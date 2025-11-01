@@ -5,15 +5,15 @@
                 <x-form.input :label="__('form.icon')" name="icon" value="{{ $form?->icon ?? old('icon') }}" placeholder="fa-solid fa-cog" />
             </div>
             <div class="col-md-6">
+                <x-form.input :label="__('form.sort')" type="number" name="sort" value="{{ $form?->sort ?? 0 }}" min="0" />
+            </div>
+            <div class="col-md-12">
                 <x-form.input :label="__('form.image')" type="file" name="image" accept="image/*" />
                 @if ($form?->image)
                     <small class="d-block mt-2">
                         <img src="{{ asset($form->image) }}" alt="{{ $form->getName() }}" style="max-width: 150px; max-height: 150px;">
                     </small>
                 @endif
-            </div>
-            <div class="col-md-6">
-                <x-form.input :label="__('form.sort')" type="number" name="sort" value="{{ $form?->sort ?? 0 }}" min="0" />
             </div>
         </div>
         <hr class="my-4">

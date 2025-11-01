@@ -304,3 +304,9 @@ select.form-control-sm.error ~ .select2-container--default:not(.select2-containe
 .sidebar-content .nav.nav-sidebar > .nav-item:first-child .nav-link {
     height: 50px;
 }
+.file-preview {
+    min-height: 207px;
+}
+.file-preview-status {
+    z-index: 1000;
+}
