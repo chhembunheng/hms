@@ -1,0 +1,80 @@
+[
+  {
+    "title": "អ្នកអភិវឌ្ឍន៍ Flutter",
+    "slug": "flutter-developer",
+    "location": "ភ្នំពេញ, កម្ពុជា",
+    "type": "ពេញម៉ោង",
+    "position": "អ្នកអភិវឌ្ឍន៍",
+    "priority": "បន្ទាន់",
+    "level": "កំរិតកណ្ដាល",
+    "date": "2025-08-10",
+    "description": "បង្កើត និងថែទាំកម្មវិធីទូរស័ព្ទឆ្លាតវៃពហុវេទិកាដោយប្រើ Flutter។ ធ្វើការសហការជាមួយអ្នកអភិវឌ្ឍន៍ backend។",
+    "icon": "fas fa-mobile-alt",
+    "link": "#"
+  },
+  {
+    "title": "អ្នកអភិវឌ្ឍន៍ PHP Laravel ជាន់ខ្ពស់",
+    "slug": "senior-php-laravel-developer",
+    "location": "ភ្នំពេញ, កម្ពុជា",
+    "type": "ពេញម៉ោង",
+    "position": "អ្នកអភិវឌ្ឍន៍",
+    "priority": "បន្ទាន់",
+    "level": "ជាន់ខ្ពស់",
+    "date": "2025-08-12",
+    "description": "អភិវឌ្ឍ និងថែទាំកម្មវិធីវេបដោយប្រើ Framework PHP Laravel។ ប្រាកដថាមានប្រសិទ្ធភាពខ្ពស់ សុវត្ថិភាព និងអាចពង្រីកបាន។",
+    "icon": "fas fa-code",
+    "link": "#"
+  },
+  {
+    "title": "អ្នករចនា UX/UI",
+    "slug": "ux-ui-designer",
+    "location": "ភ្នំពេញ, កម្ពុជា",
+    "type": "ពេញម៉ោង",
+    "position": "រចនា",
+    "priority": "ធម្មតា",
+    "level": "កំរិតកណ្ដាល",
+    "date": "2025-08-01",
+    "description": "រចនាបទពិសោធន៍ និងអ៊ីនធើហ្វេស ដែលផ្អែកលើអ្នកប្រើប្រាស់។ បង្កើត wireframe, prototype ហើយសហការជាមួយអ្នកអភិវឌ្ឍន៍ដើម្បីដាក់ទៅប្រើប្រាស់ជាក់ស្តែង។",
+    "icon": "fas fa-pencil-ruler",
+    "link": "#"
+  },
+  {
+    "title": "និស្សិតហាត់ការ Graphic Design",
+    "slug": "graphic-design-intern",
+    "location": "ភ្នំពេញ, កម្ពុជា",
+    "type": "ហាត់ការ",
+    "position": "រចនា",
+    "priority": "ធម្មតា",
+    "level": "ហាត់ការ",
+    "date": "2025-09-01",
+    "description": "ជួយក្រុមរចនាក្នុង việc បង្កើតគម្រោងក្រាហ្វិកបណ្តាញសង្គម UI mockup និងសម្ភារៈផ្សព្វផ្សាយ។ រៀនឧបករណ៍ និងដំណើរការរចនាជាក់ស្តែង។",
+    "icon": "fas fa-paint-brush",
+    "link": "#"
+  },
+  {
+    "title": "និស្សិតហាត់ការ អភិវឌ្ឍន៍កម្មវិធី",
+    "slug": "software-development-intern",
+    "location": "ភ្នំពេញ, កម្ពុជា",
+    "type": "ហាត់ការ",
+    "position": "អ្នកអភិវឌ្ឍន៍",
+    "priority": "ធម្មតា",
+    "level": "ហាត់ការ",
+    "date": "2025-09-05",
+    "description": "ធ្វើការជាមួយអ្នកអភិវឌ្ឍន៍ជាន់ខ្ពស់ លើគម្រោងពិត ដោយប្រើ Framework ទំនើប។ រៀនវីធីសរសេរកូដល្អ និងការគ្រប់គ្រងកំណែ (version control)।",
+    "icon": "fas fa-laptop-code",
+    "link": "#"
+  },
+  {
+    "title": "និស្សិតហាត់ការ Digital Marketing",
+    "slug": "digital-marketing-intern",
+    "location": "ភ្នំពេញ, កម្ពុជា",
+    "type": "ហាត់ការ",
+    "position": "ទីផ្សារ",
+    "priority": "ធម្មតា",
+    "level": "ហាត់ការ",
+    "date": "2025-09-10",
+    "description": "គាំទ្រក្រុមទីផ្សារក្នុងការបង្កើតខ្លឹមសារបណ្ដាញសង្គម ការងារ SEO និងវិភាគយុទ្ធនាការ។ ឈ្នះបទពិសោធន៍អនុវត្តន៍ផ្ទាល់ក្នុងយុទ្ធសាស្ត្រឌីជីថល។",
+    "icon": "fas fa-bullhorn",
+    "link": "#"
+  }
+]

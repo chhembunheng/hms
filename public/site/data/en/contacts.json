@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "title": "Info",
+        "slug": "info",
+        "icon": "fa-solid fa-circle-info",
+        "description": "General company information, inquiries, and customer guidance.",
+        "phone": "012345855/092226133",
+        "email": "info@wintech.com.kh"
+    },
+    {
+        "id": 2,
+        "title": "Technical / Support",
+        "slug": "technical",
+        "icon": "fa-solid fa-gears",
+        "description": "Technical assistance, troubleshooting, and product-related support.",
+        "phone": "0962856786/010345432",
+        "email": "support@wintech.com.kh"
+    },
+    {
+        "id": 4,
+        "title": "Career",
+        "slug": "career",
+        "icon": "fa-solid fa-briefcase",
+        "description": "Career opportunities, job applications, and HR-related queries.",
+        "phone": "015 871 787",
+        "email": "career@wintech.com.kh"
+    }
+]

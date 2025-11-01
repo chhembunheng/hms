@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "name": "ការជួយគាំទ្រ IT ពីចម្ងាយ",
+    "slug": "remote-it-assistance",
+    "icon": "fa-solid fa-headset",
+    "description": "ទទួលបានការគាំទ្រ IT ពីចម្ងាយបន្ទាន់ ដើម្បីដោះស្រាយបញ្ហាបានលឿន និងមានប្រសិទ្ធភាព។"
+  },
+  {
+    "id": 2,
+    "name": "ដោះស្រាយបញ្ហា IT",
+    "slug": "solving-it-problems",
+    "icon": "fa-solid fa-screwdriver-wrench",
+    "description": "យើងវាយតម្លៃ និងជួសជុលបញ្ហា IT ដើម្បីកាត់បន្ថយពេល downtime និងបង្កើនផលិតភាពការងារ។"
+  },
+  {
+    "id": 3,
+    "name": "ការគ្រប់គ្រង IT ជាមុន",
+    "slug": "practice-it-management",
+    "icon": "fa-solid fa-gear",
+    "description": "ការគ្រប់គ្រង IT ដោយចុងហត្ថ ដើម្បីរក្សាប្រព័ន្ធឲ្យប្រតិបត្តិការលឿន ប្រសើរ និងមានស្ថេរភាព។"
+  },
+  {
+    "id": 4,
+    "name": "សេវាសន្តិសុខ IT",
+    "slug": "it-security-services",
+    "icon": "fa-solid fa-shield-check",
+    "description": "ការពារអាជីវកម្មរបស់អ្នកដោយដំណោះស្រាយសន្តិសុខ IT កម្រិតខ្ពស់ និងការការពារគ្រោះថ្នាក់មុនកើត។"
+  },
+  {
+    "id": 5,
+    "name": "សេវា IT គ្រប់គ្រង",
+    "slug": "managed-it-service",
+    "icon": "fa-solid fa-laptop-code",
+    "description": "សេវា IT គ្រប់គ្រងពេញលេញ ជាមួយការត្រួតពិនិត្យ 24/7 និងការគាំទ្របន្តបន្ទាប់។"
+  },
+  {
+    "id": 6,
+    "name": "សេវា Cloud",
+    "slug": "cloud-services",
+    "icon": "fa-solid fa-cloud",
+    "description": "ដំណោះស្រាយ Cloud បត់បែនបាន ដើម្បីបង្កើនការសហការងាយស្រួល កន្លែងផ្ទុក និងសមត្ថភាពពង្រីក។"
+  },
+  {
+    "id": 7,
+    "name": "ការប្រឹក្សា IT",
+    "slug": "it-consulting",
+    "icon": "fa-regular fa-solid fa-lightbulb",
+    "description": "ការប្រឹក្សាជំនាញ IT ដើម្បីរចនាយុទ្ធសាស្ត្របច្ចេកវិទ្យា សមស្របនឹងគោលដៅអាជីវកម្មរបស់អ្នក។"
+  },
+  {
+    "id": 8,
+    "name": "ការបម្រុងទុក & ស្ដារទិន្នន័យ",
+    "slug": "data-backup-recovery",
+    "icon": "fa-solid fa-database",
+    "description": "ការបម្រុងទុកទិន្នន័យដែលមានសុវត្ថិភាព និងដំណោះស្រាយស្ដារឡើងវិញរហ័ស ដើម្បីការពារព័ត៌មានសំខាន់។"
+  },
+  {
+    "id": 9,
+    "name": "ដំណោះស្រាយបណ្តាញ",
+    "slug": "network-solutions",
+    "icon": "fa-solid fa-wifi",
+    "description": "ការរចនា ដំឡើង និងថែទាំបណ្តាញដែលអាចទុកចិត្តបាន សម្រាប់ការភ្ជាប់រលូន។"
+  },
+  {
+    "id": 10,
+    "name": "ការបណ្ដុះបណ្ដាល & គាំទ្រ IT",
+    "slug": "it-training-support",
+    "icon": "fa-solid fa-graduation-cap",
+    "description": "បណ្ដុះបណ្ដាល IT ជ पेशេវី និងការគាំទ្រជាប់លាប់ ដើម្បីឲ្យបុគ្គលិករបស់អ្នកត្រូវបានអាប់ដេតជានិច្ច។"
+  }
+]

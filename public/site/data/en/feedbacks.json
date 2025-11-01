@@ -1,0 +1,44 @@
+[
+    {
+        "rating": 5,
+        "content": "WINTECH provided excellent service and delivered our project on time. The team was professional and responsive throughout the process.",
+        "avatar": "site/assets/img/client/testimonial-1.jpg",
+        "name": "Saabir al-Obeid",
+        "title": "Business Man"
+    },
+    {
+        "rating": 5,
+        "content": "I was impressed with their attention to detail and dedication. They exceeded our expectations and made the whole experience smooth.",
+        "avatar": "site/assets/img/client/testimonial-2.jpg",
+        "name": "Zahra Burnett",
+        "title": "Business Woman"
+    },
+    {
+        "rating": 3.5,
+        "content": "The team was highly skilled and communicated clearly. I felt supported every step of the way and the results were outstanding.",
+        "avatar": "site/assets/img/client/testimonial-3.jpg",
+        "name": "Stevie Wills",
+        "title": "Business Man"
+    },
+    {
+        "rating": 4.5,
+        "content": "They transformed our ideas into reality with great efficiency. I would recommend them to anyone seeking quality software solutions.",
+        "avatar": "site/assets/img/client/2.jpg",
+        "name": "Amara Singh",
+        "title": "Entrepreneur"
+    },
+    {
+        "rating": 4,
+        "content": "Very professional company. The end product was great, though communication could be slightly faster at times.",
+        "avatar": "site/assets/img/client/1.jpg",
+        "name": "David Kim",
+        "title": "Marketing Director"
+    },
+    {
+        "rating": 4.5,
+        "content": "Their dedication and creativity really stood out. The project was a success, and we look forward to working with them again.",
+        "avatar": "site/assets/img/client/4.jpg",
+        "name": "Leila Hassan",
+        "title": "Project Manager"
+    }
+]

@@ -1,0 +1,563 @@
+[
+    {
+        "title": "Academics",
+        "description": "Design and manage programs, courses, and curricula with multi-campus, multi-language support.",
+        "icon": "fas fa-book-open",
+        "link": "#",
+        "image": "site/assets/img/features/academics.jpg",
+        "details": [
+            {
+                "id": 1,
+                "title": "Curriculum Builder",
+                "icon": "fas fa-book",
+                "description": "Structure programs, years, semesters, and courses."
+            },
+            {
+                "id": 2,
+                "title": "Program & Course Mapping",
+                "icon": "fas fa-project-diagram",
+                "description": "Pre-requisites, co-requisites, and equivalencies."
+            },
+            {
+                "id": 3,
+                "title": "Multi-Language UI",
+                "icon": "fas fa-language",
+                "description": "Khmer • English • Chinese labels and reports."
+            },
+            {
+                "id": 4,
+                "title": "Compliance Templates",
+                "icon": "fas fa-check-double",
+                "description": "MoEYS/IB/Cambridge-ready structures."
+            }
+        ]
+    },
+    {
+        "title": "Admissions & Enrollment",
+        "description": "Digitize applications and streamline offers, seat management, and onboarding.",
+        "icon": "fas fa-user-plus",
+        "link": "#",
+        "image": "site/assets/img/features/admissions.jpg",
+        "details": [
+            {
+                "id": 1,
+                "title": "Online Applications",
+                "icon": "fas fa-file-alt",
+                "description": "Custom forms with document uploads."
+            },
+            {
+                "id": 2,
+                "title": "Lead Management",
+                "icon": "fas fa-bullhorn",
+                "description": "Track inquiries to enrolled students."
+            },
+            {
+                "id": 3,
+                "title": "Offers & E-Sign",
+                "icon": "fas fa-file-signature",
+                "description": "Generate offers and collect digital signatures."
+            },
+            {
+                "id": 4,
+                "title": "Waitlists & Seats",
+                "icon": "fas fa-user-clock",
+                "description": "Seat caps, waitlist rules, and auto-moves."
+            }
+        ]
+    },
+    {
+        "title": "Messaging & Communication",
+        "description": "Targeted announcements via Email, SMS, and Push with delivery tracking.",
+        "icon": "fas fa-comments",
+        "link": "#",
+        "image": "site/assets/img/features/messaging.jpg",
+        "details": [
+            {
+                "id": 1,
+                "title": "Segmented Sends",
+                "icon": "fas fa-bullhorn",
+                "description": "Filter by campus, class, grade, or role."
+            },
+            {
+                "id": 2,
+                "title": "Multi-Channel",
+                "icon": "fas fa-paper-plane",
+                "description": "Email, SMS, and push notifications."
+            },
+            {
+                "id": 3,
+                "title": "Templates & Scheduling",
+                "icon": "fas fa-calendar-check",
+                "description": "Reusable templates and timed sends."
+            },
+            {
+                "id": 4,
+                "title": "Delivery Reports",
+                "icon": "fas fa-clipboard-list",
+                "description": "Bounces, opens, and read receipts."
+            }
+        ]
+    },
+    {
+        "title": "LMS & Social Learning",
+        "description": "Collaborative class spaces with resources, assignments, and discussions.",
+        "icon": "fas fa-users",
+        "link": "#",
+        "image": "site/assets/img/features/lms.jpg",
+        "details": [
+            {
+                "id": 1,
+                "title": "Content Library",
+                "icon": "fas fa-folder-open",
+                "description": "Organize files, links, and media per course."
+            },
+            {
+                "id": 2,
+                "title": "Assignments",
+                "icon": "fas fa-tasks",
+                "description": "Submissions, due dates, and grading."
+            },
+            {
+                "id": 3,
+                "title": "Discussions",
+                "icon": "fas fa-comments",
+                "description": "Course-level threads and replies."
+            },
+            {
+                "id": 4,
+                "title": "Grade Sync",
+                "icon": "fas fa-sync",
+                "description": "Sync scores into gradebook."
+            }
+        ]
+    },
+    {
+        "title": "Administration",
+        "description": "Centralized configuration, roles/permissions, and module personalization.",
+        "icon": "fas fa-cogs",
+        "link": "#",
+        "image": "site/assets/img/features/admin.png",
+        "details": [
+            {
+                "id": 1,
+                "title": "Import/Export",
+                "icon": "fas fa-file-import",
+                "description": "Bulk CSV/XLSX operations."
+            },
+            {
+                "id": 2,
+                "title": "Roles & Permissions",
+                "icon": "fas fa-user-shield",
+                "description": "Fine-grained access control."
+            },
+            {
+                "id": 3,
+                "title": "Audit Logs",
+                "icon": "fas fa-clipboard-check",
+                "description": "Track changes across modules."
+            },
+            {
+                "id": 4,
+                "title": "Org Structure",
+                "icon": "fas fa-sitemap",
+                "description": "Multi-campus, departments, and classes."
+            }
+        ]
+    },
+    {
+        "title": "Students & Parents Portal",
+        "description": "Self-service portal for schedules, grades, invoices, and notifications.",
+        "icon": "fas fa-user-graduate",
+        "link": "#",
+        "image": "site/assets/img/features/portal.jpg",
+        "details": [
+            {
+                "id": 1,
+                "title": "Timetable",
+                "icon": "fas fa-calendar-alt",
+                "description": "Personal schedules and events."
+            },
+            {
+                "id": 2,
+                "title": "Attendance Alerts",
+                "icon": "fas fa-bell",
+                "description": "Instant late/absence notifications."
+            },
+            {
+                "id": 3,
+                "title": "Grades & Transcripts",
+                "icon": "fas fa-clipboard-list",
+                "description": "View marks and official records."
+            },
+            {
+                "id": 4,
+                "title": "Billing",
+                "icon": "fas fa-file-invoice-dollar",
+                "description": "Invoices, receipts, and payments."
+            }
+        ]
+    },
+    {
+        "title": "Teachers & Staff Portal",
+        "description": "Tools for timetables, attendance, grading, and approvals.",
+        "icon": "fas fa-chalkboard-teacher",
+        "link": "#",
+        "image": "site/assets/img/features/teacher-portal.jpg",
+        "details": [
+            {
+                "id": 1,
+                "title": "Attendance Taking",
+                "icon": "fas fa-check-square",
+                "description": "Daily and period attendance."
+            },
+            {
+                "id": 2,
+                "title": "Gradebook",
+                "icon": "fas fa-table",
+                "description": "Weights, categories, and comments."
+            },
+            {
+                "id": 3,
+                "title": "Approvals",
+                "icon": "fas fa-stamp",
+                "description": "Leave, results, and workflow steps."
+            },
+            {
+                "id": 4,
+                "title": "Resource Sharing",
+                "icon": "fas fa-share-alt",
+                "description": "Share files and lesson plans."
+            }
+        ]
+    },
+    {
+        "title": "Assessment, Gradebook & Transcripts",
+        "description": "Flexible grading schemes with customizable transcripts.",
+        "icon": "fas fa-clipboard-check",
+        "link": "#",
+        "image": "site/assets/img/features/assessment.png",
+        "details": [
+            {
+                "id": 1,
+                "title": "Grading Schemes",
+                "icon": "fas fa-balance-scale",
+                "description": "GPA, percentage, rubric, and CCE."
+            },
+            {
+                "id": 2,
+                "title": "Rubrics",
+                "icon": "fas fa-th-list",
+                "description": "Criteria-based scoring."
+            },
+            {
+                "id": 3,
+                "title": "Transcripts",
+                "icon": "fas fa-file-invoice",
+                "description": "Custom formats and templates."
+            },
+            {
+                "id": 4,
+                "title": "Exam Imports",
+                "icon": "fas fa-file-upload",
+                "description": "Bulk result uploads."
+            }
+        ]
+    },
+    {
+        "title": "Fees, Billing & Payments",
+        "description": "End-to-end billing with discounts, payment plans, and online payments.",
+        "icon": "fas fa-credit-card",
+        "link": "#",
+        "image": "site/assets/img/features/payment.png",
+        "details": [
+            {
+                "id": 1,
+                "title": "Invoices",
+                "icon": "fas fa-file-invoice-dollar",
+                "description": "Generate schedules and reminders."
+            },
+            {
+                "id": 2,
+                "title": "Discounts & Scholarships",
+                "icon": "fas fa-percentage",
+                "description": "Rules and eligibility checks."
+            },
+            {
+                "id": 3,
+                "title": "Installments",
+                "icon": "fas fa-stream",
+                "description": "Payment plans with penalties."
+            },
+            {
+                "id": 4,
+                "title": "Gateways",
+                "icon": "fas fa-plug",
+                "description": "Connect popular payment providers."
+            }
+        ]
+    },
+    {
+        "title": "Attendance & Biometrics",
+        "description": "Accurate time/attendance with device integrations and instant alerts.",
+        "icon": "fas fa-fingerprint",
+        "link": "#",
+        "image": "site/assets/img/features/attendance.jpg",
+        "details": [
+            {
+                "id": 1,
+                "title": "Device Integrations",
+                "icon": "fas fa-fingerprint",
+                "description": "ZKTeco, Hikvision, and more."
+            },
+            {
+                "id": 2,
+                "title": "Real-Time Alerts",
+                "icon": "fas fa-bell",
+                "description": "Notify parents and staff instantly."
+            },
+            {
+                "id": 3,
+                "title": "Geo-Fence",
+                "icon": "fas fa-map-marker-alt",
+                "description": "Location-aware check-ins."
+            },
+            {
+                "id": 4,
+                "title": "Kiosk Mode",
+                "icon": "fas fa-tablet-alt",
+                "description": "Tablet-based attendance stations."
+            }
+        ]
+    },
+    {
+        "title": "Timetable & Scheduling",
+        "description": "Smart scheduling with clash detection and room allocation.",
+        "icon": "fas fa-calendar-alt",
+        "link": "#",
+        "image": "site/assets/img/features/timetable.png",
+        "details": [
+            {
+                "id": 1,
+                "title": "Auto-Generate",
+                "icon": "fas fa-magic",
+                "description": "Build timetables from constraints."
+            },
+            {
+                "id": 2,
+                "title": "Clash Detection",
+                "icon": "fas fa-exclamation-triangle",
+                "description": "Find conflicts quickly."
+            },
+            {
+                "id": 3,
+                "title": "Room Allocation",
+                "icon": "fas fa-door-open",
+                "description": "Assign rooms and resources."
+            },
+            {
+                "id": 4,
+                "title": "Teacher Load",
+                "icon": "fas fa-user-clock",
+                "description": "Balance workloads easily."
+            }
+        ]
+    },
+    {
+        "title": "Reporting & Analytics",
+        "description": "Operational and academic insights with custom report builder.",
+        "icon": "fas fa-chart-line",
+        "link": "#",
+        "image": "site/assets/img/features/analytics.jpg",
+        "details": [
+            {
+                "id": 1,
+                "title": "Standard Reports",
+                "icon": "fas fa-file-alt",
+                "description": "Ready-made operational reports."
+            },
+            {
+                "id": 2,
+                "title": "Custom Builder",
+                "icon": "fas fa-tools",
+                "description": "Create ad-hoc reports with filters."
+            },
+            {
+                "id": 3,
+                "title": "Dashboards",
+                "icon": "fas fa-chart-line",
+                "description": "Trends and KPIs at a glance."
+            },
+            {
+                "id": 4,
+                "title": "Export & Share",
+                "icon": "fas fa-file-export",
+                "description": "CSV/XLSX/PDF exports."
+            }
+        ]
+    },
+    {
+        "title": "Apps & Integrations",
+        "description": "Connect Google Workspace, Microsoft 365, payments, and more via API.",
+        "icon": "fas fa-th",
+        "link": "#",
+        "image": "site/assets/img/features/integrations.jpg",
+        "details": [
+            {
+                "id": 1,
+                "title": "SSO Providers",
+                "icon": "fas fa-sign-in-alt",
+                "description": "Google & Microsoft single sign-on."
+            },
+            {
+                "id": 2,
+                "title": "Calendar/Drive Sync",
+                "icon": "fas fa-sync-alt",
+                "description": "Sync calendars and files."
+            },
+            {
+                "id": 3,
+                "title": "Payment APIs",
+                "icon": "fas fa-credit-card",
+                "description": "Seamless gateway integrations."
+            },
+            {
+                "id": 4,
+                "title": "Open REST API",
+                "icon": "fas fa-code",
+                "description": "Build custom integrations."
+            }
+        ]
+    },
+    {
+        "title": "Mobile Apps",
+        "description": "Native iOS/Android with push notifications for key events.",
+        "icon": "fas fa-mobile-alt",
+        "link": "#",
+        "image": "site/assets/img/features/mobile.jpg",
+        "details": [
+            {
+                "id": 1,
+                "title": "Push Notifications",
+                "icon": "fas fa-bell",
+                "description": "Instant alerts for updates."
+            },
+            {
+                "id": 2,
+                "title": "Fees & Grades",
+                "icon": "fas fa-list-alt",
+                "description": "Mobile view of finance and results."
+            },
+            {
+                "id": 3,
+                "title": "Attendance Check-In",
+                "icon": "fas fa-qrcode",
+                "description": "QR or device-based check-ins."
+            },
+            {
+                "id": 4,
+                "title": "Multi-Language",
+                "icon": "fas fa-language",
+                "description": "Localized mobile interfaces."
+            }
+        ]
+    },
+    {
+        "title": "Health Records",
+        "description": "Student medical profiles with BMI and forms.",
+        "icon": "fas fa-heartbeat",
+        "link": "#",
+        "image": "site/assets/img/features/health.jpg",
+        "details": [
+            {
+                "id": 1,
+                "title": "Medical Profiles",
+                "icon": "fas fa-notes-medical",
+                "description": "Allergies, conditions, medications."
+            },
+            {
+                "id": 2,
+                "title": "Immunizations",
+                "icon": "fas fa-syringe",
+                "description": "Track vaccinations and boosters."
+            },
+            {
+                "id": 3,
+                "title": "BMI & Metrics",
+                "icon": "fas fa-weight",
+                "description": "Auto BMI and growth tracking."
+            },
+            {
+                "id": 4,
+                "title": "Custom Forms",
+                "icon": "fas fa-file-medical",
+                "description": "Clinic notes and consent forms."
+            }
+        ]
+    },
+    {
+        "title": "Data Security, SSO & Compliance",
+        "description": "Protect data with SSO, audits, and regulatory alignment.",
+        "icon": "fas fa-shield-alt",
+        "link": "#",
+        "image": "site/assets/img/features/security.jpg",
+        "details": [
+            {
+                "id": 1,
+                "title": "Single Sign-On (SSO)",
+                "icon": "fas fa-sign-in-alt",
+                "description": "Seamless access to multiple applications with one set of credentials."
+            },
+            {
+                "id": 2,
+                "title": "Role-Based Access Control",
+                "icon": "fas fa-user-shield",
+                "description": "Granular permissions based on user roles and responsibilities."
+            },
+            {
+                "id": 3,
+                "title": "Data Backup & Retention",
+                "icon": "fas fa-database",
+                "description": "Regular backups and compliance with data retention policies."
+            },
+            {
+                "id": 4,
+                "title": "MoEYS Alignment",
+                "icon": "fas fa-school",
+                "description": "Ensuring compliance with Ministry of Education Youth and Sport standards."
+            }
+        ]
+    },
+    {
+        "title": "Support & Onboarding",
+        "description": "Guided setup with responsive help channels and SLAs.",
+        "icon": "fas fa-headset",
+        "link": "#",
+        "image": "site/assets/img/features/support.jpg",
+        "details": [
+            {
+                "id": 1,
+                "title": "In-App Chat/Email/Phone",
+                "icon": "fas fa-headset",
+                "description": "Multiple support channels."
+            },
+            {
+                "id": 2,
+                "title": "Data Migration",
+                "icon": "fas fa-exchange-alt",
+                "description": "Move legacy records safely."
+            },
+            {
+                "id": 3,
+                "title": "Training",
+                "icon": "fas fa-chalkboard-teacher",
+                "description": "Role-based onboarding sessions."
+            },
+            {
+                "id": 4,
+                "title": "SLA Options",
+                "icon": "fas fa-stopwatch",
+                "description": "Priority response service levels."
+            }
+        ]
+    }
+]

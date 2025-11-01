@@ -1,0 +1,77 @@
+{
+  "main_menu": [
+    {
+      "name": "Explore",
+      "slug": "explore",
+      "icon": "fa-chevron-down",
+      "items": [
+        {
+          "name": "Popular",
+          "slug": "popular",
+          "icon": "fa-arrow-trend-up",
+          "route": "frontend.popular"
+        },
+        {
+          "name": "Support",
+          "slug": "support",
+          "icon": "fa-headset",
+          "route": "frontend.support"
+        },
+        {
+          "name": "About Us",
+          "slug": "about-us",
+          "icon": "fa-lightbulb",
+          "route": "frontend.about"
+        },
+        {
+          "name": "Our Teams",
+          "slug": "our-teams",
+          "icon": "fa-users",
+          "route": "frontend.teams"
+        },
+        {
+          "name": "Privacy Policy",
+          "slug": "privacy-policy",
+          "icon": "fa-shield-halved",
+          "route": "frontend.privacy-policy"
+        },
+        {
+          "name": "FAQ",
+          "slug": "faq",
+          "icon": "fa-circle-question",
+          "route": "frontend.faq"
+        },
+        {
+          "name": "Terms & Conditions",
+          "slug": "terms-condition",
+          "icon": "fa-handshake",
+          "route": "frontend.terms-condition"
+        },
+        {
+          "name": "Contact Us",
+          "slug": "contact-us",
+          "icon": "fa-envelope",
+          "route": "frontend.contact"
+        }
+      ]
+    },
+    {
+      "name": "Services",
+      "slug": "services",
+      "icon": "fa-briefcase",
+      "route": "frontend.services"
+    },
+    {
+      "name": "Products",
+      "slug": "products",
+      "icon": "fa-box",
+      "route": "frontend.products"
+    },
+    {
+      "name": "Projects",
+      "slug": "projects",
+      "icon": "fa-folder",
+      "route": "frontend.projects"
+    }
+  ]
+}

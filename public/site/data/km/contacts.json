@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "title": "ព័ត៌មានទូទៅ",
+    "slug": "info",
+    "icon": "fa-solid fa-circle-info",
+    "description": "ព័ត៌មានអំពីក្រុមហ៊ុន សំណួរទូទៅ និងការណែនាំសេវាកម្មអតិថិជន។",
+    "phone": "012345855/092226133",
+    "email": "info@wintech.com.kh"
+  },
+  {
+    "id": 2,
+    "title": "បច្ចេកទេស / គាំទ្រ",
+    "slug": "technical",
+    "icon": "fa-solid fa-gears",
+    "description": "ជំនួយបច្ចេកទេស ការដោះស្រាយបញ្ហា និងការគាំទ្រលើផលិតផល/សេវាកម្ម។",
+    "phone": "0962856786/010345432",
+    "email": "support@wintech.com.kh"
+  },
+  {
+    "id": 4,
+    "title": "អាជីព",
+    "slug": "career",
+    "icon": "fa-solid fa-briefcase",
+    "description": "ឱកាសការងារ ការដាក់ពាក្យចូលធ្វើការ និងសំណួរពាក់ព័ន្ធធនធានមនុស្ស (HR)।",
+    "phone": "015 871 787",
+    "email": "career@wintech.com.kh"
+  }
+]

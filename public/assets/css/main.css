@@ -1,0 +1,306 @@
+.navbar-dark {
+    background-color: var(--app-primary-color) !important;
+}
+
+.nav-link {
+    color: var(--app-primary-color) !important;
+}
+
+.nav-sidebar .nav-link {
+    display: flex;
+    align-items: center;
+}
+
+.nav-sidebar .nav-link i.fa-fw {
+    font-size: 0.9rem;
+}
+
+.nav-group-sub .nav-link {
+    padding-left: 24px !important;
+}
+
+.nav-group-sub .nav-group-sub .nav-link {
+    padding-left: 32px !important;
+}
+
+.ph {
+    font-size: var(--icon-font-size);
+}
+
+.lang-flag {
+    vertical-align: middle;
+    height: 22px;
+    width: 22px;
+    overflow: hidden;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.lang-flag-text {
+    text-transform: uppercase;
+}
+
+.ph-1x {
+    font-size: calc(1 * var(--icon-font-size))
+}
+
+.ph-2x {
+    font-size: calc(2 * var(--icon-font-size))
+}
+
+.ph-3x {
+    font-size: calc(3 * var(--icon-font-size))
+}
+
+.ph-4x {
+    font-size: calc(4 * var(--icon-font-size))
+}
+
+.ph-5x {
+    font-size: calc(5 * var(--icon-font-size))
+}
+
+.ph-lg {
+    font-size: var(--icon-font-size-lg)
+}
+
+.ph-sm {
+    font-size: var(--icon-font-size-sm)
+}
+
+.ph-rotate-90 {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg)
+}
+
+.ph-rotate-180 {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg)
+}
+
+.ph-rotate-270 {
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg)
+}
+
+.ph-flip-horizontal {
+    -webkit-transform: scale(-1, 1);
+    transform: scale(-1, 1)
+}
+
+.ph-flip-vertical {
+    -webkit-transform: scale(1, -1);
+    transform: scale(1, -1)
+}
+
+.ph-flip-horizontal.ph-flip-vertical {
+    -webkit-transform: scale(-1, -1);
+    transform: scale(-1, -1)
+}
+
+.btn .icon {
+    margin-right: 8px;
+}
+
+.datatable-header:has(:only-child) {
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.col-form-label.required:after,
+.form-label.required:after {
+    color: #d63939;
+    content: "*";
+    margin-left: .25rem;
+}
+
+.sidebar-section-body {
+    padding: 0px;
+}
+
+.form-control-feedback-icon i {
+    font-size: var(--icon-font-size-sm);
+}
+
+.poster-layout__content {
+    display: inline-block;
+    width: 100%;
+    max-width: 400px
+}
+
+.auth-form-layout {
+    height: 100%
+}
+
+.form-layout__background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: center center/cover no-repeat #e8ebf0;
+    overflow: hidden
+}
+
+.form-layout_preview .form-layout__background {
+    top: 54px
+}
+
+.auth-form-layout-foreground {
+    position: relative;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background-image: url('../images/backgrounds/2.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+@media only screen and (max-width: 992px) {
+    .auth-form-layout-foreground {
+        padding: 20px
+    }
+}
+
+.auth-form-layout-fill-screen .auth-form-layout-foreground {
+    min-height: 100vh
+}
+
+@media only screen and (max-width: 480px) {
+    @supports (-webkit-touch-callout:none) {
+
+        .auth-form-layout-foreground,
+        .auth-form-layout-fill-screen .auth-form-layout-foreground {
+            min-height: -webkit-fill-available;
+            min-height: -moz-available;
+            min-height: stretch
+        }
+    }
+}
+
+.auth-form-layout-content-container {
+    width: 100%;
+    max-width: 400px
+}
+
+.auth-form-layout-card {
+    position: relative
+}
+
+.auth-form-layout-card-underlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #fff;
+    border-radius: 12px
+}
+
+.auth-form-layout-card-underlay-z-2 {
+    background: #f9fafc;
+    right: 10px;
+    bottom: -10px;
+    left: 10px
+}
+
+.auth-form-layout-card-underlay-z-1 {
+    background: #f4f6f8;
+    right: 20px;
+    bottom: -20px;
+    left: 20px
+}
+
+.auth-form-layout-card-content {
+    position: relative;
+    background: #fff;
+    box-shadow: 0 0 80px 0 rgba(0, 0, 0, .06);
+    border-radius: 12px
+}
+
+.auth-form-layout-content {
+    display: inline-block;
+    width: 100%
+}
+
+.form-layout__footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px
+}
+
+.form-layout__footer-item {
+    margin: 0 6px
+}
+
+.form-layout__footer-item+.form-layout__footer-item:before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(117, 129, 145, .3);
+    margin-right: 6px;
+    vertical-align: middle
+}
+
+.background-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    min-height: 100%;
+    padding: 40px
+}
+.login-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.login-logo .logo {
+    width: 70px;
+    height: 70px;
+    background-color: #00213e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 40%;
+}
+.login-logo img {
+    width: 65%;
+    height: 65%;
+    object-fit: contain;
+}
+.offcanvas {
+    margin: 12px;
+    border-radius: 0.5rem;
+}
+.form-control.is-invalid, .form-control.error {
+    border-color: #EF4444;
+    color: #EF4444;
+}
+.form-control.is-invalid ~ label.error, .form-control.error ~ label.error {
+    color: #EF4444;
+}
+.form-control.is-invalid:focus, .form-control.error:focus {
+    border-color: #EF4444;
+    box-shadow: 0 0 0 0.125rem rgba(239, 68, 68, 0.25);
+}
+select.form-control-sm ~ .select2-container .select2-selection__rendered {
+    height: 36px !important;
+}
+select.form-control-sm.error ~ .select2-container--focus:not(.select2-container--disabled) .select2-selection--multiple, select.form-control-sm.error ~ .select2-container--open .select2-selection--multiple {
+    border-color: #EF4444 !important;
+    box-shadow: 0 0 0 0.125rem rgba(239, 68, 68, 0.25) !important;
+}
+select.form-control-sm.error ~ .select2-container--default:not(.select2-container--disabled) .select2-selection--multiple, select.form-control-sm.error ~ .select2-container--default .select2-selection--multiple {
+    border-color: #EF4444 !important;
+}
+.sidebar-content .nav.nav-sidebar > .nav-item:first-child .nav-link {
+    height: 50px;
+}

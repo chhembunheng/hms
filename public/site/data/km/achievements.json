@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "number": 10,
+        "suffix": "+",
+        "title": "ឆ្នាំបទពិសោធន៍",
+        "icon": "fa-solid fa-clock"
+    },
+    {
+        "id": 2,
+        "number": 30,
+        "suffix": "+",
+        "title": "បុគ្គលិក",
+        "icon": "fa-solid fa-users"
+    },
+    {
+        "id": 3,
+        "number": 1,
+        "suffix": "K+",
+        "title": "គម្រោងបានបញ្ចប់",
+        "icon": "fa-solid fa-diagram-project"
+    },
+    {
+        "id": 4,
+        "number": 90,
+        "suffix": "K+",
+        "title": "ការវាយតម្លៃ ៥ ផ្កាយ",
+        "icon": "fa-solid fa-star"
+    }
+]

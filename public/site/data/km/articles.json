@@ -1,0 +1,152 @@
+[
+  {
+    "image": "site/assets/img/blog-details/planning-for-a-safe-return-to-the-workplace-it-solutions.png",
+    "image_cover": "site/assets/img/blog-details/planning-for-a-safe-return-to-the-workplace-it-solutions.png",
+    "author": "Sophia Martinez",
+    "date": "17 June 2022",
+    "title": "ការ​គ្រោងទុក​សុវត្ថិភាព​សម្រាប់​ការ​ត្រឡប់​ទៅ​កន្លែង​ធ្វើការ៖ ដំណោះស្រាយ IT",
+    "slug": "planning-for-a-safe-return-to-the-workplace-it-solutions",
+    "excerpt": "ស្វែងយល់អំពីយុទ្ធសាស្ត្រ IT សំខាន់ៗ ដែលធានាសុវត្ថិភាព សុវត្ថិភាពទិន្នន័យ និងផលិតភាព នៅពេលក្រុមធ្វើដំណើរត្រឡប់មកការិយាល័យវិញបន្ទាប់ពីការងារពីចម្ងាយ។",
+    "categories": [
+      "ដំណោះស្រាយ IT"
+    ],
+    "tags": [
+      "return-to-office",
+      "it-strategy",
+      "workplace-safety",
+      "hybrid-work"
+    ],
+    "link": "#",
+    "meta": {
+      "title": "ការ​គ្រោងទុក​សុវត្ថិភាព​សម្រាប់​ការ​ត្រឡប់​ទៅ​កន្លែង​ធ្វើការ៖ ដំណោះស្រាយ IT",
+      "image": "site/assets/img/blog-details/planning-for-a-safe-return-to-the-workplace-it-solutions.png",
+      "description": "ស្វែងយល់អំពីយុទ្ធសាស្ត្រ IT សំខាន់ៗ ដែលធានាសុវត្ថិភាព សុវត្ថិភាពទិន្នន័យ និងផលិតភាព នៅពេលក្រុមធ្វើដំណើរត្រឡប់មកការិយាល័យវិញបន្ទាប់ពីការងារពីចម្ងាយ។"
+    },
+    "content": "<article style=\"margin:16px 0; padding:18px; background:#fff; line-height:1.55; font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;\"><h1 style=\"font-size:1.15rem; margin:0 0 8px;\">ការគ្រោងការត្រឡប់ទៅការិយាល័យដោយសុវត្ថិភាព</h1><p style=\"margin:0 0 10px; color:#444;\">បញ្ជីត្រួតពិនិត្យជាក់ស្តែង ដោយផ្តោតលើ IT ជាដំណាក់កាលទីមុន ដើម្បីរក្សាឲ្យក្រុមមានផលិតភាព និងការការពារ ខណៈពេលពួកគេត្រឡប់មកធ្វើការនៅកន្លែងការងារវិញ។</p><h2 style=\"font-size:1rem; margin:14px 0 6px;\">1) ការចូលប្រើ &amp; អត្តសញ្ញាណ</h2><ul style=\"margin:0 0 10px 18px; padding:0;\"><li>ដាក់ឲ្យប្រើ SSO + MFA សម្រាប់កម្មវិធីទាំងអស់ និង VPN ទាំងអស់។</li><li>ពិនិត្យ និងសម្អាតគណនីចាស់ៗ/មិនប្រើទៀត ហើយអនុវត្តគោលការណ៍សិទ្ធិអប្បបរមា (least privilege)।</li><li>ប្រើគោលការណ៍ចូលប្រើមានលក្ខខណ្ឌ សម្រាប់ការចូលពីឧបករណ៍ក្រៅការគ្រប់គ្រង ឬពីទីតាំងដែលមិនធម្មតាតាមភូមិសាស្ត្រ។</li></ul><h2 style=\"font-size:1rem; margin:14px 0 6px;\">2) ភាពរួចរាល់បណ្តាញ</h2><ul style=\"margin:0 0 10px 18px; padding:0;\"><li>បែងចែកចរាចរណ៍សម្រាប់ភ្ញៀវ ឧបករណ៍ IoT និងបណ្តាញសម្រាប់អង្គការ (ប្រើ VLANs)។</li><li>កែលំអ Wi-Fi ដើម្បីគាំទ្រដង់ស៊ីតេខ្ពស់ និងធ្វើផ្ទៀងផ្ទាត់ QoS សម្រាប់ការប្រាស្រ័យសន្ទនាវីដេអូ។</li><li>ដំឡើង Zero Trust Network Access (ZTNA) សម្រាប់ថ្ងៃធ្វើការពីចម្ងាយ/ម៉ូដ hybrid។</li></ul><h2 style=\"font-size:1rem; margin:14px 0 6px;\">3) អនាម័យឧបករណ៍</h2><ul style=\"margin:0 0 10px 18px; padding:0;\"><li>ទាមទារ EDR ការអ៊ិនគ្រីបថាស និងការត្រួតពិនិត្យសុវត្ថិភាពឧបករណ៍នៅពេលចូលប្រព័ន្ធ។</li><li>ដាក់បច្ចុប្បន្នភាព OS/firmware មុនថ្ងៃទីមួយដែលត្រឡប់មកការិយាល័យ។</li><li>ប្រើ MDM ដើម្បីដាក់ឧបករណ៍ដែលមិនអនុលោមតាមគោលនយោបាយចូលក្នុងស្ថានភាពបំពាន/ការ៉ង់ធីន។</li></ul><h2 style=\"font-size:1rem; margin:14px 0 6px;\">4) កន្លែងសហការ</h2><ul style=\"margin:0 0 10px 18px; padding:0;\"><li>ស្តង់ដារអ៊ិនស្តូឡ៍បន្ទប់ប្រជុំ (camera/mic/display kit ដូចគ្នា) ហើយដាក់ការត្រួតពិនិត្យដែលអាចស្ដារខ្លួនបានដោយស្វ័យប្រវត្តិ។</li><li>ការចូលរួមប្រជុំដោយមិនប៉ះ ប្រព័ន្ធវិភាគបរិមាណមនុស្សក្នុងបន្ទប់ និងផ្ទាំងបង្ហាញព័ត៌មានឌីជីថល។</li></ul><h2 style=\"font-size:1rem; margin:14px 0 6px;\">5) សន្តិសុខ &amp; ការយល់ដឹងរបស់បុគ្គលិក</h2><ul style=\"margin:0 0 10px 18px; padding:0;\"><li>ធ្វើតេស្តប្រតិបត្តិការបន្លំតាមអ៊ីមែល (phishing simulation) ផ្តោតលើព័ត៌មានវិលត្រឡប់ការងារនៅការិយាល័យ។</li><li>ធ្វើបច្ចុប្បន្នភាព playbook / runbook ប្រតិបត្តិការបន្ទាន់សម្រាប់បរិយាកាសធ្វើការបែប hybrid។</li></ul><p style=\"margin:12px 0 0;\">✅ <strong>លទ្ធផល:</strong> ការិយាល័យដែលអាចធន់នឹងហានិភ័យ បត់បែនបានងាយ និងគាំទ្រការធ្វើការបែប hybrid ដោយមិនបោះបង់សុវត្ថិភាព។</p></article>"
+  },
+  {
+    "image": "site/assets/img/blog-details/cybersecurity.png",
+    "image_cover": "site/assets/img/blog-details/cybersecurity.png",
+    "author": "James Carter",
+    "date": "20 June 2022",
+    "title": "ន័យសារៈសំខាន់នៃវិញ្ញាបនប័ត្រសន្តិសុខស៊ីបឺរពាក់ព័ន្ធនឹងអាជីវកម្មរបស់អ្នក",
+    "slug": "what-cybersecurity-certifications-can-mean-for-your-business",
+    "excerpt": "ស្វែងយល់ថាវិញ្ញាបនប័ត្រដែលទទួលស្គាល់ក្នុងឧស្សាហកម្ម អាចបង្កើនសុវត្ថិភាព កាត់បន្ថយហានិភ័យ និងបង្កើនទំនុកចិត្តរបស់អតិថិជនយ៉ាងដូចម្តេច។",
+    "categories": [
+      "សន្តិសុខស៊ីបឺរ"
+    ],
+    "tags": [
+      "cybersecurity",
+      "certifications",
+      "compliance",
+      "trust"
+    ],
+    "link": "#",
+    "meta": {
+      "title": "ន័យសារៈសំខាន់នៃវិញ្ញាបនប័ត្រសន្តិសុខស៊ីបឺរពាក់ព័ន្ធនឹងអាជីវកម្មរបស់អ្នក",
+      "image": "site/assets/img/blog-details/cybersecurity.png",
+      "description": "ស្វែងយល់ថាវិញ្ញាបនប័ត្រដែលទទួលស្គាល់ក្នុងឧស្សាហកម្ម អាចបង្កើនសុវត្ថិភាព កាត់បន្ថយហានិភ័យ និងបង្កើនទំនុកចិត្តរបស់អតិថិជនយ៉ាងដូចម្តេច។"
+    },
+    "content": "<article style=\"margin:16px 0; padding:18px; background:#fff; line-height:1.55; font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;\"><h1 style=\"font-size:1.15rem; margin:0 0 8px;\">វិញ្ញាបនប័ត្រសន្តិសុខស៊ីបឺរ៖ ផលប៉ះពាល់ដល់អាជីវកម្ម</h1><p style=\"margin:0 0 10px; color:#444;\">វិញ្ញាបនប័ត្រជួយបញ្ជាក់ថាប្រព័ន្ធសន្តិសុខរបស់អ្នកមានវឌ្ឍនភាព ពង្រីកទំនុកចិត្តអតិថិជន រំលែកពេលស្រាវជ្រាវ due diligence និងបើកឱកាសក្នុងវិស័យដែលគ្រប់គ្រងតឹងរឹង។</p><h2 style=\"font-size:1rem; margin:14px 0 6px;\">ស្តង់ដារដែលគេប្រើញឹកញាប់</h2><ul style=\"margin:0 10px 10px 18px;\"><li><strong>ISO/IEC 27001</strong>: បង្ហាញកម្រិតចាស់ពេញវ័យនៃ ISMS មានការទទួលស្គាល់ទូទាំងពិភពលោក។</li><li><strong>SOC 2</strong> (Type I/II): ប្រភេទភាពទុកចិត្តសម្រាប់អ្នកទិញសេវា SaaS។</li><li><strong>PCI DSS</strong>: ការការពារទិន្នន័យកាតបង់ប្រាក់ សម្រាប់អ្នកលក់ ឬក្រុមហ៊ុនដំណើរការទូទាត់។</li><li><strong>CIS Controls</strong> / <strong>NIST CSF</strong>: គោលដៅមូលដ្ឋាន និងផែនផ្គូផែនផ្គង់ដំណើរវឌ្ឍនភាព។</li></ul><h2 style=\"font-size:1rem; margin:14px 0 6px;\">ហេតុអ្វីវាមានសារៈសំខាន់</h2><ol style=\"margin:0 0 10px 18px;\"><li><strong>ល្បឿនលក់លឿនឡើង:</strong> ត្រូវឆ្លើយសំណួរសន្តិសុខតិចជាងមុនពេលបិទការលក់។</li><li><strong>កាត់បន្ថយហានិភ័យ:</strong> ត្រួតពិនិត្យដែលបានអះអាងជាផ្លូវការ និងការត្រួតពិនិត្យដោយភាគីទីបី។</li><li><strong>ទំនុកចិត្តពីវិនិយោគិន:</strong> បញ្ជាក់ថាក្រុមហ៊ុនមានវិន័យនិងការគ្រប់គ្រងល្អ។</li></ol><h2 style=\"font-size:1rem; margin:14px 0 6px;\">ចាប់ផ្តើមយ៉ាងដូចម្តេច</h2><ul style=\"margin:0 0 10px 18px;\"><li>ធ្វើការ gap assessment ហើយឲ្យអាទិភាពចំពោះបញ្ហាហានិភ័យខ្ពស់។</li><li>អូតូម៉ាតការប្រមូលផ្ទះសម្ភារៈភស្តុតាង និងការត្រួតពិនិត្យការគ្រប់គ្រង។</li><li>ហ្វឹកហ្វឺនម្ចាស់ដែនកាន់; ផ្គូផ្គងការគ្រប់គ្រងទៅនឹងគោលនយោបាយ និងសន្លឹកកិច្ចការ (tickets)।</li></ul><p style=\"margin:12px 0 0;\">💡 <strong>គន្លឹះ:</strong> ចាក់សោវិញ្ញាបនប័ត្រជា\u200bកម្មវិធីប្រព័ន្ធបន្ត មិនមែនគម្រោងរយៈពេលខ្លី។ ដាក់វាចូលក្នុងការធ្វើផែនការរៀងរាល់ត្រីមាស។</p></article>"
+  },
+  {
+    "image": "site/assets/img/blog-details/machine-learning-applications-for-every-industry.png",
+    "image_cover": "site/assets/img/blog-details/machine-learning-applications-for-every-industry.png",
+    "author": "Emily Zhang",
+    "date": "25 June 2022",
+    "title": "កម្មវិធី Machine Learning សម្រាប់គ្រប់ឧស្សាហកម្ម",
+    "slug": "machine-learning-applications-for-every-industry",
+    "excerpt": "ពីវិស័យសុខាភិបាលរហូតដល់រាយការណ៍លក់រាយ សូម្បីក្រុមហ៊ុនថាមពល — ស្វែងយល់ពីរបៀបដែល Machine Learning កំពុងបម្លែងប្រតិបត្តិការអាជីវកម្ម។",
+    "categories": [
+      "AI &amp; Machine Learning"
+    ],
+    "tags": [
+      "machine-learning",
+      "use-cases",
+      "industry",
+      "ai"
+    ],
+    "link": "#",
+    "meta": {
+      "title": "កម្មវិធី Machine Learning សម្រាប់គ្រប់ឧស្សាហកម្ម",
+      "image": "site/assets/img/blog-details/machine-learning-applications-for-every-industry.png",
+      "description": "ពីវិស័យសុខាភិបាលរហូតដល់រាយការណ៍លក់រាយ សូម្បីក្រុមហ៊ុនថាមពល — ស្វែងយល់ពីរបៀបដែល Machine Learning កំពុងបម្លែងប្រតិបត្តិការអាជីវកម្ម។"
+    },
+    "content": "<article style=\"margin:16px 0; padding:18px; background:#fff; line-height:1.55; font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;\"><h1 style=\"font-size:1.15rem; margin:0 0 8px;\">Machine Learning ដែលផ្តល់តម្លៃពិត</h1><p style=\"margin:0 0 10px; color:#444;\">លំនាំ ML ៤ ប្រភេទដែលអាចសាកល្បងបានក្នុងរយៈពេលខ្លី មិនចាំបាច់រង់ចាំជាច្រើនខែ។</p><h2 style=\"font-size:1rem; margin:14px 0 6px;\">1) ការទស្សន៍ទាយ និងការធ្វើផែនការ</h2><p style=\"margin:0 0 10px;\">ការទស្សន៍ទាយអំពីតម្រូវការទំនិញសម្រាប់លក់រាយ ការប្រើកន្លែងគ្រែសម្រាប់មន្ទីរពេទ្យ ឬការធ្វើផែនការបរិំណោយថាមពល។ ចាប់ផ្តើមពីទិន្នន័យប្រវត្តិសាស្ត្រ និងម៉ូឌែលមូលដ្ឋាន ដែលងាយយល់ បន្ទាប់មកកែលំអរ។</p><h2 style=\"font-size:1rem; margin:14px 0 6px;\">2) ការផ្ដល់អនុសាសន៍</h2><p style=\"margin:0 0 10px;\">ការផ្ដល់ផលិតផល ឬកម្រងមាតិកាដែលសមស្របបន្ទាប់បន្សំ ជួយបង្កើនអត្រាបម្លែង និងការចូលរួម។ ត្រូវវាស់អ្វីដែលបង្កើនតម្លៃពិត (incremental lift) មិនមែនគ្រាន់តែចំនួនចុច។</p><h2 style=\"font-size:1rem; margin:14px 0 6px;\">3) វីស្យុន និងគុណភាព</h2><p style=\"margin:0 0 10px;\">ការរកឃើញកំហុសលើខ្សែផលិតដោយប្រើកាមេរ៉ា និងComputer Vision។ ឲ្យមនុស្សពិនិត្យថែមទៀតរហូតដល់សមត្ថភាព precision/recall ដល់គោលដៅ។</p><h2 style=\"font-size:1rem; margin:14px 0 6px;\">4) NLP សម្រាប់ប្រតិបត្តិការ</h2><p style=\"margin:0 0 10px;\">តម្រៀបសំបុត្រគាំទ្រ អ៊្រោតអ៊ីមែល ទាញយកអង្គធាតុសំខាន់ៗពីឯកសារ។ ត្រូវវាស់រយៈពេលដោះស្រាយ (time-to-resolution) និងពេញចិត្តរបស់អតិថិជន (CSAT)।</p><h2 style=\"font-size:1rem; margin:14px 0 6px;\">ប្លេប៊ុក交付 (Delivery Playbook)</h2><ul style=\"margin:0 0 10px 18px;\"><li>កំណត់ KPI អាជីវកម្មតែមួយ សម្រាប់គោលបំណងនីមួយៗ។</li><li>ចាប់ផ្តើមដោយមូលដ្ឋាន ហើយដឹកជញ្ជូន slice តូចៗដែលបណ្ដេញចោលការសន្មត់។</li><li>គ្រប់គ្រង MLOps: កំណែទុកវើសិន ដុត/តាមដាន និងធ្វើ rollback ពេលចាំបាច់។</li></ul><p style=\"margin:12px 0 0;\">📈 <strong>លទ្ធផល:</strong> តម្លៃ ML ដែលអាចធ្វើម្ដងហើយម្ដងទៀត ក្នុងក្រុមជាច្រើន ដោយមិនបង្កើតវេទិកាច្រើនពេក។</p></article>"
+  },
+  {
+    "image": "site/assets/img/blog-details/5-technology-considerations-for-office-relocations.png",
+    "image_cover": "site/assets/img/blog-details/5-technology-considerations-for-office-relocations.png",
+    "author": "CHAMN4B",
+    "date": "27 June 2022",
+    "title": "បច្ចេកវិទ្យា 5 ចំណុចត្រូវគិតមុនពេលផ្លាស់ទីការិយាល័យ",
+    "slug": "5-technology-considerations-for-office-relocations",
+    "excerpt": "កំពុងផ្លាស់ទីការិយាល័យមែនទេ? នេះគឺជាកត្តា IT សំខាន់ៗ 5 យ៉ាង ដែលជួយកាត់បន្ថយពេល downtime និងរក្សាអាជីវកម្មឲ្យភ្ជាប់គ្នាដោយស្ថិរភាព។",
+    "categories": [
+      "បច្ចេកវិទ្យាអាជីវកម្ម"
+    ],
+    "tags": [
+      "office-move",
+      "it-infrastructure",
+      "downtime",
+      "networking"
+    ],
+    "link": "#",
+    "meta": {
+      "title": "បច្ចេកវិទ្យា 5 ចំណុចត្រូវគិតមុនពេលផ្លាស់ទីការិយាល័យ",
+      "image": "site/assets/img/blog-details/5-technology-considerations-for-office-relocations.png",
+      "description": "កំពុងផ្លាស់ទីការិយាល័យមែនទេ? នេះគឺជាកត្តា IT សំខាន់ៗ 5 យ៉ាង ដែលជួយកាត់បន្ថយពេល downtime និងរក្សាអាជីវកម្មឲ្យភ្ជាប់គ្នាដោយស្ថិរភាព។"
+    },
+    "content": "<article style=\"margin:16px 0; padding:18px; background:#fff; line-height:1.55; font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;\"><h1 style=\"font-size:1.15rem; margin:0 0 8px;\">បញ្ជីត្រួតពិនិត្យបច្ចេកវិទ្យាសម្រាប់ការផ្លាស់ទីការិយាល័យរបស់អ្នក</h1><ol style=\"margin:0 0 10px 18px;\"><li><strong>ការតភ្ជាប់:</strong> កុម៉ង់សេវាអ៊ីនធឺណិត/សៀគ្វីទិន្នន័យ 60–90 ថ្ងៃមុន ពិនិត្យផ្លូវ redundancy ហើយមានផែនការចូលបម្រុង 4G/5G។</li><li><strong>LAN &amp; Wi-Fi:</strong> ផែនទីកម្តៅ (heatmap) កំណត់ចំនួន access point ថវិកា PoE និងស្តង់ដារ​ខ្សែកាប (Cat6A+)។</li><li><strong>កន្លែងសហការ:</strong> ស្តង់ដារឧបករណ៍បន្ទប់ប្រជុំ ស្លាកសម្គាល់ និងដាក់ជាស្ថានីយ៍ដែលអាចគ្រប់គ្រងពីចម្ងាយ។</li><li><strong>សន្តិសុខ:</strong> ប្រព័ន្ធគ្រប់គ្រងចូលប្រើ អ្នកថតកាមេរ៉ា ការបែងចែកបណ្តាញ និងការគ្រប់គ្រងភ្ញៀវ។</li><li><strong>ផែនការកាត់ប្តូរភ្ជាប់ (cutover plan):</strong> កំណត់ថ្ងៃបិទការផ្លាស់ប្តូរ ជំហានrollback និងក្រុមគាំទ្រពិសេសក្រោយប្តូរ (hypercare)।</li></ol><h2 style=\"font-size:1rem; margin:14px 0 6px;\">ការផ្លាស់ទីទិន្នន័យ &amp; ទ្រព្យសម្បត្តិ</h2><ul style=\"margin:0 0 10px 18px;\"><li>បម្រុងទិន្នន័យ និងសាកល្បងការស្ដារឡើងវិញ ធានាថាមានអ៊ិនគ្រីបពេលដឹកជញ្ជូន និងកំណត់ត្រាច្រកផ្លូវ (chain of custody)।</li><li>រៀបចំនូវបញ្ជីទ្រព្យសកម្មជាមួយបាកូដ បិទប្រើឧបករណ៍មិនចាំបាច់ ហើយបញ្ចេញ e-waste ដោយមានទំនួលខុសត្រូវ។</li></ul><p style=\"margin:12px 0 0;\">🧭 <strong>គន្លឹះជំនាញ:</strong> ធ្វើសាកល្បងដូចពិតក្នុងបរិយាកាសលាប (lab) មុនពេលកាត់ប្តូរពិតនៅចុងសប្ដាហ៍ ដើម្បីផ្ទៀងផ្ទាត់អាស្រ័យភាពទាំងអស់។</p></article>"
+  },
+  {
+    "image": "site/assets/img/blog-details/everything-you-need-to-know-about-geo-blocking.png",
+    "image_cover": "site/assets/img/blog-details/everything-you-need-to-know-about-geo-blocking.png",
+    "author": "David Kim",
+    "date": "28 June 2022",
+    "title": "អ្វីៗគ្រប់យ៉ាងដែលអ្នកត្រូវដឹងអំពី Geo-Blocking",
+    "slug": "everything-you-need-to-know-about-geo-blocking",
+    "excerpt": "យល់អំពីរបៀបដែល geo-blocking ដំណើរការ ហេតុអ្វីវាសំខាន់សម្រាប់អាជីវកម្ម និងផលប៉ះពាល់លើបទពិសោធន៍របស់អតិថិជន។",
+    "categories": [
+      "អ៊ីនធឺណិត"
+    ],
+    "tags": [
+      "geo-blocking",
+      "content-restrictions",
+      "region-locking",
+      "compliance"
+    ],
+    "link": "#",
+    "meta": {
+      "title": "អ្វីៗគ្រប់យ៉ាងដែលអ្នកត្រូវដឹងអំពី Geo-Blocking",
+      "image": "site/assets/img/blog-details/everything-you-need-to-know-about-geo-blocking.png",
+      "description": "យល់អំពីរបៀបដែល geo-blocking ដំណើរការ ហេតុអ្វីវាសំខាន់សម្រាប់អាជីវកម្ម និងផលប៉ះពាល់លើបទពិសោធន៍របស់អតិថិជន។"
+    },
+    "content": "<article style=\"margin:16px 0; padding:18px; background:#fff; line-height:1.55; font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;\"><h1 style=\"font-size:1.15rem; margin:0 0 8px;\">Geo-Blocking: មូលដ្ឋានចាំបាច់</h1><p style=\"margin:0 0 10px; color:#444;\">Geo-blocking គឺជាការកំណត់ការចូលប្រើមាតិកា ឬសេវាកម្ម យោងតាមទីតាំងអ្នកប្រើប្រាស់ ដោយផ្អែកលើ IP GPS ឬតំបន់បង់ប្រាក់។ ប្រសិនបើអនុវត្តបានត្រឹមត្រូវ វាជួយបញ្ចុះបញ្ចូលច្បាប់ អាជ្ញាប័ណ្ណ និងបទពិសោធន៍អ្នកប្រើ។</p><h2 style=\"font-size:1rem; margin:14px 0 6px;\">វាដំណើរការយ៉ាងដូចម្តេច</h2><ul style=\"margin:0 0 10px 18px;\"><li>ពិនិត្យ geolocation តាម IP និង ASN នៅកម្រិត CDN/WAF edge។</li><li>ប្រើ locale ឧបករណ៍ ប្រទេសក្នុងស៊ីម ហើយពិនិត្យតំបន់បង់ប្រាក់ (BIN) ជាសញ្ញាបន្ថែម។</li><li>ប្រើ allow/deny list តាមផ្លូវ URL ផលិតផល ឬមុខងារ (feature flag) ជាក់លាក់។</li></ul><h2 style=\"font-size:1rem; margin:14px 0 6px;\">ពេលណាត្រូវប្រើវា</h2><ul style=\"margin:0 0 10px 18px;\"><li>ការគ្រប់គ្រងសិទ្ធិផ្សាយរបស់មេឌિયા និងកីឡា។</li><li>ការគ្រប់គ្រងនាំចេញ ច្បាប់អាយុ និងតម្រូវការរដ្ឋបាលផ្សេងៗ។</li><li>កាត់បន្ថយការក្លែងបន្លំ និងការគ្រប់គ្រងតម្លៃតាមតំបន់។</li></ul><h2 style=\"font-size:1rem; margin:14px 0 6px;\">បទពិសោធន៍អ្នកប្រើ &amp; ភាពអនុលោម</h2><ul style=\"margin:0 0 10px 18px;\"><li>បង្ហាញសារ ឬជម្រើសជំនួសយ៉ាងច្បាស់ សម្រាប់តំបន់ដែលត្រូវបានបិទ។</li><li>គោរពច្បាប់ឯកជនភាព កុំប្រមូលទិន្នន័យលើសត្រូវការ។</li><li>កត់ត្រាការសម្រេចចិត្តសម្រាប់ audit និងមើលតាមរយៈលំនាំការបំពាន (ឧ. VPN)។</li></ul><p style=\"margin:12px 0 0;\">🛡️ <strong>សរុប:</strong> អនុវត្តវិធានការដែលសមស្រប មិនខ្លាំងពេក ហើយពិនិត្យម្តងទៀតពេលទីផ្សាររបស់អ្នកផ្លាស់ប្តូរ។</p></article>"
+  },
+  {
+    "image": "site/assets/img/blog-details/internal-or-outsourced-it-whats-the-best-choice.png",
+    "image_cover": "site/assets/img/blog-details/internal-or-outsourced-it-whats-the-best-choice.png",
+    "author": "Amara Singh",
+    "date": "30 June 2022",
+    "title": "IT ក្នុងផ្ទះ ឬជួលខាងក្រៅ: ជម្រើសណាដែលល្អជាងសម្រាប់អង្គការរបស់អ្នក?",
+    "slug": "internal-or-outsourced-it-whats-the-best-choice",
+    "excerpt": "ប្រៀបធៀបអត្ថប្រយោជន៍ និងគុណវិបត្តិរវាងក្រុម IT ផ្ទាល់ខ្លួន និងសេវា IT ជួលខាងក្រៅ ដើម្បីស្វែងរកម៉ូឌែលដែលសមស្របបំផុតសម្រាប់អង្គការរបស់អ្នក។",
+    "categories": [
+      "យុទ្ធសាស្ត្រអាជីវកម្ម"
+    ],
+    "tags": [
+      "it-outsourcing",
+      "in-house-it",
+      "cost-benefit",
+      "scalability"
+    ],
+    "link": "#",
+    "meta": {
+      "title": "IT ក្នុងផ្ទះ ឬជួលខាងក្រៅ: ជម្រើសណាដែលល្អជាងសម្រាប់អង្គការរបស់អ្នក?",
+      "image": "site/assets/img/blog-details/internal-or-outsourced-it-whats-the-best-choice.png",
+      "description": "ប្រៀបធៀបអត្ថប្រយោជន៍ និងគុណវិបត្តិរវាងក្រុម IT ផ្ទាល់ខ្លួន និងសេវា IT ជួលខាងក្រៅ ដើម្បីស្វែងរកម៉ូឌែលដែលសមស្របបំផុតសម្រាប់អង្គការរបស់អ្នក។"
+    },
+    "content": "<article style=\"margin:16px 0; padding:18px; background:#fff; line-height:1.55; font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;\"><h1 style=\"font-size:1.15rem; margin:0 0 8px;\">IT ខាងក្នុង ប្រៀបធៀបនឹង IT ជួលខាងក្រៅ</h1><p style=\"margin:0 0 10px; color:#444;\">ជ្រើសម៉ូឌែលដែលសមស្របនឹងទំហំ អត្រាហានិភ័យ និងផែនទីអភិវឌ្ឍន៍រយៈពេលវែង របស់អ្នក មិនមែនគ្រាន់តែថវិកាឆ្នាំនេះ។</p><h2 style=\"font-size:1rem; margin:14px 0 6px;\">ក្រុមក្នុងផ្ទះ៖ អត្ថប្រយោជន៍</h2><ul style=\"margin:0 0 10px 18px;\"><li>ចំណេះដឹងជ្រៅលើដែនជំនាញ និងcontext លឿន។</li><li>សមស្របវប្បធម៌ និងការគ្រប់គ្រងដោយផ្ទាល់។</li><li>សេវាឆ្លើយតបការពារប្រព័ន្ធស្នូលបានលឿន។</li></ul><h2 style=\"font-size:1rem; margin:14px 0 6px;\">ក្រុមក្នុងផ្ទះ៖ គុណវិបត្តិ</h2><ul style=\"margin:0 0 10px 18px;\"><li>ពិបាកក្នុងការទាក់ទាញ និងរក្សាទេពកោសល្យពិសេស។</li><li>ថ្លៃថេរ​ខ្ពស់ និងគ្រប់គ្រង on-call អស់កម្លាំង។</li></ul><h2 style=\"font-size:1rem; margin:14px 0 6px;\">ជួលខាងក្រៅ៖ អត្ថប្រយោជន៍</h2><ul style=\"margin:0 0 10px 18px;\"><li>គាំទ្រ 24/7 និងជំនាញទូលំទូលាយដែលអាចប្រើបានតាមត្រូវការ។</li><li>សមត្ថភាពបត់បែន (elastic capacity) សម្រាប់គម្រោង ឬការចេញដំណើរការ/rollout ធំៗ។</li><li>SLA ផ្អែកលើលទ្ធផល និងឧបករណ៍/ប្រព័ន្ធជាប់ស្នូលរួចរាល់។</li></ul><h2 style=\"font-size:1rem; margin:14px 0 6px;\">ជួលខាងក្រៅ៖ គុណវិបត្តិ</h2><ul style=\"margin:0 0 10px 18px;\"><li>ខ្វះ context ជ្រៅពីអង្គការ ហានិភ័យពឹងផ្អែកលើវិនដ័រ។</li><li>គុណភាពអាចប្រែប្រួល ដូច្នេះត្រូវមានការគ្រប់គ្រង និងត្រួតពិនិត្យយ៉ាងច្បាស់។</li></ul><h2 style=\"font-size:1rem; margin:14px 0 6px;\">ម៉ូឌែល Hybrid</h2><p style=\"margin:0 0 10px;\">ទុកយុទ្ធសាស្ត្រ និងស្ថាបត្យកម្មស្នូលនៅខាងក្នុង ប៉ុន្តែជួលខាងក្រៅសម្រាប់ប្រតិបត្តិការប្រចាំថ្ងៃ NOC/SOC 24/7 និងគម្រោងពេលខ្លី។ កំណត់ RACI និងផ្លូវ escalation ឲ្យច្បាស់។</p><p style=\"margin:12px 0 0;\">🧩 <strong>ស៊ុមសម្រេចចិត្ត:</strong> ខិត្តប័ណ្ណសមត្ថភាពប្រឆាំងនឹងលទ្ធផលអាជីវកម្ម រួចសាកល្បងសេវា co-managed 90 ថ្ងៃ មុនពេលចុះបង្គាប់យូរអង្វែង។</p></article>"
+  }
+]

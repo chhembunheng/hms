@@ -1,0 +1,80 @@
+[
+  {
+    "title": "Flutter Developer",
+    "slug": "flutter-developer",
+    "location": "Phnom Penh, Cambodia",
+    "type": "Full time",
+    "position": "Developer",
+    "priority": "Urgent",
+    "level": "Mid",
+    "date": "2025-08-10",
+    "description": "Build and maintain cross-platform mobile applications using Flutter. Collaborate with backend developers.",
+    "icon": "fas fa-mobile-alt",
+    "link": "#"
+  },
+  {
+    "title": "Senior PHP Laravel Developer",
+    "slug": "senior-php-laravel-developer",
+    "location": "Phnom Penh, Cambodia",
+    "type": "Full time",
+    "position": "Developer",
+    "priority": "Urgent",
+    "level": "Senior",
+    "date": "2025-08-12",
+    "description": "Develop and maintain web applications using PHP Laravel framework. Ensure best practices in performance, security, and scalability.",
+    "icon": "fas fa-code",
+    "link": "#"
+  },
+  {
+    "title": "UX/UI Designer",
+    "slug": "ux-ui-designer",
+    "location": "Phnom Penh, Cambodia",
+    "type": "Full time",
+    "position": "Design",
+    "priority": "Regular",
+    "level": "Mid",
+    "date": "2025-08-01",
+    "description": "Design user-centered interfaces and experiences. Create wireframes, prototypes, and collaborate with developers to bring designs to life.",
+    "icon": "fas fa-pencil-ruler",
+    "link": "#"
+  },
+  {
+    "title": "Graphic Design Intern",
+    "slug": "graphic-design-intern",
+    "location": "Phnom Penh, Cambodia",
+    "type": "Internship",
+    "position": "Design",
+    "priority": "Regular",
+    "level": "Intern",
+    "date": "2025-09-01",
+    "description": "Assist the design team with creating social media graphics, UI mockups, and marketing materials. Learn design tools and processes.",
+    "icon": "fas fa-paint-brush",
+    "link": "#"
+  },
+  {
+    "title": "Software Development Intern",
+    "slug": "software-development-intern",
+    "location": "Phnom Penh, Cambodia",
+    "type": "Internship",
+    "position": "Developer",
+    "priority": "Regular",
+    "level": "Intern",
+    "date": "2025-09-05",
+    "description": "Work with senior developers on real-world projects using modern frameworks. Learn coding best practices and version control.",
+    "icon": "fas fa-laptop-code",
+    "link": "#"
+  },
+  {
+    "title": "Digital Marketing Intern",
+    "slug": "digital-marketing-intern",
+    "location": "Phnom Penh, Cambodia",
+    "type": "Internship",
+    "position": "Marketing",
+    "priority": "Regular",
+    "level": "Intern",
+    "date": "2025-09-10",
+    "description": "Support the marketing team with social media content, SEO tasks, and campaign analytics. Gain hands-on experience in digital strategy.",
+    "icon": "fas fa-bullhorn",
+    "link": "#"
+  }
+]
