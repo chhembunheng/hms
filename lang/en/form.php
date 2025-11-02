@@ -93,4 +93,10 @@ return [
         'twitter_card' => 'Twitter Card Type',
     ],
     'instruction' => 'Please fill out the form carefully. Fields marked with <span class="text-danger">*</span> are required.',
+    'apply' => 'Apply',
+    'reset' => 'Reset',
+    'clear' => 'Clear',
+    'upload' => 'Upload',
+    'choose_file' => 'Choose File',
+    'close' => 'Close',
 ];

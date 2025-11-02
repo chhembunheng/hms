@@ -28,7 +28,7 @@ class PermissionDataTable extends DataTable
             ->addColumn('menu', fn($row) => $row->menu?->translations->where('locale', $locale)->first()?->name ?? $row->menu?->translations->where('locale', 'en')->first()?->name ?? 'N/A')
             ->addColumn('action_route', fn($row) => $row->action_route ?? '-')
             ->addColumn('order', fn($row) => $row->order)
-            ->addColumn('action', fn($a) => view('settings.permissions.action', compact('a')))
+            ->addColumn('action', fn($row) => view('settings.permissions.action', compact('row')))
             ->rawColumns(['action']);
     }
 

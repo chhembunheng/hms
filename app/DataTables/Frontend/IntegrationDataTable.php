@@ -15,7 +15,7 @@ class IntegrationDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', fn($a) => view('frontend.integrations.action', compact('a')))
+            ->addColumn('action', fn($row) => view('frontend.integrations.action', compact('row')))
             ->setRowId('id')
             ->editColumn('name', function (Integration $model) {
                 return $model->getName(app()->getLocale());

@@ -15,7 +15,7 @@ class FaqDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', fn($a) => view('frontend.faqs.action', compact('a')))
+            ->addColumn('action', fn($row) => view('frontend.faqs.action', compact('row')))
             ->setRowId('id')
             ->editColumn('question', function (Faq $model) {
                 return $model->getQuestion(app()->getLocale());

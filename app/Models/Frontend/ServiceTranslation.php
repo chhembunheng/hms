@@ -11,7 +11,8 @@ class ServiceTranslation extends Model
     protected $fillable = [
         'service_id',
         'locale',
-        'title',
+        'name',
+        'content',
         'short_description',
         'description',
         'created_by',

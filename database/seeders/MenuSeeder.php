@@ -24,7 +24,6 @@ class MenuSeeder extends Seeder
     private function createMenus($menus, $parentId = null, $locales = []): void
     {
         foreach ($menus as $data) {
-            // Create or find menu without name (structural data only)
             $menu = Menu::updateOrCreate(
                 [
                     'parent_id' => $parentId,
@@ -39,10 +38,7 @@ class MenuSeeder extends Seeder
                     'order' => $data['order'],
                 ]
             );
-
-            // Create translations for each locale
             foreach ($locales as $locale) {
-                // Determine which name to use for this locale
                 $nameKey = 'name_' . $locale;
                 $descriptionKey = 'description_' . $locale;
                 $name = $data[$nameKey] ?? $data['name'] ?? 'Untitled';
@@ -56,12 +52,10 @@ class MenuSeeder extends Seeder
                     [
                         'name' => $name,
                         'description' => $description,
-                        'created_by' => 1, // System user
+                        'created_by' => 1,
                     ]
                 );
             }
-
-            // Create permissions if they exist
             if (!empty($data['permissions'])) {
                 foreach ($data['permissions'] as $permissionData) {
                     $permission = Permission::updateOrCreate(
@@ -71,6 +65,7 @@ class MenuSeeder extends Seeder
                         ],
                         [
                             'menu_id' => $menu->id,
+                            'action' => $permissionData['action'],
                             'icon' => $permissionData['icon'],
                             'target' => $permissionData['target'],
                             'order' => $permissionData['order'],

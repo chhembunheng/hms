@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\DataTables\Frontend\ServiceDataTable;
-use App\Http\Controllers\Controller;
-use App\Models\Frontend\Service;
-use App\Models\Frontend\ServiceTranslation;
 use Illuminate\Http\Request;
+use App\Models\Frontend\Service;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Frontend\ServiceTranslation;
+use App\DataTables\Frontend\ServiceDataTable;
 
 class ServiceController extends Controller
 {
@@ -37,42 +38,50 @@ class ServiceController extends Controller
                     'slug' => 'required|string|unique:services,slug',
                 ];
                 foreach ($this->locales->keys() as $locale) {
-                    $rules["translations.{$locale}.name"] = 'required|string|max:255';
-                    $rules["translations.{$locale}.short_description"] = 'nullable|string';
-                    $rules["translations.{$locale}.description"] = 'nullable|string';
+                    if ($locale === config('app.locale')) {
+                        $rules["translations.{$locale}.name"] = 'required|string|max:255';
+                        $rules["translations.{$locale}.short_description"] = 'nullable|string';
+                        $rules["translations.{$locale}.description"] = 'nullable|string';
+                    }
                 }
 
                 $validator = Validator::make($request->all(), $rules);
                 if ($validator->fails()) {
                     return errors(message: $validator->errors()->first());
                 }
-
-                $service = Service::create([
-                    'slug' => $request->input('slug'),
-                    'image' => null,
-                    'sort' => $request->input('sort', 0),
-                    'created_by' => auth()->id(),
-                    'updated_by' => auth()->id(),
-                ]);
-
-                if ($request->hasFile('image')) {
-                    $service->image = uploadFile($request->file('image'), 'services');
-                    $service->save();
-                }
-
-                foreach ($this->locales->keys() as $locale) {
-                    $trans = $request->input("translations.{$locale}");
-                    ServiceTranslation::create([
-                        'service_id' => $service->id,
-                        'locale' => $locale,
-                        'name' => $trans['name'],
-                        'short_description' => $trans['short_description'] ?? null,
-                        'description' => $trans['description'] ?? null,
+                DB::transaction(function () use ($request, $form) {
+                    $service = Service::create([
+                        'slug' => $request->input('slug'),
+                        'image' => null,
+                        'sort' => $request->input('sort', 0),
+                        'content' => $request->input('content', null),
+                        'description' => $request->input('description', null),
                         'created_by' => auth()->id(),
                         'updated_by' => auth()->id(),
                     ]);
-                }
 
+                    if ($request->hasFile('image')) {
+                        $service->image = uploadFile($request->file('image'), 'services');
+                        $service->save();
+                    }
+
+                    foreach ($this->locales->keys() as $locale) {
+                        $trans = $request->input("translations.{$locale}");
+                        if(empty($trans['name'])){
+                            continue;
+                        }
+                        ServiceTranslation::create([
+                            'service_id' => $service->id,
+                            'locale' => $locale,
+                            'name' => $trans['name'],
+                            'short_description' => $trans['short_description'] ?? null,
+                            'description' => $trans['description'] ?? null,
+                            'content' => $trans['content'] ?? null,
+                            'created_by' => auth()->id(),
+                            'updated_by' => auth()->id(),
+                        ]);
+                    }
+                });
                 return success(message: 'Service created successfully');
             } catch (\Exception $e) {
                 return errors(message: $e->getMessage());

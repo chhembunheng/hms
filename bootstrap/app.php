@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\Abilities::class,
+            \App\Http\Middleware\ProcessEditor::class,
         ]);
         $middleware->group('api', [
             \Illuminate\Routing\Middleware\SubstituteBindings::class,

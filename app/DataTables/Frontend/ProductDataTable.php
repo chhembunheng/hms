@@ -15,7 +15,7 @@ class ProductDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', fn($a) => view('frontend.products.action', compact('a')))
+            ->addColumn('action', fn($row) => view('frontend.products.action', compact('row')))
             ->setRowId('id')
             ->editColumn('name', function (Product $model) {
                 return $model->getName(app()->getLocale());

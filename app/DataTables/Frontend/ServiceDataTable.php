@@ -15,7 +15,7 @@ class ServiceDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', fn($a) => view('frontend.services.action', compact('a')))
+            ->addColumn('action', fn($row) => view('frontend.services.action', compact('row')))
             ->setRowId('id')
             ->editColumn('name', function (Service $model) {
                 return $model->getName(app()->getLocale());

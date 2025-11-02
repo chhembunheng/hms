@@ -15,7 +15,7 @@ class PlanDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', fn($a) => view('frontend.plans.action', compact('a')))
+            ->addColumn('action', fn($row) => view('frontend.plans.action', compact('row')))
             ->setRowId('id')
             ->editColumn('title', function (Plan $model) {
                 return $model->getTitle(app()->getLocale());

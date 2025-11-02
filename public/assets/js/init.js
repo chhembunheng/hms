@@ -4,26 +4,13 @@
     localStorage.getItem('direction') == 'rtl' && document.documentElement.setAttribute('dir', 'rtl');
 })();
 
-
-// Setup module
-// ------------------------------
-
 const themeSwitcher = function() {
-
-
-    //
-    // Setup module components
-    //
-
-    // Theme
     const layoutTheme = function() {
         var primaryTheme = 'light';
         var secondaryTheme = 'dark';
         var storageKey = 'theme';
         var colorscheme = document.getElementsByName('main-theme');
         var mql = window.matchMedia('(prefers-color-scheme: ' + primaryTheme + ')');
-
-        // Changes the active radiobutton
         function indicateTheme(mode) {
             for(var i = colorscheme.length; i--; ) {
                 if(colorscheme[i].value == mode) {
@@ -35,8 +22,6 @@ const themeSwitcher = function() {
                 }
             }
         };
-
-        // Turns alt stylesheet on/off
         function applyTheme(mode) {
             var st = document.documentElement;
             if (mode == primaryTheme) {
@@ -54,8 +39,6 @@ const themeSwitcher = function() {
                 }
             }
         };
-
-        // Handles radiobutton clicks
         function setTheme(e) {
             var mode = e.target.value;
             document.documentElement.classList.add('no-transitions');
@@ -65,16 +48,12 @@ const themeSwitcher = function() {
             else {
                 localStorage.setItem(storageKey, mode);
             }
-            // When the auto button was clicked the auto-switcher needs to kick in
             autoTheme(mql);
         };
-
-        // Handles the media query evaluation, so it expects a media query as parameter
         function autoTheme(e) {
             var current = localStorage.getItem(storageKey);
             var mode = primaryTheme;
             var indicate = primaryTheme;
-            // User set preference has priority
             if ( current != null) {
                 indicate = mode = current;
             }
@@ -87,18 +66,12 @@ const themeSwitcher = function() {
                 document.documentElement.classList.remove('no-transitions');
             }, 100);
         };
-
-        // Create an event listener for media query matches and run it immediately
         autoTheme(mql);
         mql.addListener(autoTheme);
-
-        // Set up listeners for radio button clicks */
         for(var i = colorscheme.length; i--; ) {
             colorscheme[i].onchange = setTheme;
         }
     };
-
-    // Direction
     const layoutDirection = function() {
         var dirSwitch = document.querySelector('[name="layout-direction"]');
 
@@ -123,12 +96,6 @@ const themeSwitcher = function() {
             });
         }
     };
-
-
-    //
-    // Return objects assigned to module
-    //
-
     return {
         init: function() {
             layoutTheme();

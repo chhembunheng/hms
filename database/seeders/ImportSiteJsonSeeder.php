@@ -159,9 +159,10 @@ class ImportSiteJsonSeeder extends Seeder
                 DB::table('service_translations')->updateOrInsert(
                     ['service_id' => $serviceId, 'locale' => $locale],
                     [
-                        'title' => $t['name'] ?? ($locale === 'en' ? $item['name'] ?? 'N/A' : ''),
+                        'name' => $t['name'] ?? ($locale === 'en' ? $item['name'] ?? 'N/A' : ''),
                         'short_description' => $t['short_description'] ?? null,
                         'description' => $t['description'] ?? null,
+                        'content' => $t['content'] ?? null,
                         'updated_at' => now(),
                         'created_at' => now(),
                     ]

@@ -27,7 +27,7 @@ class MenuDataTable extends DataTable
             ->addColumn('name', fn($row) => $row->translations->where('locale', $locale)->first()?->name ?? $row->translations->where('locale', 'en')->first()?->name ?? 'N/A')
             ->addColumn('route', fn($row) => $row->route ?? '-')
             ->addColumn('order', fn($row) => $row->order)
-            ->addColumn('action', fn($a) => view('settings.menus.action', compact('a')))
+            ->addColumn('action', fn($row) => view('settings.menus.action', compact('row')))
             ->rawColumns(['action']);
     }
 

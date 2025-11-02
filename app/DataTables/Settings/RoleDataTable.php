@@ -25,7 +25,7 @@ class RoleDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addIndexColumn()
             ->addColumn('name', fn($row) => $row->translations->where('locale', $locale)->first()?->name ?? $row->translations->where('locale', 'en')->first()?->name ?? 'N/A')
-            ->addColumn('action', fn($a) => view('settings.roles.action', compact('a')))
+            ->addColumn('action', fn($row) => view('settings.roles.action', compact('row')))
             ->rawColumns(['action']);
     }
 

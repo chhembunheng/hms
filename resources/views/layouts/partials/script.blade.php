@@ -8,10 +8,30 @@
  <script src="{{ asset('assets/js/vendor/pickers/daterangepicker.js') }}"></script>
  <script src="{{ asset('assets/js/vendor/forms/validation/validate.min.js') }}"></script>
  <script src="{{ asset('assets/js/vendor/pickers/datepicker.min.js') }}"></script>
+ <script src="{{ asset('assets/js/vendor/notifications/noty.min.js') }}"></script>
  <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
  <script src="{{ asset('assets/js/app.js') }}?v={{ time() }}"></script>
  <script src="{{ asset('assets/js/init.js') }}"></script>
+ <script src="{{ asset('assets/js/helpers.js') }}?v={{ time() }}"></script>
  <script>
+     // override Noty default settings
+     Noty.overrideDefaults({
+         theme: 'limitless',
+         layout: 'topRight',
+         type: 'alert',
+         timeout: 2500
+     });
+     // initialize SweetAlert2
+     const swalInit = swal.mixin({
+         buttonsStyling: false,
+         customClass: {
+             confirmButton: 'btn btn-primary',
+             cancelButton: 'btn btn-light',
+             denyButton: 'btn btn-light',
+             input: 'form-control'
+         }
+     });
+     // initialize body overlay
      $(document).ready(function() {
          $('#body-overlay').hide();
          $(document).find('select.multiple-select').multiselect();
@@ -24,15 +44,6 @@
              }
          });
          $(document).find('select.select2').select2();
-     });
-     const swalInit = swal.mixin({
-         buttonsStyling: false,
-         customClass: {
-             confirmButton: 'btn btn-primary',
-             cancelButton: 'btn btn-light',
-             denyButton: 'btn btn-light',
-             input: 'form-control'
-         }
      });
 
      function loading(e) {
@@ -87,42 +98,29 @@
                  $.ajax({
                      url: url,
                      type: 'DELETE',
-                     success: function(response) {
-                         if (response.status === 'success') {
-                             swalInit.fire({
-                                 title: 'Deleted!',
-                                 text: response.message,
-                                 icon: 'success',
-                                 customClass: {
-                                     confirmButton: 'btn btn-success'
-                                 }
-                             }).then(function() {
-                                 if (el.closest('.dataTables_wrapper').length) {
-                                     el.closest('.dataTables_wrapper').find('table.datatables').DataTable().ajax.reload();
-                                 } else {
-                                     window.location.reload();
-                                 }
-                             });
+                     success: function(res) {
+                         if (res.status === 'success') {
+                             if (el.closest('.dataTables_wrapper').length) {
+                                 el.closest('.dataTables_wrapper').find('table.datatables').DataTable().ajax.reload();
+                                 new Noty({
+                                     type: 'success',
+                                     text: '<i class="fa-solid fa-check fa-fw"></i> ' + res.message
+                                 }).show();
+                             } else {
+                                 window.location.reload();
+                             }
                          } else {
-                             swalInit.fire({
-                                 title: 'Error!',
-                                 text: response.message,
-                                 icon: 'error',
-                                 customClass: {
-                                     confirmButton: 'btn btn-danger'
-                                 }
-                             });
+                             new Noty({
+                                 type: 'error',
+                                 text: res.message
+                             }).show();
                          }
                      },
                      error: function(e) {
-                         swalInit.fire({
-                             title: 'Error!',
-                             text: 'Something went wrong',
-                             icon: 'error',
-                             customClass: {
-                                 confirmButton: 'btn btn-danger'
-                             }
-                         });
+                         new Noty({
+                             type: 'error',
+                             text: 'Something went wrong'
+                         }).show();
                      }
                  });
              }
@@ -130,25 +128,11 @@
      }
 
      function clearCache() {
-         swalInit.fire({
-             title: '{{ __('messages.are_you_sure') }}',
-             text: '{{ __('messages.clear_confirmation') }}',
-             icon: 'question',
-             showCancelButton: true,
-             confirmButtonText: '<i class="fa-solid fa-broom-wide fa-fw"></i> &nbsp; {{ __('messages.yes_clear') }}',
-             cancelButtonText: '<i class="fa-solid fa-ban fa-fw"></i> &nbsp; {{ __('messages.no_cancel') }}',
-             buttonsStyling: false,
-             customClass: {
-                 confirmButton: 'btn btn-flat-success',
-                 cancelButton: 'btn btn-light'
-             }
-         }).then(function(result) {
-             if (result.value) {
-                 setTimeout(function() {
-                     window.location.href = '{{ route('clear-cache') }}';
-                 }, 300);
-             }
-         });
+         window.location.href = '{{ route('clear-cache') }}';
+     }
+
+     function clearCache() {
+         window.location.href = '{{ route('clear-cache') }}';
      }
 
      $.ajaxSetup({
@@ -334,12 +318,118 @@
                  }
              }
          });
+         $(form).on('submit', function(e) {
+             e.preventDefault();
+             if (!$(form).valid()) {
+                 e.preventDefault();
+                 return false;
+             }
+             $.ajax({
+                 url: form.getAttribute('action'),
+                 type: form.getAttribute('method') || 'POST',
+                 data: $(form).serialize(),
+                 dataType: 'json',
+                 success: function(res) {
+                     if (res.status === 'success') {
+                         swalInit.fire({
+                             title: 'Success!',
+                             text: res.message,
+                             icon: 'success',
+                             customClass: {
+                                 confirmButton: 'btn btn-success'
+                             }
+                         }).then(function() {
+                             if (res.redirect) {
+                                 window.location.href = res.redirect;
+                             } else {
+                                 location.reload();
+                             }
+                         });
+                     } else {
+                         swalInit.fire({
+                             title: 'Error!',
+                             text: res.message,
+                             icon: 'error',
+                             customClass: {
+                                 confirmButton: 'btn btn-danger'
+                             }
+                         });
+                     }
+                 },
+                 error: function(e) {
+                     let message = 'Something went wrong';
+                     if (e.responseJSON && e.responseJSON.message) {
+                         message = e.responseJSON.message;
+                     }
+                     swalInit.fire({
+                         title: 'Error!',
+                         text: message,
+                         icon: 'error',
+                         customClass: {
+                             confirmButton: 'btn btn-danger'
+                         }
+                     });
+                 }
+             });
+         });
      });
+
+     class CdnUploadAdapter {
+         constructor(loader) {
+             this.loader = loader;
+             this.xhr = null;
+         }
+
+         async upload() {
+             try {
+                 const file = await this.loader.file;
+
+                 // Convert file to base64
+                 const base64 = await this.fileToBase64(file);
+
+                 return {
+                     default: base64
+                 };
+             } catch (error) {
+                 console.error('Upload error:', error);
+                 throw error;
+             }
+         }
+
+         fileToBase64(file) {
+             return new Promise((resolve, reject) => {
+                 const reader = new FileReader();
+
+                 reader.addEventListener('load', () => {
+                     resolve(reader.result);
+                 });
+
+                 reader.addEventListener('error', () => {
+                     reject(new Error('Failed to read file'));
+                 });
+
+                 reader.addEventListener('progress', (evt) => {
+                     if (evt.lengthComputable) {
+                         this.loader.uploadTotal = evt.total;
+                         this.loader.uploaded = evt.loaded;
+                     }
+                 });
+
+                 reader.readAsDataURL(file);
+             });
+         }
+
+         abort() {
+             // No abort needed for local conversion
+         }
+     }
+
+     function CdnUploadPlugin(editor) {
+         editor.plugins.get('FileRepository').createUploadAdapter = loader => new CdnUploadAdapter(loader);
+     }
+
      const editorsMap = new Map();
-
-     // Optional: if meta call returns before editor is ready, stash the HTML here
      const pendingEditorHTML = new Map();
-
      const editors = document.querySelectorAll('.editor');
      editors.forEach((node) => {
          let toolbars = [
@@ -366,14 +456,12 @@
                  licenseKey: 'GPL',
                  toolbar: toolbars,
                  image: {
-                     toolbar: ['imageTextAlternative', 'imageStyle:full', 'imageStyle:side'],
+                     toolbar: ['imageTextAlternative', 'imageStyle:side'],
                      insert: {
-                         integrations: ['upload', 'url']
+                         integrations: ['upload'],
                      }
                  },
-                 ckfinder: {
-                     uploadUrl: '{{ route('text-editor.upload') }}?&_token={{ csrf_token() }}'
-                 }
+                 extraPlugins: [CdnUploadPlugin],
              })
              .then(editor => {
                  editorsMap.set(node, editor);
@@ -394,6 +482,19 @@
          const keywords = $('input[name="meta[keywords]"]');
          const contentNode = document.querySelector('textarea.content-en');
          const instance = editorsMap.get(contentNode);
+         if (empty(content)) {
+             swalInit.fire({
+                 toast: true,
+                 icon: 'error',
+                 text: 'Please enter content to generate meta information',
+                 position: 'top-end',
+                 background: '#f8d7da',
+                 timer: 3000,
+                 timerProgressBar: true,
+                 showConfirmButton: false
+             });
+             return;
+         }
          if (metaGenerated) {
              return;
          }
@@ -412,9 +513,11 @@
                          title: 'Success!',
                          text: 'Meta information generated successfully',
                          icon: 'success',
-                         customClass: {
-                             confirmButton: 'btn btn-success'
-                         }
+                         toast: true,
+                         position: 'top-end',
+                         timer: 3000,
+                         showConfirmButton: false,
+                         timerProgressBar: true
                      });
                      if (res.data.title) {
                          title.val(res.data.title);
@@ -438,15 +541,18 @@
                          title: 'Error!',
                          text: res.message,
                          icon: 'error',
-                         customClass: {
-                             confirmButton: 'btn btn-danger'
-                         }
+                         showConfirmButton: false,
+                         toast: true,
+                         position: 'top-end',
+                         timer: 3000,
+                         timerProgressBar: true
                      });
                  }
              },
              complete: function() {
                  $('.meta-generator').removeClass('fa-fw fa-2x fa-beat-fade');
                  metaGenerated = false;
+                 loading('stop');
              },
              error: function(e) {
                  let message = 'Something went wrong';
@@ -457,9 +563,10 @@
                      title: 'Error!',
                      text: message,
                      icon: 'error',
-                     customClass: {
-                         confirmButton: 'btn btn-danger'
-                     }
+                     toast: true,
+                     position: 'top-end',
+                     timer: 3000,
+                     timerProgressBar: true,
                  });
              }
          });

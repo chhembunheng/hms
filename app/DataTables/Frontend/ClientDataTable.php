@@ -15,7 +15,7 @@ class ClientDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', fn($a) => view('frontend.clients.action', compact('a')))
+            ->addColumn('action', fn($row) => view('frontend.clients.action', compact('row')))
             ->setRowId('id')
             ->editColumn('name', function (Client $model) {
                 return $model->getName(app()->getLocale());

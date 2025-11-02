@@ -15,7 +15,7 @@ class NavigationDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', fn($a) => view('frontend.navigations.action', compact('a')))
+            ->addColumn('action', fn($row) => view('frontend.navigations.action', compact('row')))
             ->setRowId('id')
             ->editColumn('name', function (Navigation $model) {
                 return $model->getName(app()->getLocale());

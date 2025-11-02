@@ -42,7 +42,7 @@ class UserDataTable extends DataTable
 
                 return $translation->first_name . ' ' . $translation->last_name;
             })
-            ->addColumn('action', fn($a) => view('settings.users.action', compact('a')))
+            ->addColumn('action', fn($row) => view('settings.users.action', compact('row')))
             ->rawColumns(['action']);
     }
 

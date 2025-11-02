@@ -15,7 +15,7 @@ class TeamDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', fn($a) => view('frontend.teams.action', compact('a')))
+            ->addColumn('action', fn($row) => view('frontend.teams.action', compact('row')))
             ->setRowId('id')
             ->editColumn('name', function (Team $model) {
                 return $model->getName(app()->getLocale());
