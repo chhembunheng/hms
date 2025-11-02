@@ -7,21 +7,14 @@
             <div class="col-md-6">
                 <x-form.input :label="__('form.sort')" type="number" name="sort" value="{{ $form?->sort ?? 0 }}" min="0" />
             </div>
-            <div class="col-md-6">
-                <x-form.input :label="__('form.image')" type="file" name="image" accept="image/*" id="service-image" />
-                @if ($form?->image)
-                    <small class="d-block mt-2">
-                        <img src="{{ asset($form->image) }}" alt="{{ $form->getName() }}" style="max-width: 150px; max-height: 150px;">
-                    </small>
-                @endif
+        </div>
+        <hr class="my-4">
+        <div class="row">
+            <div class="col-6">
+                <x-form.input :label="__('form.image')" type="file" name="image" accept="image/*" id="service-image" :initialPreview="$form?->image ? asset($form->image) : null" :initialCaption="$form?->image ? basename($form->image) : null" />
             </div>
-            <div class="col-md-6">
-                <x-form.input :label="__('form.image')" type="file" name="image_cover" accept="image/*" id="service-image-cover" />
-                @if ($form?->image_cover)
-                    <small class="d-block mt-2">
-                        <img src="{{ asset($form->image_cover) }}" alt="{{ $form->getName() }}" style="max-width: 150px; max-height: 150px;">
-                    </small>
-                @endif
+            <div class="col-6">
+                <x-form.input :label="__('form.image')" type="file" name="image_cover" accept="image/*" id="service-image-cover" :initialPreview="$form?->image_cover ? asset($form->image_cover) : null" :initialCaption="$form?->image_cover ? basename($form->image_cover) : null" />
             </div>
         </div>
         <hr class="my-4">

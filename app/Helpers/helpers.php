@@ -256,7 +256,7 @@ if (!function_exists('webpasset')) {
 if (! function_exists('yesNo')) {
     function yesNo($instance)
     {
-        return $instance ? '<span class="badge bg-success bg-opacity-10 text-success">Yes</span>' : '<span class="badge bg-danger bg-opacity-10 text-danger">No</span>';
+        return badge($instance ? 'success' : 'danger', $instance ? 'Yes' : 'No');
     }
 }
 
@@ -645,5 +645,31 @@ if (! function_exists('uploadBase64')) {
             return $putFile;
         }
         throw new \Exception('Invalid upload driver: ' . $driver);
+    }
+}
+
+if (!function_exists('getFileSize')) {
+    /**
+     * Get file size in human readable format (bytes).
+     */
+    function getFileSize($filePath): int
+    {
+        if (!$filePath) {
+            return 0;
+        }
+        
+        try {
+            if (file_exists(public_path($filePath))) {
+                return filesize(public_path($filePath));
+            }
+            
+            if (Storage::exists($filePath)) {
+                return Storage::size($filePath);
+            }
+        } catch (\Exception $e) {
+            Log::warning("getFileSize: Could not get size for {$filePath}", ['error' => $e->getMessage()]);
+        }
+        
+        return 0;
     }
 }

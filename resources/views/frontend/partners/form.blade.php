@@ -2,14 +2,6 @@
     <x-form.layout :form="$form">
         <div class="row">
             <div class="col-md-6">
-                <x-form.input :label="__('form.logo')" type="file" name="logo" accept="image/*" />
-                @if($form?->logo)
-                    <small class="d-block mt-2">
-                        <img src="{{ asset($form->logo) }}" alt="{{ $form->getName() }}" style="max-width: 150px; max-height: 150px;">
-                    </small>
-                @endif
-            </div>
-            <div class="col-md-6">
                 <x-form.input :label="__('form.website_url')" type="url" name="website_url" value="{{ $form?->website_url ?? old('website_url') }}" />
             </div>
             <div class="col-md-6">
@@ -17,6 +9,14 @@
             </div>
             <div class="col-md-12 mt-3">
                 <x-form.checkbox :label="__('form.active')" id="is_active" name="is_active" value="1" checked="{{ $form?->is_active ?? true }}" />
+            </div>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="row">
+            <div class="col-12">
+                <x-form.input :label="__('form.logo')" type="file" name="logo" accept="image/*" :initialPreview="$form?->logo ? asset($form->logo) : null" :initialCaption="$form?->logo ? basename($form->logo) : null" />
             </div>
         </div>
 

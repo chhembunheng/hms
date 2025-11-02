@@ -2,14 +2,6 @@
     <x-form.layout :form="$form">
         <div class="row">
             <div class="col-md-6">
-                <x-form.input :label="__('form.image')" type="file" name="image" accept="image/*" />
-                @if ($form?->image)
-                    <small class="d-block mt-2">
-                        <img src="{{ asset($form->image) }}" alt="{{ $form->getName() }}" style="max-width: 150px; max-height: 150px;">
-                    </small>
-                @endif
-            </div>
-            <div class="col-md-6">
                 <x-form.input :label="__('form.sort')" type="number" name="sort" value="{{ $form?->sort ?? 0 }}" min="0" />
             </div>
             <div class="col-md-6">
@@ -32,6 +24,12 @@
             </div>
             <div class="col-md-6">
                 <x-form.input :label="__('form.email')" type="email" name="email" value="{{ old('email', $form?->email) }}" placeholder="name@example.com" />
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="row">
+            <div class="col-12">
+                <x-form.input :label="__('form.photo')" type="file" name="photo" accept="image/*" :initialPreview="$form?->photo ? asset($form->photo) : null" :initialCaption="$form?->photo ? basename($form->photo) : null" :initialSize="$form?->photo ? getFileSize($form->photo) : null" />
             </div>
         </div>
         <hr class="my-4">

@@ -2,22 +2,6 @@
     <x-form.layout :form="$form">
         <div class="row">
             <div class="col-md-6">
-                <x-form.input :label="__('form.thumbnail')" type="file" name="thumbnail" accept="image/*" />
-                @if ($form?->thumbnail)
-                    <small class="d-block mt-2">
-                        <img src="{{ asset($form->thumbnail) }}" alt="{{ $form->getTitle() }}" style="max-width: 150px; max-height: 150px;">
-                    </small>
-                @endif
-            </div>
-            <div class="col-md-6">
-                <x-form.input :label="__('form.image_cover')" type="file" name="image_cover" accept="image/*" />
-                @if ($form?->image_cover)
-                    <small class="d-block mt-2">
-                        <img src="{{ asset($form->image_cover) }}" alt="{{ $form->getTitle() }}" style="max-width: 150px; max-height: 150px;">
-                    </small>
-                @endif
-            </div>
-            <div class="col-md-6">
                 <x-form.input :label="__('form.sort')" type="number" name="sort" value="{{ $form?->sort ?? 0 }}" min="0" />
             </div>
             <div class="col-md-6">
@@ -37,6 +21,15 @@
             </div>
             <div class="col-md-12">
                 <x-form.checkbox :label="__('form.published')" id="is_published" name="is_published" value="1" checked="{{ $form?->is_published }}" checked />
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="row">
+            <div class="col-6">
+                <x-form.input :label="__('form.thumbnail')" type="file" name="thumbnail" accept="image/*" :initialPreview="$form?->thumbnail ? asset($form->thumbnail) : null" :initialCaption="$form?->thumbnail ? basename($form->thumbnail) : null" :initialSize="$form?->thumbnail ? getFileSize($form->thumbnail) : null" />
+            </div>
+            <div class="col-6">
+                <x-form.input :label="__('form.image_cover')" type="file" name="image_cover" accept="image/*" :initialPreview="$form?->image_cover ? asset($form->image_cover) : null" :initialCaption="$form?->image_cover ? basename($form->image_cover) : null" :initialSize="$form?->image_cover ? getFileSize($form->image_cover) : null" />
             </div>
         </div>
         <hr class="my-4">

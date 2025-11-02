@@ -17,12 +17,19 @@ class ProductDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('action', fn($row) => view('frontend.products.action', compact('row')))
             ->setRowId('id')
+            ->addColumn('image', function (Product $model) {
+                if ($model->image) {
+                    return '<a href="' . asset($model->image) . '" data-bs-popup="lightbox"><img src="' . asset($model->image) . '" alt="' . $model->getName(app()->getLocale()) . '" style="max-width: 50px; height: auto; border-radius: 4px;"></a>';
+                }
+                return '<span class="text-muted">No image</span>';
+            })
             ->editColumn('name', function (Product $model) {
                 return $model->getName(app()->getLocale());
             })
             ->editColumn('created_at', function (Product $model) {
                 return $model->created_at?->format('M d, Y');
-            });
+            })
+            ->rawColumns(['action', 'image']);
     }
 
     public function query(Product $model): QueryBuilder
@@ -46,6 +53,7 @@ class ProductDataTable extends DataTable
         return [
             Column::make('id')->title('ID')->width(60),
             Column::make('sku')->title('SKU')->width(120),
+            Column::computed('image')->title(__('root.common.image'))->width(80)->addClass('text-center'),
             Column::computed('name')->title(__('root.common.name'))->width(200),
             Column::make('sort')->title(__('root.common.sort'))->width(100),
             Column::make('created_at')->title(__('root.common.created_at'))->width(120),

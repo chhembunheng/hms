@@ -8,6 +8,7 @@
                 <a href="{{ route($action['action_route'], ['id' => $row->id]) }}" class="dropdown-item" onclick="deleteRecord(event)">
                     <i class="fa-light {{ $action['icon'] }} me-2"></i> {{ $action->translations->firstWhere('locale', app()->getLocale())->name }}
                 </a>
+                @continue
             @endif
             @if ($action['target'] === 'self')
                 <a href="{{ route($action['action_route'], ['id' => $row->id]) }}" class="dropdown-item">

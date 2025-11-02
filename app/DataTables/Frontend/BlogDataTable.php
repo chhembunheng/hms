@@ -17,12 +17,19 @@ class BlogDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('action', fn($row) => view('frontend.blogs.action', compact('row')))
             ->setRowId('id')
+            ->addColumn('thumbnail', function (Blog $model) {
+                if ($model->thumbnail) {
+                    return '<a href="' . asset($model->thumbnail) . '" data-bs-popup="lightbox"><img src="' . asset($model->thumbnail) . '" alt="' . $model->getTitle(app()->getLocale()) . '" style="max-width: 50px; height: auto; border-radius: 4px;"></a>';
+                }
+                return '<span class="text-muted">No image</span>';
+            })
             ->editColumn('title', function (Blog $model) {
                 return $model->getTitle(app()->getLocale());
             })
             ->editColumn('created_at', function (Blog $model) {
                 return $model->created_at?->format('M d, Y');
-            });
+            })
+            ->rawColumns(['action', 'thumbnail']);
     }
 
     public function query(Blog $model): QueryBuilder
@@ -45,6 +52,7 @@ class BlogDataTable extends DataTable
     {
         return [
             Column::make('id')->title('ID')->width(60),
+            Column::computed('thumbnail')->title(__('root.common.thumbnail'))->width(80)->addClass('text-center'),
             Column::computed('title')->title(__('root.common.title'))->width(200),
             Column::make('created_at')->title(__('root.common.created_at'))->width(120),
             Column::computed('action')

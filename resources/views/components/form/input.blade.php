@@ -1,8 +1,15 @@
-@props(['label', 'required' => $attributes->has('required') && $attributes->get('required') === 'required'])
+@props(['label', 'required' => $attributes->has('required') && $attributes->get('required') === 'required', 'initialPreview' => null, 'initialCaption' => null, 'initialSize' => null])
 @if ($attributes->has('accept') && $attributes->get('accept') === 'image/*')
     <div class="mb-3">
         <p class="fw-semibold @if ($required) required @endif">{{ $label ?? '' }}</p>
-        <input type="file" {{ $attributes->merge(['class' => 'form-control-sm file-input file-input-open-editor']) }} data-input-group-class="input-group-sm" @if ($required) required @endif>
+        <input type="file" 
+            {{ $attributes->merge(['class' => 'form-control-sm file-input file-input-open-editor kv-fileinput-caption']) }} 
+            data-input-group-class="input-group-sm"
+            data-upload-url="false"
+            @if ($initialPreview) data-initial-preview="{{ $initialPreview }}" @endif
+            @if ($initialCaption) data-initial-caption="{{ $initialCaption }}" @endif
+            @if ($initialSize) data-initial-preview-file-size="{{ $initialSize }}" @endif
+            @if ($required) required @endif>
     </div>
 @else
     <div class="mb-3">

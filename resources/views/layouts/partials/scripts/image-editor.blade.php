@@ -100,6 +100,8 @@
         close: '<i class="fa-regular fa-xmark"></i>'
     };
     const fileActionSettings = {
+        rotateClass: '',
+        rotateIcon: '<i class="fa-solid fa-rotate-right"></i>',
         zoomClass: '',
         zoomIcon: '<i class="fa-solid fa-magnifying-glass-plus"></i>',
         dragClass: 'p-2',
@@ -115,29 +117,52 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         try {
-            $('.file-input').fileinput({
-                showPreview: true,
-                showUpload: false,
-                browseOnZoneClick: true,
-                initialPreviewAsData: true,
-                previewZoomButtonClasses: previewZoomButtonClasses,
-                previewZoomButtonIcons: previewZoomButtonIcons,
-                fileActionSettings: fileActionSettings,
-                browseLabel: 'Browse',
-                browseIcon: '<i class="fa-light fa-clone-plus me-2"></i>',
-                uploadIcon: '<i class="fa-light fa-cloud-arrow-up me-2"></i>',
-                removeIcon: '<i class="fa-light fa-x fs-base me-2"></i>',
-                layoutTemplates: {
-                    icon: '<i class="fa-light fa-check"></i>'
-                },
-                removeClass: 'btn btn-light',
-                browseClass: 'btn btn-light',
-                initialCaption: 'No file selected'
+            $('.file-input').each(function() {
+                const $input = $(this);
+                const initialPreview = $input.data('initial-preview') || null;
+                const initialSize = $input.data('initial-preview-file-size') || null;
+                const initialCaption = $input.data('initial-caption') || 'No file selected';
+                const initialPreviewConfig = initialPreview ? [{
+                    caption: initialCaption,
+                    size: initialSize || null
+                }] : [];
+
+                $input.fileinput({
+                    showPreview: true,
+                    showUpload: false,
+                    browseOnZoneClick: document.dir === 'rtl' ? false : true,
+                    overwriteInitial: true,
+                    initialCaption: initialCaption,
+                    browseLabel: 'Browse',
+                    browseIcon: '<i class="fa-light fa-clone-plus me-2"></i>',
+                    removeIcon: '<i class="fa-light fa-x fs-base me-2"></i>',
+                    removeClass: 'btn btn-light',
+                    browseClass: 'btn btn-light',
+                    layoutTemplates: {
+                        icon: '<i class="fa-light fa-check"></i>'
+                    },
+                    initialPreviewAsData: true,
+                    initialPreview: initialPreview || [],
+                    initialPreviewConfig: initialPreviewConfig,
+                    previewZoomButtonClasses: previewZoomButtonClasses,
+                    previewZoomButtonIcons: previewZoomButtonIcons,
+                    fileActionSettings: Object.assign({}, fileActionSettings, {
+                        showUpload: false,
+                        showZoom: false
+                    }),
+                    uploadAsync: false,
+                    uploadUrl: null,
+                    deleteUrl: null
+                }).on('filepreajax filepreupload filebatchpreupload filepredelete filebeforedelete', (e) => {
+                    e.preventDefault();
+                    return false;
+                });
             });
         } catch (e) {
             console.error('Error initializing fileinput:', e);
         }
     });
+
 
 
     let editor = null;

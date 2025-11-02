@@ -9,9 +9,10 @@
  <script src="{{ asset('assets/js/vendor/forms/validation/validate.min.js') }}"></script>
  <script src="{{ asset('assets/js/vendor/pickers/datepicker.min.js') }}"></script>
  <script src="{{ asset('assets/js/vendor/notifications/noty.min.js') }}"></script>
+ <script src="{{ asset('assets/js/vendor/media/glightbox.min.js') }}"></script>
  <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
  <script src="{{ asset('assets/js/app.js') }}?v={{ time() }}"></script>
- <script src="{{ asset('assets/js/init.js') }}"></script>
+ <script src="{{ asset('assets/js/init.js') }}?v={{ time() }}"></script>
  <script src="{{ asset('assets/js/helpers.js') }}?v={{ time() }}"></script>
  <script>
      // override Noty default settings

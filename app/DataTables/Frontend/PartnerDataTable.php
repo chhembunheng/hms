@@ -17,13 +17,19 @@ class PartnerDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('action', fn($row) => view('frontend.partners.action', compact('row')))
             ->setRowId('id')
+            ->addColumn('logo', function (Partner $model) {
+                if ($model->logo) {
+                    return '<a href="' . asset($model->logo) . '" data-bs-popup="lightbox"><img src="' . asset($model->logo) . '" alt="' . $model->getName(app()->getLocale()) . '" style="max-width: 50px; height: auto; border-radius: 4px;"></a>';
+                }
+                return '<span class="text-muted">No logo</span>';
+            })
             ->editColumn('name', function (Partner $model) {
                 return $model->getName(app()->getLocale());
             })
             ->editColumn('is_active', function (Partner $model) {
-                return $model->is_active ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
+                return badge($model->is_active ? 'active' : 'inactive');
             })
-            ->rawColumns(['action', 'is_active'])
+            ->rawColumns(['action', 'is_active', 'logo'])
             ->editColumn('created_at', function (Partner $model) {
                 return $model->created_at?->format('M d, Y');
             });
@@ -50,6 +56,7 @@ class PartnerDataTable extends DataTable
     {
         return [
             Column::make('id')->title('ID')->width(60),
+            Column::computed('logo')->title(__('root.common.logo'))->width(80)->addClass('text-center'),
             Column::computed('name')->title(__('root.common.name'))->width(200),
             Column::make('sort')->title(__('root.common.sort'))->width(80),
             Column::computed('is_active')->title(__('root.common.status'))->width(100),
