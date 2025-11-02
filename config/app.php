@@ -122,25 +122,4 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
-
-    'languages' => [
-        'en' => [
-            'code' => 'en',
-            'variant' => 'en-US',
-            'name' => 'English',
-            'flag' => 'assets/icons/flags/en.svg',
-        ],
-        'km' => [
-            'code' => 'km',
-            'variant' => 'km-KH',
-            'name' => 'ខ្មែរ',
-            'flag' => 'assets/icons/flags/km.svg',
-        ],
-    ],
-    'language_variant' => [
-        'km' => 'km-KH',
-        'en' => 'en-US'
-    ],
-    'available_locales' => ['km', 'en'],
-
 ];

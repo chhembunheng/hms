@@ -16,7 +16,7 @@ class TeamController extends Controller
 
     public function __construct()
     {
-        $this->locales = collect(config('app.languages'));
+        $this->locales = collect(config('init.languages'));
         $this->positions = [
             1 => 'Assistant Director',
             2 => 'Accountant',

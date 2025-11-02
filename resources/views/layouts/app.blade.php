@@ -17,7 +17,9 @@
 </head>
 
 <body style="overflow: visible;">
-    {{-- <div class="card-overlay" id="body-overlay"><span class="ph ph-spinner-gap spinner"></span></div> --}}
+    @if (config('init.loading.enabled') === true)
+        <div class="card-overlay" id="body-overlay"><span class="{{ config('init.loading.icon') }}"></span></div>
+    @endif
     @include('layouts.partials.navigation')
     <div class="page-content">
         @include('layouts.partials.sidebar')
@@ -30,67 +32,13 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="editorModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Image Editor</h5>
-                    <button class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <div id="editorWrap">
-                        <div id="tuiEditor"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <style>
-            #editorModal .modal-fullscreen .modal-content,
-            #editorModal .modal-fullscreen .modal-body {
-                height: 100%;
-            }
 
-            #editorModal .modal-body {
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            #editorWrap {
-                flex: 1;
-                min-height: 0;
-                border: 1px solid #e5e7eb;
-            }
-
-            #tuiEditor {
-                width: 100%;
-                height: 100%;
-                position: relative;
-            }
-            #tuiEditor .tui-image-editor-help-menu {
-                display: flex;
-            }
-            #tuiEditor .tie-crop-button.action {
-                display: flex;
-                align-items: center;
-                gap: 5px;
-                justify-content: center;
-            }
-            #tuiEditor .tie-crop-button.action .tui-image-editor-button {
-                display: flex;
-                align-items: center;
-                gap: 5px;
-            }
-            #tuiEditor .tui-image-editor-header {
-                visibility: hidden;
-            }
-        </style>
-    </div>
     <div class="modal fade" id="modal-remote" tabindex="-1" role="dialog" aria-labelledby="modal-remote-label" aria-hidden="true"></div>
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf
     </form>
     @include('layouts.partials.script')
+    @include('layouts.partials.scripts.image-editor')
     @stack('scripts')
 </body>
 

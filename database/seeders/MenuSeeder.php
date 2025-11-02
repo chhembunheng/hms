@@ -17,7 +17,7 @@ class MenuSeeder extends Seeder
     public function run(): void
     {
         $menus = json_decode(File::get(database_path('seeders/data/menus.json')), true) ?? throw new \Exception('Missing menus.json');
-        $locales = config('app.available_locales', ['en']);
+        $locales = config('init.available_locales', ['en']);
         $this->createMenus($menus, null, $locales);
     }
 

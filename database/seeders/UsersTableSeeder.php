@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
     public function run(): void
     {
         $roleData = json_decode(file_get_contents(database_path('seeders/data/users.json')), true) ?? throw new \Exception('Missing users.json');
-        $locales = config('app.available_locales', ['en']);
+        $locales = config('init.available_locales', ['en']);
 
         foreach ($roleData as $roleInfo) {
             // Create role without name (structural data)

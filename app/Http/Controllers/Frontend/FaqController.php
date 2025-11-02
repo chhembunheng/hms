@@ -16,7 +16,7 @@ class FaqController extends Controller
 
     public function __construct()
     {
-        $this->locales = collect(config('app.languages'));
+        $this->locales = collect(config('init.languages'));
         $this->categories = Faq::whereNull('parent_id')->with('translations', function ($query) {
             $query->where('locale', app()->getLocale());
         })->get()->pluck('translations.0.question', 'id')->toArray();

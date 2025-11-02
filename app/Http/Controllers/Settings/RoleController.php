@@ -27,7 +27,7 @@ class RoleController extends Controller
     public function add(Request $request)
     {
         $form = new Role();
-        $locales = collect(config('app.languages'));
+        $locales = collect(config('init.languages'));
 
         if ($request->isMethod('post')) {
             try {
@@ -83,7 +83,7 @@ class RoleController extends Controller
     public function edit(Request $request, $id)
     {
         $form = Role::findOrFail($id);
-        $locales = collect(config('app.languages'));
+        $locales = collect(config('init.languages'));
 
         if ($request->isMethod('post')) {
             try {

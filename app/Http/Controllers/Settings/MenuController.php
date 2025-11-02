@@ -27,7 +27,7 @@ class MenuController extends Controller
     public function add(Request $request)
     {
         $form = new Menu();
-        $locales = collect(config('app.languages'));
+        $locales = collect(config('init.languages'));
         
         if ($request->isMethod('post')) {
             try {
@@ -87,7 +87,7 @@ class MenuController extends Controller
     public function edit(Request $request, $id)
     {
         $form = Menu::findOrFail($id);
-        $locales = collect(config('app.languages'));
+        $locales = collect(config('init.languages'));
 
         if ($request->isMethod('post')) {
             try {

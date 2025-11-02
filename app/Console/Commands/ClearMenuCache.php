@@ -27,7 +27,7 @@ class ClearMenuCache extends Command
     public function handle()
     {
         Cache::forget('menus_raw_data');
-        $locales = config('app.available_locales', ['en']);
+        $locales = config('init.available_locales', ['en']);
         foreach ($locales as $locale) {
             $pattern = "processed_menus_{$locale}_*";
             $this->info("Clearing cache pattern: {$pattern}");

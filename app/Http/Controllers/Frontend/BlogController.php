@@ -16,7 +16,7 @@ class BlogController extends Controller
 
     public function __construct()
     {
-        $this->locales = collect(config('app.languages'));
+        $this->locales = collect(config('init.languages'));
     }
 
     public function index(BlogDataTable $dataTable)

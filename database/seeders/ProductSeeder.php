@@ -53,7 +53,7 @@ class ProductSeeder extends Seeder
         }
 
         // Now add translations for all locales
-        $locales = config('app.available_locales', ['en', 'km']);
+        $locales = config('init.available_locales', ['en', 'km']);
 
         foreach ($locales as $locale) {
             $filePath = public_path("site/data/{$locale}/products.json");

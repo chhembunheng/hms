@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.language_variant')[app()->getLocale()] ?? 'en-US' }}" dir="ltr">
+<html lang="{{ config('init.language_variants')[app()->getLocale()] ?? 'en-US' }}" dir="ltr">
 
 <head>
     <meta charset="utf-8">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.language_variant')[app()->getLocale()] ?? 'en-US' }}" dir="ltr">
+<html lang="{{ config('init.language_variants')[app()->getLocale()] ?? 'en-US' }}" dir="ltr">
 
 <head>
     <meta charset="utf-8">
@@ -88,7 +88,7 @@
                         <ul class="navbar-nav">
                             <li class="nav-item switch-language-mobile">
                                 @php
-                                    $languages = collect(config('app.languages'));
+                                    $languages = collect(config('init.languages'));
                                     $currentLocale = app()->getLocale();
                                     $currentLanguage = $languages->firstWhere('code', $currentLocale);
                                 @endphp
@@ -98,7 +98,7 @@
                                     <i class="fa-solid fa-chevron-down fa-fw desktop-icon"></i>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    @foreach (config('app.languages') as $language)
+                                    @foreach (config('init.languages') as $language)
                                         @if ($language['code'] !== $currentLocale)
                                             @php
                                                 $switchUrl = route(Route::currentRouteName(), array_merge(request()->route()->parameters(), ['locale' => $language['code']]));
@@ -170,7 +170,7 @@
                             <ul class="navbar-nav">
                                 <li class="nav-item switch-language-desktop d-flex align-items-center">
                                     @php
-                                        $languages = collect(config('app.languages'));
+                                        $languages = collect(config('init.languages'));
                                         $currentLocale = app()->getLocale();
                                         $currentLanguage = $languages->firstWhere('code', $currentLocale);
                                     @endphp
@@ -180,7 +180,7 @@
                                         <i class="fa-solid fa-chevron-down fa-fw desktop-icon"></i>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-end">
-                                        @foreach (config('app.languages') as $language)
+                                        @foreach (config('init.languages') as $language)
                                             @if ($language['code'] !== $currentLocale)
                                                 @php
                                                     $switchUrl = route(Route::currentRouteName(), array_merge(request()->route()->parameters(), ['locale' => $language['code']]));

@@ -11,7 +11,7 @@ class SitemapController extends Controller
 {
     public function index()
     {
-        $locales = config('app.available_locales', ['en']);
+        $locales = config('init.available_locales', ['en']);
         $defaultLocale = $locales[0];
         $services = $this->loadJson('services.json');
         $products = $this->loadJson('products.json');
