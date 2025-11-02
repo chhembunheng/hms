@@ -3,13 +3,14 @@
         <i class="fa-solid fa-bars"></i>
     </a>
     <div class="dropdown-menu dropdown-menu-end">
-        <u></u>
         @foreach ($actions as $action)
-            @if (!isset($action['action_route']) || !Route::has($action['action_route']))
-                @continue
-            @endif
-            @if ($action['action'] == 'delete')
+            @if ($action['action'] === 'delete')
                 <a href="{{ route($action['action_route'], ['id' => $row->id]) }}" class="dropdown-item" onclick="deleteRecord(event)">
+                    <i class="fa-light {{ $action['icon'] }} me-2"></i> {{ $action->translations->firstWhere('locale', app()->getLocale())->name }}
+                </a>
+            @endif
+            @if ($action['target'] === 'self')
+                <a href="{{ route($action['action_route'], ['id' => $row->id]) }}" class="dropdown-item">
                     <i class="fa-light {{ $action['icon'] }} me-2"></i> {{ $action->translations->firstWhere('locale', app()->getLocale())->name }}
                 </a>
             @endif
