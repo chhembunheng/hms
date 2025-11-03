@@ -15,13 +15,14 @@ class FaqDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addIndexColumn()
             ->addColumn('action', fn($row) => view('frontend.faqs.action', compact('row')))
             ->setRowId('id')
             ->editColumn('question', function (Faq $model) {
                 return $model->getQuestion(app()->getLocale());
             })
             ->editColumn('created_at', function (Faq $model) {
-                return $model->created_at?->format('M d, Y');
+                return $model->created_at?->format(config('init.datetime.display_format'));
             });
     }
 
@@ -38,13 +39,14 @@ class FaqDataTable extends DataTable
         return $this->builder()
             ->setTableId('faq-table')
             ->columns($this->getColumns())
-            ->minifiedAjax();
+            ->minifiedAjax()
+            ->orderBy(1);
     }
 
     public function getColumns(): array
     {
         return [
-            Column::make('id')->title('ID')->width(60),
+            Column::computed('DT_RowIndex')->title(__('root.common.no'))->width(60),
             Column::computed('question')->title('Question')->width(300),
             Column::make('sort')->title(__('root.common.sort'))->width(100),
             Column::make('created_at')->title(__('root.common.created_at'))->width(120),

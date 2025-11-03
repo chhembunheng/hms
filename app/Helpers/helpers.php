@@ -425,6 +425,9 @@ if (! function_exists('date_period')) {
 if (!function_exists('slug')) {
     function slug($string, $separator = '-')
     {
+        if(empty($string)) {
+            return null;
+        }
         $slug = strtolower($string);
         $slug = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $slug);
         $slug = preg_replace('/[^a-z0-9]+/i', $separator, $slug);

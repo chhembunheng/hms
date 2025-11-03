@@ -15,6 +15,7 @@ class TeamDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addIndexColumn()
             ->addColumn('action', fn($row) => view('frontend.teams.action', compact('row')))
             ->setRowId('id')
             ->addColumn('photo', function (Team $model) {
@@ -26,10 +27,16 @@ class TeamDataTable extends DataTable
             ->editColumn('name', function (Team $model) {
                 return $model->getName(app()->getLocale());
             })
-            ->editColumn('created_at', function (Team $model) {
-                return $model->created_at?->format('M d, Y');
+            ->addColumn('phone', function (Team $model) {
+                if ($model->email) {
+                    return '<a href="mailto:' . $model->email . '">' . $model->email . '</a>';
+                }
+                return '<span class="text-muted">Not phone</span>';
             })
-            ->rawColumns(['action', 'photo']);
+            ->editColumn('created_at', function (Team $model) {
+                return $model->created_at?->format(config('init.datetime.display_format'));
+            })
+            ->rawColumns(['action', 'photo', 'phone']);
     }
 
     public function query(Team $model): QueryBuilder
@@ -45,15 +52,17 @@ class TeamDataTable extends DataTable
         return $this->builder()
             ->setTableId('team-table')
             ->columns($this->getColumns())
-            ->minifiedAjax();
+            ->minifiedAjax()
+            ->orderBy(2);
     }
 
     public function getColumns(): array
     {
         return [
-            Column::make('id')->title('ID')->width(60),
+            Column::computed('DT_RowIndex')->title(__('root.common.no'))->width(60),
             Column::computed('photo')->title(__('root.common.photo'))->width(80)->addClass('text-center'),
             Column::computed('name')->title(__('root.common.name'))->width(200),
+            Column::computed('phone')->title('Phone/Email')->width(150),
             Column::make('created_at')->title(__('root.common.created_at'))->width(120),
             Column::computed('action')
                 ->exportable(false)

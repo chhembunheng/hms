@@ -231,6 +231,23 @@ class ImportSiteJsonSeeder extends Seeder
             'en' => collect($en)->keyBy('id'),
             'km' => collect($km)->keyBy('id'),
         ];
+        $positions = collect([
+            1 => 'Assistant Director',
+            2 => 'Accountant',
+            3 => 'Business Analyst',
+            4 => 'Customer Support',
+            5 => 'Designer',
+            6 => 'Developer',
+            7 => 'Director',
+            8 => 'Finance Analyst',
+            9 => 'HR Specialist',
+            10 => 'Manager',
+            11 => 'Marketing Specialist',
+            12 => 'Product Manager',
+            13 => 'Sales Representative',
+            14 => 'Senior Developer',
+            15 => 'UI/UX Designer',
+        ])->flip(); // name => id
 
         foreach ($byId['en'] as $id => $item) {
             // Match by English name if exists
@@ -258,6 +275,7 @@ class ImportSiteJsonSeeder extends Seeder
             } else {
                 DB::table('teams')->where('id', $teamId)->update([
                     'photo' => $item['photo'] ?? null,
+                    'position_id' => array_search($item['position'] ?? '', $positions) ?: null,
                     'linkedin_url' => $socials['linkedin'] ?? null,
                     'twitter_url' => $socials['twitter'] ?? null,
                     'facebook_url' => $socials['facebook'] ?? null,
@@ -275,7 +293,7 @@ class ImportSiteJsonSeeder extends Seeder
                     ['team_id' => $teamId, 'locale' => $locale],
                     [
                         'name' => $t['name'] ?? ($locale === 'en' ? $item['name'] ?? 'N/A' : ''),
-                        'position' => $t['position'] ?? null,
+                        'position_name' => $t['position'] ?? null,
                         'bio' => $t['bio'] ?? null,
                         'updated_at' => now(),
                         'created_at' => now(),

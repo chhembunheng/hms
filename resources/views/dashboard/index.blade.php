@@ -184,7 +184,7 @@
                             </h5>
                         </div>
                         <div class="card-body">
-                            @if($visitedCountries->count() > 0)
+                            @if ($visitedCountries->count() > 0)
                                 <div style="height: 300px;">
                                     <canvas id="visitedCountriesChart"></canvas>
                                 </div>
@@ -208,20 +208,19 @@
                             </h5>
                         </div>
                         <div class="card-body">
-                            @if($browserUsage->count() > 0)
+                            @if ($browserUsage->count() > 0)
                                 <div class="mb-3" style="height: 200px;">
                                     <canvas id="browserUsageChart"></canvas>
                                 </div>
                                 <div class="list-group list-group-flush">
-                                    @foreach($browserUsage as $browser)
+                                    @foreach ($browserUsage as $browser)
                                         <div class="list-group-item border-0 px-0 py-1">
                                             <div class="d-flex justify-content-between align-items-center mb-1">
                                                 <span class="small">{{ $browser['name'] }}</span>
                                                 <span class="small fw-medium">{{ $browser['percentage'] }}%</span>
                                             </div>
                                             <div class="progress" style="height: 3px;">
-                                                <div class="progress-bar" 
-                                                     style="width: {{ $browser['percentage'] }}%; background-color: {{ $browser['color'] }}"></div>
+                                                <div class="progress-bar" style="width: {{ $browser['percentage'] }}%; background-color: {{ $browser['color'] }}"></div>
                                             </div>
                                         </div>
                                     @endforeach
@@ -255,9 +254,7 @@
                             <span class="fw-medium">{{ $systemStatus['memory_usage'] }}%</span>
                         </div>
                         <div class="progress" style="height: 6px;">
-                            <div class="progress-bar {{ $systemStatus['memory_usage'] > 80 ? 'bg-danger' : ($systemStatus['memory_usage'] > 60 ? 'bg-warning' : 'bg-success') }}" 
-                                 role="progressbar" 
-                                 style="width: {{ $systemStatus['memory_usage'] }}%"></div>
+                            <div class="progress-bar {{ $systemStatus['memory_usage'] > 80 ? 'bg-danger' : ($systemStatus['memory_usage'] > 60 ? 'bg-warning' : 'bg-success') }}" role="progressbar" style="width: {{ $systemStatus['memory_usage'] }}%"></div>
                         </div>
                         <small class="text-muted">{{ $systemStatus['memory_used'] }} / {{ $systemStatus['memory_total'] }}</small>
                     </div>
@@ -267,9 +264,7 @@
                             <span class="fw-medium">{{ $systemStatus['storage_usage'] }}%</span>
                         </div>
                         <div class="progress" style="height: 6px;">
-                            <div class="progress-bar {{ $systemStatus['storage_usage'] > 80 ? 'bg-danger' : ($systemStatus['storage_usage'] > 60 ? 'bg-warning' : 'bg-info') }}" 
-                                 role="progressbar" 
-                                 style="width: {{ $systemStatus['storage_usage'] }}%"></div>
+                            <div class="progress-bar {{ $systemStatus['storage_usage'] > 80 ? 'bg-danger' : ($systemStatus['storage_usage'] > 60 ? 'bg-warning' : 'bg-info') }}" role="progressbar" style="width: {{ $systemStatus['storage_usage'] }}%"></div>
                         </div>
                         <small class="text-muted">{{ $systemStatus['storage_used'] }} / {{ $systemStatus['storage_total'] }}</small>
                     </div>
@@ -279,9 +274,7 @@
                             <span class="fw-medium">{{ $systemStatus['server_load'] }}%</span>
                         </div>
                         <div class="progress" style="height: 6px;">
-                            <div class="progress-bar {{ $systemStatus['server_load'] > 80 ? 'bg-danger' : ($systemStatus['server_load'] > 60 ? 'bg-warning' : 'bg-primary') }}" 
-                                 role="progressbar" 
-                                 style="width: {{ min($systemStatus['server_load'], 100) }}%"></div>
+                            <div class="progress-bar {{ $systemStatus['server_load'] > 80 ? 'bg-danger' : ($systemStatus['server_load'] > 60 ? 'bg-warning' : 'bg-primary') }}" role="progressbar" style="width: {{ min($systemStatus['server_load'], 100) }}%"></div>
                         </div>
                         <small class="text-muted">Load Average: {{ $systemStatus['load_average'] }}</small>
                     </div>
@@ -292,7 +285,7 @@
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
                             <small class="text-muted">Cache: {{ $systemStatus['cache_size'] }}</small>
-                            @if($systemStatus['reverb_enabled'])
+                            @if ($systemStatus['reverb_enabled'])
                                 <span class="badge bg-success">
                                     <i class="fa-duotone fa-broadcast-tower me-1"></i>
                                     Reverb Active
@@ -314,7 +307,7 @@
                     <h5 class="mb-0 fw-semibold">Permissions by Menu</h5>
                 </div>
                 <div class="card-body">
-                    @if($permissionsByMenu->count() > 0)
+                    @if ($permissionsByMenu->count() > 0)
                         <canvas id="permissionsByMenuChart" height="200"></canvas>
                     @else
                         <div class="text-center text-muted py-4">
@@ -394,12 +387,10 @@
                             <div class="list-group-item border-0 px-3 py-3">
                                 <div class="d-flex align-items-start">
                                     <div class="position-relative me-3">
-                                        <div class="bg-gradient rounded-circle d-flex align-items-center justify-content-center" 
-                                             style="width: 44px; height: 44px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                        <div class="bg-gradient rounded-circle d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
                                             <span class="text-white fw-bold">{{ strtoupper(substr($user['name'], 0, 2)) }}</span>
                                         </div>
-                                        <span class="position-absolute bottom-0 end-0 bg-success border border-white rounded-circle" 
-                                              style="width: 12px; height: 12px;"></span>
+                                        <span class="position-absolute bottom-0 end-0 bg-success border border-white rounded-circle" style="width: 12px; height: 12px;"></span>
                                     </div>
                                     <div class="flex-fill min-width-0">
                                         <h6 class="mb-0 text-truncate">{{ $user['name'] }}</h6>
@@ -438,18 +429,14 @@
                         @forelse($recentTeams as $team)
                             <div class="list-group-item border-0 px-3 py-3">
                                 <div class="d-flex align-items-start">
-                                    <div class="rounded d-flex align-items-center justify-content-center me-3" 
-                                         style="width: 44px; height: 44px; flex-shrink: 0; overflow: hidden;">
-                                        @if($team['photo'])
+                                    <div class="rounded d-flex align-items-center justify-content-center me-3" style="width: 44px; height: 44px; flex-shrink: 0; overflow: hidden;">
+                                        @if ($team['photo'])
                                             @php
                                                 $img = webp_variants($team['photo'], 'xs', null, 80);
                                             @endphp
-                                            <img src="{{ $img['fallback'] }}" 
-                                                 srcset="{{ $img['srcset'] }}" 
-                                                 alt="{{ $team['name'] }}" 
-                                                 class="rounded" 
-                                                 loading="lazy"
-                                                 style="width: 44px; height: 44px; object-fit: cover;">
+                                            <a href="{{ $img['fallback'] }}" data-bs-popup="lightbox">
+                                                <img src="{{ $img['fallback'] }}" srcset="{{ $img['srcset'] }}" alt="{{ $team['name'] }}" class="rounded" loading="lazy" style="width: 44px; height: 44px; object-fit: cover;">
+                                            </a>
                                         @else
                                             <div class="bg-success bg-opacity-10 rounded d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
                                                 <i class="fa-duotone fa-user text-success fs-5"></i>
@@ -496,9 +483,8 @@
                         @forelse($recentServices as $service)
                             <div class="list-group-item border-0 px-3 py-3">
                                 <div class="d-flex align-items-start">
-                                    <div class="bg-warning bg-opacity-10 rounded d-flex align-items-center justify-content-center me-3" 
-                                         style="width: 44px; height: 44px; flex-shrink: 0;">
-                                        @if($service['icon'])
+                                    <div class="bg-warning bg-opacity-10 rounded d-flex align-items-center justify-content-center me-3" style="width: 44px; height: 44px; flex-shrink: 0;">
+                                        @if ($service['icon'])
                                             <i class="{{ $service['icon'] }} text-warning fs-5"></i>
                                         @else
                                             <i class="fa-duotone fa-wrench text-warning fs-5"></i>
@@ -553,19 +539,29 @@
                         responsive: true,
                         maintainAspectRatio: false,
                         plugins: {
-                            legend: { display: false },
-                            tooltip: { enabled: false }
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                enabled: false
+                            }
                         },
                         scales: {
-                            x: { display: false },
-                            y: { display: false }
+                            x: {
+                                display: false
+                            },
+                            y: {
+                                display: false
+                            }
                         },
                         elements: {
                             line: {
                                 borderWidth: 2,
                                 tension: 0.4
                             },
-                            point: { radius: 0 }
+                            point: {
+                                radius: 0
+                            }
                         }
                     }
                 };
@@ -651,7 +647,9 @@
                         responsive: true,
                         maintainAspectRatio: false,
                         plugins: {
-                            legend: { display: false },
+                            legend: {
+                                display: false
+                            },
                             tooltip: {
                                 mode: 'index',
                                 intersect: false,
@@ -688,155 +686,170 @@
                 });
 
                 // Visited Countries Chart (Doughnut)
-                @if($visitedCountries->count() > 0)
-                new Chart(document.getElementById('visitedCountriesChart').getContext('2d'), {
-                    type: 'doughnut',
-                    data: {
-                        labels: {!! json_encode($visitedCountries->pluck('name')) !!},
-                        datasets: [{
-                            data: {!! json_encode($visitedCountries->pluck('count')) !!},
-                            backgroundColor: {!! json_encode($visitedCountries->pluck('color')) !!},
-                            borderColor: '#fff',
-                            borderWidth: 3,
-                            hoverOffset: 8
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        cutout: '65%',
-                        plugins: {
-                            legend: {
-                                position: 'bottom',
-                                labels: {
-                                    padding: 15,
-                                    usePointStyle: true,
-                                    font: { size: 12 }
-                                }
-                            },
-                            tooltip: {
-                                backgroundColor: 'rgba(0,0,0,0.8)',
-                                padding: 12,
-                                cornerRadius: 6,
-                                callbacks: {
-                                    label: function(context) {
-                                        const label = context.label || '';
-                                        const value = context.parsed || 0;
-                                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                        const percentage = ((value / total) * 100).toFixed(1);
-                                        return label + ': ' + value.toLocaleString() + ' visitors (' + percentage + '%)';
+                @if ($visitedCountries->count() > 0)
+                    new Chart(document.getElementById('visitedCountriesChart').getContext('2d'), {
+                        type: 'doughnut',
+                        data: {
+                            labels: {!! json_encode($visitedCountries->pluck('name')) !!},
+                            datasets: [{
+                                data: {!! json_encode($visitedCountries->pluck('count')) !!},
+                                backgroundColor: {!! json_encode($visitedCountries->pluck('color')) !!},
+                                borderColor: '#fff',
+                                borderWidth: 3,
+                                hoverOffset: 8
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            cutout: '65%',
+                            plugins: {
+                                legend: {
+                                    position: 'bottom',
+                                    labels: {
+                                        padding: 15,
+                                        usePointStyle: true,
+                                        font: {
+                                            size: 12
+                                        }
+                                    }
+                                },
+                                tooltip: {
+                                    backgroundColor: 'rgba(0,0,0,0.8)',
+                                    padding: 12,
+                                    cornerRadius: 6,
+                                    callbacks: {
+                                        label: function(context) {
+                                            const label = context.label || '';
+                                            const value = context.parsed || 0;
+                                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                            const percentage = ((value / total) * 100).toFixed(1);
+                                            return label + ': ' + value.toLocaleString() + ' visitors (' + percentage + '%)';
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                });
+                    });
                 @endif
 
                 // Browser Usage Chart (Doughnut)
-                @if($browserUsage->count() > 0)
-                new Chart(document.getElementById('browserUsageChart').getContext('2d'), {
-                    type: 'doughnut',
-                    data: {
-                        labels: {!! json_encode($browserUsage->pluck('name')) !!},
-                        datasets: [{
-                            data: {!! json_encode($browserUsage->pluck('count')) !!},
-                            backgroundColor: {!! json_encode($browserUsage->pluck('color')) !!},
-                            borderColor: '#fff',
-                            borderWidth: 3,
-                            hoverOffset: 8
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        cutout: '60%',
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            tooltip: {
-                                backgroundColor: 'rgba(0,0,0,0.8)',
-                                padding: 12,
-                                cornerRadius: 6,
-                                callbacks: {
-                                    label: function(context) {
-                                        const label = context.label || '';
-                                        const value = context.parsed || 0;
-                                        const percentage = {!! json_encode($browserUsage->pluck('percentage')) !!}[context.dataIndex];
-                                        return label + ': ' + value.toLocaleString() + ' (' + percentage + '%)';
+                @if ($browserUsage->count() > 0)
+                    new Chart(document.getElementById('browserUsageChart').getContext('2d'), {
+                        type: 'doughnut',
+                        data: {
+                            labels: {!! json_encode($browserUsage->pluck('name')) !!},
+                            datasets: [{
+                                data: {!! json_encode($browserUsage->pluck('count')) !!},
+                                backgroundColor: {!! json_encode($browserUsage->pluck('color')) !!},
+                                borderColor: '#fff',
+                                borderWidth: 3,
+                                hoverOffset: 8
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            cutout: '60%',
+                            plugins: {
+                                legend: {
+                                    display: false
+                                },
+                                tooltip: {
+                                    backgroundColor: 'rgba(0,0,0,0.8)',
+                                    padding: 12,
+                                    cornerRadius: 6,
+                                    callbacks: {
+                                        label: function(context) {
+                                            const label = context.label || '';
+                                            const value = context.parsed || 0;
+                                            const percentage = {!! json_encode($browserUsage->pluck('percentage')) !!}[context.dataIndex];
+                                            return label + ': ' + value.toLocaleString() + ' (' + percentage + '%)';
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                });
+                    });
                 @endif
 
                 // Permissions by Menu Chart (Horizontal Bar)
-                @if($permissionsByMenu->count() > 0)
-                new Chart(document.getElementById('permissionsByMenuChart').getContext('2d'), {
-                    type: 'bar',
-                    data: {
-                        labels: {!! json_encode($permissionsByMenu->pluck('name')) !!},
-                        datasets: [{
-                            label: 'Permissions',
-                            data: {!! json_encode($permissionsByMenu->pluck('count')) !!},
-                            backgroundColor: chartColors.primary,
-                            borderRadius: 6,
-                            borderSkipped: false,
-                            barThickness: 20
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        indexAxis: 'y',
-                        plugins: {
-                            legend: { display: false },
-                            tooltip: {
-                                backgroundColor: 'rgba(0,0,0,0.8)',
-                                padding: 12,
-                                cornerRadius: 6
-                            }
+                @if ($permissionsByMenu->count() > 0)
+                    new Chart(document.getElementById('permissionsByMenuChart').getContext('2d'), {
+                        type: 'bar',
+                        data: {
+                            labels: {!! json_encode($permissionsByMenu->pluck('name')) !!},
+                            datasets: [{
+                                label: 'Permissions',
+                                data: {!! json_encode($permissionsByMenu->pluck('count')) !!},
+                                backgroundColor: chartColors.primary,
+                                borderRadius: 6,
+                                borderSkipped: false,
+                                barThickness: 20
+                            }]
                         },
-                        scales: {
-                            x: {
-                                beginAtZero: true,
-                                grid: {
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            indexAxis: 'y',
+                            plugins: {
+                                legend: {
                                     display: false
                                 },
-                                ticks: {
-                                    stepSize: 1
+                                tooltip: {
+                                    backgroundColor: 'rgba(0,0,0,0.8)',
+                                    padding: 12,
+                                    cornerRadius: 6
                                 }
                             },
-                            y: {
-                                grid: {
-                                    display: false
+                            scales: {
+                                x: {
+                                    beginAtZero: true,
+                                    grid: {
+                                        display: false
+                                    },
+                                    ticks: {
+                                        stepSize: 1
+                                    }
+                                },
+                                y: {
+                                    grid: {
+                                        display: false
+                                    }
                                 }
                             }
                         }
-                    }
-                });
+                    });
                 @endif
             });
         </script>
 
         <style>
             /* Custom color utilities */
-            .text-teal { color: #26a69a !important; }
-            .bg-teal { background-color: #26a69a !important; }
-            .text-indigo { color: #5c6bc0 !important; }
-            .bg-indigo { background-color: #5c6bc0 !important; }
-            
+            .text-teal {
+                color: #26a69a !important;
+            }
+
+            .bg-teal {
+                background-color: #26a69a !important;
+            }
+
+            .text-indigo {
+                color: #5c6bc0 !important;
+            }
+
+            .bg-indigo {
+                background-color: #5c6bc0 !important;
+            }
+
             /* Card hover effects */
             .card {
                 transition: all 0.3s ease;
             }
-            
+
             .card:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.1) !important;
+                box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1) !important;
             }
 
             /* Progress bar animations */
@@ -850,7 +863,7 @@
             }
 
             .list-group-item:hover {
-                background-color: rgba(0,0,0,0.02);
+                background-color: rgba(0, 0, 0, 0.02);
             }
 
             /* Badge animations */

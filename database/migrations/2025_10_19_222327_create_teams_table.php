@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
             $table->string('photo')->nullable();
+            $table->string('slug')->unique()->nullable();
+            $table->unsignedBigInteger('position_id')->nullable();
             $table->string('linkedin_url')->nullable();
             $table->string('twitter_url')->nullable();
             $table->string('facebook_url')->nullable();

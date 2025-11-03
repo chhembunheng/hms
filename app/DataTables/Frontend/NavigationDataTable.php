@@ -15,6 +15,7 @@ class NavigationDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addIndexColumn()
             ->addColumn('action', fn($row) => view('frontend.navigations.action', compact('row')))
             ->setRowId('id')
             ->editColumn('name', function (Navigation $model) {
@@ -24,7 +25,7 @@ class NavigationDataTable extends DataTable
                 return $model->getLabel(app()->getLocale());
             })
             ->editColumn('created_at', function (Navigation $model) {
-                return $model->created_at?->format('M d, Y');
+                return $model->created_at?->format(config('init.datetime.display_format'));
             });
     }
 
@@ -41,13 +42,14 @@ class NavigationDataTable extends DataTable
         return $this->builder()
             ->setTableId('navigation-table')
             ->columns($this->getColumns())
-            ->minifiedAjax();
+            ->minifiedAjax()
+            ->orderBy(1);
     }
 
     public function getColumns(): array
     {
         return [
-            Column::make('id')->title('ID')->width(60),
+            Column::computed('DT_RowIndex')->title(__('root.common.no'))->width(60),
             Column::computed('name')->title(__('root.common.name'))->width(200),
             Column::computed('label')->title(__('root.common.label'))->width(150),
             Column::make('url')->title(__('root.common.url'))->width(200),

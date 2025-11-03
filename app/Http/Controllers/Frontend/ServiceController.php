@@ -51,7 +51,7 @@ class ServiceController extends Controller
                 }
                 DB::transaction(function () use ($request, $form) {
                     $service = Service::create([
-                        'slug' => $request->input('slug'),
+                        'slug' => slug($request->input('slug', null)),
                         'image' => null,
                         'sort' => $request->input('sort', 0),
                         'content' => $request->input('content', null),
@@ -130,7 +130,7 @@ class ServiceController extends Controller
                     return errors(message: $validator->errors()->first());
                 }
 
-                $form->slug = $request->input('slug');
+                $form->slug = slug($request->input('slug', null));
                 $form->sort = $request->input('sort', 0);
                 $form->updated_by = auth()->id();
                 if ($request->hasFile('image')) {

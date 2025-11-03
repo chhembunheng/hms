@@ -101,8 +101,7 @@ const themeSwitcher = function() {
             console.warn('Warning - glightbox.min.js is not loaded.');
             return;
         }
-
-        // Image lightbox
+        
         const lightbox = GLightbox({
             selector: '[data-bs-popup="lightbox"]',
             loop: true,

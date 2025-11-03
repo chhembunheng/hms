@@ -27,6 +27,9 @@ class MenuDataTable extends DataTable
             ->addColumn('name', fn($row) => $row->translations->where('locale', $locale)->first()?->name ?? $row->translations->where('locale', 'en')->first()?->name ?? 'N/A')
             ->addColumn('route', fn($row) => $row->route ?? '-')
             ->addColumn('order', fn($row) => $row->order)
+            ->editColumn('created_at', function (Menu $model) {
+                return $model->created_at?->format(config('init.datetime.display_format'));
+            })
             ->addColumn('action', fn($row) => view('settings.menus.action', compact('row')))
             ->rawColumns(['action']);
     }
@@ -49,7 +52,8 @@ class MenuDataTable extends DataTable
         return $this->builder()
                     ->setTableId('menu-table')
                     ->columns($this->getColumns())
-                    ->minifiedAjax();
+                    ->minifiedAjax()
+                    ->orderBy(1);
     }
 
     /**
@@ -58,7 +62,7 @@ class MenuDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id'),
+            Column::computed('DT_RowIndex')->title(__('root.common.no'))->width(60),
             Column::make('name'),
             Column::make('route'),
             Column::make('order'),

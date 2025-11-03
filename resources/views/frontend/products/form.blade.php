@@ -55,7 +55,7 @@
         </div>
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <x-form.input :label="__('form.slug')" name="slug" value="{{ old('slug', $form?->slug) }}" required />
+                <x-form.input :label="__('form.slug')" name="slug" value="{{ old('slug', $form?->slug) }}" />
             </div>
             <div class="col-md-8 offset-md-2">
                 <h4 class="mt-4">{{ __('form.meta.meta_information') }} <i class="ms-2 fa-solid fa-wand-magic-sparkles cursor-pointer text-success meta-generator"></i></h4>

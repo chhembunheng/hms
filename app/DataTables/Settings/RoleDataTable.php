@@ -25,6 +25,9 @@ class RoleDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addIndexColumn()
             ->addColumn('name', fn($row) => $row->translations->where('locale', $locale)->first()?->name ?? $row->translations->where('locale', 'en')->first()?->name ?? 'N/A')
+            ->editColumn('created_at', function (Role $model) {
+                return $model->created_at?->format(config('init.datetime.display_format'));
+            })
             ->addColumn('action', fn($row) => view('settings.roles.action', compact('row')))
             ->rawColumns(['action']);
     }
@@ -47,7 +50,8 @@ class RoleDataTable extends DataTable
         return $this->builder()
                     ->setTableId('role-table')
                     ->columns($this->getColumns())
-                    ->minifiedAjax();
+                    ->minifiedAjax()
+                    ->orderBy(1);
     }
 
     /**
@@ -56,7 +60,7 @@ class RoleDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id'),
+            Column::computed('DT_RowIndex')->title(__('root.common.no'))->width(60),
             Column::make('name'),
             Column::make('administrator'),
             Column::make('order'),

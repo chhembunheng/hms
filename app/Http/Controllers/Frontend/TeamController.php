@@ -51,13 +51,12 @@ class TeamController extends Controller
         if ($request->isMethod('post')) {
             try {
                 $rules = [
-                    'sort' => 'nullable|integer',
                     'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                    'slug' => 'nullable|string|unique:teams,slug',
                 ];
 
                 foreach ($this->locales->keys() as $locale) {
                     $rules["translations.{$locale}.name"] = 'required|string|max:255';
-                    $rules["translations.{$locale}.slug"] = 'required|string|unique:team_translations,slug';
                     $rules["translations.{$locale}.position"] = 'nullable|string';
                     $rules["translations.{$locale}.description"] = 'nullable|string';
                 }
@@ -69,13 +68,14 @@ class TeamController extends Controller
 
                 $team = Team::create([
                     'image' => null,
-                    'sort' => $request->input('sort', 0),
+                    'slug' => slug($request->input('slug', null)),
+                    'position_id' => $request->input('position_id', null),
                     'created_by' => auth()->id(),
                     'updated_by' => auth()->id(),
                 ]);
 
-                if ($request->hasFile('image')) {
-                    $team->image = uploadFile($request->file('image'), 'teams');
+                if ($request->photo) {
+                    $team->photo = uploadBase64($request->photo, 'teams');
                     $team->save();
                 }
 
@@ -85,8 +85,7 @@ class TeamController extends Controller
                         'team_id' => $team->id,
                         'locale' => $locale,
                         'name' => $trans['name'],
-                        'slug' => $trans['slug'],
-                        'position' => $trans['position'] ?? null,
+                        'position_name' => $trans['position_name'] ?? null,
                         'description' => $trans['description'] ?? null,
                         'created_by' => auth()->id(),
                         'updated_by' => auth()->id(),
@@ -120,8 +119,6 @@ class TeamController extends Controller
         foreach ($form->translations as $translation) {
             $translations[$translation->locale] = [
                 'name' => $translation->name,
-                'slug' => $translation->slug,
-                'position' => $translation->position,
                 'description' => $translation->description,
             ];
         }
@@ -129,13 +126,12 @@ class TeamController extends Controller
         if ($request->isMethod('post')) {
             try {
                 $rules = [
-                    'sort' => 'nullable|integer',
                     'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                    'slug' => 'nullable|string|unique:teams,slug,' . $form->id,
                 ];
 
                 foreach ($this->locales->keys() as $locale) {
                     $rules["translations.{$locale}.name"] = 'required|string|max:255';
-                    $rules["translations.{$locale}.slug"] = 'required|string|unique:team_translations,slug,' . $form->id . ',team_id';
                     $rules["translations.{$locale}.position"] = 'nullable|string';
                     $rules["translations.{$locale}.description"] = 'nullable|string';
                 }
@@ -145,13 +141,13 @@ class TeamController extends Controller
                     return errors(message: $validator->errors()->first());
                 }
 
-                $form->sort = $request->input('sort', 0);
+                $form->slug = slug($request->input('slug', null));
                 $form->updated_by = auth()->id();
+                $form->position_id = $request->input('position_id', null);
 
-                if ($request->hasFile('image')) {
-                    $form->image = uploadFile($request->file('image'), 'teams');
+                if($request->photo) {
+                    $form->photo = uploadBase64($request->photo, 'teams');
                 }
-
                 $form->save();
 
                 foreach ($this->locales->keys() as $locale) {
@@ -160,8 +156,7 @@ class TeamController extends Controller
                         ['team_id' => $form->id, 'locale' => $locale],
                         [
                             'name' => $trans['name'],
-                            'slug' => $trans['slug'],
-                            'position' => $trans['position'] ?? null,
+                            'position_name' => $trans['position_name'] ?? null,
                             'description' => $trans['description'] ?? null,
                             'updated_by' => auth()->id(),
                         ]

@@ -15,6 +15,7 @@ class ProductDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addIndexColumn()
             ->addColumn('action', fn($row) => view('frontend.products.action', compact('row')))
             ->setRowId('id')
             ->addColumn('image', function (Product $model) {
@@ -27,7 +28,7 @@ class ProductDataTable extends DataTable
                 return $model->getName(app()->getLocale());
             })
             ->editColumn('created_at', function (Product $model) {
-                return $model->created_at?->format('M d, Y');
+                return $model->created_at?->format(config('init.datetime.display_format'));
             })
             ->rawColumns(['action', 'image']);
     }
@@ -45,13 +46,14 @@ class ProductDataTable extends DataTable
         return $this->builder()
             ->setTableId('product-table')
             ->columns($this->getColumns())
-            ->minifiedAjax();
+            ->minifiedAjax()
+            ->orderBy(3);
     }
 
     public function getColumns(): array
     {
         return [
-            Column::make('id')->title('ID')->width(60),
+            Column::computed('DT_RowIndex')->title(__('root.common.no'))->width(60),
             Column::make('sku')->title('SKU')->width(120),
             Column::computed('image')->title(__('root.common.image'))->width(80)->addClass('text-center'),
             Column::computed('name')->title(__('root.common.name'))->width(200),

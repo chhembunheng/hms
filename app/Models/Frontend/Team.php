@@ -16,6 +16,7 @@ class Team extends Model
         'facebook_url',
         'instagram_url',
         'github_url',
+        'position_id',
         'email',
         'is_active',
         'created_by',

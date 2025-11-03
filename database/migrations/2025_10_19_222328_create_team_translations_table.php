@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('team_id')->constrained('teams')->cascadeOnDelete();
             $table->string('locale', 10);
             $table->string('name');
-            $table->string('position');
-            $table->text('bio')->nullable();
+            $table->string('bio')->nullable();
+            $table->string('position_name')->nullable();
             $table->authors();
             $table->unique(['team_id','locale']);
 

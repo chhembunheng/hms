@@ -47,11 +47,9 @@ class ProductController extends Controller
                 if ($validator->fails()) {
                     return errors(message: $validator->errors()->first());
                 }
-
                 $product = Product::create([
-                    'slug' => $request->input('slug'),
+                    'slug' => slug($request->input('slug', null)),
                     'image' => null,
-                    'sort' => $request->input('sort', 0),
                     'created_by' => auth()->id(),
                     'updated_by' => auth()->id(),
                 ]);
@@ -124,7 +122,7 @@ class ProductController extends Controller
                     return errors(message: $validator->errors()->first());
                 }
 
-                $form->slug = $request->input('slug');
+                $form->slug = slug($request->input('slug', null));
                 $form->sort = $request->input('sort', 0);
                 $form->updated_by = auth()->id();
 

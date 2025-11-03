@@ -15,6 +15,7 @@ class IntegrationDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addIndexColumn()
             ->addColumn('action', fn($row) => view('frontend.integrations.action', compact('row')))
             ->setRowId('id')
             ->addColumn('logo', function (Integration $model) {
@@ -27,7 +28,7 @@ class IntegrationDataTable extends DataTable
                 return $model->getName(app()->getLocale());
             })
             ->editColumn('created_at', function (Integration $model) {
-                return $model->created_at?->format('M d, Y');
+                return $model->created_at?->format(config('init.datetime.display_format'));
             })
             ->rawColumns(['action', 'logo']);
     }
@@ -45,13 +46,14 @@ class IntegrationDataTable extends DataTable
         return $this->builder()
             ->setTableId('integration-table')
             ->columns($this->getColumns())
-            ->minifiedAjax();
+            ->minifiedAjax()
+            ->orderBy(2);
     }
 
     public function getColumns(): array
     {
         return [
-            Column::make('id')->title('ID')->width(60),
+            Column::computed('DT_RowIndex')->title(__('root.common.no'))->width(60),
             Column::computed('logo')->title(__('root.common.logo'))->width(80)->addClass('text-center'),
             Column::computed('name')->title(__('root.common.name'))->width(200),
             Column::make('created_at')->title(__('root.common.created_at'))->width(120),

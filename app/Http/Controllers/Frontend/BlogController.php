@@ -49,7 +49,7 @@ class BlogController extends Controller
                 }
 
                 $blog = Blog::create([
-                    'slug' => $request->input('slug'),
+                    'slug' => slug($request->input('slug', null)),
                     'image' => null,
                     'created_by' => auth()->id(),
                     'updated_by' => auth()->id(),
@@ -151,7 +151,7 @@ class BlogController extends Controller
                     return errors(message: $validator->errors()->first());
                 }
 
-                $form->slug = $request->input('slug');
+                $form->slug = slug($request->input('slug', null));
                 $form->updated_by = auth()->id();
 
                 if ($request->hasFile('image')) {

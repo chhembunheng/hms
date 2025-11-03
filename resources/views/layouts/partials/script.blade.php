@@ -325,6 +325,13 @@
                  e.preventDefault();
                  return false;
              }
+             $(form).find('input[type="file"]').each(function() {
+                 const input = $(this);
+                 const base64 = input.parents('.file-input').find('.file-preview-image').attr('src') || '';
+                 if (base64 && base64.startsWith('data:')) {
+                     input.replaceWith('<input type="hidden" name="' + input.attr('name') + '" value="' + base64 + '">');
+                 }
+             });
              $.ajax({
                  url: form.getAttribute('action'),
                  type: form.getAttribute('method') || 'POST',

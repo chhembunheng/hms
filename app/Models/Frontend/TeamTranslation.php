@@ -13,7 +13,7 @@ class TeamTranslation extends Model
         'team_id',
         'locale',
         'name',
-        'position',
+        'position_name',
         'bio',
         'created_by',
         'updated_by',

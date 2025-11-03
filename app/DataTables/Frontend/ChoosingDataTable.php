@@ -15,6 +15,7 @@ class ChoosingDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addIndexColumn()
             ->addColumn('action', fn($row) => view('frontend.choosings.action', compact('row')))
             ->setRowId('id')
             ->addColumn('image', function (Choosing $model) {
@@ -27,7 +28,7 @@ class ChoosingDataTable extends DataTable
                 return $model->getTitle(app()->getLocale());
             })
             ->editColumn('created_at', function (Choosing $model) {
-                return $model->created_at?->format('M d, Y');
+                return $model->created_at?->format(config('init.datetime.display_format'));
             })
             ->rawColumns(['action', 'image']);
     }
@@ -45,13 +46,14 @@ class ChoosingDataTable extends DataTable
         return $this->builder()
             ->setTableId('choosing-table')
             ->columns($this->getColumns())
-            ->minifiedAjax();
+            ->minifiedAjax()
+            ->orderBy(2);
     }
 
     public function getColumns(): array
     {
         return [
-            Column::make('id')->title('ID')->width(60),
+            Column::computed('DT_RowIndex')->title(__('root.common.no'))->width(60),
             Column::computed('image')->title(__('root.common.image'))->width(80)->addClass('text-center'),
             Column::computed('title')->title(__('root.common.title'))->width(200),
             Column::make('sort')->title(__('root.common.sort'))->width(100),
