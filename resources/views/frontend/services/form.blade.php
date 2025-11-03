@@ -2,7 +2,7 @@
     <x-form.layout :form="$form">
         <div class="row">
             <div class="col-md-6">
-                <x-form.input :label="__('form.icon')" name="icon" value="{{ $form?->icon ?? old('icon') }}" placeholder="fa-solid fa-cog" />
+                <x-form.icon id="icon-service" :label="__('form.icon')" name="icon" value="{{ $form?->icon ?? old('icon') }}" placeholder="fa-solid fa-cog" />
             </div>
             <div class="col-md-6">
                 <x-form.input :label="__('form.sort')" type="number" name="sort" value="{{ $form?->sort ?? 0 }}" min="0" />

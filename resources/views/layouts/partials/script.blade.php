@@ -10,6 +10,8 @@
  <script src="{{ asset('assets/js/vendor/pickers/datepicker.min.js') }}"></script>
  <script src="{{ asset('assets/js/vendor/notifications/noty.min.js') }}"></script>
  <script src="{{ asset('assets/js/vendor/media/glightbox.min.js') }}"></script>
+ <script src="{{ asset('assets/js/vendor/pickers/icon-picker/js/icon-picker.min.js') }}?v={{ time() }}"></script>
+ <script src="{{ asset('assets/js/vendor/pickers/icon-picker/lib/fontawesome.js') }}?v={{ time() }}"></script>
  <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
  <script src="{{ asset('assets/js/app.js') }}?v={{ time() }}"></script>
  <script src="{{ asset('assets/js/init.js') }}?v={{ time() }}"></script>
@@ -45,6 +47,12 @@
              }
          });
          $(document).find('select.select2').select2();
+         $('.icon-picker-box').each(function() {
+             $(this).iconPicker({
+                 onClick: '.open-icon-picker', // trigger inside each box
+                 iconLibrary: fontAwesome
+             });
+         });
      });
 
      function loading(e) {
