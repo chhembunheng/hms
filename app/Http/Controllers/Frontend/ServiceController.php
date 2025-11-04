@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Frontend\ServiceTranslation;
 use App\DataTables\Frontend\ServiceDataTable;
+use App\Rules\ImageRule;
 
 class ServiceController extends Controller
 {
@@ -34,7 +35,7 @@ class ServiceController extends Controller
             try {
                 $rules = [
                     'sort' => 'nullable|integer',
-                    'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                    'image' => ['nullable', new ImageRule()],
                     'slug' => 'required|string|unique:services,slug',
                 ];
                 foreach ($this->locales->keys() as $locale) {
@@ -60,8 +61,8 @@ class ServiceController extends Controller
                         'updated_by' => auth()->id(),
                     ]);
 
-                    if ($request->hasFile('image')) {
-                        $service->image = uploadFile($request->file('image'), 'services');
+                    if ($request->image) {
+                        $service->image = uploadImage($request->image, 'services');
                         $service->save();
                     }
 
@@ -109,6 +110,7 @@ class ServiceController extends Controller
                 'name' => $translation->name,
                 'short_description' => $translation->short_description,
                 'description' => $translation->description,
+                'content' => $translation->content,
             ];
         }
 
@@ -116,7 +118,7 @@ class ServiceController extends Controller
             try {
                 $rules = [
                     'sort' => 'nullable|integer',
-                    'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                    'image' => ['nullable', new ImageRule()],
                     'slug' => 'required|string|unique:services,slug,' . $form->id,
                 ];
                 foreach ($this->locales->keys() as $locale) {
@@ -133,8 +135,8 @@ class ServiceController extends Controller
                 $form->slug = slug($request->input('slug', null));
                 $form->sort = $request->input('sort', 0);
                 $form->updated_by = auth()->id();
-                if ($request->hasFile('image')) {
-                    $form->image = uploadFile($request->file('image'), 'services');
+                if ($request->image) {
+                    $form->image = uploadImage($request->image, 'services');
                 }
                 $form->save();
 
@@ -146,6 +148,7 @@ class ServiceController extends Controller
                             'name' => $trans['name'],
                             'short_description' => $trans['short_description'] ?? null,
                             'description' => $trans['description'] ?? null,
+                            'content' => $trans['content'] ?? null,
                             'updated_by' => auth()->id(),
                         ]
                     );

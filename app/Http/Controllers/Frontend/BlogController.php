@@ -9,6 +9,7 @@ use App\Models\Frontend\BlogTranslation;
 use App\Models\Frontend\SeoMeta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Rules\ImageRule;
 
 class BlogController extends Controller
 {
@@ -34,7 +35,7 @@ class BlogController extends Controller
         if ($request->isMethod('post')) {
             try {
                 $rules = [
-                    'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                    'image' => ['nullable', new ImageRule()],
                     'slug' => 'required|string|unique:blogs,slug',
                 ];
                 foreach ($this->locales->keys() as $locale) {
@@ -55,8 +56,8 @@ class BlogController extends Controller
                     'updated_by' => auth()->id(),
                 ]);
 
-                if ($request->hasFile('image')) {
-                    $blog->image = uploadFile($request->file('image'), 'blogs');
+                if ($request->image) {
+                    $blog->image = uploadImage($request->image, 'blogs');
                     $blog->save();
                 }
 
@@ -137,7 +138,7 @@ class BlogController extends Controller
         if ($request->isMethod('post')) {
             try {
                 $rules = [
-                    'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                    'image' => ['nullable', new ImageRule()],
                     'slug' => 'required|string|unique:blogs,slug,' . $form->id,
                 ];
                 foreach ($this->locales->keys() as $locale) {
@@ -154,8 +155,8 @@ class BlogController extends Controller
                 $form->slug = slug($request->input('slug', null));
                 $form->updated_by = auth()->id();
 
-                if ($request->hasFile('image')) {
-                    $form->image = uploadFile($request->file('image'), 'blogs');
+                if ($request->image) {
+                    $form->image = uploadImage($request->image, 'blogs');
                 }
 
                 $form->save();

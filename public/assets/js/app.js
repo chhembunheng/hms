@@ -1,25 +1,31 @@
-/* ------------------------------------------------------------------------------
- *
- *  # Template JS core
- *
- *  Includes minimum required JS code for proper template functioning
- *
- * ---------------------------------------------------------------------------- */
+(function () {
+    ((localStorage.getItem('theme') == 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) || localStorage.getItem('theme') == 'dark') && document.documentElement.setAttribute('data-color-theme', 'dark');
+    localStorage.getItem('direction') == 'rtl' && document.getElementById("stylesheet").setAttribute('href', 'assets/css/rtl/all.min.css');
+    localStorage.getItem('direction') == 'rtl' && document.documentElement.setAttribute('dir', 'rtl');
+})();
 
-
-// Setup module
-// ------------------------------
-
+// initialize SweetAlert2
+const swalInit = swal.mixin({
+    buttonsStyling: false,
+    customClass: {
+        confirmButton: 'btn btn-primary',
+        cancelButton: 'btn btn-light',
+        denyButton: 'btn btn-light',
+        input: 'form-control'
+    }
+});
+const Toast = swal.mixin({
+    toast: true,
+    position: 'top-end',
+    iconColor: 'white',
+    showConfirmButton: false,
+    timer: 5000,
+    timerProgressBar: true,
+    customClass: {
+        popup: 'colored-toast'
+    }
+});
 const App = function () {
-
-
-    // Utils
-    // -------------------------
-
-    //
-    // Transitions
-    //
-
     // Disable all transitions
     const transitionsDisabled = function () {
         document.body.classList.add('no-transitions');
@@ -38,12 +44,30 @@ const App = function () {
     // Custom scrollbar style is controlled by CSS. This function is needed to keep default
     // scrollbars on MacOS and avoid usage of extra JS libraries
     const detectOS = function () {
-        const platform = window.navigator.platform,
-            windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
-            customScrollbarsClass = 'custom-scrollbars';
+        // Modern approach using userAgentData API (replaces deprecated navigator.platform)
+        const isWindows = async () => {
+            if (navigator.userAgentData) {
+                try {
+                    const platformData = await navigator.userAgentData.getHighEntropyValues(['platform']);
+                    return platformData.platform === 'Windows';
+                } catch (e) {
+                    // Fallback if getHighEntropyValues fails
+                    return navigator.userAgentData.platform === 'Windows';
+                }
+            }
+            // Fallback for older browsers (deprecated but still works)
+            console.warn('Warning - navigator.userAgentData is not supported in this browser. Falling back to deprecated navigator.platform.');
+            return navigator.platform.includes('Win');
+        };
 
-        // Add class if OS is windows
-        windowsPlatforms.indexOf(platform) != -1 && document.documentElement.classList.add(customScrollbarsClass);
+        const customScrollbarsClass = 'custom-scrollbars';
+
+        // Apply Windows-specific scrollbar styling
+        isWindows().then(isWin => {
+            if (isWin) {
+                document.documentElement.classList.add(customScrollbarsClass);
+            }
+        });
     };
 
 
@@ -571,9 +595,19 @@ const App = function () {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
         }
-        $('.select').select2({
-            minimumResultsForSearch: Infinity,
-            width: '100%'
+        $('select.select2').each(function () {
+            const $select = $(this);
+            const inModal = $select.closest('.modal').length > 0;
+            const dropdownParent = inModal ? $select.closest('.modal-body') : $('.content-inner');
+            const searchable = $select.data('searchable') === false ? Infinity : 0;
+            const placeholderText = $select.data('placeholder') || '';
+            $select.select2({
+                minimumResultsForSearch: searchable,
+                width: '100%',
+                dropdownParent: dropdownParent,
+                placeholder: placeholderText,
+                allowClear: placeholderText !== ''
+            });
         });
     };
     const componentModal = function () {
@@ -607,51 +641,60 @@ const App = function () {
             console.warn('Warning - multiselect.min.js is not loaded.');
             return;
         }
-        $('.multiple-select').multiselect({
-            includeSelectAllOption: true,
-            enableFiltering: true,
-            enableCaseInsensitiveFiltering: true,
-            buttonWidth: '100%',
-            onChange: function (option, checked) {
-                updateSelectAllIndeterminate($(this.$select));
-            },
-            onSelectAll: function () {
-                updateSelectAllIndeterminate($(this.$select));
-            },
-            onDeselectAll: function () {
-                updateSelectAllIndeterminate($(this.$select));
-            },
-            onDropdownShow: function (event) {
-                let select = $(event.target).parent().find('select');
-                let exist = select.find('option').map(function () {
-                    return $(this).val();
-                }).get();
-                let server = select.data('server');
-                let filters = (select.data('filters') || '').split(',');
-                let data = {};
-                filters.forEach(function (filter) {
-                    data[filter] = $('[name="' + filter + '[]"]').val() || $('[name="' + filter + '"]').val();
-                });
-                if (server) {
-                    $.ajax({
-                        url: server,
-                        type: 'POST',
-                        data: data,
-                        async: false,
-                        success: function (res) {
-                            let options = res.data.map(e => e.id.toString());
-                            let isDiff = exist.length !== options.length || exist.some(opt => !options.includes(opt));
-                            if (isDiff) {
-                                select.empty();
-                                $.each(res.data, function (i, e) {
-                                    select.append('<option value="' + e.id + '">' + e.text + '</option>');
-                                });
-                                select.multiselect('rebuild');
-                            }
-                        }
+        $('select[multiple="multiple"]').each(function () {
+            const $multiple = $(this);
+            const inModal = $multiple.closest('.modal').length > 0;
+            const dropdownParent = inModal ? $multiple.closest('.modal-body') : $('.content-inner');
+            const searchable = $multiple.data('searchable') === false ? false : true;
+            $multiple.multiselect('destroy');
+            $multiple.multiselect({
+                dropRight: document.dir === 'rtl' ? false : true,
+                dropUp: $multiple.hasClass('drop-up') ? true : false,
+                includeSelectAllOption: true,
+                enableFiltering: searchable,
+                enableCaseInsensitiveFiltering: searchable,
+                buttonWidth: '100%',
+                onChange: function (option, checked) {
+                    updateSelectAllIndeterminate($(this.$select));
+                },
+                onSelectAll: function () {
+                    updateSelectAllIndeterminate($(this.$select));
+                },
+                onDeselectAll: function () {
+                    updateSelectAllIndeterminate($(this.$select));
+                },
+                onDropdownShow: function (event) {
+                    let select = $(event.target).parent().find('select');
+                    let exist = select.find('option').map(function () {
+                        return $(this).val();
+                    }).get();
+                    let server = select.data('server');
+                    let filters = (select.data('filters') || '').split(',');
+                    let data = {};
+                    filters.forEach(function (filter) {
+                        data[filter] = $('[name="' + filter + '[]"]').val() || $('[name="' + filter + '"]').val();
                     });
+                    if (server) {
+                        $.ajax({
+                            url: server,
+                            type: 'POST',
+                            data: data,
+                            async: false,
+                            success: function (res) {
+                                let options = res.data.map(e => e.id.toString());
+                                let isDiff = exist.length !== options.length || exist.some(opt => !options.includes(opt));
+                                if (isDiff) {
+                                    select.empty();
+                                    $.each(res.data, function (i, e) {
+                                        select.append('<option value="' + e.id + '">' + e.text + '</option>');
+                                    });
+                                    select.multiselect('rebuild');
+                                }
+                            }
+                        });
+                    }
                 }
-            }
+            });
         });
     };
     function updateSelectAllIndeterminate($select) {
@@ -666,6 +709,114 @@ const App = function () {
             selectAllCheckbox.prop('indeterminate', true).prop('checked', false);
         }
     }
+
+    const layoutTheme = function () {
+        var primaryTheme = 'light';
+        var secondaryTheme = 'dark';
+        var storageKey = 'theme';
+        var colorscheme = document.getElementsByName('main-theme');
+        var mql = window.matchMedia('(prefers-color-scheme: ' + primaryTheme + ')');
+        function indicateTheme(mode) {
+            for (var i = colorscheme.length; i--;) {
+                if (colorscheme[i].value == mode) {
+                    colorscheme[i].checked = true;
+                    colorscheme[i].closest('.list-group-item').classList.add('bg-primary', 'bg-opacity-10', 'border-primary');
+                }
+                else {
+                    colorscheme[i].closest('.list-group-item').classList.remove('bg-primary', 'bg-opacity-10', 'border-primary');
+                }
+            }
+        };
+        function applyTheme(mode) {
+            var st = document.documentElement;
+            if (mode == primaryTheme) {
+                st.removeAttribute('data-color-theme');
+            }
+            else if (mode == secondaryTheme) {
+                st.setAttribute('data-color-theme', 'dark');
+            }
+            else {
+                if (!mql.matches) {
+                    st.setAttribute('data-color-theme', 'dark');
+                }
+                else {
+                    st.removeAttribute('data-color-theme');
+                }
+            }
+        };
+        function setTheme(e) {
+            var mode = e.target.value;
+            document.documentElement.classList.add('no-transitions');
+            if ((mode == primaryTheme)) {
+                localStorage.removeItem(storageKey);
+            }
+            else {
+                localStorage.setItem(storageKey, mode);
+            }
+            autoTheme(mql);
+        };
+        function autoTheme(e) {
+            var current = localStorage.getItem(storageKey);
+            var mode = primaryTheme;
+            var indicate = primaryTheme;
+            if (current != null) {
+                indicate = mode = current;
+            }
+            else if (e != null && e.matches) {
+                mode = primaryTheme;
+            }
+            applyTheme(mode);
+            indicateTheme(indicate);
+            setTimeout(function () {
+                document.documentElement.classList.remove('no-transitions');
+            }, 100);
+        };
+        autoTheme(mql);
+        mql.addEventListener('change', autoTheme);
+        for (var i = colorscheme.length; i--;) {
+            colorscheme[i].onchange = setTheme;
+        }
+    };
+    const layoutDirection = function () {
+        var dirSwitch = document.querySelector('[name="layout-direction"]');
+
+        if (dirSwitch) {
+            var dirSwitchSelected = localStorage.getItem("direction") !== null && localStorage.getItem("direction") === "rtl";
+            dirSwitch.checked = dirSwitchSelected;
+
+            function resetDir() {
+                if (dirSwitch.checked) {
+                    document.getElementById("stylesheet").setAttribute('href', 'assets/css/rtl/all.min.css');
+                    document.documentElement.setAttribute("dir", "rtl");
+                    localStorage.setItem("direction", "rtl");
+                } else {
+                    document.getElementById("stylesheet").setAttribute('href', 'assets/css/ltr/all.min.css');
+                    document.documentElement.setAttribute("dir", "ltr");
+                    localStorage.removeItem("direction");
+                }
+            }
+
+            dirSwitch.addEventListener("change", function () {
+                resetDir();
+            });
+        }
+    };
+    const componentLightbox = function () {
+        if (typeof GLightbox == 'undefined') {
+            console.warn('Warning - glightbox.min.js is not loaded.');
+            return;
+        }
+
+        const lightbox = GLightbox({
+            selector: '[data-bs-popup="lightbox"]',
+            loop: true,
+            svg: {
+                next: document.dir == "rtl" ? '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 477.175 477.175" xml:space="preserve"><g><path d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z"/></g></svg>' : '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 477.175 477.175" xml:space="preserve"> <g><path d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z"/></g></svg>',
+                prev: document.dir == "rtl" ? '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 477.175 477.175" xml:space="preserve"><g><path d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z"/></g></svg>' : '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 477.175 477.175" xml:space="preserve"><g><path d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z"/></g></svg>'
+            }
+        });
+    };
+
     function reinitializeDynamicComponents() {
         componentMultiselect();
         componentDaterange();
@@ -695,6 +846,7 @@ const App = function () {
             componentSelect2();
             componentMultiselect();
             componentModal();
+            componentLightbox();
         },
 
         // Initialize all sidebars
@@ -724,6 +876,11 @@ const App = function () {
             dropdownSubmenu();
         },
 
+        initLayoutTheme: function () {
+            layoutTheme();
+            layoutDirection();
+        },
+
         // Initialize core
         initCore: function () {
             App.initBeforeLoad();
@@ -732,6 +889,7 @@ const App = function () {
             App.initComponents();
             App.initCardActions();
             App.initDropdowns();
+            App.initLayoutTheme();
         }
     };
 }();

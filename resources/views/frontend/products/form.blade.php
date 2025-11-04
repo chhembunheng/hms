@@ -2,13 +2,16 @@
     <x-form.layout :form="$form">
         <div class="row">
             <div class="col-md-6">
-                <x-form.input :label="__('form.icon')" name="icon" value="{{ old('icon', $form?->icon) }}" placeholder="fa-solid fa-users" />
+                <x-form.icon :label="__('form.icon')" name="icon" value="{{ old('icon', $form?->icon) }}" />
             </div>
             <div class="col-md-6">
                 <x-form.input :label="__('form.sku')" name="sku" value="{{ old('sku', $form?->sku) }}" placeholder="PROD-001" />
             </div>
             <div class="col-md-6">
-                <x-form.input :label="__('form.category')" name="category" value="{{ old('category', $form?->category) }}" placeholder="Human Resources" />
+                <x-form.select readonly data-searchable="false" :label="__('form.category')" name="category_id" value="{{ old('category_id', $form?->category_id) }}" data-placeholder="Select a category" :options="$categories" required />
+            </div>
+            <div class="col-md-6">
+                <x-form.select readonly multiple data-searchable="false" :label="__('form.tags')" name="tag_id" value="{{ old('tag_id', $form?->tag_id) }}" data-placeholder="Select tags" :options="$categories" required />
             </div>
             <div class="col-md-6">
                 <x-form.input :label="__('form.sort')" type="number" name="sort" value="{{ $form?->sort ?? 0 }}" min="0" />
@@ -35,10 +38,10 @@
         </div>
         <div class="tab-content" id="localeTabContent">
             @foreach ($locales as $locale => $language)
-                <div class="tab-pane fade @if ($locale === config('app.locale')) show active @endif" id="locale-{{ $locale }}" role="tabpanel" aria-labelledby="locale-{{ $locale }}-tab">
+                <div @class(['tab-pane fade', 'show active' => $locale === config('app.locale')]) id="locale-{{ $locale }}" role="tabpanel" aria-labelledby="locale-{{ $locale }}-tab">
                     <div class="row">
                         <div class="col-md-8 offset-md-2">
-                            <x-form.input class="@if ($locale === config('app.locale')) content-seo @endif" :label="__('form.name')" name="translations[{{ $locale }}][name]" :value="old('translations.' . $locale . '.name', $translations[$locale]['name'] ?? '')" required />
+                            <x-form.input @class(['content-seo' => $locale === config('app.locale')]) :label="__('form.name')" name="translations[{{ $locale }}][name]" :value="old('translations.' . $locale . '.name', $translations[$locale]['name'] ?? '')" required />
                         </div>
                         <div class="col-md-8 offset-md-2">
                             <x-form.textarea :label="__('form.short_description')" name="translations[{{ $locale }}][short_description]" :value="old('translations.' . $locale . '.short_description', $translations[$locale]['short_description'] ?? '')" rows="2" />

@@ -23,7 +23,7 @@
         </div>
         <div class="tab-content" id="localeTabContent">
             @foreach ($locales as $locale => $language)
-                <div class="tab-pane fade @if ($locale === config('app.locale')) show active @endif" id="locale-{{ $locale }}" role="tabpanel" aria-labelledby="locale-{{ $locale }}-tab">
+                <div @class(['tab-pane fade', 'show active' => $locale === config('app.locale')]) id="locale-{{ $locale }}" role="tabpanel" aria-labelledby="locale-{{ $locale }}-tab">
                     <div class="row">
                         <div class="col-md-8 offset-md-2">
                             <x-form.textarea class="basic" editor :label="__('form.question')" name="translations[{{ $locale }}][question]" :value="old('translations.' . $locale . '.question', $translations[$locale]['question'] ?? '')" rows="3" required />

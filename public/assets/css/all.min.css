@@ -95,6 +95,10 @@
     --border-radius-pill: 50rem;
     --link-color: var(--app-primary-color-link);
     --link-hover-color: var(--app-primary-color-link-hover);
+    --form-control-disabled-bg: #f1f4f9;
+    --form-control-disabled-color: #707280;
+    --form-control-readonly-bg: #f1f4f9;
+    --form-control-readonly-color: #707280;
     --code-color: #f35c86;
     --highlight-bg: rgba(0, 0, 0, 0.15)
 }
@@ -20697,7 +20701,7 @@ html[data-color-theme=dark] .select2-container {
     float: right;
     font-size: 0;
     line-height: 1;
-    margin-top: calc((var(--body-line-height-computed) - var(--icon-font-size)) * .5);
+    margin-top: calc((var(--body-line-height-computed) - var(--icon-font-size-sm)) * .5);
     margin-left: var(--spacer-2);
     opacity: .75;
     transition: opacity ease-in-out var(--transition-base-timer)
@@ -20714,10 +20718,10 @@ html[data-color-theme=dark] .select2-container {
 }
 
 .select2-selection--single .select2-selection__clear:after {
-    content: "\f642";
+    content: "\f00d";
     font-family: var(--icon-font-family);
     display: inline-block;
-    font-size: var(--icon-font-size);
+    font-size: var(--icon-font-size-sm);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale
 }
@@ -36744,4 +36748,89 @@ html[data-color-theme=dark] .sidebar-expand.sidebar-end {
 
 .layout-boxed .page-content {
     background-color: var(--body-bg)
+}
+.colored-toast.swal2-icon-success {
+  background-color: var(--success) !important;
+}
+
+.colored-toast.swal2-icon-error {
+  background-color: var(--danger) !important;
+}
+
+.colored-toast.swal2-icon-warning {
+  background-color: var(--warning) !important;
+}
+
+.colored-toast.swal2-icon-info {
+  background-color: var(--info) !important;
+}
+
+.colored-toast.swal2-icon-question {
+  background-color: var(--secondary) !important;
+}
+
+.colored-toast .swal2-title {
+  color: white;
+}
+
+.colored-toast .swal2-close {
+  color: white;
+}
+
+.colored-toast .swal2-html-container {
+  color: white;
+}
+.form-control[readonly] {
+    background-color: var(--form-control-readonly-bg);
+    opacity: 1;
+    font-weight: normal !important;
+}
+
+.select2-container--disabled .select2-selection,
+select.select2[disabled] ~ .select2-container .select2-selection {
+    background-color: var(--form-control-disabled-bg);
+    color: var(--form-control-disabled-color);
+    cursor: not-allowed;
+    opacity: 1;
+    font-weight: normal !important;
+    pointer-events: none;
+}
+
+.select2-container--disabled .select2-selection__arrow,
+select.select2[disabled] ~ .select2-container .select2-selection__arrow {
+    display: none;
+}
+
+select.select2[readonly] ~ .select2-container .select2-selection {
+    background-color: var(--form-control-readonly-bg);
+    color: var(--form-control-readonly-color);
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 1;
+    font-weight: normal !important;
+}
+
+.multiselect-native-select select[multiple][readonly] + .dropdown .dropdown-toggle,
+.multiselect-native-select select[multiple][disabled] + .dropdown .dropdown-toggle {
+    background-color: var(--form-control-readonly-bg) !important;
+    color: var(--form-control-readonly-color) !important;
+    cursor: not-allowed !important;
+    opacity: 1;
+    pointer-events: none;
+    font-weight: normal !important;
+}
+
+.multiselect-native-select select[multiple][readonly] + .dropdown .multiselect-container,
+.multiselect-native-select select[multiple][disabled] + .dropdown .multiselect-container {
+    display: none !important;
+}
+
+.multiselect-native-select select[multiple][readonly],
+.multiselect-native-select select[multiple][disabled] {
+    background-color: var(--form-control-readonly-bg) !important;
+    color: var(--form-control-readonly-color) !important;
+    opacity: 1;
+    cursor: not-allowed;
+    pointer-events: none;
+    font-weight: normal !important;
 }

@@ -43,7 +43,7 @@
         </div>
         <div class="d-lg-flex mb-2 mb-lg-0">
             @foreach ($navbars as $navbar)
-                @if (Route::has($navbar['action_route']) && Route::currentRouteName() != $navbar['action_route'])
+                @if (Route::currentRouteName() != $navbar['action_route'])
                     <a href="{{ route($navbar['action_route']) }}" class="d-flex align-items-center text-body py-2">
                         <i class="fa-solid {{ $navbar['icon'] }} me-1 fa-fw fa-xl"></i>
                         {{ $navbar['name_' . app()->getLocale()] }}

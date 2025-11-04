@@ -4,11 +4,11 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use App\Models\Settings\Menu;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -135,6 +135,7 @@ class Abilities
                 'active' => $isActive
             ];
             foreach ($menuObject->permissions as $permission) {
+                if(isset($permission['action_route']) && !Route::has($permission['action_route'])) continue;
                 // Get permission name from translation
                 $permissionName = $permission['name'] ?? 'N/A';
                 if (isset($permission->translations) && $permission->translations->count() > 0) {

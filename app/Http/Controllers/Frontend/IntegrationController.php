@@ -8,6 +8,7 @@ use App\Models\Frontend\Integration;
 use App\Models\Frontend\IntegrationTranslation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Rules\ImageRule;
 
 class IntegrationController extends Controller
 {
@@ -33,7 +34,7 @@ class IntegrationController extends Controller
             try {
                 $rules = [
                     'sort' => 'nullable|integer',
-                    'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                    'image' => ['nullable', new ImageRule()],
                 ];
 
                 foreach ($this->locales->keys() as $locale) {
@@ -55,8 +56,8 @@ class IntegrationController extends Controller
                     'updated_by' => auth()->id(),
                 ]);
 
-                if ($request->hasFile('image')) {
-                    $integration->image = uploadFile($request->file('image'), 'integrations');
+                if ($request->image) {
+                    $integration->image = uploadImage($request->image, 'integrations');
                     $integration->save();
                 }
 
@@ -111,7 +112,7 @@ class IntegrationController extends Controller
             try {
                 $rules = [
                     'sort' => 'nullable|integer',
-                    'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                    'image' => ['nullable', new ImageRule()],
                 ];
 
                 foreach ($this->locales->keys() as $locale) {
@@ -129,8 +130,8 @@ class IntegrationController extends Controller
                 $form->sort = $request->input('sort', 0);
                 $form->updated_by = auth()->id();
 
-                if ($request->hasFile('image')) {
-                    $form->image = uploadFile($request->file('image'), 'integrations');
+                if ($request->image) {
+                    $form->image = uploadImage($request->image, 'integrations');
                 }
 
                 $form->save();

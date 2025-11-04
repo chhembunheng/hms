@@ -1,43 +1,23 @@
- <script src="{{ asset('assets/js/jquery/jquery.min.js') }}"></script>
- <script src="{{ asset('assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
- <script src="{{ asset('assets/js/vendor/uploaders/fileinput/fileinput.min.js') }}"></script>
- <script src="{{ asset('assets/js/vendor/notifications/sweet_alert.min.js') }}"></script>
- <script src="{{ asset('assets/js/vendor/forms/selects/bootstrap_multiselect.js') }}?{{ time() }}"></script>
- <script src="{{ asset('assets/js/vendor/forms/selects/select2.min.js') }}"></script>
- <script src="{{ asset('assets/js/vendor/ui/moment/moment.min.js') }}"></script>
- <script src="{{ asset('assets/js/vendor/pickers/daterangepicker.js') }}"></script>
- <script src="{{ asset('assets/js/vendor/forms/validation/validate.min.js') }}"></script>
- <script src="{{ asset('assets/js/vendor/pickers/datepicker.min.js') }}"></script>
- <script src="{{ asset('assets/js/vendor/notifications/noty.min.js') }}"></script>
- <script src="{{ asset('assets/js/vendor/media/glightbox.min.js') }}"></script>
- <script src="{{ asset('assets/js/vendor/pickers/icon-picker/js/icon-picker.min.js') }}?v={{ time() }}"></script>
- <script src="{{ asset('assets/js/vendor/pickers/icon-picker/lib/fontawesome.js') }}?v={{ time() }}"></script>
- <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
- <script src="{{ asset('assets/js/app.js') }}?v={{ time() }}"></script>
- <script src="{{ asset('assets/js/init.js') }}?v={{ time() }}"></script>
- <script src="{{ asset('assets/js/helpers.js') }}?v={{ time() }}"></script>
+ <script src="{{ asset('assets/js/jquery/jquery.min.js') }}?v={{ config('init.layout_version') }}"></script>
+ <script src="{{ asset('assets/js/bootstrap/bootstrap.bundle.min.js') }}?v={{ config('init.layout_version') }}"></script>
+ <script src="{{ asset('assets/js/vendor/uploaders/fileinput/fileinput.min.js') }}?v={{ config('init.layout_version') }}"></script>
+ <script src="{{ asset('assets/js/vendor/notifications/sweet_alert.min.js') }}?v={{ config('init.layout_version') }}"></script>
+ <script src="{{ asset('assets/js/vendor/forms/selects/bootstrap_multiselect.js') }}?v={{ config('init.layout_version') }}"></script>
+ <script src="{{ asset('assets/js/vendor/forms/selects/select2.min.js') }}?v={{ config('init.layout_version') }}"></script>
+ <script src="{{ asset('assets/js/vendor/ui/moment/moment.min.js') }}?v={{ config('init.layout_version') }}"></script>
+ <script src="{{ asset('assets/js/vendor/pickers/daterangepicker.js') }}?v={{ config('init.layout_version') }}"></script>
+ <script src="{{ asset('assets/js/vendor/forms/validation/validate.min.js') }}?v={{ config('init.layout_version') }}"></script>
+ <script src="{{ asset('assets/js/vendor/pickers/datepicker.min.js') }}?v={{ config('init.layout_version') }}"></script>
+ <script src="{{ asset('assets/js/vendor/media/glightbox.min.js') }}?v={{ config('init.layout_version') }}"></script>
+ <script src="{{ asset('assets/js/vendor/pickers/icon-picker/js/icon-picker.min.js') }}?v={{ config('init.layout_version') }}"></script>
+ <script src="{{ asset('assets/js/vendor/pickers/icon-picker/lib/fontawesome.js') }}?v={{ config('init.layout_version') }}"></script>
+ <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js?v={{ config('init.layout_version') }}"></script>
+ <script src="{{ asset('assets/js/app.js') }}?v={{ config('init.layout_version') }}"></script>
+ <script src="{{ asset('assets/js/helpers.js') }}?v={{ config('init.layout_version') }}"></script>
  <script>
-     // override Noty default settings
-     Noty.overrideDefaults({
-         theme: 'limitless',
-         layout: 'topRight',
-         type: 'alert',
-         timeout: 2500
-     });
-     // initialize SweetAlert2
-     const swalInit = swal.mixin({
-         buttonsStyling: false,
-         customClass: {
-             confirmButton: 'btn btn-primary',
-             cancelButton: 'btn btn-light',
-             denyButton: 'btn btn-light',
-             input: 'form-control'
-         }
-     });
      // initialize body overlay
      $(document).ready(function() {
          $('#body-overlay').hide();
-         $(document).find('select.multiple-select').multiselect();
          $(document).find('select.select-icons').select2({
              templateResult: iconFormat,
              minimumResultsForSearch: Infinity,
@@ -46,10 +26,10 @@
                  return m;
              }
          });
-         $(document).find('select.select2').select2();
          $('.icon-picker-box').each(function() {
              $(this).iconPicker({
-                 onClick: '.open-icon-picker', // trigger inside each box
+                 onClick: '.open-icon-picker',
+                 searchable: true,
                  iconLibrary: fontAwesome
              });
          });
@@ -111,25 +91,20 @@
                          if (res.status === 'success') {
                              if (el.closest('.dataTables_wrapper').length) {
                                  el.closest('.dataTables_wrapper').find('table.datatables').DataTable().ajax.reload();
-                                 new Noty({
-                                     type: 'success',
-                                     text: '<i class="fa-solid fa-check fa-fw"></i> ' + res.message
-                                 }).show();
+                                 success(res.message);
                              } else {
                                  window.location.reload();
                              }
                          } else {
-                             new Noty({
-                                 type: 'error',
-                                 text: res.message
-                             }).show();
+                             error(res.message);
                          }
                      },
                      error: function(e) {
-                         new Noty({
-                             type: 'error',
-                             text: 'Something went wrong'
-                         }).show();
+                         let message = 'Something went wrong';
+                         if (e.responseJSON && e.responseJSON.message) {
+                             message = e.responseJSON.message;
+                         }
+                         error(message);
                      }
                  });
              }
@@ -169,16 +144,8 @@
      function copyToClipboard(e) {
          e.preventDefault();
          const text = $(e.target).attr('clipboard-text');
-         console.log(text);
          navigator.clipboard.writeText(text).then(() => {
-             swalInit.fire({
-                 text: 'Copied to clipboard',
-                 icon: 'success',
-                 toast: true,
-                 showConfirmButton: false,
-                 position: 'top-end',
-                 timer: 1000
-             });
+             success('{{ __('messages.copied_to_clipboard') }}');
          });
      }
      $(document).on('click', '.action-buttons button', function(e) {
@@ -238,14 +205,7 @@
                  });
              },
              error: function(e) {
-                 swalInit.fire({
-                     title: 'Error!',
-                     text: 'Something went wrong',
-                     icon: 'error',
-                     customClass: {
-                         confirmButton: 'btn btn-danger'
-                     }
-                 });
+                 error('Something went wrong');
              }
          });
      });
@@ -265,29 +225,12 @@
              dataType: 'json',
              success: function(res) {
                  if (res.status === 'success') {
-                     swalInit.fire({
-                         title: 'Success!',
-                         text: res.message,
-                         icon: 'success',
-                         customClass: {
-                             confirmButton: 'btn btn-success'
-                         }
-                     }).then(function() {
-                         if (redirect) {
-                             window.location.href = redirect;
-                         } else {
-                             location.reload();
-                         }
-                     });
+                     success(res.message);
+                     if (redirect) {
+                         window.location.href = redirect;
+                     }
                  } else {
-                     swalInit.fire({
-                         title: 'Error!',
-                         text: res.message,
-                         icon: 'error',
-                         customClass: {
-                             confirmButton: 'btn btn-danger'
-                         }
-                     });
+                     error(res.message);
                  }
              },
              error: function(e) {
@@ -295,14 +238,7 @@
                  if (e.responseJSON && e.responseJSON.message) {
                      message = e.responseJSON.message;
                  }
-                 swalInit.fire({
-                     title: 'Error!',
-                     text: message,
-                     icon: 'error',
-                     customClass: {
-                         confirmButton: 'btn btn-danger'
-                     }
-                 });
+                 error(message);
              }
          });
      });
@@ -331,13 +267,23 @@
              e.preventDefault();
              if (!$(form).valid()) {
                  e.preventDefault();
-                 return false;
+                 error('Please fill the form correctly');
+                 return;
              }
              $(form).find('input[type="file"]').each(function() {
                  const input = $(this);
                  const base64 = input.parents('.file-input').find('.file-preview-image').attr('src') || '';
                  if (base64 && base64.startsWith('data:')) {
                      input.replaceWith('<input type="hidden" name="' + input.attr('name') + '" value="' + base64 + '">');
+                 }
+             });
+             //  Ckeditor handling
+             $(form).find('.editor').each(function() {
+                 const node = $(this);
+                 const editorInstance = editorsMap.get(this);
+                 if (editorInstance) {
+                     const data = editorInstance.getData();
+                     node.val(data);
                  }
              });
              $.ajax({
@@ -347,29 +293,12 @@
                  dataType: 'json',
                  success: function(res) {
                      if (res.status === 'success') {
-                         swalInit.fire({
-                             title: 'Success!',
-                             text: res.message,
-                             icon: 'success',
-                             customClass: {
-                                 confirmButton: 'btn btn-success'
-                             }
-                         }).then(function() {
-                             if (res.redirect) {
-                                 window.location.href = res.redirect;
-                             } else {
-                                 location.reload();
-                             }
-                         });
+                         success(res.message);
+                         if (res.redirect) {
+                             window.location.href = res.redirect;
+                         }
                      } else {
-                         swalInit.fire({
-                             title: 'Error!',
-                             text: res.message,
-                             icon: 'error',
-                             customClass: {
-                                 confirmButton: 'btn btn-danger'
-                             }
-                         });
+                         error(res.message);
                      }
                  },
                  error: function(e) {
@@ -377,14 +306,7 @@
                      if (e.responseJSON && e.responseJSON.message) {
                          message = e.responseJSON.message;
                      }
-                     swalInit.fire({
-                         title: 'Error!',
-                         text: message,
-                         icon: 'error',
-                         customClass: {
-                             confirmButton: 'btn btn-danger'
-                         }
-                     });
+                     error(message);
                  }
              });
          });
@@ -472,7 +394,7 @@
                  licenseKey: 'GPL',
                  toolbar: toolbars,
                  image: {
-                     toolbar: ['imageTextAlternative', 'imageStyle:side'],
+                     toolbar: ['imageTextAlternative', 'imageStyle:side', 'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight'],
                      insert: {
                          integrations: ['upload'],
                      }
@@ -499,16 +421,7 @@
          const contentNode = document.querySelector('textarea.content-en');
          const instance = editorsMap.get(contentNode);
          if (empty(content)) {
-             swalInit.fire({
-                 toast: true,
-                 icon: 'error',
-                 text: 'Please enter content to generate meta information',
-                 position: 'top-end',
-                 background: '#f8d7da',
-                 timer: 3000,
-                 timerProgressBar: true,
-                 showConfirmButton: false
-             });
+             error('Please fill the content field to generate meta information');
              return;
          }
          if (metaGenerated) {
@@ -525,16 +438,7 @@
              },
              success: function(res) {
                  if (res.status === 'success') {
-                     swalInit.fire({
-                         title: 'Success!',
-                         text: 'Meta information generated successfully',
-                         icon: 'success',
-                         toast: true,
-                         position: 'top-end',
-                         timer: 3000,
-                         showConfirmButton: false,
-                         timerProgressBar: true
-                     });
+                     success(res.message);
                      if (res.data.title) {
                          title.val(res.data.title);
                      }
@@ -553,37 +457,19 @@
                          }
                      }
                  } else {
-                     swalInit.fire({
-                         title: 'Error!',
-                         text: res.message,
-                         icon: 'error',
-                         showConfirmButton: false,
-                         toast: true,
-                         position: 'top-end',
-                         timer: 3000,
-                         timerProgressBar: true
-                     });
+                     error(res.message);
                  }
              },
              complete: function() {
                  $('.meta-generator').removeClass('fa-fw fa-2x fa-beat-fade');
                  metaGenerated = false;
-                 loading('stop');
              },
              error: function(e) {
                  let message = 'Something went wrong';
                  if (e.responseJSON && e.responseJSON.message) {
                      message = e.responseJSON.message;
                  }
-                 swalInit.fire({
-                     title: 'Error!',
-                     text: message,
-                     icon: 'error',
-                     toast: true,
-                     position: 'top-end',
-                     timer: 3000,
-                     timerProgressBar: true,
-                 });
+                 error(message);
              }
          });
      });

@@ -17,41 +17,29 @@ function empty(instance = '') {
     return false;
 }
 function error(message = 'Error: An unexpected issue occurred. Please try again later.') {
-    new Noty({
-        type: 'error',
-        text: `<div class="d-flex align-items-center p-2">
-                   <i class="fa-light fa-circle-exclamation fa-beat-fade fa-fw fa-2xl me-3"></i>
-                   <span>${message}</span>
-               </div>`
-    }).show();
+    Toast.fire({
+        icon: 'error',
+        text: message
+    });
 }
 
 function success(message = 'Success: Operation completed successfully. Thank you!') {
-    new Noty({
-        type: 'success',
-        text: `<div class="d-flex align-items-center p-2">
-                   <i class="fa-light fa-circle-check fa-beat-fade fa-fw fa-2xl me-3"></i>
-                   <span>${message}</span>
-               </div>`
-    }).show();
+    Toast.fire({
+        icon: 'success',
+        text: message
+    });
 }
 
 function info(message = 'Info: Here is an update for you.') {
-    new Noty({
-        type: 'info',
-        text: `<div class="d-flex align-items-center p-2">
-                   <i class="fa-light fa-circle-info fa-beat-fade fa-fw fa-2xl me-3"></i>
-                   <span>${message}</span>
-               </div>`
-    }).show();
+    Toast.fire({
+        icon: 'info',
+        text: message
+    });
 }
 
 function warning(message = 'Warning: Please review your action before proceeding.') {
-    new Noty({
-        type: 'warning',
-        text: `<div class="d-flex align-items-center p-2">
-                   <i class="fa-light fa-circle-exclamation fa-beat-fade fa-fw fa-2xl me-3"></i>
-                   <span>${message}</span>
-               </div>`
-    }).show();
+    Toast.fire({
+        icon: 'warning',
+        text: message
+    });
 }

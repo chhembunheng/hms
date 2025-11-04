@@ -8,6 +8,7 @@ use App\Models\Frontend\Client;
 use App\Models\Frontend\ClientTranslation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Rules\ImageRule;
 
 class ClientController extends Controller
 {
@@ -32,7 +33,7 @@ class ClientController extends Controller
         if ($request->isMethod('post')) {
             try {
                 $rules = [
-                    'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                    'image' => ['nullable', new ImageRule()],
                     'is_active' => 'nullable|boolean',
                     'sort' => 'nullable|integer|min:0',
                 ];
@@ -55,8 +56,8 @@ class ClientController extends Controller
                     'updated_by' => auth()->id(),
                 ]);
 
-                if ($request->hasFile('image')) {
-                    $client->image = uploadFile($request->file('image'), 'clients');
+                if ($request->image) {
+                    $client->image = uploadImage($request->image, 'clients');
                     $client->save();
                 }
 
@@ -97,7 +98,7 @@ class ClientController extends Controller
         if ($request->isMethod('post')) {
             try {
                 $rules = [
-                    'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                    'image' => ['nullable', new ImageRule()],
                     'is_active' => 'nullable|boolean',
                     'sort' => 'nullable|integer|min:0',
                 ];
@@ -116,8 +117,8 @@ class ClientController extends Controller
                 $form->sort = $request->input('sort', 0);
                 $form->updated_by = auth()->id();
 
-                if ($request->hasFile('image')) {
-                    $form->image = uploadFile($request->file('image'), 'clients');
+                if ($request->image) {
+                    $form->image = uploadImage($request->image, 'clients');
                 }
 
                 $form->save();

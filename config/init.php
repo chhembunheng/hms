@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'layout_version' => rand(1000, 9999),
 
     'loading' => [
         'enabled' => env('APP_LOADING', false),

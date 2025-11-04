@@ -47,10 +47,10 @@
 
         <div class="tab-content" id="localeTabContent">
             @foreach ($locales as $locale => $language)
-                <div class="tab-pane fade @if ($locale === config('app.locale')) show active @endif" id="locale-{{ $locale }}" role="tabpanel" aria-labelledby="locale-{{ $locale }}-tab">
+                <div @class(['tab-pane fade', 'show active' => $locale === config('app.locale')]) id="locale-{{ $locale }}" role="tabpanel" aria-labelledby="locale-{{ $locale }}-tab">
                     <div class="row">
                         <div class="col-md-8 offset-md-2">
-                            <x-form.input :label="__('form.title')" name="translations[{{ $locale }}][title]" :value="old('translations.' . $locale . '.title', $translations[$locale]['title'] ?? '')" required />
+                            <x-form.input @class(['content-seo' => $locale === config('app.locale')]) :label="__('form.title')" name="translations[{{ $locale }}][title]" :value="old('translations.' . $locale . '.title', $translations[$locale]['title'] ?? '')" required />
                         </div>
                         <div class="col-md-8 offset-md-2">
                             <x-form.textarea :label="__('form.short_description')" name="translations[{{ $locale }}][short_description]" :value="old('translations.' . $locale . '.short_description', $translations[$locale]['short_description'] ?? '')" rows="2" />

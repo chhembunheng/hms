@@ -488,87 +488,42 @@ if (! function_exists('errors')) {
 if (! function_exists('uploadFile')) {
     function uploadFile(UploadedFile $image, string $path, string $pathThumb = '', int $width = 200): string
     {
-        $driver   = env('UPLOAD_DRIVER', 'storage');
         $fileName = md5(time() . $image->getClientOriginalName()) . '.' . $image->extension();
+        $path      = trim($path, '/');
+        $pathThumb = trim($pathThumb, '/');
+        $putFile   = $path . '/' . $fileName;
 
-        if ($driver === 'storage') {
-            $path      = trim($path, '/');
-            $pathThumb = trim($pathThumb, '/');
-            $putFile   = $path . '/' . $fileName;
-
-            if (! is_dir(storage_path('app/public/' . $pathThumb))) {
-                mkdir(storage_path('app/public/' . $pathThumb), 0777, true);
-            }
-
-            // Store the file
-            $stored = Storage::disk('public')->put($putFile, file_get_contents($image->getRealPath()));
-            if (! $stored || ! Storage::disk('public')->exists($putFile)) {
-                Log::error("Failed to store file or file missing after upload: $putFile");
-                return '';
-            }
-
-            // Create thumbnail if pathThumb is provided
-            if (! empty($pathThumb)) {
-                try {
-                    $imageContent = Storage::disk('public')->get($putFile);
-                    $manager      = new ImageManager(new Driver());
-                    $thumbImage   = $manager->read($imageContent);
-                    $thumbPath    = storage_path("app/public/{$pathThumb}");
-
-                    if (! File::exists($thumbPath)) {
-                        File::makeDirectory($thumbPath, 0755, true);
-                    }
-
-                    $thumbImage->scaleDown(width: $width)
-                        ->save("{$thumbPath}/{$fileName}");
-                } catch (\Throwable $e) {
-                    Log::error("Thumbnail creation failed for $putFile: " . $e->getMessage());
-                }
-            }
-
-            return 'storage/' . $putFile;
+        if (! is_dir(storage_path('app/public/' . $pathThumb))) {
+            mkdir(storage_path('app/public/' . $pathThumb), 0777, true);
         }
 
-        if ($driver === 'public') {
-            $path      = '/storage/' . trim($path, '/');
-            $pathThumb = ! empty($pathThumb) ? '/storage/' . trim($pathThumb, '/') : '';
-            $dir       = public_path($path);
-            $putFile   = $path . '/' . $fileName;
-            $fullPath  = $dir . '/' . $fileName;
-
-            // Create directory if it doesn't exist
-            if (! File::exists($dir)) {
-                File::makeDirectory($dir, 0755, true);
-            }
-
-            // Store the file
-            $stored = File::put($fullPath, file_get_contents($image->getRealPath()));
-            if (! $stored || ! File::exists($fullPath)) {
-                Log::error("Failed to store file or file missing after upload: $fullPath");
-                return '';
-            }
-
-            // Create thumbnail if pathThumb is provided
-            if (! empty($pathThumb)) {
-                try {
-                    $dirThumb = public_path($pathThumb);
-                    if (! File::exists($dirThumb)) {
-                        File::makeDirectory($dirThumb, 0755, true);
-                    }
-
-                    $manager    = new ImageManager(new Driver());
-                    $thumbImage = $manager->read($fullPath);
-                    $thumbImage->scaleDown(width: $width)
-                        ->save("{$dirThumb}/{$fileName}");
-                } catch (\Throwable $e) {
-                    Log::error("Thumbnail creation failed for $fullPath: " . $e->getMessage());
-                }
-            }
-
-            return $putFile;
+        // Store the file
+        $stored = Storage::disk('public')->put($putFile, file_get_contents($image->getRealPath()));
+        if (! $stored || ! Storage::disk('public')->exists($putFile)) {
+            Log::error("Failed to store file or file missing after upload: $putFile");
+            return '';
         }
 
-        throw new \Exception('Invalid upload driver: ' . $driver);
+        // Create thumbnail if pathThumb is provided
+        if (! empty($pathThumb)) {
+            try {
+                $imageContent = Storage::disk('public')->get($putFile);
+                $manager      = new ImageManager(new Driver());
+                $thumbImage   = $manager->read($imageContent);
+                $thumbPath    = storage_path("app/public/{$pathThumb}");
+
+                if (! File::exists($thumbPath)) {
+                    File::makeDirectory($thumbPath, 0755, true);
+                }
+
+                $thumbImage->scaleDown(width: $width)
+                    ->save("{$thumbPath}/{$fileName}");
+            } catch (\Throwable $e) {
+                Log::error("Thumbnail creation failed for $putFile: " . $e->getMessage());
+            }
+        }
+
+        return 'storage/' . $putFile;
     }
 }
 
@@ -590,64 +545,60 @@ if (! function_exists('uploadBase64')) {
             }
         }
 
-        $driver   = env('UPLOAD_DRIVER', 'storage');
         $fileName = md5(time() . uniqid()) . '.png';
+        $path      = trim($path, '/');
+        $pathThumb = trim($pathThumb, '/');
+        if (! is_dir(storage_path('app/public/' . $pathThumb))) {
+            mkdir(storage_path('app/public/' . $pathThumb), 0777, true);
+        }
+        $putFile = $path . '/' . $fileName;
 
-        if ($driver === 'storage') {
-            $path      = trim($path, '/');
-            $pathThumb = trim($pathThumb, '/');
-            if (! is_dir(storage_path('app/public/' . $pathThumb))) {
-                mkdir(storage_path('app/public/' . $pathThumb), 0777, true);
-            }
-            $putFile = $path . '/' . $fileName;
-
-            // Store the file
-            $stored = Storage::disk('public')->put($putFile, $decoded);
-            if (! $stored) {
-                return '';
-            }
-
-            // Create thumbnail if pathThumb is provided
-            if (! empty($pathThumb)) {
-                $manager      = new ImageManager(new Driver());
-                $imageContent = Storage::disk('public')->get($putFile);
-                $image        = $manager->read($imageContent);
-                $image->scaleDown(width: $width)->save(storage_path('app/public/' . $pathThumb . '/' . $fileName));
-            }
-
-            return 'storage/' . $putFile;
+        // Store the file
+        $stored = Storage::disk('public')->put($putFile, $decoded);
+        if (! $stored) {
+            return '';
         }
 
-        if ($driver === 'public') {
-            $path      = '/storage/' . trim($path, '/');
-            $pathThumb = ! empty($pathThumb) ? '/storage/' . trim($pathThumb, '/') : '';
-            $dir       = public_path($path);
-            $putFile   = $path . '/' . $fileName;
-
-            // Create directory if it doesn't exist
-            if (! File::exists($dir)) {
-                File::makeDirectory($dir, 0755, true);
-            }
-
-            // Store the file
-            $stored = File::put($dir . '/' . $fileName, $decoded);
-            if (! $stored) {
-                return '';
-            }
-
-            // Create thumbnail if pathThumb is provided
-            if (! empty($pathThumb)) {
-                $dirThumb = public_path($pathThumb);
-                if (! File::exists($dirThumb)) {
-                    File::makeDirectory($dirThumb, 0755, true);
-                }
-                $manager = new ImageManager(new Driver());
-                $image   = $manager->read($dir . '/' . $fileName);
-                $image->scaleDown(width: $width)->save($dirThumb . '/' . $fileName);
-            }
-            return $putFile;
+        // Create thumbnail if pathThumb is provided
+        if (! empty($pathThumb)) {
+            $manager      = new ImageManager(new Driver());
+            $imageContent = Storage::disk('public')->get($putFile);
+            $image        = $manager->read($imageContent);
+            $image->scaleDown(width: $width)->save(storage_path('app/public/' . $pathThumb . '/' . $fileName));
         }
-        throw new \Exception('Invalid upload driver: ' . $driver);
+
+        return 'storage/' . $putFile;
+    }
+}
+
+if (! function_exists('uploadImage')) {
+    /**
+     * Upload image from either base64 string or UploadedFile.
+     * Handles both uploaded files and base64 encoded images.
+     *
+     * @param string|UploadedFile $image Base64 string or UploadedFile instance
+     * @param string $path Storage path (e.g., 'products', 'blogs', 'teams')
+     * @param string $pathThumb Optional thumbnail path
+     * @param int $width Thumbnail width
+     * @return string Path to stored image or empty string on failure
+     */
+    function uploadImage($image, string $path, string $pathThumb = '', int $width = 200): string
+    {
+        if (empty($image)) {
+            return '';
+        }
+
+        // Handle UploadedFile instances
+        if ($image instanceof UploadedFile) {
+            return uploadFile($image, $path, $pathThumb, $width);
+        }
+
+        // Handle base64 strings
+        if (is_string($image)) {
+            return uploadBase64($image, $path, $pathThumb, $width);
+        }
+
+        return '';
     }
 }
 

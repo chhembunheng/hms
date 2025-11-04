@@ -305,7 +305,11 @@ select.form-control-sm.error ~ .select2-container--default:not(.select2-containe
     height: 50px;
 }
 .file-preview {
-    min-height: 207px;
+    min-height: 240px;
+    border-radius: 0.375rem;
+    background: var(--aim-surface-2);
+    position: relative;
+    overflow: hidden;
 }
 .file-preview-status {
     z-index: 1000;

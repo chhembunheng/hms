@@ -8,14 +8,28 @@ use App\Models\Frontend\Product;
 use App\Models\Frontend\ProductTranslation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Rules\ImageRule;
 
 class ProductController extends Controller
 {
     protected $locales;
+    protected $categories;
 
     public function __construct()
     {
         $this->locales = collect(config('init.languages'));
+        $this->categories = [
+            1 => 'Human Resources',
+            2 => 'Finance',
+            3 => 'IT Services',
+            4 => 'Marketing',
+            5 => 'Sales',
+            6 => 'Customer Support',
+            7 => 'Research and Development',
+            8 => 'Operations',
+            9 => 'Legal',
+            10 => 'Administration',
+        ];
     }
 
     public function index(ProductDataTable $dataTable)
@@ -27,6 +41,7 @@ class ProductController extends Controller
     {
         $form = new Product();
         $locales = $this->locales;
+        $categories = $this->categories;
         $translations = [];
 
         if ($request->isMethod('post')) {
@@ -34,7 +49,7 @@ class ProductController extends Controller
                 $rules = [
                     'slug' => 'required|string|unique:products,slug',
                     'sort' => 'nullable|integer',
-                    'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                    'image' => ['nullable', new ImageRule()],
                 ];
 
                 foreach ($this->locales->keys() as $locale) {
@@ -54,8 +69,8 @@ class ProductController extends Controller
                     'updated_by' => auth()->id(),
                 ]);
 
-                if ($request->hasFile('image')) {
-                    $product->image = uploadFile($request->file('image'), 'products');
+                if ($request->image) {
+                    $product->image = uploadImage($request->image, 'products');
                     $product->save();
                 }
 
@@ -78,7 +93,7 @@ class ProductController extends Controller
             }
         }
 
-        return view('frontend.products.form', compact('form', 'locales', 'translations'));
+        return view('frontend.products.form', compact('form', 'locales', 'translations', 'categories'));
     }
 
     public function show($slug)
@@ -93,7 +108,7 @@ class ProductController extends Controller
     {
         $form = Product::with('translations')->findOrFail($id);
         $locales = $this->locales;
-
+        $categories = $this->categories;
         $translations = [];
         foreach ($form->translations as $translation) {
             $translations[$translation->locale] = [
@@ -108,7 +123,7 @@ class ProductController extends Controller
                 $rules = [
                     'slug' => 'required|string|unique:products,slug,' . $form->id,
                     'sort' => 'nullable|integer',
-                    'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                    'image' => ['nullable', new ImageRule()],
                 ];
 
                 foreach ($this->locales->keys() as $locale) {
@@ -126,8 +141,8 @@ class ProductController extends Controller
                 $form->sort = $request->input('sort', 0);
                 $form->updated_by = auth()->id();
 
-                if ($request->hasFile('image')) {
-                    $form->image = uploadFile($request->file('image'), 'products');
+                if ($request->image) {
+                    $form->image = uploadImage($request->image, 'products');
                 }
 
                 $form->save();
@@ -151,7 +166,7 @@ class ProductController extends Controller
             }
         }
 
-        return view('frontend.products.form', compact('form', 'locales', 'translations'));
+        return view('frontend.products.form', compact('form', 'locales', 'translations', 'categories'));
     }
 
     public function destroy($id)

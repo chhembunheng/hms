@@ -8,6 +8,7 @@ use App\Models\Frontend\Partner;
 use App\Models\Frontend\PartnerTranslation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Rules\ImageRule;
 
 class PartnerController extends Controller
 {
@@ -32,7 +33,7 @@ class PartnerController extends Controller
         if ($request->isMethod('post')) {
             try {
                 $rules = [
-                    'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                    'logo' => ['nullable', new ImageRule()],
                     'website_url' => 'nullable|url',
                     'is_active' => 'nullable|boolean',
                     'sort' => 'nullable|integer|min:0',
@@ -57,8 +58,8 @@ class PartnerController extends Controller
                     'updated_by' => auth()->id(),
                 ]);
 
-                if ($request->hasFile('logo')) {
-                    $partner->logo = uploadFile($request->file('logo'), 'partners');
+                if ($request->logo) {
+                    $partner->logo = uploadImage($request->logo, 'partners');
                     $partner->save();
                 }
 
@@ -99,7 +100,7 @@ class PartnerController extends Controller
         if ($request->isMethod('post')) {
             try {
                 $rules = [
-                    'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                    'logo' => ['nullable', new ImageRule()],
                     'website_url' => 'nullable|url',
                     'is_active' => 'nullable|boolean',
                     'sort' => 'nullable|integer|min:0',
@@ -120,8 +121,8 @@ class PartnerController extends Controller
                 $form->sort = $request->input('sort', 0);
                 $form->updated_by = auth()->id();
 
-                if ($request->hasFile('logo')) {
-                    $form->logo = uploadFile($request->file('logo'), 'partners');
+                if ($request->logo) {
+                    $form->logo = uploadImage($request->logo, 'partners');
                 }
 
                 $form->save();
