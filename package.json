@@ -4,7 +4,9 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "minify": "node scripts/minify-icon-picker.js",
+        "minify:icon-picker": "node scripts/minify-icon-picker.js public/assets/js/vendor/pickers/icon-picker"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",

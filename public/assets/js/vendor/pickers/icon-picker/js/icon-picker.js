@@ -24,11 +24,22 @@
           </div>
           <div id="aim-modal--icon-preview-wrap" class="aim-modal--icon-preview-wrap">
             <div class="aim-modal--icon-search">
-              <input type="search" placeholder="Filter by name..." aria-label="Filter icons"/>
+              <input type="search" class="form-control form-control-sm" placeholder="Filter by name..." aria-label="Filter icons"/>
               <i class="fas fa-search" aria-hidden="true"></i>
             </div>
             <div class="aim-modal--icon-preview-inner">
               <div id="aim-modal--icon-preview"></div>
+            </div>
+            <div class="aim-modal--pagination">
+              <button type="button" class="aim-pagination-btn aim-pagination-prev" aria-label="Previous page">
+                <i class="fas fa-chevron-left"></i> Previous
+              </button>
+              <div class="aim-pagination-info">
+                <span class="aim-pagination-current">1</span> / <span class="aim-pagination-total">1</span>
+              </div>
+              <button type="button" class="aim-pagination-btn aim-pagination-next" aria-label="Next page">
+                Next <i class="fas fa-chevron-right"></i>
+              </button>
             </div>
           </div>
         </div>
@@ -52,10 +63,10 @@
 			const name = iconClass.replace(prefix, '');
 			const label = name.replace(/-/g, ' ');
 			return `
-        <div class="aim-icon-item" data-library-id="${library}" data-filter="${name}">
-          <button type="button" class="aim-icon-item-inner" title="${name}" aria-label="${label}">
-            <i class="${iconClass}"></i>
-            <div class="aim-icon-item-name" title="${name}">${label}</div>
+        <div class="aim-icon-item" data-library-id="${library}" data-filter="${name}" data-icon-class="${iconClass}">
+          <button type="button" class="aim-icon-item-inner" title="${iconClass}" aria-label="${label}">
+            <i class="${prefix} ${iconClass}"></i>
+            <div class="aim-icon-item-class">${iconClass}</div>
           </button>
         </div>
       `;
@@ -78,7 +89,8 @@
 			onClick: '',             // selector for button that opens the modal
 			iconLibrary: DEFAULT_LIBRARY,
 			insertButtonText: 'Insert',
-			debounceMs: 120
+			debounceMs: 120,
+			itemsPerPage: 20        // pagination: icons per page
 		}, options || {});
 
 		if (!opts.onClick) return this;
@@ -94,6 +106,14 @@
 			const $sidebarTabs = $modal.find('.aim-modal--sidebar-tabs');
 			const $previewWrap = $modal.find('#aim-modal--icon-preview');
 			const $searchInput = $modal.find('.aim-modal--icon-search input');
+			const $paginationPrev = $modal.find('.aim-pagination-prev');
+			const $paginationNext = $modal.find('.aim-pagination-next');
+			const $paginationCurrent = $modal.find('.aim-pagination-current');
+			const $paginationTotal = $modal.find('.aim-pagination-total');
+
+			// pagination state
+			let currentPage = 1;
+			let totalPages = 1;
 
 			// build sidebar groups + icons
 			let iconMarkupParts = [];
@@ -112,8 +132,11 @@
 			$sidebarTabs.html(sidebarToMarkup(sideBarList));
 			$previewWrap.html(iconMarkupParts.join(''));
 
-			// cache icon items
+			// cache icon items and initialize visibility attributes
 			let $iconItems = $previewWrap.find('.aim-icon-item');
+			$iconItems.each(function () {
+				$(this).attr('data-search-visible', 'true').attr('data-category-visible', 'true');
+			});
 
 			// wire: trigger open
 			$trigger.on('click', function () {
@@ -150,7 +173,24 @@
 			$searchInput.on('keyup', debounce(function () {
 				const text = ($searchInput.val() || '').toString().trim().toLowerCase();
 				filterBySearch(text);
+				currentPage = 1;
+				updatePagination();
 			}, opts.debounceMs));
+
+			// wire: pagination buttons
+			$paginationPrev.on('click', function () {
+				if (currentPage > 1) {
+					currentPage--;
+					updatePagination();
+				}
+			});
+
+			$paginationNext.on('click', function () {
+				if (currentPage < totalPages) {
+					currentPage++;
+					updatePagination();
+				}
+			});
 
 			// wire: icon click (select & insert immediately)
 			$previewWrap.on('click', '.aim-icon-item', function () {
@@ -158,6 +198,10 @@
 				const $item = $(this).addClass('aesthetic-selected');
 				const selected = $item.find('i').attr('class') || '';
 				const $input = $root.find('input').first();
+				const $i = $input.closest('div').find('i').first();				
+				if ($i.length) {
+					$i.attr('class', selected);
+				}
 				if ($input.length) $input.val(selected);
 				closeModal();
 			});
@@ -166,6 +210,9 @@
 			function openModal() {
 				$modal.addClass('aim-open').removeClass('aim-close');
 				requestAnimationFrame(() => $searchInput.trigger('focus'));
+				// Initialize pagination when modal opens
+				currentPage = 1;
+				updatePagination();
 			}
 
 			function closeModal() {
@@ -175,21 +222,59 @@
 			function filterBySearch(text) {
 				if (!text) {
 					// show everything currently allowed by sidebar filter
-					$iconItems.each(function () { this.style.display = ''; });
-					return;
+					$iconItems.each(function () { 
+						$(this).attr('data-search-visible', 'true');
+					});
+				} else {
+					$iconItems.each(function () {
+						const hay = (this.dataset.filter || '').toLowerCase();
+						const matches = hay.includes(text);
+						$(this).attr('data-search-visible', matches ? 'true' : 'false');
+					});
 				}
-				$iconItems.each(function () {
-					const hay = (this.dataset.filter || '').toLowerCase();
-					this.style.display = hay.includes(text) ? '' : 'none';
-				});
 			}
 
 			function filterBySidebar(libraryId) {
 				const showAll = libraryId === 'all';
 				$iconItems.each(function () {
 					const match = showAll || (this.dataset.libraryId === libraryId);
-					this.style.display = match ? '' : 'none';
+					$(this).attr('data-category-visible', match ? 'true' : 'false');
 				});
+				currentPage = 1;
+				updatePagination();
+			}
+
+			function updatePagination() {
+				// Get visible icons based on current filters
+				const $visibleIcons = $iconItems.filter(function () {
+					const searchVisible = $(this).attr('data-search-visible') !== 'false';
+					const categoryVisible = $(this).attr('data-category-visible') !== 'false';
+					return searchVisible && categoryVisible;
+				});
+
+				const totalVisible = $visibleIcons.length;
+				totalPages = Math.ceil(totalVisible / opts.itemsPerPage) || 1;
+				
+				// Update pagination info
+				$paginationCurrent.text(currentPage);
+				$paginationTotal.text(totalPages);
+
+				// Enable/disable buttons
+				$paginationPrev.prop('disabled', currentPage === 1);
+				$paginationNext.prop('disabled', currentPage === totalPages);
+
+				// Hide all icons first
+				$iconItems.hide();
+
+				// Show/hide icons based on current page
+				const startIndex = (currentPage - 1) * opts.itemsPerPage;
+				const endIndex = startIndex + opts.itemsPerPage;
+
+				$visibleIcons.slice(startIndex, endIndex).show();
+
+				// Scroll to top of icon preview
+				const $previewInner = $modal.find('.aim-modal--icon-preview-inner');
+				$previewInner.scrollTop(0);
 			}
 
 			// optional: expose destroy
