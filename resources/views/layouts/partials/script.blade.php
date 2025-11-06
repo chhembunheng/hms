@@ -11,13 +11,14 @@
  <script src="{{ asset('assets/js/vendor/media/glightbox.min.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/vendor/pickers/icon-picker/js/icon-picker.min.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/vendor/pickers/icon-picker/lib/fontawesome.js') }}?v={{ config('init.layout_version') }}"></script>
- <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js?v={{ config('init.layout_version') }}"></script>
+ <script src="{{ asset('assets/js/vendor/editors/ckeditor.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/app.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/helpers.js') }}?v={{ config('init.layout_version') }}"></script>
  <script>
      // initialize body overlay
+     //  please make overlay start and stop when page loaded
+
      $(document).ready(function() {
-         $('#body-overlay').hide();
          $(document).find('select.select-icons').select2({
              templateResult: iconFormat,
              minimumResultsForSearch: Infinity,
@@ -33,13 +34,13 @@
                  iconLibrary: fontAwesome
              });
          });
+         loading('stop');
      });
-
      function loading(e) {
          if (e == 'stop') {
-             $('#body-overlay').hide();
+             $('#body-overlay').fadeOut(300);
          } else {
-             $('#body-overlay').show();
+             $('#body-overlay').fadeIn();
          }
      }
 
@@ -131,6 +132,9 @@
              if (e.status === 403) {
                  window.location.href = '/403';
              }
+         },
+         error: function(e) {
+            loading('stop');
          }
      });
 

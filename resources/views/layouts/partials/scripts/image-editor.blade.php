@@ -77,10 +77,10 @@
     </style>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tui-code-snippet/2.3.2/tui-code-snippet.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fabric@4.6.0/dist/fabric.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/tui-color-picker@2.2.8/dist/tui-color-picker.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tui-image-editor/3.15.3/tui-image-editor.min.js"></script>
+<script src="{{ asset('assets/js/vendor/editors/tui/tui-code-snippet.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/editors/tui/fabric.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/editors/tui/tui-color-picker.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/editors/tui/tui-image-editor.min.js') }}"></script>
 
 <script>
     const previewZoomButtonClasses = {
