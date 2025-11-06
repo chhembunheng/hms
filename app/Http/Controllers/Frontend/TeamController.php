@@ -38,7 +38,7 @@ class TeamController extends Controller
 
     public function index(TeamDataTable $dataTable)
     {
-        return $dataTable->render('frontend.teams.index');
+        return $dataTable->render('frontends.teams.index');
     }
 
     public function add(Request $request)
@@ -98,7 +98,7 @@ class TeamController extends Controller
             }
         }
 
-        return view('frontend.teams.form', compact('form', 'locales', 'translations', 'positions'));
+        return view('frontends.teams.form', compact('form', 'locales', 'translations', 'positions'));
     }
 
     public function show($slug)
@@ -107,7 +107,7 @@ class TeamController extends Controller
         $team = Team::whereHas('translations', function ($query) use ($locale, $slug) {
             $query->where('locale', $locale)->where('slug', $slug);
         })->with('translations')->firstOrFail();
-        return view('frontend.teams.show', compact('team', 'locale'));
+        return view('frontends.teams.show', compact('team', 'locale'));
     }
 
     public function edit(Request $request, $id)
@@ -169,7 +169,7 @@ class TeamController extends Controller
             }
         }
 
-        return view('frontend.teams.form', compact('form', 'locales', 'translations', 'positions'));
+        return view('frontends.teams.form', compact('form', 'locales', 'translations', 'positions'));
     }
 
     public function destroy($id)

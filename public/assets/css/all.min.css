@@ -21071,7 +21071,7 @@ html[data-color-theme=dark] .select2-selection--single .select2-selection__arrow
 }
 
 .select2-search--dropdown:after {
-    content: "\f4a8";
+    content: "\f002";
     font-family: var(--icon-font-family);
     position: absolute;
     top: 50%;
@@ -32382,7 +32382,7 @@ iframe.wait-autoplay {
 }
 
 .gridjs-search:after {
-    content: "\f4a8";
+    content: "\f002";
     font-family: var(--icon-font-family);
     position: absolute;
     top: 50%;

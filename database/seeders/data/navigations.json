@@ -1,0 +1,101 @@
+[
+    {
+        "name_en": "Explore",
+        "name_km": "ស្វែង​យល់",
+        "parent_id": null,
+        "route_name": null,
+        "icon": "fas fa-compass",
+        "order": 1,
+        "children": [
+            {
+                "name_en": "About Us",
+                "name_km": "អំពី​ពួក​យើង",
+                "parent_id": null,
+                "route_name": "frontend.about-us.index",
+                "icon": "fas fa-info-circle",
+                "order": 1
+            },
+            {
+                "name_en": "Contact Us",
+                "name_km": "ទាក់ទង​មក​ពួក​យើង",
+                "parent_id": null,
+                "route_name": "contact-us.index",
+                "icon": "fas fa-envelope",
+                "order": 2
+            },
+            {
+                "name_en": "our Team",
+                "name_km": "ក្រុមការ​ងារ",
+                "parent_id": null,
+                "route_name": "teams.index",
+                "icon": "fas fa-users",
+                "order": 3
+            },
+            {
+                "name_en": "Careers",
+                "name_km": "អាជីព",
+                "parent_id": null,
+                "route_name": "frontend.careers.index",
+                "icon": "fas fa-briefcase",
+                "order": 4
+            },
+            {
+                "name_en": "FAQ",
+                "name_km": "សំណួរ​ដែល​សួរ​ប៉ុន្មាន​ដង",
+                "parent_id": null,
+                "route_name": "frontend.faq.index",
+                "icon": "fas fa-question-circle",
+                "order": 5
+            },
+            {
+                "name_en": "Privacy Policy",
+                "name_km": "គោលការណ៍​ឯកជនភាព",
+                "parent_id": null,
+                "route_name": "frontend.privacy-policy.index",
+                "icon": "fas fa-user-shield",
+                "order": 6
+            },
+            {
+                "name_en": "Terms & Conditions",
+                "name_km": "ល័ក្ខខ័ណ្ឌ និង លក្ខខណ្ឌ",
+                "parent_id": null,
+                "route_name": "frontend.terms-and-conditions.index",
+                "icon": "fas fa-file-contract",
+                "order": 7
+            }
+        ]
+    },
+    {
+        "name_en": "Services",
+        "name_km": "សេវាកម្ម",
+        "parent_id": null,
+        "route_name": "frontend.services.index",
+        "icon": "fas fa-concierge-bell",
+        "order": 2
+    },
+    {
+        "name_en": "Products",
+        "name_km": "ផលិតផល",
+        "parent_id": null,
+        "route_name": "frontend.products.index",
+        "icon": "fas fa-box-open",
+        "order": 3
+    },
+    {
+        "name_en": "Intergrations",
+        "name_km": "ការរួមបញ្ចូល",
+        "parent_id": null,
+        "route_name": "frontend.integrations.index",
+        "icon": "fas fa-plug",
+        "order": 4
+    },
+    {
+        "name_en": "Blog",
+        "name_km": "ប្លុក",
+        "parent_id": null,
+        "route_name": "frontend.blog.index",
+        "icon": "fas fa-blog",
+        "order": 5
+    }
+
+]

@@ -16,7 +16,7 @@ class ServiceDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('action', fn($row) => view('frontend.services.action', compact('row')))
+            ->addColumn('action', fn($row) => view('frontends.services.action', compact('row')))
             ->setRowId('id')
             ->addColumn('image', function (Service $model) {
                 if ($model->image) {

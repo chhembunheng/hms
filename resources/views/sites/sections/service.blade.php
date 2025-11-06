@@ -32,7 +32,7 @@
                             <ul>
                                 @foreach ($services as $srv)
                                     <li class="{{ $srv->id == $service->id ? 'active' : '' }}">
-                                        <a href="{{ route('frontend.services', ['slug' => $srv->slug, 'locale' => app()->getLocale()]) }}" aria-label="{{ $srv->name }}">{{ $srv->name }}</a>
+                                        <a href="{{ route('services', ['slug' => $srv->slug, 'locale' => app()->getLocale()]) }}" aria-label="{{ $srv->name }}">{{ $srv->name }}</a>
                                     </li>
                                 @endforeach
                             </ul>

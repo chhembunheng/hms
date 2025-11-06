@@ -28,7 +28,7 @@
                                 </div>
                                 <p class="text-gray-700 leading-relaxed m-0 mb-1">{{ $career->description }}</p>
                                 <p class="text-gray-700 leading-relaxed m-0 mb-3"><i class="fa-jelly fa-solid fa-calendar fa-fw"></i> &nbsp;<span>Posted {{ $career->date ? date('F d, Y', strtotime($career->date)) : 'N/A' }}</span></p>
-                                <a class="project-link-btn" href="{{ Route::has('frontend.careers') ? route('frontend.careers', ['locale' => app()->getLocale(), 'slug' => $career->slug]) : '#' }}">View &nbsp;<i class="fa-solid fa-arrow-right"></i></a>
+                                <a class="project-link-btn" href="{{ Route::has('frontend.careers') ? route('careers', ['locale' => app()->getLocale(), 'slug' => $career->slug]) : '#' }}">View &nbsp;<i class="fa-solid fa-arrow-right"></i></a>
                             </div>
                             <div class="flex flex-wrap gap-2">
                                 {!! badge($career->type) !!}

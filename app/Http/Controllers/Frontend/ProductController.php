@@ -34,7 +34,7 @@ class ProductController extends Controller
 
     public function index(ProductDataTable $dataTable)
     {
-        return $dataTable->render('frontend.products.index');
+        return $dataTable->render('frontends.products.index');
     }
 
     public function add(Request $request)
@@ -93,7 +93,7 @@ class ProductController extends Controller
             }
         }
 
-        return view('frontend.products.form', compact('form', 'locales', 'translations', 'categories'));
+        return view('frontends.products.form', compact('form', 'locales', 'translations', 'categories'));
     }
 
     public function show($slug)
@@ -101,7 +101,7 @@ class ProductController extends Controller
         $locale = app()->getLocale();
         $product = Product::where('slug', $slug)->with('translations')->firstOrFail();
 
-        return view('frontend.products.show', compact('product', 'locale'));
+        return view('frontends.products.show', compact('product', 'locale'));
     }
 
     public function edit(Request $request, $id)
@@ -166,7 +166,7 @@ class ProductController extends Controller
             }
         }
 
-        return view('frontend.products.form', compact('form', 'locales', 'translations', 'categories'));
+        return view('frontends.products.form', compact('form', 'locales', 'translations', 'categories'));
     }
 
     public function destroy($id)

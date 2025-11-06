@@ -16,7 +16,7 @@ class AchievementDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('action', fn($row) => view('frontend.achievements.action', compact('row')))
+            ->addColumn('action', fn($row) => view('frontends.achievements.action', compact('row')))
             ->setRowId('id')
             ->editColumn('title', function (Achievement $model) {
                 return $model->getTitle(app()->getLocale());

@@ -20,7 +20,7 @@ class NavigationController extends Controller
 
     public function index(NavigationDataTable $dataTable)
     {
-        return $dataTable->render('frontend.navigations.index');
+        return $dataTable->render('frontends.navigations.index');
     }
 
     public function add(Request $request)
@@ -75,7 +75,7 @@ class NavigationController extends Controller
             }
         }
 
-        return view('frontend.navigations.form', compact('form', 'locales', 'translations', 'navigations'));
+        return view('frontends.navigations.form', compact('form', 'locales', 'translations', 'navigations'));
     }
 
     public function edit(Request $request, $id)
@@ -136,7 +136,7 @@ class NavigationController extends Controller
             }
         }
 
-        return view('frontend.navigations.form', compact('form', 'locales', 'translations', 'navigations'));
+        return view('frontends.navigations.form', compact('form', 'locales', 'translations', 'navigations'));
     }
 
     public function destroy($id)
@@ -171,6 +171,7 @@ class NavigationController extends Controller
         $navigations = $query->get()->mapWithKeys(function ($nav) use ($locale) {
             return [$nav->id => $nav->getName($locale)];
         });
+        dd($navigations);
 
         return $navigations->toArray();
     }

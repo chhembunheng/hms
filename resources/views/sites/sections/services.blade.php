@@ -23,7 +23,7 @@
                         <h3>{{ $service->name }}</h3>
                         <p>{!! $service->short_description ?? '' !!}</p>
                         <div class="services-btn-link">
-                            <a href="{{ Route::has('frontend.services') ? route('frontend.services', ['locale' => app()->getLocale(), 'slug' => $service->slug]) : '#' }}" class="services-link">
+                            <a href="{{ Route::has('frontend.services') ? route('services', ['locale' => app()->getLocale(), 'slug' => $service->slug]) : '#' }}" class="services-link">
                                 {{ __('global.read_more') }}
                                 <span class="visually-hidden">{{ $service->name }}</span>
                             </a>

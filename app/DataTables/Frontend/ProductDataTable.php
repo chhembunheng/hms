@@ -16,7 +16,7 @@ class ProductDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('action', fn($row) => view('frontend.products.action', compact('row')))
+            ->addColumn('action', fn($row) => view('frontends.products.action', compact('row')))
             ->setRowId('id')
             ->addColumn('image', function (Product $model) {
                 if ($model->image) {

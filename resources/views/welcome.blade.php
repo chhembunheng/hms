@@ -40,8 +40,8 @@
 
             $prev = $index !== false && $index > 0 ? (object) $jsons[$index - 1] : null;
             $next = $index !== false && $index < $jsons->count() - 1 ? (object) $jsons[$index + 1] : null;
-            $next = !empty($next) ? route('frontend.blogs', ['locale' => app()->getLocale(), 'slug' => $next->slug]) : '';
-            $prev = !empty($prev) ? route('frontend.blogs', ['locale' => app()->getLocale(), 'slug' => $prev->slug]) : '';
+            $next = !empty($next) ? route('blogs', ['locale' => app()->getLocale(), 'slug' => $next->slug]) : '';
+            $prev = !empty($prev) ? route('blogs', ['locale' => app()->getLocale(), 'slug' => $prev->slug]) : '';
         @endphp
         @include('sites.sections.article', ['articles' => $articles, 'article' => $article, 'title' => __('global.article'), 'subtitle' => __('global.latest_post_from_article'), 'next' => $next, 'prev' => $prev])
     @endisset

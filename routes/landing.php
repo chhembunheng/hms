@@ -25,7 +25,7 @@ Route::group([
             $services = json_decode(file_get_contents(public_path('site/data/' . $locale . '/services.json')));
         }
         return view('welcome', compact('sliders', 'choosing', 'services', 'achievements'));
-    })->name('frontend.home');
+    })->name('home');
 
     // PRIVACY POLICY
     Route::get('/privacy-policy', function () {
@@ -37,7 +37,7 @@ Route::group([
         $content = file_get_contents(public_path('site/data/' . app()->getLocale() . '/privacy-policy.html'));
 
         return view('welcome', compact('content', 'area'));
-    })->name('frontend.privacy-policy');
+    })->name('privacy-policy');
 
     // COOKIE POLICY
     Route::get('/cookie-policy', function () {
@@ -49,7 +49,7 @@ Route::group([
         $content = file_get_contents(public_path('site/data/' . app()->getLocale() . '/cookie-policy.html'));
 
         return view('welcome', compact('content', 'area'));
-    })->name('frontend.cookie-policy');
+    })->name('cookie-policy');
 
     // TERMS & CONDITIONS
     Route::get('/terms-condition', function () {
@@ -61,7 +61,7 @@ Route::group([
         $content = file_get_contents(public_path('site/data/' . app()->getLocale() . '/terms-condition.html'));
 
         return view('welcome', compact('content', 'area'));
-    })->name('frontend.terms-condition');
+    })->name('terms-condition');
 
     // FAQ
     Route::get('/faq', function () {
@@ -75,7 +75,7 @@ Route::group([
         $categories = json_decode(file_get_contents(public_path('site/data/' . app()->getLocale() . '/faqs.json')));
 
         return view('welcome', compact('categories', 'area', 'talk'));
-    })->name('frontend.faq');
+    })->name('faq');
 
     // INTEGRATIONS (list + detail)
     Route::get('/integrations/{slug?}', function () {
@@ -104,7 +104,7 @@ Route::group([
         $meta = $integration->meta ?? new stdClass();
 
         return view('welcome', compact('integrations', 'area', 'meta', 'integration'));
-    })->name('frontend.integrations');
+    })->name('integrations');
 
     // CAREERS (list + detail)
     Route::get('/careers/{slug?}', function () {
@@ -132,7 +132,7 @@ Route::group([
         ];
 
         return view('welcome', compact('careers', 'area', 'talk'));
-    })->name('frontend.careers');
+    })->name('careers');
 
     // TEAMS
     Route::get('/teams', function () {
@@ -146,7 +146,7 @@ Route::group([
         ];
 
         return view('welcome', compact('teams', 'area', 'talk'));
-    })->name('frontend.teams');
+    })->name('teams');
 
     // ABOUT
     Route::get('/about', function () {
@@ -161,7 +161,7 @@ Route::group([
         ];
 
         return view('welcome', compact('content', 'area', 'talk', 'contacts'));
-    })->name('frontend.about');
+    })->name('about-us');
 
     // CONTACT
     Route::get('/contact', function () {
@@ -176,7 +176,7 @@ Route::group([
         ];
 
         return view('welcome', compact('area', 'talk', 'contacts', 'choosing'));
-    })->name('frontend.contact');
+    })->name('contact-us');
 
     // BLOGS (list + detail)
     Route::get('/blogs/{slug?}', function () {
@@ -204,7 +204,7 @@ Route::group([
         ];
 
         return view('welcome', compact('articles', 'area', 'talk', 'article'));
-    })->name('frontend.blogs');
+    })->name('blogs');
 
     // SERVICES (list + detail)
     Route::get('/services/{slug?}', function () {
@@ -234,7 +234,7 @@ Route::group([
         $meta = $service->meta ?? new stdClass();
 
         return view('welcome', compact('services', 'service', 'area', 'talk', 'meta'));
-    })->name('frontend.services');
+    })->name('services');
 
     // PRODUCTS (list + detail)
     Route::get('/products/{slug?}', function () {
@@ -265,7 +265,7 @@ Route::group([
         $details = $product->features ?? [];
 
         return view('welcome', compact('product', 'details', 'area', 'talk', 'meta'));
-    })->name('frontend.products');
+    })->name('products');
 
     // PRICING (list view only in your current data model)
     Route::get('/pricing/{slug?}', function () {
@@ -279,7 +279,7 @@ Route::group([
         ];
 
         return view('welcome', compact('pricing', 'area', 'talk'));
-    })->name('frontend.pricing');
+    })->name('pricing');
 
     // CONTACT FORM SUBMIT
     Route::post('/submit-contact', function () {
@@ -289,7 +289,7 @@ Route::group([
             'status'  => 'success',
             'message' => __('global.thank_you_for_getting_in_touch_we_will_get_back_to_you_soon'),
         ]);
-    })->name('frontend.contact.submit');
+    })->name('contact.submit');
 
     // WEBP ASSET HELPER
     Route::get('/webp', function () {
@@ -298,5 +298,5 @@ Route::group([
         }
 
         echo webpasset(request()->get('image'), request()->get('height'));
-    })->name('frontend.webp');
+    })->name('webp');
 });

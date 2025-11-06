@@ -21,7 +21,7 @@ class IntegrationController extends Controller
 
     public function index(IntegrationDataTable $dataTable)
     {
-        return $dataTable->render('frontend.integrations.index');
+        return $dataTable->render('frontends.integrations.index');
     }
 
     public function add(Request $request)
@@ -81,7 +81,7 @@ class IntegrationController extends Controller
             }
         }
 
-        return view('frontend.integrations.form', compact('form', 'locales', 'translations'));
+        return view('frontends.integrations.form', compact('form', 'locales', 'translations'));
     }
 
     public function show($slug)
@@ -90,7 +90,7 @@ class IntegrationController extends Controller
         $integration = Integration::whereHas('translations', function ($query) use ($locale, $slug) {
             $query->where('locale', $locale)->where('slug', $slug);
         })->with('translations')->firstOrFail();
-        return view('frontend.integrations.show', compact('integration', 'locale'));
+        return view('frontends.integrations.show', compact('integration', 'locale'));
     }
 
     public function edit(Request $request, $id)
@@ -156,7 +156,7 @@ class IntegrationController extends Controller
             }
         }
 
-        return view('frontend.integrations.form', compact('form', 'locales', 'translations'));
+        return view('frontends.integrations.form', compact('form', 'locales', 'translations'));
     }
 
     public function destroy($id)

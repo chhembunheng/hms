@@ -16,7 +16,7 @@ class PartnerDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('action', fn($row) => view('frontend.partners.action', compact('row')))
+            ->addColumn('action', fn($row) => view('frontends.partners.action', compact('row')))
             ->setRowId('id')
             ->addColumn('logo', function (Partner $model) {
                 if ($model->logo) {

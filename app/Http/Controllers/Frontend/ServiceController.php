@@ -22,7 +22,7 @@ class ServiceController extends Controller
 
     public function index(ServiceDataTable $dataTable)
     {
-        return $dataTable->render('frontend.services.index');
+        return $dataTable->render('frontends.services.index');
     }
 
     public function add(Request $request)
@@ -89,14 +89,14 @@ class ServiceController extends Controller
             }
         }
 
-        return view('frontend.services.form', compact('form', 'locales', 'translations'));
+        return view('frontends.services.form', compact('form', 'locales', 'translations'));
     }
 
     public function show($slug)
     {
         $locale = app()->getLocale();
         $service = Service::where('slug', $slug)->with('translations')->firstOrFail();
-        return view('frontend.services.show', compact('service', 'locale'));
+        return view('frontends.services.show', compact('service', 'locale'));
     }
 
     public function edit(Request $request, $id)
@@ -160,7 +160,7 @@ class ServiceController extends Controller
             }
         }
 
-        return view('frontend.services.form', compact('form', 'locales', 'translations'));
+        return view('frontends.services.form', compact('form', 'locales', 'translations'));
     }
 
     public function destroy($id)

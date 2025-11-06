@@ -16,7 +16,7 @@ class TeamDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('action', fn($row) => view('frontend.teams.action', compact('row')))
+            ->addColumn('action', fn($row) => view('frontends.teams.action', compact('row')))
             ->setRowId('id')
             ->addColumn('photo', function (Team $model) {
                 if ($model->photo) {

@@ -16,7 +16,7 @@ class CareerDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('action', fn($row) => view('frontend.careers.action', compact('row')))
+            ->addColumn('action', fn($row) => view('frontends.careers.action', compact('row')))
             ->setRowId('id')
             ->editColumn('title', function (Career $model) {
                 return $model->getTitle(app()->getLocale());

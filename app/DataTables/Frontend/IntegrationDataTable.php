@@ -16,7 +16,7 @@ class IntegrationDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('action', fn($row) => view('frontend.integrations.action', compact('row')))
+            ->addColumn('action', fn($row) => view('frontends.integrations.action', compact('row')))
             ->setRowId('id')
             ->addColumn('logo', function (Integration $model) {
                 if ($model->logo) {

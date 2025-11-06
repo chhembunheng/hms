@@ -29,7 +29,7 @@
                                                 {{ $slider->button_text }} <span></span>
                                             </a>
                                         @endif
-                                        <a class="default-btn" href="{{ Route::has('frontend.contact') ? route('frontend.contact', ['locale' => app()->getLocale()]) : '#' }}">
+                                        <a class="default-btn" href="{{ Route::has('frontend.contact') ? route('contact', ['locale' => app()->getLocale()]) : '#' }}">
                                             {{ __('global.contact_us') }} <span></span>
                                         </a>
                                     </div>

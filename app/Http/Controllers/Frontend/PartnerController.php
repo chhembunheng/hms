@@ -21,7 +21,7 @@ class PartnerController extends Controller
 
     public function index(PartnerDataTable $dataTable)
     {
-        return $dataTable->render('frontend.partners.index');
+        return $dataTable->render('frontends.partners.index');
     }
 
     public function add(Request $request)
@@ -81,7 +81,7 @@ class PartnerController extends Controller
             }
         }
 
-        return view('frontend.partners.form', compact('form', 'locales', 'translations'));
+        return view('frontends.partners.form', compact('form', 'locales', 'translations'));
     }
 
     public function edit(Request $request, $id)
@@ -145,7 +145,7 @@ class PartnerController extends Controller
             }
         }
 
-        return view('frontend.partners.form', compact('form', 'locales', 'translations'));
+        return view('frontends.partners.form', compact('form', 'locales', 'translations'));
     }
 
     public function destroy($id)

@@ -16,7 +16,7 @@ class ClientDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('action', fn($row) => view('frontend.clients.action', compact('row')))
+            ->addColumn('action', fn($row) => view('frontends.clients.action', compact('row')))
             ->setRowId('id')
             ->addColumn('image', function (Client $model) {
                 if ($model->image) {

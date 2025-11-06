@@ -2,13 +2,7 @@
     <x-form.layout :form="$form">
         <div class="row">
             <div class="col-md-6">
-                <x-form.select :label="__('form.parent_navigation')" name="parent_id">
-                    <option value="">{{ __('form.select') }}</option>
-                    @foreach ($navigations as $id => $name)
-                        <option value="{{ $id }}" @selected($form?->parent_id === $id)>
-                            {{ $name }}
-                        </option>
-                    @endforeach
+                <x-form.select :label="__('form.parent_navigation')" name="parent_id" :options="$navigations" :selected="$form?->parent_id ?? old('parent_id')">
                 </x-form.select>
             </div>
             <div class="col-md-6">

@@ -20,7 +20,7 @@ class PlanController extends Controller
 
     public function index(PlanDataTable $dataTable)
     {
-        return $dataTable->render('frontend.plans.index');
+        return $dataTable->render('frontends.plans.index');
     }
 
     public function add(Request $request)
@@ -67,13 +67,13 @@ class PlanController extends Controller
             }
         }
 
-        return view('frontend.plans.form', compact('form', 'locales', 'translations'));
+        return view('frontends.plans.form', compact('form', 'locales', 'translations'));
     }
 
     public function show($id)
     {
         $plan = Plan::with('translations')->findOrFail($id);
-        return view('frontend.plans.show', compact('plan'));
+        return view('frontends.plans.show', compact('plan'));
     }
 
     public function edit(Request $request, $id)
@@ -124,7 +124,7 @@ class PlanController extends Controller
             }
         }
 
-        return view('frontend.plans.form', compact('form', 'locales', 'translations'));
+        return view('frontends.plans.form', compact('form', 'locales', 'translations'));
     }
 
     public function destroy($id)

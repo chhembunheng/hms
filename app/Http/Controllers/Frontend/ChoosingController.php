@@ -20,7 +20,7 @@ class ChoosingController extends Controller
 
     public function index(ChoosingDataTable $dataTable)
     {
-        return $dataTable->render('frontend.choosings.index');
+        return $dataTable->render('frontends.choosings.index');
     }
 
     public function add(Request $request)
@@ -72,13 +72,13 @@ class ChoosingController extends Controller
             }
         }
 
-        return view('frontend.choosings.form', compact('form', 'locales', 'translations'));
+        return view('frontends.choosings.form', compact('form', 'locales', 'translations'));
     }
 
     public function show($id)
     {
         $choosing = Choosing::with('translations')->findOrFail($id);
-        return view('frontend.choosings.show', compact('choosing'));
+        return view('frontends.choosings.show', compact('choosing'));
     }
 
     public function edit(Request $request, $id)
@@ -135,7 +135,7 @@ class ChoosingController extends Controller
             }
         }
 
-        return view('frontend.choosings.form', compact('form', 'locales', 'translations'));
+        return view('frontends.choosings.form', compact('form', 'locales', 'translations'));
     }
 
     public function destroy($id)

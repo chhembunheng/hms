@@ -24,7 +24,7 @@ class FaqController extends Controller
 
     public function index(FaqDataTable $dataTable)
     {
-        return $dataTable->render('frontend.faqs.index');
+        return $dataTable->render('frontends.faqs.index');
     }
 
     public function add(Request $request)
@@ -76,13 +76,13 @@ class FaqController extends Controller
             }
         }
 
-        return view('frontend.faqs.form', compact('form', 'locales', 'translations', 'categories'));
+        return view('frontends.faqs.form', compact('form', 'locales', 'translations', 'categories'));
     }
 
     public function show($id)
     {
         $faq = Faq::with('translations')->findOrFail($id);
-        return view('frontend.faqs.show', compact('faq'));
+        return view('frontends.faqs.show', compact('faq'));
     }
 
     public function edit(Request $request, $id)
@@ -139,7 +139,7 @@ class FaqController extends Controller
             }
         }
 
-        return view('frontend.faqs.form', compact('form', 'locales', 'translations', 'categories'));
+        return view('frontends.faqs.form', compact('form', 'locales', 'translations', 'categories'));
     }
 
     public function destroy($id)

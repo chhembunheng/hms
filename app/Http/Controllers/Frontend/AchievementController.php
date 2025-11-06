@@ -20,7 +20,7 @@ class AchievementController extends Controller
 
     public function index(AchievementDataTable $dataTable)
     {
-        return $dataTable->render('frontend.achievements.index');
+        return $dataTable->render('frontends.achievements.index');
     }
 
     public function add(Request $request)
@@ -67,13 +67,13 @@ class AchievementController extends Controller
             }
         }
 
-        return view('frontend.achievements.form', compact('form', 'locales', 'translations'));
+        return view('frontends.achievements.form', compact('form', 'locales', 'translations'));
     }
 
     public function show($id)
     {
         $achievement = Achievement::with('translations')->findOrFail($id);
-        return view('frontend.achievements.show', compact('achievement'));
+        return view('frontends.achievements.show', compact('achievement'));
     }
 
     public function edit(Request $request, $id)
@@ -124,7 +124,7 @@ class AchievementController extends Controller
             }
         }
 
-        return view('frontend.achievements.form', compact('form', 'locales', 'translations'));
+        return view('frontends.achievements.form', compact('form', 'locales', 'translations'));
     }
 
     public function destroy($id)

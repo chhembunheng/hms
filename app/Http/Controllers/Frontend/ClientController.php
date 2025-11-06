@@ -21,7 +21,7 @@ class ClientController extends Controller
 
     public function index(ClientDataTable $dataTable)
     {
-        return $dataTable->render('frontend.clients.index');
+        return $dataTable->render('frontends.clients.index');
     }
 
     public function add(Request $request)
@@ -79,7 +79,7 @@ class ClientController extends Controller
             }
         }
 
-        return view('frontend.clients.form', compact('form', 'locales', 'translations'));
+        return view('frontends.clients.form', compact('form', 'locales', 'translations'));
     }
 
     public function edit(Request $request, $id)
@@ -141,7 +141,7 @@ class ClientController extends Controller
             }
         }
 
-        return view('frontend.clients.form', compact('form', 'locales', 'translations'));
+        return view('frontends.clients.form', compact('form', 'locales', 'translations'));
     }
 
     public function destroy($id)

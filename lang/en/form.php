@@ -99,4 +99,5 @@ return [
     'upload' => 'Upload',
     'choose_file' => 'Choose File',
     'close' => 'Close',
+    'select' => 'Select'
 ];

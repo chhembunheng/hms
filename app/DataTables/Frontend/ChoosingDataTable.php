@@ -16,7 +16,7 @@ class ChoosingDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('action', fn($row) => view('frontend.choosings.action', compact('row')))
+            ->addColumn('action', fn($row) => view('frontends.choosings.action', compact('row')))
             ->setRowId('id')
             ->addColumn('image', function (Choosing $model) {
                 if ($model->image) {

@@ -16,7 +16,7 @@ class BlogDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('action', fn($row) => view('frontend.blogs.action', compact('row')))
+            ->addColumn('action', fn($row) => view('frontends.blogs.action', compact('row')))
             ->setRowId('id')
             ->addColumn('thumbnail', function (Blog $model) {
                 if ($model->thumbnail) {

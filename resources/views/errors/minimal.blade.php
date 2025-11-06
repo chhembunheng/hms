@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="{{ asset('site/assets/css/meanmenu.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('site/assets/css/style.min.css') . (env('APP_ENV') == 'local' || request()->clear == 'yes' ? '?v=' . time() : '') }}" />
     <link rel="stylesheet" href="{{ asset('site/assets/css/responsive.min.css') . (env('APP_ENV') == 'local' || request()->clear == 'yes' ? '?v=' . time() : '') }}" />
-    @include('frontend.layouts.partials.head')
+    @include('frontends.layouts.partials.head')
 </head>
 
 <body class="antialiased">
@@ -48,7 +48,7 @@
                         <img src="@yield('code', webpasset('site/assets/img/404.png'))" alt="error">
                         <h3>@yield('title', __('global.error_404_title'))</h3>
                         <p>@yield('message', __('global.error_404_message'))</p>
-                        <a href="{{ route('frontend.home', ['locale' => app()->getLocale() ?? 'en']) }}" class="default-btn-one">{{ __('global.back_to_home') }}</a>
+                        <a href="{{ route('home', ['locale' => app()->getLocale() ?? 'en']) }}" class="default-btn-one">{{ __('global.back_to_home') }}</a>
                     </div>
                 </div>
             </div>

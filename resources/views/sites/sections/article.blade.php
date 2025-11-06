@@ -82,11 +82,11 @@
                                 @continue
                             @endif
                             <article class="item">
-                                <a href="{{ route('frontend.blogs', ['locale' => app()->getLocale(), 'slug' => $post->slug]) }}" class="thumb"> <span class="fullimage cover" role="img" style="background-image: url('{{ webpasset($post->image) }}');"></span></a>
+                                <a href="{{ route('blogs', ['locale' => app()->getLocale(), 'slug' => $post->slug]) }}" class="thumb"> <span class="fullimage cover" role="img" style="background-image: url('{{ webpasset($post->image) }}');"></span></a>
                                 <div class="info">
                                     <span>{{ $post->date }}</span>
                                     <h4 class="title usmall">
-                                        <a href="{{ route('frontend.blogs', ['locale' => app()->getLocale(), 'slug' => $post->slug]) }}">{{ $post->title }}</a>
+                                        <a href="{{ route('blogs', ['locale' => app()->getLocale(), 'slug' => $post->slug]) }}">{{ $post->title }}</a>
                                     </h4>
                                 </div>
                             </article>

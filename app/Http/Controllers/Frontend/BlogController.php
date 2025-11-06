@@ -22,7 +22,7 @@ class BlogController extends Controller
 
     public function index(BlogDataTable $dataTable)
     {
-        return $dataTable->render('frontend.blogs.index');
+        return $dataTable->render('frontends.blogs.index');
     }
 
     public function add(Request $request)
@@ -100,14 +100,14 @@ class BlogController extends Controller
             }
         }
 
-    return view('frontend.blogs.form', compact('form', 'locales', 'translations', 'seo'));
+    return view('frontends.blogs.form', compact('form', 'locales', 'translations', 'seo'));
     }
 
     public function show($slug)
     {
         $locale = app()->getLocale();
         $blog = Blog::where('slug', $slug)->with('translations')->firstOrFail();
-        return view('frontend.blogs.show', compact('blog', 'locale'));
+        return view('frontends.blogs.show', compact('blog', 'locale'));
     }
 
     public function edit(Request $request, $id)
@@ -199,7 +199,7 @@ class BlogController extends Controller
             }
         }
 
-    return view('frontend.blogs.form', compact('form', 'locales', 'translations', 'seo'));
+    return view('frontends.blogs.form', compact('form', 'locales', 'translations', 'seo'));
     }
 
     public function destroy($id)

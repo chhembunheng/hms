@@ -20,7 +20,7 @@ class CareerController extends Controller
 
     public function index(CareerDataTable $dataTable)
     {
-        return $dataTable->render('frontend.careers.index');
+        return $dataTable->render('frontends.careers.index');
     }
 
     public function add(Request $request)
@@ -70,7 +70,7 @@ class CareerController extends Controller
             }
         }
 
-        return view('frontend.careers.form', compact('form', 'locales', 'translations'));
+        return view('frontends.careers.form', compact('form', 'locales', 'translations'));
     }
 
     public function show($slug)
@@ -79,7 +79,7 @@ class CareerController extends Controller
         $career = Career::whereHas('translations', function ($query) use ($locale, $slug) {
             $query->where('locale', $locale)->where('slug', $slug);
         })->with('translations')->firstOrFail();
-        return view('frontend.careers.show', compact('career', 'locale'));
+        return view('frontends.careers.show', compact('career', 'locale'));
     }
 
     public function edit(Request $request, $id)
@@ -136,7 +136,7 @@ class CareerController extends Controller
             }
         }
 
-        return view('frontend.careers.form', compact('form', 'locales', 'translations'));
+        return view('frontends.careers.form', compact('form', 'locales', 'translations'));
     }
 
     public function destroy($id)

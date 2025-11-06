@@ -61,7 +61,7 @@
     <link rel="stylesheet" href="{{ asset('site/assets/css/meanmenu.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('site/assets/css/style.min.css') . (env('APP_ENV') == 'local' || request()->clear == 'yes' ? '?v=' . time() : '') }}" />
     <link rel="stylesheet" href="{{ asset('site/assets/css/responsive.min.css') . (env('APP_ENV') == 'local' || request()->clear == 'yes' ? '?v=' . time() : '') }}" />
-    @include('frontend.layouts.partials.head')
+    @include('frontends.layouts.partials.head')
 </head>
 
 <body>
@@ -72,7 +72,7 @@
         <div class="techone-responsive-nav">
             <div class="techone-responsive-menu">
                 <div class="logo">
-                    <a href="{{ Route::currentRouteName() == 'frontend.home' ? '#' : route('frontend.home', ['locale' => app()->getLocale()]) }}">
+                    <a href="{{ Route::currentRouteName() == 'frontend.home' ? '#' : route('home', ['locale' => app()->getLocale()]) }}">
                         <img src="{{ $img['fallback'] }}" srcset="{{ $img['srcset'] }}" sizes="(max-width: 600px) 95vw, {{ $img['width'] }}px" alt="Brand Name Logo" loading="lazy" width="{{ $img['width'] }}" height="auto">
                     </a>
                 </div>
@@ -81,7 +81,7 @@
         <nav id="main-nav" class="techone-nav" role="navigation" aria-label="Main Navigation">
             <div class="container">
                 <nav class="navbar navbar-expand-md navbar-light desktop-screen">
-                    <a class="navbar-brand" href="{{ Route::currentRouteName() == 'frontend.home' ? '#' : route('frontend.home', ['locale' => app()->getLocale()]) }}">
+                    <a class="navbar-brand" href="{{ Route::currentRouteName() == 'frontend.home' ? '#' : route('home', ['locale' => app()->getLocale()]) }}">
                         <img src="{{ $img['fallback'] }}" srcset="{{ $img['srcset'] }}" sizes="(max-width: 600px) 95vw, {{ $img['width'] }}px" alt="Brand Name Logo" loading="lazy" width="{{ $img['width'] }}" height="auto">
                     </a>
                     <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
@@ -153,14 +153,14 @@
                             @endif
                             @if (Route::has('frontend.integrations'))
                                 <li class="nav-item">
-                                    <a href="{{ route('frontend.integrations', ['locale' => app()->getLocale()]) }}" class="nav-link" aria-label="{{ __('global.integrations') }}">
+                                    <a href="{{ route('integrations', ['locale' => app()->getLocale()]) }}" class="nav-link" aria-label="{{ __('global.integrations') }}">
                                         {{ __('global.integrations') }}
                                     </a>
                                 </li>
                             @endif
                             @if (Route::has('frontend.blogs'))
                                 <li class="nav-item">
-                                    <a href="{{ route('frontend.blogs', ['locale' => app()->getLocale()]) }}" class="nav-link" aria-label="{{ __('global.nav_blogs') }}">
+                                    <a href="{{ route('blogs', ['locale' => app()->getLocale()]) }}" class="nav-link" aria-label="{{ __('global.nav_blogs') }}">
                                         {{ __('global.nav_blogs') }}
                                     </a>
                                 </li>
@@ -206,7 +206,7 @@
         {{ $slot }}
     </main>
     <footer id="footer" role="contentinfo">
-        @include('frontend.layouts.partials.footer')
+        @include('frontends.layouts.partials.footer')
     </footer>
     <button class="go-top" aria-label="Scroll to top">
         <i class="fas fa-chevron-up"></i>
@@ -252,7 +252,7 @@
                 <div class="card-title mb-2 d-flex align-items-center gap-2" id="cookieTitle"><span class="fw-semibold">{{ __('global.we_use_cookies') }}</span><span class="badge bg-primary rounded-pill">{{ __('global.privacy') }}</span></div>
                 <div id="cookieDesc" class="small text-body-secondary">
                     <p class="mb-2">{{ __('global.cookie_intro_text') }}</p>
-                    <p class="mb-3">{{ __('global.cookie_choice_text') }} <a class="link-primary" href="{{ Route::has('frontend.cookie-policy') ? route('frontend.cookie-policy', ['locale' => app()->getLocale()]) : '#' }}" target="_blank"
+                    <p class="mb-3">{{ __('global.cookie_choice_text') }} <a class="link-primary" href="{{ Route::has('frontend.cookie-policy') ? route('cookie-policy', ['locale' => app()->getLocale()]) : '#' }}" target="_blank"
                             rel="noopener noreferrer">{{ __('global.cookie_policy') }}</a> {{ __('global.for_details') }}</p><button class="btn btn-link p-0 small text-body-secondary d-inline-flex align-items-center gap-1" type="button" id="detailsToggle" aria-expanded="false"
                         aria-controls="cookieDetails"><span id="chevron" class="chevron-icon">⌄</span><span>{{ __('global.show_cookie_categories') }}</span></button>
                     <div class="mt-2 collapse" id="cookieDetails" style="display:none;">
@@ -290,7 +290,7 @@
     <script src="{{ asset('site/assets/js/jquery.meanmenu.min.js') }}"></script>
     <script src="{{ asset('site/assets/js/mail.min.js') }}"></script>
     <script src="{{ asset('site/assets/js/main.min.js') }}"></script>
-    @include('frontend.layouts.partials.js')
+    @include('frontends.layouts.partials.js')
     @stack('scripts')
 </body>
 
