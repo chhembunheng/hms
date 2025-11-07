@@ -14,7 +14,7 @@ class Menu extends Model
 
     protected $fillable = [
         'icon',
-        'order',
+        'sort',
         'route',
         'parent_id',
         'created_by',

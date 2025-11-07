@@ -38,7 +38,7 @@ class Abilities
         $menusData = Cache::remember($cacheKey, 60 * 60 * 24, function () {
             return Menu::with(['children', 'permissions.translations', 'translations'])
                 ->whereNull('parent_id')
-                ->orderBy('order')
+                ->orderBy('sort')
                 ->get();
         });
 
@@ -94,7 +94,7 @@ class Abilities
     }
     private function recursives($menus, $parent = null, $currentRoute = null)
     {
-        $data = collect();
+        $dataMenus = collect();
         $locale = App::getLocale();
         $currentRoute = $currentRoute ?? request()->route()->getName();
         foreach ($menus as $menu) {
@@ -131,7 +131,7 @@ class Abilities
                 'route' => $route,
                 'icon' => $menu->icon ?? $menu['icon'] ?? null,
                 'children' => $children,
-                'permissions' => collect($menu->permissions ?? $menu['permissions'] ?? [])->sortBy('order')->values(),
+                'permissions' => collect($menu->permissions ?? $menu['permissions'] ?? [])->sortBy('sort')->values(),
                 'active' => $isActive
             ];
             foreach ($menuObject->permissions as $permission) {
@@ -160,8 +160,8 @@ class Abilities
                     elseif ($permission['target'] !== 'index') $this->actions[] = $permission;
                 }
             }
-            $data->put($id, $menuObject);
+            $dataMenus->put($id, $menuObject);
         }
-        return $data;
+        return $dataMenus;
     }
 }

@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Frontend\Faq;
-use App\Models\Frontend\FaqTranslation;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use App\Models\Frontend\FaqTranslation;
 
 class FaqSeeder extends Seeder
 {
@@ -13,77 +14,89 @@ class FaqSeeder extends Seeder
      */
     public function run(): void
     {
-        // Load FAQ data for both locales
-        $locales = ['en', 'km'];
-        
-        foreach ($locales as $locale) {
-            $jsonPath = public_path("site/data/{$locale}/faqs.json");
-            
-            if (!file_exists($jsonPath)) {
-                $this->command->warn("FAQ file not found for locale: {$locale}");
-                continue;
-            }
+        $jsonPath = database_path("seeders/data/frontend/faqs.json");
 
-            $categories = json_decode(file_get_contents($jsonPath), true);
+        if (!file_exists($jsonPath)) {
+            $this->command->warn("FAQ JSON file not found at: {$jsonPath}");
+            return;
+        }
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        FaqTranslation::truncate();
+        Faq::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        $this->command->warn("🧹 Existing FAQ data truncated.");
 
-            if (!$categories) {
-                $this->command->warn("Invalid JSON in FAQ file for locale: {$locale}");
-                continue;
-            }
 
-            foreach ($categories as $categoryData) {
-                // Create or find the parent FAQ (category)
-                $parent = Faq::firstOrCreate(
-                    ['slug' => $categoryData['slug']],
-                    [
-                        'is_published' => true,
-                        'sort' => $categoryData['id'] ?? 0,
-                    ]
-                );
+        $categories = json_decode(file_get_contents($jsonPath), true);
 
-                // Create translation for the category
-                FaqTranslation::updateOrCreate(
-                    [
-                        'faq_id' => $parent->id,
-                        'locale' => $locale,
-                    ],
-                    [
-                        'question' => $categoryData['name'],
-                        'answer' => '',
-                    ]
-                );
+        if (!$categories) {
+            $this->command->warn("Invalid or empty FAQ JSON file.");
+            return;
+        }
 
-                // Create child FAQs (questions)
-                if (isset($categoryData['faqs']) && is_array($categoryData['faqs'])) {
-                    foreach ($categoryData['faqs'] as $faqData) {
-                        // Generate a slug for the FAQ question
-                        $slug = $categoryData['slug'] . '-' . $faqData['id'];
-                        
-                        $faq = Faq::firstOrCreate(
-                            ['slug' => $slug],
-                            [
-                                'parent_id' => $parent->id,
-                                'is_published' => true,
-                                'sort' => $faqData['id'] ?? 0,
-                            ]
-                        );
+        foreach ($categories as $categoryData) {
+            // --- Create or update main category ---
+            $parent = Faq::updateOrCreate(
+                ['slug' => $categoryData['slug']],
+                [
+                    'created_by' => 1,
+                    'updated_by' => 1,
+                ]
+            );
 
-                        // Create translation for the FAQ
-                        FaqTranslation::updateOrCreate(
-                            [
-                                'faq_id' => $faq->id,
-                                'locale' => $locale,
-                            ],
-                            [
-                                'question' => $faqData['question'],
-                                'answer' => $faqData['answer'],
-                            ]
-                        );
-                    }
+            // --- Category translations ---
+            if (!empty($categoryData['translations'])) {
+                foreach ($categoryData['translations'] as $translation) {
+                    FaqTranslation::updateOrCreate(
+                        [
+                            'faq_id' => $parent->id,
+                            'locale' => $translation['locale'],
+                        ],
+                        [
+                            'question' => $translation['question'] ?? null,
+                            'answer' => $translation['answer'] ?? null,
+                            'created_by' => 1,
+                            'updated_by' => 1,
+                        ]
+                    );
                 }
             }
 
-            $this->command->info("FAQs seeded successfully for locale: {$locale}");
+            // --- Child FAQs ---
+            if (!empty($categoryData['faqs'])) {
+                foreach ($categoryData['faqs'] as $faqData) {
+                    $slug = $faqData['slug'] ?? slug($faqData['question']);
+                    $faq = Faq::updateOrCreate(
+                        ['slug' => $slug],
+                        [
+                            'parent_id' => $parent->id,
+                            'slug' => $slug,
+                            'created_by' => 1,
+                            'updated_by' => 1,
+                        ]
+                    );
+
+                    // --- FAQ translations ---
+                    if (!empty($faqData['translations'])) {
+                        foreach ($faqData['translations'] as $translation) {
+                            FaqTranslation::updateOrCreate(
+                                [
+                                    'faq_id' => $faq->id,
+                                    'locale' => $translation['locale'],
+                                ],
+                                [
+                                    'question' => $translation['question'] ?? null,
+                                    'answer' => $translation['answer'] ?? null,
+                                    'created_by' => 1,
+                                    'updated_by' => 1,
+                                ]
+                            );
+                        }
+                    }
+                }
+            }
         }
+
+        $this->command->info("✅ FAQs seeded successfully!");
     }
 }

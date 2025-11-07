@@ -15,14 +15,15 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \App\Http\Middleware\Abilities::class,
-            \App\Http\Middleware\ProcessEditor::class,
         ]);
         $middleware->group('api', [
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ]);
         $middleware->alias([
             'setlocale' => \App\Http\Middleware\SetLocale::class,
+            'abilities' => \App\Http\Middleware\Abilities::class,
+            'editor' => \App\Http\Middleware\ProcessEditor::class,
+            'navigations' => \App\Http\Middleware\Navigations::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

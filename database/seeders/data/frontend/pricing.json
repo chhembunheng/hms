@@ -1,0 +1,172 @@
+[
+	{
+		"title": "Academics",
+		"description": "Design and manage programs, courses, and curricula (MoEYS/IB/Cambridge ready) with multi-campus and multi-language (Khmer/English/Chinese) support.",
+		"icon": "fas fa-book-open",
+		"link": "#",
+		"starter": true,
+		"standard": true,
+		"premium": true,
+		"enterprise": true
+	},
+	{
+		"title": "Admissions & Enrollment",
+		"description": "Online applications, lead tracking, document collection, and automated offers with seat management and waitlists.",
+		"icon": "fas fa-user-plus",
+		"link": "#",
+		"starter": true,
+		"standard": true,
+		"premium": true,
+		"enterprise": true
+	},
+	{
+		"title": "Messaging & Communication",
+		"description": "Email/SMS/Push announcements with segments (class, grade, campus) and delivery reports.",
+		"icon": "fas fa-comments",
+		"link": "#",
+		"starter": true,
+		"standard": true,
+		"premium": true,
+		"enterprise": true
+	},
+	{
+		"title": "LMS & Social Learning",
+		"description": "Class discussions, resources, assignments, and submissions with course-level collaboration.",
+		"icon": "fas fa-users",
+		"link": "#",
+		"starter": false,
+		"standard": true,
+		"premium": true,
+		"enterprise": true
+	},
+	{
+		"title": "Administration",
+		"description": "Bulk import/export, module personalization, permissions/roles, and audit logs across campuses.",
+		"icon": "fas fa-cogs",
+		"link": "#",
+		"starter": false,
+		"standard": true,
+		"premium": true,
+		"enterprise": true
+	},
+	{
+		"title": "Students & Parents Portal",
+		"description": "Unified portal for schedules, attendance, grades, invoices, and notifications.",
+		"icon": "fas fa-user-graduate",
+		"link": "#",
+		"starter": true,
+		"standard": true,
+		"premium": true,
+		"enterprise": true
+	},
+	{
+		"title": "Teachers & Staff Portal",
+		"description": "Timetables, attendance, gradebook, assessments, and class communications with workflow approvals.",
+		"icon": "fas fa-chalkboard-teacher",
+		"link": "#",
+		"starter": true,
+		"standard": true,
+		"premium": true,
+		"enterprise": true
+	},
+	{
+		"title": "Assessment, Gradebook & Transcripts",
+		"description": "Rubrics, percentages, GPA, CCE, custom transcript templates, and moderation tools.",
+		"icon": "fas fa-clipboard-check",
+		"link": "#",
+		"starter": false,
+		"standard": true,
+		"premium": true,
+		"enterprise": true
+	},
+	{
+		"title": "Fees, Billing & Payments",
+		"description": "Invoices, discounts/scholarships, payment plans, and online payment gateways.",
+		"icon": "fas fa-credit-card",
+		"link": "#",
+		"starter": true,
+		"standard": true,
+		"premium": true,
+		"enterprise": true
+	},
+	{
+		"title": "Attendance & Biometrics",
+		"description": "Daily/period attendance, device integrations (e.g., ZKTeco/Hikvision), and instant absence alerts.",
+		"icon": "fas fa-fingerprint",
+		"link": "#",
+		"starter": false,
+		"standard": true,
+		"premium": true,
+		"enterprise": true
+	},
+	{
+		"title": "Timetable & Scheduling",
+		"description": "Automated timetable generation, room allocation, and clash detection.",
+		"icon": "fas fa-calendar-alt",
+		"link": "#",
+		"starter": true,
+		"standard": true,
+		"premium": true,
+		"enterprise": true
+	},
+	{
+		"title": "Reporting & Analytics",
+		"description": "Standard reports, custom report builder, and trend dashboards for academics and operations.",
+		"icon": "fas fa-chart-line",
+		"link": "#",
+		"starter": false,
+		"standard": true,
+		"premium": true,
+		"enterprise": true
+	},
+	{
+		"title": "Apps & Integrations",
+		"description": "Google Workspace, Microsoft 365, payment gateways, and open API for custom integrations.",
+		"icon": "fas fa-th",
+		"link": "#",
+		"starter": false,
+		"standard": true,
+		"premium": true,
+		"enterprise": true
+	},
+	{
+		"title": "Mobile Apps",
+		"description": "iOS and Android apps for students, parents, and staff with push notifications.",
+		"icon": "fas fa-mobile-alt",
+		"link": "#",
+		"starter": false,
+		"standard": true,
+		"premium": true,
+		"enterprise": true
+	},
+	{
+		"title": "Health Records",
+		"description": "Student medical profiles, auto BMI, documentation, and behaviour analytics linkage.",
+		"icon": "fas fa-heartbeat",
+		"link": "#",
+		"starter": false,
+		"standard": false,
+		"premium": true,
+		"enterprise": true
+	},
+	{
+		"title": "Data Security, SSO & Compliance",
+		"description": "SAML/Google/Microsoft SSO, audit trails, backups, and MoEYS compliance options.",
+		"icon": "fas fa-shield-alt",
+		"link": "#",
+		"starter": false,
+		"standard": false,
+		"premium": true,
+		"enterprise": true
+	},
+	{
+		"title": "Support & Onboarding",
+		"description": "In-app chat/email support, onboarding assistance, migration help, and priority SLA.",
+		"icon": "fas fa-headset",
+		"link": "#",
+		"starter": false,
+		"standard": true,
+		"premium": true,
+		"enterprise": true
+	}
+]

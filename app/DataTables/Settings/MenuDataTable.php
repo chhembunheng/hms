@@ -26,7 +26,7 @@ class MenuDataTable extends DataTable
             ->addIndexColumn()
             ->addColumn('name', fn($row) => $row->translations->where('locale', $locale)->first()?->name ?? $row->translations->where('locale', 'en')->first()?->name ?? 'N/A')
             ->addColumn('route', fn($row) => $row->route ?? '-')
-            ->addColumn('order', fn($row) => $row->order)
+            ->addColumn('sort', fn($row) => $row->order)
             ->editColumn('created_at', function (Menu $model) {
                 return $model->created_at?->format(config('init.datetime.display_format'));
             })
@@ -65,7 +65,7 @@ class MenuDataTable extends DataTable
             Column::computed('DT_RowIndex')->title(__('root.common.no'))->width(60),
             Column::make('name'),
             Column::make('route'),
-            Column::make('order'),
+            Column::make('sort'),
             Column::make('created_at'),
             Column::computed('action')
                   ->exportable(false)

@@ -72,7 +72,7 @@
         <div class="techone-responsive-nav">
             <div class="techone-responsive-menu">
                 <div class="logo">
-                    <a href="{{ Route::currentRouteName() == 'frontend.home' ? '#' : route('home', ['locale' => app()->getLocale()]) }}">
+                    <a href="{{ Route::currentRouteName() == 'welcome' ? '#' : route('welcome', ['locale' => app()->getLocale()]) }}">
                         <img src="{{ $img['fallback'] }}" srcset="{{ $img['srcset'] }}" sizes="(max-width: 600px) 95vw, {{ $img['width'] }}px" alt="Brand Name Logo" loading="lazy" width="{{ $img['width'] }}" height="auto">
                     </a>
                 </div>
@@ -81,7 +81,7 @@
         <nav id="main-nav" class="techone-nav" role="navigation" aria-label="Main Navigation">
             <div class="container">
                 <nav class="navbar navbar-expand-md navbar-light desktop-screen">
-                    <a class="navbar-brand" href="{{ Route::currentRouteName() == 'frontend.home' ? '#' : route('home', ['locale' => app()->getLocale()]) }}">
+                    <a class="navbar-brand" href="{{ Route::currentRouteName() == 'welcome' ? '#' : route('welcome', ['locale' => app()->getLocale()]) }}">
                         <img src="{{ $img['fallback'] }}" srcset="{{ $img['srcset'] }}" sizes="(max-width: 600px) 95vw, {{ $img['width'] }}px" alt="Brand Name Logo" loading="lazy" width="{{ $img['width'] }}" height="auto">
                     </a>
                     <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
@@ -113,58 +113,9 @@
                                     @endforeach
                                 </ul>
                             </li>
-                            @php
-                                $navData = json_decode(file_get_contents(public_path('site/data/' . app()->getLocale() . '/navigation.json')), true);
-                            @endphp
-                            @if($navData && isset($navData['main_menu']))
-                                @foreach($navData['main_menu'] as $menuItem)
-                                    @if(isset($menuItem['items']) && count($menuItem['items']) > 0)
-                                        {{-- Dropdown Menu --}}
-                                        <li class="nav-item">
-                                            <a href="#{{ $menuItem['slug'] }}" class="nav-link text-nowrap">
-                                                {{ $menuItem['name'] }} &nbsp;
-                                                <i class="fa-solid {{ $menuItem['icon'] }} fa-fw desktop-icon"></i>
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                @foreach($menuItem['items'] as $subItem)
-                                                    @if(Route::has($subItem['route']))
-                                                        <li class="nav-item">
-                                                            <a href="{{ route($subItem['route'], ['locale' => app()->getLocale()]) }}" class="nav-link" aria-label="{{ $subItem['name'] }}">
-                                                                <i class="fa-solid {{ $subItem['icon'] }} fa-fw me-2"></i>
-                                                                &nbsp;{{ $subItem['name'] }}
-                                                            </a>
-                                                        </li>
-                                                    @endif
-                                                @endforeach
-                                            </ul>
-                                        </li>
-                                    @elseif(isset($menuItem['route']) && Route::has($menuItem['route']))
-                                        {{-- Single Link Menu --}}
-                                        <li class="nav-item">
-                                            <a href="{{ route($menuItem['route'], ['locale' => app()->getLocale()]) }}" class="nav-link text-nowrap">
-                                                @if(isset($menuItem['icon']))
-                                                    <i class="fa-solid {{ $menuItem['icon'] }} fa-fw me-2"></i>
-                                                @endif
-                                                {{ $menuItem['name'] }}
-                                            </a>
-                                        </li>
-                                    @endif
-                                @endforeach
-                            @endif
-                            @if (Route::has('integrations'))
-                                <li class="nav-item">
-                                    <a href="{{ route('integrations', ['locale' => app()->getLocale()]) }}" class="nav-link" aria-label="{{ __('global.integrations') }}">
-                                        {{ __('global.integrations') }}
-                                    </a>
-                                </li>
-                            @endif
-                            @if (Route::has('blogs'))
-                                <li class="nav-item">
-                                    <a href="{{ route('blogs', ['locale' => app()->getLocale()]) }}" class="nav-link" aria-label="{{ __('global.nav_blogs') }}">
-                                        {{ __('global.nav_blogs') }}
-                                    </a>
-                                </li>
-                            @endif
+                            @foreach ($navigations ?? [] as $navigation)
+                                @include('frontends.layouts.partials.navigation-item', ['navigation' => $navigation])
+                            @endforeach
                         </ul>
                         <div class="other-option">
                             <ul class="navbar-nav">

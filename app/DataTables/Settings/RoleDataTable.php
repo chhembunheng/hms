@@ -63,7 +63,7 @@ class RoleDataTable extends DataTable
             Column::computed('DT_RowIndex')->title(__('root.common.no'))->width(60),
             Column::make('name'),
             Column::make('administrator'),
-            Column::make('order'),
+            Column::make('sort'),
             Column::make('created_at'),
             Column::computed('action')
                   ->exportable(false)

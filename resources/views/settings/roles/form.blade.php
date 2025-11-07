@@ -2,7 +2,7 @@
     <x-form.layout :form="$form">
         <div class="row">
             <div class="col-md-6">
-                <x-form.input :label="__('form.order')" name="order" type="number" value="{{ old('order', $form?->order ?? 0) }}" min="0" />
+                <x-form.input :label="__('form.order')" name="order" type="number" value="{{ old('sort', $form?->order ?? 0) }}" min="0" />
             </div>
             <div class="col-md-12 mt-3">
                 <x-form.checkbox :label="__('form.administrator')" id="administrator" name="administrator" value="1" checked="{{ $form?->administrator }}" />

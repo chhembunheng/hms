@@ -1,0 +1,176 @@
+[
+    {
+        "id": 1,
+        "name": "IT Consulting",
+        "slug": "it-consulting",
+        "icon": "fa-regular fa-solid fa-lightbulb",
+        "image": "site/assets/img/services/it-consulting.png",
+        "short_description": "Expert IT consulting to align technology strategies with business goals.",
+        "description": "We provide expert IT consulting to help businesses plan, design, and implement technology strategies aligned with their goals.",
+        "content": "<article id=\"it-consulting\" class=\"service-card\"><header class=\"service-header\"><h3>IT Consulting</h3><p class=\"service-tagline\">Expert IT consulting to align technology strategies with business goals.</p></header><div class=\"service-body\"><p>Partner with our senior consultants to assess your current technology, identify gaps, and build a practical roadmap that supports growth, security, and cost efficiency. From strategy to execution, we guide you through architecture decisions, vendor selection, and change management to ensure measurable outcomes.</p><ul class=\"service-features\"><li>Technology assessments &amp; maturity reviews</li><li>IT roadmaps and budget planning</li><li>Solution architecture &amp; vendor selection</li><li>Governance, risk, and compliance alignment</li><li>Change management &amp; adoption planning</li></ul></div></article>",
+        "keys": [
+            "Align IT strategy with business goals",
+            "Create actionable roadmaps and budgets",
+            "Optimize architecture and vendor choices",
+            "Reduce risk and improve compliance posture",
+            "Support change management and adoption"
+        ],
+        "meta": {
+            "title": "IT Consulting Services | Strategic Technology Advisory",
+            "image": "site/assets/img/services/it-consulting.png",
+            "description": "Expert IT consulting to align technology strategies with your business goals. Improve efficiency, security, and growth through tailored IT advisory.",
+            "keywords": [
+                "IT consulting services",
+                "technology strategy consulting",
+                "IT advisory firm",
+                "IT roadmap development",
+                "digital transformation consulting"
+            ]
+        }
+    },
+    {
+        "id": 2,
+        "name": "Networking Solutions",
+        "slug": "networking-solutions",
+        "icon": "fa-solid fa-network-wired",
+        "image": "site/assets/img/services/networking-solutions.png",
+        "short_description": "Comprehensive networking solutions for businesses of all sizes.",
+        "description": "From secure Wi-Fi to enterprise LAN/WAN, we design and implement networking solutions that keep your business connected.",
+        "content": "<article id=\"networking-solutions\" class=\"service-card\"><header class=\"service-header\"><h3>Networking Solutions</h3><p class=\"service-tagline\">Comprehensive networking solutions for businesses of all sizes.</p></header><div class=\"service-body\"><p>We plan, deploy, and manage secure, high-performance networks—wired and wireless—that scale with your business. Our designs prioritize uptime, visibility, and zero-trust principles to safeguard users and data across sites and remote locations.</p><ul class=\"service-features\"><li>LAN/WAN design and implementation</li><li>Secure Wi-Fi (802.11ax/6/6E) planning &amp; surveys</li><li>SD-WAN, VPN, and remote access</li><li>Network segmentation and zero-trust controls</li><li>Monitoring, alerting, and performance tuning</li></ul></div></article>",
+        "keys": [
+            "High-availability LAN/WAN and Wi-Fi",
+            "SD-WAN and secure remote access",
+            "Zero-trust segmentation and policy",
+            "Proactive monitoring and optimization",
+            "Designs that scale with growth"
+        ],
+        "meta": {
+            "title": "Networking Solutions | Secure LAN, WAN & Wi-Fi Design",
+            "image": "site/assets/img/services/networking-solutions.png",
+            "description": "Reliable networking solutions for LAN, WAN, and Wi-Fi. Improve connectivity, security, and scalability with SD-WAN and zero-trust network design.",
+            "keywords": [
+                "networking solutions",
+                "LAN WAN design",
+                "SD-WAN services",
+                "business Wi-Fi solutions",
+                "zero trust networking"
+            ]
+        }
+    },
+    {
+        "id": 3,
+        "name": "Cybersecurity",
+        "slug": "cybersecurity",
+        "icon": "fa-solid fa-shield-halved",
+        "image": "site/assets/img/services/cybersecurity.png",
+        "short_description": "Comprehensive cybersecurity services to protect your business.",
+        "description": "Our cybersecurity services include vulnerability assessments, firewalls, endpoint protection, and 24/7 monitoring.",
+        "content": "<article id=\"cybersecurity\" class=\"service-card\"><header class=\"service-header\"><h3>Cybersecurity</h3><p class=\"service-tagline\">Comprehensive cybersecurity services to protect your business.</p></header><div class=\"service-body\"><p>Defend your organization with layered security spanning people, process, and technology. We help you find and fix vulnerabilities, harden configurations, and detect threats in real time with continuous monitoring and response.</p><ul class=\"service-features\"><li>Vulnerability assessment &amp; remediation</li><li>Next-gen firewalls &amp; secure gateways</li><li>EDR/XDR endpoint protection</li><li>24/7 SOC monitoring &amp; incident response</li><li>Security awareness training &amp; phishing tests</li></ul></div></article>",
+        "keys": [
+            "Identify and remediate vulnerabilities",
+            "Modern firewalling and secure web access",
+            "EDR/XDR for advanced endpoint defense",
+            "24/7 monitoring and rapid response",
+            "User training to reduce human risk"
+        ],
+        "meta": {
+            "title": "Cybersecurity Services | Business Security Solutions",
+            "image": "site/assets/img/services/cybersecurity.png",
+            "description": "Protect your business with advanced cybersecurity solutions. Vulnerability assessments, firewalls, endpoint protection, and 24/7 SOC monitoring.",
+            "keywords": [
+                "cybersecurity services",
+                "business security solutions",
+                "network security monitoring",
+                "endpoint protection",
+                "vulnerability assessment"
+            ]
+        }
+    },
+    {
+        "id": 4,
+        "name": "Cloud Solutions",
+        "slug": "cloud-solutions",
+        "icon": "fa-solid fa-cloud",
+        "image": "site/assets/img/services/cloud-solutions.png",
+        "short_description": "Cloud solutions to enhance business agility and scalability.",
+        "description": "We help businesses migrate to the cloud with Microsoft 365, Google Workspace, AWS, and Azure, ensuring scalability and security.",
+        "content": "<article id=\"cloud-solutions\" class=\"service-card\"><header class=\"service-header\"><h3>Cloud Solutions</h3><p class=\"service-tagline\">Cloud solutions to enhance business agility and scalability.</p></header><div class=\"service-body\"><p>Modernize workloads and empower teams with the right cloud model—public, private, or hybrid. We handle assessments, migrations, and ongoing optimization across Microsoft 365, Google Workspace, AWS, and Azure with security baked in.</p><ul class=\"service-features\"><li>Cloud readiness assessments &amp; TCO</li><li>Migrations (email, files, servers, apps)</li><li>Microsoft 365 &amp; Google Workspace enablement</li><li>AWS/Azure architecture &amp; cost optimization</li><li>Identity, access, and backup for cloud data</li></ul></div></article>",
+        "keys": [
+            "Cloud readiness and cost modeling",
+            "Fast, low-risk migrations",
+            "M365 & Google Workspace enablement",
+            "Secure AWS/Azure architectures",
+            "Ongoing optimization and governance"
+        ],
+        "meta": {
+            "title": "Cloud Solutions | M365, Google, AWS & Azure Migration Experts",
+            "image": "site/assets/img/services/cloud-solutions.png",
+            "description": "Seamless cloud migration and management across Microsoft 365, Google Workspace, AWS, and Azure. Improve agility and security with expert guidance.",
+            "keywords": [
+                "cloud migration services",
+                "Microsoft 365 migration",
+                "AWS Azure cloud solutions",
+                "Google Workspace setup",
+                "cloud consulting firm"
+            ]
+        }
+    },
+    {
+        "id": 5,
+        "name": "Data Backup & Recovery",
+        "slug": "data-backup-recovery",
+        "icon": "fa-solid fa-database",
+        "image": "site/assets/img/services/data-backup-recovery.png",
+        "short_description": "Data backup and recovery solutions to protect your business.",
+        "description": "We implement backup strategies and disaster recovery solutions to keep your critical data safe and quickly recoverable.",
+        "content": "<article id=\"data-backup-recovery\" class=\"service-card\"><header class=\"service-header\"><h3>Data Backup &amp; Recovery</h3><p class=\"service-tagline\">Data backup and recovery solutions to protect your business.</p></header><div class=\"service-body\"><p>Protect critical systems with reliable, tested backups and disaster recovery. We design policies, automate retention, and perform recovery drills so you can restore quickly after incidents or ransomware attacks.</p><ul class=\"service-features\"><li>3-2-1 backup strategy and immutability</li><li>Image-based and file-level backups</li><li>DR planning, RPO/RTO targets, and runbooks</li><li>Cloud, on-prem, and hybrid repositories</li><li>Regular recovery tests and reporting</li></ul></div></article>",
+        "keys": [
+            "Resilient 3-2-1 backup architecture",
+            "Clear RPO/RTO with tested runbooks",
+            "Protection against ransomware",
+            "Hybrid storage (cloud/on-prem)",
+            "Proven recovery drills and reports"
+        ],
+        "meta": {
+            "title": "Data Backup & Recovery Services | Business Data Protection",
+            "image": "site/assets/img/services/data-backup-recovery.png",
+            "description": "Protect your business data with reliable backup and recovery solutions. Implement 3-2-1 strategies, disaster recovery planning, and ransomware protection.",
+            "keywords": [
+                "data backup services",
+                "disaster recovery solutions",
+                "business data protection",
+                "ransomware backup strategies",
+                "data recovery planning"
+            ]
+        }
+    },
+    {
+        "id": 6,
+        "name": "Helpdesk & Support",
+        "slug": "helpdesk-support",
+        "icon": "fa-solid fa-headset",
+        "image": "site/assets/img/services/helpdesk-support.png",
+        "short_description": "24/7 helpdesk services with SLA-based response times.",
+        "description": "Our support team provides 24/7 helpdesk services with SLA-based response times to resolve technical issues quickly.",
+        "content": "<article id=\"helpdesk-support\" class=\"service-card\"><header class=\"service-header\"><h3>Helpdesk &amp; Support</h3><p class=\"service-tagline\">24/7 helpdesk services with SLA-based response times.</p></header><div class=\"service-body\"><p>Give your users fast, friendly support around the clock. We offer multi-channel helpdesk services with clear SLAs, proactive device management, and detailed reporting to keep your teams productive.</p><ul class=\"service-features\"><li>24/7 multi-channel support (email, chat, phone)</li><li>SLA-based response &amp; escalation</li><li>Endpoint management and patching</li><li>Knowledge base and self-service portal</li><li>Monthly reporting and improvement plans</li></ul></div></article>",
+        "keys": [
+            "Always-on user support with SLAs",
+            "Fast triage and escalation",
+            "Proactive endpoint management",
+            "Self-service portal and KB",
+            "Transparent monthly reporting"
+        ],
+        "meta": {
+            "title": "Helpdesk & IT Support Services | 24/7 Tech Support",
+            "image": "site/assets/img/services/helpdesk-support.png",
+            "description": "24/7 helpdesk and IT support with SLA-based response times. Resolve issues fast and keep your business running with proactive tech support.",
+            "keywords": [
+                "IT helpdesk services",
+                "24/7 tech support",
+                "managed IT support",
+                "remote IT support",
+                "SLA helpdesk services"
+            ]
+        }
+    }
+]

@@ -8,7 +8,7 @@
                 <x-form.input :label="__('form.route')" name="route" value="{{ old('route', $form?->route) }}" placeholder="dashboard.index" />
             </div>
             <div class="col-md-6">
-                <x-form.input :label="__('form.order')" name="order" type="number" value="{{ old('order', $form?->order ?? 0) }}" min="0" />
+                <x-form.input :label="__('form.order')" name="order" type="number" value="{{ old('sort', $form?->order ?? 0) }}" min="0" />
             </div>
             <div class="col-md-6">
                 <x-form.select :label="__('form.parent_menu')" name="parent_id">

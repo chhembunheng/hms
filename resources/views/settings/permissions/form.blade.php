@@ -29,7 +29,7 @@
                 <x-form.input :label="__('form.action_route')" name="action_route" value="{{ old('action_route', $form?->action_route ?? '') }}" placeholder="e.g., settings.menus.add" />
             </div>
             <div class="col-md-6">
-                <x-form.input :label="__('form.order')" type="number" name="order" value="{{ old('order', $form?->order ?? 0) }}" min="0" required />
+                <x-form.input :label="__('form.order')" type="number" name="order" value="{{ old('sort', $form?->order ?? 0) }}" min="0" required />
             </div>
         </div>
         <hr class="my-4">

@@ -1,0 +1,164 @@
+[
+  {
+    "slug": "planning-for-a-safe-return-to-the-workplace-it-solutions",
+    "image": "site/assets/img/blog-details/planning-for-a-safe-return-to-the-workplace-it-solutions.png",
+    "image_cover": "site/assets/img/blog-details/planning-for-a-safe-return-to-the-workplace-it-solutions.png",
+    "author": "Sophia Martinez",
+    "date": "17 June 2022",
+    "categories": ["IT Solutions"],
+    "tags": ["return-to-office", "it-strategy", "workplace-safety", "hybrid-work"],
+    "link": "#",
+    "meta": {
+      "title": "Planning for a Safe Return to the Workplace IT Solutions",
+      "image": "site/assets/img/blog-details/planning-for-a-safe-return-to-the-workplace-it-solutions.png",
+      "description": "Discover key IT strategies that ensure a safe, secure, and productive return to the office after remote work."
+    },
+    "translations": [
+      {
+        "locale": "en",
+        "title": "Planning for a Safe Return to the Workplace IT Solutions",
+        "excerpt": "Discover key IT strategies that ensure a safe, secure, and productive return to the office after remote work."
+      },
+      {
+        "locale": "km",
+        "title": "ការធ្វើផែនការសម្រាប់ការត្រលប់ទៅការងារវិញដោយសុវត្ថិភាពជាមួយដំណោះស្រាយ IT",
+        "excerpt": "ស្វែងយល់អំពីយុទ្ធសាស្ត្រ IT សំខាន់ៗដើម្បីធានាថាការត្រលប់ទៅការិយាល័យវិញមានសុវត្ថិភាព មានសុវត្ថិភាព និងមានផលិតភាព។"
+      }
+    ]
+  },
+  {
+    "slug": "what-cybersecurity-certifications-can-mean-for-your-business",
+    "image": "site/assets/img/blog-details/cybersecurity.png",
+    "image_cover": "site/assets/img/blog-details/cybersecurity.png",
+    "author": "James Carter",
+    "date": "20 June 2022",
+    "categories": ["Cybersecurity"],
+    "tags": ["cybersecurity", "certifications", "compliance", "trust"],
+    "link": "#",
+    "meta": {
+      "title": "What Cybersecurity Certifications Can Mean for Your Business",
+      "image": "site/assets/img/blog-details/cybersecurity.png",
+      "description": "Learn how industry-recognized certifications strengthen your company’s security posture and build client trust."
+    },
+    "translations": [
+      {
+        "locale": "en",
+        "title": "What Cybersecurity Certifications Can Mean for Your Business",
+        "excerpt": "Learn how industry-recognized certifications strengthen your company’s security posture and build client trust."
+      },
+      {
+        "locale": "km",
+        "title": "វិញ្ញាបនបត្រសន្តិសុខស៊ីបឺរអាចមានន័យដូចម្តេចសម្រាប់អាជីវកម្មរបស់អ្នក",
+        "excerpt": "ស្វែងយល់ពីរបៀបដែលវិញ្ញាបនបត្រដែលទទួលស្គាល់ដោយឧស្សាហកម្មអាចបង្កើនសុវត្ថិភាពអាជីវកម្ម និងជំនឿអតិថិជន។"
+      }
+    ]
+  },
+  {
+    "slug": "machine-learning-applications-for-every-industry",
+    "image": "site/assets/img/blog-details/machine-learning-applications-for-every-industry.png",
+    "image_cover": "site/assets/img/blog-details/machine-learning-applications-for-every-industry.png",
+    "author": "Emily Zhang",
+    "date": "25 June 2022",
+    "categories": ["AI & Machine Learning"],
+    "tags": ["machine-learning", "use-cases", "industry", "ai"],
+    "link": "#",
+    "meta": {
+      "title": "Machine Learning Applications for Every Industry",
+      "image": "site/assets/img/blog-details/machine-learning-applications-for-every-industry.png",
+      "description": "From healthcare to retail, explore practical ways machine learning is transforming business operations worldwide."
+    },
+    "translations": [
+      {
+        "locale": "en",
+        "title": "Machine Learning Applications for Every Industry",
+        "excerpt": "From healthcare to retail, explore practical ways machine learning is transforming business operations worldwide."
+      },
+      {
+        "locale": "km",
+        "title": "ការប្រើប្រាស់ម៉ាស៊ីនរៀនសម្រាប់ឧស្សាហកម្មគ្រប់ប្រភេទ",
+        "excerpt": "ពីវិស័យសុខាភិបាលដល់លក់រាយ ស្វែងយល់ពីរបៀបដែលម៉ាស៊ីនរៀនកំពុងបម្លែងអាជីវកម្មជុំវិញពិភពលោក។"
+      }
+    ]
+  },
+  {
+    "slug": "5-technology-considerations-for-office-relocations",
+    "image": "site/assets/img/blog-details/5-technology-considerations-for-office-relocations.png",
+    "image_cover": "site/assets/img/blog-details/5-technology-considerations-for-office-relocations.png",
+    "author": "CHAMN4B",
+    "date": "27 June 2022",
+    "categories": ["Business Tech"],
+    "tags": ["office-move", "it-infrastructure", "downtime", "networking"],
+    "link": "#",
+    "meta": {
+      "title": "5 Technology Considerations for Office Relocations",
+      "image": "site/assets/img/blog-details/5-technology-considerations-for-office-relocations.png",
+      "description": "Moving offices? Here are five critical IT factors to address to minimize downtime and keep your business connected."
+    },
+    "translations": [
+      {
+        "locale": "en",
+        "title": "5 Technology Considerations for Office Relocations",
+        "excerpt": "Moving offices? Here are five critical IT factors to address to minimize downtime and keep your business connected."
+      },
+      {
+        "locale": "km",
+        "title": "៥ កត្តាបច្ចេកវិទ្យាសំខាន់ៗសម្រាប់ការផ្លាស់ទីការិយាល័យ",
+        "excerpt": "ការផ្លាស់ទីការិយាល័យ? នេះជាកត្តា IT សំខាន់ៗ៥យ៉ាងដើម្បីកាត់បន្ថយការផ្អាក និងរក្សាអាជីវកម្មឱ្យតភ្ជាប់។"
+      }
+    ]
+  },
+  {
+    "slug": "everything-you-need-to-know-about-geo-blocking",
+    "image": "site/assets/img/blog-details/everything-you-need-to-know-about-geo-blocking.png",
+    "image_cover": "site/assets/img/blog-details/everything-you-need-to-know-about-geo-blocking.png",
+    "author": "David Kim",
+    "date": "28 June 2022",
+    "categories": ["Internet"],
+    "tags": ["geo-blocking", "content-restrictions", "region-locking", "compliance"],
+    "link": "#",
+    "meta": {
+      "title": "Everything You Need to Know About Geo-Blocking",
+      "image": "site/assets/img/blog-details/everything-you-need-to-know-about-geo-blocking.png",
+      "description": "Understand how geo-blocking works, why it matters for businesses, and what it means for customer experience."
+    },
+    "translations": [
+      {
+        "locale": "en",
+        "title": "Everything You Need to Know About Geo-Blocking",
+        "excerpt": "Understand how geo-blocking works, why it matters for businesses, and what it means for customer experience."
+      },
+      {
+        "locale": "km",
+        "title": "អ្វីៗដែលអ្នកត្រូវដឹងអំពីការទប់ស្កាត់តាមតំបន់ (Geo-Blocking)",
+        "excerpt": "ស្វែងយល់ពីរបៀបដែលការទប់ស្កាត់តាមតំបន់ដំណើរការ និងហេតុអ្វីវាសំខាន់សម្រាប់អាជីវកម្ម។"
+      }
+    ]
+  },
+  {
+    "slug": "internal-or-outsourced-it-whats-the-best-choice",
+    "image": "site/assets/img/blog-details/internal-or-outsourced-it-whats-the-best-choice.png",
+    "image_cover": "site/assets/img/blog-details/internal-or-outsourced-it-whats-the-best-choice.png",
+    "author": "Amara Singh",
+    "date": "30 June 2022",
+    "categories": ["Business Strategy"],
+    "tags": ["it-outsourcing", "in-house-it", "cost-benefit", "scalability"],
+    "link": "#",
+    "meta": {
+      "title": "Internal or Outsourced IT: What’s the Best Choice?",
+      "image": "site/assets/img/blog-details/internal-or-outsourced-it-whats-the-best-choice.png",
+      "description": "Weigh the pros and cons of in-house IT teams versus outsourcing to find the right approach for your organization."
+    },
+    "translations": [
+      {
+        "locale": "en",
+        "title": "Internal or Outsourced IT: What’s the Best Choice?",
+        "excerpt": "Weigh the pros and cons of in-house IT teams versus outsourcing to find the right approach for your organization."
+      },
+      {
+        "locale": "km",
+        "title": "សេវា IT ផ្ទៃក្នុង ឬក្រៅ — ជម្រើសណាល្អជាង?",
+        "excerpt": "វាស់វែងអត្ថប្រយោជន៍ និងគុណវិបត្តិរវាងក្រុម IT ផ្ទៃក្នុងនិងក្រៅ ដើម្បីរកវិធីសមស្របសម្រាប់អង្គភាពរបស់អ្នក។"
+      }
+    ]
+  }
+]

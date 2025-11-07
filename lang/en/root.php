@@ -157,6 +157,8 @@ return [
         'no_users' => 'No users yet',
         'no_menus' => 'No menus yet',
         'no_permissions' => 'No permissions yet',
+        'sort_order' => 'Sort Order',
+        'sort' => 'Sort',
     ],
 
     'auth' => [

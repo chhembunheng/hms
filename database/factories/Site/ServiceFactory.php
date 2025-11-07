@@ -21,7 +21,7 @@ class ServiceFactory extends Factory
             'name' => fake()->name(),
             'summary' => fake()->text(100),
             'body' => fake()->text(500),
-            'order' => fake()->numberBetween(1, 100),
+            'sort' => fake()->numberBetween(1, 100),
         ];
     }
 }

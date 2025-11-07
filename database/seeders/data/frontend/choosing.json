@@ -1,0 +1,172 @@
+[
+  {
+    "id": 1,
+    "slug": "remote-it-assistance",
+    "icon": "fa-solid fa-headset",
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Remote IT Assistance",
+        "description": "Get instant remote IT support to resolve issues quickly and efficiently."
+      },
+      {
+        "locale": "km",
+        "name": "ជំនួយ IT ពីចម្ងាយ",
+        "description": "ទទួលបានជំនួយ IT ពីចម្ងាយភ្លាមៗ ដើម្បីដោះស្រាយបញ្ហាបានលឿន និងមានប្រសិទ្ធភាព។"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "slug": "solving-it-problems",
+    "icon": "fa-solid fa-screwdriver-wrench",
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Solving IT Problems",
+        "description": "We diagnose and fix IT problems to minimize downtime and improve productivity."
+      },
+      {
+        "locale": "km",
+        "name": "ដោះស្រាយបញ្ហា IT",
+        "description": "យើងធ្វើការវិនិច្ឆ័យ និងជួសជុលបញ្ហា IT ដើម្បីកាត់បន្ថយការផ្អាកការងារ និងបង្កើនផលិតភាព។"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "slug": "practice-it-management",
+    "icon": "fa-solid fa-gear",
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Practice IT Management",
+        "description": "Proactive IT management to keep your systems optimized and running smoothly."
+      },
+      {
+        "locale": "km",
+        "name": "ការគ្រប់គ្រង IT ដោយសកម្ម",
+        "description": "គ្រប់គ្រងប្រព័ន្ធ IT ដោយសកម្ម ដើម្បីរក្សាប្រព័ន្ធឱ្យប្រសើរឡើង និងដំណើរការយ៉ាងរលូន។"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "slug": "it-security-services",
+    "icon": "fa-solid fa-shield-check",
+    "translations": [
+      {
+        "locale": "en",
+        "name": "IT Security Services",
+        "description": "Protect your business with advanced IT security solutions and threat prevention."
+      },
+      {
+        "locale": "km",
+        "name": "សេវាការពារ IT",
+        "description": "ការពារអាជីវកម្មរបស់អ្នកជាមួយដំណោះស្រាយសុវត្ថិភាព IT កម្រិតខ្ពស់ និងការការពារគ្រោះថ្នាក់។"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "slug": "managed-it-service",
+    "icon": "fa-solid fa-laptop-code",
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Managed IT Service",
+        "description": "Comprehensive managed IT services with 24/7 monitoring and support."
+      },
+      {
+        "locale": "km",
+        "name": "សេវា IT តាមការគ្រប់គ្រង",
+        "description": "ផ្តល់សេវា IT គ្រប់គ្រងទាំងមូល ជាមួយការតាមដាន និងគាំទ្ររហូត 24/7។"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "slug": "cloud-services",
+    "icon": "fa-solid fa-cloud",
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Cloud Services",
+        "description": "Flexible cloud solutions to improve collaboration, storage, and scalability."
+      },
+      {
+        "locale": "km",
+        "name": "សេវា Cloud",
+        "description": "ដំណោះស្រាយ Cloud ដែលអាចបត់បែនបាន ដើម្បីបង្កើនការសហការងារ ការផ្ទុកទិន្នន័យ និងភាពអាចពង្រីកបាន។"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "slug": "it-consulting",
+    "icon": "fa-regular fa-solid fa-lightbulb",
+    "translations": [
+      {
+        "locale": "en",
+        "name": "IT Consulting",
+        "description": "Expert consulting to design IT strategies aligned with your business goals."
+      },
+      {
+        "locale": "km",
+        "name": "ការផ្តល់យោបល់ IT",
+        "description": "ជំនួយដោយអ្នកជំនាញក្នុងការរចនាយុទ្ធសាស្ត្រ IT ដែលសមស្របនឹងគោលបំណងអាជីវកម្មរបស់អ្នក។"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "slug": "data-backup-recovery",
+    "icon": "fa-solid fa-database",
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Data Backup & Recovery",
+        "description": "Secure data backup and fast recovery solutions to protect critical information."
+      },
+      {
+        "locale": "km",
+        "name": "ការបម្រុងទុក និងស្ដារទិន្នន័យ",
+        "description": "ដំណោះស្រាយបម្រុងទុកទិន្នន័យ និងស្ដារឡើងវិញយ៉ាងមានសុវត្ថិភាព ដើម្បីការពារព័ត៌មានសំខាន់។"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "slug": "network-solutions",
+    "icon": "fa-solid fa-wifi",
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Network Solutions",
+        "description": "Reliable network design, installation, and maintenance for seamless connectivity."
+      },
+      {
+        "locale": "km",
+        "name": "ដំណោះស្រាយបណ្តាញ",
+        "description": "រចនា តំឡើង និងថែទាំបណ្តាញយ៉ាងទុកចិត្តបាន ដើម្បីការតភ្ជាប់ដំណើរការយ៉ាងរលូន។"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "slug": "it-training-support",
+    "icon": "fa-solid fa-graduation-cap",
+    "translations": [
+      {
+        "locale": "en",
+        "name": "IT Training & Support",
+        "description": "Professional IT training and ongoing support for your staff to stay updated."
+      },
+      {
+        "locale": "km",
+        "name": "ការបណ្តុះបណ្តាល និងគាំទ្រ IT",
+        "description": "ផ្តល់ការបណ្តុះបណ្តាល IT ដោយអ្នកជំនាញ និងការគាំទ្របន្ត ដើម្បីឱ្យបុគ្គលិករបស់អ្នកតែងតែទាន់សម័យ។"
+      }
+    ]
+  }
+]

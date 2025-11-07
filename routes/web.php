@@ -14,7 +14,7 @@ Route::get('/privacy-policy.html', function () {
     ];
     $content = file_get_contents(public_path('site/data/' . app()->getLocale() . '/privacy-policy.html'));
     return view('welcome', compact('content', 'area'));
-})->name('frontend.privacy-policy-static-html');
+})->name('privacy-policy-static-html');
 
 Route::get('/privacy-policy', function () {
     $area = [
@@ -23,11 +23,12 @@ Route::get('/privacy-policy', function () {
     ];
     $content = file_get_contents(public_path('site/data/' . app()->getLocale() . '/privacy-policy.html'));
     return view('welcome', compact('content', 'area'));
-})->name('frontend.privacy-policy-static');
+})->name('privacy-policy-static');
 
-Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard.index');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'abilities'])->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard.index');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

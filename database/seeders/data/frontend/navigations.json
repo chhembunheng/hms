@@ -1,0 +1,208 @@
+[
+  {
+    "url": null,
+    "icon": "fas fa-compass",
+    "sort": 1,
+    "transactions": [
+      {
+        "locale": "en",
+        "name": "Explore",
+        "description": "Explore"
+      },
+      {
+        "locale": "km",
+        "name": "ស្វែង​យល់",
+        "description": "ស្វែង​យល់"
+      }
+    ],
+    "children": [
+      {
+        "url": "about-us",
+        "icon": "fas fa-info-circle",
+        "sort": 1,
+        "transactions": [
+          {
+            "locale": "en",
+            "name": "About Us",
+            "description": "About Us"
+          },
+          {
+            "locale": "km",
+            "name": "អំពី​ពួក​យើង",
+            "description": "អំពី​ពួក​យើង"
+          }
+        ]
+      },
+      {
+        "url": "contact-us",
+        "icon": "fas fa-envelope",
+        "sort": 2,
+        "transactions": [
+          {
+            "locale": "en",
+            "name": "Contact Us",
+            "description": "Contact Us"
+          },
+          {
+            "locale": "km",
+            "name": "ទាក់ទង​មក​ពួក​យើង",
+            "description": "ទាក់ទង​មក​ពួក​យើង"
+          }
+        ]
+      },
+      {
+        "url": "teams",
+        "icon": "fas fa-users",
+        "sort": 3,
+        "transactions": [
+          {
+            "locale": "en",
+            "name": "our Team",
+            "description": "our Team"
+          },
+          {
+            "locale": "km",
+            "name": "ក្រុមការ​ងារ",
+            "description": "ក្រុមការ​ងារ"
+          }
+        ]
+      },
+      {
+        "url": "careers",
+        "icon": "fas fa-briefcase",
+        "sort": 4,
+        "transactions": [
+          {
+            "locale": "en",
+            "name": "Careers",
+            "description": "Careers"
+          },
+          {
+            "locale": "km",
+            "name": "អាជីព",
+            "description": "អាជីព"
+          }
+        ]
+      },
+      {
+        "url": "faq",
+        "icon": "fas fa-question-circle",
+        "sort": 5,
+        "transactions": [
+          {
+            "locale": "en",
+            "name": "FAQ",
+            "description": "FAQ"
+          },
+          {
+            "locale": "km",
+            "name": "សំណួរ​ដែល​សួរ​ប៉ុន្មាន​ដង",
+            "description": "សំណួរ​ដែល​សួរ​ប៉ុន្មាន​ដង"
+          }
+        ]
+      },
+      {
+        "url": "privacy-policy",
+        "icon": "fas fa-user-shield",
+        "sort": 6,
+        "transactions": [
+          {
+            "locale": "en",
+            "name": "Privacy Policy",
+            "description": "Privacy Policy"
+          },
+          {
+            "locale": "km",
+            "name": "គោលការណ៍​ឯកជនភាព",
+            "description": "គោលការណ៍​ឯកជនភាព"
+          }
+        ]
+      },
+      {
+        "url": "terms-and-conditions",
+        "icon": "fas fa-file-contract",
+        "sort": 7,
+        "transactions": [
+          {
+            "locale": "en",
+            "name": "Terms & Conditions",
+            "description": "Terms & Conditions"
+          },
+          {
+            "locale": "km",
+            "name": "ល័ក្ខខ័ណ្ឌ និង លក្ខខណ្ឌ",
+            "description": "ល័ក្ខខ័ណ្ឌ និង លក្ខខណ្ឌ"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "services",
+    "icon": "fas fa-concierge-bell",
+    "sort": 2,
+    "transactions": [
+      {
+        "locale": "en",
+        "name": "Services",
+        "description": "Services"
+      },
+      {
+        "locale": "km",
+        "name": "សេវាកម្ម",
+        "description": "សេវាកម្ម"
+      }
+    ]
+  },
+  {
+    "url": "products",
+    "icon": "fas fa-box-open",
+    "sort": 3,
+    "transactions": [
+      {
+        "locale": "en",
+        "name": "Products",
+        "description": "Products"
+      },
+      {
+        "locale": "km",
+        "name": "ផលិតផល",
+        "description": "ផលិតផល"
+      }
+    ]
+  },
+  {
+    "url": "integrations",
+    "icon": "fas fa-plug",
+    "sort": 4,
+    "transactions": [
+      {
+        "locale": "en",
+        "name": "Intergrations",
+        "description": "Intergrations"
+      },
+      {
+        "locale": "km",
+        "name": "ការរួមបញ្ចូល",
+        "description": "ការរួមបញ្ចូល"
+      }
+    ]
+  },
+  {
+    "url": "blog",
+    "icon": "fas fa-blog",
+    "sort": 5,
+    "transactions": [
+      {
+        "locale": "en",
+        "name": "Blog",
+        "description": "Blog"
+      },
+      {
+        "locale": "km",
+        "name": "ប្លុក",
+        "description": "ប្លុក"
+      }
+    ]
+  }
+]

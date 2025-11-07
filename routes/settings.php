@@ -12,7 +12,7 @@ Route::get('clear-cache', function () {
     Artisan::call('optimize:clear');
     return redirect()->back();
 })->name('clear-cache');
-Route::group(['prefix' => 'settings', 'as' => 'settings.', 'middleware' => ['auth', 'verified']], function () {
+Route::group(['prefix' => 'settings', 'as' => 'settings.', 'middleware' => ['auth', 'verified', 'abilities']], function () {
     Route::prefix('menus')->name('menus.')->group(function () {
         Route::get('/', [MenuController::class, 'index'])->name('index');
         Route::match(['get', 'post'], '/add', [MenuController::class, 'add'])->name('add');

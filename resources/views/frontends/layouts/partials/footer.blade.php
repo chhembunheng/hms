@@ -8,7 +8,7 @@
                         @php
                             $img = webp_variants('assets/logo/full-blue.png', 'bxs', null, 60);
                         @endphp
-                        <a class="footer-logo" href="{{ Route::currentRouteName() == 'frontend.home' ? '#' : (Route::has('home') ? route('home', ['locale' => app()->getLocale()]) : '/') }}" aria-label="{{ __('global.home') }}">
+                        <a class="footer-logo" href="{{ Route::currentRouteName() == 'welcome' ? '#' : (Route::has('welcome') ? route('welcome', ['locale' => app()->getLocale()]) : '/') }}" aria-label="{{ __('global.home') }}">
                             <img src="{{ $img['fallback'] }}" srcset="{{ $img['srcset'] }}" sizes="(max-width: 600px) 95vw, {{ $img['width'] }}px" alt="Brand Name Logo" loading="lazy" width="{{ $img['width'] }}" height="auto">
                         </a>
                         <p>

@@ -11,10 +11,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(UsersTableSeeder::class);
-        $this->call(MenuSeeder::class);
-        // Existing ProductSeeder may seed basic products; keep it, then import site JSON to enrich
-        $this->call(ProductSeeder::class);
-        $this->call(ImportSiteJsonSeeder::class);
+        // $this->call(FaqSeeder::class);
+        // $this->call(UserSeeder::class);
+        // $this->call(TagSeeder::class);
+        // $this->call(IntegrationSeeder::class);
+        // $this->call(MenuSeeder::class);
+        $this->call(NavigationSeeder::class);
+        // $this->call(ProductSeeder::class);
     }
 }

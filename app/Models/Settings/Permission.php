@@ -15,7 +15,7 @@ class Permission extends Model
         'target',
         'action',
         'slug',
-        'order',
+        'sort',
         'menu_id',
         'created_by',
         'updated_by',

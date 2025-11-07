@@ -1,0 +1,2818 @@
+[
+  {
+    "id": 1,
+    "slug": "hr-management-system",
+    "icon": "fa-solid fa-users",
+    "thumb": "site/assets/img/products/hr-management-system.png",
+    "cover": "site/assets/img/products/hr-management-system-cover.png",
+    "meta": {
+      "title": "HR Management System - Wintech",
+      "image": "site/assets/img/products/hr-management-system.png",
+      "description": "All-in-one HR system for efficient employee management."
+    },
+    "features": [
+      {
+        "id": 1,
+        "title": "Employee Profiles",
+        "icon": "fas fa-id-card",
+        "description": "Centralized employee database with personal info, job history, contracts, skills, and documents.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Personal & Contact Info",
+            "icon": "fas fa-user",
+            "description": "Full name, DOB, phone, address, emergency contacts."
+          },
+          {
+            "id": 2,
+            "title": "Employment History",
+            "icon": "fas fa-briefcase",
+            "description": "Position changes, promotions, salary history, department transfers."
+          },
+          {
+            "id": 3,
+            "title": "Documents & Certificates",
+            "icon": "fas fa-file-upload",
+            "description": "Contracts, ID/passport scans, diplomas, work permits."
+          },
+          {
+            "id": 4,
+            "title": "Skills & Training",
+            "icon": "fas fa-chalkboard-teacher",
+            "description": "Track staff competencies, completed trainings, and certifications."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Payroll & Tax",
+        "icon": "fas fa-money-check-dollar",
+        "description": "Automated gross-to-net salary calculation, tax, NSSF, allowances, deductions, and downloadable payslips.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Salary Components",
+            "icon": "fas fa-layer-group",
+            "description": "Base salary, position allowance, attendance bonus, overtime."
+          },
+          {
+            "id": 2,
+            "title": "Statutory Deductions",
+            "icon": "fas fa-file-invoice-dollar",
+            "description": "Tax, NSSF, loan deductions, custom company policies."
+          },
+          {
+            "id": 3,
+            "title": "Payslip Generation",
+            "icon": "fas fa-receipt",
+            "description": "Auto-generate monthly/bi-weekly payslips for each employee."
+          },
+          {
+            "id": 4,
+            "title": "Payroll Export",
+            "icon": "fas fa-file-export",
+            "description": "Generate bank transfer sheets and accounting journal entries."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Attendance & Leave",
+        "icon": "fas fa-calendar-check",
+        "description": "Biometric / QR / GPS time-in/out, leave balance tracking, approvals, and late/absence alerts.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Biometric Integration",
+            "icon": "fas fa-fingerprint",
+            "description": "Sync from fingerprint or facial devices in real time."
+          },
+          {
+            "id": 2,
+            "title": "Leave Policies",
+            "icon": "fas fa-calendar-day",
+            "description": "Annual leave, sick leave, unpaid leave, and custom leave types."
+          },
+          {
+            "id": 3,
+            "title": "Approval Workflow",
+            "icon": "fas fa-check-double",
+            "description": "Line manager approval and escalation rules."
+          },
+          {
+            "id": 4,
+            "title": "Alerts & Notifications",
+            "icon": "fas fa-bell",
+            "description": "Notify HR and managers for late check-ins or no-shows."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Shift Scheduling",
+        "icon": "fas fa-business-time",
+        "description": "Manage rosters, shifts, and overtime rules across locations and departments.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Roster Builder",
+            "icon": "fas fa-calendar-plus",
+            "description": "Assign shifts by team, branch, or role."
+          },
+          {
+            "id": 2,
+            "title": "Overtime Rules",
+            "icon": "fas fa-clock",
+            "description": "Custom OT rates by day, holiday, or weekend."
+          },
+          {
+            "id": 3,
+            "title": "Shift Swaps",
+            "icon": "fas fa-exchange-alt",
+            "description": "Allow employees to request and get approval for swaps."
+          },
+          {
+            "id": 4,
+            "title": "Coverage View",
+            "icon": "fas fa-users-cog",
+            "description": "See who’s on duty by hour and avoid understaffing."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Performance & KPIs",
+        "icon": "fas fa-chart-line",
+        "description": "Quarterly/annual reviews, KPI scorecards, goal alignment, and performance history.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Goal Setting",
+            "icon": "fas fa-bullseye",
+            "description": "Assign objectives and expected outcomes to each employee."
+          },
+          {
+            "id": 2,
+            "title": "Appraisal Forms",
+            "icon": "fas fa-clipboard-list",
+            "description": "360° reviews, probation reviews, manager scorecards."
+          },
+          {
+            "id": 3,
+            "title": "Performance History",
+            "icon": "fas fa-history",
+            "description": "Track improvements, warnings, and achievements over time."
+          },
+          {
+            "id": 4,
+            "title": "Export & Sign-Off",
+            "icon": "fas fa-file-signature",
+            "description": "Generate review PDFs for HR and employee acknowledgement."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Recruitment & Onboarding",
+        "icon": "fas fa-user-plus",
+        "description": "Track applicants, interview stages, offers, onboarding tasks, and probation evaluations.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Applicant Tracking",
+            "icon": "fas fa-users",
+            "description": "Log candidates, CVs, and source channels."
+          },
+          {
+            "id": 2,
+            "title": "Interview Pipeline",
+            "icon": "fas fa-project-diagram",
+            "description": "Move candidates from screening → interview → offer."
+          },
+          {
+            "id": 3,
+            "title": "Onboarding Checklist",
+            "icon": "fas fa-list-check",
+            "description": "IT accounts, uniforms, policy training, equipment handover."
+          },
+          {
+            "id": 4,
+            "title": "Probation Review",
+            "icon": "fas fa-stamp",
+            "description": "90-day evaluations and confirmation letters."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Document Management",
+        "icon": "fas fa-folder-open",
+        "description": "Store contracts, certificates, policies, warnings, and renewal reminders in one place.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Secure Storage",
+            "icon": "fas fa-lock",
+            "description": "Role-based access to sensitive HR files."
+          },
+          {
+            "id": 2,
+            "title": "Expiry Alerts",
+            "icon": "fas fa-hourglass-half",
+            "description": "Notify HR before ID/passport/contract expiries."
+          },
+          {
+            "id": 3,
+            "title": "Policy Distribution",
+            "icon": "fas fa-file-alt",
+            "description": "Upload SOPs and require staff acknowledgment."
+          },
+          {
+            "id": 4,
+            "title": "Incident Records",
+            "icon": "fas fa-exclamation-circle",
+            "description": "Store warnings and disciplinary notes with timestamps."
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Employee Self-Service",
+        "icon": "fas fa-user-circle",
+        "description": "Employees can request leave, download payslips, update personal info, and submit claims.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Leave Requests",
+            "icon": "fas fa-plane-departure",
+            "description": "Staff apply from web or mobile."
+          },
+          {
+            "id": 2,
+            "title": "Payslip Download",
+            "icon": "fas fa-download",
+            "description": "Secure access to historical salary slips."
+          },
+          {
+            "id": 3,
+            "title": "Profile Update",
+            "icon": "fas fa-user-edit",
+            "description": "Employees submit changes for HR approval."
+          },
+          {
+            "id": 4,
+            "title": "Expense Claims",
+            "icon": "fas fa-receipt",
+            "description": "Upload receipts and request reimbursement."
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Compliance & Policies",
+        "icon": "fas fa-shield-alt",
+        "description": "Contract expiry tracking, HR letters, disciplinary records, and policy acknowledgements.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Contract Templates",
+            "icon": "fas fa-file-contract",
+            "description": "Standardized offers, warnings, termination notices."
+          },
+          {
+            "id": 2,
+            "title": "Regulatory Tracking",
+            "icon": "fas fa-scale-balanced",
+            "description": "Track legal requirements and labor compliance notes."
+          },
+          {
+            "id": 3,
+            "title": "Disciplinary Log",
+            "icon": "fas fa-gavel",
+            "description": "Record and categorize incidents, attach evidence."
+          },
+          {
+            "id": 4,
+            "title": "Policy Read Receipts",
+            "icon": "fas fa-check-square",
+            "description": "See who accepted company policy updates."
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "HR Analytics Dashboard",
+        "icon": "fas fa-chart-pie",
+        "description": "Headcount, turnover, overtime cost, leave trends, and payroll insights by department.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Headcount Overview",
+            "icon": "fas fa-users",
+            "description": "Active vs resigned employees by branch/role."
+          },
+          {
+            "id": 2,
+            "title": "Turnover & Retention",
+            "icon": "fas fa-door-open",
+            "description": "Track resignation reasons and tenure."
+          },
+          {
+            "id": 3,
+            "title": "Cost Insights",
+            "icon": "fas fa-dollar-sign",
+            "description": "Overtime cost, allowance spend, benefit usage."
+          },
+          {
+            "id": 4,
+            "title": "Attendance Trends",
+            "icon": "fas fa-chart-line",
+            "description": "Late arrivals, sick leave patterns, absentee hotspots."
+          }
+        ]
+      }
+    ],
+    "translations": [
+      {
+        "locale": "en",
+        "name": "HR Management System",
+        "short_description": "All-in-one HR system for efficient employee management.",
+        "description": "Manage employees, payroll, and performance in one system.",
+        "content": "Our HR Management System streamlines employee data, attendance, leave, payroll, and performance reviews. It reduces paperwork, ensures compliance, and empowers HR teams with analytics to improve workforce management.",
+        "category": "Human Resources"
+      },
+      {
+        "locale": "km",
+        "name": "ប្រព័ន្ធគ្រប់គ្រងធនធានមនុស្ស (HR)",
+        "short_description": "ប្រព័ន្ធ HR មួយតែគ្រប់យ៉ាង សម្រាប់គ្រប់គ្រងបុគ្គលិកឲ្យមានប្រសិទ្ធភាព។",
+        "description": "គ្រប់គ្រងបុគ្គលិក ប្រាក់ខែ និងសមិទ្ធិផល ក្នុងប្រព័ន្ធតែមួយ។",
+        "content": "ប្រព័ន្ធ HR របស់យើង ជួយសម្រួលទិន្នន័យបុគ្គលិក វត្តមាន ប្រាក់ឈ្នួល និងការវាយតម្លៃការងារ ដោយកាត់បន្ថយការងារក្រដាស ធានាភាពគោរពច្បាប់ និងផ្តល់វិភាគដល់ក្រុម HR ដើម្បីកែលម្អការគ្រប់គ្រងកម្លាំងពលកម្ម។",
+        "category": "ធនធានមនុស្ស"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "slug": "school-management-system",
+    "icon": "fa-solid fa-school",
+    "thumb": "site/assets/img/products/school-management-system.png",
+    "cover": "site/assets/img/products/school-management-system-cover.png",
+    "meta": {
+      "title": "School Management System - Wintech",
+      "image": "site/assets/img/products/school-management-system.png",
+      "description": "Digital platform for schools to manage operations efficiently."
+    },
+    "features": [
+      {
+        "id": 1,
+        "title": "Student Information System",
+        "icon": "fas fa-user-graduate",
+        "description": "Complete student profiles: personal data, guardians, classes, behavior notes, health info.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Student Profile",
+            "icon": "fas fa-id-card",
+            "description": "Name, DOB, ID/passport, nationality, contact info."
+          },
+          {
+            "id": 2,
+            "title": "Guardian Contacts",
+            "icon": "fas fa-user-friends",
+            "description": "Parents/guardians with phone/email for quick communication."
+          },
+          {
+            "id": 3,
+            "title": "Behavior Notes",
+            "icon": "fas fa-comment-dots",
+            "description": "Warnings, merits, counseling notes."
+          },
+          {
+            "id": 4,
+            "title": "Health & Allergies",
+            "icon": "fas fa-heartbeat",
+            "description": "Medical conditions and emergency instructions."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Admissions & Enrollment",
+        "icon": "fas fa-user-plus",
+        "description": "Digital applications, document uploads, offers, seat management, and onboarding workflow.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Online Application",
+            "icon": "fas fa-file-alt",
+            "description": "Parents submit student info and upload docs online."
+          },
+          {
+            "id": 2,
+            "title": "Offer & Acceptance",
+            "icon": "fas fa-file-signature",
+            "description": "Generate offer letters and capture e-sign approvals."
+          },
+          {
+            "id": 3,
+            "title": "Seat Allocation",
+            "icon": "fas fa-chair",
+            "description": "Assign class/grade, manage waitlists and caps."
+          },
+          {
+            "id": 4,
+            "title": "Onboarding Checklist",
+            "icon": "fas fa-list-check",
+            "description": "Uniform sizing, ID card, orientation schedule."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Timetable & Scheduling",
+        "icon": "fas fa-calendar-alt",
+        "description": "Auto-generate class schedules, detect clashes, assign teachers and rooms.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Auto Generator",
+            "icon": "fas fa-magic",
+            "description": "Build timetables based on constraints and teacher load."
+          },
+          {
+            "id": 2,
+            "title": "Clash Detection",
+            "icon": "fas fa-exclamation-triangle",
+            "description": "Prevent overlapping classes/rooms."
+          },
+          {
+            "id": 3,
+            "title": "Room Allocation",
+            "icon": "fas fa-door-open",
+            "description": "Assign labs, classrooms, meeting rooms."
+          },
+          {
+            "id": 4,
+            "title": "Teacher Load",
+            "icon": "fas fa-user-clock",
+            "description": "See hours per teacher to keep workload balanced."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Attendance Tracking",
+        "icon": "fas fa-clipboard-check",
+        "description": "Daily and period attendance for each class with instant absence notifications to parents.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Daily Roll Call",
+            "icon": "fas fa-check-square",
+            "description": "Track present/absent/late for homeroom."
+          },
+          {
+            "id": 2,
+            "title": "Period Attendance",
+            "icon": "fas fa-clock",
+            "description": "Record attendance each subject/period."
+          },
+          {
+            "id": 3,
+            "title": "Parent Alerts",
+            "icon": "fas fa-bell",
+            "description": "Send instant SMS/push for absences."
+          },
+          {
+            "id": 4,
+            "title": "Reports",
+            "icon": "fas fa-chart-line",
+            "description": "See attendance trends by class/grade."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Exams & Results",
+        "icon": "fas fa-file-signature",
+        "description": "Exam setup, score entry, grade calculation, transcript generation, and ranking reports.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Exam Timetables",
+            "icon": "fas fa-calendar-day",
+            "description": "Publish assessment dates per subject."
+          },
+          {
+            "id": 2,
+            "title": "Mark Entry",
+            "icon": "fas fa-keyboard",
+            "description": "Teachers enter scores securely from portal."
+          },
+          {
+            "id": 3,
+            "title": "Grading Schemes",
+            "icon": "fas fa-balance-scale",
+            "description": "Percentage, GPA, rubric, or custom scales."
+          },
+          {
+            "id": 4,
+            "title": "Transcripts",
+            "icon": "fas fa-file-invoice",
+            "description": "Auto-generate printable report cards."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Parent & Student Portal",
+        "icon": "fas fa-comments",
+        "description": "Parents/students can view timetable, grades, homework, invoices, and announcements.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Timetable & Homework",
+            "icon": "fas fa-calendar-alt",
+            "description": "See upcoming classes and assigned work."
+          },
+          {
+            "id": 2,
+            "title": "Grades & Feedback",
+            "icon": "fas fa-clipboard-list",
+            "description": "Check exam scores, teacher comments."
+          },
+          {
+            "id": 3,
+            "title": "Billing & Payments",
+            "icon": "fas fa-file-invoice-dollar",
+            "description": "View fees, download invoices, confirm payments."
+          },
+          {
+            "id": 4,
+            "title": "Announcements",
+            "icon": "fas fa-bullhorn",
+            "description": "School-wide notices, events, urgent alerts."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Fees & Billing",
+        "icon": "fas fa-file-invoice-dollar",
+        "description": "Issue invoices, track payments, apply scholarships/discounts, and send reminders.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Invoice Schedules",
+            "icon": "fas fa-calendar-check",
+            "description": "Create term/semester billing plans."
+          },
+          {
+            "id": 2,
+            "title": "Discount Rules",
+            "icon": "fas fa-percentage",
+            "description": "Scholarships, sibling discounts, early-bird promo."
+          },
+          {
+            "id": 3,
+            "title": "Payment Tracking",
+            "icon": "fas fa-receipt",
+            "description": "Record cash/bank/online payments and outstanding balances."
+          },
+          {
+            "id": 4,
+            "title": "Reminder Notices",
+            "icon": "fas fa-envelope-open-text",
+            "description": "Auto-send reminders for overdue fees."
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Discipline & Behavior",
+        "icon": "fas fa-exclamation-triangle",
+        "description": "Track incidents, warnings, counselor notes, and behavior improvement plans.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Incident Logging",
+            "icon": "fas fa-flag",
+            "description": "Record what happened, who was involved, witnesses."
+          },
+          {
+            "id": 2,
+            "title": "Warnings & Actions",
+            "icon": "fas fa-stamp",
+            "description": "Verbal/written warnings, suspensions, follow-up steps."
+          },
+          {
+            "id": 3,
+            "title": "Counselor Notes",
+            "icon": "fas fa-user-nurse",
+            "description": "Confidential support notes and student check-ins."
+          },
+          {
+            "id": 4,
+            "title": "Parent Communication",
+            "icon": "fas fa-phone",
+            "description": "Log that parents were informed and their response."
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Library & Assets",
+        "icon": "fas fa-book-open",
+        "description": "Catalog books, track check-outs/returns, manage textbooks, uniforms, and equipment.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Book Catalog",
+            "icon": "fas fa-book",
+            "description": "ISBN, author, category, language, edition."
+          },
+          {
+            "id": 2,
+            "title": "Borrow & Return",
+            "icon": "fas fa-exchange-alt",
+            "description": "Assign books to students/teachers and set due dates."
+          },
+          {
+            "id": 3,
+            "title": "Asset Tracking",
+            "icon": "fas fa-boxes",
+            "description": "Uniforms, tablets, lab kits, instruments."
+          },
+          {
+            "id": 4,
+            "title": "Penalty & Lost Items",
+            "icon": "fas fa-exclamation-circle",
+            "description": "Mark missing/damaged items and charge replacement fee."
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Reports & Analytics",
+        "icon": "fas fa-chart-line",
+        "description": "Attendance rates, academic performance, fee collection stats, and enrollment trends.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Academic Trends",
+            "icon": "fas fa-chart-area",
+            "description": "Class/grade average, top/bottom performers."
+          },
+          {
+            "id": 2,
+            "title": "Attendance KPIs",
+            "icon": "fas fa-user-clock",
+            "description": "Absent/late patterns by student or class."
+          },
+          {
+            "id": 3,
+            "title": "Finance Insights",
+            "icon": "fas fa-dollar-sign",
+            "description": "Fees collected vs outstanding."
+          },
+          {
+            "id": 4,
+            "title": "Enrollment Insights",
+            "icon": "fas fa-user-plus",
+            "description": "New admissions, withdrawals, retention rate."
+          }
+        ]
+      }
+    ],
+    "translations": [
+      {
+        "locale": "en",
+        "name": "School Management System",
+        "short_description": "Digital platform for schools to manage operations efficiently.",
+        "description": "Digital platform for schools to manage operations efficiently.",
+        "content": "This School Management System allows schools to handle student enrollment, timetables, exams, results, teacher assignments, and parent communication in a centralized portal, improving productivity and learning outcomes.",
+        "category": "Education"
+      },
+      {
+        "locale": "km",
+        "name": "ប្រព័ន្ធគ្រប់គ្រងសាលារៀន",
+        "short_description": "វេទិកាឌីជីថលសម្រាប់គ្រប់គ្រងការប្រតិបត្តិការ​សាលា​ដោយមានប្រសិទ្ធភាព។",
+        "description": "វេទិកាឌីជីថលសម្រាប់គ្រប់គ្រងការប្រតិបត្តិការ​សាលា​ដោយមានប្រសិទ្ធភាព។",
+        "content": "ប្រព័ន្ធនេះជួយគ្រប់គ្រងការទទួលសិស្ស កាលវិភាគ ប្រលង លទ្ធផល ការផ្ដល់ភារកិច្ចគ្រូ និងការទំនាក់ទំនងជាមួយឪពុកម្តាយ ក្នុងផ្ទាំងតែមួយ ដើម្បីបង្កើនផលិតភាព និងលទ្ធផលរៀន។",
+        "category": "ការអប់រំ"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "slug": "learning-management-system",
+    "icon": "fa-solid fa-graduation-cap",
+    "thumb": "site/assets/img/products/learning-management-system.png",
+    "cover": "site/assets/img/products/learning-management-system-cover.png",
+    "meta": {
+      "title": "Learning Management System - Wintech",
+      "image": "site/assets/img/products/learning-management-system.png",
+      "description": "Deliver and track online courses with ease."
+    },
+    "features": [
+      {
+        "id": 1,
+        "title": "Course Authoring",
+        "icon": "fas fa-folder-open",
+        "description": "Upload SCORM-style lessons, PDFs, slides, video lectures, and interactive content.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Module Builder",
+            "icon": "fas fa-layer-group",
+            "description": "Organize units, lessons, activities."
+          },
+          {
+            "id": 2,
+            "title": "Rich Media Support",
+            "icon": "fas fa-photo-video",
+            "description": "Attach video, audio, slides, external links."
+          },
+          {
+            "id": 3,
+            "title": "Reusable Content",
+            "icon": "fas fa-copy",
+            "description": "Clone lessons across courses or cohorts."
+          },
+          {
+            "id": 4,
+            "title": "Publishing Control",
+            "icon": "fas fa-toggle-on",
+            "description": "Draft vs live state with scheduled release."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Content Library",
+        "icon": "fas fa-archive",
+        "description": "Reusable learning materials organized by course, subject, and level.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Central Repository",
+            "icon": "fas fa-database",
+            "description": "Store PDFs, quizzes, slides, worksheets."
+          },
+          {
+            "id": 2,
+            "title": "Tagging & Search",
+            "icon": "fas fa-search",
+            "description": "Quickly find content by topic/outcome."
+          },
+          {
+            "id": 3,
+            "title": "Access Control",
+            "icon": "fas fa-user-lock",
+            "description": "Limit items to certain instructors or classes."
+          },
+          {
+            "id": 4,
+            "title": "Version History",
+            "icon": "fas fa-history",
+            "description": "Track updates to lesson materials."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Assignments & Quizzes",
+        "icon": "fas fa-tasks",
+        "description": "Submission deadlines, file uploads, timed quizzes, automatic and manual grading.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Question Banks",
+            "icon": "fas fa-question-circle",
+            "description": "MCQ, essay, matching, file upload."
+          },
+          {
+            "id": 2,
+            "title": "Due Dates",
+            "icon": "fas fa-calendar-check",
+            "description": "Set deadlines with late submission rules."
+          },
+          {
+            "id": 3,
+            "title": "Rubric Grading",
+            "icon": "fas fa-th-list",
+            "description": "Criteria-based scoring and feedback."
+          },
+          {
+            "id": 4,
+            "title": "Auto Grade",
+            "icon": "fas fa-robot",
+            "description": "Instant score for objective question types."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Live & Blended Learning",
+        "icon": "fas fa-video",
+        "description": "Support for live classes, attendance logging for both in-person and virtual sessions.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Live Sessions",
+            "icon": "fas fa-broadcast-tower",
+            "description": "Schedule and join live virtual classes."
+          },
+          {
+            "id": 2,
+            "title": "Attendance Logs",
+            "icon": "fas fa-user-check",
+            "description": "Mark who joined and for how long."
+          },
+          {
+            "id": 3,
+            "title": "Recording Archive",
+            "icon": "fas fa-film",
+            "description": "Store session recordings for later review."
+          },
+          {
+            "id": 4,
+            "title": "Blended Marking",
+            "icon": "fas fa-sync",
+            "description": "Combine online & offline scores in one gradebook."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Discussion Forums",
+        "icon": "fas fa-comments",
+        "description": "Per-course Q&A boards, peer discussions, teacher moderation, and announcements.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Threaded Q&A",
+            "icon": "fas fa-comments-dollar",
+            "description": "Topic-based threads with replies and mentions."
+          },
+          {
+            "id": 2,
+            "title": "Teacher Moderation",
+            "icon": "fas fa-user-shield",
+            "description": "Pin answers, remove off-topic content."
+          },
+          {
+            "id": 3,
+            "title": "Announcements",
+            "icon": "fas fa-bullhorn",
+            "description": "Instructor-only broadcast posts."
+          },
+          {
+            "id": 4,
+            "title": "Attachment Support",
+            "icon": "fas fa-paperclip",
+            "description": "Upload screenshots, docs, examples."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Gradebook Sync",
+        "icon": "fas fa-sync",
+        "description": "Automatically push assignment and quiz scores into the main gradebook.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Auto Import Scores",
+            "icon": "fas fa-download",
+            "description": "Quiz/assignment marks feed directly to gradebook."
+          },
+          {
+            "id": 2,
+            "title": "Weighting Rules",
+            "icon": "fas fa-balance-scale",
+            "description": "Homework 10%, quiz 20%, exam 70%, etc."
+          },
+          {
+            "id": 3,
+            "title": "Override & Comments",
+            "icon": "fas fa-edit",
+            "description": "Instructors can adjust and leave notes."
+          },
+          {
+            "id": 4,
+            "title": "Export",
+            "icon": "fas fa-file-export",
+            "description": "Download grades to XLSX/PDF."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Certificates & Badges",
+        "icon": "fas fa-certificate",
+        "description": "Issue branded completion certificates or skill badges upon passing requirements.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Custom Templates",
+            "icon": "fas fa-file-image",
+            "description": "Logo, colors, signatures, QR code."
+          },
+          {
+            "id": 2,
+            "title": "Completion Rules",
+            "icon": "fas fa-check-circle",
+            "description": "Min score, % complete, attendance requirement."
+          },
+          {
+            "id": 3,
+            "title": "Badge Levels",
+            "icon": "fas fa-trophy",
+            "description": "Bronze/Silver/Gold achievements."
+          },
+          {
+            "id": 4,
+            "title": "Download & Verify",
+            "icon": "fas fa-qrcode",
+            "description": "Students can download and verify authenticity."
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Progress & Analytics",
+        "icon": "fas fa-chart-bar",
+        "description": "Track learner progress, completion %, time spent, weak topics, and leaderboard views.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Completion Dashboard",
+            "icon": "fas fa-chart-pie",
+            "description": "See who is behind or ahead."
+          },
+          {
+            "id": 2,
+            "title": "Engagement Metrics",
+            "icon": "fas fa-eye",
+            "description": "Video watch time, quiz retries."
+          },
+          {
+            "id": 3,
+            "title": "Weak Topic Detection",
+            "icon": "fas fa-exclamation-circle",
+            "description": "Highlight lessons with low scores."
+          },
+          {
+            "id": 4,
+            "title": "Leaderboards",
+            "icon": "fas fa-medal",
+            "description": "Gamified ranking by score/completion."
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Learning Paths",
+        "icon": "fas fa-route",
+        "description": "Bundle courses into tracks (e.g. onboarding, compliance, upskilling) with prerequisites.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Multi-Course Tracks",
+            "icon": "fas fa-stream",
+            "description": "Group required modules in sequence."
+          },
+          {
+            "id": 2,
+            "title": "Prerequisite Rules",
+            "icon": "fas fa-lock",
+            "description": "Must pass Course A before Course B unlocks."
+          },
+          {
+            "id": 3,
+            "title": "Deadline Windows",
+            "icon": "fas fa-hourglass-half",
+            "description": "Finish onboarding within X days."
+          },
+          {
+            "id": 4,
+            "title": "Manager Visibility",
+            "icon": "fas fa-user-tie",
+            "description": "Supervisors can track staff completion."
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Mobile Access",
+        "icon": "fas fa-mobile-alt",
+        "description": "Responsive/mobile-friendly interface for watching lessons and submitting work on the go.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Responsive UI",
+            "icon": "fas fa-tablet-alt",
+            "description": "Optimized for phones/tablets."
+          },
+          {
+            "id": 2,
+            "title": "Offline Reading",
+            "icon": "fas fa-download",
+            "description": "Save PDFs/slides to view without internet."
+          },
+          {
+            "id": 3,
+            "title": "Push Notifications",
+            "icon": "fas fa-bell",
+            "description": "Reminders for deadlines and new content."
+          },
+          {
+            "id": 4,
+            "title": "Mobile Submissions",
+            "icon": "fas fa-upload",
+            "description": "Upload homework photos or files directly."
+          }
+        ]
+      }
+    ],
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Learning Management System (LMS)",
+        "short_description": "Deliver and track online courses with ease.",
+        "description": "Deliver and track online courses with ease.",
+        "content": "Our LMS helps organizations and institutions manage e-learning content, deliver interactive courses, track learner progress, and generate performance reports. It supports blended learning, assessments, and certifications.",
+        "category": "E-Learning"
+      },
+      {
+        "locale": "km",
+        "name": "ប្រព័ន្ធគ្រប់គ្រងការសិក្សា (LMS)",
+        "short_description": "បញ្ជូន និងតាមដានវគ្គសិក្សាអនឡាញបានយ៉ាងងាយស្រួល។",
+        "description": "បញ្ជូន និងតាមដានវគ្គសិក្សាអនឡាញបានយ៉ាងងាយស្រួល។",
+        "content": "LMS របស់យើង ជួយគ្រប់គ្រងមាតិការៀនអេឡិចត្រូនិក បង្ហាញវគ្គអន្តរកម្ម តាមដានវឌ្ឍនភាពអ្នករៀន និងបង្កើតរបាយការណ៍សមិទ្ធិផល។ គាំទ្រការរៀនបន្សំ ការវាយតម្លៃ និងវិញ្ញាបនបត្រ។",
+        "category": "ការសិក្សាអេឡិចត្រូនិក"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "slug": "point-of-sale",
+    "icon": "fa-solid fa-cash-register",
+    "thumb": "site/assets/img/products/point-of-sale.png",
+    "cover": "site/assets/img/products/point-of-sale-cover.png",
+    "meta": {
+      "title": "Point of Sale System - Wintech",
+      "image": "site/assets/img/products/point-of-sale.png",
+      "description": "POS system for sales, billing, and inventory management."
+    },
+    "features": [
+      {
+        "id": 1,
+        "title": "Fast Checkout",
+        "icon": "fas fa-receipt",
+        "description": "Barcode scanning, split payments, discounts, tax handling, promotions at the counter.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Barcode Scan",
+            "icon": "fas fa-barcode",
+            "description": "Add items instantly by SKU or barcode."
+          },
+          {
+            "id": 2,
+            "title": "Discounts & Promo",
+            "icon": "fas fa-tags",
+            "description": "Line-item or whole-bill discounts."
+          },
+          {
+            "id": 3,
+            "title": "Multiple Payments",
+            "icon": "fas fa-credit-card",
+            "description": "Cash + card + digital wallet split handling."
+          },
+          {
+            "id": 4,
+            "title": "Receipt Printing",
+            "icon": "fas fa-print",
+            "description": "Print or email customer receipts."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Inventory Management",
+        "icon": "fas fa-boxes-stacked",
+        "description": "Real-time stock levels, low-stock alerts, batch/expiry tracking, variant/SKU management.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Stock Levels",
+            "icon": "fas fa-box-open",
+            "description": "See current qty per branch."
+          },
+          {
+            "id": 2,
+            "title": "Low Stock Alerts",
+            "icon": "fas fa-bell",
+            "description": "Get restock alerts automatically."
+          },
+          {
+            "id": 3,
+            "title": "Variants & Bundles",
+            "icon": "fas fa-th-large",
+            "description": "Size/color SKUs and combo sets."
+          },
+          {
+            "id": 4,
+            "title": "Expiry Tracking",
+            "icon": "fas fa-exclamation-circle",
+            "description": "Track batches and expiry dates."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Purchase & Replenishment",
+        "icon": "fas fa-truck-loading",
+        "description": "Create purchase orders, receive stock, log supplier cost, and update inventory automatically.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Supplier Management",
+            "icon": "fas fa-truck",
+            "description": "Store vendor details and pricing."
+          },
+          {
+            "id": 2,
+            "title": "PO Creation",
+            "icon": "fas fa-file-invoice",
+            "description": "Raise purchase orders for low-stock items."
+          },
+          {
+            "id": 3,
+            "title": "Goods Receiving",
+            "icon": "fas fa-dolly",
+            "description": "Scan received items, auto-update stock."
+          },
+          {
+            "id": 4,
+            "title": "Cost Tracking",
+            "icon": "fas fa-dollar-sign",
+            "description": "Compare supplier cost vs sell price."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Customer Loyalty",
+        "icon": "fas fa-gift",
+        "description": "Membership tiers, points and rewards, vouchers, gift cards, and customer purchase history.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Member Profiles",
+            "icon": "fas fa-id-card",
+            "description": "Track visit frequency and spend."
+          },
+          {
+            "id": 2,
+            "title": "Points & Rewards",
+            "icon": "fas fa-coins",
+            "description": "Earn/redeem loyalty points."
+          },
+          {
+            "id": 3,
+            "title": "Gift Cards / Vouchers",
+            "icon": "fas fa-ticket-alt",
+            "description": "Sell and redeem stored-value vouchers."
+          },
+          {
+            "id": 4,
+            "title": "Purchase History",
+            "icon": "fas fa-history",
+            "description": "See what each customer buys most."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Promotions & Bundles",
+        "icon": "fas fa-tags",
+        "description": "Mix-and-match deals, happy hour pricing, buy-X-get-Y rules, and automated seasonal discounts.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Bundle Rules",
+            "icon": "fas fa-boxes",
+            "description": "Combo meals / kits with special price."
+          },
+          {
+            "id": 2,
+            "title": "BOGO / Buy X Get Y",
+            "icon": "fas fa-percentage",
+            "description": "Auto-apply free or discounted items."
+          },
+          {
+            "id": 3,
+            "title": "Timed Discounts",
+            "icon": "fas fa-clock",
+            "description": "Happy hour / weekend specials."
+          },
+          {
+            "id": 4,
+            "title": "Seasonal Campaigns",
+            "icon": "fas fa-calendar-star",
+            "description": "Pre-schedule holiday promotions."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Multi-Store Support",
+        "icon": "fas fa-store",
+        "description": "Manage multiple branches, compare outlet performance, transfer stock across locations.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Branch Profiles",
+            "icon": "fas fa-store-alt",
+            "description": "Per-branch pricing and tax rules."
+          },
+          {
+            "id": 2,
+            "title": "Inter-Branch Transfer",
+            "icon": "fas fa-random",
+            "description": "Move stock between locations."
+          },
+          {
+            "id": 3,
+            "title": "Outlet Ranking",
+            "icon": "fas fa-chart-bar",
+            "description": "Compare sales per store."
+          },
+          {
+            "id": 4,
+            "title": "User Access Control",
+            "icon": "fas fa-user-shield",
+            "description": "Cashier only sees their branch."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Sales & Profit Reports",
+        "icon": "fas fa-chart-line",
+        "description": "Daily sales summaries, top items, staff performance, margin analysis, export to Excel/PDF.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Daily Summary",
+            "icon": "fas fa-calendar-day",
+            "description": "Revenue by payment type."
+          },
+          {
+            "id": 2,
+            "title": "Top Sellers",
+            "icon": "fas fa-star",
+            "description": "Identify best-performing SKUs."
+          },
+          {
+            "id": 3,
+            "title": "Profit Margin",
+            "icon": "fas fa-chart-pie",
+            "description": "Cost vs sell price analysis."
+          },
+          {
+            "id": 4,
+            "title": "Export Reports",
+            "icon": "fas fa-file-export",
+            "description": "XLSX / PDF for management."
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Cash Control & Roles",
+        "icon": "fas fa-user-shield",
+        "description": "Open/close shift balances, void control, refunds, cashier permissions, activity logs.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Shift Open/Close",
+            "icon": "fas fa-door-open",
+            "description": "Count float-in and end-of-day cash."
+          },
+          {
+            "id": 2,
+            "title": "Refund / Void Rules",
+            "icon": "fas fa-ban",
+            "description": "Restrict who can void or refund."
+          },
+          {
+            "id": 3,
+            "title": "User Roles",
+            "icon": "fas fa-user-lock",
+            "description": "Cashier, supervisor, manager levels."
+          },
+          {
+            "id": 4,
+            "title": "Audit Trail",
+            "icon": "fas fa-clipboard-check",
+            "description": "Log every override and discount."
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Offline Mode",
+        "icon": "fas fa-plug",
+        "description": "Continue billing without internet and auto-sync when connection is restored.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Local Caching",
+            "icon": "fas fa-database",
+            "description": "Save receipts locally if offline."
+          },
+          {
+            "id": 2,
+            "title": "Sync on Reconnect",
+            "icon": "fas fa-sync",
+            "description": "Auto-upload sales & stock updates."
+          },
+          {
+            "id": 3,
+            "title": "Queue Protection",
+            "icon": "fas fa-shield-alt",
+            "description": "No lost orders from network drops."
+          },
+          {
+            "id": 4,
+            "title": "Basic Validation",
+            "icon": "fas fa-check-circle",
+            "description": "Still enforces price lists & stock."
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Hardware Integration",
+        "icon": "fas fa-print",
+        "description": "Receipt printers, barcode scanners, cash drawers, kitchen/bar order printers.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Receipt Printers",
+            "icon": "fas fa-print",
+            "description": "Thermal printers for checkout counters."
+          },
+          {
+            "id": 2,
+            "title": "Kitchen/Bar Tickets",
+            "icon": "fas fa-utensils",
+            "description": "Send orders directly to prep stations."
+          },
+          {
+            "id": 3,
+            "title": "Barcode Scanners",
+            "icon": "fas fa-barcode",
+            "description": "USB / Bluetooth scanner support."
+          },
+          {
+            "id": 4,
+            "title": "Cash Drawer Control",
+            "icon": "fas fa-cash-register",
+            "description": "Open drawer only on approved sales."
+          }
+        ]
+      }
+    ],
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Point of Sale (POS)",
+        "short_description": "POS system for sales, billing, and inventory management.",
+        "description": "POS system for sales, billing, and inventory management.",
+        "content": "The POS System is designed for retail and restaurants. It enables quick billing, inventory management, customer loyalty tracking, and sales reporting. It works both online and offline, ensuring smooth business operations.",
+        "category": "Retail"
+      },
+      {
+        "locale": "km",
+        "name": "ប្រព័ន្ធចំណុចលក់ (POS)",
+        "short_description": "ប្រព័ន្ធ POS សម្រាប់ការលក់ វិក័យប័ត្រ និងគ្រប់គ្រងស្តុកទំនិញ។",
+        "description": "ប្រព័ន្ធ POS សម្រាប់ការលក់ វិក័យប័ត្រ និងគ្រប់គ្រងស្តុកទំនិញ។",
+        "content": "ប្រព័ន្ធ POS គេស្រ្តីមសម្រាប់ហាងលក់រាយ និងភោជនីយដ្ឋាន អនុញ្ញាតឲ្យគណនេយ្យរហ័ស គ្រប់គ្រងស្តុក កម្មវិធីស្ម័គ្រចិត្តអតិថិជន និងរបាយការណ៍លក់ ដំណើរការបានទាំងអនឡាញ និងក្រៅបណ្ដាញ។",
+        "category": "លក់រាយ"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "slug": "accounting-system",
+    "icon": "fa-solid fa-file-invoice-dollar",
+    "thumb": "site/assets/img/products/accounting-system.png",
+    "cover": "site/assets/img/products/accounting-system-cover.png",
+    "meta": {
+      "title": "Accounting System - Wintech",
+      "image": "site/assets/img/products/accounting-system.png",
+      "description": "Simplify financial accounting and reporting."
+    },
+    "features": [
+      {
+        "id": 1,
+        "title": "General Ledger",
+        "icon": "fas fa-book-open",
+        "description": "Manage chart of accounts, journals, recurring entries, period closing, and adjustments.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Chart of Accounts",
+            "icon": "fas fa-list-alt",
+            "description": "Assets, liabilities, equity, income, expenses."
+          },
+          {
+            "id": 2,
+            "title": "Journal Entries",
+            "icon": "fas fa-keyboard",
+            "description": "Manual and recurring journals with approval."
+          },
+          {
+            "id": 3,
+            "title": "Period Close",
+            "icon": "fas fa-calendar-check",
+            "description": "Lock periods after review to prevent edits."
+          },
+          {
+            "id": 4,
+            "title": "Adjustments",
+            "icon": "fas fa-exchange-alt",
+            "description": "Accruals, deferrals, write-offs."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Accounts Payable",
+        "icon": "fas fa-file-invoice",
+        "description": "Record vendor bills, track due dates, manage credit notes, and monitor outstanding liabilities.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Vendor Bills",
+            "icon": "fas fa-file-upload",
+            "description": "Attach invoice scans and enter amounts."
+          },
+          {
+            "id": 2,
+            "title": "Due Date Tracking",
+            "icon": "fas fa-hourglass-half",
+            "description": "Avoid late payment penalties."
+          },
+          {
+            "id": 3,
+            "title": "Credit Notes",
+            "icon": "fas fa-undo",
+            "description": "Record supplier returns and discounts."
+          },
+          {
+            "id": 4,
+            "title": "Aging Report",
+            "icon": "fas fa-chart-line",
+            "description": "Outstanding AP by 30/60/90+ days."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Accounts Receivable",
+        "icon": "fas fa-file-invoice-dollar",
+        "description": "Issue invoices, apply receipts, handle partial payments, and aging of customer balances.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Customer Invoices",
+            "icon": "fas fa-file-alt",
+            "description": "Create and email branded invoices."
+          },
+          {
+            "id": 2,
+            "title": "Payment Allocation",
+            "icon": "fas fa-credit-card",
+            "description": "Apply partial/multiple payments to invoices."
+          },
+          {
+            "id": 3,
+            "title": "Credit Control",
+            "icon": "fas fa-exclamation-circle",
+            "description": "Flag overdue accounts for follow-up."
+          },
+          {
+            "id": 4,
+            "title": "AR Aging",
+            "icon": "fas fa-calendar-day",
+            "description": "Track outstanding by customer over time."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Expense Claims & Petty Cash",
+        "icon": "fas fa-wallet",
+        "description": "Staff submit claims with receipts; finance approves and reimburses; petty cash tracking.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Claim Submission",
+            "icon": "fas fa-receipt",
+            "description": "Upload receipt photos from web/mobile."
+          },
+          {
+            "id": 2,
+            "title": "Approval Workflow",
+            "icon": "fas fa-check-double",
+            "description": "Manager/finance-level validation."
+          },
+          {
+            "id": 3,
+            "title": "Petty Cash Log",
+            "icon": "fas fa-cash-register",
+            "description": "Track every withdrawal and top-up."
+          },
+          {
+            "id": 4,
+            "title": "Reimbursement Status",
+            "icon": "fas fa-money-bill-wave",
+            "description": "Mark paid / pending / rejected."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Tax & Compliance",
+        "icon": "fas fa-calculator",
+        "description": "VAT/GST handling, withholding tax, localization for statutory reports and auditing.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Tax Codes",
+            "icon": "fas fa-tags",
+            "description": "Configure VAT/GST rates and exemptions."
+          },
+          {
+            "id": 2,
+            "title": "Withholding Tax",
+            "icon": "fas fa-percentage",
+            "description": "Auto-calculate withholding on vendor bills."
+          },
+          {
+            "id": 3,
+            "title": "Tax Reports",
+            "icon": "fas fa-file-invoice",
+            "description": "Generate monthly/quarterly tax summaries."
+          },
+          {
+            "id": 4,
+            "title": "Audit Readiness",
+            "icon": "fas fa-clipboard-check",
+            "description": "Traceable records for regulators."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Bank Reconciliation",
+        "icon": "fas fa-university",
+        "description": "Import bank statements, match transactions, and reconcile balances quickly.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Statement Import",
+            "icon": "fas fa-file-upload",
+            "description": "Upload CSV/Excel bank activity."
+          },
+          {
+            "id": 2,
+            "title": "Auto Matching",
+            "icon": "fas fa-magic",
+            "description": "Suggest matches for payments & receipts."
+          },
+          {
+            "id": 3,
+            "title": "Manual Adjustments",
+            "icon": "fas fa-edit",
+            "description": "Handle bank fees or interest."
+          },
+          {
+            "id": 4,
+            "title": "Reconcile Report",
+            "icon": "fas fa-file-alt",
+            "description": "Show matched vs unmatched items."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Fixed Assets",
+        "icon": "fas fa-cubes",
+        "description": "Register fixed assets, calculate depreciation, manage disposals and asset value tracking.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Asset Register",
+            "icon": "fas fa-clipboard-list",
+            "description": "Track equipment, vehicles, machines."
+          },
+          {
+            "id": 2,
+            "title": "Depreciation Rules",
+            "icon": "fas fa-chart-line",
+            "description": "Straight-line, declining balance, custom."
+          },
+          {
+            "id": 3,
+            "title": "Asset Lifecycle",
+            "icon": "fas fa-recycle",
+            "description": "Acquisition, maintenance, disposal."
+          },
+          {
+            "id": 4,
+            "title": "Asset Valuation",
+            "icon": "fas fa-balance-scale",
+            "description": "NBV and accumulated depreciation tracking."
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Financial Statements",
+        "icon": "fas fa-chart-pie",
+        "description": "Profit & Loss, Balance Sheet, Cash Flow, Trial Balance – real time and exportable.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Profit & Loss",
+            "icon": "fas fa-chart-area",
+            "description": "Revenue vs expense overview."
+          },
+          {
+            "id": 2,
+            "title": "Balance Sheet",
+            "icon": "fas fa-balance-scale",
+            "description": "Assets, liabilities, equity snapshot."
+          },
+          {
+            "id": 3,
+            "title": "Cash Flow",
+            "icon": "fas fa-water",
+            "description": "Operating vs investing vs financing cash."
+          },
+          {
+            "id": 4,
+            "title": "Trial Balance",
+            "icon": "fas fa-table",
+            "description": "Debits and credits for closing."
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Budgeting & Forecasting",
+        "icon": "fas fa-bullseye",
+        "description": "Set budgets per department/project and compare actual vs planned spend.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Department Budgets",
+            "icon": "fas fa-sitemap",
+            "description": "Plan monthly/quarterly spend."
+          },
+          {
+            "id": 2,
+            "title": "Variance Analysis",
+            "icon": "fas fa-chart-line",
+            "description": "Actual vs budget tracking."
+          },
+          {
+            "id": 3,
+            "title": "Scenario Forecasts",
+            "icon": "fas fa-project-diagram",
+            "description": "Best / worst / expected cases."
+          },
+          {
+            "id": 4,
+            "title": "Approval Workflow",
+            "icon": "fas fa-check-double",
+            "description": "Get finance sign-off on revisions."
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Audit Trail & Export",
+        "icon": "fas fa-clipboard-check",
+        "description": "Full transaction history with user logs and CSV/XLSX/PDF export for auditors.",
+        "details": [
+          {
+            "id": 1,
+            "title": "User Activity Log",
+            "icon": "fas fa-user-shield",
+            "description": "Track who created/edited/deleted records."
+          },
+          {
+            "id": 2,
+            "title": "Immutable History",
+            "icon": "fas fa-lock",
+            "description": "Timestamped changes for compliance."
+          },
+          {
+            "id": 3,
+            "title": "Bulk Export",
+            "icon": "fas fa-file-export",
+            "description": "Download supporting ledgers."
+          },
+          {
+            "id": 4,
+            "title": "External Audit Pack",
+            "icon": "fas fa-briefcase",
+            "description": "Provide auditors with read-only data extracts."
+          }
+        ]
+      }
+    ],
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Accounting System",
+        "short_description": "Simplify financial accounting and reporting.",
+        "description": "Simplify financial accounting and reporting.",
+        "content": "Our Accounting System automates bookkeeping, invoicing, expense tracking, and tax calculations. It provides financial dashboards and real-time reporting, making it easier for businesses to maintain accurate financial records.",
+        "category": "Finance"
+      },
+      {
+        "locale": "km",
+        "name": "ប្រព័ន្ធគណនេយ្យ",
+        "short_description": "សម្រួលការគណនេយ្យហិរញ្ញវត្ថុ និងរបាយការណ៍។",
+        "description": "សម្រួលការគណនេយ្យហិរញ្ញវត្ថុ និងរបាយការណ៍។",
+        "content": "ប្រព័ន្ធគណនេយ្យជួយស្វ័យប្រវត្តិកម្ម សៀវភៅគណនេយ្យ វិក័យប័ត្រ ការចំណាយ និងពន្ធ។ ផ្តល់ផ្ទាំងទិន្នន័យហិរញ្ញវត្ថុ និងរបាយការណ៍ពេលពិត ងាយស្រួលក្នុងការរក្សាទុកទិន្នន័យត្រឹមត្រូវ។",
+        "category": "ហិរញ្ញវត្ថុ"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "slug": "loan-management-system",
+    "icon": "fa-solid fa-hand-holding-dollar",
+    "thumb": "site/assets/img/products/loan-management-system.png",
+    "cover": "site/assets/img/products/loan-management-system-cover.png",
+    "meta": {
+      "title": "Loan Management System - Wintech",
+      "image": "site/assets/img/products/loan-management-system.png",
+      "description": "Automate loan processing and repayment tracking."
+    },
+    "features": [
+      {
+        "id": 1,
+        "title": "Loan Origination",
+        "icon": "fas fa-file-signature",
+        "description": "Capture applications, required documents, credit purposes, and requested amounts.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Application Intake",
+            "icon": "fas fa-file-alt",
+            "description": "Register borrower info and loan purpose."
+          },
+          {
+            "id": 2,
+            "title": "Document Upload",
+            "icon": "fas fa-upload",
+            "description": "ID cards, payslips, business licenses."
+          },
+          {
+            "id": 3,
+            "title": "Eligibility Checks",
+            "icon": "fas fa-check-circle",
+            "description": "Auto-validate required criteria (age, income)."
+          },
+          {
+            "id": 4,
+            "title": "Loan Proposal",
+            "icon": "fas fa-file-invoice-dollar",
+            "description": "Draft loan terms before approval."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "KYC & Credit Scoring",
+        "icon": "fas fa-id-card-check",
+        "description": "Store borrower identity docs, run eligibility/risk scoring, flag high-risk cases.",
+        "details": [
+          {
+            "id": 1,
+            "title": "KYC Profile",
+            "icon": "fas fa-id-card",
+            "description": "Borrower ID, address, business details."
+          },
+          {
+            "id": 2,
+            "title": "Risk Flags",
+            "icon": "fas fa-exclamation-triangle",
+            "description": "Highlight high-risk or missing data."
+          },
+          {
+            "id": 3,
+            "title": "Credit Scoring",
+            "icon": "fas fa-chart-line",
+            "description": "Score based on income stability and history."
+          },
+          {
+            "id": 4,
+            "title": "Blacklists / Watchlists",
+            "icon": "fas fa-user-shield",
+            "description": "Mark restricted or blocked applicants."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Approval Workflow",
+        "icon": "fas fa-check-double",
+        "description": "Configurable review steps, maker-checker control, digital approval notes.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Maker-Checker",
+            "icon": "fas fa-user-check",
+            "description": "Separate data entry vs approval roles."
+          },
+          {
+            "id": 2,
+            "title": "Multi-Level Approval",
+            "icon": "fas fa-sitemap",
+            "description": "Branch → regional → head office."
+          },
+          {
+            "id": 3,
+            "title": "Comment History",
+            "icon": "fas fa-comments",
+            "description": "Manager notes and underwriting rationale."
+          },
+          {
+            "id": 4,
+            "title": "Decision Logs",
+            "icon": "fas fa-clipboard-check",
+            "description": "Approved/declined with timestamp and user."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Disbursement Management",
+        "icon": "fas fa-wallet",
+        "description": "Generate disbursement schedules, record fund release, link to accounting.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Funding Schedule",
+            "icon": "fas fa-calendar-alt",
+            "description": "Set lump sum or staged release dates."
+          },
+          {
+            "id": 2,
+            "title": "Bank / Cash Payout",
+            "icon": "fas fa-university",
+            "description": "Record how loan amount was disbursed."
+          },
+          {
+            "id": 3,
+            "title": "Voucher / Receipt",
+            "icon": "fas fa-receipt",
+            "description": "Generate signed handover documents."
+          },
+          {
+            "id": 4,
+            "title": "GL Posting",
+            "icon": "fas fa-file-export",
+            "description": "Push disbursement entries to accounting."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Interest & Repayment Schedule",
+        "icon": "fas fa-calculator",
+        "description": "Flat / declining balance interest, amortization tables, due dates, and penalties.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Schedule Builder",
+            "icon": "fas fa-table",
+            "description": "Generate amortization table for full loan term."
+          },
+          {
+            "id": 2,
+            "title": "Interest Types",
+            "icon": "fas fa-percentage",
+            "description": "Support flat, effective, and reducing balance interest."
+          },
+          {
+            "id": 3,
+            "title": "Due Date Calendar",
+            "icon": "fas fa-calendar-check",
+            "description": "Show upcoming installments, principal vs interest."
+          },
+          {
+            "id": 4,
+            "title": "Penalty Rules",
+            "icon": "fas fa-exclamation-circle",
+            "description": "Late fee calculation and grace periods."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Repayment Tracking",
+        "icon": "fas fa-calendar-check",
+        "description": "Track installments paid vs due, post repayments, calculate arrears automatically.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Installment Posting",
+            "icon": "fas fa-keyboard",
+            "description": "Record full or partial loan payments."
+          },
+          {
+            "id": 2,
+            "title": "Outstanding Balance",
+            "icon": "fas fa-balance-scale",
+            "description": "View remaining principal instantly."
+          },
+          {
+            "id": 3,
+            "title": "Overdue Aging",
+            "icon": "fas fa-hourglass-half",
+            "description": "Show how long each loan is late."
+          },
+          {
+            "id": 4,
+            "title": "Restructure / Reschedule",
+            "icon": "fas fa-random",
+            "description": "Support loan term extensions or restructures."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Collections & Reminders",
+        "icon": "fas fa-bell",
+        "description": "SMS reminders, overdue alerts, call logs, collector assignments, field notes.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Automated SMS",
+            "icon": "fas fa-sms",
+            "description": "Remind borrowers before/after due dates."
+          },
+          {
+            "id": 2,
+            "title": "Collector Assignment",
+            "icon": "fas fa-user-tie",
+            "description": "Assign accounts to field officers."
+          },
+          {
+            "id": 3,
+            "title": "Visit Notes",
+            "icon": "fas fa-map-marker-alt",
+            "description": "Record on-site collection attempts."
+          },
+          {
+            "id": 4,
+            "title": "Promise to Pay",
+            "icon": "fas fa-handshake",
+            "description": "Track borrower commitments and follow-ups."
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Collateral & Guarantees",
+        "icon": "fas fa-shield-alt",
+        "description": "Register collateral (land titles, vehicles, assets), valuation notes, and guarantees.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Collateral Register",
+            "icon": "fas fa-building",
+            "description": "Record land titles, vehicles, equipment."
+          },
+          {
+            "id": 2,
+            "title": "Valuation Data",
+            "icon": "fas fa-balance-scale",
+            "description": "Market value, appraiser notes, photos."
+          },
+          {
+            "id": 3,
+            "title": "Lien/Ownership",
+            "icon": "fas fa-file-contract",
+            "description": "Proof of ownership and pledge agreements."
+          },
+          {
+            "id": 4,
+            "title": "Guarantors",
+            "icon": "fas fa-user-shield",
+            "description": "Record guarantor info and liability."
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Portfolio Monitoring",
+        "icon": "fas fa-chart-area",
+        "description": "PAR (portfolio at risk), delinquency aging, branch/agent performance dashboards.",
+        "details": [
+          {
+            "id": 1,
+            "title": "PAR Reports",
+            "icon": "fas fa-chart-line",
+            "description": "Portfolio at risk by bucket (1-30, 31-60, 60+)."
+          },
+          {
+            "id": 2,
+            "title": "Branch Performance",
+            "icon": "fas fa-store",
+            "description": "Compare approval volume and repayment quality."
+          },
+          {
+            "id": 3,
+            "title": "Officer Scorecards",
+            "icon": "fas fa-user-tie",
+            "description": "Field/credit officer performance metrics."
+          },
+          {
+            "id": 4,
+            "title": "Trend Analysis",
+            "icon": "fas fa-chart-area",
+            "description": "Detect rising default risk early."
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Regulatory & Audit Reports",
+        "icon": "fas fa-file-alt",
+        "description": "Export reports required by management, auditors, and regulators.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Loan Register Export",
+            "icon": "fas fa-file-export",
+            "description": "Download all active loans with balances."
+          },
+          {
+            "id": 2,
+            "title": "Compliance Packs",
+            "icon": "fas fa-clipboard-check",
+            "description": "Standard forms for regulators and auditors."
+          },
+          {
+            "id": 3,
+            "title": "Approval Audit Trail",
+            "icon": "fas fa-history",
+            "description": "Full decision chain for each loan."
+          },
+          {
+            "id": 4,
+            "title": "Exception Reports",
+            "icon": "fas fa-exclamation-circle",
+            "description": "Highlight policy breaches or manual overrides."
+          }
+        ]
+      }
+    ],
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Loan Management System",
+        "short_description": "Automate loan processing and repayment tracking.",
+        "description": "Automate loan processing and repayment tracking.",
+        "content": "The Loan Management System handles customer loan applications, approval workflows, repayment schedules, and interest calculations. It reduces manual errors and provides transparency in loan servicing for financial institutions.",
+        "category": "Finance"
+      },
+      {
+        "locale": "km",
+        "name": "ប្រព័ន្ធគ្រប់គ្រងប្រាក់កម្ចី",
+        "short_description": "ស្វ័យប្រវត្តិកម្មដំណើរការ និងការតាមដានការបង់ប្រាក់កម្ចី។",
+        "description": "ស្វ័យប្រវត្តិកម្មដំណើរការ និងការតាមដានការបង់ប្រាក់កម្ចី។",
+        "content": "ប្រព័ន្ធនេះ គ្រប់គ្រងពាក្យសុំប្រាក់កម្ចី លំនាំអនុម័ត កាលវិភាគបង់ប្រាក់ និងគណនាការប្រាក់ ដើម្បីកាត់បន្ថយកំហុស និងបង្កើនភាពថ្លៃថ្នូរ​ក្នុងសេវាកម្មឥណទាន។",
+        "category": "ហិរញ្ញវត្ថុ"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "slug": "content-management-system",
+    "icon": "fa-solid fa-edit",
+    "thumb": "site/assets/img/products/content-management-system.png",
+    "cover": "site/assets/img/products/content-management-system-cover.png",
+    "meta": {
+      "title": "Content Management System - Wintech",
+      "image": "site/assets/img/products/content-management-system.png",
+      "description": "Manage websites and content without coding."
+    },
+    "features": [
+      {
+        "id": 1,
+        "title": "Drag & Drop Page Builder",
+        "icon": "fas fa-object-group",
+        "description": "Visually arrange sections, banners, hero sliders, galleries, CTAs, and forms.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Section Blocks",
+            "icon": "fas fa-th-large",
+            "description": "Hero, features, testimonials, FAQ, footer."
+          },
+          {
+            "id": 2,
+            "title": "Inline Editing",
+            "icon": "fas fa-edit",
+            "description": "Click to edit text, buttons, links."
+          },
+          {
+            "id": 3,
+            "title": "Responsive Layout",
+            "icon": "fas fa-mobile-alt",
+            "description": "Preview desktop/tablet/mobile."
+          },
+          {
+            "id": 4,
+            "title": "Form Builder",
+            "icon": "fas fa-envelope-open-text",
+            "description": "Add contact/lead forms without coding."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Media Library",
+        "icon": "fas fa-photo-video",
+        "description": "Centralized image/video/document storage with tags, alt text, and search.",
+        "details": [
+          {
+            "id": 1,
+            "title": "File Management",
+            "icon": "fas fa-folder-open",
+            "description": "Organize assets by folder or tag."
+          },
+          {
+            "id": 2,
+            "title": "Alt Text & Metadata",
+            "icon": "fas fa-info-circle",
+            "description": "Improve accessibility and SEO."
+          },
+          {
+            "id": 3,
+            "title": "Versioning",
+            "icon": "fas fa-history",
+            "description": "Keep older image versions for rollback."
+          },
+          {
+            "id": 4,
+            "title": "Bulk Upload",
+            "icon": "fas fa-upload",
+            "description": "Drag multiple files at once."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "SEO Optimization",
+        "icon": "fas fa-search",
+        "description": "Meta titles/descriptions, sitemap generation, structured data, and social preview tags.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Meta Controls",
+            "icon": "fas fa-pen",
+            "description": "Custom title/description per page."
+          },
+          {
+            "id": 2,
+            "title": "Open Graph Tags",
+            "icon": "fas fa-share-alt",
+            "description": "Control how links look on social media."
+          },
+          {
+            "id": 3,
+            "title": "XML Sitemap",
+            "icon": "fas fa-sitemap",
+            "description": "Auto-generate sitemap.xml for search engines."
+          },
+          {
+            "id": 4,
+            "title": "Structured Data",
+            "icon": "fas fa-code",
+            "description": "Schema markup for products, articles, FAQs."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Blog & News Publishing",
+        "icon": "fas fa-newspaper",
+        "description": "Schedule posts, manage categories/tags, and highlight featured articles.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Author Profiles",
+            "icon": "fas fa-user-edit",
+            "description": "Show writer bio and avatar."
+          },
+          {
+            "id": 2,
+            "title": "Categories & Tags",
+            "icon": "fas fa-tags",
+            "description": "Group articles by topic/vertical."
+          },
+          {
+            "id": 3,
+            "title": "Scheduled Publishing",
+            "icon": "fas fa-clock",
+            "description": "Plan announcements and campaigns."
+          },
+          {
+            "id": 4,
+            "title": "Featured/Sticky Posts",
+            "icon": "fas fa-thumbtack",
+            "description": "Pin important stories to homepage."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Forms & Lead Capture",
+        "icon": "fas fa-envelope-open-text",
+        "description": "Build contact forms, quote request forms, and route inquiries to email/CRM.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Custom Fields",
+            "icon": "fas fa-list",
+            "description": "Name, phone, dropdowns, checkboxes, file upload."
+          },
+          {
+            "id": 2,
+            "title": "Email Routing",
+            "icon": "fas fa-paper-plane",
+            "description": "Send inquiries to sales/support inboxes."
+          },
+          {
+            "id": 3,
+            "title": "CRM Handoff",
+            "icon": "fas fa-plug",
+            "description": "Push leads into CRM pipeline."
+          },
+          {
+            "id": 4,
+            "title": "Anti-Spam",
+            "icon": "fas fa-shield-alt",
+            "description": "Basic captcha / rate limiting."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Multi-Language Content",
+        "icon": "fas fa-language",
+        "description": "Publish pages in multiple languages with localized menus and slugs.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Language Switcher",
+            "icon": "fas fa-globe",
+            "description": "Frontend toggle for users."
+          },
+          {
+            "id": 2,
+            "title": "Localized URLs",
+            "icon": "fas fa-link",
+            "description": "Per-language slugs (/en, /kh, /cn)."
+          },
+          {
+            "id": 3,
+            "title": "Menu Translation",
+            "icon": "fas fa-bars",
+            "description": "Nav menus per language."
+          },
+          {
+            "id": 4,
+            "title": "Fallback Content",
+            "icon": "fas fa-arrow-rotate-right",
+            "description": "Show default language if translation missing."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Roles & Permissions",
+        "icon": "fas fa-user-shield",
+        "description": "Admin, editor, contributor roles with approval workflows and restricted access.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Role-Based Access",
+            "icon": "fas fa-user-lock",
+            "description": "Limit who can edit/publish/delete."
+          },
+          {
+            "id": 2,
+            "title": "Approval Flow",
+            "icon": "fas fa-check-double",
+            "description": "Draft → review → approve → publish."
+          },
+          {
+            "id": 3,
+            "title": "Content Ownership",
+            "icon": "fas fa-id-badge",
+            "description": "Each post tied to an owner."
+          },
+          {
+            "id": 4,
+            "title": "Activity Log",
+            "icon": "fas fa-history",
+            "description": "See exactly what changed and by who."
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Version Control & Drafts",
+        "icon": "fas fa-history",
+        "description": "Save drafts, preview before publish, and roll back to previous versions.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Live Preview",
+            "icon": "fas fa-eye",
+            "description": "See how the page looks before publishing."
+          },
+          {
+            "id": 2,
+            "title": "Revision History",
+            "icon": "fas fa-list-ol",
+            "description": "Track edits over time."
+          },
+          {
+            "id": 3,
+            "title": "Rollback",
+            "icon": "fas fa-undo",
+            "description": "Restore older versions instantly."
+          },
+          {
+            "id": 4,
+            "title": "Staging vs Production",
+            "icon": "fas fa-exchange-alt",
+            "description": "Work on drafts without affecting live site."
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Integrations & Embeds",
+        "icon": "fas fa-plug",
+        "description": "Embed maps, videos, chat widgets, analytics, and connect to external APIs.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Map & Video Embed",
+            "icon": "fas fa-map-marker-alt",
+            "description": "Google Maps, YouTube, etc."
+          },
+          {
+            "id": 2,
+            "title": "Chat Widgets",
+            "icon": "fas fa-comments",
+            "description": "Add live chat / WhatsApp buttons."
+          },
+          {
+            "id": 3,
+            "title": "Analytics Snippets",
+            "icon": "fas fa-chart-line",
+            "description": "Add tracking pixels and analytics code."
+          },
+          {
+            "id": 4,
+            "title": "Custom API Hooks",
+            "icon": "fas fa-code",
+            "description": "Display external data (listings, products)."
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Performance & Caching",
+        "icon": "fas fa-tachometer-alt",
+        "description": "Optimized page load, CDN-friendly assets, and image compression controls.",
+        "details": [
+          {
+            "id": 1,
+            "title": "CDN Ready",
+            "icon": "fas fa-cloud",
+            "description": "Serve static assets faster worldwide."
+          },
+          {
+            "id": 2,
+            "title": "Image Compression",
+            "icon": "fas fa-compress",
+            "description": "Auto-optimize uploaded images."
+          },
+          {
+            "id": 3,
+            "title": "Cache Control",
+            "icon": "fas fa-database",
+            "description": "Cache pages for faster repeat visits."
+          },
+          {
+            "id": 4,
+            "title": "Performance Insights",
+            "icon": "fas fa-chart-area",
+            "description": "See slow pages and oversized media."
+          }
+        ]
+      }
+    ],
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Content Management System (CMS)",
+        "short_description": "Manage websites and content without coding.",
+        "description": "Manage websites and content without coding.",
+        "content": "Our CMS allows businesses to create, update, and publish website content easily. With drag-and-drop tools, SEO support, and media management, it empowers non-technical users to manage professional websites.",
+        "category": "Web Development"
+      },
+      {
+        "locale": "km",
+        "name": "ប្រព័ន្ធគ្រប់គ្រងមាតិកា (CMS)",
+        "short_description": "គ្រប់គ្រងគេហទំព័រ និងមាតិកា ដោយមិនចាំបាច់សរសេរកូដ។",
+        "description": "គ្រប់គ្រងគេហទំព័រ និងមាតិកា ដោយមិនចាំបាច់សរសេរកូដ។",
+        "content": "CMS ជួយអាជីវកម្មបង្កើត បច្ចុប្បន្នភាព និងផ្សព្វផ្សាយមាតិកាគេហទំព័រយ៉ាងងាយ ដោយមានឧបករណ៍អូសដាក់ គាំទ្រ SEO និងគ្រប់គ្រងមេឌៀ ឲ្យអ្នកមិនជួយបច្ចេកទេសអាចគ្រប់គ្រងគេហទំព័រអាជីពបាន។",
+        "category": "អភិវឌ្ឍន៍គេហទំព័រ"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "slug": "real-estate-management-system",
+    "icon": "fa-solid fa-building",
+    "thumb": "site/assets/img/products/real-estate-management-system.png",
+    "cover": "site/assets/img/products/real-estate-management-system-cover.png",
+    "meta": {
+      "title": "Real Estate Management System - Wintech",
+      "image": "site/assets/img/products/real-estate-management-system.png",
+      "description": "Platform for real estate listings and sales management."
+    },
+    "features": [
+      {
+        "id": 1,
+        "title": "Property Listings",
+        "icon": "fas fa-building",
+        "description": "Create and manage property profiles with photos, price, status (available/sold/rented).",
+        "details": [
+          {
+            "id": 1,
+            "title": "Listing Profile",
+            "icon": "fas fa-home",
+            "description": "Bedrooms, bathrooms, size, location."
+          },
+          {
+            "id": 2,
+            "title": "Photo Gallery",
+            "icon": "fas fa-images",
+            "description": "Upload and reorder property images."
+          },
+          {
+            "id": 3,
+            "title": "Status Tracking",
+            "icon": "fas fa-traffic-light",
+            "description": "Available / Reserved / Sold / Rented."
+          },
+          {
+            "id": 4,
+            "title": "Pricing History",
+            "icon": "fas fa-dollar-sign",
+            "description": "Record price changes over time."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Lead & Client CRM",
+        "icon": "fas fa-user-tie",
+        "description": "Capture inquiries from calls, web forms, walk-ins; assign to agents; track follow-ups.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Lead Capture",
+            "icon": "fas fa-user-plus",
+            "description": "Import from phone/email/website."
+          },
+          {
+            "id": 2,
+            "title": "Agent Assignment",
+            "icon": "fas fa-user-check",
+            "description": "Automatically route to available agent."
+          },
+          {
+            "id": 3,
+            "title": "Follow-Up Tasks",
+            "icon": "fas fa-tasks",
+            "description": "Call-back reminders and meeting notes."
+          },
+          {
+            "id": 4,
+            "title": "Hot Lead Tagging",
+            "icon": "fas fa-fire",
+            "description": "Mark high-intent buyers/tenants."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Viewings & Appointments",
+        "icon": "fas fa-calendar-check",
+        "description": "Schedule property visits, log client interest level, record feedback after site tours.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Viewing Scheduler",
+            "icon": "fas fa-calendar-plus",
+            "description": "Book site tours for specific units."
+          },
+          {
+            "id": 2,
+            "title": "Agent Calendar",
+            "icon": "fas fa-user-clock",
+            "description": "See each agent’s upcoming viewings."
+          },
+          {
+            "id": 3,
+            "title": "Client Feedback",
+            "icon": "fas fa-comment-dots",
+            "description": "Record interest level and objections."
+          },
+          {
+            "id": 4,
+            "title": "Follow-Up Actions",
+            "icon": "fas fa-clipboard-check",
+            "description": "Set next step: 2nd viewing, offer, etc."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Deals & Contracts",
+        "icon": "fas fa-file-contract",
+        "description": "Offer letters, booking deposits, sales agreements, renewals, and key handover tracking.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Offer Letter",
+            "icon": "fas fa-file-signature",
+            "description": "Generate offer and reserve the unit."
+          },
+          {
+            "id": 2,
+            "title": "Deposit Tracking",
+            "icon": "fas fa-wallet",
+            "description": "Record booking/holding deposits."
+          },
+          {
+            "id": 3,
+            "title": "Sales / Lease Agreement",
+            "icon": "fas fa-file-alt",
+            "description": "Attach signed contracts and terms."
+          },
+          {
+            "id": 4,
+            "title": "Handover Checklist",
+            "icon": "fas fa-key",
+            "description": "Record key handover and move-in date."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Commission Tracking",
+        "icon": "fas fa-percentage",
+        "description": "Calculate agent commissions per deal, split commissions, and payout history.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Commission Rules",
+            "icon": "fas fa-scale-balanced",
+            "description": "Fixed %, tiered %, or flat fee."
+          },
+          {
+            "id": 2,
+            "title": "Split Deals",
+            "icon": "fas fa-user-friends",
+            "description": "Share commission between co-brokers."
+          },
+          {
+            "id": 3,
+            "title": "Payout History",
+            "icon": "fas fa-history",
+            "description": "Record what’s already paid to each agent."
+          },
+          {
+            "id": 4,
+            "title": "Performance Reports",
+            "icon": "fas fa-chart-line",
+            "description": "See top closers by revenue."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Rental & Lease Management",
+        "icon": "fas fa-file-signature",
+        "description": "Lease terms, rent schedules, tenant details, reminders for renewals and overdue rent.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Tenant Profile",
+            "icon": "fas fa-user",
+            "description": "Store tenant ID, contact, contract dates."
+          },
+          {
+            "id": 2,
+            "title": "Rent Schedule",
+            "icon": "fas fa-calendar-day",
+            "description": "Monthly rent due dates and amounts."
+          },
+          {
+            "id": 3,
+            "title": "Overdue Alerts",
+            "icon": "fas fa-bell",
+            "description": "Flag missed/late rental payments."
+          },
+          {
+            "id": 4,
+            "title": "Renewal Reminders",
+            "icon": "fas fa-redo",
+            "description": "Remind agents before lease expiry."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Payments & Invoicing",
+        "icon": "fas fa-file-invoice-dollar",
+        "description": "Record deposits, down payments, commission invoices, and rental receipts.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Invoice Generation",
+            "icon": "fas fa-file-invoice",
+            "description": "Create rent/sale/commission invoices."
+          },
+          {
+            "id": 2,
+            "title": "Receipt Issuance",
+            "icon": "fas fa-receipt",
+            "description": "Mark payments received and send proof."
+          },
+          {
+            "id": 3,
+            "title": "Payment Status",
+            "icon": "fas fa-clipboard-list",
+            "description": "Track paid / partial / overdue amounts."
+          },
+          {
+            "id": 4,
+            "title": "Deposit Ledger",
+            "icon": "fas fa-donate",
+            "description": "Record and refund security deposits."
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Document Storage",
+        "icon": "fas fa-folder",
+        "description": "Upload ownership docs, land titles, floor plans, ID/passport copies, signed agreements.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Property Docs",
+            "icon": "fas fa-file-alt",
+            "description": "Land titles, strata titles, floor plans."
+          },
+          {
+            "id": 2,
+            "title": "Legal Agreements",
+            "icon": "fas fa-file-contract",
+            "description": "Sales/lease contracts, MoUs, NDAs."
+          },
+          {
+            "id": 3,
+            "title": "Client KYC",
+            "icon": "fas fa-id-card",
+            "description": "Passport/ID scans and proof of funds."
+          },
+          {
+            "id": 4,
+            "title": "Access Control",
+            "icon": "fas fa-lock",
+            "description": "Restrict sensitive docs to managers only."
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Agent Performance Dashboard",
+        "icon": "fas fa-chart-line",
+        "description": "Track conversion rate, revenue per agent, pipeline value, and closing speed.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Conversion Rate",
+            "icon": "fas fa-percentage",
+            "description": "Leads contacted vs deals closed."
+          },
+          {
+            "id": 2,
+            "title": "Revenue Contribution",
+            "icon": "fas fa-dollar-sign",
+            "description": "Total commission generated per agent."
+          },
+          {
+            "id": 3,
+            "title": "Pipeline Health",
+            "icon": "fas fa-stream",
+            "description": "Value of active opportunities."
+          },
+          {
+            "id": 4,
+            "title": "Closing Speed",
+            "icon": "fas fa-stopwatch",
+            "description": "Average days to close a deal."
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Portal / Website Sync",
+        "icon": "fas fa-globe",
+        "description": "Sync listings to public website or portals so new units appear online automatically.",
+        "details": [
+          {
+            "id": 1,
+            "title": "Auto Publish",
+            "icon": "fas fa-upload",
+            "description": "Push approved listings to website."
+          },
+          {
+            "id": 2,
+            "title": "Status Sync",
+            "icon": "fas fa-sync",
+            "description": "Mark units sold/rented and hide them online."
+          },
+          {
+            "id": 3,
+            "title": "Lead Capture Forms",
+            "icon": "fas fa-envelope-open-text",
+            "description": "Route website inquiries into CRM."
+          },
+          {
+            "id": 4,
+            "title": "Brand Consistency",
+            "icon": "fas fa-palette",
+            "description": "Ensure photos, pricing, and agent info are up to date."
+          }
+        ]
+      }
+    ],
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Real Estate Management System",
+        "short_description": "Platform for real estate listings and sales management.",
+        "description": "Platform for real estate listings and sales management.",
+        "content": "The Real Estate Management System helps agencies and brokers manage property listings, leads, rentals, and sales transactions. It integrates customer relationship management and reporting to boost property business efficiency.",
+        "category": "Real Estate"
+      },
+      {
+        "locale": "km",
+        "name": "ប្រព័ន្ធគ្រប់គ្រងអចលនទ្រព្យ",
+        "short_description": "វេទិកាសម្រាប់បញ្ជីអចលនទ្រព្យ និងគ្រប់គ្រងការលក់/ជួល។",
+        "description": "វេទិកាសម្រាប់បញ្ជីអចលនទ្រព្យ និងគ្រប់គ្រងការលក់/ជួល។",
+        "content": "ប្រព័ន្ធនេះជួយភ្នាក់ងារ និងជាងដេញថ្លៃគ្រប់គ្រងបញ្ជីអចលនទ្រព្យ លីដ ការជួល និងប្រតិបត្តិការលក់ ដោយរួមបញ្ចូល CRM និងរបាយការណ៍ ដើម្បីបង្កើនប្រសិទ្ធភាពអាជីវកម្មអចលនទ្រព្យ។",
+        "category": "អចលនទ្រព្យ"
+      }
+    ]
+  }
+]

@@ -39,7 +39,7 @@ class RoleController extends Controller
                     'description.km' => 'nullable|string',
                     'description.zh' => 'nullable|string',
                     'administrator' => 'nullable|boolean',
-                    'order' => 'nullable|integer|min:0',
+                    'sort' => 'nullable|integer|min:0',
                 ];
 
                 $validator = Validator::make($request->all(), $rules);
@@ -50,7 +50,7 @@ class RoleController extends Controller
                 // Create role
                 $role = Role::create([
                     'administrator' => $request->input('administrator', 0),
-                    'order' => $request->input('order', 0),
+                    'sort' => $request->input('sort', 0),
                     'created_by' => auth()->id(),
                 ]);
 
@@ -95,7 +95,7 @@ class RoleController extends Controller
                     'description.km' => 'nullable|string',
                     'description.zh' => 'nullable|string',
                     'administrator' => 'nullable|boolean',
-                    'order' => 'nullable|integer|min:0',
+                    'sort' => 'nullable|integer|min:0',
                 ];
 
                 $validator = Validator::make($request->all(), $rules);
@@ -106,7 +106,7 @@ class RoleController extends Controller
                 // Update role
                 $form->update([
                     'administrator' => $request->input('administrator', 0),
-                    'order' => $request->input('order', 0),
+                    'sort' => $request->input('sort', 0),
                     'updated_by' => auth()->id(),
                 ]);
 

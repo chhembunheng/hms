@@ -14,10 +14,6 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        // Clear existing translations and products to avoid orphan/duplicate slugs
-        ProductTranslation::query()->delete();
-        Product::query()->delete();
-
         // Load product data from English locale first
         $filePath = public_path("site/data/en/products.json");
 
@@ -38,15 +34,17 @@ class ProductSeeder extends Seeder
                 ? Str::slug($productData['slug'])
                 : Str::slug($productData['name'] ?? 'product-' . $productData['id']);
 
-            // Create product without specifying ID
-            $product = Product::create([
-                'sku' => $sku,
-                'slug' => $slug,
-                'image' => $productData['thumb'] ?? $productData['cover'] ?? null,
-                'sort' => isset($productData['sort']) ? (int)$productData['sort'] : 0,
-                'created_by' => 1,
-                'updated_by' => 1,
-            ]);
+            // Create or find product by SKU
+            $product = Product::updateOrCreate(
+                ['sku' => $sku],
+                [
+                    'slug' => $slug,
+                    'image' => $productData['thumb'] ?? $productData['cover'] ?? null,
+                    'sort' => isset($productData['sort']) ? (int)$productData['sort'] : 0,
+                    'created_by' => 1,
+                    'updated_by' => 1,
+                ]
+            );
 
             // Store mapping of old ID to new product
             $productMap[$productData['id']] = $product->id;

@@ -40,7 +40,7 @@ class MenuController extends Controller
                     'description.zh' => 'nullable|string',
                     'icon' => 'nullable|string|max:255',
                     'route' => 'nullable|string|max:255',
-                    'order' => 'nullable|integer|min:0',
+                    'sort' => 'nullable|integer|min:0',
                     'parent_id' => 'nullable|integer|exists:menus,id',
                 ];
 
@@ -52,7 +52,7 @@ class MenuController extends Controller
                 $menu = Menu::create([
                     'icon' => $request->input('icon'),
                     'route' => $request->input('route'),
-                    'order' => $request->input('order', 0),
+                    'sort' => $request->input('sort', 0),
                     'parent_id' => $request->input('parent_id'),
                     'created_by' => auth()->id(),
                 ]);
@@ -77,7 +77,7 @@ class MenuController extends Controller
             }
         }
 
-        $menus = Menu::whereNull('parent_id')->orderBy('order')->get();
+        $menus = Menu::whereNull('parent_id')->orderBy('sort')->get();
         return view('settings.menus.form', compact('form', 'menus', 'locales'));
     }
 
@@ -100,7 +100,7 @@ class MenuController extends Controller
                     'description.zh' => 'nullable|string',
                     'icon' => 'nullable|string|max:255',
                     'route' => 'nullable|string|max:255',
-                    'order' => 'nullable|integer|min:0',
+                    'sort' => 'nullable|integer|min:0',
                     'parent_id' => 'nullable|integer|exists:menus,id',
                 ];
 
@@ -112,7 +112,7 @@ class MenuController extends Controller
                 $form->update([
                     'icon' => $request->input('icon'),
                     'route' => $request->input('route'),
-                    'order' => $request->input('order', 0),
+                    'sort' => $request->input('sort', 0),
                     'parent_id' => $request->input('parent_id'),
                     'updated_by' => auth()->id(),
                 ]);
@@ -147,7 +147,7 @@ class MenuController extends Controller
             ];
         }
 
-        $menus = Menu::whereNull('parent_id')->where('id', '!=', $form->id)->orderBy('order')->get();
+        $menus = Menu::whereNull('parent_id')->where('id', '!=', $form->id)->orderBy('sort')->get();
         return view('settings.menus.form', compact('form', 'menus', 'locales', 'translations', 'id'));
     }
 

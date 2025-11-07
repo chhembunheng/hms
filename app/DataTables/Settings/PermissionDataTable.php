@@ -27,7 +27,7 @@ class PermissionDataTable extends DataTable
             ->addColumn('name', fn($row) => $row->translations->where('locale', $locale)->first()?->name ?? $row->translations->where('locale', 'en')->first()?->name ?? 'N/A')
             ->addColumn('menu', fn($row) => $row->menu?->translations->where('locale', $locale)->first()?->name ?? $row->menu?->translations->where('locale', 'en')->first()?->name ?? 'N/A')
             ->addColumn('action_route', fn($row) => $row->action_route ?? '-')
-            ->addColumn('order', fn($row) => $row->order)
+            ->addColumn('sort', fn($row) => $row->order)
             ->editColumn('created_at', function (Permission $model) {
                 return $model->created_at?->format(config('init.datetime.display_format'));
             })
@@ -67,7 +67,7 @@ class PermissionDataTable extends DataTable
             Column::make('name'),
             Column::make('menu'),
             Column::make('action_route'),
-            Column::make('order'),
+            Column::make('sort'),
             Column::make('created_at'),
             Column::computed('action')
                   ->exportable(false)

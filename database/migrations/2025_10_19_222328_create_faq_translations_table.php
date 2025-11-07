@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignId('faq_id')->constrained('faqs')->cascadeOnDelete();
             $table->string('locale', 10);
             $table->string('question');
-            $table->text('answer');
+            $table->text('answer')->nullable();
+            $table->unique(['faq_id', 'locale']);
             $table->authors();
         });
     }

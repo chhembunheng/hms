@@ -1,0 +1,40 @@
+[
+  {
+    "administrator": 1,
+    "sort": 1,
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Administrator",
+        "description": "Administrator with full access"
+      },
+      {
+        "locale": "km",
+        "name": "អ្នកគ្រប់គ្រង",
+        "description": "អ្នកគ្រប់គ្រងដែលមានលទ្ធិសមរម្យពេញលេញ"
+      }
+    ],
+    "users": [
+      {
+        "username": "chamn4b",
+        "email": "chamn4b@gmail.com",
+        "phone": "+85510345432",
+        "gender": "male",
+        "translations": [
+          {
+            "locale": "en",
+            "first_name": "CHAMN4B",
+            "last_name": "ROEUN",
+            "address": "House #1363, National Road No. 2, Toul Roka Village, Phnom Penh 120602, Cambodia"
+          },
+          {
+            "locale": "km",
+            "first_name": "ឆាម្នាប់",
+            "last_name": "រឺន",
+            "address": "ផ្ទះលេខ 1363, ផ្លូវជាតិលេខ 2, ភូមិតោលរ៉ូកា, រាជធានីភ្នំពេញ 120602, កម្ពុជា"
+          }
+        ]
+      }
+    ]
+  }
+]

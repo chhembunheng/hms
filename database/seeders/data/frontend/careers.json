@@ -1,0 +1,140 @@
+[
+  {
+    "slug": "flutter-developer",
+    "location": "Phnom Penh, Cambodia",
+    "type": "Full time",
+    "position": "Developer",
+    "priority": "Urgent",
+    "level": "Mid",
+    "date": "2025-08-10",
+    "icon": "fas fa-mobile-alt",
+    "link": "#",
+    "translations": [
+      {
+        "locale": "en",
+        "title": "Flutter Developer",
+        "description": "Build and maintain cross-platform mobile applications using Flutter. Collaborate with backend developers."
+      },
+      {
+        "locale": "km",
+        "title": "អ្នកអភិវឌ្ឍកម្មវិធី Flutter",
+        "description": "បង្កើត និងថែទាំកម្មវិធីទូរស័ព្ទចល័តឆ្លងវេទិកាដោយប្រើ Flutter។ សហការជាមួយអ្នកអភិវឌ្ឍផ្នែកខាងក្រោយ។"
+      }
+    ]
+  },
+  {
+    "slug": "senior-php-laravel-developer",
+    "location": "Phnom Penh, Cambodia",
+    "type": "Full time",
+    "position": "Developer",
+    "priority": "Urgent",
+    "level": "Senior",
+    "date": "2025-08-12",
+    "icon": "fas fa-code",
+    "link": "#",
+    "translations": [
+      {
+        "locale": "en",
+        "title": "Senior PHP Laravel Developer",
+        "description": "Develop and maintain web applications using PHP Laravel framework. Ensure best practices in performance, security, and scalability."
+      },
+      {
+        "locale": "km",
+        "title": "អ្នកអភិវឌ្ឍ PHP Laravel ជាន់ខ្ពស់",
+        "description": "អភិវឌ្ឍ និងថែទាំកម្មវិធីគេហទំព័រដោយប្រើ Laravel Framework។ ធានាថាមានការអនុវត្តល្អបំផុតក្នុងសមត្ថភាព សុវត្ថិភាព និងភាពអាចពង្រីកបាន។"
+      }
+    ]
+  },
+  {
+    "slug": "ux-ui-designer",
+    "location": "Phnom Penh, Cambodia",
+    "type": "Full time",
+    "position": "Design",
+    "priority": "Regular",
+    "level": "Mid",
+    "date": "2025-08-01",
+    "icon": "fas fa-pencil-ruler",
+    "link": "#",
+    "translations": [
+      {
+        "locale": "en",
+        "title": "UX/UI Designer",
+        "description": "Design user-centered interfaces and experiences. Create wireframes, prototypes, and collaborate with developers to bring designs to life."
+      },
+      {
+        "locale": "km",
+        "title": "អ្នករចនាបទពិសោធន៍ និងចំណុចប្រទាក់ UX/UI",
+        "description": "រចនាចំណុចប្រទាក់ និងបទពិសោធន៍ដែលផ្អែកលើអ្នកប្រើប្រាស់។ បង្កើត wireframe, prototype និងសហការជាមួយអ្នកអភិវឌ្ឍដើម្បីអនុវត្តការរចនាឱ្យមានជីវិត។"
+      }
+    ]
+  },
+  {
+    "slug": "graphic-design-intern",
+    "location": "Phnom Penh, Cambodia",
+    "type": "Internship",
+    "position": "Design",
+    "priority": "Regular",
+    "level": "Intern",
+    "date": "2025-09-01",
+    "icon": "fas fa-paint-brush",
+    "link": "#",
+    "translations": [
+      {
+        "locale": "en",
+        "title": "Graphic Design Intern",
+        "description": "Assist the design team with creating social media graphics, UI mockups, and marketing materials. Learn design tools and processes."
+      },
+      {
+        "locale": "km",
+        "title": "និស្សិតអនុវត្តផ្នែករចនាក្រាហ្វិក",
+        "description": "ជួយក្រុមរចនាក្នុងការបង្កើតគ្រឿងក្រាហ្វិកសម្រាប់បណ្តាញសង្គម UI mockup និងសម្ភារៈផ្សព្វផ្សាយផ្សេងៗ។ រៀនប្រើឧបករណ៍ និងដំណើរការរចនា។"
+      }
+    ]
+  },
+  {
+    "slug": "software-development-intern",
+    "location": "Phnom Penh, Cambodia",
+    "type": "Internship",
+    "position": "Developer",
+    "priority": "Regular",
+    "level": "Intern",
+    "date": "2025-09-05",
+    "icon": "fas fa-laptop-code",
+    "link": "#",
+    "translations": [
+      {
+        "locale": "en",
+        "title": "Software Development Intern",
+        "description": "Work with senior developers on real-world projects using modern frameworks. Learn coding best practices and version control."
+      },
+      {
+        "locale": "km",
+        "title": "និស្សិតអនុវត្តផ្នែកអភិវឌ្ឍកម្មវិធី",
+        "description": "ធ្វើការជាមួយអ្នកអភិវឌ្ឍជាន់ខ្ពស់លើគម្រោងពិតប្រាកដដោយប្រើ Framework ទំនើប។ រៀនអំពីការសរសេរកូដ និងការគ្រប់គ្រងកំណែ។"
+      }
+    ]
+  },
+  {
+    "slug": "digital-marketing-intern",
+    "location": "Phnom Penh, Cambodia",
+    "type": "Internship",
+    "position": "Marketing",
+    "priority": "Regular",
+    "level": "Intern",
+    "date": "2025-09-10",
+    "icon": "fas fa-bullhorn",
+    "link": "#",
+    "translations": [
+      {
+        "locale": "en",
+        "title": "Digital Marketing Intern",
+        "description": "Support the marketing team with social media content, SEO tasks, and campaign analytics. Gain hands-on experience in digital strategy."
+      },
+      {
+        "locale": "km",
+        "title": "និស្សិតអនុវត្តផ្នែកទីផ្សារឌីជីថល",
+        "description": "គាំទ្រក្រុមទីផ្សារដោយជួយបង្កើតមាតិកាបណ្តាញសង្គម ការងារ SEO និងវិភាគយុទ្ធនាការ។ ទទួលបានបទពិសោធន៍ជាក់ស្តែងក្នុងយុទ្ធសាស្ត្រឌីជីថល។"
+      }
+    ]
+  }
+]

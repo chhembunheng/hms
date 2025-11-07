@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'prefix' => '{locale}',
     'where' => ['locale' => 'en|km'],
-    'middleware' => 'setlocale',
+    'middleware' => ['setlocale', 'navigations'],
 ], function () {
     // HOME
     Route::get('/', function () {
@@ -16,7 +16,7 @@ Route::group([
         $choosing = json_decode(file_get_contents(public_path('site/data/' . $locale . '/choosing.json')));
         $services = json_decode(file_get_contents(public_path('site/data/' . $locale . '/services.json')));
         return view('welcome', compact('sliders', 'choosing', 'services', 'achievements'));
-    })->name('home');
+    })->name('welcome');
 
     // PRIVACY POLICY
     Route::get('/privacy-policy', function () {

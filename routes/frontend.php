@@ -14,8 +14,26 @@ use App\Http\Controllers\Frontend\PartnerController;
 use App\Http\Controllers\Frontend\PlanController;
 use App\Http\Controllers\Frontend\AchievementController;
 use App\Http\Controllers\Frontend\CareerController;
+use App\Http\Controllers\Frontend\CategoryController;
+use App\Http\Controllers\Frontend\TagController;
 
-Route::group(['prefix' => 'frontends', 'as' => 'frontends.', 'middleware' => ['auth', 'verified']], function () {
+Route::group(['prefix' => 'frontends', 'as' => 'frontends.', 'middleware' => ['auth', 'verified', 'abilities', 'editor']], function () {
+    
+    // Categories Routes
+    Route::prefix('categories')->name('categories.')->group(function () {
+        Route::get('/', [CategoryController::class, 'index'])->name('index');
+        Route::match(['get', 'post'], '/add', [CategoryController::class, 'add'])->name('add');
+        Route::match(['get', 'post'], '/{id}/edit', [CategoryController::class, 'edit'])->name('edit');
+        Route::delete('/{id}/delete', [CategoryController::class, 'destroy'])->name('delete');
+    });
+    
+    // Tags Routes
+    Route::prefix('tags')->name('tags.')->group(function () {
+        Route::get('/', [TagController::class, 'index'])->name('index');
+        Route::match(['get', 'post'], '/add', [TagController::class, 'add'])->name('add');
+        Route::match(['get', 'post'], '/{id}/edit', [TagController::class, 'edit'])->name('edit');
+        Route::delete('/{id}/delete', [TagController::class, 'destroy'])->name('delete');
+    });
     
     // Services Routes
     Route::prefix('services')->name('services.')->group(function () {

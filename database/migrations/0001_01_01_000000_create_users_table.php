@@ -55,13 +55,13 @@ return new class extends Migration
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
             $table->tinyInteger('administrator')->default(0);
-            $table->tinyInteger('order')->default(0);
+            $table->tinyInteger('sort')->default(0);
             $table->authors();
         });
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
             $table->string('icon')->nullable();
-            $table->tinyInteger('order')->default(0);
+            $table->tinyInteger('sort')->default(0);
             $table->string('route')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable()->index();
             $table->authors();
@@ -73,7 +73,7 @@ return new class extends Migration
             $table->enum('target', ['navbar', 'index', 'action', 'self', 'confirm', 'modal'])->default('index');
             $table->string('action')->nullable();
             $table->string('slug')->unique()->index()->nullable();
-            $table->tinyInteger('order')->default(0);
+            $table->tinyInteger('sort')->default(0);
             $table->unsignedBigInteger('menu_id')->index();
             $table->authors();
         });
