@@ -25,7 +25,7 @@
                     <div class="col-lg-4 col-md-6">
                         <article class="blog-item">
                             <div class="blog-image">
-                                <a href="{{ Route::has('frontend.blogs') ? route('blogs', ['locale' => app()->getLocale(), 'slug' => $article->slug]) : '#' }}" aria-label="Read article {{ $article->title }}">
+                                <a href="{{ Route::has('blogs') ? route('blogs', ['locale' => app()->getLocale(), 'slug' => $article->slug]) : '#' }}" aria-label="Read article {{ $article->title }}">
                                     @php
                                         $img = webp_variants($article->image, 'product', null, 80);
                                     @endphp
@@ -43,12 +43,12 @@
                                 </ul>
                                 <div class="blog-content">
                                     <h3>
-                                        <a href="{{ Route::has('frontend.blogs') ? route('blogs', ['locale' => app()->getLocale(), 'slug' => $article->slug]) : '#' }}" aria-label="Read article {{ $article->title }}">
+                                        <a href="{{ Route::has('blogs') ? route('blogs', ['locale' => app()->getLocale(), 'slug' => $article->slug]) : '#' }}" aria-label="Read article {{ $article->title }}">
                                             {{ $article->title ?? 'N/A' }}
                                         </a>
                                     </h3>
                                     <p>{{ $article->excerpt ?? 'N/A' }}</p>
-                                    <div class="blog-btn"> <a href="{{ Route::has('frontend.blogs') ? route('blogs', ['locale' => app()->getLocale(), 'slug' => $article->slug]) : '#' }}" aria-label="Read article {{ $article->title }}"
+                                    <div class="blog-btn"> <a href="{{ Route::has('blogs') ? route('blogs', ['locale' => app()->getLocale(), 'slug' => $article->slug]) : '#' }}" aria-label="Read article {{ $article->title }}"
                                             class="blog-btn-one">{{ __('global.read_more') }} &nbsp;<i class="fa-solid fa-arrow-right-long fa-fw" aria-hidden="true"></i></a>
                                     </div>
                                 </div>

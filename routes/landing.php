@@ -11,19 +11,10 @@ Route::group([
     // HOME
     Route::get('/', function () {
         $locale = app()->getLocale();
-        $cache = \App\Models\Settings\DashboardCache::where('key', 'dashboard_data')->where('locale', $locale)->first();
-        if ($cache && $cache->expires_at && $cache->expires_at->isFuture()) {
-            $data = $cache->payload;
-            $sliders = $data['statistics'] ?? [];
-            $choosing = $data['usersByRole'] ?? [];
-            $services = $data['permissionsByMenu'] ?? [];
-            $achievements = $data['recentUsers'] ?? [];
-        } else {
-            $sliders = json_decode(file_get_contents(public_path('site/data/' . $locale . '/sliders.json')));
-            $achievements = json_decode(file_get_contents(public_path('site/data/' . $locale . '/achievements.json')));
-            $choosing = json_decode(file_get_contents(public_path('site/data/' . $locale . '/choosing.json')));
-            $services = json_decode(file_get_contents(public_path('site/data/' . $locale . '/services.json')));
-        }
+        $sliders = json_decode(file_get_contents(public_path('site/data/' . $locale . '/sliders.json')));
+        $achievements = json_decode(file_get_contents(public_path('site/data/' . $locale . '/achievements.json')));
+        $choosing = json_decode(file_get_contents(public_path('site/data/' . $locale . '/choosing.json')));
+        $services = json_decode(file_get_contents(public_path('site/data/' . $locale . '/services.json')));
         return view('welcome', compact('sliders', 'choosing', 'services', 'achievements'));
     })->name('home');
 
@@ -88,7 +79,7 @@ Route::group([
         if (!$integration) {
             $area = [
                 'title'   => __('global.integrations'),
-                'subtitle'=> __('global.connect_your_favorite_tools'),
+                'subtitle' => __('global.connect_your_favorite_tools'),
             ];
             $talk = true;
 
@@ -119,7 +110,7 @@ Route::group([
         if (!$career) {
             $area = [
                 'title'   => __('global.careers'),
-                'subtitle'=> __('global.join_our_team'),
+                'subtitle' => __('global.join_our_team'),
             ];
 
             return view('welcome', compact('careers', 'area', 'talk'));
@@ -142,7 +133,7 @@ Route::group([
 
         $area = [
             'title'   => __('global.our_teams'),
-            'subtitle'=> __('global.meet_our_experts'),
+            'subtitle' => __('global.meet_our_experts'),
         ];
 
         return view('welcome', compact('teams', 'area', 'talk'));
@@ -157,7 +148,7 @@ Route::group([
 
         $area = [
             'title'   => __('global.about_us'),
-            'subtitle'=> __('global.learn_more_about_our_company'),
+            'subtitle' => __('global.learn_more_about_our_company'),
         ];
 
         return view('welcome', compact('content', 'area', 'talk', 'contacts'));
@@ -172,7 +163,7 @@ Route::group([
 
         $area = [
             'title'   => __('global.contact_us'),
-            'subtitle'=> __('global.get_in_touch_with_our_team'),
+            'subtitle' => __('global.get_in_touch_with_our_team'),
         ];
 
         return view('welcome', compact('area', 'talk', 'contacts', 'choosing'));
@@ -191,7 +182,7 @@ Route::group([
         if (!$article) {
             $area = [
                 'title'   => __('global.our_blogs'),
-                'subtitle'=> __('global.latest_insights_and_updates'),
+                'subtitle' => __('global.latest_insights_and_updates'),
             ];
 
             return view('welcome', compact('articles', 'area', 'talk'));
@@ -219,7 +210,7 @@ Route::group([
         if (!$service) {
             $area = [
                 'title'   => __('global.services'),
-                'subtitle'=> __('global.our_service_offerings'),
+                'subtitle' => __('global.our_service_offerings'),
             ];
 
             return view('welcome', compact('services', 'area', 'talk'));
@@ -249,7 +240,7 @@ Route::group([
         if (!$product) {
             $area = [
                 'title'   => __('global.products'),
-                'subtitle'=> __('global.our_product_offerings'),
+                'subtitle' => __('global.our_product_offerings'),
             ];
 
             return view('welcome', compact('products', 'area', 'talk'));
@@ -275,7 +266,7 @@ Route::group([
 
         $area = [
             'title'   => __('global.pricing'),
-            'subtitle'=> __('global.our_pricing_plans'),
+            'subtitle' => __('global.our_pricing_plans'),
         ];
 
         return view('welcome', compact('pricing', 'area', 'talk'));

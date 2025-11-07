@@ -8,7 +8,7 @@
                         @php
                             $img = webp_variants('assets/logo/full-blue.png', 'bxs', null, 60);
                         @endphp
-                        <a class="footer-logo" href="{{ Route::currentRouteName() == 'frontend.home' ? '#' : (Route::has('frontend.home') ? route('home', ['locale' => app()->getLocale()]) : '/') }}" aria-label="{{ __('global.home') }}">
+                        <a class="footer-logo" href="{{ Route::currentRouteName() == 'frontend.home' ? '#' : (Route::has('home') ? route('home', ['locale' => app()->getLocale()]) : '/') }}" aria-label="{{ __('global.home') }}">
                             <img src="{{ $img['fallback'] }}" srcset="{{ $img['srcset'] }}" sizes="(max-width: 600px) 95vw, {{ $img['width'] }}px" alt="Brand Name Logo" loading="lazy" width="{{ $img['width'] }}" height="auto">
                         </a>
                         <p>
@@ -38,7 +38,7 @@
                         <ul class="footer-quick-links">
                             @foreach (json_decode(file_get_contents(public_path('site/data/' . app()->getLocale() . '/services.json'))) ?? [] as $service)
                                 <li>
-                                    <a href="{{ Route::has('frontend.services') ? route('services', ['locale' => app()->getLocale(), 'slug' => $service->slug]) : '#' }}" aria-label="{{ $service->name }}">
+                                    <a href="{{ Route::has('services') ? route('services', ['locale' => app()->getLocale(), 'slug' => $service->slug]) : '#' }}" aria-label="{{ $service->name }}">
                                         {{ $service->name }}
                                     </a>
                                 </li>
@@ -55,15 +55,15 @@
                         </div>
 
                         <ul class="footer-quick-links">
-                            @if (Route::has('frontend.about'))
+                            @if (Route::has('about-us'))
                                 <li>
-                                    <a href="{{ route('about', ['locale' => app()->getLocale()]) }}">
+                                    <a href="{{ route('about-us', ['locale' => app()->getLocale()]) }}">
                                         {{ __('global.about_us') }}
                                     </a>
                                 </li>
                             @endif
 
-                            @if (Route::has('frontend.services'))
+                            @if (Route::has('services'))
                                 <li>
                                     <a href="{{ route('services', ['locale' => app()->getLocale()]) }}">
                                         {{ __('global.services') }}
@@ -71,7 +71,7 @@
                                 </li>
                             @endif
 
-                            @if (Route::has('frontend.products'))
+                            @if (Route::has('products'))
                                 <li>
                                     <a href="{{ route('products', ['locale' => app()->getLocale()]) }}">
                                         {{ __('global.products') }}
@@ -79,7 +79,7 @@
                                 </li>
                             @endif
 
-                            @if (Route::has('frontend.projects'))
+                            @if (Route::has('projects'))
                                 <li>
                                     <a href="{{ route('projects', ['locale' => app()->getLocale()]) }}">
                                         {{ __('global.case_study') }}
@@ -87,15 +87,15 @@
                                 </li>
                             @endif
 
-                            @if (Route::has('frontend.contact'))
+                            @if (Route::has('contact-us'))
                                 <li>
-                                    <a href="{{ route('contact', ['locale' => app()->getLocale()]) }}">
+                                    <a href="{{ route('contact-us', ['locale' => app()->getLocale()]) }}">
                                         {{ __('global.contact_us') }}
                                     </a>
                                 </li>
                             @endif
 
-                            @if (Route::has('frontend.privacy-policy'))
+                            @if (Route::has('privacy-policy'))
                                 <li>
                                     <a href="{{ route('privacy-policy', ['locale' => app()->getLocale()]) }}">
                                         {{ __('global.privacy_policy') }}
@@ -103,7 +103,7 @@
                                 </li>
                             @endif
 
-                            @if (Route::has('frontend.terms-condition'))
+                            @if (Route::has('terms-condition'))
                                 <li>
                                     <a href="{{ route('terms-condition', ['locale' => app()->getLocale()]) }}">
                                         {{ __('global.terms_and_conditions') }}
@@ -111,7 +111,7 @@
                                 </li>
                             @endif
 
-                            @if (Route::has('frontend.faq'))
+                            @if (Route::has('faq'))
                                 <li>
                                     <a href="{{ route('faq', ['locale' => app()->getLocale()]) }}">
                                         {{ __('global.frequently_asked_questions') }}

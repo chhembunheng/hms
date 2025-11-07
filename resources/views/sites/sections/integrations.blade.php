@@ -23,7 +23,7 @@
                             </div>
                             <h3>{{ $integration->name }}</h3>
                             <div class="services-btn-link">
-                                <a href="{{ Route::has('frontend.integrations') ? route('integrations', ['slug' => $integration->slug, 'locale' => app()->getLocale()]) : '#' }}" class="services-link">{{ __('global.read_more') }}</a>
+                                <a href="{{ Route::has('integrations') ? route('integrations', ['slug' => $integration->slug, 'locale' => app()->getLocale()]) : '#' }}" class="services-link">{{ __('global.read_more') }}</a>
                             </div>
                         </div>
                     </div>

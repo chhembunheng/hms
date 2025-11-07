@@ -44,7 +44,7 @@
                                 <span class="project-category">{{ $product->category }}</span>
                                 <h3 class="project-title">{{ $product->name }}</h3>
                                 <p class="project-description">{!! $product->short_description ?? '' !!}</p>
-                                <a class="project-link-btn" href="{{ Route::has('frontend.products') ? route('products', ['locale' => app()->getLocale(), 'slug' => $product->slug]) : '#' }}" aria-label="View Product {{ $product->name }}">{{ __('global.view_product') }}</a>
+                                <a class="project-link-btn" href="{{ Route::has('products') ? route('products', ['locale' => app()->getLocale(), 'slug' => $product->slug]) : '#' }}" aria-label="View Product {{ $product->name }}">{{ __('global.view_product') }}</a>
                             </div>
                         </article>
                     </div>
