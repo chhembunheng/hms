@@ -171,8 +171,6 @@ class NavigationController extends Controller
         $navigations = $query->get()->mapWithKeys(function ($nav) use ($locale) {
             return [$nav->id => $nav->getName($locale)];
         });
-        dd($navigations);
-
         return $navigations->toArray();
     }
 }

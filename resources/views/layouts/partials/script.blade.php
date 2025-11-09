@@ -27,6 +27,12 @@
                  return m;
              }
          });
+         $(document).find('select.select2').select2({
+             minimumResultsForSearch: Infinity,
+             escapeMarkup: function(m) {
+                 return m;
+             }
+         });
          $('.icon-picker-box').each(function() {
              $(this).iconPicker({
                  onClick: '.open-icon-picker',

@@ -2,8 +2,7 @@
     <x-form.layout :form="$form">
         <div class="row">
             <div class="col-md-6">
-                <x-form.select :label="__('form.parent_navigation')" name="parent_id" :options="$navigations" :selected="$form?->parent_id ?? old('parent_id')">
-                </x-form.select>
+                <x-form.select :label="__('form.parent_navigation')" name="parent_id" :options="$navigations" :selected="$form?->parent_id ?? old('parent_id')"/>
             </div>
             <div class="col-md-6">
                 <x-form.input :label="__('form.url')" name="url" value="{{ $form?->url ?? old('url') }}" />
