@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('product_feature_details', function (Blueprint $table) {
             $table->id();
-            $table->string('slug')->unique();
-            $table->string('image')->nullable();
+            $table->foreignId('product_feature_id')->constrained('product_features')->cascadeOnDelete();
             $table->string('icon')->nullable();
             $table->unsignedInteger('sort')->default(0);
             $table->authors();
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('product_feature_details');
     }
 };

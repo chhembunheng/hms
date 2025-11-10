@@ -9,8 +9,6 @@
  <script src="{{ asset('assets/js/vendor/forms/validation/validate.min.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/vendor/pickers/datepicker.min.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/vendor/media/glightbox.min.js') }}?v={{ config('init.layout_version') }}"></script>
- <script src="{{ asset('assets/js/vendor/pickers/icon-picker/js/icon-picker.min.js') }}?v={{ config('init.layout_version') }}"></script>
- <script src="{{ asset('assets/js/vendor/pickers/icon-picker/lib/fontawesome.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/vendor/editors/ckeditor.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/app.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/helpers.js') }}?v={{ config('init.layout_version') }}"></script>
@@ -32,13 +30,6 @@
              escapeMarkup: function(m) {
                  return m;
              }
-         });
-         $('.icon-picker-box').each(function() {
-             $(this).iconPicker({
-                 onClick: '.open-icon-picker',
-                 searchable: true,
-                 iconLibrary: fontAwesome
-             });
          });
          loading('stop');
      });

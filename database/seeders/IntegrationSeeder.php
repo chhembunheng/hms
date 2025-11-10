@@ -20,7 +20,7 @@ class IntegrationSeeder extends Seeder
         }
         // Process integrations here
         foreach ($integrations as $integration) {
-            dd($integration);die;
+            // dd($integration);die;
             $integrationModel = Integration::updateOrCreate([
                 'name' => $integration['name'],
             ], [

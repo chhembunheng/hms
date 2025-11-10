@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\DataTables\Frontend\ProductDataTable;
-use App\Http\Controllers\Controller;
-use App\Models\Frontend\Product;
-use App\Models\Frontend\ProductTranslation;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use App\Rules\ImageRule;
+use Illuminate\Http\Request;
+use App\Models\Frontend\Product;
+use App\Models\Frontend\Category;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Models\Frontend\ProductFeature;
+use Illuminate\Support\Facades\Validator;
+use App\Models\Frontend\ProductTranslation;
+use App\DataTables\Frontend\ProductDataTable;
+use App\Models\Frontend\ProductFeatureDetail;
+use App\Models\Frontend\ProductFeatureTranslation;
+use App\Models\Frontend\ProductFeatureDetailTranslation;
 
 class ProductController extends Controller
 {
@@ -18,18 +24,11 @@ class ProductController extends Controller
     public function __construct()
     {
         $this->locales = collect(config('init.languages'));
-        $this->categories = [
-            1 => 'Human Resources',
-            2 => 'Finance',
-            3 => 'IT Services',
-            4 => 'Marketing',
-            5 => 'Sales',
-            6 => 'Customer Support',
-            7 => 'Research and Development',
-            8 => 'Operations',
-            9 => 'Legal',
-            10 => 'Administration',
-        ];
+        $this->categories = Category::with('translations')->orderBy('sort')->get()->map(function ($category) {
+            return [
+                $category->id => $category->getName(app()->getLocale()),
+            ];
+        })->collapse();
     }
 
     public function index(ProductDataTable $dataTable)
@@ -62,30 +61,92 @@ class ProductController extends Controller
                 if ($validator->fails()) {
                     return errors(message: $validator->errors()->first());
                 }
-                $product = Product::create([
-                    'slug' => slug($request->input('slug', null)),
-                    'image' => null,
-                    'created_by' => auth()->id(),
-                    'updated_by' => auth()->id(),
-                ]);
+                DB::transaction(function () use ($request) {
 
-                if ($request->image) {
-                    $product->image = uploadImage($request->image, 'products');
-                    $product->save();
-                }
-
-                foreach ($this->locales->keys() as $locale) {
-                    $trans = $request->input("translations.{$locale}");
-                    ProductTranslation::create([
-                        'product_id' => $product->id,
-                        'locale' => $locale,
-                        'name' => $trans['name'],
-                        'short_description' => $trans['short_description'] ?? null,
-                        'description' => $trans['description'] ?? null,
+                    $product = Product::create([
+                        'slug' => slug($request->input('slug', null)),
+                        'image' => null,
+                        'icon' => $request->input('icon', null),
+                        'sort' => $request->input('sort', 0),
                         'created_by' => auth()->id(),
                         'updated_by' => auth()->id(),
                     ]);
-                }
+
+                    if ($request->image) {
+                        $product->image = uploadImage($request->image, 'products');
+                        $product->save();
+                    }
+
+                    $product->categories()->sync($request->input('category_id', []));
+                    $product->tags()->sync($request->input('tag_id', []));
+
+                    foreach ($this->locales->keys() as $locale) {
+                        $trans = $request->input("translations.{$locale}");
+                        ProductTranslation::create([
+                            'product_id' => $product->id,
+                            'locale' => $locale,
+                            'name' => $trans['name'],
+                            'short_description' => $trans['short_description'] ?? null,
+                            'description' => $trans['description'] ?? null,
+                            'created_by' => auth()->id(),
+                            'updated_by' => auth()->id(),
+                        ]);
+                    }
+
+                    // Handle features and feature details
+                    if ($request->has('features')) {
+                        foreach ($request->input('features') as $featureData) {
+                            $feature = ProductFeature::create([
+                                'product_id' => $product->id,
+                                'icon' => $featureData['icon'] ?? null,
+                                'sort' => $featureData['sort'] ?? 0,
+                                'created_by' => auth()->id(),
+                                'updated_by' => auth()->id(),
+                            ]);
+
+                            // Create feature translations
+                            if (isset($featureData['translations'])) {
+                                foreach ($featureData['translations'] as $locale => $translation) {
+                                    ProductFeatureTranslation::create([
+                                        'product_feature_id' => $feature->id,
+                                        'locale' => $locale,
+                                        'title' => $translation['title'] ?? null,
+                                        'description' => $translation['description'] ?? null,
+                                        'created_by' => auth()->id(),
+                                        'updated_by' => auth()->id(),
+                                    ]);
+                                }
+                            }
+
+                            // Handle feature details
+                            if (isset($featureData['details'])) {
+                                foreach ($featureData['details'] as $detailData) {
+                                    $detail = ProductFeatureDetail::create([
+                                        'product_feature_id' => $feature->id,
+                                        'icon' => $detailData['icon'] ?? null,
+                                        'sort' => $detailData['sort'] ?? 0,
+                                        'created_by' => auth()->id(),
+                                        'updated_by' => auth()->id(),
+                                    ]);
+
+                                    // Create detail translations
+                                    if (isset($detailData['translations'])) {
+                                        foreach ($detailData['translations'] as $locale => $translation) {
+                                            ProductFeatureDetailTranslation::create([
+                                                'product_feature_detail_id' => $detail->id,
+                                                'locale' => $locale,
+                                                'title' => $translation['title'] ?? null,
+                                                'description' => $translation['description'] ?? null,
+                                                'created_by' => auth()->id(),
+                                                'updated_by' => auth()->id(),
+                                            ]);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
 
                 return success(message: 'Product created successfully');
             } catch (\Exception $e) {
@@ -106,7 +167,7 @@ class ProductController extends Controller
 
     public function edit(Request $request, $id)
     {
-        $form = Product::with('translations')->findOrFail($id);
+        $form = Product::with(['translations', 'features.translations', 'features.details.translations'])->findOrFail($id);
         $locales = $this->locales;
         $categories = $this->categories;
         $translations = [];
@@ -136,29 +197,99 @@ class ProductController extends Controller
                 if ($validator->fails()) {
                     return errors(message: $validator->errors()->first());
                 }
+                DB::transaction(function () use ($request, $form) {
 
-                $form->slug = slug($request->input('slug', null));
-                $form->sort = $request->input('sort', 0);
-                $form->updated_by = auth()->id();
+                    $form->slug = slug($request->input('slug', null));
+                    $form->sort = $request->input('sort', 0);
+                    $form->icon = $request->input('icon', null);
+                    $form->updated_by = auth()->id();
 
-                if ($request->image) {
-                    $form->image = uploadImage($request->image, 'products');
-                }
+                    if ($request->image) {
+                        $form->image = uploadImage($request->image, 'products');
+                    }
 
-                $form->save();
+                    $form->save();
 
-                foreach ($this->locales->keys() as $locale) {
-                    $trans = $request->input("translations.{$locale}");
-                    ProductTranslation::updateOrCreate(
-                        ['product_id' => $form->id, 'locale' => $locale],
-                        [
-                            'name' => $trans['name'],
-                            'short_description' => $trans['short_description'] ?? null,
-                            'description' => $trans['description'] ?? null,
-                            'updated_by' => auth()->id(),
-                        ]
-                    );
-                }
+                    $form->categories()->sync($request->input('category_id', []));
+                    $form->tags()->sync($request->input('tag_id', []));
+
+                    foreach ($this->locales->keys() as $locale) {
+                        $trans = $request->input("translations.{$locale}");
+                        ProductTranslation::updateOrCreate(
+                            ['product_id' => $form->id, 'locale' => $locale],
+                            [
+                                'name' => $trans['name'],
+                                'short_description' => $trans['short_description'] ?? null,
+                                'description' => $trans['description'] ?? null,
+                                'updated_by' => auth()->id(),
+                            ]
+                        );
+                    }
+
+                    // Delete existing features and recreate (simpler approach)
+                    $form->features()->each(function ($feature) {
+                        $feature->details()->each(function ($detail) {
+                            $detail->translations()->delete();
+                            $detail->delete();
+                        });
+                        $feature->translations()->delete();
+                        $feature->delete();
+                    });
+
+                    // Handle features and feature details
+                    if ($request->has('features')) {
+                        foreach ($request->input('features') as $featureData) {
+                            $feature = ProductFeature::create([
+                                'product_id' => $form->id,
+                                'icon' => $featureData['icon'] ?? null,
+                                'sort' => $featureData['sort'] ?? 0,
+                                'created_by' => auth()->id(),
+                                'updated_by' => auth()->id(),
+                            ]);
+
+                            // Create feature translations
+                            if (isset($featureData['translations'])) {
+                                foreach ($featureData['translations'] as $locale => $translation) {
+                                    ProductFeatureTranslation::create([
+                                        'product_feature_id' => $feature->id,
+                                        'locale' => $locale,
+                                        'title' => $translation['title'] ?? null,
+                                        'description' => $translation['description'] ?? null,
+                                        'created_by' => auth()->id(),
+                                        'updated_by' => auth()->id(),
+                                    ]);
+                                }
+                            }
+
+                            // Handle feature details
+                            if (isset($featureData['details'])) {
+                                foreach ($featureData['details'] as $detailData) {
+                                    $detail = ProductFeatureDetail::create([
+                                        'product_feature_id' => $feature->id,
+                                        'icon' => $detailData['icon'] ?? null,
+                                        'sort' => $detailData['sort'] ?? 0,
+                                        'created_by' => auth()->id(),
+                                        'updated_by' => auth()->id(),
+                                    ]);
+
+                                    // Create detail translations
+                                    if (isset($detailData['translations'])) {
+                                        foreach ($detailData['translations'] as $locale => $translation) {
+                                            ProductFeatureDetailTranslation::create([
+                                                'product_feature_detail_id' => $detail->id,
+                                                'locale' => $locale,
+                                                'title' => $translation['title'] ?? null,
+                                                'description' => $translation['description'] ?? null,
+                                                'created_by' => auth()->id(),
+                                                'updated_by' => auth()->id(),
+                                            ]);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
 
                 return success(message: 'Product updated successfully');
             } catch (\Exception $e) {

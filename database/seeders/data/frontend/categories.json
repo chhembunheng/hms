@@ -1,0 +1,182 @@
+[
+    {
+        "slug": "networking-solutions",
+        "icon": "fa-network-wired",
+        "image": "/images/categories/networking-solutions.jpg",
+        "sort": 1,
+        "translations": {
+            "en": {
+                "name": "Networking Solutions",
+                "description": "High-quality networking products and solutions for seamless connectivity.",
+                "content": "<p>Explore our range of networking solutions designed to meet your connectivity needs. From routers to switches, we provide reliable products that ensure your network runs smoothly.</p>"
+            },
+            "km": {
+                "name": "ដំណោះស្រាយបណ្តាញ",
+                "description": "ផលិតផលនិងដំណោះស្រាយបណ្តាញដែលមានគុណភាពខ្ពស់សម្រាប់ការតភ្ជាប់ដោយរលូន។",
+                "content": "<p>សូមស្វែងរកដំណោះស្រាយបណ្តាញរបស់យើងដែលបានរចនាឡើងដើម្បីបំពេញតម្រូវការការតភ្ជាប់របស់អ្នក។ ចាប់ពីរ៉ូទ័រទៅស្វិច យើងផ្តល់ផលិតផលដែលអាចទុកចិត្តបានសម្រាប់បណ្តាញរបស់អ្នក។</p>"
+            }
+        }
+    },
+    {
+        "slug": "cybersecurity",
+        "icon": "fa-shield-alt",
+        "image": "/images/categories/cybersecurity.jpg",
+        "sort": 2,
+        "translations": {
+            "en": {
+                "name": "Cybersecurity",
+                "description": "Protect your business with advanced cybersecurity solutions.",
+                "content": "<p>Our cybersecurity solutions safeguard your systems and data against threats, ensuring your operations remain secure and compliant.</p>"
+            },
+            "km": {
+                "name": "សន្តិសុខស៊ីបឺរ",
+                "description": "ការពារអាជីវកម្មរបស់អ្នកជាមួយដំណោះស្រាយសន្តិសុខស៊ីបឺរដ៏ទំនើប។",
+                "content": "<p>ដំណោះស្រាយសន្តិសុខស៊ីបឺររបស់យើងការពារប្រព័ន្ធនិងទិន្នន័យរបស់អ្នកពីការគំរាមកំហែង ដើម្បីធានាសុវត្ថិភាពនិងការអនុលោមតាមច្បាប់។</p>"
+            }
+        }
+    },
+    {
+        "slug": "cloud-services",
+        "icon": "fa-cloud",
+        "image": "/images/categories/cloud-services.jpg",
+        "sort": 3,
+        "translations": {
+            "en": {
+                "name": "Cloud Services",
+                "description": "Reliable and scalable cloud computing solutions for your business.",
+                "content": "<p>We provide cloud infrastructure, storage, and management services that allow your business to grow flexibly and securely.</p>"
+            },
+            "km": {
+                "name": "សេវាពពក",
+                "description": "ដំណោះស្រាយគណនាពពកដែលអាចទុកចិត្តបាននិងអាចពង្រីកសម្រាប់អាជីវកម្មរបស់អ្នក។",
+                "content": "<p>យើងផ្តល់សេវា​ផ្នែកហេដ្ឋារចនាសម្ព័ន្ធ និងការគ្រប់គ្រងពពក ដើម្បីជួយអាជីវកម្មរបស់អ្នកឱ្យលូតលាស់ដោយសុវត្ថិភាព។</p>"
+            }
+        }
+    },
+    {
+        "slug": "data-center",
+        "icon": "fa-server",
+        "image": "/images/categories/data-center.jpg",
+        "sort": 4,
+        "translations": {
+            "en": {
+                "name": "Data Center Solutions",
+                "description": "Efficient, secure, and scalable data center infrastructure.",
+                "content": "<p>We deliver modern data center designs and services optimized for performance, energy efficiency, and security.</p>"
+            },
+            "km": {
+                "name": "ដំណោះស្រាយមជ្ឈមណ្ឌលទិន្នន័យ",
+                "description": "ហេដ្ឋារចនាសម្ព័ន្ធមជ្ឈមណ្ឌលទិន្នន័យប្រសើរនិងសុវត្ថិភាព។",
+                "content": "<p>យើងផ្តល់ដំណោះស្រាយមជ្ឈមណ្ឌលទិន្នន័យទំនើបដែលអាចទុកចិត្តបាន និងប្រសើរជាងមុនសម្រាប់សមត្ថភាព និងសុវត្ថិភាព។</p>"
+            }
+        }
+    },
+    {
+        "slug": "backup-disaster-recovery",
+        "icon": "fa-database",
+        "image": "/images/categories/backup-disaster-recovery.jpg",
+        "sort": 5,
+        "translations": {
+            "en": {
+                "name": "Backup & Disaster Recovery",
+                "description": "Protect your data with reliable backup and recovery solutions.",
+                "content": "<p>Ensure business continuity with our automated data backup and disaster recovery systems that minimize downtime.</p>"
+            },
+            "km": {
+                "name": "ការបម្រុងទុកទិន្នន័យ និងស្តារឡើងវិញ",
+                "description": "ការពារទិន្នន័យរបស់អ្នកដោយដំណោះស្រាយបម្រុងទុកនិងស្តារឡើងវិញដែលអាចទុកចិត្តបាន។",
+                "content": "<p>ធានាបាននូវការបន្តអាជីវកម្មដោយប្រើប្រព័ន្ធបម្រុងទុកនិងស្តារឡើងវិញដោយស្វ័យប្រវត្តិរបស់យើង។</p>"
+            }
+        }
+    },
+    {
+        "slug": "managed-it-services",
+        "icon": "fa-headset",
+        "image": "/images/categories/managed-it-services.jpg",
+        "sort": 6,
+        "translations": {
+            "en": {
+                "name": "Managed IT Services",
+                "description": "Comprehensive IT management for smooth operations.",
+                "content": "<p>Our managed IT services handle your infrastructure, support, and security so you can focus on your business.</p>"
+            },
+            "km": {
+                "name": "សេវាកម្មគ្រប់គ្រង IT",
+                "description": "សេវាកម្មគ្រប់គ្រង IT ពេញលេញសម្រាប់ប្រតិបត្តិការរលូន។",
+                "content": "<p>យើងគ្រប់គ្រងហេដ្ឋារចនាសម្ព័ន្ធ ការគាំទ្រ និងសន្តិសុខរបស់អ្នក ដើម្បីឱ្យអ្នកអាចផ្តោតលើអាជីវកម្ម។</p>"
+            }
+        }
+    },
+    {
+        "slug": "it-consulting",
+        "icon": "fa-user-tie",
+        "image": "/images/categories/it-consulting.jpg",
+        "sort": 7,
+        "translations": {
+            "en": {
+                "name": "IT Consulting",
+                "description": "Expert advice and strategic IT planning for business growth.",
+                "content": "<p>We offer IT consulting services that align technology with your business goals for better efficiency and innovation.</p>"
+            },
+            "km": {
+                "name": "ការប្រឹក្សាផ្នែក IT",
+                "description": "ដំបូន្មាននិងការធ្វើផែនការផ្នែក IT ដោយអ្នកជំនាញ។",
+                "content": "<p>យើងផ្តល់សេវាប្រឹក្សាផ្នែក IT ដើម្បីអោយបច្ចេកវិទ្យាសម្របសម្រួលជាមួយគោលដៅអាជីវកម្មរបស់អ្នក។</p>"
+            }
+        }
+    },
+    {
+        "slug": "web-development",
+        "icon": "fa-code",
+        "image": "/images/categories/web-development.jpg",
+        "sort": 8,
+        "translations": {
+            "en": {
+                "name": "Web Development",
+                "description": "Modern, responsive websites that drive engagement.",
+                "content": "<p>Our team creates stunning, high-performance websites using the latest web technologies.</p>"
+            },
+            "km": {
+                "name": "ការអភិវឌ្ឍវេបសាយ",
+                "description": "វេបសាយទំនើបដែលឆ្លើយតបបានល្អនិងទាក់ទាញ។",
+                "content": "<p>ក្រុមយើងបង្កើតវេបសាយប្រកបដោយគុណភាពខ្ពស់ជាមួយបច្ចេកវិទ្យាវេបថ្មីៗ។</p>"
+            }
+        }
+    },
+    {
+        "slug": "mobile-app-development",
+        "icon": "fa-mobile-alt",
+        "image": "/images/categories/mobile-app-development.jpg",
+        "sort": 9,
+        "translations": {
+            "en": {
+                "name": "Mobile App Development",
+                "description": "Native and cross-platform mobile app solutions.",
+                "content": "<p>We build powerful, user-friendly mobile applications for iOS and Android platforms.</p>"
+            },
+            "km": {
+                "name": "ការអភិវឌ្ឍកម្មវិធីទូរស័ព្ទ",
+                "description": "ដំណោះស្រាយកម្មវិធីទូរស័ព្ទសម្រាប់ iOS និង Android។",
+                "content": "<p>យើងបង្កើតកម្មវិធីទូរស័ព្ទដែលងាយប្រើនិងមានប្រសិទ្ធភាពខ្ពស់។</p>"
+            }
+        }
+    },
+    {
+        "slug": "ai-ml-solutions",
+        "icon": "fa-robot",
+        "image": "/images/categories/ai-ml-solutions.jpg",
+        "sort": 10,
+        "translations": {
+            "en": {
+                "name": "AI & Machine Learning",
+                "description": "Smart AI-driven solutions to automate and optimize processes.",
+                "content": "<p>We integrate artificial intelligence and machine learning to enhance decision-making and productivity.</p>"
+            },
+            "km": {
+                "name": "បញ្ញាសិប្បនិម្មិត និងម៉ាស៊ីនរៀន",
+                "description": "ដំណោះស្រាយប្រើបញ្ញាសិប្បនិម្មិតដើម្បីស្វ័យប្រវត្តិនិងបង្កើនប្រសិទ្ធភាព។",
+                "content": "<p>យើងបញ្ចូលបញ្ញាសិប្បនិម្មិតនិងម៉ាស៊ីនរៀនដើម្បីបង្កើនការសម្រេចចិត្តនិងផលិតភាព។</p>"
+            }
+        }
+    }
+]

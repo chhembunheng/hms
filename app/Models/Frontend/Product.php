@@ -10,9 +10,9 @@ class Product extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'sku',
         'slug',
         'image',
+        'icon',
         'sort',
         'created_by',
         'updated_by',
@@ -57,5 +57,15 @@ class Product extends Model
     public function getShortDescription($locale = null)
     {
         return $this->getTranslation($locale)?->short_description ?? null;
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'product_category', 'product_id', 'category_id');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'product_tag', 'product_id', 'tag_id');
     }
 }

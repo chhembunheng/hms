@@ -4182,19 +4182,3 @@ const brands = [
     "fa-swift",
     "fa-umbraco"
 ];
-const fontAwesome = {
-    "font-awesome": {
-        solid: {
-            prefix: "fa-solid ",
-            "icon-style": "fa-solid",
-            "list-icon": "fa-solid fa-font-awesome",
-            icons: icons,
-        },
-        brands: {
-            prefix: "fa-brands ",
-            "icon-style": "fa-brands",
-            "list-icon": "fa-brands fa-font-awesome",
-            icons: brands,
-        },
-    },
-};

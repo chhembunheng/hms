@@ -2,10 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\Frontend\Product;
-use App\Models\Frontend\ProductTranslation;
-use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
+use Illuminate\Database\Seeder;
+use App\Models\Frontend\Product;
+use Illuminate\Support\Facades\DB;
+use App\Models\Frontend\ProductFeature;
+use App\Models\Frontend\ProductTranslation;
+use App\Models\Frontend\ProductFeatureTranslation;
 
 class ProductSeeder extends Seeder
 {
@@ -14,80 +17,96 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        // Load product data from English locale first
-        $filePath = public_path("site/data/en/products.json");
+        $filePath = database_path('seeders/data/frontend/products.json');
 
         if (!file_exists($filePath)) {
             $this->command->warn("Product file not found: {$filePath}");
             return;
         }
 
-        $productsData = json_decode(file_get_contents($filePath), true);
-        $productMap = []; // Map old IDs to new product instances
+        $products = json_decode(file_get_contents($filePath), true);
 
-        foreach ($productsData as $productData) {
-            // Generate SKU if not present in JSON
-            $sku = $productData['sku'] ?? 'PROD-' . str_pad($productData['id'], 3, '0', STR_PAD_LEFT);
-            
-            // Generate slug from product name or slug field
-            $slug = !empty($productData['slug'])
-                ? Str::slug($productData['slug'])
-                : Str::slug($productData['name'] ?? 'product-' . $productData['id']);
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        ProductTranslation::truncate();
+        Product::truncate();
+        ProductFeatureTranslation::truncate();
+        ProductFeature::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        $this->command->warn("🧹 Existing Product data truncated.");
 
-            // Create or find product by SKU
-            $product = Product::updateOrCreate(
-                ['sku' => $sku],
+        foreach ($products as $product) {
+            $productModel = Product::updateOrCreate(
+                ['slug' => $product['slug']],
                 [
-                    'slug' => $slug,
-                    'image' => $productData['thumb'] ?? $productData['cover'] ?? null,
-                    'sort' => isset($productData['sort']) ? (int)$productData['sort'] : 0,
+                    'slug' => $product['slug'],
+                    'image' => $product['thumb'] ?? $product['cover'] ?? null,
+                    'sort' => isset($product['sort']) ? (int)$product['sort'] : 0,
                     'created_by' => 1,
                     'updated_by' => 1,
                 ]
             );
-
-            // Store mapping of old ID to new product
-            $productMap[$productData['id']] = $product->id;
-        }
-
-        // Now add translations for all locales
-        $locales = config('init.available_locales', ['en', 'km']);
-
-        foreach ($locales as $locale) {
-            $filePath = public_path("site/data/{$locale}/products.json");
-
-            if (!file_exists($filePath)) {
-                $this->command->warn("Product file not found: {$filePath}");
-                continue;
-            }
-
-            $productsData = json_decode(file_get_contents($filePath), true);
-
-            foreach ($productsData as $index => $productData) {
-                // Use mapped product ID
-                $newProductId = $productMap[$productData['id']] ?? null;
-
-                if (!$newProductId) {
-                    continue;
+            if (isset($product['translations']) && is_array($product['translations'])) {
+                foreach ($product['translations'] as $productTranslation) {
+                    ProductTranslation::updateOrCreate(
+                        [
+                            'product_id' => $productModel->id,
+                            'locale' => $productTranslation['locale'] ?? 'en',
+                        ],
+                        [
+                            'name' => $productTranslation['name'] ?? '',
+                            'description' => $productTranslation['description'] ?? '',
+                            'short_description' => $productTranslation['short_description'] ?? '',
+                            'created_by' => 1,
+                            'updated_by' => 1,
+                        ]
+                    );
                 }
-
-                // Create translation
-                ProductTranslation::updateOrCreate(
-                    [
-                        'product_id' => $newProductId,
-                        'locale' => $locale,
-                    ],
-                    [
-                        'name' => $productData['name'] ?? 'Unnamed Product',
-                        'short_description' => $productData['short_description'] ?? null,
-                        'description' => $productData['description'] ?? null,
+            }
+            if(isset($product['features']) && is_array($product['features'])) {
+                foreach ($product['features'] as $feature) {
+                    $productFeatureModel = ProductFeature::create([
+                        'product_id' => $productModel->id,
+                        'icon' => $feature['icon'] ?? null,
+                        'sort' => isset($feature['sort']) ? (int)$feature['sort'] : 0,
+                        'is_highlighted' => 1,
                         'created_by' => 1,
                         'updated_by' => 1,
-                    ]
-                );
+                    ]);
+                    if (isset($feature['translations']) && is_array($feature['translations'])) {
+                        foreach ($feature['translations'] as $featureTranslation) {
+                            $productFeatureModel->translations()->create([
+                                'locale' => $featureTranslation['locale'] ?? 'en',
+                                'title' => $featureTranslation['title'] ?? '',
+                                'description' => $featureTranslation['description'] ?? '',
+                                'created_by' => 1,
+                                'updated_by' => 1,
+                            ]);
+                        }
+                    }
+                    if (isset($feature['details']) && is_array($feature['details'])) {
+                        foreach ($feature['details'] as $detail) {
+                            $featureDetailModel = $productFeatureModel->details()->create([
+                                'icon' => $detail['icon'] ?? null,
+                                'sort' => isset($detail['sort']) ? (int)$detail['sort'] : 0,
+                                'created_by' => 1,
+                                'updated_by' => 1,
+                            ]);
+                            if (isset($detail['translations']) && is_array($detail['translations'])) {
+                                foreach ($detail['translations'] as $detailTranslation) {
+                                    $featureDetailModel->translations()->create([
+                                        'locale' => $detailTranslation['locale'] ?? 'en',
+                                        'title' => $detailTranslation['title'] ?? '',
+                                        'description' => $detailTranslation['description'] ?? '',
+                                        'created_by' => 1,
+                                        'updated_by' => 1,
+                                    ]);
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
-
         $this->command->info('Products seeded successfully!');
     }
 }

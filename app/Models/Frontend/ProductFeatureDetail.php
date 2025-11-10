@@ -5,14 +5,14 @@ namespace App\Models\Frontend;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ProductFeature extends Model
+class ProductFeatureDetail extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'product_features';
+    protected $table = 'product_feature_details';
 
     protected $fillable = [
-        'product_id',
+        'product_feature_id',
         'icon',
         'sort',
         'created_by',
@@ -24,13 +24,13 @@ class ProductFeature extends Model
         'sort' => 'integer',
     ];
 
-    public function translations()
+    public function feature()
     {
-        return $this->hasMany(ProductFeatureTranslation::class, 'product_feature_id');
+        return $this->belongsTo(ProductFeature::class, 'product_feature_id');
     }
 
-    public function details()
+    public function translations()
     {
-        return $this->hasMany(ProductFeatureDetail::class, 'product_feature_id');
+        return $this->hasMany(ProductFeatureDetailTranslation::class, 'product_feature_detail_id');
     }
 }

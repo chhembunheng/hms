@@ -74,8 +74,8 @@
     --white-rgb: 255, 255, 255;
     --body-color-rgb: 31, 41, 55;
     --body-bg-rgb: 241, 244, 249;
-    --font-sans-serif: "Ubuntu", sans-serif, Battambang;
-    --font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --font-sans-serif: "Ubuntu", Battambang;
+    --font-monospace: "Ubuntu", Battambang;
     --gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
     --body-font-family: var(--font-sans-serif);
     --body-font-size: 0.85rem;
