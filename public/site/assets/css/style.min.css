@@ -4517,3 +4517,14 @@ blockquote::after {
     border: unset !important;
     display: none !important;
 }
+
+#header .navbar-brand {
+    padding-left: 20px !important;
+}
+
+#header .navbar-toggler {
+    padding-right: 20px !important;
+}
+#header .language-selector-wrapper {
+    padding-right: 15px;
+}
