@@ -52,107 +52,14 @@
         <link rel="alternate" hreflang="{{ $locale ?? 'en' }}" href="{{ request()->url() }}" />
     @endif
 
-    <!-- Core CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-    <link rel="stylesheet" href="{{ asset('site/assets/css/meanmenu.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('site/assets/css/style.min.css') . (env('APP_ENV') == 'local' || request()->clear == 'yes' ? '?v=' . time() : '') }}" />
-    <link rel="stylesheet" href="{{ asset('site/assets/css/responsive.min.css') . (env('APP_ENV') == 'local' || request()->clear == 'yes' ? '?v=' . time() : '') }}" />
-    @include('frontends.layouts.partials.head')
+    @include('frontends.layouts.partials.header')
 </head>
 
 <body>
     @php
         $img = webp_variants('assets/logo/full-blue.png', 'bxs', null, 60);
     @endphp
-    <header id="header" role="banner" class="navbar-area is-sticky">
-        <div class="techone-responsive-nav">
-            <div class="techone-responsive-menu">
-                <div class="logo">
-                    <a href="{{ Route::currentRouteName() == 'welcome' ? '#' : route('welcome', ['locale' => app()->getLocale()]) }}">
-                        <img src="{{ $img['fallback'] }}" srcset="{{ $img['srcset'] }}" sizes="(max-width: 600px) 95vw, {{ $img['width'] }}px" alt="Brand Name Logo" loading="lazy" width="{{ $img['width'] }}" height="auto">
-                    </a>
-                </div>
-            </div>
-        </div>
-        <nav id="main-nav" class="techone-nav" role="navigation" aria-label="Main Navigation">
-            <div class="container">
-                <nav class="navbar navbar-expand-md navbar-light desktop-screen">
-                    <a class="navbar-brand" href="{{ Route::currentRouteName() == 'welcome' ? '#' : route('welcome', ['locale' => app()->getLocale()]) }}">
-                        <img src="{{ $img['fallback'] }}" srcset="{{ $img['srcset'] }}" sizes="(max-width: 600px) 95vw, {{ $img['width'] }}px" alt="Brand Name Logo" loading="lazy" width="{{ $img['width'] }}" height="auto">
-                    </a>
-                    <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
-                        <ul class="navbar-nav">
-                            <li class="nav-item switch-language-mobile">
-                                @php
-                                    $languages = collect(config('init.languages'));
-                                    $currentLocale = app()->getLocale();
-                                    $currentLanguage = $languages->firstWhere('code', $currentLocale);
-                                @endphp
-                                <a href="#" class="nav-link">
-                                    <img src="{{ asset($currentLanguage['flag']) }}" class="language-flag" alt="Language Flag">
-                                    {{ $currentLanguage['name'] }}
-                                    <i class="fa-solid fa-chevron-down fa-fw desktop-icon"></i>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    @foreach (config('init.languages') as $language)
-                                        @if ($language['code'] !== $currentLocale)
-                                            @php
-                                                $switchUrl = route(Route::currentRouteName(), array_merge(request()->route()->parameters(), ['locale' => $language['code']]));
-                                            @endphp
-                                            <li class="nav-item">
-                                                <a href="{{ $switchUrl }}" class="nav-link" aria-label="{{ __('global.switch_language_to', ['lang' => $language['name']]) }}">
-                                                    <img src="{{ asset($language['flag']) }}" class="language-flag">
-                                                    &nbsp;&nbsp;{{ $language['name'] }}
-                                                </a>
-                                            </li>
-                                        @endif
-                                    @endforeach
-                                </ul>
-                            </li>
-                            @foreach ($navigations ?? [] as $navigation)
-                                @include('frontends.layouts.partials.navigation-item', ['navigation' => $navigation])
-                            @endforeach
-                        </ul>
-                        <div class="other-option">
-                            <ul class="navbar-nav">
-                                <li class="nav-item switch-language-desktop d-flex align-items-center">
-                                    @php
-                                        $languages = collect(config('init.languages'));
-                                        $currentLocale = app()->getLocale();
-                                        $currentLanguage = $languages->firstWhere('code', $currentLocale);
-                                    @endphp
-                                    <a href="#" class="nav-link text-nowrap">
-                                        <img src="{{ asset($currentLanguage['flag']) }}" class="language-flag" alt="Language Flag">
-                                        {{ $currentLanguage['name'] }}
-                                        <i class="fa-solid fa-chevron-down fa-fw desktop-icon"></i>
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-menu-end">
-                                        @foreach (config('init.languages') as $language)
-                                            @if ($language['code'] !== $currentLocale)
-                                                @php
-                                                    $switchUrl = route(Route::currentRouteName(), array_merge(request()->route()->parameters(), ['locale' => $language['code']]));
-                                                @endphp
-                                                <li class="nav-item">
-                                                    <a href="{{ $switchUrl }}" class="nav-link" aria-label="{{ __('global.switch_language_to', ['lang' => $language['name']]) }}">
-                                                        <img src="{{ asset($language['flag']) }}" class="language-flag">
-                                                        &nbsp;&nbsp;{{ $language['name'] }}
-                                                    </a>
-                                                </li>
-                                            @endif
-                                        @endforeach
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        </nav>
-    </header>
+   @include('frontends.layouts.partials.top-navigation')
     <main id="main-content" role="main">
         {{ $slot }}
     </main>
@@ -230,17 +137,6 @@
             </div>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/counterup2/2.0.2/index.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.20.0/dist/jquery.validate.min.js"></script>
-    <script src="{{ asset('site/assets/js/jquery.meanmenu.min.js') }}"></script>
-    <script src="{{ asset('site/assets/js/mail.min.js') }}"></script>
-    <script src="{{ asset('site/assets/js/main.min.js') }}"></script>
     @include('frontends.layouts.partials.js')
     @stack('scripts')
 </body>
