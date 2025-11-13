@@ -89,10 +89,7 @@
                 c("all"), allowCookie(), location.reload()
             })
         }(), $(document).ready(function() {
-            $(".nav").meanmenu({
-                meanMenuContainer: ".techone-responsive-menu",
-                meanScreenWidth: 991
-            }), setTimeout(function() {
+             setTimeout(function() {
                 let e = $(".meanmenu-reveal");
                 e.length && (e.attr({
                     role: "button",

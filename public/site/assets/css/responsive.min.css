@@ -1,3 +1,17 @@
+#top-navigation .language-selector-wrapper {
+    padding-right: 20px;
+}
+#top-navigation .navbar-toggler {
+    padding-right: 0;
+    display: none;
+}
+#navbarContent .navbar-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+}
+
 @media only screen and (max-width:767px) {
     .section-title h2 {
         font-size: 30px
@@ -361,29 +375,52 @@
         margin-bottom: 20px
     }
 
-
-
-    
-
-    #navbarContent {
-        position: absolute !important;
-        top: 60px !important;
-        left: 0 !important;
-        right: 0 !important;
-        padding: 20px !important;
-        background-color: #fff !important;
-        box-shadow: 0 4px 6px rgb(0 0 0 / .1) !important;
-        border-radius: 8px !important;
-        z-index: 1000 !important
+    #top-navigation .language-selector-wrapper {
+        padding-right: 0;
     }
+    #top-navigation .navbar-toggler {
+        padding-right: 20px;
+        display: block;
+    }
+    #top-navigation .language-selector-wrapper i {
+        display: none;
+    }
+    #top-navigation #navbarContent {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: #fff;
+        left: 0;
+        color: #000;
+    }
+    #top-navigation #navbarContent * {
+        color: #000 !important;
+    }
+    #top-navigation #navbarContent .navbar-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+    }
+    #top-navigation #navbarContent .dropdown {
+        width: 100%;
+    }
+    #top-navigation #navbarContent:not(.show) {
+        display: none;
+    }
+    #top-navigation .dropdown-sub-menu.show {
+        position: static !important;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        width: 100%;
+        margin-top: 0;
+        transform: none !important;
+        padding: 0 20px !important;
+    }
+
 }
 
 @media only screen and (min-width:480px) and (max-width:767px) {
-    .techone-responsive-nav .techone-responsive-menu.mean-container .navbar-nav {
-        overflow-y: scroll;
-        height: 250px
-    }
-
     .footer-quick-links li:last-child {
         padding-bottom: 0
     }
@@ -407,22 +444,6 @@
         padding-bottom: 100px;
         background-position: center
     }
-
-
-
-    
-
-    #navbarContent {
-        position: absolute !important;
-        top: 60px !important;
-        left: 0 !important;
-        right: 0 !important;
-        padding: 20px !important;
-        background-color: #fff !important;
-        box-shadow: 0 4px 6px rgb(0 0 0 / .1) !important;
-        border-radius: 8px !important;
-        z-index: 1000 !important
-    }
 }
 
 @media only screen and (min-width:0) and (max-width:380px) {
@@ -440,22 +461,6 @@
 
     .video-box {
         justify-content: left
-    }
-
-
-
-    
-
-    #navbarContent {
-        position: absolute !important;
-        top: 60px !important;
-        left: 0 !important;
-        right: 0 !important;
-        padding: 20px !important;
-        background-color: #fff !important;
-        box-shadow: 0 4px 6px rgb(0 0 0 / .1) !important;
-        border-radius: 8px !important;
-        z-index: 1000 !important
     }
 }
 
@@ -495,22 +500,6 @@
         flex: unset;
         max-width: unset;
         margin-top: 10px
-    }
-
-
-
-    
-
-    #navbarContent {
-        position: absolute !important;
-        top: 60px !important;
-        left: 0 !important;
-        right: 0 !important;
-        padding: 20px !important;
-        background-color: #fff !important;
-        box-shadow: 0 4px 6px rgb(0 0 0 / .1) !important;
-        border-radius: 8px !important;
-        z-index: 1000 !important
     }
 }
 
@@ -806,22 +795,6 @@
 
     .copyright-area ul {
         text-align: right
-    }
-
-
-
-    
-
-    #navbarContent {
-        position: absolute !important;
-        top: 60px !important;
-        left: 0 !important;
-        right: 0 !important;
-        padding: 20px !important;
-        background-color: #fff !important;
-        box-shadow: 0 4px 6px rgb(0 0 0 / .1) !important;
-        border-radius: 8px !important;
-        z-index: 1000 !important
     }
 }
 

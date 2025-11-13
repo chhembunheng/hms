@@ -75,6 +75,7 @@ class Navigations
             $navigationObject = (object) [
                 'id' => $id,
                 'name' => $navigationName,
+                'parent_id' => $parentId ?? null,
                 'route' => $route,
                 'icon' => $navigation->icon ?? $navigation['icon'] ?? null,
                 'children' => $children,

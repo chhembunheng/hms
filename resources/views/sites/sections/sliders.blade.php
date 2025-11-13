@@ -6,7 +6,6 @@
                     $img = webp_variants($slider->image, 'banner', null, 80); // expect width & height keys
                     $isFirst = $i === 0;
                 @endphp
-
                 <div class="swiper-slide">
                     <div class="slide-figure">
                         <picture>
@@ -16,7 +15,6 @@
                         </picture>
                         <span class="slide-overlay" aria-hidden="true"></span>
                     </div>
-
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-8 offset-lg-2 col-md-12">
@@ -40,7 +38,15 @@
                 </div>
             @endforeach
         </div>
-
+        <!-- slider setting -->
+        <div class="control-text">
+            <div class="swiper-button-prev swiper-nav-ctrl prev-ctrl cursor-pointer">
+                <span class="arrow prv"></span>
+            </div>
+            <div class="swiper-button-next swiper-nav-ctrl next-ctrl cursor-pointer">
+                <span class="arrow nxt"></span>
+            </div>
+        </div>
         <div class="swiper-pagination"></div>
     </div>
 </header>

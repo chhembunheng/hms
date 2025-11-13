@@ -59,10 +59,8 @@
     @php
         $img = webp_variants('assets/logo/full-blue.png', 'bxs', null, 60);
     @endphp
-   @include('frontends.layouts.partials.top-navigation')
-    <main id="main-content" role="main">
-        {{ $slot }}
-    </main>
+    @include('frontends.layouts.partials.top-navigation')
+    {{ $slot }}
     <footer id="footer" role="contentinfo">
         @include('frontends.layouts.partials.footer')
     </footer>
@@ -110,9 +108,9 @@
                 <div class="card-title mb-2 d-flex align-items-center gap-2" id="cookieTitle"><span class="fw-semibold">{{ __('global.we_use_cookies') }}</span><span class="badge bg-primary rounded-pill">{{ __('global.privacy') }}</span></div>
                 <div id="cookieDesc" class="small text-body-secondary">
                     <p class="mb-2">{{ __('global.cookie_intro_text') }}</p>
-                    <p class="mb-3">{{ __('global.cookie_choice_text') }} <a class="link-primary" href="{{ Route::has('cookie-policy') ? route('cookie-policy', ['locale' => app()->getLocale()]) : '#' }}" target="_blank"
-                            rel="noopener noreferrer">{{ __('global.cookie_policy') }}</a> {{ __('global.for_details') }}</p><button class="btn btn-link p-0 small text-body-secondary d-inline-flex align-items-center gap-1" type="button" id="detailsToggle" aria-expanded="false"
-                        aria-controls="cookieDetails"><span id="chevron" class="chevron-icon">⌄</span><span>{{ __('global.show_cookie_categories') }}</span></button>
+                    <p class="mb-3">{{ __('global.cookie_choice_text') }} <a class="link-primary" href="{{ Route::has('cookie-policy') ? route('cookie-policy', ['locale' => app()->getLocale()]) : '#' }}" target="_blank" rel="noopener noreferrer">{{ __('global.cookie_policy') }}</a>
+                        {{ __('global.for_details') }}</p><button class="btn btn-link p-0 small text-body-secondary d-inline-flex align-items-center gap-1" type="button" id="detailsToggle" aria-expanded="false" aria-controls="cookieDetails"><span id="chevron"
+                            class="chevron-icon">⌄</span><span>{{ __('global.show_cookie_categories') }}</span></button>
                     <div class="mt-2 collapse" id="cookieDetails" style="display:none;">
                         <div class="border rounded-2 p-2 bg-body-tertiary small">
                             <div class="pb-2 mb-2 border-bottom">
