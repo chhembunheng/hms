@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-         Schema::create('seo_meta', function (Blueprint $table) {
+        Schema::create('seo_meta', function (Blueprint $table) {
             $table->id();
             $table->string('seoable_type');
             $table->unsignedBigInteger('seoable_id');
@@ -27,8 +27,8 @@ return new class extends Migration
             $table->string('og_image')->nullable();
             $table->authors();
 
-            $table->unique(['seoable_type','seoable_id','locale']);
-            $table->index(['slug','locale']);
+            $table->unique(['seoable_type', 'seoable_id', 'locale']);
+            $table->index(['slug', 'locale']);
         });
     }
 

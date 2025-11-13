@@ -54,7 +54,6 @@ class ProductDataTable extends DataTable
     {
         return [
             Column::computed('DT_RowIndex')->title(__('root.common.no'))->width(60),
-            Column::make('sku')->title('SKU')->width(120),
             Column::computed('image')->title(__('root.common.image'))->width(80)->addClass('text-center'),
             Column::computed('name')->title(__('root.common.name'))->width(200),
             Column::make('sort')->title(__('root.common.sort'))->width(100),
