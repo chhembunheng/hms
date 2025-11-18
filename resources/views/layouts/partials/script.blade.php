@@ -15,8 +15,23 @@
  <script>
      // initialize body overlay
      //  please make overlay start and stop when page loaded
-
+     $.ajaxSetup({
+         headers: {
+             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         },
+         beforeSend: function() {
+             loading('start');
+         }
+     });
+     $(document).ajaxComplete(function() {
+         loading('stop');
+     });
+     $(document).ajaxError(function() {
+         error('Something went wrong');
+         loading('stop');
+     });
      $(document).ready(function() {
+
          $(document).find('select.select-icons').select2({
              templateResult: iconFormat,
              minimumResultsForSearch: Infinity,
@@ -31,13 +46,13 @@
                  return m;
              }
          });
-         loading('stop');
      });
+
      function loading(e) {
-         if (e == 'stop') {
-             $('#body-overlay').fadeOut(300);
+         if (e === 'stop') {
+             $(document).find('#body-overlay').addClass('d-none');
          } else {
-             $('#body-overlay').fadeIn();
+             $(document).find('#body-overlay').removeClass('d-none');
          }
      }
 
@@ -116,24 +131,6 @@
      function clearCache() {
          window.location.href = '{{ route('clear-cache') }}';
      }
-
-     $.ajaxSetup({
-         headers: {
-             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-         },
-         beforeSend: function() {
-             loading();
-         },
-         complete: function(e) {
-             loading('stop');
-             if (e.status === 403) {
-                 window.location.href = '/403';
-             }
-         },
-         error: function(e) {
-            loading('stop');
-         }
-     });
 
      function changeLanguage(lang) {
          setTimeout(function() {
@@ -437,6 +434,7 @@
                  content: content,
                  _token: '{{ csrf_token() }}'
              },
+             dataType: 'json',
              success: function(res) {
                  if (res.status === 'success') {
                      success(res.message);

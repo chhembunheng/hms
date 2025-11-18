@@ -17,7 +17,7 @@
 
 <body style="overflow: visible;">
     @if (config('init.loading.enabled') === true)
-        <div class="card-overlay" id="body-overlay"><span class="{{ config('init.loading.icon') }}"></span></div>
+        <div class="card-overlay d-none" id="body-overlay"><span class="{{ config('init.loading.icon') }}"></span></div>
     @endif
     @include('layouts.partials.navigation')
     <div class="page-content">
