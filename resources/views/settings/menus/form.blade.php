@@ -2,7 +2,20 @@
     <x-form.layout :form="$form">
         <div class="row">
             <div class="col-md-6">
-                <x-form.input :label="__('form.icon')" name="icon" value="{{ old('icon', $form?->icon) }}" placeholder="fa-solid fa-home" />
+                <label class="form-label">{{ __('form.icon') }}</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="icon-preview">
+                        @if(old('icon', $form?->icon))
+                            <i class="{{ old('icon', $form?->icon) }}"></i>
+                        @else
+                            <i class="fa-solid fa-image text-muted"></i>
+                        @endif
+                    </span>
+                    <input type="text" id="icon-input" name="icon" class="form-control form-control-sm" value="{{ old('icon', $form?->icon) }}" placeholder="fa-solid fa-home" aria-describedby="icon-preview">
+                    <button type="button" class="btn btn-outline-secondary" id="open-icon-picker" title="{{ __('form.choose_icon') }}">
+                        <i class="fa-solid fa-icons"></i>
+                    </button>
+                </div>
             </div>
             <div class="col-md-6">
                 <x-form.input :label="__('form.route')" name="route" value="{{ old('route', $form?->route) }}" placeholder="dashboard.index" />
@@ -74,16 +87,27 @@
                             $action_suffix = count($action_route) > 1 ? $action_route[count($action_route) - 1] : '';
                             $action_prefix = count($action_route) > 1 ? implode('.', array_slice($action_route, 0, -1)) : '';
                         @endphp
-                        <div class="permission-row mb-2 d-flex gap-2 align-items-start">
+                        <div class="permission-row mb-2 d-flex gap-2 align-items-start" draggable="true">
                             <input type="hidden" name="permissions_existing[][id]" value="{{ $perm->id }}">
+                            <input type="hidden" name="permissions_existing[][sort]" class="perm-sort-input" value="{{ $perm->sort ?? 0 }}">
+                            <span class="drag-handle btn btn-sm btn-light me-2" title="Move">☰</span>
                             <div class="flex-grow-1">
-                                <div class="d-flex gap-2">
-                                    <div class="input-group">
-                                        <span class="input-group-text perm-action-prefix">{{ $action_prefix ?? '' }}</span>
-                                        <input type="text" class="form-control form-control-sm perm-action-visible" value="{{ $permName }}" placeholder="Permission name">
-                                        <input type="hidden" name="permissions_existing[][action]" class="perm-action-hidden" value="{{ $action_suffix ?? '' }}">
+                                <div class="row w-100 g-2 align-items-start">
+                                    <div class="col-auto d-flex align-items-start">
+                                        <div class="me-1">
+                                            <x-form.icon name="permissions_existing[][icon]" class="text-muted" :text="false" value="{{ $perm->icon ?? '' }}" />
+                                        </div>
                                     </div>
-                                    <input type="text" name="permissions_existing[][slug]" class="form-control form-control-sm" value="{{ $perm->slug ?? '' }}" placeholder="slug/action">
+                                    <div class="col">
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-text perm-action-prefix">{{ $action_prefix ?? '' }}</span>
+                                            <input type="text" class="form-control form-control-sm perm-action-visible" value="{{ $action_suffix }}" placeholder="Permission Route Action">
+                                            <input type="hidden" name="permissions_existing[][action]" class="perm-action-hidden" value="{{ $action_suffix ?? '' }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" name="permissions_existing[][slug]" class="form-control form-control-sm" value="{{ $perm->slug ?? '' }}" placeholder="slug/action">
+                                    </div>
                                 </div>
                                 <div class="mt-1">
                                     <ul class="nav nav-tabs" role="tablist">
@@ -196,7 +220,7 @@
                         }
                     }
                     var uid = 'perm-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
-                    var $row = $('<div>').addClass('permission-row mb-2 d-flex gap-2 align-items-start');
+                    var $row = $('<div>').addClass('permission-row mb-2 d-flex gap-2 align-items-start').attr('draggable', 'true');
 
                     if (typeof id !== 'undefined' && id !== null) {
                         $('<input>', {
@@ -204,17 +228,37 @@
                             name: 'permissions_existing[][id]',
                             value: id
                         }).appendTo($row);
+                        $('<input>', {
+                            type: 'hidden',
+                            name: 'permissions_existing[][sort]',
+                            class: 'perm-sort-input',
+                            value: 0
+                        }).appendTo($row);
+                        $('<span>').addClass('drag-handle btn btn-sm btn-light me-2').attr('title', 'Move').text('\u2630').appendTo($row);
+                    } else {
+                        // new row: add new sort input and drag handle
+                        $('<input>', {
+                            type: 'hidden',
+                            name: 'permissions_new[][sort]',
+                            class: 'perm-sort-input',
+                            value: 0
+                        }).appendTo($row);
+                        $('<span>').addClass('drag-handle btn btn-sm btn-light me-2').attr('title', 'Move').text('\u2630').appendTo($row);
                     }
 
                     var isExisting = (typeof id !== 'undefined' && id !== null);
                     var actionName = isExisting ? 'permissions_existing[][action]' : 'permissions_new[][action]';
                     var slugName = isExisting ? 'permissions_existing[][slug]' : 'permissions_new[][slug]';
 
-                    var $flex = $('<div>').addClass('flex-grow-1');
-                    var $inputsDiv = $('<div>').addClass('d-flex gap-2');
+                    // build row columns: icon (col-auto), action (col), slug (col-md-3)
+                    var $rowBody = $('<div>').addClass('row w-100 g-2 align-items-start');
 
-                    // action input-group: prefix addon + visible suffix input + hidden full action input (named)
-                    var $actionGroup = $('<div>').addClass('input-group');
+                    var $colIcon = $('<div>').addClass('col-auto d-flex align-items-start');
+                    var $iconWrap = $('<div>').addClass('me-1').html('<i class="fa-solid fa-image text-muted"></i>');
+                    $colIcon.append($iconWrap);
+
+                    var $colAction = $('<div>').addClass('col');
+                    var $actionGroup = $('<div>').addClass('input-group input-group-sm');
                     var $prefix = $('<span>').addClass('input-group-text perm-action-prefix').text('');
                     var $visible = $('<input>', {
                         type: 'text',
@@ -228,18 +272,19 @@
                         class: 'perm-action-hidden',
                         value: action
                     });
-
                     $actionGroup.append($prefix).append($visible).append($hidden);
-                    $inputsDiv.append($actionGroup);
+                    $colAction.append($actionGroup);
 
+                    var $colSlug = $('<div>').addClass('col-md-3');
                     $('<input>', {
                         type: 'text',
                         name: slugName,
                         placeholder: 'slug/action',
                         value: slug
-                    }).addClass('form-control form-control-sm').appendTo($inputsDiv);
+                    }).addClass('form-control form-control-sm').appendTo($colSlug);
 
-                    $flex.append($inputsDiv);
+                    $rowBody.append($colIcon).append($colAction).append($colSlug);
+                    var $flex = $('<div>').addClass('flex-grow-1').append($rowBody);
 
                     // build language tabs
                     var $tabsWrap = $('<div>').addClass('mt-1');
@@ -306,12 +351,100 @@
                     $list.append($newRow);
                     // initialize action prefix UI for the new row
                     initActionRow($newRow);
+                    // bind drag handlers for the new row
+                    bindDragHandlers($newRow);
                     // focus first input (action/name)
                     $newRow.find('.perm-action-visible').first().focus();
                 });
 
+                // Icon preview: update preview when the icon input changes
+                function updateIconPreview() {
+                    var cls = ($('#icon-input').val() || '').trim();
+                    var $preview = $('#icon-preview');
+                    if (!cls) {
+                        $preview.html('<i class="fa-solid fa-image text-muted"></i>');
+                    } else {
+                        // escape attribute - we trust input but keep simple
+                        $preview.html('<i class="' + cls.replace(/"/g, '') + '"></i>');
+                    }
+                }
+
+                // initialize preview on load
+                updateIconPreview();
+
+                // sync preview while typing
+                $(document).on('input', '#icon-input', function() {
+                    updateIconPreview();
+                });
+
+                // Open icon picker if available; otherwise focus input
+                $(document).on('click', '#open-icon-picker', function() {
+                    var $input = $('#icon-input');
+                    if (typeof window.openIconPicker === 'function') {
+                        try {
+                            window.openIconPicker($input);
+                        } catch (e) {
+                            $input.focus();
+                        }
+                    } else {
+                        $input.focus();
+                    }
+                });
+
                 // run once on load to prefill any existing empty action fields
                 prefillExistingActions();
+
+                // DRAG & DROP ordering (native HTML5)
+                var draggedRow = null;
+
+                function onDragStart(e) {
+                    draggedRow = this;
+                    e.originalEvent.dataTransfer.effectAllowed = 'move';
+                    e.originalEvent.dataTransfer.setData('text/plain', 'drag');
+                    $(this).addClass('dragging');
+                }
+
+                function onDragEnd(e) {
+                    $(this).removeClass('dragging');
+                    draggedRow = null;
+                    updateOrderInputs();
+                }
+
+                function onDragOver(e) {
+                    e.preventDefault();
+                    e.originalEvent.dataTransfer.dropEffect = 'move';
+                    var $target = $(this);
+                    if (!draggedRow || this === draggedRow) return;
+                    var rect = this.getBoundingClientRect();
+                    var offset = e.originalEvent.clientY - rect.top;
+                    if (offset > rect.height / 2) {
+                        $target.after(draggedRow);
+                    } else {
+                        $target.before(draggedRow);
+                    }
+                }
+
+                function updateOrderInputs() {
+                    $('#menu-permissions-list').find('.permission-row').each(function(index) {
+                        var $row = $(this);
+                        $row.find('.perm-sort-input').val(index);
+                    });
+                }
+
+                function bindDragHandlers($container) {
+                    $container.find('.permission-row').each(function() {
+                        var el = this;
+                        $(el).off('dragstart.drag drop.drag dragover.drag dragend.drag');
+                        $(el).on('dragstart.drag', onDragStart);
+                        $(el).on('dragend.drag', onDragEnd);
+                        $(el).on('dragover.drag', onDragOver);
+                    });
+                    // set initial order
+                    updateOrderInputs();
+                }
+
+                // bind handlers initially and whenever rows are added/removed
+                bindDragHandlers($(document));
 
                 // update empty action inputs when route changes
                 $(document).on('input', 'input[name="route"]', function() {

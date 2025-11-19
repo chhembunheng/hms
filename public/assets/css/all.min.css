@@ -20581,8 +20581,6 @@ html[data-color-theme=dark] .offcanvas-header .btn-close {
     filter: brightness(.85)
 }
 
-@charset "UTF-8";
-
 .select2-container {
     --s2-bg: var(--white);
     --s2-color: var(--body-color);
@@ -20598,8 +20596,8 @@ html[data-color-theme=dark] .offcanvas-header .btn-close {
     --s2-disabled-bg: var(--gray-100);
     --s2-disabled-border-color: var(--gray-400);
     --s2-disabled-opacity: 0.6;
-    --s2-font-size: var(--body-font-size);
-    --s2-line-height: var(--body-line-height);
+    --s2-font-size: var(--body-font-size-sm);
+    --s2-line-height: var(--body-line-height-sm);
     --s2-indicator-padding: 2.625rem;
     --s2-menu-padding-y: 0.625rem;
     --s2-menu-max-height: 17rem;
@@ -20618,8 +20616,8 @@ html[data-color-theme=dark] .offcanvas-header .btn-close {
     --s2-menu-link-active-color: var(--gray-900);
     --s2-menu-link-active-bg: var(--gray-300);
     --s2-search-bg: var(--white);
-    --s2-search-padding-y: 0.5rem;
-    --s2-search-padding-x: 0.875rem;
+    --s2-search-padding-y: 0.375rem;
+    --s2-search-padding-x: 0.75rem;
     --s2-search-color: var(--body-color);
     --s2-search-border-width: var(--border-width);
     --s2-search-border-color: var(--gray-400);
@@ -20639,7 +20637,10 @@ html[data-color-theme=dark] .offcanvas-header .btn-close {
     vertical-align: middle;
     text-align: left
 }
-
+.form-select-sm + .select2-container {
+    --s2-padding-y: 0.375rem;
+    --s2-padding-x: 0.75rem;
+}
 .select2-container[data-color-theme=dark],
 [data-color-theme=dark] .select2-container:not([data-color-theme]),
 html[data-color-theme=dark] .select2-container {

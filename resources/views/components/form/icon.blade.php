@@ -1,9 +1,9 @@
-@props(['label', 'required' => $attributes->has('required') && $attributes->get('required') === 'required', 'value' => null, 'id' => 'icon-select-' . \Illuminate\Support\Str::uuid()])
+@props(['label', 'required' => $attributes->has('required') && $attributes->get('required') === 'required', 'value' => null, 'text' => true, 'id' => 'icon-select-' . \Illuminate\Support\Str::uuid()])
 
 <div class="mb-3">
     <label class="form-label @if ($required) required @endif">{{ $label ?? '' }}</label>
-    <div class="input-group icon-picker-box">
-        <select id="{{ $id }}" {{ $attributes->merge(['class' => 'form-select form-select-sm icon-select2']) }} @if ($required) required @endif data-initial-value="{{ $value }}">
+    <div class="input-group icon-picker-box input-group-sm" style="min-width:160px;">
+        <select id="{{ $id }}" style="min-width:160px;" {{ $attributes->merge(['class' => 'form-select form-select-sm icon-select2']) }} @if ($required) required @endif data-initial-value="{{ $value }}">
             @if ($value)
                 <option value="{{ $value }}" selected>{{ $value }}</option>
             @endif
@@ -13,6 +13,7 @@
 
 @pushOnce('scripts')
     <script>
+        const showText = @json($text);
         window.__iconPickerData = window.__iconPickerData || {
             loaded: false,
             loadingPromise: null,
@@ -56,9 +57,10 @@
                     });
 
                     // Keep only the first ICON_LIMIT icons to limit displayed options.
+                    // store and return only the limited set to avoid passing the full list to Select2
                     window.__iconPickerData.icons = Array.isArray(mapped) ? mapped.slice(0, ICON_LIMIT) : [];
                     window.__iconPickerData.loaded = true;
-                    return mapped;
+                    return window.__iconPickerData.icons;
                 })
                 .catch(function(err) {
                     console.error('Error loading fontawesome-icons-merged.json:', err);
@@ -92,11 +94,13 @@
                         data: allIcons,
                         templateResult: function(icon) {
                             if (!icon.id) return icon.text;
-                            return '<i class="' + icon.id + ' fa-fw me-2"></i>' + icon.text;
+                            if(showText) return '<i class="' + icon.id + ' fa-fw me-2"></i>' + icon.text;
+                            return '<i class="' + icon.id + ' fa-fw"></i>';
                         },
                         templateSelection: function(icon) {
                             if (!icon.id) return icon.text || '';
-                            return '<i class="' + icon.id + ' fa-fw me-2"></i>' + icon.text;
+                            if(showText) return '<i class="' + icon.id + ' fa-fw me-2"></i>' + icon.text;
+                            return '<i class="' + icon.id + ' fa-fw"></i>';
                         },
                         escapeMarkup: function(m) {
                             return m;
