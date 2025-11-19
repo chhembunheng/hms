@@ -40,6 +40,8 @@ class RoleController extends Controller
                     'description.zh' => 'nullable|string',
                     'administrator' => 'nullable|boolean',
                     'sort' => 'nullable|integer|min:0',
+                    'permissions' => 'nullable|array',
+                    'permissions.*' => 'integer|exists:permissions,id',
                 ];
 
                 $validator = Validator::make($request->all(), $rules);
@@ -53,6 +55,9 @@ class RoleController extends Controller
                     'sort' => $request->input('sort', 0),
                     'created_by' => auth()->id(),
                 ]);
+
+                // Sync permissions (if any)
+                $role->permissions()->sync($request->input('permissions', []));
 
                 // Create translations
                 $names = $request->input('name', []);
@@ -96,6 +101,8 @@ class RoleController extends Controller
                     'description.zh' => 'nullable|string',
                     'administrator' => 'nullable|boolean',
                     'sort' => 'nullable|integer|min:0',
+                    'permissions' => 'nullable|array',
+                    'permissions.*' => 'integer|exists:permissions,id',
                 ];
 
                 $validator = Validator::make($request->all(), $rules);
@@ -109,6 +116,9 @@ class RoleController extends Controller
                     'sort' => $request->input('sort', 0),
                     'updated_by' => auth()->id(),
                 ]);
+
+                // Sync permissions
+                $form->permissions()->sync($request->input('permissions', []));
 
                 // Update translations
                 $names = $request->input('name', []);

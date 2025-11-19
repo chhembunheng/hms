@@ -23,7 +23,10 @@
         </div>
         <div class="tab-content" id="localeTabContent">
             @foreach ($locales as $locale => $language)
-                <div @class(['tab-pane fade', 'show active' => $locale === config('app.locale')]) id="locale-{{ $locale }}" role="tabpanel" aria-labelledby="locale-{{ $locale }}-tab">
+                <div @class([
+                    'tab-pane fade',
+                    'show active' => $locale === config('app.locale'),
+                ]) id="locale-{{ $locale }}" role="tabpanel" aria-labelledby="locale-{{ $locale }}-tab">
                     <div class="row">
                         <div class="col-md-8 offset-md-2">
                             <x-form.input :label="__('form.name')" name="name[{{ $locale }}]" value="{{ old('name.' . $locale, $translations[$locale]['name'] ?? '') }}" required />
@@ -34,6 +37,12 @@
                     </div>
                 </div>
             @endforeach
+        </div>
+        {{-- Permissions tree --}}
+        <div class="row mt-3">
+            <div class="col-md-10 offset-md-1">
+                @include('settings.roles._permissions_tree', ['form' => $form])
+            </div>
         </div>
         <div class="row">
             <div class="col-md-8 offset-md-2 text-end mt-3">
