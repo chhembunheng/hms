@@ -1,4 +1,5 @@
- <script src="{{ asset('assets/js/jquery/jquery.min.js') }}?v={{ config('init.layout_version') }}"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+ <script>if (typeof jQuery === 'undefined') {document.write('<script src="' + '{{ asset('assets/js/jquery/jquery.min.js') }}?v={{ config('init.layout_version') }}' + '"><\/script>');}</script>
  <script src="{{ asset('assets/js/bootstrap/bootstrap.bundle.min.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/vendor/uploaders/fileinput/fileinput.min.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/vendor/notifications/sweet_alert.min.js') }}?v={{ config('init.layout_version') }}"></script>

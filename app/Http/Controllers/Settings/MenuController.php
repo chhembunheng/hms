@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\Settings\MenuDataTable;
 use App\Models\Settings\Menu;
+use App\Models\Settings\Permission;
 use App\Models\Settings\MenuTranslation;
 use Illuminate\Support\Facades\Validator;
 
@@ -42,6 +43,9 @@ class MenuController extends Controller
                     'route' => 'nullable|string|max:255',
                     'sort' => 'nullable|integer|min:0',
                     'parent_id' => 'nullable|integer|exists:menus,id',
+                    'permissions_new' => 'nullable|array',
+                    'permissions_new.*.action' => 'nullable|string|max:255',
+                    'permissions_new.*.slug' => 'nullable|string|max:255',
                 ];
 
                 $validator = Validator::make($request->all(), $rules);
@@ -57,11 +61,42 @@ class MenuController extends Controller
                     'created_by' => auth()->id(),
                 ]);
 
+                // Persist new permissions (if any)
+                $permissionsNew = $request->input('permissions_new', []);
+                if (is_array($permissionsNew) && count($permissionsNew)) {
+                    foreach ($permissionsNew as $p) {
+                        $action = trim($p['action'] ?? '');
+                        $slug = trim($p['slug'] ?? '');
+                        if ($action === '' && $slug === '') continue;
+                        $perm = Permission::create([
+                            'action' => $action ?: null,
+                            'slug' => $slug ?: null,
+                            'menu_id' => $menu->id,
+                            'created_by' => auth()->id(),
+                        ]);
+                        // persist translations if provided
+                        $translations = $p['translations'] ?? [];
+                        if (is_array($translations) && count($translations)) {
+                            foreach ($translations as $locale => $name) {
+                                $name = trim($name);
+                                if ($name === '') continue;
+                                \App\Models\Settings\PermissionTranslation::create([
+                                    'permission_id' => $perm->id,
+                                    'locale' => $locale,
+                                    'name' => $name,
+                                    'created_by' => auth()->id(),
+                                ]);
+                            }
+                        }
+                    }
+                }
+
                 // Create translations
                 $names = $request->input('name', []);
                 $descriptions = $request->input('description', []);
-                
-                foreach ($locales as $locale) {
+
+                // $locales is a collection keyed by locale code; iterate keys to get locale codes
+                foreach ($locales->keys() as $locale) {
                     MenuTranslation::create([
                         'menu_id' => $menu->id,
                         'locale' => $locale,
@@ -102,6 +137,13 @@ class MenuController extends Controller
                     'route' => 'nullable|string|max:255',
                     'sort' => 'nullable|integer|min:0',
                     'parent_id' => 'nullable|integer|exists:menus,id',
+                    'permissions_existing' => 'nullable|array',
+                    'permissions_existing.*.id' => 'nullable|integer|exists:permissions,id',
+                    'permissions_existing.*.action' => 'nullable|string|max:255',
+                    'permissions_existing.*.slug' => 'nullable|string|max:255',
+                    'permissions_new' => 'nullable|array',
+                    'permissions_new.*.action' => 'nullable|string|max:255',
+                    'permissions_new.*.slug' => 'nullable|string|max:255',
                 ];
 
                 $validator = Validator::make($request->all(), $rules);
@@ -117,11 +159,86 @@ class MenuController extends Controller
                     'updated_by' => auth()->id(),
                 ]);
 
+                // Handle permissions update/create/delete
+                $existing = $request->input('permissions_existing', []);
+                $existingIds = [];
+                if (is_array($existing) && count($existing)) {
+                    foreach ($existing as $e) {
+                        $id = isset($e['id']) ? intval($e['id']) : null;
+                        $action = trim($e['action'] ?? '');
+                        $slug = trim($e['slug'] ?? '');
+                        $translations = $e['translations'] ?? [];
+                        if ($id) {
+                            $perm = Permission::where('id', $id)->where('menu_id', $form->id)->first();
+                            if ($perm) {
+                                $perm->update([
+                                    'action' => $action ?: null,
+                                    'slug' => $slug ?: null,
+                                    'updated_by' => auth()->id(),
+                                ]);
+                                $existingIds[] = $perm->id;
+
+                                // update translations
+                                if (is_array($translations) && count($translations)) {
+                                    foreach ($translations as $locale => $name) {
+                                        $name = trim($name ?? '');
+                                        \App\Models\Settings\PermissionTranslation::updateOrCreate(
+                                            ['permission_id' => $perm->id, 'locale' => $locale],
+                                            ['name' => $name, 'updated_by' => auth()->id()]
+                                        );
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Create new permissions
+                $permissionsNew = $request->input('permissions_new', []);
+                if (is_array($permissionsNew) && count($permissionsNew)) {
+                    foreach ($permissionsNew as $p) {
+                        $action = trim($p['action'] ?? '');
+                        $slug = trim($p['slug'] ?? '');
+                        $translations = $p['translations'] ?? [];
+                        if ($action === '' && $slug === '') continue;
+                        $perm = Permission::create([
+                            'action' => $action ?: null,
+                            'slug' => $slug ?: null,
+                            'menu_id' => $form->id,
+                            'created_by' => auth()->id(),
+                        ]);
+                        $existingIds[] = $perm->id;
+                        if (is_array($translations) && count($translations)) {
+                            foreach ($translations as $locale => $name) {
+                                $name = trim($name);
+                                if ($name === '') continue;
+                                \App\Models\Settings\PermissionTranslation::create([
+                                    'permission_id' => $perm->id,
+                                    'locale' => $locale,
+                                    'name' => $name,
+                                    'created_by' => auth()->id(),
+                                ]);
+                            }
+                        }
+                    }
+                }
+
+                // Delete permissions that were removed in the form
+                $toDelete = Permission::where('menu_id', $form->id)
+                    ->when(count($existingIds) > 0, fn($q) => $q->whereNotIn('id', $existingIds))
+                    ->get();
+                foreach ($toDelete as $del) {
+                    $del->deleted_by = auth()->id();
+                    $del->save();
+                    $del->delete();
+                }
+
                 // Update translations
                 $names = $request->input('name', []);
                 $descriptions = $request->input('description', []);
                 
-                foreach ($locales as $locale) {
+                // iterate locale keys (collection preserves keys from config)
+                foreach ($locales->keys() as $locale) {
                     MenuTranslation::updateOrCreate(
                         ['menu_id' => $form->id, 'locale' => $locale],
                         [
