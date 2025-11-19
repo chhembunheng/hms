@@ -40,7 +40,7 @@
         </div>
         {{-- Permissions tree --}}
         <div class="row mt-3">
-            <div class="col-md-10 offset-md-1">
+            <div class="col-md-8 offset-md-2">
                 @include('settings.roles._permissions_tree', ['form' => $form])
             </div>
         </div>

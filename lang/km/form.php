@@ -92,5 +92,11 @@ return [
         'twitter_image' => 'រូបភាព Twitter',
         'twitter_card' => 'ប្រភេទកាត Twitter',
     ],
+    'apply' => 'Apply',
+    'reset' => 'Reset',
+    'clear' => 'Clear',
+    'upload' => 'Upload',
+    'choose_file' => 'Choose File',
+    'close' => 'Close',
     'instruction' => 'សូមបំពេញទម្រង់ដោយយកចិត្តទុកដាក់។ វាលដែលមានសញ្ញា <span class="text-danger">*</span> គឺត្រូវការ។',
 ];
