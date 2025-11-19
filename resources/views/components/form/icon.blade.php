@@ -1,9 +1,38 @@
 @props(['label', 'required' => $attributes->has('required') && $attributes->get('required') === 'required', 'value' => null, 'text' => true, 'id' => 'icon-select-' . \Illuminate\Support\Str::uuid()])
-
+@php
+    $faRootClasses = [
+        'fa-solid',
+        'fa-regular',
+        'fa-light',
+        'fa-thin',
+        'fa-duotone',
+        'fa-brands',
+        'fa-sharp fa-solid',
+        'fa-sharp fa-regular',
+        'fa-sharp fa-light',
+        'fa-sharp fa-thin',
+    ];
+    if ($value) {
+        $isValid = false;
+        foreach ($faRootClasses as $rootClass) {
+            if (str_starts_with($value, $rootClass . ' ')) {
+                $isValid = true;
+                break;
+            }
+        }
+        if (!$isValid) {
+            $value = 'fa-solid ' . $value;
+        }
+    }
+@endphp
 <div class="mb-3">
-    <label class="form-label @if ($required) required @endif">{{ $label ?? '' }}</label>
+    @isset($label)
+        <label class="form-label @if ($required) required @endif">{{ $label }}</label>
+    @endisset
     <div class="input-group icon-picker-box input-group-sm" style="min-width:160px;">
-        <select id="{{ $id }}" style="min-width:160px;" {{ $attributes->merge(['class' => 'form-select form-select-sm icon-select2']) }} @if ($required) required @endif data-initial-value="{{ $value }}">
+        <select id="{{ $id }}" style="min-width:160px;"
+            {{ $attributes->merge(['class' => 'form-select form-select-sm icon-select2']) }}
+            @if ($required) required @endif data-initial-value="{{ $value }}">
             @if ($value)
                 <option value="{{ $value }}" selected>{{ $value }}</option>
             @endif
@@ -94,12 +123,14 @@
                         data: allIcons,
                         templateResult: function(icon) {
                             if (!icon.id) return icon.text;
-                            if(showText) return '<i class="' + icon.id + ' fa-fw me-2"></i>' + icon.text;
+                            if (showText) return '<i class="' + icon.id +
+                                ' fa-fw me-2"></i>' + icon.text;
                             return '<i class="' + icon.id + ' fa-fw"></i>';
                         },
                         templateSelection: function(icon) {
                             if (!icon.id) return icon.text || '';
-                            if(showText) return '<i class="' + icon.id + ' fa-fw me-2"></i>' + icon.text;
+                            if (showText) return '<i class="' + icon.id +
+                                ' fa-fw me-2"></i>' + icon.text;
                             return '<i class="' + icon.id + ' fa-fw"></i>';
                         },
                         escapeMarkup: function(m) {
