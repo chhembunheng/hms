@@ -168,7 +168,7 @@ class ProductController extends Controller
 
     public function edit(Request $request, $id)
     {
-        $form = Product::with(['translations', 'features.translations', 'features.details.translations'])->findOrFail($id);
+        $form = Product::with(['translations', 'features.details.translations'])->findOrFail($id);
         $locales = $this->locales;
         $categories = $this->categories;
         $translations = [];
@@ -298,7 +298,7 @@ class ProductController extends Controller
             }
         }
 
-        return view('frontends.products.form', compact('form', 'locales', 'translations', 'categories', 'features'));
+        return view('frontends.products.form', compact('form', 'locales', 'translations', 'categories'));
     }
 
     public function feature(Request $request, $id)
