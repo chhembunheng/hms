@@ -41,6 +41,7 @@
             if (window.initIconPicker) window.initIconPicker();
             featureIndex++;
             refreshFeatureAccordion();
+            reindexFeatures();
         });
 
         $(document).on('click', '.remove-feature', function () {
@@ -90,14 +91,12 @@
             $('#featuresAccordion .feature-item').each(function (newIndex) {
                 $(this).attr('data-feature-index', newIndex);
                 $(this).find('.feature-title').text("Feature #" + (newIndex + 1));
-
                 $(this).find('input, textarea, select').each(function () {
                     let name = $(this).attr('name');
                     if (!name) return;
                     name = name.replace(/features\[\d+]/, 'features['+newIndex+']');
                     $(this).attr('name', name);
                 });
-
                 reindexDetails(newIndex);
             });
         }
