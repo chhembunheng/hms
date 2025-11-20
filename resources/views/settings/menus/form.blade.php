@@ -1,492 +1,325 @@
 <x-app-layout>
     <x-form.layout :form="$form">
+
         <div class="row">
             <div class="col-md-6">
                 <x-form.icon :label="__('form.icon')" name="icon" value="{{ old('icon', $form?->icon) }}" :text="false" />
             </div>
+
             <div class="col-md-6">
                 <x-form.input :label="__('form.route')" name="route" value="{{ old('route', $form?->route) }}"
                     placeholder="dashboard.index" />
             </div>
+
             <div class="col-md-6">
                 <x-form.input :label="__('form.order')" name="sort" type="number"
                     value="{{ old('sort', $form?->sort ?? 0) }}" min="0" />
             </div>
+
             <div class="col-md-6">
-                <x-form.select :label="__('form.parent_menu')" name="parent_id">
-                    <option value="">{{ __('form.select') }}</option>
-                    @foreach ($menus as $menu)
-                        @if (isset($form) && $form->id === $menu->id)
-                            @continue
-                        @endif
-                        @php
-                            $menuName =
-                                $menu->translations->where('locale', app()->getLocale())->first()?->name ??
-                                ($menu->translations->where('locale', 'en')->first()?->name ?? 'N/A');
-                        @endphp
-                        <option value="{{ $menu->id }}" @selected(old('parent_id', $form?->parent_id) == $menu->id)>
-                            {{ $menuName }}
-                        </option>
-                    @endforeach
-                </x-form.select>
+                <x-form.select :label="__('form.parent_menu')" name="parent_id" :options="$menus" :selected="$form?->parent_id" />
             </div>
         </div>
 
         <hr class="my-4">
 
         <div class="mb-3">
-            <ul class="nav nav-tabs" role="tablist">
+            <ul class="nav nav-tabs">
                 @foreach ($locales as $locale => $language)
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link @if ($locale === config('app.locale')) active @endif"
-                            id="locale-{{ $locale }}-tab" data-bs-toggle="tab"
-                            data-bs-target="#locale-{{ $locale }}" type="button" role="tab"
-                            aria-controls="locale-{{ $locale }}"
-                            aria-selected="@if ($locale === config('app.locale')) true @else false @endif">
-                            <img src="{{ asset($language['flag']) }}" class="lang-flag me-2"><span
-                                class="fs-lg">{{ $language['name'] }}</span>
+                    <li class="nav-item">
+                        <button type="button" class="nav-link @if ($locale === app()->getLocale()) active @endif"
+                            data-bs-toggle="tab" data-bs-target="#locale-{{ $locale }}">
+                            <img src="{{ asset($language['flag']) }}" class="lang-flag me-2">
+                            {{ $language['name'] }}
                         </button>
                     </li>
                 @endforeach
             </ul>
         </div>
 
-        <div class="tab-content" id="localeTabContent">
-            @foreach ($locales as $locale => $language)
-                <div @class([
-                    'tab-pane fade',
-                    'show active' => $locale === config('app.locale'),
-                ]) id="locale-{{ $locale }}" role="tabpanel"
-                    aria-labelledby="locale-{{ $locale }}-tab">
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2">
-                            <x-form.input :label="__('form.name')" name="name[{{ $locale }}]"
-                                value="{{ old('name.' . $locale, $translations[$locale]['name'] ?? '') }}" required />
-                        </div>
-                        <div class="col-md-8 offset-md-2">
-                            <x-form.textarea :label="__('form.description')" name="description[{{ $locale }}]"
-                                value="{{ old('description.' . $locale, $translations[$locale]['description'] ?? '') }}"
-                                rows="3" />
-                        </div>
+        <div class="tab-content">
+            @foreach ($locales as $locale => $lng)
+                <div id="locale-{{ $locale }}"
+                    class="tab-pane fade @if ($locale === app()->getLocale()) show active @endif">
+
+                    <div class="col-md-8 offset-md-2 my-2">
+                        <x-form.input :label="__('form.name')" name="name[{{ $locale }}]"
+                            value="{{ old('name.' . $locale, $translations[$locale]['name'] ?? '') }}" required />
                     </div>
+
+                    <div class="col-md-8 offset-md-2 my-2">
+                        <x-form.textarea :label="__('form.description')" name="description[{{ $locale }}]"
+                            value="{{ old('description.' . $locale, $translations[$locale]['description'] ?? '') }}"
+                            rows="3" />
+                    </div>
+
                 </div>
             @endforeach
         </div>
 
-        {{-- Permissions for this menu (add/edit) --}}
-        <div class="mt-4 col-md-8 offset-md-2">
-            <h5 class="mb-3">{{ __('form.permissions') }}</h5>
+        <hr class="my-4">
+
+        <div class="col-md-8 offset-md-2">
+            <h4>{{ __('form.permissions') }}</h4>
 
             <div id="menu-permissions-list">
-                @if (isset($form) && $form->permissions->count())
-                    @foreach ($form->permissions as $perm)
-                        @php
-                            $permName =
-                                $perm->translations->where('locale', app()->getLocale())->first()?->name ??
-                                ($perm->translations->where('locale', 'en')->first()?->name ??
-                                    ($perm->action ?? ($perm->slug ?? 'Permission')));
-                            $action_route = explode('.', $perm->action_route ?? '');
-                            $action_suffix = count($action_route) > 1 ? $action_route[count($action_route) - 1] : '';
-                            $action_prefix =
-                                count($action_route) > 1 ? implode('.', array_slice($action_route, 0, -1)) : '';
-                        @endphp
-                        <div class="permission-row mb-2 d-flex gap-2 align-items-start" draggable="true">
-                            <input type="hidden" name="permissions_existing[][id]" value="{{ $perm->id }}">
-                            <input type="hidden" name="permissions_existing[][sort]" class="perm-sort-input"
-                                value="{{ $perm->sort ?? 0 }}">
-                            <span class="drag-handle btn btn-sm btn-light me-2 py-2" title="Move">
-                                <i class="fa-regular fa-arrow-down-1-9"></i>
-                            </span>
-                            <div class="flex-grow-1">
-                                <div class="row w-100 g-2 align-items-start">
-                                    <div class="col-auto d-flex align-items-start">
-                                        <div class="me-1">
-                                            <x-form.icon name="permissions_existing[][icon]" class="text-muted"
-                                                :text="false" value="{{ $perm->icon ?? '' }}" />
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="input-group input-group-sm">
-                                            <span
-                                                class="input-group-text perm-action-prefix">{{ $action_prefix ?? '' }}</span>
-                                            <input type="text"
-                                                class="form-control form-control-sm perm-action-visible"
-                                                value="{{ $action_suffix }}" placeholder="Permission Route Action">
-                                            <input type="hidden" name="permissions_existing[][action]"
-                                                class="perm-action-hidden" value="{{ $action_suffix ?? '' }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <input type="text" name="permissions_existing[][slug]"
-                                            class="form-control form-control-sm" value="{{ $perm->slug ?? '' }}"
-                                            placeholder="slug/action">
+
+                {{-- EXISTING PERMISSIONS --}}
+                @foreach ($form->permissions ?? [] as $perm)
+                    @php
+                        $action_route = $perm->action_route ?? '';
+                        $parts = explode('.', $action_route);
+                        $suffix = array_pop($parts);
+                        $prefix = implode('.', $parts);
+                    @endphp
+
+                    <div class="permission-row d-flex align-items-start gap-2 my-2" draggable="true">
+
+                        <input type="hidden" name="permissions_existing[{{ $perm->id }}][id]"
+                            value="{{ $perm->id }}">
+                        <input type="hidden" name="permissions_existing[{{ $perm->id }}][sort]"
+                            class="perm-sort-input" value="{{ $perm->sort }}">
+
+                        <span class="drag-handle btn btn-light btn-sm">
+                            <i class="fa-solid fa-grip-lines"></i>
+                        </span>
+
+                        <div class="flex-grow-1">
+
+                            <div class="row g-2">
+
+                                <div class="col-auto">
+                                    <x-form.icon name="permissions_existing[{{ $perm->id }}][icon]"
+                                        :text="false" value="{{ $perm->icon }}" />
+                                </div>
+
+                                <div class="col">
+                                    <div class="input-group input-group-sm">
+                                        <span
+                                            class="input-group-text perm-action-prefix">{{ $prefix ? $prefix . '.' : '' }}</span>
+
+                                        <input type="text" class="form-control perm-action-visible"
+                                            value="{{ $suffix }}" placeholder="edit">
+
+                                        <input type="hidden"
+                                            name="permissions_existing[{{ $perm->id }}][action_route]"
+                                            class="perm-action-hidden" value="{{ $action_route }}">
                                     </div>
                                 </div>
-                                <div class="mt-1">
-                                    <ul class="nav nav-tabs" role="tablist">
-                                        @foreach ($locales as $lkey => $ll)
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link @if ($loop->first) active @endif"
-                                                    id="perm-{{ $perm->id }}-tab-{{ $lkey }}"
-                                                    data-bs-toggle="tab"
-                                                    data-bs-target="#perm-{{ $perm->id }}-panel-{{ $lkey }}"
-                                                    type="button" role="tab"
-                                                    aria-controls="perm-{{ $perm->id }}-panel-{{ $lkey }}"
-                                                    aria-selected="@if ($loop->first) true @else false @endif">{{ $ll['name'] }}</button>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                    <div class="tab-content p-2 border rounded-bottom">
-                                        @foreach ($locales as $lkey => $ll)
-                                            @php $t = $perm->translations->where('locale', $lkey)->first(); @endphp
-                                            <div class="tab-pane fade @if ($loop->first) show active @endif"
-                                                id="perm-{{ $perm->id }}-panel-{{ $lkey }}"
-                                                role="tabpanel"
-                                                aria-labelledby="perm-{{ $perm->id }}-tab-{{ $lkey }}">
-                                                <input type="text"
-                                                    name="permissions_existing[][translations][{{ $lkey }}]"
-                                                    class="form-control form-control-sm"
-                                                    value="{{ $t?->name ?? '' }}"
-                                                    placeholder="{{ $ll['name'] }} name">
-                                            </div>
-                                        @endforeach
-                                    </div>
+
+                                <div class="col-md-3">
+                                    <input type="text" name="permissions_existing[{{ $perm->id }}][slug]"
+                                        class="form-control form-control-sm" value="{{ $perm->slug }}"
+                                        placeholder="slug-auto" />
                                 </div>
+
                             </div>
-                            <button type="button" class="btn btn-sm btn-danger btn-perm-remove">&times;</button>
+
+                            {{-- Translation Tabs --}}
+                            <ul class="nav nav-tabs my-2">
+                                @foreach ($locales as $lc => $lng)
+                                    <li class="nav-item">
+                                        <button type="button"
+                                            class="nav-link @if ($loop->first) active @endif"
+                                            data-bs-toggle="tab"
+                                            data-bs-target="#p-{{ $perm->id }}-{{ $lc }}">
+                                            {{ $lng['name'] }}
+                                        </button>
+                                    </li>
+                                @endforeach
+                            </ul>
+
+                            <div class="tab-content border rounded p-2">
+                                @foreach ($locales as $lc => $lng)
+                                    @php
+                                        $t = $perm->translations->where('locale', $lc)->first();
+                                    @endphp
+                                    <div id="p-{{ $perm->id }}-{{ $lc }}"
+                                        class="tab-pane fade @if ($loop->first) show active @endif">
+                                        <input type="text" class="form-control form-control-sm"
+                                            name="permissions_existing[{{ $perm->id }}][translations][{{ $lc }}]"
+                                            value="{{ $t?->name }}">
+                                    </div>
+                                @endforeach
+                            </div>
+
                         </div>
-                    @endforeach
-                @endif
+
+                        <button type="button" class="btn btn-danger btn-sm btn-perm-remove">&times;</button>
+
+                    </div>
+                @endforeach
+
             </div>
 
-            <div class="mt-2">
-                <button type="button" class="btn btn-sm btn-outline-primary"
-                    id="add-permission-btn">{{ __('form.add_permission') ?? 'Add permission' }}</button>
-            </div>
+            <button type="button" class="btn btn-outline-primary btn-sm mt-2" id="add-permission-btn">
+                + {{ __('form.add_permission') }}
+            </button>
+
         </div>
-        <div class="row">
-            <div class="col-md-8 offset-md-2 text-end mt-3">
-                <button type="submit" class="btn btn-primary">{{ __('form.save') }}</button>
-            </div>
+
+        <div class="col-md-8 offset-md-2 text-end mt-3">
+            <button class="btn btn-primary">{{ __('form.save') }}</button>
         </div>
+
     </x-form.layout>
+
     @pushOnce('scripts')
         <script>
             jQuery(function($) {
-                var $list = $('#menu-permissions-list');
-                var $addBtn = $('#add-permission-btn');
 
-                if (!$list.length) {
-                    console.warn('Menu permissions list container not found');
-                    return;
-                }
+                const locales = @json($locales);
 
-                // locales data from server: { "en": { name: "English", flag: "..." }, "km": { ... } }
-                var localesData = {!! json_encode($locales->toArray()) !!};
-
-                // helper to compute a prefix from the route input.
-                function getRoutePrefix() {
-                    var route = $('input[name="route"]').val() || '';
-                    route = route.trim();
-                    if (!route) return '';
-                    var parts = route.split('.');
+                function routePrefix() {
+                    let r = $('input[name="route"]').val() || '';
+                    let parts = r.split('.');
                     if (parts.length > 1) {
-                        parts.pop(); // remove last segment (e.g. '.index')
+                        parts.pop();
                         return parts.join('.');
                     }
-                    return route;
+                    return r;
                 }
 
-                // Prefill existing permission action inputs that are empty with the route prefix
-                function prefillExistingActions() {
-                    var prefix = getRoutePrefix();
-                    $('#menu-permissions-list').find('.permission-row').each(function() {
-                        initActionRow($(this));
-                    });
-                }
+                function initRow($row) {
+                    let prefix = routePrefix();
+                    let $hidden = $row.find('.perm-action-hidden');
+                    let $visible = $row.find('.perm-action-visible');
+                    let $prefix = $row.find('.perm-action-prefix');
 
-                function initActionRow($row) {
-                    var prefix = getRoutePrefix();
-                    var $hidden = $row.find('.perm-action-hidden');
-                    var $visible = $row.find('.perm-action-visible');
-                    var $prefixSpan = $row.find('.perm-action-prefix');
+                    $prefix.text(prefix ? prefix + '.' : '');
 
-                    $prefixSpan.text(prefix ? (prefix + '.') : '');
+                    let full = $hidden.val().trim();
 
-                    var hiddenVal = ($hidden.val() || '').trim();
-                    if (!hiddenVal) {
-                        // if empty, set hidden to prefix + '.' to guide users, leave visible as-is (usually server-rendered label or empty)
-                        if (prefix) {
-                            $hidden.val(prefix + '.');
-                        }
-                    } else {
-                        if (prefix && hiddenVal.indexOf(prefix + '.') === 0) {
-                            $visible.val(hiddenVal.substring((prefix + '.').length));
-                        } else {
-                            // value doesn't start with prefix - keep the current visible value (often a translation shown by server)
-                        }
+                    if (!full && prefix) {
+                        $hidden.val(prefix + '.');
                     }
 
-                    // sync visible -> hidden on input
-                    $visible.off('input.perm').on('input.perm', function() {
-                        var v = $(this).val().trim();
-                        var full = prefix ? (prefix + (v ? '.' + v : '.')) : v;
+                    if (full.startsWith(prefix + '.')) {
+                        $visible.val(full.substring(prefix.length + 1));
+                    }
+
+                    $visible.off('input').on('input', function() {
+                        let s = $(this).val().trim();
+                        let full = prefix ? prefix + '.' + s : s;
                         $hidden.val(full);
                     });
                 }
 
-                function createRow(action, slug, id, icon) {
-                    action = action || '';
-                    slug = slug || '';
-                    // if no explicit action provided, try prefilling from route prefix
-                    if (!action) {
-                        var rp = getRoutePrefix();
-                        if (rp) {
-                            action = rp + '.';
-                        }
-                    }
-                    var uid = 'perm-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
-                    var $row = $('<div>').addClass('permission-row mb-2 d-flex gap-2 align-items-start').attr(
-                        'draggable', 'true');
+                function createRow() {
+                    let prefix = routePrefix();
+                    let uid = 'n_' + Date.now();
 
-                    if (typeof id !== 'undefined' && id !== null) {
-                        $('<input>', {
-                            type: 'hidden',
-                            name: 'permissions_existing[][id]',
-                            value: id
-                        }).appendTo($row);
-                        $('<input>', {
-                            type: 'hidden',
-                            name: 'permissions_existing[][sort]',
-                            class: 'perm-sort-input',
-                            value: 0
-                        }).appendTo($row);
-                        $('<span>').addClass('drag-handle btn btn-sm btn-light me-2 py-2').attr('title', 'Move').html(
-                            '<i class="fa-regular fa-arrow-down-1-9"></i>').appendTo($row);
-                    } else {
-                        // new row: add new sort input and drag handle
-                        $('<input>', {
-                            type: 'hidden',
-                            name: 'permissions_new[][sort]',
-                            class: 'perm-sort-input',
-                            value: 0
-                        }).appendTo($row);
-                        $('<span>').addClass('drag-handle btn btn-sm btn-light me-2 py-2').attr('title', 'Move').html(
-                            '<i class="fa-regular fa-arrow-down-1-9"></i>').appendTo($row);
-                    }
+                    let html = `
+                <div class="permission-row d-flex align-items-start gap-2 my-2" draggable="true">
 
-                    var isExisting = (typeof id !== 'undefined' && id !== null);
-                    var actionName = isExisting ? 'permissions_existing[][action]' : 'permissions_new[][action]';
-                    var slugName = isExisting ? 'permissions_existing[][slug]' : 'permissions_new[][slug]';
+                    <input type="hidden" name="permissions_new[${uid}][sort]" class="perm-sort-input" value="0">
 
-                    // build row columns: icon (col-auto), action (col), slug (col-md-3)
-                    var $rowBody = $('<div>').addClass('row w-100 g-2 align-items-start');
+                    <span class="drag-handle btn btn-light btn-sm">
+                        <i class="fa-solid fa-grip-lines"></i>
+                    </span>
 
-                    var $colIcon = $('<div>').addClass('col-auto d-flex align-items-start');
+                    <div class="flex-grow-1">
 
-                    // build icon picker box similar to the x-form.icon component so new rows support Select2 icon picker
-                    var $iconPickerBox = $('<div>').addClass('input-group icon-picker-box input-group-sm me-1').css(
-                        'min-width', '160px');
-                    var selectName = isExisting ? 'permissions_existing[][icon]' : 'permissions_new[][icon]';
-                    var $select = $('<select>', {
-                        'class': 'form-select form-select-sm icon-select2',
-                        'name': selectName,
-                        'data-initial-value': icon || ''
-                    }).css('min-width', '160px');
+                        <div class="row g-2">
 
-                    $iconPickerBox.append($select);
-                    $colIcon.append($iconPickerBox);
+                            <div class="col-auto">
+                                <div class="input-group icon-picker-box input-group-sm" style="min-width:160px;">
+                                    <select name="permissions_new[${uid}][icon]" class="form-select form-select-sm icon-select2" style="min-width:160px;"></select>
+                                </div>
+                            </div>
 
-                    var $colAction = $('<div>').addClass('col');
-                    var $actionGroup = $('<div>').addClass('input-group input-group-sm');
-                    var $prefix = $('<span>').addClass('input-group-text perm-action-prefix').text('');
-                    var $visible = $('<input>', {
-                        type: 'text',
-                        class: 'form-control form-control-sm perm-action-visible',
-                        placeholder: 'Permission Route Action',
-                        value: action
-                    });
-                    var $hidden = $('<input>', {
-                        type: 'hidden',
-                        name: actionName,
-                        class: 'perm-action-hidden',
-                        value: action
-                    });
-                    $actionGroup.append($prefix).append($visible).append($hidden);
-                    $colAction.append($actionGroup);
+                            <div class="col">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text perm-action-prefix">${prefix ? prefix + '.' : ''}</span>
+                                    <input class="form-control perm-action-visible" placeholder="edit">
+                                    <input type="hidden" class="perm-action-hidden"
+                                           name="permissions_new[${uid}][action_route]"
+                                           value="${prefix ? prefix + '.' : ''}">
+                                </div>
+                            </div>
 
-                    var $colSlug = $('<div>').addClass('col-md-3');
-                    $('<input>', {
-                        type: 'text',
-                        name: slugName,
-                        placeholder: 'slug/action',
-                        value: slug
-                    }).addClass('form-control form-control-sm').appendTo($colSlug);
+                            <div class="col-md-3">
+                                <input type="text" name="permissions_new[${uid}][slug]"
+                                       class="form-control form-control-sm" placeholder="auto">
+                            </div>
 
-                    $rowBody.append($colIcon).append($colAction).append($colSlug);
-                    var $flex = $('<div>').addClass('flex-grow-1').append($rowBody);
+                        </div>
 
-                    // build language tabs
-                    var $tabsWrap = $('<div>').addClass('mt-1');
-                    var $nav = $('<ul>').addClass('nav nav-tabs').attr('role', 'tablist');
-                    var $tabContent = $('<div>').addClass('tab-content p-2 border rounded-bottom');
-                    var first = true;
+                        <ul class="nav nav-tabs my-2">`;
 
-                    Object.keys(localesData).forEach(function(lkey) {
-                        var ll = localesData[lkey];
-                        var tabId = uid + '-tab-' + lkey;
-                        var panelId = uid + '-panel-' + lkey;
-
-                        var $li = $('<li>').addClass('nav-item').attr('role', 'presentation');
-                        var $btn = $('<button>')
-                            .addClass('nav-link' + (first ? ' active' : ''))
-                            .attr({
-                                id: tabId,
-                                'data-bs-toggle': 'tab',
-                                'data-bs-target': '#' + panelId,
-                                type: 'button',
-                                role: 'tab',
-                                'aria-controls': panelId,
-                                'aria-selected': first ? 'true' : 'false'
-                            })
-                            .text(ll.name);
-
-                        $li.append($btn);
-                        $nav.append($li);
-
-                        var inputName = isExisting ? ('permissions_existing[][translations][' + lkey + ']') : (
-                            'permissions_new[][translations][' + lkey + ']');
-                        var $pane = $('<div>')
-                            .addClass('tab-pane fade' + (first ? ' show active' : ''))
-                            .attr({
-                                id: panelId,
-                                role: 'tabpanel',
-                                'aria-labelledby': tabId
-                            });
-
-                        $('<input>', {
-                            type: 'text',
-                            name: inputName,
-                            class: 'form-control form-control-sm',
-                            placeholder: ll.name + ' name'
-                        }).appendTo($pane);
-
-                        $tabContent.append($pane);
+                    let first = true;
+                    Object.keys(locales).forEach(lc => {
+                        html += `
+                    <li class="nav-item">
+                        <button type="button" class="nav-link ${first ? 'active' : ''}"
+                                data-bs-toggle="tab"
+                                data-bs-target="#new-${uid}-${lc}">
+                            ${locales[lc].name}
+                        </button>
+                    </li>
+                `;
                         first = false;
                     });
 
-                    $tabsWrap.append($nav).append($tabContent);
-                    $flex.append($tabsWrap);
-                    $row.append($flex);
+                    html += `</ul>
+                     <div class="tab-content border rounded p-2">`;
 
-                    $('<button>', {
-                        type: 'button'
-                    }).addClass('btn btn-sm btn-danger btn-perm-remove').html('&times;').appendTo($row);
+                    first = true;
+                    Object.keys(locales).forEach(lc => {
+                        html += `
+                    <div id="new-${uid}-${lc}" class="tab-pane fade ${first ? 'show active' : ''}">
+                        <input type="text" name="permissions_new[${uid}][translations][${lc}]"
+                               class="form-control form-control-sm">
+                    </div>
+                `;
+                        first = false;
+                    });
+
+                    html += `</div></div>
+
+                    <button type="button" class="btn btn-danger btn-sm btn-perm-remove">&times;</button>
+
+                </div>
+            `;
+
+                    let $row = $(html);
+                    $('#menu-permissions-list').append($row);
+                    initRow($row);
+
+                    if (typeof window.initIconPicker === 'function') {
+                        window.initIconPicker();
+                    }
 
                     return $row;
                 }
 
-                $(document).on('click', '#add-permission-btn', function(e) {
-                    e.preventDefault();
-                    var $newRow = createRow('', '', null, '');
-                    $list.append($newRow);
-                    // initialize action prefix UI for the new row
-                    initActionRow($newRow);
-                    // bind drag handlers for the new row
-                    bindDragHandlers($newRow);
-                    // initialize icon picker for the new row (Select2)
-                    if (typeof window.initIconPicker === 'function') {
-                        window.initIconPicker();
-                    }
-                    // focus first input (action/name)
-                    $newRow.find('.perm-action-visible').first().focus();
+                $('#add-permission-btn').on('click', function() {
+                    let $row = createRow();
+                    $row.find('.perm-action-visible').focus();
+                    updateSort();
                 });
 
-                // Note: preview UI removed; no preview update logic required
-
-                // Open icon picker if available; otherwise focus input
-                $(document).on('click', '#open-icon-picker', function() {
-                    var $input = $('#icon-input');
-                    if (typeof window.openIconPicker === 'function') {
-                        try {
-                            window.openIconPicker($input);
-                        } catch (e) {
-                            $input.focus();
-                        }
-                    } else {
-                        $input.focus();
-                    }
-                });
-
-                // run once on load to prefill any existing empty action fields
-                prefillExistingActions();
-
-                // DRAG & DROP ordering (native HTML5)
-                var draggedRow = null;
-
-                function onDragStart(e) {
-                    draggedRow = this;
-                    e.originalEvent.dataTransfer.effectAllowed = 'move';
-                    e.originalEvent.dataTransfer.setData('text/plain', 'drag');
-                    $(this).addClass('dragging');
-                }
-
-                function onDragEnd(e) {
-                    $(this).removeClass('dragging');
-                    draggedRow = null;
-                    updateOrderInputs();
-                }
-
-                function onDragOver(e) {
-                    e.preventDefault();
-                    e.originalEvent.dataTransfer.dropEffect = 'move';
-                    var $target = $(this);
-                    if (!draggedRow || this === draggedRow) return;
-                    var rect = this.getBoundingClientRect();
-                    var offset = e.originalEvent.clientY - rect.top;
-                    if (offset > rect.height / 2) {
-                        $target.after(draggedRow);
-                    } else {
-                        $target.before(draggedRow);
-                    }
-                }
-
-                function updateOrderInputs() {
-                    $('#menu-permissions-list').find('.permission-row').each(function(index) {
-                        var $row = $(this);
-                        $row.find('.perm-sort-input').val(index);
-                    });
-                }
-
-                function bindDragHandlers($container) {
-                    $container.find('.permission-row').each(function() {
-                        var el = this;
-                        $(el).off('dragstart.drag drop.drag dragover.drag dragend.drag');
-                        $(el).on('dragstart.drag', onDragStart);
-                        $(el).on('dragend.drag', onDragEnd);
-                        $(el).on('dragover.drag', onDragOver);
-                    });
-                    // set initial order
-                    updateOrderInputs();
-                }
-
-                // bind handlers initially and whenever rows are added/removed
-                bindDragHandlers($(document));
-
-                // initialize icon picker for any existing permission rows (if component rendered selects)
-                if (typeof window.initIconPicker === 'function') {
-                    window.initIconPicker();
-                }
-
-                // update empty action inputs when route changes
-                $(document).on('input', 'input[name="route"]', function() {
-                    prefillExistingActions();
-                });
-
-                $(document).on('click', '.btn-perm-remove', function(e) {
-                    e.preventDefault();
+                $(document).on('click', '.btn-perm-remove', function() {
                     $(this).closest('.permission-row').remove();
+                    updateSort();
                 });
+
+                function updateSort() {
+                    $('#menu-permissions-list .permission-row').each(function(i) {
+                        $(this).find('.perm-sort-input').val(i);
+                    });
+                }
+
+                $('#menu-permissions-list .permission-row').each(function() {
+                    initRow($(this));
+                });
+
+                $(document).on('input', 'input[name="route"]', function() {
+                    $('#menu-permissions-list .permission-row').each(function() {
+                        initRow($(this));
+                    });
+                });
+
             });
         </script>
     @endpushOnce

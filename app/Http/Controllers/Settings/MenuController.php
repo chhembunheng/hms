@@ -3,289 +3,275 @@
 namespace App\Http\Controllers\Settings;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\DataTables\Settings\MenuDataTable;
 use App\Models\Settings\Menu;
+use Illuminate\Support\Facades\DB;
 use App\Models\Settings\Permission;
+use App\Http\Controllers\Controller;
 use App\Models\Settings\MenuTranslation;
 use Illuminate\Support\Facades\Validator;
+use App\DataTables\Settings\MenuDataTable;
+use App\Models\Settings\PermissionTranslation;
 
 class MenuController extends Controller
 {
-    public function __construct() {}
-
-    /**
-     * Display a listing of the menus.
-     */
     public function index(MenuDataTable $dataTable)
     {
         return $dataTable->render('settings.menus.index');
     }
 
-    /**
-     * Show the form for creating a new menu.
-     */
+    private function menuList($exclude = null)
+    {
+        $locale = app()->getLocale();
+
+        return Menu::select([
+            'menus.id',
+            DB::raw("COALESCE(
+                    (SELECT name FROM menu_translations 
+                     WHERE menu_id = menus.id AND locale = '$locale' LIMIT 1),
+                    (SELECT name FROM menu_translations 
+                     WHERE menu_id = menus.id AND locale = 'en' LIMIT 1)
+                ) AS name")
+        ])
+            ->when($exclude, fn($q) => $q->where('menus.id', '!=', $exclude))
+            ->orderBy('menus.sort')
+            ->pluck('name', 'id')
+            ->toArray();
+    }
+
     public function add(Request $request)
     {
-        $form = new Menu();
         $locales = collect(config('init.languages'));
-        
-        if ($request->isMethod('post')) {
-            try {
-                $rules = [
-                    'name.en' => 'required|string|max:255',
-                    'name.km' => 'nullable|string|max:255',
-                    'name.zh' => 'nullable|string|max:255',
-                    'description.en' => 'nullable|string',
-                    'description.km' => 'nullable|string',
-                    'description.zh' => 'nullable|string',
-                    'icon' => 'nullable|string|max:255',
-                    'route' => 'nullable|string|max:255',
-                    'sort' => 'nullable|integer|min:0',
-                    'parent_id' => 'nullable|integer|exists:menus,id',
-                    'permissions_new' => 'nullable|array',
-                    'permissions_new.*.action' => 'nullable|string|max:255',
-                    'permissions_new.*.slug' => 'nullable|string|max:255',
-                ];
+        $form = new Menu();
 
-                $validator = Validator::make($request->all(), $rules);
-                if ($validator->fails()) {
-                    return errors(message: $validator->errors()->first());
-                }
+        if ($request->isMethod('post')) {
+
+            DB::beginTransaction();
+            try {
+
+                Validator::make($request->all(), [
+                    'name.en' => 'required|string|max:255',
+                ])->validate();
 
                 $menu = Menu::create([
-                    'icon' => $request->input('icon'),
-                    'route' => $request->input('route'),
-                    'sort' => $request->input('sort', 0),
-                    'parent_id' => $request->input('parent_id'),
+                    'icon'       => $request->icon,
+                    'route'      => $request->route,
+                    'sort'       => $request->sort ?? 0,
+                    'parent_id'  => $request->parent_id,
                     'created_by' => auth()->id(),
                 ]);
 
-                // Persist new permissions (if any)
-                $permissionsNew = $request->input('permissions_new', []);
-                if (is_array($permissionsNew) && count($permissionsNew)) {
-                    foreach ($permissionsNew as $p) {
-                        $action = trim($p['action'] ?? '');
-                        $slug = trim($p['slug'] ?? '');
-                        if ($action === '' && $slug === '') continue;
-                        $perm = Permission::create([
-                            'action' => $action ?: null,
-                            'slug' => $slug ?: null,
-                            'menu_id' => $menu->id,
+                /* Prepare payload */
+                $permissions = [];
+                $translations = [];
+                $i = 0;
+
+                foreach ($request->permissions_new ?? [] as $row) {
+                    $action_route = trim($row['action_route'] ?? '');
+                    if ($action_route === '') continue;
+
+                    $parts = explode('.', $action_route);
+                    $action = end($parts);
+                    $slug   = slug($action_route);
+                    $permission_id = Permission::updateOrCreate([
+                        'menu_id' => $menu->id,
+                        'slug' => $slug,
+                    ],[
+                        'menu_id' => $menu->id,
+                        'action' => $action,
+                        'action_route' => $action_route,
+                        'slug' => $slug,
+                        'icon' => $row['icon'] ?? null,
+                        'sort' => $i++,
+                        'created_by' => auth()->id(),
+                    ])->id;
+
+                    foreach ($row['translations'] ?? [] as $lc => $name) {
+                        if (trim($name) === '') continue;
+                        $translations[] = [
+                            'permission_id' => $permission_id,
+                            'locale' => $lc,
+                            'name' => trim($name),
                             'created_by' => auth()->id(),
-                        ]);
-                        // persist translations if provided
-                        $translations = $p['translations'] ?? [];
-                        if (is_array($translations) && count($translations)) {
-                            foreach ($translations as $locale => $name) {
-                                $name = trim($name);
-                                if ($name === '') continue;
-                                \App\Models\Settings\PermissionTranslation::create([
-                                    'permission_id' => $perm->id,
-                                    'locale' => $locale,
-                                    'name' => $name,
-                                    'created_by' => auth()->id(),
-                                ]);
-                            }
-                        }
+                        ];
                     }
                 }
 
-                // Create translations
-                $names = $request->input('name', []);
-                $descriptions = $request->input('description', []);
+                /* Insert/Upsert permissions */
+                Permission::upsert(
+                    $permissions,
+                    ['id'],
+                    ['menu_id', 'action', 'action_route', 'slug', 'icon', 'sort']
+                );
+                PermissionTranslation::upsert(
+                    $translations,
+                    ['permission_id', 'locale'],
+                    ['name']
+                );
 
-                // $locales is a collection keyed by locale code; iterate keys to get locale codes
-                foreach ($locales->keys() as $locale) {
+                /* Menu translations */
+                foreach ($locales->keys() as $lc) {
                     MenuTranslation::create([
                         'menu_id' => $menu->id,
-                        'locale' => $locale,
-                        'name' => $names[$locale] ?? $names['en'] ?? '',
-                        'description' => $descriptions[$locale] ?? null,
+                        'locale' => $lc,
+                        'name' => $request->name[$lc] ?? '',
+                        'description' => $request->description[$lc] ?? null,
                         'created_by' => auth()->id(),
                     ]);
                 }
 
+                DB::commit();
                 return success(message: 'Menu created successfully.');
-            } catch (\Exception $e) {
-                return errors(message: $e->getMessage());
+            } catch (\Throwable $e) {
+                DB::rollBack();
+                return errors($e->getMessage());
             }
         }
 
-        $menus = Menu::whereNull('parent_id')->orderBy('sort')->get();
+        $menus = $this->menuList();
+
         return view('settings.menus.form', compact('form', 'menus', 'locales'));
     }
 
-    /**
-     * Show the form for editing the specified menu.
-     */
     public function edit(Request $request, $id)
     {
-        $form = Menu::findOrFail($id);
         $locales = collect(config('init.languages'));
+        $form = Menu::with('translations', 'permissions.translations')->findOrFail($id);
 
         if ($request->isMethod('post')) {
-            try {
-                $rules = [
-                    'name.en' => 'required|string|max:255',
-                    'name.km' => 'nullable|string|max:255',
-                    'name.zh' => 'nullable|string|max:255',
-                    'description.en' => 'nullable|string',
-                    'description.km' => 'nullable|string',
-                    'description.zh' => 'nullable|string',
-                    'icon' => 'nullable|string|max:255',
-                    'route' => 'nullable|string|max:255',
-                    'sort' => 'nullable|integer|min:0',
-                    'parent_id' => 'nullable|integer|exists:menus,id',
-                    'permissions_existing' => 'nullable|array',
-                    'permissions_existing.*.id' => 'nullable|integer|exists:permissions,id',
-                    'permissions_existing.*.action' => 'nullable|string|max:255',
-                    'permissions_existing.*.slug' => 'nullable|string|max:255',
-                    'permissions_new' => 'nullable|array',
-                    'permissions_new.*.action' => 'nullable|string|max:255',
-                    'permissions_new.*.slug' => 'nullable|string|max:255',
-                ];
 
-                $validator = Validator::make($request->all(), $rules);
-                if ($validator->fails()) {
-                    return errors(message: $validator->errors()->first());
-                }
+            DB::beginTransaction();
+            try {
+
+                Validator::make($request->all(), [
+                    'name.en' => 'required',
+                ])->validate();
 
                 $form->update([
-                    'icon' => $request->input('icon'),
-                    'route' => $request->input('route'),
-                    'sort' => $request->input('sort', 0),
-                    'parent_id' => $request->input('parent_id'),
+                    'icon' => $request->icon,
+                    'route' => $request->route,
+                    'sort' => $request->sort ?? 0,
+                    'parent_id'  => $request->parent_id,
                     'updated_by' => auth()->id(),
                 ]);
 
-                // Handle permissions update/create/delete
-                $existing = $request->input('permissions_existing', []);
-                $existingIds = [];
-                if (is_array($existing) && count($existing)) {
-                    foreach ($existing as $e) {
-                        $id = isset($e['id']) ? intval($e['id']) : null;
-                        $action = trim($e['action'] ?? '');
-                        $slug = trim($e['slug'] ?? '');
-                        $translations = $e['translations'] ?? [];
-                        if ($id) {
-                            $perm = Permission::where('id', $id)->where('menu_id', $form->id)->first();
-                            if ($perm) {
-                                $perm->update([
-                                    'action' => $action ?: null,
-                                    'slug' => $slug ?: null,
-                                    'updated_by' => auth()->id(),
-                                ]);
-                                $existingIds[] = $perm->id;
+                $permissions = [];
+                $translations = [];
+                $i = 0;
 
-                                // update translations
-                                if (is_array($translations) && count($translations)) {
-                                    foreach ($translations as $locale => $name) {
-                                        $name = trim($name ?? '');
-                                        \App\Models\Settings\PermissionTranslation::updateOrCreate(
-                                            ['permission_id' => $perm->id, 'locale' => $locale],
-                                            ['name' => $name, 'updated_by' => auth()->id()]
-                                        );
-                                    }
-                                }
-                            }
-                        }
+                /* Existing */
+                foreach ($request->permissions_existing ?? [] as $p) {
+                    $action_route = trim($p['action_route'] ?? '');
+                    if ($action_route === '') continue;
+
+                    $parts = explode('.', $action_route);
+                    $action = end($parts);
+                    $slug   = $p['slug'] ?: slug($action_route);
+                    $permission_id = (int) $p['id'];
+
+                    $permissions[] = [
+                        'id' => $permission_id,
+                        'menu_id' => $form->id,
+                        'action' => $action,
+                        'action_route' => $action_route,
+                        'slug' => $slug,
+                        'icon' => $p['icon'] ?? null,
+                        'sort' => $i++,
+                    ];
+
+                    foreach ($p['translations'] ?? [] as $lc => $name) {
+                        $translations[] = [
+                            'permission_id' => $permission_id,
+                            'locale' => $lc,
+                            'name' => trim($name),
+                        ];
                     }
                 }
 
-                // Create new permissions
-                $permissionsNew = $request->input('permissions_new', []);
-                if (is_array($permissionsNew) && count($permissionsNew)) {
-                    foreach ($permissionsNew as $p) {
-                        $action = trim($p['action'] ?? '');
-                        $slug = trim($p['slug'] ?? '');
-                        $translations = $p['translations'] ?? [];
-                        if ($action === '' && $slug === '') continue;
-                        $perm = Permission::create([
-                            'action' => $action ?: null,
-                            'slug' => $slug ?: null,
-                            'menu_id' => $form->id,
-                            'created_by' => auth()->id(),
-                        ]);
-                        $existingIds[] = $perm->id;
-                        if (is_array($translations) && count($translations)) {
-                            foreach ($translations as $locale => $name) {
-                                $name = trim($name);
-                                if ($name === '') continue;
-                                \App\Models\Settings\PermissionTranslation::create([
-                                    'permission_id' => $perm->id,
-                                    'locale' => $locale,
-                                    'name' => $name,
-                                    'created_by' => auth()->id(),
-                                ]);
-                            }
-                        }
-                    }
-                }
-
-                // Delete permissions that were removed in the form
-                $toDelete = Permission::where('menu_id', $form->id)
-                    ->when(count($existingIds) > 0, fn($q) => $q->whereNotIn('id', $existingIds))
-                    ->get();
-                foreach ($toDelete as $del) {
-                    $del->deleted_by = auth()->id();
-                    $del->save();
-                    $del->delete();
-                }
-
-                // Update translations
-                $names = $request->input('name', []);
-                $descriptions = $request->input('description', []);
-                
-                // iterate locale keys (collection preserves keys from config)
-                foreach ($locales->keys() as $locale) {
-                    MenuTranslation::updateOrCreate(
-                        ['menu_id' => $form->id, 'locale' => $locale],
+                /* New */
+                foreach ($request->permissions_new ?? [] as $p) {
+                    $action_route = trim($p['action_route'] ?? '');
+                    if ($action_route === '') continue;
+                    $parts = explode('.', $action_route);
+                    $action = end($parts);
+                    $slug = slug($action_route);
+                    $permissionNew = [
+                        'menu_id' => $form->id,
+                        'action' => $action,
+                        'action_route' => $action_route,
+                        'slug' => $slug,
+                        'icon' => $p['icon'] ?? null,
+                        'sort' => $i++,
+                    ];
+                    $permission_id = Permission::updateOrCreate(
                         [
-                            'name' => $names[$locale] ?? $names['en'] ?? '',
-                            'description' => $descriptions[$locale] ?? null,
-                            'updated_by' => auth()->id(),
+                            'menu_id' => $form->id,
+                            'slug' => $slug,
+                        ],
+                        $permissionNew
+                    )->id;
+                    foreach ($p['translations'] ?? [] as $lc => $name) {
+                        if (trim($name) === '') continue;
+                        $translations[] = [
+                            'permission_id' => $permission_id,
+                            'locale' => $lc,
+                            'name' => trim($name),
+                        ];
+                    }
+                }
+
+                /* Upsert */
+                Permission::upsert(
+                    $permissions,
+                    ['action_route', 'menu_id'],
+                    ['menu_id', 'action', 'action_route', 'slug', 'icon', 'sort']
+                );
+                PermissionTranslation::upsert(
+                    $translations,
+                    ['permission_id', 'locale'],
+                    ['name']
+                );
+
+                /* Menu translations */
+                foreach ($locales->keys() as $lc) {
+                    MenuTranslation::updateOrCreate(
+                        ['menu_id' => $form->id, 'locale' => $lc],
+                        [
+                            'name' => $request->name[$lc] ?? '',
+                            'description' => $request->description[$lc] ?? null,
+                            'updated_by'  => auth()->id(),
                         ]
                     );
                 }
 
+                DB::commit();
                 return success(message: 'Menu updated successfully.');
-            } catch (\Exception $e) {
-                return errors(message: $e->getMessage());
+            } catch (\Throwable $e) {
+                DB::rollBack();
+                return errors($e->getMessage());
             }
         }
 
-        // Load translations into array for view
         $translations = [];
-        foreach ($form->translations as $translation) {
-            $translations[$translation->locale] = [
-                'name' => $translation->name,
-                'description' => $translation->description,
+        foreach ($form->translations as $t) {
+            $translations[$t->locale] = [
+                'name' => $t->name,
+                'description' => $t->description,
             ];
         }
 
-        $menus = Menu::whereNull('parent_id')->where('id', '!=', $form->id)->orderBy('sort')->get();
-        return view('settings.menus.form', compact('form', 'menus', 'locales', 'translations', 'id'));
+        $menus = $this->menuList($form->id);
+
+        return view('settings.menus.form', compact(
+            'form',
+            'menus',
+            'locales',
+            'translations',
+            'id'
+        ));
     }
 
-    /**
-     * Remove the specified menu from storage.
-     */
     public function destroy($id)
     {
-        try {
-            $menu = Menu::findOrFail($id);
-            
-            // Delete child menus first
-            Menu::where('parent_id', $menu->id)->update(['deleted_by' => auth()->id()]);
-            
-            $menu->deleted_by = auth()->id();
-            $menu->save();
-            $menu->delete();
-            
-            return success(message: 'Menu deleted successfully.');
-        } catch (\Exception $e) {
-            return errors(message: $e->getMessage());
-        }
+        return errors("Deletion disabled because mode=B (keep permissions).");
     }
 }

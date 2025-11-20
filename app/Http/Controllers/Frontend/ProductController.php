@@ -42,6 +42,7 @@ class ProductController extends Controller
         $locales = $this->locales;
         $categories = $this->categories;
         $translations = [];
+        $features = [];
 
         if ($request->isMethod('post')) {
             try {
@@ -154,7 +155,7 @@ class ProductController extends Controller
             }
         }
 
-        return view('frontends.products.form', compact('form', 'locales', 'translations', 'categories'));
+        return view('frontends.products.form', compact('form', 'locales', 'translations', 'categories', 'features'));
     }
 
     public function show($slug)
@@ -297,7 +298,142 @@ class ProductController extends Controller
             }
         }
 
-        return view('frontends.products.form', compact('form', 'locales', 'translations', 'categories'));
+        return view('frontends.products.form', compact('form', 'locales', 'translations', 'categories', 'features'));
+    }
+
+    public function feature(Request $request, $id)
+    {
+        $form = Product::with(['translations', 'features.translations', 'features.details.translations'])->findOrFail($id);
+        $locales = $this->locales;
+        $categories = $this->categories;
+        $translations = [];
+        foreach ($form->translations as $translation) {
+            $translations[$translation->locale] = [
+                'name' => $translation->name,
+                'short_description' => $translation->short_description,
+                'description' => $translation->description,
+            ];
+        }
+
+        if ($request->isMethod('post')) {
+            try {
+                $rules = [
+                    'slug' => 'required|string|unique:products,slug,' . $form->id,
+                    'sort' => 'nullable|integer',
+                    'image' => ['nullable', new ImageRule()],
+                ];
+
+                foreach ($this->locales->keys() as $locale) {
+                    $rules["translations.{$locale}.name"] = 'required|string|max:255';
+                    $rules["translations.{$locale}.short_description"] = 'nullable|string';
+                    $rules["translations.{$locale}.description"] = 'nullable|string';
+                }
+
+                $validator = Validator::make($request->all(), $rules);
+                if ($validator->fails()) {
+                    return errors(message: $validator->errors()->first());
+                }
+                DB::transaction(function () use ($request, $form) {
+
+                    $form->slug = slug($request->input('slug', null));
+                    $form->sort = $request->input('sort', 0);
+                    $form->icon = $request->input('icon', null);
+                    $form->updated_by = auth()->id();
+
+                    if ($request->image) {
+                        $form->image = uploadImage($request->image, 'products');
+                    }
+
+                    $form->save();
+
+                    $form->categories()->sync($request->input('category_id', []));
+                    $form->tags()->sync($request->input('tag_id', []));
+
+                    foreach ($this->locales->keys() as $locale) {
+                        $trans = $request->input("translations.{$locale}");
+                        ProductTranslation::updateOrCreate(
+                            ['product_id' => $form->id, 'locale' => $locale],
+                            [
+                                'name' => $trans['name'],
+                                'short_description' => $trans['short_description'] ?? null,
+                                'description' => $trans['description'] ?? null,
+                                'updated_by' => auth()->id(),
+                            ]
+                        );
+                    }
+
+                    // Delete existing features and recreate (simpler approach)
+                    $form->features()->each(function ($feature) {
+                        $feature->details()->each(function ($detail) {
+                            $detail->translations()->delete();
+                            $detail->delete();
+                        });
+                        $feature->translations()->delete();
+                        $feature->delete();
+                    });
+
+                    // Handle features and feature details
+                    if ($request->has('features')) {
+                        foreach ($request->input('features') as $featureData) {
+                            $feature = ProductFeature::create([
+                                'product_id' => $form->id,
+                                'icon' => $featureData['icon'] ?? null,
+                                'sort' => $featureData['sort'] ?? 0,
+                                'created_by' => auth()->id(),
+                                'updated_by' => auth()->id(),
+                            ]);
+
+                            // Create feature translations
+                            if (isset($featureData['translations'])) {
+                                foreach ($featureData['translations'] as $locale => $translation) {
+                                    ProductFeatureTranslation::create([
+                                        'product_feature_id' => $feature->id,
+                                        'locale' => $locale,
+                                        'title' => $translation['title'] ?? null,
+                                        'description' => $translation['description'] ?? null,
+                                        'created_by' => auth()->id(),
+                                        'updated_by' => auth()->id(),
+                                    ]);
+                                }
+                            }
+
+                            // Handle feature details
+                            if (isset($featureData['details'])) {
+                                foreach ($featureData['details'] as $detailData) {
+                                    $detail = ProductFeatureDetail::create([
+                                        'product_feature_id' => $feature->id,
+                                        'icon' => $detailData['icon'] ?? null,
+                                        'sort' => $detailData['sort'] ?? 0,
+                                        'created_by' => auth()->id(),
+                                        'updated_by' => auth()->id(),
+                                    ]);
+
+                                    // Create detail translations
+                                    if (isset($detailData['translations'])) {
+                                        foreach ($detailData['translations'] as $locale => $translation) {
+                                            ProductFeatureDetailTranslation::create([
+                                                'product_feature_detail_id' => $detail->id,
+                                                'locale' => $locale,
+                                                'title' => $translation['title'] ?? null,
+                                                'description' => $translation['description'] ?? null,
+                                                'created_by' => auth()->id(),
+                                                'updated_by' => auth()->id(),
+                                            ]);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                return success(message: 'Product updated successfully');
+            } catch (\Exception $e) {
+                return errors(message: $e->getMessage());
+            }
+        }
+
+        return view('frontends.products.partials.product-features', compact('form', 'locales', 'translations', 'categories'));
     }
 
     public function destroy($id)

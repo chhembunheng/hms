@@ -48,6 +48,7 @@ Route::group(['prefix' => 'frontends', 'as' => 'frontends.', 'middleware' => ['a
         Route::get('/', [ProductController::class, 'index'])->name('index');
         Route::match(['get', 'post'], '/add', [ProductController::class, 'add'])->name('add');
         Route::match(['get', 'post'], '/{id}/edit', [ProductController::class, 'edit'])->name('edit');
+        Route::match(['get', 'post'], '/{id}/feature', [ProductController::class, 'feature'])->name('feature');
         Route::delete('/{id}/delete', [ProductController::class, 'destroy'])->name('delete');
     });
     

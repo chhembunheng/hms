@@ -66,9 +66,6 @@
                 .then(function(data) {
                     const rawIcons = Array.isArray(data.icons) ? data.icons : [];
 
-                    // Limit how many icons are kept for the picker to avoid huge dropdowns.
-                    const ICON_LIMIT = 50;
-
                     const mapped = rawIcons.map(function(item) {
                         const cls = item.class || '';
                         const label = item.label || '';
@@ -85,9 +82,8 @@
                         };
                     });
 
-                    // Keep only the first ICON_LIMIT icons to limit displayed options.
-                    // store and return only the limited set to avoid passing the full list to Select2
-                    window.__iconPickerData.icons = Array.isArray(mapped) ? mapped.slice(0, ICON_LIMIT) : [];
+                    // store and return the full list to Select2 so search works across all icons
+                    window.__iconPickerData.icons = Array.isArray(mapped) ? mapped : [];
                     window.__iconPickerData.loaded = true;
                     return window.__iconPickerData.icons;
                 })
@@ -117,6 +113,10 @@
 
                     const initialValue = $select.data('initial-value');
 
+                    let matchCount = 0;
+                    let lastTerm = null;
+                    const RESULT_LIMIT = 50;
+
                     $select.select2({
                         placeholder: 'Select an icon...',
                         allowClear: !$select.prop('required'),
@@ -137,11 +137,22 @@
                             return m;
                         },
                         matcher: function(params, data) {
-                            if ($.trim(params.term) === '') {
+                            const term = $.trim(params.term).toLowerCase();
+
+                            if (lastTerm !== term) {
+                                matchCount = 0;
+                                lastTerm = term;
+                            }
+
+                            if (matchCount >= RESULT_LIMIT) {
+                                return null;
+                            }
+
+                            if (term === '') {
+                                matchCount++;
                                 return data;
                             }
 
-                            const term = params.term.toLowerCase();
                             const text = (data.text || '').toLowerCase();
                             const id = (data.id || '').toLowerCase();
                             const label = (data.label || '').toLowerCase();
@@ -155,6 +166,7 @@
                                 label.indexOf(term) > -1 ||
                                 keywords.indexOf(term) > -1
                             ) {
+                                matchCount++;
                                 return data;
                             }
                             return null;
