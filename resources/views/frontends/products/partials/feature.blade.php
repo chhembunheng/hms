@@ -6,7 +6,7 @@
             <span class="drag-handle-feature me-2" style="cursor: move;">
                 <i class="fa-solid fa-grip-vertical"></i>
             </span>
-            <span class="feature-title">Feature #{{ (int) $index + 1 }}</span>
+            <span class="feature-title">Feature #<span class="feature-number">{{ (int) $index + 1 }}</span></span>
         </button>
     </h2>
 

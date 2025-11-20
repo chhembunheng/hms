@@ -6,7 +6,7 @@
             <span class="drag-handle-detail me-2" style="cursor: move;">
                 <i class="fa-solid fa-grip-vertical"></i>
             </span>
-            <span class="detail-title">Detail #{{ (int) $detailIndex + 1 }}</span>
+            <span class="detail-title">Detail #<span class="detail-number">{{ (int) $detailIndex + 1 }}</span></span>
         </button>
     </h2>
 
