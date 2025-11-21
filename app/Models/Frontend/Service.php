@@ -19,6 +19,12 @@ class Service extends Model
         'deleted_by',
     ];
 
+    public function navigations()
+    {
+        return $this->morphMany(Navigation::class, 'linked');
+    }
+
+
     /**
      * Get the translations for this service.
      */

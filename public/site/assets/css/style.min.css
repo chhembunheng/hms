@@ -4570,6 +4570,7 @@ blockquote::after {
     font-weight: 400;
     line-height: 24px;
     gap: 8px;
+    white-space: nowrap;
 }
 
 #top-navigation .navbar-brand {

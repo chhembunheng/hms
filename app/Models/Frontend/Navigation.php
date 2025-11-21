@@ -23,6 +23,12 @@ class Navigation extends Model
         'sort' => 'integer',
     ];
 
+
+    public function linked()
+    {
+        return $this->morphTo();
+    }
+
     public function translations()
     {
         return $this->hasMany(NavigationTranslation::class, 'navigation_id');

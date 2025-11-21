@@ -64,7 +64,7 @@ class Navigations
             } else {
                 $navigationName = $navigation['name_' . $locale] ?? $navigation['name_en'] ?? $navigation['name'] ?? 'N/A';
             }
-            if (!is_null($navigation->url) && !Route::has($navigation->url)) continue;
+            if (!is_null($navigation->url) && !Route::has($navigation->url) && is_null($navigation->linked_id)) continue;
             $id = $navigation->id ?? $navigation['id'];
             $parentId = $navigation->parent_id ?? $navigation['parent_id'] ?? null;
             if ($parentId != $parent) continue;
@@ -77,6 +77,8 @@ class Navigations
                 'name' => $navigationName,
                 'parent_id' => $parentId ?? null,
                 'route' => $route,
+                'linked_type' => $navigation->linked_type ?? $navigation['linked_type'] ?? null,
+                'linked_id' => $navigation->linked_id ?? $navigation['linked_id'] ?? null,
                 'icon' => $navigation->icon ?? $navigation['icon'] ?? null,
                 'children' => $children,
                 'active' => $isActive

@@ -23,6 +23,19 @@ class Product extends Model
         'sort' => 'integer',
     ];
 
+
+    public function navigations()
+    {
+        return $this->morphMany(Navigation::class, 'linked');
+    }
+
+    public function navigation()
+    {
+        return $this->morphOne(Navigation::class, 'linked')->latest();
+    }
+
+
+
     public function translations()
     {
         return $this->hasMany(ProductTranslation::class, 'product_id');

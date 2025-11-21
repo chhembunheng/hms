@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\DataTables\Frontend\NavigationDataTable;
-use App\Http\Controllers\Controller;
-use App\Models\Frontend\Navigation;
-use App\Models\Frontend\NavigationTranslation;
 use Illuminate\Http\Request;
+use App\Traits\FrontendTrait;
+use App\Models\Frontend\Navigation;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Frontend\NavigationTranslation;
+use App\DataTables\Frontend\NavigationDataTable;
 
 class NavigationController extends Controller
 {
+    use FrontendTrait;
+
     protected $locales;
 
     public function __construct()
@@ -151,26 +154,5 @@ class NavigationController extends Controller
         } catch (\Exception $e) {
             return errors(message: $e->getMessage());
         }
-    }
-
-    /**
-     * Get navigations for dropdown selection
-     * Excludes the current navigation being edited (to prevent self-referencing)
-     */
-    protected function getNavigationsForDropdown($excludeId = null)
-    {
-        $locale = app()->getLocale();
-        $query = Navigation::with('translations')
-            ->whereNull('deleted_at')
-            ->orderBy('sort', 'asc');
-
-        if ($excludeId) {
-            $query->where('id', '!=', $excludeId);
-        }
-
-        $navigations = $query->get()->mapWithKeys(function ($nav) use ($locale) {
-            return [$nav->id => $nav->getName($locale)];
-        });
-        return $navigations->toArray();
     }
 }

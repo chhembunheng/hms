@@ -5,12 +5,16 @@
                 <x-form.icon :label="__('form.icon')" name="icon" value="{{ old('icon', $form?->icon) }}" />
             </div>
             <div class="col-md-6">
+                <x-form.select :label="__('form.navigation')" name="navigation_id" :selected="old('navigation_id', $form?->navigation?->parent_id)"
+                    :options="$navigations" data-placeholder="Select a navigation" />
+            </div>
+            <div class="col-md-6">
                 <x-form.select multiple data-searchable="false" :label="__('form.category')" name="category_id[]" :selected="$form?->categories?->pluck('id')->toArray()"
                     data-placeholder="Select a category" :options="$categories" required />
             </div>
             <div class="col-md-6">
                 <x-form.select multiple data-searchable="false" :label="__('form.tags')" name="tag_id[]" :selected="$form?->tags?->pluck('id')->toArray()"
-                    data-placeholder="Select tags" :options="$categories" required />
+                    data-placeholder="Select tags" :options="$tags" required />
             </div>
             <div class="col-md-6">
                 <x-form.input :label="__('form.sort')" type="number" name="sort" value="{{ $form?->sort ?? 0 }}"
