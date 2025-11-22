@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->longText('content')->nullable();
-            $table->authors();
+            $table->author();
             $table->unique(['category_id', 'locale']);
         });
     }

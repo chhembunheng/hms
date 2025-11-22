@@ -58,7 +58,7 @@
                                 name="translations[{{ $locale }}][name]" :value="old(
                                     'translations.' . $locale . '.name',
                                     $translations[$locale]['name'] ?? '',
-                                )" required />
+                                )" required lang="{{ $locale }}"/>
                         </div>
                         <div class="col-md-8 offset-md-2">
                             <x-form.textarea :label="__('form.short_description')"
@@ -66,21 +66,21 @@
                                     'translations.' . $locale . '.short_description',
                                     $translations[$locale]['short_description'] ?? '',
                                 )"
-                                rows="2" />
+                                rows="2" lang="{{ $locale }}"/>
                         </div>
                         <div class="col-md-8 offset-md-2">
                             <x-form.textarea :label="__('form.description')" name="translations[{{ $locale }}][description]"
                                 :value="old(
                                     'translations.' . $locale . '.description',
                                     $translations[$locale]['description'] ?? '',
-                                )" rows="5" class="editor" />
+                                )" rows="5" class="editor" lang="{{ $locale }}"/>
                         </div>
                         <div class="col-md-8 offset-md-2">
                             <x-form.textarea :label="__('form.content')" name="translations[{{ $locale }}][content]"
                                 :value="old(
                                     'translations.' . $locale . '.content',
                                     $translations[$locale]['content'] ?? '',
-                                )" rows="6" class="editor content-{{ $locale }}" />
+                                )" rows="6" class="editor content-{{ $locale }}" lang="{{ $locale }}"/>
                         </div>
                     </div>
                 </div>

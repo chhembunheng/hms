@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('github_url')->nullable();
             $table->string('email')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->authors();
+            $table->author();
         });
     }
 

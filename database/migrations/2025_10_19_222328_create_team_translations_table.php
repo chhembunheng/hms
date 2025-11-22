@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('bio')->nullable();
             $table->string('position_name')->nullable();
-            $table->authors();
+            $table->author();
             $table->unique(['team_id','locale']);
 
         });

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('locale', 10);
             $table->string('name');
             $table->text('description')->nullable();
-            $table->authors();
+            $table->author();
             $table->unique(['integration_id','locale']);
         });
     }

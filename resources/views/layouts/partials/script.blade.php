@@ -1,14 +1,28 @@
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
- <script>if (typeof jQuery === 'undefined') {document.write('<script src="' + '{{ asset('assets/js/jquery/jquery.min.js') }}?v={{ config('init.layout_version') }}' + '"><\/script>');}</script>
+ <script>
+     if (typeof jQuery === 'undefined') {
+         document.write('<script src="' +
+             '{{ asset('assets/js/jquery/jquery.min.js') }}?v={{ config('init.layout_version') }}' + '"><\/script>');
+     }
+ </script>
  <script src="{{ asset('assets/js/bootstrap/bootstrap.bundle.min.js') }}?v={{ config('init.layout_version') }}"></script>
- <script src="{{ asset('assets/js/vendor/uploaders/fileinput/fileinput.min.js') }}?v={{ config('init.layout_version') }}"></script>
- <script src="{{ asset('assets/js/vendor/notifications/sweet_alert.min.js') }}?v={{ config('init.layout_version') }}"></script>
- <script src="{{ asset('assets/js/vendor/forms/selects/bootstrap_multiselect.js') }}?v={{ config('init.layout_version') }}"></script>
- <script src="{{ asset('assets/js/vendor/forms/selects/select2.min.js') }}?v={{ config('init.layout_version') }}"></script>
+ <script
+     src="{{ asset('assets/js/vendor/uploaders/fileinput/fileinput.min.js') }}?v={{ config('init.layout_version') }}">
+ </script>
+ <script src="{{ asset('assets/js/vendor/notifications/sweet_alert.min.js') }}?v={{ config('init.layout_version') }}">
+ </script>
+ <script
+     src="{{ asset('assets/js/vendor/forms/selects/bootstrap_multiselect.js') }}?v={{ config('init.layout_version') }}">
+ </script>
+ <script src="{{ asset('assets/js/vendor/forms/selects/select2.min.js') }}?v={{ config('init.layout_version') }}">
+ </script>
  <script src="{{ asset('assets/js/vendor/ui/moment/moment.min.js') }}?v={{ config('init.layout_version') }}"></script>
- <script src="{{ asset('assets/js/vendor/pickers/daterangepicker.js') }}?v={{ config('init.layout_version') }}"></script>
- <script src="{{ asset('assets/js/vendor/forms/validation/validate.min.js') }}?v={{ config('init.layout_version') }}"></script>
- <script src="{{ asset('assets/js/vendor/pickers/datepicker.min.js') }}?v={{ config('init.layout_version') }}"></script>
+ <script src="{{ asset('assets/js/vendor/pickers/daterangepicker.js') }}?v={{ config('init.layout_version') }}">
+ </script>
+ <script src="{{ asset('assets/js/vendor/forms/validation/validate.min.js') }}?v={{ config('init.layout_version') }}">
+ </script>
+ <script src="{{ asset('assets/js/vendor/pickers/datepicker.min.js') }}?v={{ config('init.layout_version') }}">
+ </script>
  <script src="{{ asset('assets/js/vendor/media/glightbox.min.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/vendor/editors/ckeditor.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/app.js') }}?v={{ config('init.layout_version') }}"></script>
@@ -104,7 +118,8 @@
                      success: function(res) {
                          if (res.status === 'success') {
                              if (el.closest('.dataTables_wrapper').length) {
-                                 el.closest('.dataTables_wrapper').find('table.datatables').DataTable().ajax.reload();
+                                 el.closest('.dataTables_wrapper').find('table.datatables')
+                                     .DataTable().ajax.reload();
                                  success(res.message);
                              } else {
                                  window.location.reload();
@@ -271,9 +286,11 @@
              }
              $(form).find('input[type="file"]').each(function() {
                  const input = $(this);
-                 const base64 = input.parents('.file-input').find('.file-preview-image').attr('src') || '';
+                 const base64 = input.parents('.file-input').find('.file-preview-image').attr(
+                     'src') || '';
                  if (base64 && base64.startsWith('data:')) {
-                     input.replaceWith('<input type="hidden" name="' + input.attr('name') + '" value="' + base64 + '">');
+                     input.replaceWith('<input type="hidden" name="' + input.attr('name') +
+                         '" value="' + base64 + '">');
                  }
              });
              //  Ckeditor handling
@@ -366,7 +383,7 @@
      }
 
      const editorsMap = new Map();
-     const pendingEditorHTML = new Map();
+     const editorHTML = new Map();
      const editors = document.querySelectorAll('.editor');
      editors.forEach((node) => {
          let toolbars = [
@@ -393,7 +410,9 @@
                  licenseKey: 'GPL',
                  toolbar: toolbars,
                  image: {
-                     toolbar: ['imageTextAlternative', 'imageStyle:side', 'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight'],
+                     toolbar: ['imageTextAlternative', 'imageStyle:side', 'imageStyle:alignLeft',
+                         'imageStyle:alignCenter', 'imageStyle:alignRight'
+                     ],
                      insert: {
                          integrations: ['upload'],
                      }
@@ -402,9 +421,9 @@
              })
              .then(editor => {
                  editorsMap.set(node, editor);
-                 if (pendingEditorHTML.has(node)) {
-                     editor.setData(pendingEditorHTML.get(node) || '');
-                     pendingEditorHTML.delete(node);
+                 if (editorHTML.has(node)) {
+                     editor.setData(editorHTML.get(node) || '');
+                     editorHTML.delete(node);
                  }
                  const editableEl = editor.ui.view.editable.element;
                  editableEl.style.minHeight = minHeight;
@@ -417,8 +436,9 @@
          const title = $('input[name="meta[title]"]');
          const description = $('input[name="meta[description]"]');
          const keywords = $('input[name="meta[keywords]"]');
-         const contentNode = document.querySelector('textarea.content-en');
-         const instance = editorsMap.get(contentNode);
+         const contentNodes = document.querySelectorAll(
+             'textarea[name^="translations"][name$="[content]"]'
+         );
          if (empty(content)) {
              error('Please fill the content field to generate meta information');
              return;
@@ -436,40 +456,53 @@
                  _token: '{{ csrf_token() }}'
              },
              dataType: 'json',
+
              success: function(res) {
                  if (res.status === 'success') {
                      success(res.message);
                      if (res.data.title) {
-                         title.val(res.data.title);
+                         $.each(res.data.title, function(index, data) {
+                             if (data.lang !== 'en') return;
+                             title.val(data.value);
+                         });
                      }
                      if (res.data.description) {
-                         description.val(res.data.description);
+                         $.each(res.data.description, function(index, data) {
+                             if (data.lang !== 'en') return;
+                             description.val(data.value);
+                         });
                      }
                      if (res.data.keywords) {
-                         keywords.val(res.data.keywords);
+                         $.each(res.data.keywords, function(index, data) {
+                             if (data.lang !== 'en') return;
+                             keywords.val(data.value.join(', '));
+                         });
                      }
                      if (res.data.content) {
-                         const instance = editorsMap.get(contentNode);
-                         if (instance) {
-                             instance.setData(res.data.content);
-                         } else {
-                             pendingEditorHTML.set(contentNode, res.data.content);
-                         }
+                         contentNodes.forEach(function(contentNode) {
+                             var instance = editorsMap.get(contentNode);
+                             var lang = contentNode.getAttribute('lang') || 'en';
+                             $.each(res.data.content, function(index, data) {
+                                 if (data.lang !== lang) return;
+                                 if (instance) {
+                                     instance.setData(data.value);
+                                 } else {
+                                     editorHTML.set(contentNode, data
+                                         .value);
+                                 }
+                             });
+
+                         });
                      }
+
                  } else {
                      error(res.message);
                  }
              },
+
              complete: function() {
                  $('.meta-generator').removeClass('fa-fw fa-2x fa-beat-fade');
                  metaGenerated = false;
-             },
-             error: function(e) {
-                 let message = 'Something went wrong';
-                 if (e.responseJSON && e.responseJSON.message) {
-                     message = e.responseJSON.message;
-                 }
-                 error(message);
              }
          });
      });

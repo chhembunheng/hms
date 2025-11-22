@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('seo_meta', function (Blueprint $table) {
             $table->id();
-            $table->string('seoable_type');
-            $table->unsignedBigInteger('seoable_id');
+            $table->morphs('model');
             $table->string('locale', 10)->default('en');
-            $table->string('title')->nullable();
             $table->string('slug')->nullable();
+            $table->boolean('is_published')->default(false);
+            $table->integer('seo_score')->default(0);
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();
             $table->text('meta_keywords')->nullable();
@@ -25,10 +25,11 @@ return new class extends Migration
             $table->string('og_title')->nullable();
             $table->text('og_description')->nullable();
             $table->string('og_image')->nullable();
-            $table->authors();
-
-            $table->unique(['seoable_type', 'seoable_id', 'locale']);
-            $table->index(['slug', 'locale']);
+            $table->string('og_type')->nullable();
+            $table->enum('seo_status', ['draft', 'pending', 'published'])->default('draft');
+            $table->unique(['model_type', 'model_id', 'locale']);
+            $table->index(['slug', 'locale', 'is_published']);
+            $table->author();
         });
     }
 

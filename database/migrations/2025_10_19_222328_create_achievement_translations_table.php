@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('locale', 10);
             $table->string('title');
             $table->string('subtitle')->nullable();
-            $table->authors();
+            $table->author();
             $table->unique(['achievement_id','locale']);
         });
 

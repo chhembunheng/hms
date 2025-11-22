@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('short_description')->nullable();
             $table->longText('description')->nullable();
             $table->longText('content')->nullable();
-            $table->authors();
+            $table->author();
             
             $table->unique(['service_id','locale']);
         });

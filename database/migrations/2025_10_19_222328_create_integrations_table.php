@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('logo')->nullable();
             $table->string('url')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->authors();
+            $table->author();
         });
     }
 

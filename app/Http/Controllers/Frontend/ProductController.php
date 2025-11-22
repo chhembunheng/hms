@@ -6,7 +6,6 @@ use App\Rules\ImageRule;
 use Illuminate\Http\Request;
 use App\Traits\FrontendTrait;
 use App\Models\Frontend\Product;
-use App\Models\Frontend\Category;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Frontend\ProductFeature;
@@ -159,6 +158,7 @@ class ProductController extends Controller
                     }
 
                     $form->save();
+                    $form->generateSEO();
                     $linked = $form->navigations()->updateOrCreate([
                         'linked_type' => Product::class,
                         'linked_id' => $form->id,
@@ -183,6 +183,7 @@ class ProductController extends Controller
                                 'name' => $trans['name'],
                                 'short_description' => $trans['short_description'] ?? null,
                                 'description' => $trans['description'] ?? null,
+                                'content' => $trans['content'] ?? null,
                                 'updated_by' => auth()->id(),
                             ]
                         );

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('short_description')->nullable();
             $table->text('description')->nullable();
-            $table->authors();
+            $table->author();
             $table->unique(['career_id','locale']);
         });
     }

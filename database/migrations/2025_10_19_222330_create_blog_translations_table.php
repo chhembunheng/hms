@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('excerpt')->nullable();
             $table->longText('body')->nullable();
-            $table->authors();
+            $table->author();
             $table->unique(['blog_id','locale']);
         });
     }

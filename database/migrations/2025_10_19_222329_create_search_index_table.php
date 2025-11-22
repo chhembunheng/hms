@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('excerpt')->nullable();
             $table->text('keywords')->nullable();
             $table->string('url')->nullable();
-            $table->authors();
+            $table->author();
 
             $table->index(['locale','title']);
         });

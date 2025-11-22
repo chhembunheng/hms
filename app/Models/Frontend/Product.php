@@ -2,12 +2,13 @@
 
 namespace App\Models\Frontend;
 
+use App\Traits\HasSEO;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, HasSEO;
 
     protected $fillable = [
         'slug',
@@ -80,5 +81,10 @@ class Product extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class, 'product_tag', 'product_id', 'tag_id');
+    }
+
+    public function getCanonicalUrl()
+    {
+        return '/en/products/' . $this->slug;
     }
 }

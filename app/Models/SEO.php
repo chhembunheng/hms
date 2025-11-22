@@ -15,11 +15,19 @@ class SEO extends Model
     protected $fillable = [
         'model_type',
         'model_id',
+        'locale',
         'meta_title',
         'meta_description',
         'meta_keywords',
+        'og_title',
+        'og_description',
+        'og_image',
+        'og_type',
+        'slug',
+        'canonical_url',
         'seo_score',
         'is_published',
+        'seo_status',
         'created_by',
         'updated_by',
         'deleted_by',
@@ -27,6 +35,6 @@ class SEO extends Model
 
     protected $casts = [
         'is_published' => 'boolean',
-        'seo_score' => 'integer',
+        'seo_score' => 'integer'
     ];
 }

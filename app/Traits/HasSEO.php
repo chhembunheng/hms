@@ -2,84 +2,65 @@
 
 namespace App\Traits;
 
+use App\Models\SEO;
+
 trait HasSEO
 {
-    /**
-     * Get the SEO record for this model
-     */
-    public function seo(): MorphOne
+    public function seo()
     {
-        return $this->morphOne(SEORecord::class, 'model');
+        return $this->morphOne(SEO::class, 'model');
     }
 
-    /**
-     * Create or update SEO record
-     */
-    public function updateSEO(array $data): SEORecord
+    public function updateSEO(array $data)
     {
-        return $this->seo()->updateOrCreate(
-            ['model_type' => static::class, 'model_id' => $this->id],
-            $data
-        );
+        return $this->seo()->updateOrCreate([], $data);
     }
 
-    /**
-     * Get SEO data
-     */
-    public function getSEOData(): ?SEORecord
+    public function getSEO(): ?SEO
     {
         return $this->seo;
     }
 
-    /**
-     * Check if SEO is published
-     */
     public function isSEOPublished(): bool
     {
-        return $this->seo?->is_published ?? false;
+        return (bool) ($this->seo?->is_published);
     }
 
-    /**
-     * Get SEO score
-     */
     public function getSEOScore(): int
     {
-        return $this->seo?->seo_score ?? 0;
+        return (int) ($this->seo?->seo_score ?? 0);
     }
 
-    /**
-     * Get SEO health status
-     */
     public function getSEOHealth(): string
     {
         return $this->seo?->getHealthStatus() ?? 'none';
     }
 
-    /**
-     * Generate default SEO data from model attributes
-     */
-    public function generateDefaultSEO(): void
+    public function generateSEO(): void
     {
-        $title = $this->getAttribute('title') ?? $this->getAttribute('name');
-        $description = $this->getAttribute('description') ?? $this->getAttribute('bio');
-        $slug = $this->getAttribute('slug') ?? '';
+        $meta = request()->input('meta', []);
+
         $seoData = [
-            'meta_title' => $title ? substr($title, 0, 60) : null,
-            'meta_description' => $description ? substr($description, 0, 160) : null,
-            'og_title' => $title,
-            'og_description' => $description,
+            'meta_title' => $meta['title'],
+            'meta_description' => $meta['description'],
+            'meta_keywords' => is_array($meta['keywords']) ? implode(', ', $meta['keywords']) : $meta['keywords'],
+            'lang' => 'en',
+            'og_title' => $meta['title'],
+            'og_description' => $meta['description'],
             'og_type' => 'article',
-            'is_published' => false,
-            'seo_status' => 'draft',
+            'og_image' => $this->image,
+            'canonical_url' => $this->getCanonicalUrl(),
+            'slug' => slug($this->getCanonicalUrl()),
+            'is_published' => true,
+            'seo_status' => 'published',
+            'created_by' => auth()->id(),
+            'updated_by' => auth()->id(),
         ];
 
-        // Build canonical URL if slug exists
-        if ($slug) {
-            $modelName = strtolower(class_basename($this));
-            $seoData['canonical_url'] = url("/{$modelName}/{$slug}");
-        }
+        $seo = $this->updateSEO($seoData);
 
-        $this->updateSEO($seoData);
-        $this->seo->updateSEOScore();
+        if (method_exists($seo, 'updateSEOScore')) {
+            $seo->updateSEOScore();
+        }
     }
 }

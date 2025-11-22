@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('question');
             $table->text('answer')->nullable();
             $table->unique(['faq_id', 'locale']);
-            $table->authors();
+            $table->author();
         });
     }
 

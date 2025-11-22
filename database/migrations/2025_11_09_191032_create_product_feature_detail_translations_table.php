@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('locale', 10);
             $table->string('title');
             $table->text('description')->nullable();
-            $table->authors();
+            $table->author();
 
             $table->unique(['product_feature_detail_id', 'locale'], 'unique_product_feature_detail_locale');
         });

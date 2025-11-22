@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('priority', ['low', 'medium', 'high'])->default('medium');
             $table->unsignedInteger('sort')->default(0);
             $table->boolean('is_active')->default(true);
-            $table->authors();
+            $table->author();
         });
 
     }

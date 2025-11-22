@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('thumbnail')->nullable();
             $table->boolean('is_published')->default(true);
             $table->unsignedInteger('sort')->default(0);
-            $table->authors();
+            $table->author();
         });
     }
 

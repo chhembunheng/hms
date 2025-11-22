@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('website_url')->nullable();
             $table->unsignedInteger('sort')->default(0);
             $table->boolean('is_active')->default(true);
-            $table->authors();
+            $table->author();
         });
     }
 

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->text('description')->nullable();
-            $table->authors();
+            $table->author();
             $table->unique(['user_id', 'locale']);
         });
     }

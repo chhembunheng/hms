@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->boolean('is_active')->default(true);
             $table->unsignedInteger('sort')->default(0);
-            $table->authors();
+            $table->author();
         });
     }
 

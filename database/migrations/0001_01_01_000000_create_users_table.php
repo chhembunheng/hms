@@ -25,13 +25,13 @@ return new class extends Migration
             $table->text('two_factor_recovery_codes')->nullable();
             $table->timestamp('two_factor_confirmed_at')->nullable();
             $table->rememberToken();
-            $table->authors();
+            $table->author();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
-            $table->authors();
+            $table->author();
         });
 
         Schema::create('sessions', function (Blueprint $table) {
@@ -49,14 +49,14 @@ return new class extends Migration
             $table->string('name');
             $table->string('credential_id');
             $table->json('data');
-            $table->authors();
+            $table->author();
         });
 
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
             $table->tinyInteger('administrator')->default(0);
             $table->tinyInteger('sort')->default(0);
-            $table->authors();
+            $table->author();
         });
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
@@ -64,7 +64,7 @@ return new class extends Migration
             $table->tinyInteger('sort')->default(0);
             $table->string('route')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable()->index();
-            $table->authors();
+            $table->author();
         });
         Schema::create('permissions', function (Blueprint $table) {
             $table->id();
@@ -75,7 +75,7 @@ return new class extends Migration
             $table->string('slug')->unique()->index()->nullable();
             $table->tinyInteger('sort')->default(0);
             $table->unsignedBigInteger('menu_id')->index();
-            $table->authors();
+            $table->author();
         });
         Schema::create('role_permission', function (Blueprint $table) {
             $table->unsignedBigInteger('role_id')->index();

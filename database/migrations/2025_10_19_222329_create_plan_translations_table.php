@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('plan_id')->constrained('plans')->cascadeOnDelete();
             $table->string('locale', 10);
             $table->string('name');
-            $table->authors();
+            $table->author();
             $table->unique(['plan_id','locale']);
         });
     }
