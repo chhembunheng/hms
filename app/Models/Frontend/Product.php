@@ -74,10 +74,25 @@ class Product extends Model
     {
         return $this->getTranslation($locale)?->description ?? null;
     }
-
-    public function getShortDescription($locale = null)
+    public function getContent($locale = null)
     {
         return $this->getTranslation($locale)?->content ?? null;
+    }
+    public function getSliderTitle($locale = null)
+    {
+        return $this->getTranslation($locale)?->slider_title ?? null;
+    }
+    public function getSliderDescription($locale = null)
+    {
+        return $this->getTranslation($locale)?->slider_description ?? null;
+    }
+    public function getRoute()
+    {
+        return 'products';
+    }
+    public function buttonText()
+    {
+        return __('root.common.learn_more');
     }
 
     public function categories()

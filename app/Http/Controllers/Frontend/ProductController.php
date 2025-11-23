@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Rules\ImageRule;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Traits\FrontendTrait;
 use App\Models\Frontend\Product;
@@ -21,7 +22,7 @@ use App\Models\Frontend\ProductFeatureDetailTranslation;
 class ProductController extends Controller
 {
     use FrontendTrait;
-    
+
     protected $locales;
     protected $categories;
 
@@ -67,7 +68,7 @@ class ProductController extends Controller
                 }
                 DB::transaction(function () use ($request) {
 
-                    $product = Product::create([
+                    $form = Product::create([
                         'slug' => slug($request->input('slug', null)),
                         'image' => null,
                         'icon' => $request->input('icon', null),
@@ -79,38 +80,41 @@ class ProductController extends Controller
                     ]);
 
                     if ($request->image) {
-                        $product->image = uploadImage($request->image, 'uploads/products');
-                        $product->save();
+                        $form->image = uploadImage($request->image, 'uploads/products');
+                        $form->save();
                     }
 
                     if ($request->slider_image) {
-                        $product->slider_image = uploadImage($request->slider_image, 'uploads/products/slider');
-                        $product->save();
+                        $form->slider_image = uploadImage($request->slider_image, 'uploads/products/slider');
+                        $form->save();
                     }
 
                     if ($request->has('images') && is_array($request->input('images'))) {
-                        $product->images = processGalleryImages($request->input('images'), 'uploads/products/gallery');
-                        $product->save();
+                        $form->images = processGalleryImages($request->input('images'), 'uploads/products/gallery');
+                        $form->save();
                     }
 
-                    $product->categories()->sync($request->input('category_id', []));
-                    $product->tags()->sync($request->input('tag_id', []));
-                    $dataTranslation = [];
+                    $form->categories()->sync($request->input('category_id', []));
+                    $form->tags()->sync($request->input('tag_id', []));
+                    $translations = [];
                     foreach ($this->locales->keys() as $locale) {
                         $trans = $request->input("translations[{$locale}]");
-                        dd( $trans);
-                        ProductTranslation::create([
-                            'product_id' => $product->id,
-                            'locale' => $locale,
-                            'name' => $trans['name'],
+                        $name = $trans['name'] ?? '';
+                        $description = $trans['description'] ?? '';
+                        $sliderTitle = $trans['slider_title'] ?? $name;
+                        $sliderDescription = $trans['slider_description'] ?? $description;
+                        $translations[] = [
+                            'product_id' => $form->id,
+                            'name' => $name,
+                            'description' => $description,
+                            'slider_title' => $sliderTitle,
+                            'slider_description' => $sliderDescription,
                             'content' => $trans['content'] ?? null,
-                            'description' => $trans['description'] ?? null,
-                            'slider_title' => $trans['slider_title'] ?? null,
-                            'slider_description' => $trans['slider_description'] ?? null,
                             'created_by' => auth()->id(),
                             'updated_by' => auth()->id(),
-                        ]);
+                        ];
                     }
+                    ProductTranslation::insert($translations);
                 });
                 return success(message: 'Product created successfully');
             } catch (\Exception $e) {
@@ -140,8 +144,10 @@ class ProductController extends Controller
         foreach ($form->translations as $translation) {
             $translations[$translation->locale] = [
                 'name' => $translation->name,
-                'content' => $translation->content,
                 'description' => $translation->description,
+                'content' => $translation->content,
+                'slider_title' => $translation->slider_title,
+                'slider_description' => $translation->slider_description,
             ];
         }
 
@@ -186,33 +192,39 @@ class ProductController extends Controller
 
                     $form->save();
                     $form->generateSEO();
-                    $linked = $form->navigations()->updateOrCreate([
-                        'linked_type' => Product::class,
-                        'linked_id' => $form->id,
-                    ],
-                    [
-                        'parent_id' => $request->input('navigation_id', null),
-                        'icon' => $request->input('icon', null),
-                        'url' => 'products' . '/' . $form->slug,
-                        'sort' => $request->input('sort', 0),
-                        'created_by' => auth()->id(),
-                        'updated_by' => auth()->id(),
-                    ]);
+                    $linked = $form->navigations()->updateOrCreate(
+                        [
+                            'linked_type' => Product::class,
+                            'linked_id' => $form->id,
+                        ],
+                        [
+                            'parent_id' => $request->input('navigation_id', null),
+                            'icon' => $request->input('icon', null),
+                            'url' => 'products' . '/' . $form->slug,
+                            'sort' => $request->input('sort', 0),
+                            'created_by' => auth()->id(),
+                            'updated_by' => auth()->id(),
+                        ]
+                    );
                     $form->categories()->sync($request->input('category_id', []));
                     $form->tags()->sync($request->input('tag_id', []));
-                    
+
 
                     $translations = [];
                     $linkeds = [];
                     foreach ($this->locales->keys() as $locale) {
                         $trans = $request->input("translations.{$locale}");
+                        $name = $trans['name'] ?? '';
+                        $description = $trans['description'] ?? '';
+                        $sliderTitle = $trans['slider_title'] ?? $name;
+                        $sliderDescription = $trans['slider_description'] ?? $description;
                         $translations[] = [
                             'product_id' => $form->id,
-                            'name' => $trans['name'],
+                            'name' => $name,
+                            'description' => $description,
+                            'slider_title' => $sliderTitle,
+                            'slider_description' => Str::of($sliderDescription)->stripTags()->trim(),
                             'content' => $trans['content'] ?? null,
-                            'description' => $trans['description'] ?? null,
-                            'slider_title' => $trans['slider_title'] ?? null,
-                            'slider_description' => $trans['slider_description'] ?? null,
                             'locale' => $locale,
                             'updated_by' => auth()->id(),
                         ];
@@ -225,7 +237,7 @@ class ProductController extends Controller
                         ];
                     }
                     NavigationTranslation::upsert($linkeds, ['navigation_id', 'locale'], ['name', 'label', 'updated_by']);
-                    ProductTranslation::upsert($translations, ['product_id', 'locale'], ['name', 'content', 'description', 'content', 'updated_by']);
+                    ProductTranslation::upsert($translations, ['product_id', 'locale'], ['name', 'description', 'content', 'slider_title', 'slider_description', 'updated_by']);
                     Artisan::call('cache:clear');
                 });
                 return success(message: 'Product updated successfully');

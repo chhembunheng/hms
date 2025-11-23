@@ -1,6 +1,6 @@
 <div class="navbar-area" id="top-navigation">
     <!-- Logo -->
-    <a class="navbar-brand me-4" style="flex: 1" href="{{ Route::currentRouteName() == 'welcome' ? '#' : route('welcome', ['locale' => app()->getLocale()]) }}" title="Home">
+    <a class="navbar-brand me-4" style="flex: 1" href="{{ Route::currentRouteName() == 'index' ? '#' : route('index', ['locale' => app()->getLocale()]) }}" title="Home">
         <img src="{{ $img['fallback'] }}" srcset="{{ $img['srcset'] }}" sizes="(max-width: 600px) 95vw, {{ $img['width'] }}px" alt="Brand Name Logo" loading="lazy" width="{{ $img['width'] }}" height="auto" class="img-fluid" style="max-height: 48px;">
     </a>
     <!-- Navigation Menu -->

@@ -39,4 +39,13 @@ return [
         'en' => 'en-US'
     ],
     'available_locales' => ['km', 'en'],
+    'sections' => [
+        'index' => ['sliders', 'services', 'integrations', 'talk', 'achievements', 'contacts'],
+        'services' => ['services'],
+        'products' => ['products'],
+        'pricing' => ['pricing_plans'],
+        'careers' => ['careers'],
+        'blogs' => ['blogs'],
+        'integrations' => ['integrations'],
+    ],
 ];

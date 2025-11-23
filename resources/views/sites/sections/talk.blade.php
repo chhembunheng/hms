@@ -17,7 +17,7 @@
             <div class="col-lg-10 offset-lg-1">
                 <div class="contact-form">
                     <div class="form-messages"></div>
-                    <form id="contact-form" class="contact-form form" action="{{ route('contact.submit', ['locale' => app()->getLocale()]) }}" method="POST" error-message="{{ __('global.contact_form_error_message') }}">
+                    <form id="contact-form" class="contact-form form" action="{{ route('submit-contact', ['locale' => app()->getLocale()]) }}" method="POST" error-message="{{ __('global.contact_form_error_message') }}">
                         @csrf
                         <div class="row">
                             <div class="col-lg-6 col-md-6">

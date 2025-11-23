@@ -494,7 +494,7 @@
                                         <h6 class="mb-0 text-truncate">{{ $service['name'] }}</h6>
                                         <small class="text-muted d-block text-truncate">
                                             <i class="fa-duotone fa-file-lines me-1"></i>
-                                            {{ Str::limit($service['description'], 40) ?: 'No description' }}
+                                            {!! $service['description'] !!}
                                         </small>
                                         <small class="text-muted">
                                             <i class="fa-regular fa-clock me-1"></i>{{ $service['created_at_ago'] }}

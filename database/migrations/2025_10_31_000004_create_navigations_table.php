@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('navigations', function (Blueprint $table) {
             $table->id();
             $table->string('url')->nullable();
+            $table->string('slug')->nullable()->unique();
             $table->unsignedBigInteger('parent_id')->nullable()->index();
             $table->nullableMorphs('linked');
             $table->string('icon')->nullable();

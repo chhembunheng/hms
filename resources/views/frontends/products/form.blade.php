@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="row">
-            <x-slider-form :form="$form" :locales="$locales" />
+            <x-slider-form :form="$form" :locales="$locales" :translations="$translations" />
         </div>
         <hr class="my-4">
         <div class="row">

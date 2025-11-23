@@ -1072,8 +1072,7 @@ blockquote cite {
 .navbar-area {
     background-color: #fff0;
     transition: .4s;
-    position: absolute;
-    height: auto
+    height: auto;
 }
 
 .navbar-area.is-sticky {
@@ -4439,11 +4438,6 @@ blockquote::after {
     bottom: -8px
 }
 
-.swiper-container.parallax-slider,
-.swiper-container.parallax-slider .swiper-wrapper {
-    height: 100%
-}
-
 .slide-figure {
     position: absolute;
     inset: 0
@@ -4469,7 +4463,7 @@ blockquote::after {
 }
 
 .slide-figure .slide-overlay {
-    background: rgb(0 0 0 / .5);
+    background: rgb(0 0 0 / .3);
     pointer-events: none;
     z-index: 1
 }
@@ -4552,10 +4546,6 @@ blockquote::after {
     min-width: 230px;
 }
 
-#top-navigation * {
-    color: #ffffff !important;
-}
-
 #top-navigation .dropdown-menu * {
     color: #060318 !important;
 }
@@ -4581,10 +4571,9 @@ blockquote::after {
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
-    background: transparent !important;
-    color: #ffffff !important;
     padding: 16px !important;
-
+    color: #00213e !important;
+    background: #ffffff !important;
 }
 
 #top-navigation.is-sticky * {

@@ -159,6 +159,7 @@ return [
         'no_permissions' => 'No permissions yet',
         'sort_order' => 'Sort Order',
         'sort' => 'Sort',
+        'learn_more' => 'Learn More',
     ],
 
     'auth' => [

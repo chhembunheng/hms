@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use Spatie\Image\Image;
+use Illuminate\Support\Str;
 use Spatie\Image\Enums\Fit;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
@@ -11,9 +12,6 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Imagick\Driver;
 
 if (!function_exists('webp_variants')) {
-    /**
-     * Generate responsive WebP variants (with logging).
-     */
     function webp_variants(
         string $path,
         string|array|null $presetOrWidths = null,
@@ -27,6 +25,9 @@ if (!function_exists('webp_variants')) {
             if (trim($path) === '') {
                 Log::warning("webp_variants: empty path received");
                 return ['srcset' => '', 'variants' => [], 'fallback' => '', 'width' => 0];
+            }
+            if (trim(strtolower(substr($path, 0, 7))) === 'uploads') {
+                $path = 'storage/' . ltrim($path, '/');
             }
 
             $presets = [
@@ -45,7 +46,6 @@ if (!function_exists('webp_variants')) {
                 'bxs' => [64, 128, 256, 342],
             ];
 
-            // Resolve widths
             if (is_array($presetOrWidths)) {
                 $widths = array_values(array_filter($presetOrWidths, fn($w) => is_int($w) && $w > 0));
             } elseif (is_string($presetOrWidths) && isset($presets[$presetOrWidths])) {
@@ -66,7 +66,6 @@ if (!function_exists('webp_variants')) {
                 Log::info("webp_variants: created cache dir {$cacheBase}");
             }
 
-            // --- get source file ---
             if ($isRemote) {
                 $tmpName = "{$cacheBase}/tmp-{$sourceKey}.{$ext}";
                 $tmpPath = $disk->path($tmpName);
@@ -165,7 +164,6 @@ if (!function_exists('webp_variants')) {
     }
 }
 
-
 if (!function_exists('webpasset')) {
     function webpasset($path = '', $height = null, $absoluteWebpPath = null, $quality = 80)
     {
@@ -252,7 +250,6 @@ if (!function_exists('webpasset')) {
     }
 }
 
-
 if (! function_exists('yesNo')) {
     function yesNo($instance)
     {
@@ -320,7 +317,6 @@ if (! function_exists('badge')) {
             'full time' => 'badge bg-success bg-opacity-10 text-success',
         ];
 
-        // Normalize nullable inputs
         $normalizedStatus = strtolower(trim((string)($status ?? '')));
         $displayText = ($text !== null && $text !== '') ? $text : ucwords($normalizedStatus);
         if (empty(trim($displayText))) {
@@ -330,6 +326,7 @@ if (! function_exists('badge')) {
         return '<span class="' . $class . '">' . $displayText . '</span>';
     }
 }
+
 if (!function_exists('json')) {
     function json($data)
     {
@@ -338,6 +335,7 @@ if (!function_exists('json')) {
         exit;
     }
 }
+
 if (!function_exists('can')) {
     function can($expression)
     {
@@ -359,6 +357,7 @@ if (!function_exists('can')) {
         return true;
     }
 }
+
 if (! function_exists('date_period')) {
     function date_period($start_date, $end_date, $timezone = 'UTC')
     {
@@ -423,10 +422,11 @@ if (! function_exists('date_period')) {
         ];
     }
 }
+
 if (!function_exists('slug')) {
     function slug($string, $separator = '-')
     {
-        if(empty($string)) {
+        if (empty($string)) {
             return null;
         }
         $slug = strtolower($string);
@@ -437,12 +437,14 @@ if (!function_exists('slug')) {
         return $slug;
     }
 }
+
 if (! function_exists('clipboard')) {
     function clipboard($instance)
     {
         return '<i class="ph ph-copy me-3 text-primary cursor-pointer" clipboard-text="' . $instance . '" onclick="copyToClipboard(event)"></i>';
     }
 }
+
 if (! function_exists('user_date')) {
     function user_date($instance)
     {
@@ -452,6 +454,7 @@ if (! function_exists('user_date')) {
         return date(session('date_format'), strtotime($instance));
     }
 }
+
 if (! function_exists('user_datetime')) {
     function user_datetime($instance)
     {
@@ -461,12 +464,14 @@ if (! function_exists('user_datetime')) {
         return date(session('datetime_format'), strtotime($instance));
     }
 }
+
 if (! function_exists('locale')) {
     function locale()
     {
         return request()->locale ?? config('app.locale');
     }
 }
+
 if (! function_exists('success')) {
     function success(array $data = [], string $message = '')
     {
@@ -486,6 +491,7 @@ if (! function_exists('errors')) {
         ], $errors));
     }
 }
+
 if (! function_exists('uploadFile')) {
     function uploadFile(UploadedFile $image, string $path, string $pathThumb = '', int $width = 200): string
     {
@@ -498,14 +504,12 @@ if (! function_exists('uploadFile')) {
             mkdir(storage_path('app/public/' . $pathThumb), 0777, true);
         }
 
-        // Store the file
         $stored = Storage::disk('public')->put($putFile, file_get_contents($image->getRealPath()));
         if (! $stored || ! Storage::disk('public')->exists($putFile)) {
             Log::error("Failed to store file or file missing after upload: $putFile");
             return '';
         }
 
-        // Create image if pathThumb is provided
         if (! empty($pathThumb)) {
             try {
                 $imageContent = Storage::disk('public')->get($putFile);
@@ -523,6 +527,16 @@ if (! function_exists('uploadFile')) {
                 Log::error("image creation failed for $putFile: " . $e->getMessage());
             }
         }
+        if (storage_path('app/public/' . $putFile)) {
+            chmod(storage_path('app/public/' . $putFile), 0644);
+        }
+        $putFile = Str::of($putFile)->rtrim('/');
+        if (trim(strtolower(substr($putFile, 0, 7))) === 'uploads') {
+            $putFile = 'storage/' . ltrim($putFile, '/');
+        }
+        if (trim(strtolower(substr($putFile, 0, 7))) === 'uploads') {
+            $putFile = 'storage/' . ltrim($putFile, '/');
+        }
 
         return $putFile;
     }
@@ -531,14 +545,12 @@ if (! function_exists('uploadFile')) {
 if (! function_exists('uploadBase64')) {
     function uploadBase64(string $base64, string $path, string $pathThumb = '', int $width = 200): string
     {
-        // Validate base64 string
         if (! preg_match('/^data:image\/[a-z]+;base64,/', $base64)) {
             $decoded = base64_decode($base64, true);
             if ($decoded === false) {
                 return '';
             }
         } else {
-            // Remove data URI prefix if present
             $base64  = preg_replace('/^data:image\/[a-z]+;base64,/', '', $base64);
             $decoded = base64_decode($base64, true);
             if ($decoded === false) {
@@ -554,13 +566,11 @@ if (! function_exists('uploadBase64')) {
         }
         $putFile = $path . '/' . $fileName;
 
-        // Store the file
         $stored = Storage::disk('public')->put($putFile, $decoded);
         if (! $stored) {
             return '';
         }
 
-        // Create image if pathThumb is provided
         if (! empty($pathThumb)) {
             $manager      = new ImageManager(new Driver());
             $imageContent = Storage::disk('public')->get($putFile);
@@ -568,33 +578,29 @@ if (! function_exists('uploadBase64')) {
             $image->scaleDown(width: $width)->save(storage_path('app/public/' . $pathThumb . '/' . $fileName));
         }
 
+        if (storage_path('app/public/' . $putFile)) {
+            chmod(storage_path('app/public/' . $putFile), 0644);
+        }
+        $putFile = Str::of($putFile)->rtrim('/');
+        if (trim(strtolower(substr($putFile, 0, 7))) === 'uploads') {
+            $putFile = 'storage/' . ltrim($putFile, '/');
+        }
+
         return $putFile;
     }
 }
 
 if (! function_exists('uploadImage')) {
-    /**
-     * Upload image from either base64 string or UploadedFile.
-     * Handles both uploaded files and base64 encoded images.
-     *
-     * @param string|UploadedFile $image Base64 string or UploadedFile instance
-     * @param string $path Storage path (e.g., 'products', 'blogs', 'teams')
-     * @param string $pathThumb Optional image path
-     * @param int $width image width
-     * @return string Path to stored image or empty string on failure
-     */
     function uploadImage($image, string $path, string $pathThumb = '', int $width = 200): string
     {
         if (empty($image)) {
             return '';
         }
 
-        // Handle UploadedFile instances
         if ($image instanceof UploadedFile) {
             return uploadFile($image, $path, $pathThumb, $width);
         }
 
-        // Handle base64 strings
         if (is_string($image)) {
             return uploadBase64($image, $path, $pathThumb, $width);
         }
@@ -604,24 +610,15 @@ if (! function_exists('uploadImage')) {
 }
 
 if (!function_exists('processGalleryImages')) {
-    /**
-     * Process gallery images array to convert base64 to file paths.
-     * Ensures only relative file paths are stored in the database.
-     *
-     * @param array $images Array of gallery items with 'url', 'alt', 'label' keys
-     * @param string $path Storage path (e.g., 'products/gallery', 'blogs/gallery')
-     * @return array Processed images with file paths instead of base64
-     */
     function processGalleryImages(array $images, string $path): array
     {
         return collect($images)->map(function ($image) use ($path) {
             $url = $image['url'] ?? null;
-            
+
             if (empty($url)) {
                 return null;
             }
 
-            // If it's already a file path (stored in DB), keep it
             if (!preg_match('/^data:image\//', $url)) {
                 return [
                     'url' => $url,
@@ -630,7 +627,6 @@ if (!function_exists('processGalleryImages')) {
                 ];
             }
 
-            // Convert base64 to file
             $filePath = uploadBase64($url, $path);
             if (empty($filePath)) {
                 return null;
@@ -646,27 +642,24 @@ if (!function_exists('processGalleryImages')) {
 }
 
 if (!function_exists('getFileSize')) {
-    /**
-     * Get file size in human readable format (bytes).
-     */
     function getFileSize($filePath): int
     {
         if (!$filePath) {
             return 0;
         }
-        
+
         try {
             if (file_exists(public_path($filePath))) {
                 return filesize(public_path($filePath));
             }
-            
+
             if (Storage::exists($filePath)) {
                 return Storage::size($filePath);
             }
         } catch (\Exception $e) {
             Log::warning("getFileSize: Could not get size for {$filePath}", ['error' => $e->getMessage()]);
         }
-        
+
         return 0;
     }
 }

@@ -14,6 +14,7 @@ class Navigation extends Model
     protected $fillable = [
         'parent_id',
         'url',
+        'slug',
         'icon',
         'sort',
         'created_by',

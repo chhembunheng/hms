@@ -37,10 +37,11 @@ class NavigationSeeder extends Seeder
             $navigationModel = Navigation::updateOrCreate(
                 [
                     'parent_id' => $parentId,
-                    'url' => $navigation['url'] ?? null,
+                    'slug' => $navigation['slug'] ?? null,
                 ],
                 [
                     'parent_id' => $parentId,
+                    'slug' => $navigation['slug'] ?? null,
                     'icon' => $navigation['icon'],
                     'url' => $navigation['url'] ?? null,
                     'sort' => $navigation['sort'],

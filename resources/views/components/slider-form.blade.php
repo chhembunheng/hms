@@ -1,19 +1,16 @@
-@props(['form' => null, 'locales' => []])
+@props(['form' => null, 'locales' => [], 'translations' => []])
 <div class="col-md-12">
     <x-form.checkbox :label="__('form.is_slider')" name="is_slider" value="1" :checked="old('is_slider', $form?->is_slider)" />
 </div>
-<!-- Slider Section -->
 <div id="slider-section" style="display: @if (old('is_slider', $form?->is_slider)) block @else none @endif;">
     <hr class="my-4">
     <h4 class="mb-3">{{ __('form.slider_content') }}</h4>
-    <!-- Slider Image -->
     <div class="row mb-4">
         <div class="col-md-6">
             <x-form.input :label="__('form.slider_image')" type="file" name="slider_image" accept="image/*" id="product-slider-image"
                 :initialPreview="$form?->slider_image ? asset($form->slider_image) : null" :initialCaption="$form?->slider_image ? basename($form->slider_image) : null" />
         </div>
         <div class="col-md-6">
-            <!-- Slider Translation Tabs -->
             <div class="mb-3 mt-4">
                 <ul class="nav nav-tabs" role="tablist">
                     @foreach ($locales as $locale => $language)

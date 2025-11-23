@@ -58,6 +58,30 @@ class Service extends Model
     {
         return $this->translations->where('locale', $locale)->first()?->description ?? '';
     }
+    /**
+     * Get the content for a specific locale.
+     */
+    public function getContent($locale = 'en')
+    {
+        return $this->translations->where('locale', $locale)->first()?->content ?? '';
+    }
+    // get route
+    public function getRoute()
+    {
+        return 'services';
+    }
+    // slider title
+    public function getSliderTitle($locale = 'en')
+    {
+        return $this->translations->where('locale', $locale)->first()?->slider_title ?? '';
+    }
+    /**
+     * Get the slider description for a specific locale.
+     */
+    public function getSliderDescription($locale = 'en')
+    {
+        return $this->translations->where('locale', $locale)->first()?->slider_description ?? '';
+    }
 
     /**
      * Get the slug for a specific locale.
