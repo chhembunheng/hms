@@ -65,23 +65,17 @@ class ServiceController extends Controller
                     ]);
 
                     if ($request->image) {
-                        $service->image = uploadImage($request->image, 'services');
+                        $service->image = uploadImage($request->image, 'uploads/services');
                         $service->save();
                     }
 
                     if ($request->slider_image) {
-                        $service->slider_image = uploadImage($request->slider_image, 'services/slider');
+                        $service->slider_image = uploadImage($request->slider_image, 'uploads/services/slider');
                         $service->save();
                     }
 
                     if ($request->has('images') && is_array($request->input('images'))) {
-                        $service->images = collect($request->input('images'))->map(function($image) {
-                            return [
-                                'url' => $image['url'] ?? null,
-                                'alt' => $image['alt'] ?? '',
-                                'label' => $image['label'] ?? '',
-                            ];
-                        })->toArray();
+                        $service->images = processGalleryImages($request->input('images'), 'uploads/services/gallery');
                         $service->save();
                     }
 
@@ -158,20 +152,14 @@ class ServiceController extends Controller
                 $form->is_slider = $request->boolean('is_slider');
                 $form->updated_by = auth()->id();
                 if ($request->image) {
-                    $form->image = uploadImage($request->image, 'services');
+                    $form->image = uploadImage($request->image, 'uploads/services');
                 }
                 if ($request->slider_image) {
-                    $form->slider_image = uploadImage($request->slider_image, 'services/slider');
+                    $form->slider_image = uploadImage($request->slider_image, 'uploads/services/slider');
                 }
 
                 if ($request->has('images') && is_array($request->input('images'))) {
-                    $form->images = collect($request->input('images'))->map(function($image) {
-                        return [
-                            'url' => $image['url'] ?? null,
-                            'alt' => $image['alt'] ?? '',
-                            'label' => $image['label'] ?? '',
-                        ];
-                    })->toArray();
+                    $form->images = processGalleryImages($request->input('images'), 'uploads/services/gallery');
                 }
 
                 $form->save();

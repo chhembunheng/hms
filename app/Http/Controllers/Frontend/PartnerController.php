@@ -59,7 +59,7 @@ class PartnerController extends Controller
                 ]);
 
                 if ($request->logo) {
-                    $partner->logo = uploadImage($request->logo, 'partners');
+                    $partner->logo = uploadImage($request->logo, 'uploads/partners');
                     $partner->save();
                 }
 
@@ -122,7 +122,7 @@ class PartnerController extends Controller
                 $form->updated_by = auth()->id();
 
                 if ($request->logo) {
-                    $form->logo = uploadImage($request->logo, 'partners');
+                    $form->logo = uploadImage($request->logo, 'uploads/partners');
                 }
 
                 $form->save();

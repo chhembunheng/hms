@@ -524,7 +524,7 @@ if (! function_exists('uploadFile')) {
             }
         }
 
-        return 'storage/' . $putFile;
+        return $putFile;
     }
 }
 
@@ -568,7 +568,7 @@ if (! function_exists('uploadBase64')) {
             $image->scaleDown(width: $width)->save(storage_path('app/public/' . $pathThumb . '/' . $fileName));
         }
 
-        return 'storage/' . $putFile;
+        return $putFile;
     }
 }
 
@@ -600,6 +600,48 @@ if (! function_exists('uploadImage')) {
         }
 
         return '';
+    }
+}
+
+if (!function_exists('processGalleryImages')) {
+    /**
+     * Process gallery images array to convert base64 to file paths.
+     * Ensures only relative file paths are stored in the database.
+     *
+     * @param array $images Array of gallery items with 'url', 'alt', 'label' keys
+     * @param string $path Storage path (e.g., 'products/gallery', 'blogs/gallery')
+     * @return array Processed images with file paths instead of base64
+     */
+    function processGalleryImages(array $images, string $path): array
+    {
+        return collect($images)->map(function ($image) use ($path) {
+            $url = $image['url'] ?? null;
+            
+            if (empty($url)) {
+                return null;
+            }
+
+            // If it's already a file path (stored in DB), keep it
+            if (!preg_match('/^data:image\//', $url)) {
+                return [
+                    'url' => $url,
+                    'alt' => $image['alt'] ?? '',
+                    'label' => $image['label'] ?? '',
+                ];
+            }
+
+            // Convert base64 to file
+            $filePath = uploadBase64($url, $path);
+            if (empty($filePath)) {
+                return null;
+            }
+
+            return [
+                'url' => $filePath,
+                'alt' => $image['alt'] ?? '',
+                'label' => $image['label'] ?? '',
+            ];
+        })->filter()->toArray();
     }
 }
 

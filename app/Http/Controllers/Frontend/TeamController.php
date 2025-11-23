@@ -75,7 +75,7 @@ class TeamController extends Controller
                 ]);
 
                 if ($request->photo) {
-                    $team->photo = uploadBase64($request->photo, 'teams');
+                    $team->photo = uploadBase64($request->photo, 'uploads/teams');
                     $team->save();
                 }
 
@@ -146,7 +146,7 @@ class TeamController extends Controller
                 $form->position_id = $request->input('position_id', null);
 
                 if($request->photo) {
-                    $form->photo = uploadBase64($request->photo, 'teams');
+                    $form->photo = uploadBase64($request->photo, 'uploads/teams');
                 }
                 $form->save();
 

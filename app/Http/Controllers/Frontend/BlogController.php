@@ -57,18 +57,12 @@ class BlogController extends Controller
                 ]);
 
                 if ($request->image) {
-                    $blog->image = uploadImage($request->image, 'blogs');
+                    $blog->image = uploadImage($request->image, 'uploads/blogs');
                     $blog->save();
                 }
 
                 if ($request->has('images') && is_array($request->input('images'))) {
-                    $blog->images = collect($request->input('images'))->map(function($image) {
-                        return [
-                            'url' => $image['url'] ?? null,
-                            'alt' => $image['alt'] ?? '',
-                            'label' => $image['label'] ?? '',
-                        ];
-                    })->toArray();
+                    $blog->images = processGalleryImages($request->input('images'), 'uploads/blogs/gallery');
                     $blog->save();
                 }
 
@@ -167,17 +161,11 @@ class BlogController extends Controller
                 $form->updated_by = auth()->id();
 
                 if ($request->image) {
-                    $form->image = uploadImage($request->image, 'blogs');
+                    $form->image = uploadImage($request->image, 'uploads/blogs');
                 }
 
                 if ($request->has('images') && is_array($request->input('images'))) {
-                    $form->images = collect($request->input('images'))->map(function($image) {
-                        return [
-                            'url' => $image['url'] ?? null,
-                            'alt' => $image['alt'] ?? '',
-                            'label' => $image['label'] ?? '',
-                        ];
-                    })->toArray();
+                    $form->images = processGalleryImages($request->input('images'), 'uploads/blogs/gallery');
                 }
 
                 $form->save();

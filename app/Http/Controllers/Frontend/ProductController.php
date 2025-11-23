@@ -79,23 +79,17 @@ class ProductController extends Controller
                     ]);
 
                     if ($request->image) {
-                        $product->image = uploadImage($request->image, 'products');
+                        $product->image = uploadImage($request->image, 'uploads/products');
                         $product->save();
                     }
 
                     if ($request->slider_image) {
-                        $product->slider_image = uploadImage($request->slider_image, 'products/slider');
+                        $product->slider_image = uploadImage($request->slider_image, 'uploads/products/slider');
                         $product->save();
                     }
 
                     if ($request->has('images') && is_array($request->input('images'))) {
-                        $product->images = collect($request->input('images'))->map(function($image) {
-                            return [
-                                'url' => $image['url'] ?? null,
-                                'alt' => $image['alt'] ?? '',
-                                'label' => $image['label'] ?? '',
-                            ];
-                        })->toArray();
+                        $product->images = processGalleryImages($request->input('images'), 'uploads/products/gallery');
                         $product->save();
                     }
 
@@ -179,21 +173,15 @@ class ProductController extends Controller
                     $form->updated_by = auth()->id();
 
                     if ($request->image) {
-                        $form->image = uploadImage($request->image, 'products');
+                        $form->image = uploadImage($request->image, 'uploads/products');
                     }
 
                     if ($request->slider_image) {
-                        $form->slider_image = uploadImage($request->slider_image, 'products/slider');
+                        $form->slider_image = uploadImage($request->slider_image, 'uploads/products/slider');
                     }
 
                     if ($request->has('images') && is_array($request->input('images'))) {
-                        $form->images = collect($request->input('images'))->map(function($image) {
-                            return [
-                                'url' => $image['url'] ?? null,
-                                'alt' => $image['alt'] ?? '',
-                                'label' => $image['label'] ?? '',
-                            ];
-                        })->toArray();
+                        $form->images = processGalleryImages($request->input('images'), 'uploads/products/gallery');
                     }
 
                     $form->save();
@@ -289,13 +277,12 @@ class ProductController extends Controller
                     $form->icon = $request->input('icon', null);
                     $form->is_slider = $request->boolean('is_slider');
                     $form->updated_by = auth()->id();
-
                     if ($request->image) {
-                        $form->image = uploadImage($request->image, 'products');
+                        $form->image = uploadImage($request->image, 'uploads/products');
                     }
 
                     if ($request->slider_image) {
-                        $form->slider_image = uploadImage($request->slider_image, 'products/slider');
+                        $form->slider_image = uploadImage($request->slider_image, 'uploads/products/slider');
                     }
 
                     $form->save();

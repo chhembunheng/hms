@@ -59,23 +59,16 @@ class IntegrationController extends Controller
                 ]);
 
                 if ($request->image) {
-                    $integration->image = uploadImage($request->image, 'integrations');
+                    $integration->image = uploadImage($request->image, 'uploads/integrations');
                     $integration->save();
                 }
 
                 if ($request->logo) {
-                    $integration->logo = uploadImage($request->logo, 'integrations/logos');
+                    $integration->logo = uploadImage($request->logo, 'uploads/integrations/logos');
                     $integration->save();
                 }
-
                 if ($request->has('images') && is_array($request->input('images'))) {
-                    $integration->images = collect($request->input('images'))->map(function($image) {
-                        return [
-                            'url' => $image['url'] ?? null,
-                            'alt' => $image['alt'] ?? '',
-                            'label' => $image['label'] ?? '',
-                        ];
-                    })->toArray();
+                    $integration->images = processGalleryImages($request->input('images'), 'uploads/integrations/gallery');
                     $integration->save();
                 }
 
@@ -150,21 +143,15 @@ class IntegrationController extends Controller
                 $form->updated_by = auth()->id();
 
                 if ($request->image) {
-                    $form->image = uploadImage($request->image, 'integrations');
+                    $form->image = uploadImage($request->image, 'uploads/integrations');
                 }
 
                 if ($request->logo) {
-                    $form->logo = uploadImage($request->logo, 'integrations/logos');
+                    $form->logo = uploadImage($request->logo, 'uploads/integrations/logos');
                 }
 
                 if ($request->has('images') && is_array($request->input('images'))) {
-                    $form->images = collect($request->input('images'))->map(function($image) {
-                        return [
-                            'url' => $image['url'] ?? null,
-                            'alt' => $image['alt'] ?? '',
-                            'label' => $image['label'] ?? '',
-                        ];
-                    })->toArray();
+                    $form->images = processGalleryImages($request->input('images'), 'uploads/integrations/gallery');
                 }
 
                 $form->save();

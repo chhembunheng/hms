@@ -57,7 +57,7 @@ class ClientController extends Controller
                 ]);
 
                 if ($request->image) {
-                    $client->image = uploadImage($request->image, 'clients');
+                    $client->image = uploadImage($request->image, 'uploads/clients');
                     $client->save();
                 }
 
@@ -118,7 +118,7 @@ class ClientController extends Controller
                 $form->updated_by = auth()->id();
 
                 if ($request->image) {
-                    $form->image = uploadImage($request->image, 'clients');
+                    $form->image = uploadImage($request->image, 'uploads/clients');
                 }
 
                 $form->save();
