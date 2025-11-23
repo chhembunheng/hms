@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('locale', 10);
             $table->string('title');
             $table->text('description')->nullable();
+            $table->longText('content')->nullable();
             $table->author();
             $table->unique(['choosing_id','locale']);
         });

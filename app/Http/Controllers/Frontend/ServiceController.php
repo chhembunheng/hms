@@ -41,7 +41,7 @@ class ServiceController extends Controller
                 foreach ($this->locales->keys() as $locale) {
                     if ($locale === config('app.locale')) {
                         $rules["translations.{$locale}.name"] = 'required|string|max:255';
-                        $rules["translations.{$locale}.short_description"] = 'nullable|string';
+                        $rules["translations.{$locale}.content"] = 'nullable|string';
                         $rules["translations.{$locale}.description"] = 'nullable|string';
                     }
                 }
@@ -75,7 +75,7 @@ class ServiceController extends Controller
                             'service_id' => $service->id,
                             'locale' => $locale,
                             'name' => $trans['name'],
-                            'short_description' => $trans['short_description'] ?? null,
+                            'content' => $trans['content'] ?? null,
                             'description' => $trans['description'] ?? null,
                             'content' => $trans['content'] ?? null,
                             'created_by' => auth()->id(),
@@ -108,7 +108,7 @@ class ServiceController extends Controller
         foreach ($form->translations as $translation) {
             $translations[$translation->locale] = [
                 'name' => $translation->name,
-                'short_description' => $translation->short_description,
+                'content' => $translation->content,
                 'description' => $translation->description,
                 'content' => $translation->content,
             ];
@@ -123,7 +123,7 @@ class ServiceController extends Controller
                 ];
                 foreach ($this->locales->keys() as $locale) {
                     $rules["translations.{$locale}.name"] = 'required|string|max:255';
-                    $rules["translations.{$locale}.short_description"] = 'nullable|string';
+                    $rules["translations.{$locale}.content"] = 'nullable|string';
                     $rules["translations.{$locale}.description"] = 'nullable|string';
                 }
 
@@ -146,7 +146,7 @@ class ServiceController extends Controller
                         ['service_id' => $form->id, 'locale' => $locale],
                         [
                             'name' => $trans['name'],
-                            'short_description' => $trans['short_description'] ?? null,
+                            'content' => $trans['content'] ?? null,
                             'description' => $trans['description'] ?? null,
                             'content' => $trans['content'] ?? null,
                             'updated_by' => auth()->id(),

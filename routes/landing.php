@@ -89,7 +89,7 @@ Route::group([
         // DETAIL PAGE
         $area = [
             'title'    => $integration->name,
-            'subtitle' => $integration->short_description ?? '',
+            'subtitle' => $integration->content ?? '',
         ];
 
         $meta = $integration->meta ?? new stdClass();
@@ -191,7 +191,7 @@ Route::group([
         // DETAIL PAGE
         $area = [
             'title'    => $article->title,
-            'subtitle' => $article->short_description ?? '',
+            'subtitle' => $article->content ?? '',
         ];
 
         return view('welcome', compact('articles', 'area', 'talk', 'article'));
@@ -219,7 +219,7 @@ Route::group([
         // DETAIL PAGE
         $area = [
             'title'    => $service->name,
-            'subtitle' => $service->short_description ?? '',
+            'subtitle' => $service->content ?? '',
         ];
 
         $meta = $service->meta ?? new stdClass();
@@ -249,7 +249,7 @@ Route::group([
         // DETAIL PAGE
         $area = [
             'title'    => $product->name,
-            'subtitle' => $product->short_description ?? '',
+            'subtitle' => $product->content ?? '',
         ];
 
         $meta    = $product->meta ?? new stdClass();

@@ -53,7 +53,7 @@ class Career extends Model
 
     public function getShortDescription($locale = null)
     {
-        return $this->getTranslation($locale)?->short_description;
+        return $this->getTranslation($locale)?->content;
     }
 
     public function getDescription($locale = null)

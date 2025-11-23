@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('bio')->nullable();
             $table->string('position_name')->nullable();
+            $table->text('description')->nullable();
+            $table->longText('content')->nullable();
             $table->author();
             $table->unique(['team_id','locale']);
 

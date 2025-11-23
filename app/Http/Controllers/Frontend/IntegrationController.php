@@ -40,7 +40,7 @@ class IntegrationController extends Controller
                 foreach ($this->locales->keys() as $locale) {
                     $rules["translations.{$locale}.name"] = 'required|string|max:255';
                     $rules["translations.{$locale}.slug"] = 'required|string|unique:integration_translations,slug';
-                    $rules["translations.{$locale}.short_description"] = 'nullable|string';
+                    $rules["translations.{$locale}.content"] = 'nullable|string';
                     $rules["translations.{$locale}.description"] = 'nullable|string';
                 }
 
@@ -68,7 +68,7 @@ class IntegrationController extends Controller
                         'locale' => $locale,
                         'name' => $trans['name'],
                         'slug' => $trans['slug'],
-                        'short_description' => $trans['short_description'] ?? null,
+                        'content' => $trans['content'] ?? null,
                         'description' => $trans['description'] ?? null,
                         'created_by' => auth()->id(),
                         'updated_by' => auth()->id(),
@@ -103,7 +103,7 @@ class IntegrationController extends Controller
             $translations[$translation->locale] = [
                 'name' => $translation->name,
                 'slug' => $translation->slug,
-                'short_description' => $translation->short_description,
+                'content' => $translation->content,
                 'description' => $translation->description,
             ];
         }
@@ -118,7 +118,7 @@ class IntegrationController extends Controller
                 foreach ($this->locales->keys() as $locale) {
                     $rules["translations.{$locale}.name"] = 'required|string|max:255';
                     $rules["translations.{$locale}.slug"] = 'required|string|unique:integration_translations,slug,' . $form->id . ',integration_id';
-                    $rules["translations.{$locale}.short_description"] = 'nullable|string';
+                    $rules["translations.{$locale}.content"] = 'nullable|string';
                     $rules["translations.{$locale}.description"] = 'nullable|string';
                 }
 
@@ -143,7 +143,7 @@ class IntegrationController extends Controller
                         [
                             'name' => $trans['name'],
                             'slug' => $trans['slug'],
-                            'short_description' => $trans['short_description'] ?? null,
+                            'content' => $trans['content'] ?? null,
                             'description' => $trans['description'] ?? null,
                             'updated_by' => auth()->id(),
                         ]

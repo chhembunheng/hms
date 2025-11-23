@@ -61,10 +61,10 @@
                                 )" required lang="{{ $locale }}"/>
                         </div>
                         <div class="col-md-8 offset-md-2">
-                            <x-form.textarea :label="__('form.short_description')"
-                                name="translations[{{ $locale }}][short_description]" :value="old(
-                                    'translations.' . $locale . '.short_description',
-                                    $translations[$locale]['short_description'] ?? '',
+                            <x-form.textarea :label="__('form.content')"
+                                name="translations[{{ $locale }}][content]" :value="old(
+                                    'translations.' . $locale . '.content',
+                                    $translations[$locale]['content'] ?? '',
                                 )"
                                 rows="2" lang="{{ $locale }}"/>
                         </div>

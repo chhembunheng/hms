@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('career_id')->constrained('careers')->cascadeOnDelete();
             $table->string('locale', 10);
             $table->string('title');
-            $table->text('short_description')->nullable();
             $table->text('description')->nullable();
+            $table->longText('content')->nullable();
             $table->author();
             $table->unique(['career_id','locale']);
         });

@@ -16,8 +16,7 @@ return new class extends Migration
             $table->foreignId('service_id')->constrained('services')->cascadeOnDelete();
             $table->string('locale', 10);
             $table->string('name');
-            $table->text('short_description')->nullable();
-            $table->longText('description')->nullable();
+            $table->text('description')->nullable();
             $table->longText('content')->nullable();
             $table->author();
             

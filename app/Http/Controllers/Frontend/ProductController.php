@@ -55,7 +55,7 @@ class ProductController extends Controller
 
                 foreach ($this->locales->keys() as $locale) {
                     $rules["translations.{$locale}.name"] = 'required|string|max:255';
-                    $rules["translations.{$locale}.short_description"] = 'nullable|string';
+                    $rules["translations.{$locale}.content"] = 'nullable|string';
                     $rules["translations.{$locale}.description"] = 'nullable|string';
                 }
 
@@ -81,14 +81,15 @@ class ProductController extends Controller
 
                     $product->categories()->sync($request->input('category_id', []));
                     $product->tags()->sync($request->input('tag_id', []));
-
+                    $dataTranslation = [];
                     foreach ($this->locales->keys() as $locale) {
-                        $trans = $request->input("translations.{$locale}");
+                        $trans = $request->input("translations[{$locale}]");
+                        dd( $trans);
                         ProductTranslation::create([
                             'product_id' => $product->id,
                             'locale' => $locale,
                             'name' => $trans['name'],
-                            'short_description' => $trans['short_description'] ?? null,
+                            'content' => $trans['content'] ?? null,
                             'description' => $trans['description'] ?? null,
                             'created_by' => auth()->id(),
                             'updated_by' => auth()->id(),
@@ -123,7 +124,7 @@ class ProductController extends Controller
         foreach ($form->translations as $translation) {
             $translations[$translation->locale] = [
                 'name' => $translation->name,
-                'short_description' => $translation->short_description,
+                'content' => $translation->content,
                 'description' => $translation->description,
             ];
         }
@@ -138,7 +139,7 @@ class ProductController extends Controller
 
                 foreach ($this->locales->keys() as $locale) {
                     $rules["translations.{$locale}.name"] = 'required|string|max:255';
-                    $rules["translations.{$locale}.short_description"] = 'nullable|string';
+                    $rules["translations.{$locale}.content"] = 'nullable|string';
                     $rules["translations.{$locale}.description"] = 'nullable|string';
                 }
 
@@ -175,18 +176,18 @@ class ProductController extends Controller
                     $form->tags()->sync($request->input('tag_id', []));
                     
 
+                    $translations = [];
                     foreach ($this->locales->keys() as $locale) {
                         $trans = $request->input("translations.{$locale}");
-                        ProductTranslation::updateOrCreate(
-                            ['product_id' => $form->id, 'locale' => $locale],
-                            [
-                                'name' => $trans['name'],
-                                'short_description' => $trans['short_description'] ?? null,
-                                'description' => $trans['description'] ?? null,
-                                'content' => $trans['content'] ?? null,
-                                'updated_by' => auth()->id(),
-                            ]
-                        );
+                        $translations[] = [
+                            'product_id' => $form->id,
+                            'name' => $trans['name'],
+                            'content' => $trans['content'] ?? null,
+                            'description' => $trans['description'] ?? null,
+                            'content' => $trans['content'] ?? null,
+                            'locale' => $locale,
+                            'updated_by' => auth()->id(),
+                        ];
                         $linked->translations()->updateOrCreate(
                             ['locale' => $locale],
                             [
@@ -196,6 +197,8 @@ class ProductController extends Controller
                             ]
                         );
                     }
+                    ProductTranslation::upsert($translations, ['product_id', 'locale'], ['name', 'content', 'description', 'content', 'updated_by']);
+                    dd($translations);
                     Artisan::call('cache:clear');
                 });
                 return success(message: 'Product updated successfully');
@@ -216,7 +219,7 @@ class ProductController extends Controller
         foreach ($form->translations as $translation) {
             $translations[$translation->locale] = [
                 'name' => $translation->name,
-                'short_description' => $translation->short_description,
+                'content' => $translation->content,
                 'description' => $translation->description,
             ];
         }
@@ -231,7 +234,7 @@ class ProductController extends Controller
 
                 foreach ($this->locales->keys() as $locale) {
                     $rules["translations.{$locale}.name"] = 'required|string|max:255';
-                    $rules["translations.{$locale}.short_description"] = 'nullable|string';
+                    $rules["translations.{$locale}.content"] = 'nullable|string';
                     $rules["translations.{$locale}.description"] = 'nullable|string';
                 }
 
@@ -261,7 +264,7 @@ class ProductController extends Controller
                             ['product_id' => $form->id, 'locale' => $locale],
                             [
                                 'name' => $trans['name'],
-                                'short_description' => $trans['short_description'] ?? null,
+                                'content' => $trans['content'] ?? null,
                                 'description' => $trans['description'] ?? null,
                                 'updated_by' => auth()->id(),
                             ]

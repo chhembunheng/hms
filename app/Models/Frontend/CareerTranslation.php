@@ -12,7 +12,7 @@ class CareerTranslation extends Model
         'career_id',
         'locale',
         'title',
-        'short_description',
+        'content',
         'description',
         'created_by',
         'updated_by',

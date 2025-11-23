@@ -126,7 +126,6 @@ class DashboardController extends Controller
                 return [
                     'id' => $service->id,
                     'name' => $translation?->title ?? 'N/A',
-                    'description' => $translation?->short_description ?? '',
                     'icon' => $service->icon,
                     'created_at' => $service->created_at->format('M d, Y H:i'),
                     'created_at_ago' => $service->created_at->diffForHumans(),

@@ -7,7 +7,7 @@ return [
     'slug' => 'Slug',
     'sku' => 'SKU',
     'description' => 'Description',
-    'short_description' => 'Short Description',
+    'content' => 'Short Description',
     'content' => 'Content',
     'body' => 'Body',
     'excerpt' => 'Excerpt',

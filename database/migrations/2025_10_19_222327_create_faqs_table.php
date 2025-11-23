@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('faqs', function (Blueprint $table) {
             $table->id();
             $table->string('slug')->unique();
+            $table->foreignId('parent_id')->nullable()->constrained('faqs')->nullOnDelete();
             $table->boolean('is_published')->default(true);
             $table->unsignedInteger('sort')->default(0);
             $table->author();

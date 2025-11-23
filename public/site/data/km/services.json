@@ -5,7 +5,6 @@
     "slug": "it-consulting",
     "icon": "fa-regular fa-solid fa-lightbulb",
     "image": "site/assets/img/services/it-consulting.png",
-    "short_description": "សេវាកម្មប្រឹក្សា IT ដោយអ្នកជំនាញ ដើម្បីអោយយុទ្ធសាស្ត្រ​បច្ចេកវិទ្យាសមស្របនឹងគោលដៅអាជីវកម្ម។",
     "description": "យើងផ្តល់សេវាប្រឹក្សា IT ដល់អាជីវកម្ម ដើម្បីគ្រោង ទៅរចនា និងអនុវត្តយុទ្ធសាស្ត្របច្ចេកវិទ្យាដែលសមស្របនឹងគោលដៅអង្គការ។",
     "content": "<article id=\"it-consulting\" class=\"service-card\"><header class=\"service-header\"><h3>ការផ្តល់យោបល់ផ្នែក IT</h3><p class=\"service-tagline\">សេវាប្រឹក្សា IT ដោយអ្នកជំនាញ ដើម្បីអោយយុទ្ធសាស្ត្របច្ចេកវិទ្យាសមស្របនឹងគោលដៅអាជីវកម្ម។</p></header><div class=\"service-body\"><p>ជាដៃគូជាមួយទីប្រឹក្សាជាន់ខ្ពស់របស់យើង ដើម្បីវាយតម្លៃបច្ចេកវិទ្យាបច្ចុប្បន្ន រកឃើញចន្លោះខ្វែងខាត ហើយបង្កើតផែនទីដំណើរការជាក់ស្តែង ដែលគាំទ្រការលូតលាស់ សុវត្ថិភាព និងប្រសិទ្ធភាពថ្លៃដើម។ ចាប់ពីយុទ្ធសាស្ត្ររហូតដល់ការអនុវត្ត យើងណែនាំអ្នកក្នុងការសម្រេចចិត្តស្ថាបត្យកម្ម ការជ្រើសរើសវិនដ័រ និងការគ្រប់គ្រងការផ្លាស់ប្តូរ ដើម្បីធានាលទ្ធផលដែលវាស់វែងបាន។</p><ul class=\"service-features\"><li>ការវាយតម្លៃបច្ចេកវិទ្យា និងពិនិត្យកម្រិតប зрелភាព</li><li>ផែនទីផ្លូវ IT និងការធ្វើបញ្ជីថវិកា</li><li>ស្ថាបត្យកម្មដំណោះស្រាយ និងការជ្រើសរើសវិនដ័រ</li><li>ការសម្របសម្រួលគោលនយោបាយធ្វើការគ្រប់គ្រង ការហានិភ័យ និងការអនុលោមតាម</li><li>ការគ្រប់គ្រងការផ្លាស់ប្តូរ និងផែនការការទទួលយកប្រើប្រាស់</li></ul></div></article>",
     "keys": [
@@ -34,7 +33,6 @@
     "slug": "networking-solutions",
     "icon": "fa-solid fa-network-wired",
     "image": "site/assets/img/services/networking-solutions.png",
-    "short_description": "ដំណោះស្រាយបណ្តាញពេញលេញសម្រាប់អាជីវកម្មគ្រប់ទំហំ។",
     "description": "ចាប់ពី Wi-Fi សុវត្ថិភាពរហូតដល់ LAN/WAN កម្រិតសហគ្រាស យើងរចនា និងដំឡើងបណ្តាញដែលរក្សាអាជីវកម្មរបស់អ្នកឲ្យភ្ជាប់គ្នា។",
     "content": "<article id=\"networking-solutions\" class=\"service-card\"><header class=\"service-header\"><h3>ដំណោះស្រាយបណ្តាញ</h3><p class=\"service-tagline\">ដំណោះស្រាយបណ្តាញពេញលេញសម្រាប់អាជីវកម្មគ្រប់ទំហំ។</p></header><div class=\"service-body\"><p>យើងគ្រោង ដំឡើង និងគ្រប់គ្រងបណ្តាញមានសុវត្ថិភាព និងប្រសិទ្ធភាពខ្ពស់ — ទាំងខ្សែ និងគ្មានខ្សែ — ដែលអាចពង្រីកតាមការលូតលាស់អាជីវកម្មរបស់អ្នក។ ការរចនារបស់យើងផ្តល់អាទិភាពដល់ uptime ការមានភាពមើលឃើញ (visibility) និងគោលការណ៍ Zero Trust ដើម្បីការពារគណនីអ្នកប្រើប្រាស់ និងទិន្នន័យ នៅទាំងសាខាផ្សេងៗ និងពេលធ្វើការពីចម្ងាយ។</p><ul class=\"service-features\"><li>ការរចនា និងដំណើរការ LAN/WAN</li><li>ការធ្វើផែនទី និងស្ទង់ពណ៌ Wi-Fi សុវត្ថិភាព (802.11ax/6/6E)</li><li>SD-WAN, VPN និងការចូលពីចម្ងាយ</li><li>ការបែងចែកបណ្តាញ និងគោលការណ៍ Zero Trust</li><li>ការត្រួតពិនិត្យ ស្គាល់ព្រមាន និងកែលំអប្រសិទ្ធភាព</li></ul></div></article>",
     "keys": [
@@ -63,7 +61,6 @@
     "slug": "cybersecurity",
     "icon": "fa-solid fa-shield-halved",
     "image": "site/assets/img/services/cybersecurity.png",
-    "short_description": "សេវាសន្តិសុខស៊ីបឺរពេញលេញ ដើម្បីការពារអាជីវកម្មរបស់អ្នក។",
     "description": "សេវាសន្តិសុខស៊ីបឺររបស់យើង រួមមានការវាយតម្លៃចន្លោះងាយរងគ្រោះ firewall ការការពារឧបករណ៍ និងការត្រួតពិនិត្យ 24/7។",
     "content": "<article id=\"cybersecurity\" class=\"service-card\"><header class=\"service-header\"><h3>សន្តិសុខស៊ីបឺរ</h3><p class=\"service-tagline\">សេវាសន្តិសុខស៊ីបឺរពេញលេញ ដើម្បីការពារអាជីវកម្មរបស់អ្នក។</p></header><div class=\"service-body\"><p>ការពារអង្គការរបស់អ្នកជាស្រទាប់ៗ តាមមនុស្ស ដំណើរការ និងបច្ចេកវិទ្យា។ យើងជួយស្វែងរក និងជួសជុលចន្លោះងាយរងគ្រោះ ពង្រឹងការកំណត់រចនាសម្ព័ន្ធ (hardening) ហើយរកឃើញការគំរាមកំហែងពេលវេលាពិតតាមរយៈការត្រួតពិនិត្យ និងឆ្លើយតបជាប់ៗគ្នា។</p><ul class=\"service-features\"><li>ការវាយតម្លៃ និងការកែប្រែចន្លោះងាយរងគ្រោះ</li><li>Next-gen firewall និង secure web gateway</li><li>ការការពារឧបករណ៍បញ្ចប់ (EDR/XDR)</li><li>SOC 24/7 ការត្រួតពិនិត្យ និងឆ្លើយតបទន្ទឹមព្រឹត្តិការណ៍</li><li>ការបណ្តុះបណ្តាលការយល់ដឹងសន្តិសុខ និងតេស្តបន្លំនៅតាមអ៊ីមែល (phishing)</li></ul></div></article>",
     "keys": [
@@ -92,7 +89,6 @@
     "slug": "cloud-solutions",
     "icon": "fa-solid fa-cloud",
     "image": "site/assets/img/services/cloud-solutions.png",
-    "short_description": "ដំណោះស្រាយ Cloud ដើម្បីបង្កើនភាពរហ័សរហួន និងសមត្ថភាពពង្រីកអាជីវកម្ម។",
     "description": "យើងជួយអាជីវកម្មប្ដូរទៅ Cloud ជាមួយ Microsoft 365, Google Workspace, AWS និង Azure ដោយធានាភាពអាចពង្រីក និងសុវត្ថិភាព។",
     "content": "<article id=\"cloud-solutions\" class=\"service-card\"><header class=\"service-header\"><h3>ដំណោះស្រាយ Cloud</h3><p class=\"service-tagline\">ដំណោះស្រាយ Cloud ដើម្បីបង្កើនភាពរហ័សរហួន និងសមត្ថភាពពង្រីកអាជីវកម្ម។</p></header><div class=\"service-body\"><p>បច្ចុប្បន្នភាពកម្រិតប្រតិបត្តិការ (modernize workloads) និងផ្តល់ឱ្យក្រុមរបស់អ្នកនូវម៉ូឌែល Cloud ត្រឹមត្រូវ — សាធារណៈ ឯកជន ឬ Hybrid។ យើងគ្រប់គ្រងការវាយតម្លៃ ការផ្លាស់ប្តូរ (migration) និងការកែលំអបន្តិចម្តងៗ លើ Microsoft 365, Google Workspace, AWS និង Azure ជាមួយសុវត្ថិភាពបញ្ចូលជាផ្នែកស្នូល។</p><ul class=\"service-features\"><li>ការវាយតម្លៃភាពរួចរាល់សម្រាប់ Cloud និងថ្លៃដើមសរុប (TCO)</li><li>ការផ្លាស់ប្តូរ (អ៊ីមែល ឯកសារ ម៉ាស៊ីនមេ អាប់ផ្លីខេសិន)</li><li>ការបើកដំណើរការ Microsoft 365 និង Google Workspace</li><li>ស្ថាបត្យកម្ម AWS/Azure និងការកែលំអថ្លៃដើម</li><li>អត្តសញ្ញាណ ការចូលប្រើ និងការបម្រុងទិន្នន័យសម្រាប់ Cloud</li></ul></div></article>",
     "keys": [
@@ -121,7 +117,6 @@
     "slug": "data-backup-recovery",
     "icon": "fa-solid fa-database",
     "image": "site/assets/img/services/data-backup-recovery.png",
-    "short_description": "ដំណោះស្រាយបម្រុងទុក និងស្ដារទិន្នន័យ ដើម្បីការពារអាជីវកម្មរបស់អ្នក។",
     "description": "យើងអនុវត្តយុទ្ធសាស្ត្របម្រុងទុកទិន្នន័យ និងដំណោះស្រាយសង្គ្រោះក្រោយគ្រោះមហន្តរាយ (disaster recovery) ដើម្បីរក្សាទិន្នន័យសំខាន់របស់អ្នកឲ្យមានសុវត្ថិភាព និងអាចស្ដារបានយ៉ាងលឿន។",
     "content": "<article id=\"data-backup-recovery\" class=\"service-card\"><header class=\"service-header\"><h3>ការបម្រុងទុក &amp; ការស្ដារឡើងវិញនៃទិន្នន័យ</h3><p class=\"service-tagline\">ដំណោះស្រាយបម្រុងទុក និងស្ដារទិន្នន័យ ដើម្បីការពារអាជីវកម្មរបស់អ្នក។</p></header><div class=\"service-body\"><p>ការពារប្រព័ន្ធសំខាន់ៗរបស់អ្នកជាមួយការបម្រុងទុកដែលទុកចិត្តបាន និងបានសាកល្បងពិត ព្រមទាំងផែនការសង្គ្រោះក្រោយគ្រោះមហន្តរាយ។ យើងរចនាគោលការណ៍ ប៉ារ៉ាម៉ែត្រ retention ដោយអូតូម៉ាត និងធ្វើតេស្តស្ដារឡើងវិញជាប្រចាំ ដូច្នេះអ្នកអាចស្ដារឡើងវិញបានយ៉ាងលឿន បន្ទាប់ពីអរិភាព ឬវីរុសរំលោភទិន្នន័យ (ransomware)।</p><ul class=\"service-features\"><li>យុទ្ធសាស្ត្រ backup 3-2-1 និងទិន្នន័យមិនអាចកែប្រែបាន (immutability)</li><li>ការបម្រុងទុកជារូបភាពសរុប (image-based) និងកម្រិតឯកសារ (file-level)</li><li>ផែនការ DR គោលដៅ RPO/RTO និង runbook ច្បាស់លាស់</li><li>ទុកទិន្នន័យនៅ Cloud, នៅក្នុងស្ថានីយ៍ផ្ទាល់ (on-prem) ឬ Hybrid</li><li>ការធ្វើតេស្តស្ដារឡើងវិញ និងរបាយការណ៍ជាប្រចាំ</li></ul></div></article>",
     "keys": [
@@ -150,7 +145,6 @@
     "slug": "helpdesk-support",
     "icon": "fa-solid fa-headset",
     "image": "site/assets/img/services/helpdesk-support.png",
-    "short_description": "សេវា Helpdesk 24/7 ជាមួយពេលឆ្លើយតបផ្អែកលើ SLA។",
     "description": "ក្រុមគាំទ្ររបស់យើងផ្តល់សេវា Helpdesk 24/7 ជាមួយពេលឆ្លើយតបផ្អែកលើ SLA ដើម្បីដោះស្រាយបញ្ហាបច្ចេកទេសយ៉ាងលឿន។",
     "content": "<article id=\"helpdesk-support\" class=\"service-card\"><header class=\"service-header\"><h3>Helpdesk &amp; គាំទ្រ​បច្ចេកទេស</h3><p class=\"service-tagline\">សេវា Helpdesk 24/7 ជាមួយពេលឆ្លើយតបផ្អែកលើ SLA។</p></header><div class=\"service-body\"><p>ផ្តល់ជំនួយឲ្យអ្នកប្រើប្រាស់របស់អ្នកបានលឿន រួសរាយ និងជាបន្តបន្ទាប់។ យើងផ្តល់សេវា Helpdesk ពហុឆានែល 24/7 ជាមួយ SLA ច្បាស់លាស់ ការគ្រប់គ្រងឧបករណ៍ជាមុនមួយជំហាន និងរបាយការណ៍លម្អិត ដើម្បីរក្សាឲ្យក្រុមរបស់អ្នកមានផលិតភាព។</p><ul class=\"service-features\"><li>គាំទ្រ 24/7 ពហុឆានែល (អ៊ីមែល, ចាត់, ទូរស័ព្ទ)</li><li>ពេលឆ្លើយតប និងបណ្តើរ escalation ផ្អែកលើ SLA</li><li>ការគ្រប់គ្រងឧបករណ៍បញ្ចប់ និងការដាក់បច្ចុប្បន្នភាពពិសេស (patching)</li><li>មូលដ្ឋានចំណេះដឹង (knowledge base) និងទ្វារបម្រើ self-service</li><li>របាយការណ៍ប្រចាំខែ និងផែនការកែលម្អបន្ត</li></ul></div></article>",
     "keys": [

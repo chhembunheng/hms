@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('search_index', function (Blueprint $table) {
             $table->id();
-            $table->string('searchable_type');
-            $table->unsignedBigInteger('searchable_id');
+            $table->nullableMorphs('model');
             $table->string('locale', 10)->default('en');
             $table->string('title');
-            $table->text('excerpt')->nullable();
             $table->text('keywords')->nullable();
+            $table->text('description')->nullable();
+            $table->longText('content')->nullable();
             $table->string('url')->nullable();
             $table->author();
 

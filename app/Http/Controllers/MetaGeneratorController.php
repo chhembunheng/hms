@@ -95,11 +95,24 @@ class MetaGeneratorController extends Controller
 
             $text = data_get($resp->json(), 'choices.0.message.content', '');
 
+            $text = preg_replace('/```(?:json)?/i', '', $text);
+            $text = preg_replace('/\x{FEFF}|\x{200B}|\x{200C}|\x{200D}|\x{2060}/u', '', $text);
+            $text = str_replace(['“', '”', '‘', '’'], ['"', '"', "'", "'"], $text);
+            $text = preg_replace('/,\s*(\]|\})/', '$1', $text);
+            $text = trim($text);
+
             $json = json_decode($text, true);
 
             if (json_last_error() !== JSON_ERROR_NONE) {
-                return errors(message: 'Model did not return valid JSON.', errors: [$text]);
+                return errors(
+                    message: 'Model did not return valid JSON.',
+                    errors: [
+                        'error' => json_last_error_msg(),
+                        'raw'   => $text
+                    ]
+                );
             }
+
 
             return success(data: ['data' => $json], message: 'Metadata generated successfully.');
         } catch (\Exception $e) {

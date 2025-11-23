@@ -70,7 +70,7 @@ class Product extends Model
 
     public function getShortDescription($locale = null)
     {
-        return $this->getTranslation($locale)?->short_description ?? null;
+        return $this->getTranslation($locale)?->content ?? null;
     }
 
     public function categories()

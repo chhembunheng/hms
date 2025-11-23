@@ -53,7 +53,7 @@
                             <x-form.input @class(['content-seo' => $locale === config('app.locale')]) :label="__('form.title')" name="translations[{{ $locale }}][title]" :value="old('translations.' . $locale . '.title', $translations[$locale]['title'] ?? '')" required />
                         </div>
                         <div class="col-md-8 offset-md-2">
-                            <x-form.textarea :label="__('form.short_description')" name="translations[{{ $locale }}][short_description]" :value="old('translations.' . $locale . '.short_description', $translations[$locale]['short_description'] ?? '')" rows="2" />
+                            <x-form.textarea :label="__('form.content')" name="translations[{{ $locale }}][content]" :value="old('translations.' . $locale . '.content', $translations[$locale]['content'] ?? '')" rows="2" />
                         </div>
                         <div class="col-md-8 offset-md-2">
                             <x-form.textarea :label="__('form.description')" name="translations[{{ $locale }}][description]" :value="old('translations.' . $locale . '.description', $translations[$locale]['description'] ?? '')" rows="5" class="editor" />

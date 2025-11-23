@@ -21,7 +21,7 @@
                             <i class="{{ $service->icon }}" aria-hidden="true"></i>
                         </div>
                         <h3>{{ $service->name }}</h3>
-                        <p>{!! $service->short_description ?? '' !!}</p>
+                        <p>{!! $service->content ?? '' !!}</p>
                         <div class="services-btn-link">
                             <a href="{{ Route::has('services') ? route('services', ['locale' => app()->getLocale(), 'slug' => $service->slug]) : '#' }}" class="services-link">
                                 {{ __('global.read_more') }}

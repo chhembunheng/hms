@@ -7,7 +7,7 @@ return [
     'slug' => 'Slug',
     'sku' => 'លេខកូដ (SKU)',
     'description' => 'ការពិពណ៌នា',
-    'short_description' => 'ការពិពណ៌នាខ្លី',
+    'content' => 'ការពិពណ៌នាខ្លី',
     'content' => 'ខ្លឹមសារ',
     'body' => 'ដេីមាង',
     'excerpt' => 'ឯកសារដក',

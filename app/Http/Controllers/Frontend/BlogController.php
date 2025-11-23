@@ -40,7 +40,7 @@ class BlogController extends Controller
                 ];
                 foreach ($this->locales->keys() as $locale) {
                     $rules["translations.{$locale}.title"] = 'required|string|max:255';
-                    $rules["translations.{$locale}.short_description"] = 'nullable|string';
+                    $rules["translations.{$locale}.content"] = 'nullable|string';
                     $rules["translations.{$locale}.description"] = 'nullable|string';
                 }
 
@@ -67,7 +67,7 @@ class BlogController extends Controller
                         'blog_id' => $blog->id,
                         'locale' => $locale,
                         'title' => $trans['title'],
-                        'short_description' => $trans['short_description'] ?? null,
+                        'content' => $trans['content'] ?? null,
                         'description' => $trans['description'] ?? null,
                         'created_by' => auth()->id(),
                         'updated_by' => auth()->id(),
@@ -120,7 +120,7 @@ class BlogController extends Controller
         foreach ($form->translations as $translation) {
             $translations[$translation->locale] = [
                 'title' => $translation->title,
-                'short_description' => $translation->short_description,
+                'content' => $translation->content,
                 'description' => $translation->description,
             ];
         }
@@ -143,7 +143,7 @@ class BlogController extends Controller
                 ];
                 foreach ($this->locales->keys() as $locale) {
                     $rules["translations.{$locale}.title"] = 'required|string|max:255';
-                    $rules["translations.{$locale}.short_description"] = 'nullable|string';
+                    $rules["translations.{$locale}.content"] = 'nullable|string';
                     $rules["translations.{$locale}.description"] = 'nullable|string';
                 }
 
@@ -167,7 +167,7 @@ class BlogController extends Controller
                         ['blog_id' => $form->id, 'locale' => $locale],
                         [
                             'title' => $trans['title'],
-                            'short_description' => $trans['short_description'] ?? null,
+                            'content' => $trans['content'] ?? null,
                             'description' => $trans['description'] ?? null,
                             'updated_by' => auth()->id(),
                         ]

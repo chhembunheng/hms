@@ -13,7 +13,7 @@ class ServiceTranslation extends Model
         'locale',
         'name',
         'content',
-        'short_description',
+        'content',
         'description',
         'created_by',
         'updated_by',

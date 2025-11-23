@@ -36,7 +36,7 @@ class CareerController extends Controller
                 foreach ($this->locales->keys() as $locale) {
                     $rules["translations.{$locale}.title"] = 'required|string|max:255';
                     $rules["translations.{$locale}.slug"] = 'required|string|unique:career_translations,slug';
-                    $rules["translations.{$locale}.short_description"] = 'nullable|string';
+                    $rules["translations.{$locale}.content"] = 'nullable|string';
                     $rules["translations.{$locale}.description"] = 'nullable|string';
                 }
 
@@ -57,7 +57,7 @@ class CareerController extends Controller
                         'locale' => $locale,
                         'title' => $trans['title'],
                         'slug' => $trans['slug'],
-                        'short_description' => $trans['short_description'] ?? null,
+                        'content' => $trans['content'] ?? null,
                         'description' => $trans['description'] ?? null,
                         'created_by' => auth()->id(),
                         'updated_by' => auth()->id(),
@@ -92,7 +92,7 @@ class CareerController extends Controller
             $translations[$translation->locale] = [
                 'title' => $translation->title,
                 'slug' => $translation->slug,
-                'short_description' => $translation->short_description,
+                'content' => $translation->content,
                 'description' => $translation->description,
             ];
         }
@@ -104,7 +104,7 @@ class CareerController extends Controller
                 foreach ($this->locales->keys() as $locale) {
                     $rules["translations.{$locale}.title"] = 'required|string|max:255';
                     $rules["translations.{$locale}.slug"] = 'required|string|unique:career_translations,slug,' . $form->id . ',career_id';
-                    $rules["translations.{$locale}.short_description"] = 'nullable|string';
+                    $rules["translations.{$locale}.content"] = 'nullable|string';
                     $rules["translations.{$locale}.description"] = 'nullable|string';
                 }
 
@@ -123,7 +123,7 @@ class CareerController extends Controller
                         [
                             'title' => $trans['title'],
                             'slug' => $trans['slug'],
-                            'short_description' => $trans['short_description'] ?? null,
+                            'content' => $trans['content'] ?? null,
                             'description' => $trans['description'] ?? null,
                             'updated_by' => auth()->id(),
                         ]

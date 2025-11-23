@@ -55,7 +55,7 @@ class ProductSeeder extends Seeder
                         [
                             'name' => $productTranslation['name'] ?? '',
                             'description' => $productTranslation['description'] ?? '',
-                            'short_description' => $productTranslation['short_description'] ?? '',
+                            'content' => $productTranslation['content'] ?? '',
                             'created_by' => 1,
                             'updated_by' => 1,
                         ]
