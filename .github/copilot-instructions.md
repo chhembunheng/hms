@@ -153,276 +153,89 @@ This application is a Laravel application and its main Laravel ecosystems packag
     - <code-snippet>public function __construct(public GitHub $github) { }</code-snippet>
 - Do not allow empty `__construct()` methods with zero parameters.
 
-### Type Declarations
-- Always use explicit return type declarations for methods and functions.
-- Use appropriate PHP type hints for method parameters.
+## WinTechWebsite — Condensed Copilot Instructions
 
-<code-snippet name="Explicit Return Types and Method Params" lang="php">
-protected function isAccessible(User $user, ?string $path = null): bool
-{
-    ...
-}
-</code-snippet>
+High-impact guidance for AI coding agents in this repository. Redundancies and repeated detail removed.
 
-## Comments
-- Prefer PHPDoc blocks over comments. Never use comments within the code itself unless there is something _very_ complex going on.
+### Core Stack & Entry Points
+- Laravel 12 (PHP ^8.2) MVC: routes (`routes/*.php`) → controllers (`app/Http/Controllers`) → views (`resources/views`).
+- Frontend: Vite + Tailwind (`vite.config.js`, `tailwind.config.js`). Dev server: `npm run dev`.
+- Helpers autoloaded from `app/Helpers/helpers.php` & `app/Helpers/jwt.php`.
 
-## PHPDoc Blocks
-- Add useful array shape type definitions for arrays when appropriate.
+### Essential Commands
+- Install deps: `composer install` / `npm install`.
+- Full dev (multi-process): `composer run dev`.
+- Run tests (sqlite in-memory): `composer test`.
+- Rebuild assets: `npm run build`.
 
-## Enums
-- Typically, keys in an Enum should be TitleCase. For example: `FavoritePerson`, `BestLake`, `Monthly`.
+### Key Packages / Concerns
+- Octane (long-lived processes): avoid global mutable state per request.
+- JWT Auth (`tymon/jwt-auth`): see `config/jwt.php` + middleware.
+- DataTables (`app/DataTables` + yajra packages).
+- SEO & Caching: responsecache, seotools, sitemap.
 
+### When Implementing Features
+- Prefer `php artisan make:*` generators (`--no-interaction`).
+- Add pages: route file → controller → Blade view.
+- Use Form Request classes for validation (no inline `$request->validate()`).
+- Eloquent first: relationships, eager loading to prevent N+1. Avoid raw `DB::` unless necessary.
+- Name routes & use `route()` for URL generation.
 
-=== laravel/core rules ===
+### Testing (Pest)
+- All changes require test coverage (feature tests typical). Write concise Pest tests: `it('does X', fn () => ...)`.
+- Use factories + states; leverage datasets for repetitive validation.
+- Targeted run: `php artisan test tests/Feature/FooTest.php` before full suite.
+- Prefer semantic assertions (`assertSuccessful()`, `assertForbidden()`).
 
-## Do Things the Laravel Way
+### PHP & Code Style
+- Use constructor property promotion; always explicit return types & parameter hints.
+- Relationship methods typed (e.g. `public function user(): BelongsTo`).
+- Use PHPDoc for complex shapes; avoid stray inline comments.
+- Run `vendor/bin/pint --dirty` before finalizing.
 
-- Use `php artisan make:` commands to create new files (i.e. migrations, controllers, models, etc.). You can list available Artisan commands using the `list-artisan-commands` tool.
-- If you're creating a generic PHP class, use `artisan make:class`.
-- Pass `--no-interaction` to all Artisan commands to ensure they work without user input. You should also pass the correct `--options` to ensure correct behavior.
+### Livewire (v3)
+- Namespace `App\Livewire`; layout `components.layouts.app`.
+- Real-time binding: `wire:model.live`; deferred default: `wire:model`.
+- Use `$this->dispatch()` for events; add `wire:key` in loops.
+- Validate & authorize inside actions; single root element per component.
 
-### Database
-- Always use proper Eloquent relationship methods with return type hints. Prefer relationship methods over raw queries or manual joins.
-- Use Eloquent models and relationships before suggesting raw database queries
-- Avoid `DB::`; prefer `Model::query()`. Generate code that leverages Laravel's ORM capabilities rather than bypassing them.
-- Generate code that prevents N+1 query problems by using eager loading.
-- Use Laravel's query builder for very complex database operations.
+### Tailwind
+- Follow existing utility patterns; use `gap-*` instead of ad-hoc margins for lists.
+- Support dark mode with `dark:` where precedent exists.
 
-### Model Creation
-- When creating new models, create useful factories and seeders for them too. Ask the user if they need any other things, using `list-artisan-commands` to check the available options to `php artisan make:model`.
+### Documentation & Tools (Laravel Boost)
+- Search version-specific docs first via `search-docs` (broad topic queries before coding).
+- Use `list-artisan-commands` to confirm generator options.
+- Use `tinker` for dynamic inspection; `database-query` for read-only SQL.
+- Generate absolute links with `get-absolute-url`.
+- Check recent browser issues via `browser-logs`.
 
-### APIs & Eloquent Resources
-- For APIs, default to using Eloquent API Resources and API versioning unless existing API routes do not, then you should follow existing application convention.
+### Configuration & Environment
+- Only reference env values through `config()` in app code (never direct `env()` outside config files).
+- For column modifications, repeat full column definition in migrations.
 
-### Controllers & Validation
-- Always create Form Request classes for validation rather than inline validation in controllers. Include both validation rules and custom error messages.
-- Check sibling Form Requests to see if the application uses array or string based validation rules.
+### Common Recovery / Errors
+- Vite missing manifest: run `npm run build` or ensure dev server running.
 
-### Queues
-- Use queued jobs for time-consuming operations with the `ShouldQueue` interface.
+### Quality Checklist Before Completing Work
+1. Code follows existing naming/style; no new base folders.
+2. Proper artisan generators used.
+3. Validation via Form Request.
+4. Routes named; URLs generated with `route()`.
+5. No N+1 (eager load where needed).
+6. Tests added/updated & passing (targeted run done).
+7. Pint formatting applied.
+8. Assets rebuilt if front-end changed.
+9. Long-lived state safe for Octane.
 
-### Authentication & Authorization
-- Use Laravel's built-in authentication and authorization features (gates, policies, Sanctum, etc.).
+### Quick Reference Commands
+```bash
+composer run dev
+composer test
+vendor/bin/pint --dirty
+npm run dev
+npm run build
+```
 
-### URL Generation
-- When generating links to other pages, prefer named routes and the `route()` function.
-
-### Configuration
-- Use environment variables only in configuration files - never use the `env()` function directly outside of config files. Always use `config('app.name')`, not `env('APP_NAME')`.
-
-### Testing
-- When creating models for tests, use the factories for the models. Check if the factory has custom states that can be used before manually setting up the model.
-- Faker: Use methods such as `$this->faker->word()` or `fake()->randomDigit()`. Follow existing conventions whether to use `$this->faker` or `fake()`.
-- When creating tests, make use of `php artisan make:test [options] <name>` to create a feature test, and pass `--unit` to create a unit test. Most tests should be feature tests.
-
-### Vite Error
-- If you receive an "Illuminate\Foundation\ViteException: Unable to locate file in Vite manifest" error, you can run `npm run build` or ask the user to run `npm run dev` or `composer run dev`.
-
-
-=== laravel/v12 rules ===
-
-## Laravel 12
-
-- Use the `search-docs` tool to get version specific documentation.
-- Since Laravel 11, Laravel has a new streamlined file structure which this project uses.
-
-### Laravel 12 Structure
-- No middleware files in `app/Http/Middleware/`.
-- `bootstrap/app.php` is the file to register middleware, exceptions, and routing files.
-- `bootstrap/providers.php` contains application specific service providers.
-- **No app\Console\Kernel.php** - use `bootstrap/app.php` or `routes/console.php` for console configuration.
-- **Commands auto-register** - files in `app/Console/Commands/` are automatically available and do not require manual registration.
-
-### Database
-- When modifying a column, the migration must include all of the attributes that were previously defined on the column. Otherwise, they will be dropped and lost.
-- Laravel 11 allows limiting eagerly loaded records natively, without external packages: `$query->latest()->limit(10);`.
-
+Need an example (controller, Form Request, Livewire component, Pest test)? Ask with the target artifact and I’ll scaffold succinctly.
 ### Models
-- Casts can and likely should be set in a `casts()` method on a model rather than the `$casts` property. Follow existing conventions from other models.
-
-
-=== livewire/core rules ===
-
-## Livewire Core
-- Use the `search-docs` tool to find exact version specific documentation for how to write Livewire & Livewire tests.
-- Use the `php artisan make:livewire [Posts\CreatePost]` artisan command to create new components
-- State should live on the server, with the UI reflecting it.
-- All Livewire requests hit the Laravel backend, they're like regular HTTP requests. Always validate form data, and run authorization checks in Livewire actions.
-
-## Livewire Best Practices
-- Livewire components require a single root element.
-- Use `wire:loading` and `wire:dirty` for delightful loading states.
-- Add `wire:key` in loops:
-
-    ```blade
-    @foreach ($items as $item)
-        <div wire:key="item-{{ $item->id }}">
-            {{ $item->name }}
-        </div>
-    @endforeach
-    ```
-
-- Prefer lifecycle hooks like `mount()`, `updatedFoo()` for initialization and reactive side effects:
-
-<code-snippet name="Lifecycle hook examples" lang="php">
-    public function mount(User $user) { $this->user = $user; }
-    public function updatedSearch() { $this->resetPage(); }
-</code-snippet>
-
-
-## Testing Livewire
-
-<code-snippet name="Example Livewire component test" lang="php">
-    Livewire::test(Counter::class)
-        ->assertSet('count', 0)
-        ->call('increment')
-        ->assertSet('count', 1)
-        ->assertSee(1)
-        ->assertStatus(200);
-</code-snippet>
-
-
-    <code-snippet name="Testing a Livewire component exists within a page" lang="php">
-        $this->get('/posts/create')
-        ->assertSeeLivewire(CreatePost::class);
-    </code-snippet>
-
-
-=== livewire/v3 rules ===
-
-## Livewire 3
-
-### Key Changes From Livewire 2
-- These things changed in Livewire 2, but may not have been updated in this application. Verify this application's setup to ensure you conform with application conventions.
-    - Use `wire:model.live` for real-time updates, `wire:model` is now deferred by default.
-    - Components now use the `App\Livewire` namespace (not `App\Http\Livewire`).
-    - Use `$this->dispatch()` to dispatch events (not `emit` or `dispatchBrowserEvent`).
-    - Use the `components.layouts.app` view as the typical layout path (not `layouts.app`).
-
-### New Directives
-- `wire:show`, `wire:transition`, `wire:cloak`, `wire:offline`, `wire:target` are available for use. Use the documentation to find usage examples.
-
-### Alpine
-- Alpine is now included with Livewire, don't manually include Alpine.js.
-- Plugins included with Alpine: persist, intersect, collapse, and focus.
-
-### Lifecycle Hooks
-- You can listen for `livewire:init` to hook into Livewire initialization, and `fail.status === 419` for the page expiring:
-
-<code-snippet name="livewire:load example" lang="js">
-document.addEventListener('livewire:init', function () {
-    Livewire.hook('request', ({ fail }) => {
-        if (fail && fail.status === 419) {
-            alert('Your session expired');
-        }
-    });
-
-    Livewire.hook('message.failed', (message, component) => {
-        console.error(message);
-    });
-});
-</code-snippet>
-
-
-=== pint/core rules ===
-
-## Laravel Pint Code Formatter
-
-- You must run `vendor/bin/pint --dirty` before finalizing changes to ensure your code matches the project's expected style.
-- Do not run `vendor/bin/pint --test`, simply run `vendor/bin/pint` to fix any formatting issues.
-
-
-=== pest/core rules ===
-
-## Pest
-
-### Testing
-- If you need to verify a feature is working, write or update a Unit / Feature test.
-
-### Pest Tests
-- All tests must be written using Pest. Use `php artisan make:test --pest <name>`.
-- You must not remove any tests or test files from the tests directory without approval. These are not temporary or helper files - these are core to the application.
-- Tests should test all of the happy paths, failure paths, and weird paths.
-- Tests live in the `tests/Feature` and `tests/Unit` directories.
-- Pest tests look and behave like this:
-<code-snippet name="Basic Pest Test Example" lang="php">
-it('is true', function () {
-    expect(true)->toBeTrue();
-});
-</code-snippet>
-
-### Running Tests
-- Run the minimal number of tests using an appropriate filter before finalizing code edits.
-- To run all tests: `php artisan test`.
-- To run all tests in a file: `php artisan test tests/Feature/ExampleTest.php`.
-- To filter on a particular test name: `php artisan test --filter=testName` (recommended after making a change to a related file).
-- When the tests relating to your changes are passing, ask the user if they would like to run the entire test suite to ensure everything is still passing.
-
-### Pest Assertions
-- When asserting status codes on a response, use the specific method like `assertForbidden` and `assertNotFound` instead of using `assertStatus(403)` or similar, e.g.:
-<code-snippet name="Pest Example Asserting postJson Response" lang="php">
-it('returns all', function () {
-    $response = $this->postJson('/api/docs', []);
-
-    $response->assertSuccessful();
-});
-</code-snippet>
-
-### Mocking
-- Mocking can be very helpful when appropriate.
-- When mocking, you can use the `Pest\Laravel\mock` Pest function, but always import it via `use function Pest\Laravel\mock;` before using it. Alternatively, you can use `$this->mock()` if existing tests do.
-- You can also create partial mocks using the same import or self method.
-
-### Datasets
-- Use datasets in Pest to simplify tests which have a lot of duplicated data. This is often the case when testing validation rules, so consider going with this solution when writing tests for validation rules.
-
-<code-snippet name="Pest Dataset Example" lang="php">
-it('has emails', function (string $email) {
-    expect($email)->not->toBeEmpty();
-})->with([
-    'james' => 'james@laravel.com',
-    'taylor' => 'taylor@laravel.com',
-]);
-</code-snippet>
-
-
-=== tailwindcss/core rules ===
-
-## Tailwind Core
-
-- Use Tailwind CSS classes to style HTML, check and use existing tailwind conventions within the project before writing your own.
-- Offer to extract repeated patterns into components that match the project's conventions (i.e. Blade, JSX, Vue, etc..)
-- Think through class placement, order, priority, and defaults - remove redundant classes, add classes to parent or child carefully to limit repetition, group elements logically
-- You can use the `search-docs` tool to get exact examples from the official documentation when needed.
-
-### Spacing
-- When listing items, use gap utilities for spacing, don't use margins.
-
-    <code-snippet name="Valid Flex Gap Spacing Example" lang="html">
-        <div class="flex gap-8">
-            <div>Superior</div>
-            <div>Michigan</div>
-            <div>Erie</div>
-        </div>
-    </code-snippet>
-
-
-### Dark Mode
-- If existing pages and components support dark mode, new pages and components must support dark mode in a similar way, typically using `dark:`.
-
-
-=== tailwindcss/v3 rules ===
-
-## Tailwind 3
-
-- Always use Tailwind CSS v3 - verify you're using only classes supported by this version.
-
-
-=== tests rules ===
-
-## Test Enforcement
-
-- Every change must be programmatically tested. Write a new test or update an existing test, then run the affected tests to make sure they pass.
-- Run the minimum number of tests needed to ensure code quality and speed. Use `php artisan test` with a specific filename or filter.
-</laravel-boost-guidelines>
