@@ -9,6 +9,8 @@ class Client extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'clients';
+
     protected $fillable = [
         'image',
         'sort',

@@ -9,6 +9,8 @@ class Career extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'careers';
+
     protected $fillable = [
         'slug',
         'location',

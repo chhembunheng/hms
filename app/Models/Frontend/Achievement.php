@@ -9,6 +9,8 @@ class Achievement extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'achievements';
+
     protected $fillable = [
         'icon',
         'value',

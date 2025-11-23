@@ -8,6 +8,8 @@ class ClientTranslation extends Model
 {
     public $timestamps = false;
 
+    protected $table = 'client_translations';
+
     protected $fillable = [
         'client_id',
         'locale',

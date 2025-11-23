@@ -9,6 +9,8 @@ class Choosing extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'choosings';
+
     protected $fillable = [
         'image',
         'sort',

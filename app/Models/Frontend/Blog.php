@@ -9,6 +9,8 @@ class Blog extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'blogs';
+
     protected $fillable = [
         'slug',
         'author_id',

@@ -9,6 +9,8 @@ class TeamTranslation extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'team_translations';
+
     protected $fillable = [
         'team_id',
         'locale',

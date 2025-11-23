@@ -8,6 +8,8 @@ class CareerTranslation extends Model
 {
     public $timestamps = false;
 
+    protected $table = 'career_translations';
+
     protected $fillable = [
         'career_id',
         'locale',

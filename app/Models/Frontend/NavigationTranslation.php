@@ -9,6 +9,8 @@ class NavigationTranslation extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'navigation_translations';
+
     protected $fillable = [
         'navigation_id',
         'locale',

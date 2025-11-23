@@ -8,6 +8,8 @@ class IntegrationTranslation extends Model
 {
     public $timestamps = false;
 
+    protected $table = 'integration_translations';
+
     protected $fillable = [
         'integration_id',
         'locale',

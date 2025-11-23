@@ -9,6 +9,8 @@ class Faq extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'faqs';
+
     protected $fillable = [
         'parent_id',
         'slug',

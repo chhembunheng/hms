@@ -9,6 +9,8 @@ class Plan extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'plans';
+
     protected $fillable = [
         'sort',
         'is_active',

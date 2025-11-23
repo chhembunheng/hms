@@ -10,6 +10,8 @@ class Product extends Model
 {
     use SoftDeletes, HasSEO;
 
+    protected $table = 'products';
+
     protected $fillable = [
         'slug',
         'image',

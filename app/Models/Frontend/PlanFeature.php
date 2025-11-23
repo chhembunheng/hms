@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class PlanFeature extends Model
 {
     use SoftDeletes;
+    protected $table = 'plan_features';
 }

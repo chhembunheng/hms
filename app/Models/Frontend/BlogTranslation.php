@@ -8,6 +8,8 @@ class BlogTranslation extends Model
 {
     public $timestamps = false;
 
+    protected $table = 'blog_translations';
+
     protected $fillable = [
         'blog_id',
         'locale',

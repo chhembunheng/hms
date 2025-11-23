@@ -6,13 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class ServiceTranslation extends Model
 {
-    public $timestamps = false;
-
+    protected $table = 'service_translations';
+    
     protected $fillable = [
         'service_id',
         'locale',
         'name',
-        'content',
         'content',
         'description',
         'created_by',

@@ -9,6 +9,8 @@ class Integration extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'integrations';
+
     protected $fillable = [
         'logo',
         'url',

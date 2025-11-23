@@ -9,6 +9,8 @@ class Partner extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'partners';
+
     protected $fillable = [
         'logo',
         'website_url',

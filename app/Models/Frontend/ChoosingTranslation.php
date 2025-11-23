@@ -8,6 +8,8 @@ class ChoosingTranslation extends Model
 {
     public $timestamps = false;
 
+    protected $table = 'choosing_translations';
+
     protected $fillable = [
         'choosing_id',
         'locale',

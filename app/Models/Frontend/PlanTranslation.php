@@ -8,6 +8,8 @@ class PlanTranslation extends Model
 {
     public $timestamps = false;
 
+    protected $table = 'plan_translations';
+
     protected $fillable = [
         'plan_id',
         'locale',

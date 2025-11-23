@@ -9,6 +9,8 @@ class Navigation extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'navigations';
+
     protected $fillable = [
         'parent_id',
         'url',

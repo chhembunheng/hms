@@ -9,6 +9,8 @@ class Team extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'teams';
+
     protected $fillable = [
         'photo',
         'linkedin_url',

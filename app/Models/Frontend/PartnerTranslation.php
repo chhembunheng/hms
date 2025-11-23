@@ -8,6 +8,8 @@ class PartnerTranslation extends Model
 {
     public $timestamps = false;
 
+    protected $table = 'partner_translations';
+
     protected $fillable = [
         'partner_id',
         'locale',

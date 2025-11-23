@@ -8,6 +8,8 @@ class AchievementTranslation extends Model
 {
     public $timestamps = false;
 
+    protected $table = 'achievement_translations';
+
     protected $fillable = [
         'achievement_id',
         'locale',
