@@ -26,10 +26,16 @@
         <hr class="my-4">
         <div class="row">
             <div class="col-6">
-                <x-form.input :label="__('form.thumbnail')" type="file" name="thumbnail" accept="image/*" :initialPreview="$form?->thumbnail ? asset($form->thumbnail) : null" :initialCaption="$form?->thumbnail ? basename($form->thumbnail) : null" :initialSize="$form?->thumbnail ? getFileSize($form->thumbnail) : null" />
+                <x-form.input :label="__('form.image')" type="file" name="image" accept="image/*" :initialPreview="$form?->image ? asset($form->image) : null" :initialCaption="$form?->image ? basename($form->image) : null" :initialSize="$form?->image ? getFileSize($form->image) : null" />
             </div>
             <div class="col-6">
                 <x-form.input :label="__('form.image_cover')" type="file" name="image_cover" accept="image/*" :initialPreview="$form?->image_cover ? asset($form->image_cover) : null" :initialCaption="$form?->image_cover ? basename($form->image_cover) : null" :initialSize="$form?->image_cover ? getFileSize($form->image_cover) : null" />
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="row">
+            <div class="col-12">
+                <x-form.gallery :label="__('form.gallery_image')" name="images" :images="$form?->images" />
             </div>
         </div>
         <hr class="my-4">

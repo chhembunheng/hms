@@ -24,13 +24,19 @@ class IntegrationDataTable extends DataTable
                 }
                 return '<span class="text-muted">No logo</span>';
             })
+            ->addColumn('image', function (Integration $model) {
+                if ($model->image) {
+                    return '<a href="' . asset($model->image) . '" data-bs-popup="lightbox"><img src="' . asset($model->image) . '" alt="' . $model->getName(app()->getLocale()) . '" style="max-width: 50px; height: auto; border-radius: 4px;"></a>';
+                }
+                return '<span class="text-muted">No image</span>';
+            })
             ->editColumn('name', function (Integration $model) {
                 return $model->getName(app()->getLocale());
             })
             ->editColumn('created_at', function (Integration $model) {
                 return $model->created_at?->format(config('init.datetime.display_format'));
             })
-            ->rawColumns(['action', 'logo']);
+            ->rawColumns(['action', 'logo', 'image']);
     }
 
     public function query(Integration $model): QueryBuilder
@@ -55,6 +61,7 @@ class IntegrationDataTable extends DataTable
         return [
             Column::computed('DT_RowIndex')->title(__('root.common.no'))->width(60),
             Column::computed('logo')->title(__('root.common.logo'))->width(80)->addClass('text-center'),
+            Column::computed('image')->title(__('root.common.image'))->width(80)->addClass('text-center'),
             Column::computed('name')->title(__('root.common.name'))->width(200),
             Column::make('created_at')->title(__('root.common.created_at'))->width(120),
             Column::computed('action')

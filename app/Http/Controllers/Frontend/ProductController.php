@@ -88,6 +88,17 @@ class ProductController extends Controller
                         $product->save();
                     }
 
+                    if ($request->has('images') && is_array($request->input('images'))) {
+                        $product->images = collect($request->input('images'))->map(function($image) {
+                            return [
+                                'url' => $image['url'] ?? null,
+                                'alt' => $image['alt'] ?? '',
+                                'label' => $image['label'] ?? '',
+                            ];
+                        })->toArray();
+                        $product->save();
+                    }
+
                     $product->categories()->sync($request->input('category_id', []));
                     $product->tags()->sync($request->input('tag_id', []));
                     $dataTranslation = [];
@@ -173,6 +184,16 @@ class ProductController extends Controller
 
                     if ($request->slider_image) {
                         $form->slider_image = uploadImage($request->slider_image, 'products/slider');
+                    }
+
+                    if ($request->has('images') && is_array($request->input('images'))) {
+                        $form->images = collect($request->input('images'))->map(function($image) {
+                            return [
+                                'url' => $image['url'] ?? null,
+                                'alt' => $image['alt'] ?? '',
+                                'label' => $image['label'] ?? '',
+                            ];
+                        })->toArray();
                     }
 
                     $form->save();

@@ -12,8 +12,20 @@
         <hr class="my-4">
 
         <div class="row">
-            <div class="col-12">
+            <div class="col-md-6">
                 <x-form.input :label="__('form.image')" type="file" name="image" accept="image/*" :initialPreview="$form?->image ? asset($form->image) : null" :initialCaption="$form?->image ? basename($form->image) : null" />
+            </div>
+            <div class="col-md-6">
+                <x-form.input :label="__('form.logo')" type="file" name="logo" accept="image/*" :initialPreview="$form?->logo ? asset($form->logo) : null" :initialCaption="$form?->logo ? basename($form->logo) : null" />
+            </div>
+        </div>
+
+        <hr class="my-4">
+
+        <!-- Translations Tabs -->
+        <div class="row">
+            <div class="col-12">
+                <x-form.gallery :label="__('form.gallery_image')" name="images" :images="$form?->images" />
             </div>
         </div>
 

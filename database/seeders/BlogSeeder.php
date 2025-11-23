@@ -39,7 +39,7 @@ class BlogSeeder extends Seeder
                 $blog = Blog::query()->firstOrNew(['slug' => $entry['slug']]);
                 $blog->fill([
                     'author_id' => $blog->author_id ?? 1,
-                    'thumbnail' => $entry['thumbnail'] ?? $entry['image'] ?? null,
+                    'image' => $entry['image'] ?? $entry['image'] ?? null,
                     'is_published' => $entry['is_published'] ?? true,
                     'sort' => $entry['sort'] ?? ($index + 1),
                 ]);

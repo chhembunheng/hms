@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('slug')->unique();
             $table->foreignId('author_id')->nullable()->constrained('teams')->nullOnDelete();
-            $table->string('thumbnail')->nullable();
+            $table->string('image')->nullable();
+            $table->json('images')->nullable();
             $table->boolean('is_published')->default(true);
             $table->unsignedInteger('sort')->default(0);
             $table->author();

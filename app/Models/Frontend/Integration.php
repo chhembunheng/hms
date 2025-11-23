@@ -13,6 +13,8 @@ class Integration extends Model
 
     protected $fillable = [
         'logo',
+        'image',
+        'images',
         'url',
         'is_active',
         'created_by',
@@ -22,6 +24,7 @@ class Integration extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
+        'images' => 'collection',
     ];
 
     public function translations()

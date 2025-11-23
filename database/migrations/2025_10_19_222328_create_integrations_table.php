@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('logo')->nullable();
             $table->string('url')->nullable();
+            $table->json('images')->nullable();
             $table->boolean('is_active')->default(true);
             $table->author();
         });

@@ -2,11 +2,11 @@
     <x-form.layout :form="$form">
         <div class="row">
             <div class="col-md-6">
-                <x-form.icon :label="__('form.icon')" name="icon" value="{{ old('icon', $form?->icon) }}" :text="false"/>
+                <x-form.icon :label="__('form.icon')" name="icon" value="{{ old('icon', $form?->icon) }}" :text="false" />
             </div>
             <div class="col-md-6">
-                <x-form.select :label="__('form.navigation')" name="navigation_id" :selected="old('navigation_id', $form?->navigation?->parent_id)"
-                    :options="$navigations" data-placeholder="Select a navigation"/>
+                <x-form.select :label="__('form.navigation')" name="navigation_id" :selected="old('navigation_id', $form?->navigation?->parent_id)" :options="$navigations"
+                    data-placeholder="Select a navigation" />
             </div>
             <div class="col-md-6">
                 <x-form.select multiple data-searchable="false" :label="__('form.category')" name="category_id[]" :selected="$form?->categories?->pluck('id')->toArray()"
@@ -20,15 +20,21 @@
                 <x-form.input :label="__('form.sort')" type="number" name="sort" value="{{ $form?->sort ?? 0 }}"
                     min="0" />
             </div>
-            <div class="col-md-6">
-                <x-form.checkbox :label="__('form.is_slider')" name="is_slider" value="1" :checked="old('is_slider', $form?->is_slider)" />
+        </div>
+        <div class="row">
+            <x-slider-form :form="$form" :locales="$locales" />
+        </div>
+        <hr class="my-4">
+        <div class="row">
+            <div class="col-6">
+                <x-form.input :label="__('form.image')" type="file" name="image" accept="image/*" :initialPreview="$form?->image ? asset($form->image) : null"
+                    :initialCaption="$form?->image ? basename($form->image) : null" :initialSize="$form?->image ? getFileSize($form->image) : null" />
             </div>
         </div>
         <hr class="my-4">
         <div class="row">
             <div class="col-12">
-                <x-form.input :label="__('form.image')" type="file" name="image" accept="image/*" :initialPreview="$form?->image ? asset($form->image) : null"
-                    :initialCaption="$form?->image ? basename($form->image) : null" :initialSize="$form?->image ? getFileSize($form->image) : null" />
+                <x-form.gallery :label="__('form.gallery_image')" name="images" :images="$form?->images" />
             </div>
         </div>
         <hr class="my-4">
@@ -61,86 +67,31 @@
                                 name="translations[{{ $locale }}][name]" :value="old(
                                     'translations.' . $locale . '.name',
                                     $translations[$locale]['name'] ?? '',
-                                )" required lang="{{ $locale }}"/>
+                                )" required
+                                lang="{{ $locale }}" />
                         </div>
                         <div class="col-md-8 offset-md-2">
                             <x-form.textarea :label="__('form.description')" name="translations[{{ $locale }}][description]"
                                 :value="old(
                                     'translations.' . $locale . '.description',
                                     $translations[$locale]['description'] ?? '',
-                                )" rows="5" class="editor" lang="{{ $locale }}"/>
+                                )" rows="5" class="editor" lang="{{ $locale }}" />
                         </div>
                         <div class="col-md-8 offset-md-2">
                             <x-form.textarea :label="__('form.content')" name="translations[{{ $locale }}][content]"
                                 :value="old(
                                     'translations.' . $locale . '.content',
                                     $translations[$locale]['content'] ?? '',
-                                )" rows="6" class="editor content-{{ $locale }}" lang="{{ $locale }}"/>
+                                )" rows="6" class="editor content-{{ $locale }}"
+                                lang="{{ $locale }}" />
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
-        
-        <!-- Slider Section -->
-        <div id="slider-section" style="display: @if (old('is_slider', $form?->is_slider)) block @else none @endif;">
-            <hr class="my-4">
-            <h4 class="mb-3">{{ __('form.slider_content') }}</h4>
-            
-            <!-- Slider Image -->
-            <div class="row mb-4">
-                <div class="col-12">
-                    <x-form.input :label="__('form.slider_image')" type="file" name="slider_image" accept="image/*" id="product-slider-image"
-                        :initialPreview="$form?->slider_image ? asset($form->slider_image) : null" :initialCaption="$form?->slider_image ? basename($form->slider_image) : null" />
-                </div>
-            </div>
-            
-            <!-- Slider Translation Tabs -->
-            <div class="mb-3">
-                <ul class="nav nav-tabs" role="tablist">
-                    @foreach ($locales as $locale => $language)
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link @if ($locale === config('app.locale')) active @endif"
-                                id="slider-locale-{{ $locale }}-tab" data-bs-toggle="tab"
-                                data-bs-target="#slider-locale-{{ $locale }}" type="button" role="tab"
-                                aria-controls="slider-locale-{{ $locale }}"
-                                aria-selected="@if ($locale === config('app.locale')) true @else false @endif">
-                                <img src="{{ asset($language['flag']) }}" class="lang-flag me-2"><span
-                                    class="fs-lg">{{ $language['name'] }}</span>
-                            </button>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-            
-            <div class="tab-content" id="sliderTabContent">
-                @foreach ($locales as $locale => $language)
-                    <div @class([
-                        'tab-pane fade',
-                        'show active' => $locale === config('app.locale'),
-                    ]) id="slider-locale-{{ $locale }}" role="tabpanel"
-                        aria-labelledby="slider-locale-{{ $locale }}-tab">
-                        <div class="row">
-                            <div class="col-md-8 offset-md-2">
-                                <x-form.input :label="__('form.slider_title')" name="translations[{{ $locale }}][slider_title]"
-                                    :value="old(
-                                        'translations.' . $locale . '.slider_title',
-                                        $translations[$locale]['slider_title'] ?? '',
-                                    )" lang="{{ $locale }}"/>
-                            </div>
-                            <div class="col-md-8 offset-md-2">
-                                <x-form.textarea :label="__('form.slider_description')" name="translations[{{ $locale }}][slider_description]"
-                                    :value="old(
-                                        'translations.' . $locale . '.slider_description',
-                                        $translations[$locale]['slider_description'] ?? '',
-                                    )" rows="3" lang="{{ $locale }}"/>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-        
+
+       
+
         <x-generate-seo :form="$form" />
     </x-form.layout>
     <script>

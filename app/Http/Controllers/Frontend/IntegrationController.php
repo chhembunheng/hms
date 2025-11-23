@@ -35,6 +35,7 @@ class IntegrationController extends Controller
                 $rules = [
                     'sort' => 'nullable|integer',
                     'image' => ['nullable', new ImageRule()],
+                    'logo' => ['nullable', new ImageRule()],
                 ];
 
                 foreach ($this->locales->keys() as $locale) {
@@ -51,6 +52,7 @@ class IntegrationController extends Controller
 
                 $integration = Integration::create([
                     'image' => null,
+                    'logo' => null,
                     'sort' => $request->input('sort', 0),
                     'created_by' => auth()->id(),
                     'updated_by' => auth()->id(),
@@ -58,6 +60,22 @@ class IntegrationController extends Controller
 
                 if ($request->image) {
                     $integration->image = uploadImage($request->image, 'integrations');
+                    $integration->save();
+                }
+
+                if ($request->logo) {
+                    $integration->logo = uploadImage($request->logo, 'integrations/logos');
+                    $integration->save();
+                }
+
+                if ($request->has('images') && is_array($request->input('images'))) {
+                    $integration->images = collect($request->input('images'))->map(function($image) {
+                        return [
+                            'url' => $image['url'] ?? null,
+                            'alt' => $image['alt'] ?? '',
+                            'label' => $image['label'] ?? '',
+                        ];
+                    })->toArray();
                     $integration->save();
                 }
 
@@ -113,6 +131,7 @@ class IntegrationController extends Controller
                 $rules = [
                     'sort' => 'nullable|integer',
                     'image' => ['nullable', new ImageRule()],
+                    'logo' => ['nullable', new ImageRule()],
                 ];
 
                 foreach ($this->locales->keys() as $locale) {
@@ -132,6 +151,20 @@ class IntegrationController extends Controller
 
                 if ($request->image) {
                     $form->image = uploadImage($request->image, 'integrations');
+                }
+
+                if ($request->logo) {
+                    $form->logo = uploadImage($request->logo, 'integrations/logos');
+                }
+
+                if ($request->has('images') && is_array($request->input('images'))) {
+                    $form->images = collect($request->input('images'))->map(function($image) {
+                        return [
+                            'url' => $image['url'] ?? null,
+                            'alt' => $image['alt'] ?? '',
+                            'label' => $image['label'] ?? '',
+                        ];
+                    })->toArray();
                 }
 
                 $form->save();

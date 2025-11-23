@@ -14,7 +14,8 @@ class Blog extends Model
     protected $fillable = [
         'slug',
         'author_id',
-        'thumbnail',
+        'image',
+        'images',
         'is_published',
         'sort',
         'created_by',
@@ -24,6 +25,7 @@ class Blog extends Model
 
     protected $casts = [
         'is_published' => 'boolean',
+        'images' => 'collection',
     ];
 
     public function translations()

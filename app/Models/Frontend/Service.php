@@ -15,6 +15,7 @@ class Service extends Model
         'slug',
         'icon',
         'image',
+        'images',
         'sort',
         'is_slider',
         'slider_image',
@@ -25,6 +26,7 @@ class Service extends Model
 
     protected $casts = [
         'is_slider' => 'boolean',
+        'images' => 'collection',
     ];
 
     public function navigations()

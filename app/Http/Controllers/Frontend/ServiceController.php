@@ -74,6 +74,17 @@ class ServiceController extends Controller
                         $service->save();
                     }
 
+                    if ($request->has('images') && is_array($request->input('images'))) {
+                        $service->images = collect($request->input('images'))->map(function($image) {
+                            return [
+                                'url' => $image['url'] ?? null,
+                                'alt' => $image['alt'] ?? '',
+                                'label' => $image['label'] ?? '',
+                            ];
+                        })->toArray();
+                        $service->save();
+                    }
+
                     foreach ($this->locales->keys() as $locale) {
                         $trans = $request->input("translations.{$locale}");
                         if(empty($trans['name'])){
@@ -152,6 +163,17 @@ class ServiceController extends Controller
                 if ($request->slider_image) {
                     $form->slider_image = uploadImage($request->slider_image, 'services/slider');
                 }
+
+                if ($request->has('images') && is_array($request->input('images'))) {
+                    $form->images = collect($request->input('images'))->map(function($image) {
+                        return [
+                            'url' => $image['url'] ?? null,
+                            'alt' => $image['alt'] ?? '',
+                            'label' => $image['label'] ?? '',
+                        ];
+                    })->toArray();
+                }
+
                 $form->save();
 
                 foreach ($this->locales->keys() as $locale) {

@@ -505,7 +505,7 @@ if (! function_exists('uploadFile')) {
             return '';
         }
 
-        // Create thumbnail if pathThumb is provided
+        // Create image if pathThumb is provided
         if (! empty($pathThumb)) {
             try {
                 $imageContent = Storage::disk('public')->get($putFile);
@@ -520,7 +520,7 @@ if (! function_exists('uploadFile')) {
                 $thumbImage->scaleDown(width: $width)
                     ->save("{$thumbPath}/{$fileName}");
             } catch (\Throwable $e) {
-                Log::error("Thumbnail creation failed for $putFile: " . $e->getMessage());
+                Log::error("image creation failed for $putFile: " . $e->getMessage());
             }
         }
 
@@ -560,7 +560,7 @@ if (! function_exists('uploadBase64')) {
             return '';
         }
 
-        // Create thumbnail if pathThumb is provided
+        // Create image if pathThumb is provided
         if (! empty($pathThumb)) {
             $manager      = new ImageManager(new Driver());
             $imageContent = Storage::disk('public')->get($putFile);
@@ -579,8 +579,8 @@ if (! function_exists('uploadImage')) {
      *
      * @param string|UploadedFile $image Base64 string or UploadedFile instance
      * @param string $path Storage path (e.g., 'products', 'blogs', 'teams')
-     * @param string $pathThumb Optional thumbnail path
-     * @param int $width Thumbnail width
+     * @param string $pathThumb Optional image path
+     * @param int $width image width
      * @return string Path to stored image or empty string on failure
      */
     function uploadImage($image, string $path, string $pathThumb = '', int $width = 200): string

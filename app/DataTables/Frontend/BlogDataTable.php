@@ -18,9 +18,9 @@ class BlogDataTable extends DataTable
             ->addIndexColumn()
             ->addColumn('action', fn($row) => view('frontends.blogs.action', compact('row')))
             ->setRowId('id')
-            ->addColumn('thumbnail', function (Blog $model) {
-                if ($model->thumbnail) {
-                    return '<a href="' . asset($model->thumbnail) . '" data-bs-popup="lightbox"><img src="' . asset($model->thumbnail) . '" alt="' . $model->getTitle(app()->getLocale()) . '" style="max-width: 50px; height: auto; border-radius: 4px;"></a>';
+            ->addColumn('image', function (Blog $model) {
+                if ($model->image) {
+                    return '<a href="' . asset($model->image) . '" data-bs-popup="lightbox"><img src="' . asset($model->image) . '" alt="' . $model->getTitle(app()->getLocale()) . '" style="max-width: 50px; height: auto; border-radius: 4px;"></a>';
                 }
                 return '<span class="text-muted">No image</span>';
             })
@@ -30,7 +30,7 @@ class BlogDataTable extends DataTable
             ->editColumn('created_at', function (Blog $model) {
                 return $model->created_at?->format(config('init.datetime.display_format'));
             })
-            ->rawColumns(['action', 'thumbnail']);
+            ->rawColumns(['action', 'image']);
     }
 
     public function query(Blog $model): QueryBuilder
@@ -54,7 +54,7 @@ class BlogDataTable extends DataTable
     {
         return [
             Column::computed('DT_RowIndex')->title(__('root.common.no'))->width(60),
-            Column::computed('thumbnail')->title(__('root.common.thumbnail'))->width(80)->addClass('text-center'),
+            Column::computed('image')->title(__('root.common.image'))->width(80)->addClass('text-center'),
             Column::computed('title')->title(__('root.common.title'))->width(200),
             Column::make('created_at')->title(__('root.common.created_at'))->width(120),
             Column::computed('action')

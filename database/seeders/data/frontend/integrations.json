@@ -3981,13 +3981,13 @@
             "transactions": [
               {
                 "locale": "en",
-                "name": "Video transcoding and thumbnailing",
-                "description": "Video transcoding and thumbnailing"
+                "name": "Video transcoding and imageing",
+                "description": "Video transcoding and imageing"
               },
               {
                 "locale": "km",
-                "name": "Video transcoding and thumbnailing",
-                "description": "Video transcoding and thumbnailing"
+                "name": "Video transcoding and imageing",
+                "description": "Video transcoding and imageing"
               }
             ]
           },

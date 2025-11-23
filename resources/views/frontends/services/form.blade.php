@@ -25,6 +25,12 @@
             </div>
         </div>
         <hr class="my-4">
+        <div class="row">
+            <div class="col-12">
+                <x-form.gallery :label="__('form.gallery_image')" name="images" :images="$form?->images" />
+            </div>
+        </div>
+        <hr class="my-4">
         <div class="mb-3">
             <ul class="nav nav-tabs" role="tablist">
                 @foreach ($locales as $locale => $language)

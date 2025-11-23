@@ -15,6 +15,7 @@ class Product extends Model
     protected $fillable = [
         'slug',
         'image',
+        'images',
         'icon',
         'sort',
         'is_slider',
@@ -27,6 +28,7 @@ class Product extends Model
     protected $casts = [
         'sort' => 'integer',
         'is_slider' => 'boolean',
+        'images' => 'collection',
     ];
 
 
