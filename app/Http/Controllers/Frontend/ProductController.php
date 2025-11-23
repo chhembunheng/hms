@@ -52,6 +52,7 @@ class ProductController extends Controller
                     'slug' => 'required|string|unique:products,slug',
                     'sort' => 'nullable|integer',
                     'image' => ['nullable', new ImageRule()],
+                    'is_slider' => 'nullable|boolean',
                 ];
 
                 foreach ($this->locales->keys() as $locale) {
@@ -71,12 +72,19 @@ class ProductController extends Controller
                         'image' => null,
                         'icon' => $request->input('icon', null),
                         'sort' => $request->input('sort', 0),
+                        'is_slider' => $request->boolean('is_slider'),
+                        'slider_image' => null,
                         'created_by' => auth()->id(),
                         'updated_by' => auth()->id(),
                     ]);
 
                     if ($request->image) {
                         $product->image = uploadImage($request->image, 'products');
+                        $product->save();
+                    }
+
+                    if ($request->slider_image) {
+                        $product->slider_image = uploadImage($request->slider_image, 'products/slider');
                         $product->save();
                     }
 
@@ -92,6 +100,8 @@ class ProductController extends Controller
                             'name' => $trans['name'],
                             'content' => $trans['content'] ?? null,
                             'description' => $trans['description'] ?? null,
+                            'slider_title' => $trans['slider_title'] ?? null,
+                            'slider_description' => $trans['slider_description'] ?? null,
                             'created_by' => auth()->id(),
                             'updated_by' => auth()->id(),
                         ]);
@@ -136,6 +146,7 @@ class ProductController extends Controller
                     'slug' => 'required|string|unique:products,slug,' . $form->id,
                     'sort' => 'nullable|integer',
                     'image' => ['nullable', new ImageRule()],
+                    'is_slider' => 'nullable|boolean',
                 ];
 
                 foreach ($this->locales->keys() as $locale) {
@@ -153,10 +164,15 @@ class ProductController extends Controller
                     $form->slug = slug($request->input('slug', null));
                     $form->sort = $request->input('sort', 0);
                     $form->icon = $request->input('icon', null);
+                    $form->is_slider = $request->boolean('is_slider');
                     $form->updated_by = auth()->id();
 
                     if ($request->image) {
                         $form->image = uploadImage($request->image, 'products');
+                    }
+
+                    if ($request->slider_image) {
+                        $form->slider_image = uploadImage($request->slider_image, 'products/slider');
                     }
 
                     $form->save();
@@ -186,7 +202,8 @@ class ProductController extends Controller
                             'name' => $trans['name'],
                             'content' => $trans['content'] ?? null,
                             'description' => $trans['description'] ?? null,
-                            'content' => $trans['content'] ?? null,
+                            'slider_title' => $trans['slider_title'] ?? null,
+                            'slider_description' => $trans['slider_description'] ?? null,
                             'locale' => $locale,
                             'updated_by' => auth()->id(),
                         ];
@@ -231,6 +248,7 @@ class ProductController extends Controller
                     'slug' => 'required|string|unique:products,slug,' . $form->id,
                     'sort' => 'nullable|integer',
                     'image' => ['nullable', new ImageRule()],
+                    'is_slider' => 'nullable|boolean',
                 ];
 
                 foreach ($this->locales->keys() as $locale) {
@@ -248,10 +266,15 @@ class ProductController extends Controller
                     $form->slug = slug($request->input('slug', null));
                     $form->sort = $request->input('sort', 0);
                     $form->icon = $request->input('icon', null);
+                    $form->is_slider = $request->boolean('is_slider');
                     $form->updated_by = auth()->id();
 
                     if ($request->image) {
                         $form->image = uploadImage($request->image, 'products');
+                    }
+
+                    if ($request->slider_image) {
+                        $form->slider_image = uploadImage($request->slider_image, 'products/slider');
                     }
 
                     $form->save();

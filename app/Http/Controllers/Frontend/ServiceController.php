@@ -37,6 +37,7 @@ class ServiceController extends Controller
                     'sort' => 'nullable|integer',
                     'image' => ['nullable', new ImageRule()],
                     'slug' => 'required|string|unique:services,slug',
+                    'is_slider' => 'nullable|boolean',
                 ];
                 foreach ($this->locales->keys() as $locale) {
                     if ($locale === config('app.locale')) {
@@ -55,6 +56,8 @@ class ServiceController extends Controller
                         'slug' => slug($request->input('slug', null)),
                         'image' => null,
                         'sort' => $request->input('sort', 0),
+                        'is_slider' => $request->boolean('is_slider'),
+                        'slider_image' => null,
                         'content' => $request->input('content', null),
                         'description' => $request->input('description', null),
                         'created_by' => auth()->id(),
@@ -63,6 +66,11 @@ class ServiceController extends Controller
 
                     if ($request->image) {
                         $service->image = uploadImage($request->image, 'services');
+                        $service->save();
+                    }
+
+                    if ($request->slider_image) {
+                        $service->slider_image = uploadImage($request->slider_image, 'services/slider');
                         $service->save();
                     }
 
@@ -77,7 +85,8 @@ class ServiceController extends Controller
                             'name' => $trans['name'],
                             'content' => $trans['content'] ?? null,
                             'description' => $trans['description'] ?? null,
-                            'content' => $trans['content'] ?? null,
+                            'slider_title' => $trans['slider_title'] ?? null,
+                            'slider_description' => $trans['slider_description'] ?? null,
                             'created_by' => auth()->id(),
                             'updated_by' => auth()->id(),
                         ]);
@@ -120,6 +129,7 @@ class ServiceController extends Controller
                     'sort' => 'nullable|integer',
                     'image' => ['nullable', new ImageRule()],
                     'slug' => 'required|string|unique:services,slug,' . $form->id,
+                    'is_slider' => 'nullable|boolean',
                 ];
                 foreach ($this->locales->keys() as $locale) {
                     $rules["translations.{$locale}.name"] = 'required|string|max:255';
@@ -134,9 +144,13 @@ class ServiceController extends Controller
 
                 $form->slug = slug($request->input('slug', null));
                 $form->sort = $request->input('sort', 0);
+                $form->is_slider = $request->boolean('is_slider');
                 $form->updated_by = auth()->id();
                 if ($request->image) {
                     $form->image = uploadImage($request->image, 'services');
+                }
+                if ($request->slider_image) {
+                    $form->slider_image = uploadImage($request->slider_image, 'services/slider');
                 }
                 $form->save();
 
@@ -148,7 +162,8 @@ class ServiceController extends Controller
                             'name' => $trans['name'],
                             'content' => $trans['content'] ?? null,
                             'description' => $trans['description'] ?? null,
-                            'content' => $trans['content'] ?? null,
+                            'slider_title' => $trans['slider_title'] ?? null,
+                            'slider_description' => $trans['slider_description'] ?? null,
                             'updated_by' => auth()->id(),
                         ]
                     );

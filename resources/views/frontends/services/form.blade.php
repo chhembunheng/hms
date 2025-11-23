@@ -9,6 +9,9 @@
                 <x-form.input :label="__('form.sort')" type="number" name="sort" value="{{ $form?->sort ?? 0 }}"
                     min="0" />
             </div>
+            <div class="col-md-6">
+                <x-form.checkbox :label="__('form.is_slider')" name="is_slider" value="1" :checked="old('is_slider', $form?->is_slider)" />
+            </div>
         </div>
         <hr class="my-4">
         <div class="row">
@@ -79,6 +82,78 @@
                 </div>
             @endforeach
         </div>
+        
+        <!-- Slider Section -->
+        <div id="slider-section" style="display: @if (old('is_slider', $form?->is_slider)) block @else none @endif;">
+            <hr class="my-4">
+            <h4 class="mb-3">{{ __('form.slider_content') }}</h4>
+            
+            <!-- Slider Image -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <x-form.input :label="__('form.slider_image')" type="file" name="slider_image" accept="image/*" id="service-slider-image"
+                        :initialPreview="$form?->slider_image ? asset($form->slider_image) : null" :initialCaption="$form?->slider_image ? basename($form->slider_image) : null" />
+                </div>
+            </div>
+            
+            <!-- Slider Translation Tabs -->
+            <div class="mb-3">
+                <ul class="nav nav-tabs" role="tablist">
+                    @foreach ($locales as $locale => $language)
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link @if ($locale === config('app.locale')) active @endif"
+                                id="slider-locale-{{ $locale }}-tab" data-bs-toggle="tab"
+                                data-bs-target="#slider-locale-{{ $locale }}" type="button" role="tab"
+                                aria-controls="slider-locale-{{ $locale }}"
+                                aria-selected="@if ($locale === config('app.locale')) true @else false @endif">
+                                <img src="{{ asset($language['flag']) }}" class="lang-flag me-2"><span
+                                    class="fs-lg">{{ $language['name'] }}</span>
+                            </button>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+            
+            <div class="tab-content" id="sliderTabContent">
+                @foreach ($locales as $locale => $language)
+                    <div @class([
+                        'tab-pane fade',
+                        'show active' => $locale === config('app.locale'),
+                    ]) id="slider-locale-{{ $locale }}" role="tabpanel"
+                        aria-labelledby="slider-locale-{{ $locale }}-tab">
+                        <div class="row">
+                            <div class="col-md-8 offset-md-2">
+                                <x-form.input :label="__('form.slider_title')" name="translations[{{ $locale }}][slider_title]"
+                                    :value="old(
+                                        'translations.' . $locale . '.slider_title',
+                                        $translations[$locale]['slider_title'] ?? '',
+                                    )" />
+                            </div>
+                            <div class="col-md-8 offset-md-2">
+                                <x-form.textarea :label="__('form.slider_description')" name="translations[{{ $locale }}][slider_description]"
+                                    :value="old(
+                                        'translations.' . $locale . '.slider_description',
+                                        $translations[$locale]['slider_description'] ?? '',
+                                    )" rows="3" />
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+        
         <x-generate-seo :form="$form" />
     </x-form.layout>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const isSliderCheckbox = document.querySelector('input[name="is_slider"]');
+            const sliderSection = document.getElementById('slider-section');
+
+            function toggleSliderSection() {
+                sliderSection.style.display = isSliderCheckbox.checked ? 'block' : 'none';
+            }
+
+            isSliderCheckbox.addEventListener('change', toggleSliderSection);
+        });
+    </script>
 </x-app-layout>

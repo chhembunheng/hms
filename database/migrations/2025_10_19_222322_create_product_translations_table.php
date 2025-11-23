@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->longText('content')->nullable();
+            $table->string('slider_title')->nullable();
+            $table->text('slider_description')->nullable();
             $table->author();
 
             $table->unique(['product_id', 'locale']);

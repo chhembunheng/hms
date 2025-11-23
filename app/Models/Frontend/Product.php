@@ -17,6 +17,8 @@ class Product extends Model
         'image',
         'icon',
         'sort',
+        'is_slider',
+        'slider_image',
         'created_by',
         'updated_by',
         'deleted_by',
@@ -24,6 +26,7 @@ class Product extends Model
 
     protected $casts = [
         'sort' => 'integer',
+        'is_slider' => 'boolean',
     ];
 
 

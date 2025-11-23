@@ -14,6 +14,8 @@ class ProductTranslation extends Model
         'name',
         'description',
         'content',
+        'slider_title',
+        'slider_description',
         'created_by',
         'updated_by',
     ];

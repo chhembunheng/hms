@@ -14,6 +14,8 @@ class ServiceTranslation extends Model
         'name',
         'content',
         'description',
+        'slider_title',
+        'slider_description',
         'created_by',
         'updated_by',
     ];

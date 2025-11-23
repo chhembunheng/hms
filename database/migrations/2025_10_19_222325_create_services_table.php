@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('icon')->nullable();
             $table->string('image')->nullable();
+            $table->boolean('is_slider')->default(false);
+            $table->string('slider_image')->nullable();
             $table->unsignedInteger('sort')->default(0);
             $table->author();
         });
