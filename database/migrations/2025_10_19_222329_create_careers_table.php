@@ -17,13 +17,12 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->date('deadline')->nullable();
             $table->enum('type', ['full_time', 'part_time', 'internship'])->default('full_time');
-            $table->enum('level', ['junior', 'mid', 'senior'])->default('junior');
-            $table->enum('priority', ['low', 'medium', 'high'])->default('medium');
+            $table->enum('level', ['junior', 'mid', 'senior', 'intern'])->default('junior');
+            $table->enum('priority', ['urgent', 'low', 'medium', 'high'])->default('medium');
             $table->unsignedInteger('sort')->default(0);
             $table->boolean('is_active')->default(true);
             $table->author();
         });
-
     }
 
     /**

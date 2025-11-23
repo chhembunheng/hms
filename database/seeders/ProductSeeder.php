@@ -62,7 +62,7 @@ class ProductSeeder extends Seeder
                     );
                 }
             }
-            if(isset($product['features']) && is_array($product['features'])) {
+            if (isset($product['features']) && is_array($product['features'])) {
                 foreach ($product['features'] as $feature) {
                     $productFeatureModel = ProductFeature::create([
                         'product_id' => $productModel->id,

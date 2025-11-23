@@ -5,7 +5,6 @@
         "slug": "it-consulting",
         "icon": "fa-regular fa-solid fa-lightbulb",
         "image": "site/assets/img/services/it-consulting.png",
-        "content": "Expert IT consulting to align technology strategies with business goals.",
         "description": "We provide expert IT consulting to help businesses plan, design, and implement technology strategies aligned with their goals.",
         "content": "<article id=\"it-consulting\" class=\"service-card\"><header class=\"service-header\"><h3>IT Consulting</h3><p class=\"service-tagline\">Expert IT consulting to align technology strategies with business goals.</p></header><div class=\"service-body\"><p>Partner with our senior consultants to assess your current technology, identify gaps, and build a practical roadmap that supports growth, security, and cost efficiency. From strategy to execution, we guide you through architecture decisions, vendor selection, and change management to ensure measurable outcomes.</p><ul class=\"service-features\"><li>Technology assessments &amp; maturity reviews</li><li>IT roadmaps and budget planning</li><li>Solution architecture &amp; vendor selection</li><li>Governance, risk, and compliance alignment</li><li>Change management &amp; adoption planning</li></ul></div></article>",
         "keys": [
@@ -34,7 +33,6 @@
         "slug": "networking-solutions",
         "icon": "fa-solid fa-network-wired",
         "image": "site/assets/img/services/networking-solutions.png",
-        "content": "Comprehensive networking solutions for businesses of all sizes.",
         "description": "From secure Wi-Fi to enterprise LAN/WAN, we design and implement networking solutions that keep your business connected.",
         "content": "<article id=\"networking-solutions\" class=\"service-card\"><header class=\"service-header\"><h3>Networking Solutions</h3><p class=\"service-tagline\">Comprehensive networking solutions for businesses of all sizes.</p></header><div class=\"service-body\"><p>We plan, deploy, and manage secure, high-performance networks—wired and wireless—that scale with your business. Our designs prioritize uptime, visibility, and zero-trust principles to safeguard users and data across sites and remote locations.</p><ul class=\"service-features\"><li>LAN/WAN design and implementation</li><li>Secure Wi-Fi (802.11ax/6/6E) planning &amp; surveys</li><li>SD-WAN, VPN, and remote access</li><li>Network segmentation and zero-trust controls</li><li>Monitoring, alerting, and performance tuning</li></ul></div></article>",
         "keys": [
@@ -63,7 +61,6 @@
         "slug": "cybersecurity",
         "icon": "fa-solid fa-shield-halved",
         "image": "site/assets/img/services/cybersecurity.png",
-        "content": "Comprehensive cybersecurity services to protect your business.",
         "description": "Our cybersecurity services include vulnerability assessments, firewalls, endpoint protection, and 24/7 monitoring.",
         "content": "<article id=\"cybersecurity\" class=\"service-card\"><header class=\"service-header\"><h3>Cybersecurity</h3><p class=\"service-tagline\">Comprehensive cybersecurity services to protect your business.</p></header><div class=\"service-body\"><p>Defend your organization with layered security spanning people, process, and technology. We help you find and fix vulnerabilities, harden configurations, and detect threats in real time with continuous monitoring and response.</p><ul class=\"service-features\"><li>Vulnerability assessment &amp; remediation</li><li>Next-gen firewalls &amp; secure gateways</li><li>EDR/XDR endpoint protection</li><li>24/7 SOC monitoring &amp; incident response</li><li>Security awareness training &amp; phishing tests</li></ul></div></article>",
         "keys": [
@@ -92,7 +89,6 @@
         "slug": "cloud-solutions",
         "icon": "fa-solid fa-cloud",
         "image": "site/assets/img/services/cloud-solutions.png",
-        "content": "Cloud solutions to enhance business agility and scalability.",
         "description": "We help businesses migrate to the cloud with Microsoft 365, Google Workspace, AWS, and Azure, ensuring scalability and security.",
         "content": "<article id=\"cloud-solutions\" class=\"service-card\"><header class=\"service-header\"><h3>Cloud Solutions</h3><p class=\"service-tagline\">Cloud solutions to enhance business agility and scalability.</p></header><div class=\"service-body\"><p>Modernize workloads and empower teams with the right cloud model—public, private, or hybrid. We handle assessments, migrations, and ongoing optimization across Microsoft 365, Google Workspace, AWS, and Azure with security baked in.</p><ul class=\"service-features\"><li>Cloud readiness assessments &amp; TCO</li><li>Migrations (email, files, servers, apps)</li><li>Microsoft 365 &amp; Google Workspace enablement</li><li>AWS/Azure architecture &amp; cost optimization</li><li>Identity, access, and backup for cloud data</li></ul></div></article>",
         "keys": [
@@ -121,7 +117,6 @@
         "slug": "data-backup-recovery",
         "icon": "fa-solid fa-database",
         "image": "site/assets/img/services/data-backup-recovery.png",
-        "content": "Data backup and recovery solutions to protect your business.",
         "description": "We implement backup strategies and disaster recovery solutions to keep your critical data safe and quickly recoverable.",
         "content": "<article id=\"data-backup-recovery\" class=\"service-card\"><header class=\"service-header\"><h3>Data Backup &amp; Recovery</h3><p class=\"service-tagline\">Data backup and recovery solutions to protect your business.</p></header><div class=\"service-body\"><p>Protect critical systems with reliable, tested backups and disaster recovery. We design policies, automate retention, and perform recovery drills so you can restore quickly after incidents or ransomware attacks.</p><ul class=\"service-features\"><li>3-2-1 backup strategy and immutability</li><li>Image-based and file-level backups</li><li>DR planning, RPO/RTO targets, and runbooks</li><li>Cloud, on-prem, and hybrid repositories</li><li>Regular recovery tests and reporting</li></ul></div></article>",
         "keys": [
@@ -150,7 +145,6 @@
         "slug": "helpdesk-support",
         "icon": "fa-solid fa-headset",
         "image": "site/assets/img/services/helpdesk-support.png",
-        "content": "24/7 helpdesk services with SLA-based response times.",
         "description": "Our support team provides 24/7 helpdesk services with SLA-based response times to resolve technical issues quickly.",
         "content": "<article id=\"helpdesk-support\" class=\"service-card\"><header class=\"service-header\"><h3>Helpdesk &amp; Support</h3><p class=\"service-tagline\">24/7 helpdesk services with SLA-based response times.</p></header><div class=\"service-body\"><p>Give your users fast, friendly support around the clock. We offer multi-channel helpdesk services with clear SLAs, proactive device management, and detailed reporting to keep your teams productive.</p><ul class=\"service-features\"><li>24/7 multi-channel support (email, chat, phone)</li><li>SLA-based response &amp; escalation</li><li>Endpoint management and patching</li><li>Knowledge base and self-service portal</li><li>Monthly reporting and improvement plans</li></ul></div></article>",
         "keys": [

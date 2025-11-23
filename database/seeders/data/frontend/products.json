@@ -14,7 +14,6 @@
       {
         "locale": "en",
         "name": "HR Management System",
-        "content": "All-in-one HR system for efficient employee management.",
         "description": "Manage employees, payroll, and performance in one system.",
         "content": "Our HR Management System streamlines employee data, attendance, leave, payroll, and performance reviews. It reduces paperwork, ensures compliance, and empowers HR teams with analytics to improve workforce management.",
         "category": "Human Resources"
@@ -22,7 +21,6 @@
       {
         "locale": "km",
         "name": "ប្រព័ន្ធគ្រប់គ្រងធនធានមនុស្ស (HR)",
-        "content": "ប្រព័ន្ធ HR មួយតែគ្រប់យ៉ាង សម្រាប់គ្រប់គ្រងបុគ្គលិកឲ្យមានប្រសិទ្ធភាព។",
         "description": "គ្រប់គ្រងបុគ្គលិក ប្រាក់ខែ និងសមិទ្ធិផល ក្នុងប្រព័ន្ធតែមួយ។",
         "content": "ប្រព័ន្ធ HR របស់យើង ជួយសម្រួលទិន្នន័យបុគ្គលិក វត្តមាន ប្រាក់ឈ្នួល និងការវាយតម្លៃការងារ ដោយកាត់បន្ថយការងារក្រដាស ធានាភាពគោរពច្បាប់ និងផ្តល់វិភាគដល់ក្រុម HR ដើម្បីកែលម្អការគ្រប់គ្រងកម្លាំងពលកម្ម។",
         "category": "ធនធានមនុស្ស"
@@ -123,7 +121,6 @@
       {
         "locale": "en",
         "name": "School Management System",
-        "content": "Digital platform to manage students, classes, finance, and administration.",
         "description": "Automate student enrollment, class scheduling, fees, exams, and reporting for schools.",
         "content": "Our School Management System centralizes academic, finance, and administrative data for schools. It supports student enrollment, class lists, attendance, exams, transcripts, school fees, and communication with parents, helping schools work more efficiently and transparently.",
         "category": "Education"
@@ -131,7 +128,6 @@
       {
         "locale": "km",
         "name": "ប្រព័ន្ធគ្រប់គ្រងសាលា",
-        "content": "វេទិកាឌីជីថលសម្រាប់គ្រប់គ្រងសិស្ស ថ្នាក់ ហិរញ្ញវត្ថុ និងរដ្ឋបាលសាលា។",
         "description": "ស្វ័យប្រវត្តិកម្មការចុះឈ្មោះសិស្ស កាលវិភាគ ថ្លៃសិក្សា ការប្រឡង និងរបាយការណ៍សម្រាប់សាលា។",
         "content": "ប្រព័ន្ធគ្រប់គ្រងសាលារបស់យើង ប្រមូលទិន្នន័យវិជ្ជា ប្រាក់ និងរដ្ឋបាលទាំងអស់នៅកន្លែងតែមួយ។ ប្រព័ន្ធគាំទ្រការចុះឈ្មោះសិស្ស បញ្ជីថ្នាក់ វត្តមាន ការប្រឡង ពិន្ទុ ប័ណ្ណពិន្ទុ និងការទូរគមនាគមន៍ជាមួយមាតាបិតា ដើម្បីឲ្យសាលាធ្វើការងារបានមានប្រសិទ្ធភាព។",
         "category": "អប់រំ"
@@ -217,7 +213,6 @@
       {
         "locale": "en",
         "name": "Learning Management System (LMS)",
-        "content": "Deliver online courses, quizzes, and learning materials to students anytime.",
         "description": "Host digital courses, track learner progress, and support blended learning.",
         "content": "Our LMS allows schools and training centers to deliver online courses, upload lessons and videos, assign quizzes and homework, and track learner progress in real time. It supports blended learning, mobile access, and integration with school systems.",
         "category": "Education"
@@ -225,7 +220,6 @@
       {
         "locale": "km",
         "name": "ប្រព័ន្ធគ្រប់គ្រងការរៀន (LMS)",
-        "content": "ផ្តល់មេរៀនអនឡាញ សំណួរសាកល្បង និងឯកសារសិក្សាដល់សិស្សគ្រប់ពេល។",
         "description": "ផ្ទុកមេរៀនឌីជីថល តាមដានវឌ្ឍនភាពសិក្សា និងគាំទ្រការរៀនបញ្ចូលគ្នា (Blended Learning)។",
         "content": "LMS របស់យើង អនុញ្ញាតឲ្យសាលា និងមជ្ឈមណ្ឌលបណ្ដុះបណ្ដាល បង្ហោះមេរៀន វីដេអូ កិច្ចការផ្ទះ និងសំណួរសាកល្បង ហើយតាមដានវឌ្ឍនភាពសិស្សបានពេលវេលាពិត។ ប្រព័ន្ធគាំទ្រការរៀនតាមទូរសព្ទ និងអាចភ្ជាប់ជាមួយប្រព័ន្ធគ្រប់គ្រងសាលា។",
         "category": "អប់រំ"
@@ -311,7 +305,6 @@
       {
         "locale": "en",
         "name": "Point of Sale (POS) System",
-        "content": "Modern POS for sales, inventory, and cashier management.",
         "description": "Handle billing, inventory, and daily sales reports in one POS system.",
         "content": "Our POS System is designed for Cambodian retail shops, mini-marts, and restaurants. It supports barcode scanning, multiple payment methods, discount promotions, multi-branch inventory, and detailed sales reports to help owners control their business in real time.",
         "category": "Retail & F&B"
@@ -319,7 +312,6 @@
       {
         "locale": "km",
         "name": "ប្រព័ន្ធគ្រប់គ្រងលក់ (POS)",
-        "content": "ប្រព័ន្ធ POS ទំនើបសម្រាប់គ្រប់គ្រងការលក់ ស្តុក និងអ្នកគិតលុយ។",
         "description": "គ្រប់គ្រងវិក្ក័យប័ត្រ ស្តុក ទំនិញ និងរបាយការណ៍លក់ប្រចាំថ្ងៃ ក្នុងប្រព័ន្ធតែមួយ។",
         "content": "ប្រព័ន្ធ POS របស់យើង ត្រូវបានរចនាសម្រាប់ហាងលក់រាយ មីនីម៉ាត និងភោជនីយដ្ឋាននៅកម្ពុជា។ ប្រព័ន្ធគាំទ្រការស្កេនបាកូដ វិធីទូទាត់ជាច្រើន ការបញ្ចុះតម្លៃ ស្តុកសាខាច្រើន និងរបាយការណ៍លក់លម្អិត ដើម្បីឲ្យម្ចាស់អាជីវកម្មតាមដានបានពេលវេលាពិត។",
         "category": "លក់រាយ និងអាហារូបត្ថម្ភ"
@@ -405,7 +397,6 @@
       {
         "locale": "en",
         "name": "Accounting System",
-        "content": "Simplify bookkeeping, AP/AR, and financial statements.",
         "description": "Designed for Cambodian SMEs to manage accounts, tax, and financial reports.",
         "content": "Our Accounting System supports chart of accounts, journal entries, AP/AR, cash and bank modules, and financial statements such as balance sheet and income statement. It helps businesses comply with local standards and have a clear view of their finances.",
         "category": "Finance"
@@ -413,7 +404,6 @@
       {
         "locale": "km",
         "name": "ប្រព័ន្ធគ្រប់គ្រងគណនេយ្យ",
-        "content": "សម្រួលការចុះសៀវភៅ គណនេយ្យកក់-ជំពាក់ និងរបាយការណ៍ហិរញ្ញវត្ថុ។",
         "description": "រចនាឡើងសម្រាប់សហគ្រាសតូចមធ្យម (SME) នៅកម្ពុជា ដើម្បីគ្រប់គ្រងគណនេយ្យ ពន្ធ និងរបាយការណ៍ហិរញ្ញវត្ថុ។",
         "content": "ប្រព័ន្ធគ្រប់គ្រងគណនេយ្យរបស់យើង គាំទ្រផែនទីគណនី ការចុះប្រតិភូករារៀងរាល់ខែ គណនេយ្យកក់-ជំពាក់ ប្រាក់សាច់ និងគណនីធនាគារ និងរបាយការណ៍ហិរញ្ញវត្ថុដូចជា តុល្យការណ៍ និងរបាយការណ៍ប្រាក់ចំណេញ-ខាត។ វាជួយអាជីវកម្មគោរពតាមស្តង់ដារក្នុងស្រុក និងឲ្យឃើញស្ថានភាពហិរញ្ញវត្ថុច្បាស់លាស់។",
         "category": "ហិរញ្ញវត្ថុ"
@@ -499,7 +489,6 @@
       {
         "locale": "en",
         "name": "Loan Management System",
-        "content": "Digitize loan applications, schedules, and collection processes.",
         "description": "Built for MFIs, cooperatives, and lenders to manage client loans efficiently.",
         "content": "Our Loan Management System covers client onboarding, loan application, credit analysis, approval workflow, disbursement, repayment schedules, penalties, and portfolio reporting. It fits microfinance institutions and lending companies in Cambodia.",
         "category": "Finance"
@@ -507,7 +496,6 @@
       {
         "locale": "km",
         "name": "ប្រព័ន្ធគ្រប់គ្រងឥណទាន",
-        "content": "ឌីជីថលកម្មការដាក់ពាក្យខ្ចីលុយ កាលវិភាគបង់ និងដំណើរការប្រមូលប្រាក់។",
         "description": "សម្រាប់ស្ថាប័នមីក្រូហិរញ្ញវត្ថុ សហគមន៍ និងក្រុមហ៊ុនឥណទាន ដើម្បីគ្រប់គ្រងឥណទានអតិថិជនប្រកបដោយប្រសិទ្ធភាព។",
         "content": "ប្រព័ន្ធគ្រប់គ្រងឥណទានរបស់យើង គ្របដណ្ដប់ការចុះបញ្ជីអតិថិជន ការដាក់ពាក្យខ្ចីលុយ វាយតម្លៃឥណទាន ដំណើរការអនុម័ត ការចេញប្រាក់កម្ចី កាលវិភាគបង់ប្រាក់ ប្រាក់ពិន័យ និងរបាយការណ៍ក្រពះឥណទាន។ វាសមរម្យសម្រាប់ស្ថាប័នមីក្រូហិរញ្ញវត្ថុ និងក្រុមហ៊ុនឥណទាននៅកម្ពុជា។",
         "category": "ហិរញ្ញវត្ថុ"
@@ -593,7 +581,6 @@
       {
         "locale": "en",
         "name": "Content Management System (CMS)",
-        "content": "Manage website pages, blogs, menus, and media without coding.",
         "description": "Flexible CMS for multi-language websites tailored to Cambodian organizations.",
         "content": "Our CMS lets your team manage pages, news, events, banners, and menus in multiple languages such as Khmer and English. It includes role-based access, SEO tools, and media library management, making website updates fast and secure.",
         "category": "Web & Digital"
@@ -601,7 +588,6 @@
       {
         "locale": "km",
         "name": "ប្រព័ន្ធគ្រប់គ្រងមាតិកា (CMS)",
-        "content": "គ្រប់គ្រងទំព័រគេហទំព័រ ប្លុក មឺនុយ និងរូបភាព ដោយមិនចាំបាច់សរសេរកូដ។",
         "description": "CMS មានភាពបត់បែន សម្រាប់គេហទំព័រភាសាច្រើន ដែលសមស្របនឹងអង្គការកម្ពុជាផ្សេងៗ។",
         "content": "ប្រព័ន្ធ CMS របស់យើង អនុញ្ញាតឲ្យក្រុមការងាររបស់អ្នក គ្រប់គ្រងទំព័រ ព័ត៌មាន ព្រឹត្តិការណ៍ បដា និងមឺនុយ ជាភាសាខ្មែរ អង់គ្លេស និងភាសាផ្សេងៗទៀត។ ប្រព័ន្ធមានការគ្រប់គ្រងសិទ្ធិអ្នកប្រើ ឧបករណ៍ SEO និងបណ្ណាល័យមេឌៀ ដើម្បីធ្វើឲ្យការធ្វើបច្ចុប្បន្នភាពគេហទំព័ររហ័ស និងសុវត្ថិភាព។",
         "category": "គេហទំព័រ និងឌីជីថល"
@@ -687,7 +673,6 @@
       {
         "locale": "en",
         "name": "Real Estate Management System",
-        "content": "Manage properties, clients, agents, contracts, and payments.",
         "description": "Perfect for real estate agencies, borey projects, and property managers.",
         "content": "Our Real Estate Management System helps agencies and developers manage property listings, units, clients, agents, reservations, booking deposits, sales contracts, and rental agreements. It provides dashboards and reports to track sales, commissions, and payment schedules.",
         "category": "Real Estate"
@@ -695,7 +680,6 @@
       {
         "locale": "km",
         "name": "ប្រព័ន្ធគ្រប់គ្រងអចលនទ្រព្យ",
-        "content": "គ្រប់គ្រងអចលនទ្រព្យ អតិថិជន ភ្នាក់ងារ កិច្ចសន្យា និងការទូទាត់។",
         "description": "សមស្របសម្រាប់ភ្នាក់ងារអចលនទ្រព្យ គម្រោងបុរី និងអ្នកគ្រប់គ្រងអចលនទ្រព្យ។",
         "content": "ប្រព័ន្ធគ្រប់គ្រងអចលនទ្រព្យរបស់យើង ជួយភ្នាក់ងារ និងអ្នកអភិវឌ្ឍគម្រោង គ្រប់គ្រងបញ្ជីអចលនទ្រព្យ ឯកតាលក់ អតិថិជន ភ្នាក់ងារ ការកក់ ការទូទាត់ប្រាក់កក់ កិច្ចសន្យាលក់ និងកិច្ចសន្យាដឹកជញ្ជូនជួល។ វាមានផ្ទាំងព័ត៌មាន និងរបាយការណ៍សម្រាប់តាមដានការលក់ កម្រៃជើងសារ និងកាលវិភាគបង់ប្រាក់។",
         "category": "អចលនទ្រព្យ"
@@ -781,7 +765,6 @@
       {
         "locale": "en",
         "name": "Hotel Management System",
-        "content": "Manage room reservations, check-in/out, housekeeping, and billing.",
         "description": "Suitable for hotels, guesthouses, and resorts across Cambodia.",
         "content": "Our Hotel Management System handles walk-in and online reservations, room availability, check-in/check-out, housekeeping status, mini-bar charges, and guest billing. It helps hotel owners improve occupancy, service quality, and financial control.",
         "category": "Hospitality"
@@ -789,7 +772,6 @@
       {
         "locale": "km",
         "name": "ប្រព័ន្ធគ្រប់គ្រងសណ្ឋាគារ",
-        "content": "គ្រប់គ្រងការកក់បន្ទប់ Check-in/Check-out បន្ទប់ និងវិក្ក័យប័ត្រអតិថិជន។",
         "description": "សមស្របសម្រាប់សណ្ឋាគារ ផ្ទះសំណាក់ និងរមណីយដ្ឋានទូទាំងប្រទេសកម្ពុជា។",
         "content": "ប្រព័ន្ធគ្រប់គ្រងសណ្ឋាគាររបស់យើង គ្របដណ្ដប់ការកក់បន្ទប់ តាមអ៊ីនធឺណិត និងធម្មតា ការត្រួតពិនិត្យបន្ទប់ទំនេរ Check-in/Check-out ស្ថានភាពបន្ទប់សម្អាត ថ្លៃ mini-bar និងវិក្ក័យប័ត្រអតិថិជន។ វាជួយម្ចាស់សណ្ឋាគារកែលម្អអត្រាបំពេញបន្ទប់ គុណភាពសេវា និងការគ្រប់គ្រងហិរញ្ញវត្ថុ។",
         "category": "សណ្ឋាគារ និងទេសចរណ៍"

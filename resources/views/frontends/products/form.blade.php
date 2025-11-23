@@ -2,11 +2,11 @@
     <x-form.layout :form="$form">
         <div class="row">
             <div class="col-md-6">
-                <x-form.icon :label="__('form.icon')" name="icon" value="{{ old('icon', $form?->icon) }}" />
+                <x-form.icon :label="__('form.icon')" name="icon" value="{{ old('icon', $form?->icon) }}" :text="false"/>
             </div>
             <div class="col-md-6">
                 <x-form.select :label="__('form.navigation')" name="navigation_id" :selected="old('navigation_id', $form?->navigation?->parent_id)"
-                    :options="$navigations" data-placeholder="Select a navigation" />
+                    :options="$navigations" data-placeholder="Select a navigation"/>
             </div>
             <div class="col-md-6">
                 <x-form.select multiple data-searchable="false" :label="__('form.category')" name="category_id[]" :selected="$form?->categories?->pluck('id')->toArray()"
@@ -59,14 +59,6 @@
                                     'translations.' . $locale . '.name',
                                     $translations[$locale]['name'] ?? '',
                                 )" required lang="{{ $locale }}"/>
-                        </div>
-                        <div class="col-md-8 offset-md-2">
-                            <x-form.textarea :label="__('form.content')"
-                                name="translations[{{ $locale }}][content]" :value="old(
-                                    'translations.' . $locale . '.content',
-                                    $translations[$locale]['content'] ?? '',
-                                )"
-                                rows="2" lang="{{ $locale }}"/>
                         </div>
                         <div class="col-md-8 offset-md-2">
                             <x-form.textarea :label="__('form.description')" name="translations[{{ $locale }}][description]"

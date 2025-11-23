@@ -9,13 +9,14 @@ use App\Models\Frontend\Product;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Frontend\ProductFeature;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Frontend\ProductTranslation;
 use App\DataTables\Frontend\ProductDataTable;
 use App\Models\Frontend\ProductFeatureDetail;
+use App\Models\Frontend\NavigationTranslation;
 use App\Models\Frontend\ProductFeatureTranslation;
 use App\Models\Frontend\ProductFeatureDetailTranslation;
-use Illuminate\Support\Facades\Artisan;
 
 class ProductController extends Controller
 {
@@ -177,6 +178,7 @@ class ProductController extends Controller
                     
 
                     $translations = [];
+                    $linkeds = [];
                     foreach ($this->locales->keys() as $locale) {
                         $trans = $request->input("translations.{$locale}");
                         $translations[] = [
@@ -188,17 +190,16 @@ class ProductController extends Controller
                             'locale' => $locale,
                             'updated_by' => auth()->id(),
                         ];
-                        $linked->translations()->updateOrCreate(
-                            ['locale' => $locale],
-                            [
-                                'name' => $trans['name'],
-                                'label' => $trans['name'],
-                                'updated_by' => auth()->id(),
-                            ]
-                        );
+                        $linkeds[] = [
+                            'navigation_id' => $linked->id,
+                            'locale' => $locale,
+                            'name' => $trans['name'],
+                            'label' => $trans['name'],
+                            'updated_by' => auth()->id(),
+                        ];
                     }
+                    NavigationTranslation::upsert($linkeds, ['navigation_id', 'locale'], ['name', 'label', 'updated_by']);
                     ProductTranslation::upsert($translations, ['product_id', 'locale'], ['name', 'content', 'description', 'content', 'updated_by']);
-                    dd($translations);
                     Artisan::call('cache:clear');
                 });
                 return success(message: 'Product updated successfully');
