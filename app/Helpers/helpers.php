@@ -268,7 +268,7 @@ if (! function_exists('formate_date')) {
 }
 
 if (! function_exists('badge')) {
-    function badge(string $status = '', string $text = '')
+    function badge(?string $status = '', ?string $text = '')
     {
         $statuses = [
             'success' => 'badge bg-success bg-opacity-10 text-success',
@@ -320,12 +320,13 @@ if (! function_exists('badge')) {
             'full time' => 'badge bg-success bg-opacity-10 text-success',
         ];
 
-        $status = strtolower($status);
-        $displayText = $text ?: ucwords($status);
-        if (empty($displayText)) {
+        // Normalize nullable inputs
+        $normalizedStatus = strtolower(trim((string)($status ?? '')));
+        $displayText = ($text !== null && $text !== '') ? $text : ucwords($normalizedStatus);
+        if (empty(trim($displayText))) {
             $displayText = 'N/A';
         }
-        $class = $statuses[$status] ?? $statuses['na'];
+        $class = $statuses[$normalizedStatus] ?? $statuses['na'];
         return '<span class="' . $class . '">' . $displayText . '</span>';
     }
 }

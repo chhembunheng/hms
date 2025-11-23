@@ -36,13 +36,14 @@
                             <h3>{{ __('global.our_services') }}</h3>
                         </div>
                         <ul class="footer-quick-links">
-                            @foreach (json_decode(file_get_contents(public_path('site/data/' . app()->getLocale() . '/services.json'))) ?? [] as $service)
+                            @forelse ($services ?? [] as $service)
                                 <li>
-                                    <a href="{{ Route::has('services') ? route('services', ['locale' => app()->getLocale(), 'slug' => $service->slug]) : '#' }}" aria-label="{{ $service->name }}">
-                                        {{ $service->name }}
+                                    <a href="{{ Route::has('services') ? route('services', ['locale' => app()->getLocale(), 'slug' => $service->slug]) : '#' }}" aria-label="{{ $service->translations?->where('locale', app()->getLocale())->first()?->name ?? 'Service' }}">
+                                        {{ $service->translations?->where('locale', app()->getLocale())->first()?->name ?? 'Service' }}
                                     </a>
                                 </li>
-                            @endforeach
+                            @empty
+                            @endforelse
                         </ul>
                     </div>
                 </div>

@@ -1,6 +1,9 @@
 <x-frontend-layout>
+    @isset($stats['user_count'])
+        <div class="px-4 py-2 text-sm text-gray-600" data-test="user-count">{{ $stats['user_count'] }}</div>
+    @endisset
     @php
-        $feedbacks = json_decode(file_get_contents(public_path('site/data/' . app()->getLocale() . '/feedbacks.json')));
+        $feedbacks = $feedbacks ?? collect();
         if (isset($client)) {
             $dir = public_path('site/assets/img/clients');
             $allowed_ext = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'];
@@ -33,13 +36,12 @@
     @isset($article)
         @php
             $slug = $article->slug;
-            $json = json_decode(file_get_contents(public_path('site/data/' . app()->getLocale() . '/articles.json')), true);
-            $jsons = collect($json)->sortBy(fn($a) => \Carbon\Carbon::parse($a['date'])->timestamp)->values();
+            $articles_list = $articles ?? collect();
             $currentSlug = $slug;
-            $index = $jsons->search(fn($a) => $a['slug'] === $currentSlug);
+            $index = $articles_list->search(fn($a) => $a->slug === $currentSlug);
 
-            $prev = $index !== false && $index > 0 ? (object) $jsons[$index - 1] : null;
-            $next = $index !== false && $index < $jsons->count() - 1 ? (object) $jsons[$index + 1] : null;
+            $prev = $index !== false && $index > 0 ? $articles_list[$index - 1] : null;
+            $next = $index !== false && $index < $articles_list->count() - 1 ? $articles_list[$index + 1] : null;
             $next = !empty($next) ? route('blogs', ['locale' => app()->getLocale(), 'slug' => $next->slug]) : '';
             $prev = !empty($prev) ? route('blogs', ['locale' => app()->getLocale(), 'slug' => $prev->slug]) : '';
         @endphp

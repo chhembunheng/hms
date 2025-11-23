@@ -1,5 +1,7 @@
 <?php
 
+skipIfNoDb();
+
 use App\Models\User;
 
 test('profile page is displayed', function () {

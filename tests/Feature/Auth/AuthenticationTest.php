@@ -1,5 +1,7 @@
 <?php
 
+skipIfNoDb();
+
 use App\Models\User;
 
 test('login screen can be rendered', function () {

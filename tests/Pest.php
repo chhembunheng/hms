@@ -45,3 +45,10 @@ function something()
 {
     // ..
 }
+
+function skipIfNoDb(): void
+{
+    if (!extension_loaded('pdo_sqlite')) {
+        test()->markTestSkipped('SQLite driver missing: DB-dependent test skipped.');
+    }
+}

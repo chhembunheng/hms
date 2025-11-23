@@ -1,12 +1,12 @@
-@props(['categories' => []])
-@if ($categories)
+@props(['faqs' => []])
+@if ($faqs)
     <section class="faq-section section-padding">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 offset-lg-1">
                     <div class="faq-accordion first-faq-box">
                         <ul class="accordion">
-                            @foreach ($categories as $index => $category)
+                            @foreach ($faqs as $index => $category)
                                 @foreach ($category->faqs as $row)
                                     <li class="accordion-item mb-3">
                                         <a class="accordion-title" href="#{{ slug($category->slug) }}-{{ $row->id }}"> <i class="fa-solid fa-angle-right"></i> {{ $row->question }}</a>
