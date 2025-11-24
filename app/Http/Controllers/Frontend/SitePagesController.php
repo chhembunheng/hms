@@ -39,7 +39,9 @@ class SitePagesController extends Controller
                 $data[$key] = $collection;
             }
         }
-        $data['area'] = $area;
+        if(!empty($area)) {
+            $data['area'] = $area;
+        }
         return view('welcome', $data);
     }
 

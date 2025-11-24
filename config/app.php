@@ -28,6 +28,12 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+
+    'admin_domain' => env('ADMIN_DOMAIN', 'admin.example.com'),
+    'public_domain' => env('PUBLIC_DOMAIN', 'www.example.com'),
+    'api_domain' => env('API_DOMAIN', 'api.example.com'),
+    'asset_domain' => env('ASSET_DOMAIN', 'assets.example.com'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
