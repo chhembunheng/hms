@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Settings\Menu;
-use App\Models\Settings\Role;
-use App\Models\Settings\Permission;
-use App\Models\Settings\DashboardCache;
-use App\Models\Frontend\Team;
-use App\Models\Frontend\Service;
-use App\Models\Frontend\Partner;
-use App\Models\Frontend\Client;
-use App\Models\Frontend\Product;
 use Illuminate\Http\Request;
+use App\Models\Frontend\Team;
+use App\Models\Settings\Menu;
+use App\Models\Settings\User;
+use App\Models\Frontend\Client;
+use App\Models\Frontend\Partner;
+use App\Models\Frontend\Product;
+use App\Models\Frontend\Service;
 use Illuminate\Support\Facades\DB;
+use App\Models\Settings\DashboardCache;
 
 class DashboardController extends Controller
 {

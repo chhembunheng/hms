@@ -78,4 +78,17 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         return $this->belongsToMany(Role::class, 'user_role', 'user_id', 'role_id');
     }
 
+    public function getNameAttribute()
+    {
+        $tran = $this->translations()->where('locale', app()->getLocale())->first();
+        if ($tran && !empty($tran->name)) {
+            return $tran->name;
+        }
+        return $tran->last_name . ' ' . $tran->first_name;
+    }
+
+     public function translations()
+    {
+        return $this->hasMany(UserTranslation::class, 'user_id');
+    }
 }

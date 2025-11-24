@@ -15,16 +15,24 @@
          </div>
          <ul class="nav flex-row justify-content-end align-items-center">
              <li class="nav-item nav-item-dropdown-lg dropdown language-switch">
-                 <a href="#" class="navbar-nav-link navbar-nav-link-icon rounded-pill lang-flag-text" data-bs-toggle="dropdown" aria-expanded="false">
-                     <img src="{{ asset('assets/images/lang/' . app()->getLocale() . '.png') }}" class="lang-flag">
-                     <span class="d-none d-lg-inline-block ms-2 me-1">{{ __('admin.' . app()->getLocale()) }}</span>
+                 @php
+                     $languages = collect(config('init.languages'));
+                     $currentLocale = app()->getLocale();
+                     $currentLanguage = $languages->firstWhere('code', $currentLocale);
+                 @endphp
+                 <a href="#" class="navbar-nav-link navbar-nav-link-icon rounded-pill lang-flag-text"
+                     data-bs-toggle="dropdown" aria-expanded="false">
+                     <img src="{{ asset($currentLanguage['flag']) }}" class="lang-flag">
+                     <span class="d-none d-lg-inline-block ms-2 me-1">{{ $currentLanguage['name'] }}</span>
+                     <i class="fa-solid fa-chevron-down fa-fw" style="font-size: 0.75rem;"></i>
                  </a>
                  <div class="dropdown-menu dropdown-menu-end">
-                     @foreach (config('app.translations') ?? [] as $locale => $language)
+                     @foreach ($languages as $locale => $lang)
                          @if ($locale != app()->getLocale())
-                             <a href="{{ Route::has('admin.lang') ? route('admin.lang', ['lang' => $locale]) : '#' }}" class="dropdown-item lang-flag-text">
-                                 <img src="{{ asset('assets/images/lang/' . $locale . '.png') }}" class="lang-flag">
-                                 <span class="ms-2">{{ $language }}</span>
+                             <a href="{{ Route::has('admin.lang') ? route('admin.lang', ['lang' => $locale]) : '#' }}"
+                                 class="dropdown-item lang-flag-text">
+                                 <img src="{{ asset($lang['flag']) }}" class="lang-flag">
+                                 <span class="ms-2">{{ $lang['name'] }}</span>
                              </a>
                          @endif
                      @endforeach
@@ -32,18 +40,23 @@
              </li>
              @if (auth()->check())
                  <li class="nav-item ms-lg-2">
-                     <a href="index.html#" class="navbar-nav-link navbar-nav-link-icon rounded-pill" data-bs-toggle="offcanvas" data-bs-target="#notifications">
+                     <a href="index.html#" class="navbar-nav-link navbar-nav-link-icon rounded-pill"
+                         data-bs-toggle="offcanvas" data-bs-target="#notifications">
                          <i class="fa-solid fa-bell fa-fw"></i>
-                         <span class="badge bg-yellow text-black position-absolute top-0 end-0 translate-middle-top zindex-1 rounded-pill mt-1 me-1">2</span>
+                         <span
+                             class="badge bg-yellow text-black position-absolute top-0 end-0 translate-middle-top zindex-1 rounded-pill mt-1 me-1">2</span>
                      </a>
                  </li>
                  <li class="nav-item nav-item-dropdown-lg dropdown ms-lg-2">
-                     <a href="index.html#" class="navbar-nav-link align-items-center rounded-pill p-1" data-bs-toggle="dropdown">
+                     <a href="index.html#" class="navbar-nav-link align-items-center rounded-pill p-1"
+                         data-bs-toggle="dropdown">
                          <div class="status-indicator-container">
-                             <img src="{{ asset('assets/images/default/male-avatar.jpg') }}" class="w-32px h-32px rounded-pill">
+                             <img src="{{ asset('assets/images/default/male-avatar.jpg') }}"
+                                 class="w-32px h-32px rounded-pill">
                              <span class="status-indicator bg-success"></span>
                          </div>
                          <span class="d-none d-lg-inline-block mx-lg-2">{{ auth()->user()->name }}</span>
+                         <i class="fa-solid fa-chevron-down fa-fw" style="font-size: 0.75rem;"></i>
                      </a>
 
                      <div class="dropdown-menu dropdown-menu-end">
@@ -53,7 +66,6 @@
                                  {{ __('root.nav.manage_your_account') }}
                              </a>
                          @endif
-                         <div class="dropdown-divider"></div>
                          <a href="#" class="dropdown-item" onclick="clearCache()">
                              <i class="fa-solid fa-broom-wide me-2 fa-fw"></i>
                              {{ __('root.nav.clear_cache') }}
