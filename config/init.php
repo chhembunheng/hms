@@ -47,5 +47,7 @@ return [
         'careers' => ['careers'],
         'blogs' => ['blogs'],
         'integrations' => ['integrations'],
+        'teams' => ['teams', 'talk'],
+        'faqs' => ['faqs', 'talk']
     ],
 ];

@@ -19,7 +19,7 @@ Route::domain(config('app.public_domain'))->group(function () {
 
         Route::get('/terms-condition', [$controller, 'termsCondition'])->name('terms-condition');
 
-        Route::get('/faq', [$controller, 'faq'])->name('faq');
+        Route::get('/faqs', [$controller, 'faqs'])->name('faqs');
 
         Route::get('/about', [$controller, 'about'])->name('about');
 

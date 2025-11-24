@@ -202,4 +202,13 @@ return [
     'no_parent' => 'No Parent',
     'save' => 'Save',
     'list' => 'List',
+    'faq' => 'FAQ',
+    'faqs' => 'FAQs',
+    'our_offered_services' => 'Our Offered Services',
+    'our_products' => 'Our Products',
+    'our_teams' => 'Our Teams',
+    'our_team' => 'Our Teams',
+    'our_privacy_policy' => 'Our Privacy Policy',
+    'our_cookie_policy' => 'Our Cookie Policy',
+    'our_terms_and_conditions' => 'Our Terms and Conditions',
 ];

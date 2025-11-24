@@ -52,10 +52,12 @@ class SitePagesController extends Controller
 
     public function privacyPolicy()
     {
-        return $this->loadView()->with('area', [
+        $content = file_get_contents(public_path('site/data/' . app()->getLocale() . '/privacy-policy.html'));
+        $area = [
             'title' => __('global.privacy_policy'),
             'subtitle' => __('global.our_privacy_policy'),
-        ]);
+        ];
+        return $this->loadView()->with('content', $content)->with('area', $area);
     }
 
     public function cookiePolicy()
@@ -73,7 +75,7 @@ class SitePagesController extends Controller
             'subtitle' => __('global.our_terms_and_conditions'),
         ]);
     }
-    public function faq()
+    public function faqs()
     {
         return $this->loadView()->with('area', [
             'title' => __('global.faq'),
@@ -99,10 +101,11 @@ class SitePagesController extends Controller
 
     public function teams()
     {
-        return $this->loadView()->with('area', [
+        $area = [
             'title' => __('global.our_team'),
             'subtitle' => __('global.meet_our_experts'),
-        ]);
+        ];
+        return $this->loadView($area);
     }
     public function about()
     {

@@ -1,407 +1,418 @@
 [
     {
-        "id": 1,
-        "name": "Hang Sovann",
-        "position": "Managing Director",
         "slug": "hang-sovann",
-        "photo": "site/assets/img/teams/hang-sovann.png",
-        "socials": {
-            "telegram": "https://t.me/Mr_Sovann",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/mnusthemy",
-            "linkedin": "#",
-            "github": "#"
-        }
+        "photo": "storage/uploads/teams/hang-sovann.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Hang Sovann",
+                "position": "Director"
+            },
+            {
+                "locale": "km",
+                "name": "សុវណ្ណ ហង្ស",
+                "position": "នាយក"
+            }
+        ]
     },
     {
-        "id": 2,
-        "name": "Boran Borei",
-        "position": "Project Coordinator",
-        "slug": "boran-borei",
-        "photo": "site/assets/img/teams/boran-borei.png",
-        "socials": {
-            "telegram": "https://t.me/borei417",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/blurey417",
-            "linkedin": "#",
-            "github": "#"
-        }
+        "slug": "sem-chantha",
+        "photo": "storage/uploads/teams/sem-chantha.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Sem Chantha",
+                "position": "Project Coordinator"
+            },
+            {
+                "locale": "km",
+                "name": "សែម ចន្ថា",
+                "position": "អ្នកសម្របសម្រួលគម្រោង"
+            }
+        ]
     },
     {
-        "id": 3,
-        "name": "Gnen Chantha",
-        "position": "Project Coordinator",
-        "slug": "gnen-chantha",
-        "photo": "site/assets/img/teams/gnen-chantha.png",
-        "socials": {
-            "telegram": "https://t.me/Mr_ChanthaGnen",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/sem.chantha999",
-            "linkedin": "#",
-            "github": "#"
-        }
-    },
-    {
-        "id": 4,
-        "name": "Kim Hay",
-        "position": "Senior Developer",
-        "slug": "kim-hay",
-        "photo": "site/assets/img/teams/kim-hay.png",
-        "socials": {
-            "telegram": "https://t.me/kimhay168",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/kim.hay.92102",
-            "linkedin": "#",
-            "github": "#"
-        }
-    },
-    {
-        "id": 5,
-        "name": "Kak Vatey",
-        "position": "Accountant",
-        "slug": "kak-vatey",
-        "photo": "site/assets/img/teams/kak-vatey.png",
-        "socials": {
-            "telegram": "https://t.me/soraavatey_k157",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/soraa.vatey",
-            "linkedin": "#",
-            "github": "#"
-        }
-    },
-    {
-        "id": 6,
-        "name": "Bun ChivEng",
-        "position": "Developer",
-        "slug": "bun-chiveng",
-        "photo": "site/assets/img/teams/bun-chiveng.png",
-        "socials": {
-            "telegram": "https://t.me/Ingg_89",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/inging99888",
-            "linkedin": "#",
-            "github": "#"
-        }
-    },
-    {
-        "id": 7,
-        "name": "Khom Davon",
-        "position": "Developer",
-        "slug": "khom-davon",
-        "photo": "site/assets/img/teams/khom-davon.png",
-        "socials": {
-            "telegram": "https://t.me/Cha_von",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/junwoovon",
-            "linkedin": "#",
-            "github": "#"
-        }
-    },
-    {
-        "id": 8,
-        "name": "Phon Lykheng",
-        "position": "Senior Developer",
-        "slug": "phon-lykheng",
-        "photo": "site/assets/img/teams/phon-lykheng.png",
-        "socials": {
-            "telegram": "https://t.me/LYKHENGG",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/lykheng.phon",
-            "linkedin": "#",
-            "github": "#"
-        }
-    },
-    {
-        "id": 9,
-        "name": "Roeun Chamnab",
-        "position": "Senior Developer",
-        "slug": "roeun-chamnab",
-        "photo": "site/assets/img/teams/roeun-chamnab.png",
-        "socials": {
-            "telegram": "https://t.me/CHAMN4B",
-            "twitter": "https://x.com/liuqirc",
-            "email": "chamnab@wintech.com.kh",
-            "facebook": "https://facebook.com/CHAMN4B",
-            "linkedin": "#",
-            "github": "https://github.com/CHAMN4B"
-        }
-    },
-    {
-        "id": 10,
-        "name": "Chhem Bunheng",
-        "position": "Developer",
-        "slug": "chhem-bunheng",
-        "photo": "site/assets/img/teams/chhem-bunheng.png",
-        "socials": {
-            "telegram": "https://t.me/henggdev_04",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/Hengslytherinn",
-            "linkedin": "#",
-            "github": "#"
-        }
-    },
-    {
-        "id": 11,
-        "name": "Chhom Phea",
-        "position": "Senior Developer",
-        "slug": "chhom-phea",
-        "photo": "site/assets/img/teams/chhom-phea.png",
-        "socials": {
-            "telegram": "https://t.me/Pheadev",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/chhom.phea168",
-            "linkedin": "#",
-            "github": "#"
-        }
-    },
-    {
-        "id": 12,
-        "name": "Houy Sengleang",
-        "position": "Developer",
-        "slug": "houy-sengleang",
-        "photo": "site/assets/img/teams/houy-sengleang.png",
-        "socials": {
-            "telegram": "https://t.me/houysengleang",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/LEANG0212",
-            "linkedin": "#",
-            "github": "#"
-        }
-    },
-    {
-        "id": 13,
-        "name": "Ly Mengpor",
-        "position": "Mobile Developer",
-        "slug": "ly-mengpor",
-        "photo": "site/assets/img/teams/ly-mengpor.png",
-        "socials": {
-            "telegram": "https://t.me/mengporly",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/mengporly",
-            "linkedin": "#",
-            "github": "#"
-        }
-    },
-    {
-        "id": 14,
-        "name": "Nhem Koemheng",
-        "position": "Developer",
-        "slug": "nhem-koemheng",
-        "photo": "site/assets/img/teams/nhem-koemheng.png",
-        "socials": {
-            "telegram": "https://t.me/nhemkoemheng",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/nhem.kimheng",
-            "linkedin": "#",
-            "github": "#"
-        }
-    },
-    {
-        "id": 15,
-        "name": "Seng Keatann",
-        "position": "Developer",
-        "slug": "seng-keatann",
-        "photo": "site/assets/img/teams/seng-keatann.png",
-        "socials": {
-            "telegram": "https://t.me/sengg_an",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/sengg.an.923612",
-            "linkedin": "#",
-            "github": "#"
-        }
-    },
-    {
-        "id": 16,
-        "name": "Ser Sreang",
-        "position": "Developer",
         "slug": "ser-sreang",
-        "photo": "site/assets/img/teams/ser-sreang.png",
-        "socials": {
-            "telegram": "https://t.me/codedev555",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/sreang.kim.5555",
-            "linkedin": "#",
-            "github": "#"
-        }
+        "photo": "storage/uploads/teams/ser-sreang.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Ser Sreang",
+                "position": "Developer"
+            },
+            {
+                "locale": "km",
+                "name": "សើ ស្រៀង",
+                "position": "អ្នកអភិវឌ្ឍន៍"
+            }
+        ]
     },
     {
-        "id": 17,
-        "name": "Soy Sokvicheter",
-        "position": "Senior Developer",
         "slug": "soy-sokvicheter",
-        "photo": "site/assets/img/teams/soy-sokvicheter.png",
-        "socials": {
-            "telegram": "https://t.me/+85515533364",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/uhnmmmfwu2",
-            "linkedin": "#",
-            "github": "#"
-        }
+        "photo": "storage/uploads/teams/soy-sokvicheter.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Soy Sokvicheter",
+                "position": "Developer"
+            },
+            {
+                "locale": "km",
+                "name": "សយ សុខវិចិត្រ",
+                "position": "អ្នកអភិវឌ្ឍន៍"
+            }
+        ]
     },
     {
-        "id": 18,
-        "name": "Tab Luch",
-        "position": "Developer",
-        "slug": "tab-luch",
-        "photo": "site/assets/img/teams/tab-luch.png",
-        "socials": {
-            "telegram": "https://t.me/LuchTab11",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/LuchTab",
-            "linkedin": "#",
-            "github": "#"
-        }
+        "slug": "phon-lykheng",
+        "photo": "storage/uploads/teams/phon-lykheng.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Phon Lykheng",
+                "position": "Developer"
+            },
+            {
+                "locale": "km",
+                "name": "ផុន លីឃេង",
+                "position": "អ្នកអភិវឌ្ឍន៍"
+            }
+        ]
     },
     {
-        "id": 19,
-        "name": "Yen Sokreach",
-        "position": "Developer",
-        "slug": "yen-sokreach",
-        "photo": "site/assets/img/teams/yen-sokreach.png",
-        "socials": {
-            "telegram": "https://t.me/RE_4_CH",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/reach.real99",
-            "linkedin": "#",
-            "github": "#"
-        }
-    },
-    {
-        "id": 20,
-        "name": "Yim Sinara",
-        "position": "Developer",
-        "slug": "yim-sinara",
-        "photo": "site/assets/img/teams/yim-sinara.png",
-        "socials": {
-            "telegram": "https://t.me/yimsinara",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/yimsinara168",
-            "linkedin": "#",
-            "github": "#"
-        }
-    },
-    {
-        "id": 21,
-        "name": "Yous Phors",
-        "position": "Developer",
         "slug": "yous-phors",
-        "photo": "site/assets/img/teams/yous-phors.png",
-        "socials": {
-            "telegram": "https://t.me/Yous_Phors",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/yous.phors",
-            "linkedin": "#",
-            "github": "#"
-        }
+        "photo": "storage/uploads/teams/yous-phors.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Yous Phors",
+                "position": "Developer"
+            },
+            {
+                "locale": "km",
+                "name": "យូស ភាស់",
+                "position": "អ្នកអភិវឌ្ឍន៍"
+            }
+        ]
     },
     {
-        "id": 22,
-        "name": "Kol Panha",
-        "position": "Developer",
-        "slug": "kol-panha",
-        "photo": "site/assets/img/teams/kol-panha.png",
-        "socials": {
-            "telegram": "https://t.me/panhakol",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/xt35e96ist",
-            "linkedin": "#",
-            "github": "#"
-        }
+        "slug": "ly-mengpor",
+        "photo": "storage/uploads/teams/ly-mengpor.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Ly Mengpor",
+                "position": "Developer"
+            },
+            {
+                "locale": "km",
+                "name": "លី ម៉េងប៉",
+                "position": "អ្នកអភិវឌ្ឍន៍"
+            }
+        ]
     },
     {
-        "id": 23,
-        "name": "Chea Socheang",
-        "position": "API Developer",
-        "slug": "chea-socheang",
-        "photo": "site/assets/img/teams/chea-socheang.png",
-        "socials": {
-            "telegram": "https://t.me/socheangdev",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/socheangDev",
-            "linkedin": "#",
-            "github": "#"
-        }
+        "slug": "tab-luch",
+        "photo": "storage/uploads/teams/tab-luch.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Tab Luch",
+                "position": "Developer"
+            },
+            {
+                "locale": "km",
+                "name": "តាប់ លុច",
+                "position": "អ្នកអភិវឌ្ឍន៍"
+            }
+        ]
     },
     {
-        "id": 24,
-        "name": "Ran Ra",
-        "position": "Developer",
-        "slug": "ran-ra",
-        "photo": "site/assets/img/teams/ran-ra.png",
-        "socials": {
-            "telegram": "https://t.me/Ran_Ra02",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/heara22",
-            "linkedin": "#",
-            "github": "#"
-        }
+        "slug": "yim-sinara",
+        "photo": "storage/uploads/teams/yim-sinara.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Yim Sinara",
+                "position": "Developer"
+            },
+            {
+                "locale": "km",
+                "name": "យីម ស៊ីណារ៉ា",
+                "position": "អ្នកអភិវឌ្ឍន៍"
+            }
+        ]
     },
     {
-        "id": 25,
-        "name": "Phorn Virak",
-        "position": "Developer",
-        "slug": "phorn-virak",
-        "photo": "site/assets/img/teams/phorn-virak.png",
-        "socials": {
-            "telegram": "https://t.me/Virak599",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/virak.phorn.1",
-            "linkedin": "#",
-            "github": "#"
-        }
+        "slug": "chom-phea",
+        "photo": "storage/uploads/teams/chom-phea.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Chom Phea",
+                "position": "Developer"
+            },
+            {
+                "locale": "km",
+                "name": "ឆុំ ភា",
+                "position": "អ្នកអភិវឌ្ឍន៍"
+            }
+        ]
     },
     {
-        "id": 26,
-        "name": "Mao Chansomongkol",
-        "position": "Developer",
-        "slug": "mao-chansomongkol",
-        "photo": "site/assets/img/teams/mao-chansomongkol.png",
-        "socials": {
-            "telegram": "https://t.me/mao_chansomongkol",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "https://www.facebook.com/chan.mongkol.374964",
-            "linkedin": "#",
-            "github": "#"
-        }
+        "slug": "roeun-chamnab",
+        "photo": "storage/uploads/teams/roeun-chamnab.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Roeun Chamnab",
+                "position": "Senior Developer"
+            },
+            {
+                "locale": "km",
+                "name": "រឿន ចំណាប់",
+                "position": "អ្នកអភិវឌ្ឍន៍ជាន់ខ្ពស់"
+            }
+        ]
     },
     {
-        "id": 27,
-        "name": "Bunthoeun Seyhakbotr",
-        "position": "Developer",
+        "slug": "kim-hay",
+        "photo": "storage/uploads/teams/kim-hay.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Kim Hay",
+                "position": "Senior Developer"
+            },
+            {
+                "locale": "km",
+                "name": "គីម ហៃ",
+                "position": "អ្នកអភិវឌ្ឍន៍ជាន់ខ្ពស់"
+            }
+        ]
+    },
+    {
+        "slug": "boran-borei",
+        "photo": "storage/uploads/teams/boran-borei.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Boran Borei",
+                "position": "Project Manager"
+            },
+            {
+                "locale": "km",
+                "name": "បូរ៉ន បូរី",
+                "position": "ប្រធានគម្រោង"
+            }
+        ]
+    },
+    {
+        "slug": "yen-sokreach",
+        "photo": "storage/uploads/teams/yen-sokreach.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Yen Sokreach",
+                "position": "Developer"
+            },
+            {
+                "locale": "km",
+                "name": "យេន សុខរាជ",
+                "position": "អ្នកអភិវឌ្ឍន៍"
+            }
+        ]
+    },
+    {
+        "slug": "seng-keatann",
+        "photo": "storage/uploads/teams/seng-keatann.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Seng Keatann",
+                "position": "Developer"
+            },
+            {
+                "locale": "km",
+                "name": "សេង គាតអាន",
+                "position": "អ្នកអភិវឌ្ឍន៍"
+            }
+        ]
+    },
+    {
+        "slug": "nhem-keomheng",
+        "photo": "storage/uploads/teams/nhem-keomheng.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Nhem Keomheng",
+                "position": "Developer"
+            },
+            {
+                "locale": "km",
+                "name": "ញ៉ែម គឹមហេង",
+                "position": "អ្នកអភិវឌ្ឍន៍"
+            }
+        ]
+    },
+    {
+        "slug": "khom-davon",
+        "photo": "storage/uploads/teams/khom-davon.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Khom Davon",
+                "position": "Developer"
+            },
+            {
+                "locale": "km",
+                "name": "ខុម ដាវ៉ុន",
+                "position": "អ្នកអភិវឌ្ឍន៍"
+            }
+        ]
+    },
+    {
+        "slug": "virak-phorn",
+        "photo": "storage/uploads/teams/virak-phorn.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Virak Phorn",
+                "position": "Developer"
+            },
+            {
+                "locale": "km",
+                "name": "ភ័ណ្ឌ វីរះ",
+                "position": "អ្នកអភិវឌ្ឍន៍"
+            }
+        ]
+    },
+    {
+        "slug": "mao-chansomongkul",
+        "photo": "storage/uploads/teams/mao-chansomongkul.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Mao Chansomongkul",
+                "position": "Developer"
+            },
+            {
+                "locale": "km",
+                "name": "ម៉ៅ ចាន់សុមង្គល",
+                "position": "អ្នកអភិវឌ្ឍន៍"
+            }
+        ]
+    },
+    {
+        "slug": "sengleang-hoy",
+        "photo": "storage/uploads/teams/sengleang-hoy.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Sengleang Hoy",
+                "position": "Developer"
+            },
+            {
+                "locale": "km",
+                "name": "ហូយ សេងលាង",
+                "position": "អ្នកអភិវឌ្ឍន៍"
+            }
+        ]
+    },
+    {
+        "slug": "bunheng-chhem",
+        "photo": "storage/uploads/teams/bunheng-chhem.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Bunheng Chhem",
+                "position": "Developer"
+            },
+            {
+                "locale": "km",
+                "name": "ឆែម ប៊ុនហេង",
+                "position": "អ្នកអភិវឌ្ឍន៍"
+            }
+        ]
+    },
+    {
+        "slug": "panha-kol",
+        "photo": "storage/uploads/teams/panha-kol.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Panha Kol",
+                "position": "Developer"
+            },
+            {
+                "locale": "km",
+                "name": "កុល បញ្ញា",
+                "position": "អ្នកអភិវឌ្ឍន៍"
+            }
+        ]
+    },
+    {
+        "slug": "socheang-chea",
+        "photo": "storage/uploads/teams/socheang-chea.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Socheang Chea",
+                "position": "Developer"
+            },
+            {
+                "locale": "km",
+                "name": "ជា សុជាង",
+                "position": "អ្នកអភិវឌ្ឍន៍"
+            }
+        ]
+    },
+    {
+        "slug": "ra-ran",
+        "photo": "storage/uploads/teams/ra-ran.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Ra Ran",
+                "position": "Developer"
+            },
+            {
+                "locale": "km",
+                "name": "រ៉ាន់ រ៉ា",
+                "position": "អ្នកអភិវឌ្ឍន៍"
+            }
+        ]
+    },
+    {
+        "slug": "kak-vatey",
+        "photo": "storage/uploads/teams/kak-vatey.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Kak Vatey",
+                "position": "Designer"
+            },
+            {
+                "locale": "km",
+                "name": "",
+                "position": "អ្នករចនា"
+            }
+        ]
+    },
+    {
         "slug": "bunthoeun-seyhakbotr",
-        "photo": "site/assets/img/teams/bunthoeun-seyhakbotr.png",
-        "socials": {
-            "telegram": "https://t.me/Botr1",
-            "twitter": "#",
-            "email": "#",
-            "facebook": "#",
-            "linkedin": "#",
-            "github": "#"
-        }
+        "photo": "storage/uploads/teams/bunthoeun-seyhakbotr.png",
+        "translations": [
+            {
+                "locale": "en",
+                "name": "Bunthoeun Seyhakbotr",
+                "position": "Intern"
+            },
+            {
+                "locale": "km",
+                "name": "",
+                "position": "អនុវត្តការងារ"
+            }
+        ]
     }
 ]

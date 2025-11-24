@@ -16,6 +16,7 @@
                     </div>
                 @endif
                 @foreach ($teams as $team)
+                @if(!file_exists(public_path($team->photo)) && !empty($team->photo)) @continue; @endif
                     <div class="col-lg-3 col-md-6">
                         <div class="single-team-box" style="width: 250px;">
                             <div class="team-image" style="height: 280px; width: 100%; overflow: hidden; position: relative;">
@@ -25,8 +26,8 @@
                                 <img src="{{ $img['fallback'] }}" srcset="{{ $img['srcset'] }}" sizes="(max-width: 768px) 95vw, {{ $img['width'] }}px" alt="{{ $team->name }}" loading="lazy" width="{{ $img['width'] }}" height="auto" style="height: 100%; width: 100%; object-fit: cover;">
                             </div>
                             <div class="team-info" style="text-align: center; padding: 15px;">
-                                <h3>{{ $team->name }}</h3>
-                                <span>{{ $team->position }}</span>
+                                <h3>{{ $team->getName() }}</h3>
+                                <span>{{ $team->getPosition() }}</span>
                             </div>
                         </div>
                     </div>

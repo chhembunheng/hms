@@ -184,6 +184,25 @@
                 "description": "លុបផលិតផល"
               }
             ]
+          },
+          {
+            "action": "feature",
+            "icon": "fa-star",
+            "target": "self",
+            "sort": 4,
+            "route": "frontends.products.feature",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Feature",
+                "description": "Mark a product as featured"
+              },
+              {
+                "locale": "km",
+                "name": "លក្ខណៈពិសេស",
+                "description": "សម្គាល់ផលិតផលមួយជាលក្ខណៈពិសេស"
+              }
+            ]
           }
         ]
       },
