@@ -192,24 +192,26 @@ class ProductController extends Controller
 
                     $form->save();
                     $form->generateSEO();
-                    $linked = $form->navigations()->updateOrCreate(
-                        [
-                            'linked_type' => Product::class,
-                            'linked_id' => $form->id,
-                        ],
-                        [
-                            'parent_id' => $request->input('navigation_id', null),
-                            'icon' => $request->input('icon', null),
-                            'url' => 'products' . '/' . $form->slug,
-                            'sort' => $request->input('sort', 0),
-                            'created_by' => auth()->id(),
-                            'updated_by' => auth()->id(),
-                        ]
-                    );
+                    if ($request->navigation_id) {
+                        $linked = $form->navigations()->updateOrCreate(
+                            [
+                                'linked_type' => Product::class,
+                                'linked_id' => $form->id,
+                            ],
+                            [
+                                'parent_id' => $request->input('navigation_id', null),
+                                'icon' => $request->input('icon', null),
+                                'url' => 'products' . '/' . $form->slug,
+                                'sort' => $request->input('sort', 0),
+                                'created_by' => auth()->id(),
+                                'updated_by' => auth()->id(),
+                            ]
+                        );
+                    } else {
+                        $form->navigations()->delete();
+                    }
                     $form->categories()->sync($request->input('category_id', []));
                     $form->tags()->sync($request->input('tag_id', []));
-
-
                     $translations = [];
                     $linkeds = [];
                     foreach ($this->locales->keys() as $locale) {

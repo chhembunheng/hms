@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Rules\ImageRule;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Frontend\Service;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Frontend\ServiceTranslation;
 use App\DataTables\Frontend\ServiceDataTable;
-use App\Rules\ImageRule;
+use App\Models\Frontend\NavigationTranslation;
 
 class ServiceController extends Controller
 {
@@ -81,7 +84,7 @@ class ServiceController extends Controller
 
                     foreach ($this->locales->keys() as $locale) {
                         $trans = $request->input("translations.{$locale}");
-                        if(empty($trans['name'])){
+                        if (empty($trans['name'])) {
                             continue;
                         }
                         ServiceTranslation::create([
@@ -163,21 +166,57 @@ class ServiceController extends Controller
                 }
 
                 $form->save();
-
-                foreach ($this->locales->keys() as $locale) {
-                    $trans = $request->input("translations.{$locale}");
-                    ServiceTranslation::updateOrCreate(
-                        ['service_id' => $form->id, 'locale' => $locale],
+                $form->generateSEO();
+                $translations = [];
+                $linkeds = [];
+                if ($request->navigation_id) {
+                    $linked = $form->navigations()->updateOrCreate(
                         [
-                            'name' => $trans['name'],
-                            'content' => $trans['content'] ?? null,
-                            'description' => $trans['description'] ?? null,
-                            'slider_title' => $trans['slider_title'] ?? null,
-                            'slider_description' => $trans['slider_description'] ?? null,
+                            'linked_type' => Service::class,
+                            'linked_id' => $form->id,
+                        ],
+                        [
+                            'parent_id' => $request->input('navigation_id', null),
+                            'icon' => $request->input('icon', null),
+                            'url' => 'products' . '/' . $form->slug,
+                            'sort' => $request->input('sort', 0),
+                            'created_by' => auth()->id(),
                             'updated_by' => auth()->id(),
                         ]
                     );
+                } else {
+                    $form->navigations()->delete();
                 }
+
+                $translations = [];
+                $linkeds = [];
+                foreach ($this->locales->keys() as $locale) {
+                    $trans = $request->input("translations.{$locale}");
+                    $name = $trans['name'] ?? '';
+                    $description = $trans['description'] ?? '';
+                    $sliderTitle = $trans['slider_title'] ?? $name;
+                    $sliderDescription = $trans['slider_description'] ?? $description;
+                    $translations[] = [
+                        'product_id' => $form->id,
+                        'name' => $name,
+                        'description' => $description,
+                        'slider_title' => $sliderTitle,
+                        'slider_description' => Str::of($sliderDescription)->stripTags()->trim(),
+                        'content' => $trans['content'] ?? null,
+                        'locale' => $locale,
+                        'updated_by' => auth()->id(),
+                    ];
+                    $linkeds[] = [
+                        'navigation_id' => $linked->id,
+                        'locale' => $locale,
+                        'name' => $trans['name'],
+                        'label' => $trans['name'],
+                        'updated_by' => auth()->id(),
+                    ];
+                }
+                NavigationTranslation::upsert($linkeds, ['navigation_id', 'locale'], ['name', 'label', 'updated_by']);
+                ServiceTranslation::upsert($translations, ['product_id', 'locale'], ['name', 'description', 'content', 'slider_title', 'slider_description', 'updated_by']);
+                Artisan::call('cache:clear');
 
                 return success(message: 'Service updated successfully');
             } catch (\Exception $e) {

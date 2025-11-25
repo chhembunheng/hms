@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\DataTables\Frontend\TeamDataTable;
-use App\Http\Controllers\Controller;
-use App\Models\Frontend\Team;
-use App\Models\Frontend\TeamTranslation;
 use Illuminate\Http\Request;
+use App\Models\Frontend\Team;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Artisan;
+use App\Models\Frontend\TeamTranslation;
 use Illuminate\Support\Facades\Validator;
+use App\DataTables\Frontend\TeamDataTable;
 
 class TeamController extends Controller
 {
@@ -145,7 +146,7 @@ class TeamController extends Controller
                 $form->updated_by = auth()->id();
                 $form->position_id = $request->input('position_id', null);
 
-                if($request->photo) {
+                if ($request->photo) {
                     $form->photo = uploadBase64($request->photo, 'uploads/teams');
                 }
                 $form->save();
@@ -162,7 +163,7 @@ class TeamController extends Controller
                         ]
                     );
                 }
-
+                Artisan::call('cache:clear');
                 return success(message: 'Team updated successfully');
             } catch (\Exception $e) {
                 return errors(message: $e->getMessage());
