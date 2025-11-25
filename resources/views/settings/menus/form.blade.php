@@ -8,7 +8,7 @@
 
             <div class="col-md-6">
                 <x-form.input :label="__('form.route')" name="route" value="{{ old('route', $form?->route) }}"
-                    placeholder="dashboard.index" />
+                    placeholder="dashboard" />
             </div>
 
             <div class="col-md-6">

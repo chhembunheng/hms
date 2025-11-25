@@ -16,8 +16,10 @@ Route::get('clear-cache', function () {
 
 Route::domain(config('app.admin_domain'))->group(function () {
     Route::get('/', function () {
-        return redirect()->route('settings.my-account.index');
-    })->name('settings.home');
+        return redirect()->route('dashboard.index');
+    });
+    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index')->middleware(['abilities', 'auth', 'verified']);
+
     Route::group(['prefix' => 'settings', 'as' => 'settings.', 'middleware' => ['auth', 'verified', 'abilities']], function () {
         Route::prefix('menus')->name('menus.')->group(function () {
             Route::get('/', [MenuController::class, 'index'])->name('index');

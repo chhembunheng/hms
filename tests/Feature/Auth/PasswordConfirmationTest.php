@@ -2,7 +2,7 @@
 
 skipIfNoDb();
 
-use App\Models\User;
+use App\Models\Settings\User;
 
 test('confirm password screen can be rendered', function () {
     $user = User::factory()->create();

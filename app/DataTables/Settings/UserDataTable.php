@@ -2,7 +2,7 @@
 
 namespace App\DataTables\Settings;
 
-use App\Models\User;
+use App\Models\Settings\User;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;

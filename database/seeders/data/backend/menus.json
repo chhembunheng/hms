@@ -2,7 +2,7 @@
   {
     "icon": "fa-chart-simple",
     "sort": 1,
-    "route": "dashboard.index",
+    "route": "dashboard",
     "translations": [
       {
         "locale": "en",

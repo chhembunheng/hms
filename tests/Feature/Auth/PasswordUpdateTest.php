@@ -2,7 +2,7 @@
 
 skipIfNoDb();
 
-use App\Models\User;
+use App\Models\Settings\User;
 use Illuminate\Support\Facades\Hash;
 
 test('password can be updated', function () {

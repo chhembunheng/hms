@@ -148,7 +148,7 @@ class DashboardController extends Controller
             ['payload' => $cachePayload, 'expires_at' => now()->addHours(1)]
         );
 
-        return view('dashboard.index', $cachePayload);
+        return view('dashboard', $cachePayload);
     }
 
     /**
