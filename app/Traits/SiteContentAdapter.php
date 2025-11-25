@@ -66,7 +66,7 @@ trait SiteContentAdapter
             ->where('is_active', true)
             ->orderBy('sort')->limit(50)->get()));
 
-        $integrations = $load('integrations', fn() => $this->safeQuery(fn() => Integration::select('id', 'slug', 'image', 'sort', 'images', 'icon', 'parent_id')
+        $integrations = $load('integrations', fn() => $this->safeQuery(fn() => Integration::select('id', 'slug', 'image', 'sort', 'images', 'icon', 'parent_id', 'created_at')
             ->with(['translations' => $translationScope, 'children'])
             ->whereNull('parent_id')
             ->where('is_active', true)

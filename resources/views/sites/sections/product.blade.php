@@ -87,25 +87,7 @@
 
                     <!-- Share Section -->
                     <div class="share-section p-3 bg-light rounded-2 mb-4">
-                        <h6 class="mb-2">{{ __('global.share') }}</h6>
-                        <div class="d-flex gap-2">
-                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ url()->current() }}"
-                                target="_blank" class="btn btn-sm btn-outline-primary rounded-circle p-2">
-                                <i class="fa-brands fa-facebook-f"></i>
-                            </a>
-                            <a href="https://twitter.com/intent/tweet?url={{ url()->current() }}&text={{ $product->getName($locale) }}"
-                                target="_blank" class="btn btn-sm btn-outline-info rounded-circle p-2">
-                                <i class="fa-brands fa-twitter"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ url()->current() }}"
-                                target="_blank" class="btn btn-sm btn-outline-secondary rounded-circle p-2">
-                                <i class="fa-brands fa-linkedin-in"></i>
-                            </a>
-                            <a href="mailto:?subject={{ $product->getName($locale) }}&body={{ url()->current() }}"
-                                class="btn btn-sm btn-outline-secondary rounded-circle p-2">
-                                <i class="fa-solid fa-envelope"></i>
-                            </a>
-                        </div>
+                        <x-share :url="url()->current()" :title="$product->getName($locale)" />
                     </div>
                 </div>
             </div>

@@ -45,39 +45,26 @@
                 </div>
                 <div class="project-details-info">
                     <div class="single-info-box">
-                        <h4>Author</h4>
-                        <span>Pamela Lawrence</span>
+                        <h4>{{ __('global.author') }}</h4>
+                        <span>{{ __('global.wintech_team') }}</span>
                     </div>
                     <div class="single-info-box">
-                        <h4>Category</h4>
+                        <h4>{{ __('global.category') }}</h4>
                         <span>Virtual, Technology</span>
                     </div>
                     <div class="single-info-box">
-                        <h4>Date</h4>
-                        <span>June 20, 2022</span>
+                        <h4>{{ __('global.date') }}</h4>
+                        <span>{{ $integration->created_at?->format('M d, Y') }}</span>
                     </div>
                     <div class="single-info-box">
-                        <h4>Share</h4>
-                        <ul class="social">
-                            <li>
-                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->url()) }}"
-                                    class="share-fb" aria-label="Share on Facebook"> <i
-                                        class="fab fa-facebook-f"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->url()) }}"
-                                    class="share-x" aria-label="Share on X"> <i class="fab fa-x"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(request()->url()) }}"
-                                    class="share-li" aria-label="Share on LinkedIn"> <i
-                                        class="fab fa-linkedin-in"></i></a>
-                            </li>
-                        </ul>
+                        <x-share/>
                     </div>
                     <div class="single-info-box">
-                        <h4>Works Preview</h4>
-                        <a href="#" class="default-btn">Live Preview</a>
+                        <h4>{{ __('global.live_preview') }}</h4>
+                        <a href="#" class="default-btn">
+                            {{ __('global.view_now') }}
+                            <span></span>
+                        </a>
                     </div>
                 </div>
             </div>

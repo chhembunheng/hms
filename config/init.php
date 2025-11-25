@@ -45,8 +45,8 @@ return [
         'products' => ['products', 'talk'],
         'pricing' => ['pricing_plans'],
         'careers' => ['careers', 'talk'],
-        'blogs' => ['blogs'],
-        'integrations' => ['integrations'],
+        'blogs' => ['blogs', 'talk'],
+        'integrations' => ['integrations', 'talk'],
         'teams' => ['teams', 'talk'],
         'faqs' => ['faqs', 'talk']
     ],

@@ -13,7 +13,10 @@
                         </div>
                     @endisset
                     <div class="features-text">
-                        {!! $service->content ?? '' !!}
+                        <div class="mb-4">
+                            {!! $service->getDescription() !!}
+                        </div>
+                        {!! $service->getContent() !!}
                         @isset($service->keys)
                             <ul class="service-features-list">
                                 @foreach ($service->keys as $key)
@@ -44,6 +47,9 @@
                             <a href="{{ asset('site/assets/files/wintech-company-profile-latest-2025-10-23.pdf') }}" target="_blank" class="default-btn" aria-label="{{ __('global.download_company_profile') }}">{{ __('global.download_pdf') }} <span></span></a>
                         </div>
                     </section>
+                    <div class="mt-3">
+                        <x-share/>
+                    </div>
                 </aside>
             </div>
         </div>

@@ -158,35 +158,17 @@
                 <!-- Share Section -->
                 <div class="card shadow-sm rounded-3 border-0 mb-4">
                     <div class="card-body">
-                        <h5 class="mb-3 fw-bold">{{ __('global.share_this_job') }}</h5>
-                        <div class="d-flex gap-2">
-                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ url()->current() }}"
-                                target="_blank" class="btn btn-sm btn-outline-primary rounded-circle p-2">
-                                <i class="fa-brands fa-facebook-f"></i>
-                            </a>
-                            <a href="https://twitter.com/intent/tweet?url={{ url()->current() }}&text={{ $career?->getTitle($locale) }}"
-                                target="_blank" class="btn btn-sm btn-outline-info rounded-circle p-2">
-                                <i class="fa-brands fa-x"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ url()->current() }}"
-                                target="_blank" class="btn btn-sm btn-outline-secondary rounded-circle p-2">
-                                <i class="fa-brands fa-linkedin-in"></i>
-                            </a>
-                            <a href="mailto:?subject={{ $career?->getTitle($locale) }}&body={{ url()->current() }}"
-                                class="btn btn-sm btn-outline-secondary rounded-circle p-2">
-                                <i class="fa-solid fa-envelope"></i>
-                            </a>
-                        </div>
+                        <x-share :url="url()->current()" :title="$career?->getTitle($locale) ?? ''" :label="__('global.share_this_job')" />
                     </div>
                 </div>
 
                 <!-- CTA Card -->
-                <div class="card bg-gradient text-white shadow-sm rounded-3 border-0"
+                <div class="card bg-gradient shadow-sm rounded-3 border-0"
                     style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
                     <div class="card-body text-center p-4">
-                        <i class="fa-solid fa-rocket fa-3x mb-3 opacity-75"></i>
+                        <i class="fa-solid fa-rocket fa-3x mb-3"></i>
                         <h5 class="mb-2">{{ __('global.ready_to_join') }}</h5>
-                        <p class="small mb-3 opacity-90">{{ __('global.apply_today_message') }}</p>
+                        <p class="small mb-3">{{ __('global.apply_today_message') }}</p>
                         @if ($career?->is_active)
                             <button type="button" class="btn btn-light btn-sm rounded-pill" data-bs-toggle="modal"
                                 data-bs-target="#applyCareerModal">

@@ -1,4 +1,4 @@
-<?php  
+<?php
 return [
 
     // Privacy / Cookie
@@ -264,4 +264,15 @@ return [
     'ready_to_join' => 'ត្រៀមខ្លួនចូលរួមជាមួយក្រុមរបស់យើង?',
     'apply_today_message' => 'ផ្ញើ CV និង Cover Letter របស់អ្នកដើម្បីដាក់ពាក្យ។',
     'deadline' => 'កាលកំណត់',
+    'author' => 'អ្នក​និពន្ធ',
+    'date' => 'កាលបរិច្ឆេទ',
+    'live_preview' => 'ការមើល​ជាមុន​ផ្ទាល់',
+    'view_now' => 'មើល​ឥឡូវនេះ',
+    'wintech_team' => 'វីនថេក​',
+    'apply_for_position' => 'ដាក់ពាក្យស្នើសុំតំណែងនេះ',
+    'full_name' => 'ឈ្មោះ​ពេញ',
+    'upload_resume' => 'អាប់ឡូដប្រវត្តិរូប',
+    'cover_letter' => 'លិខិតស្នើសុំការងារ',
+    'tell_us_about_yourself' => 'ប្រាប់អំពីខ្លួនអ្នកឱ្យយើង​ដឹង',
+
 ];
