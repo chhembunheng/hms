@@ -14,6 +14,7 @@ class Team extends Model
     protected $fillable = [
         'photo',
         'linkedin_url',
+        'sort',
         'twitter_url',
         'facebook_url',
         'instagram_url',
@@ -28,6 +29,7 @@ class Team extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
+        'sort' => 'integer',
     ];
 
     public function translations()

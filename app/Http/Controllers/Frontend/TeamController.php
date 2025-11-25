@@ -71,6 +71,7 @@ class TeamController extends Controller
                     'image' => null,
                     'slug' => slug($request->input('slug', null)),
                     'position_id' => $request->input('position_id', null),
+                    'sort' => $request->input('sort', 1),
                     'created_by' => auth()->id(),
                     'updated_by' => auth()->id(),
                 ]);
@@ -145,6 +146,7 @@ class TeamController extends Controller
                 $form->slug = slug($request->input('slug', null));
                 $form->updated_by = auth()->id();
                 $form->position_id = $request->input('position_id', null);
+                $form->sort = $request->input('sort', 1);
 
                 if ($request->photo) {
                     $form->photo = uploadBase64($request->photo, 'uploads/teams');

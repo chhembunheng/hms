@@ -33,7 +33,7 @@ trait SiteContentAdapter
 
         $teams = $load('teams', fn() => $this->safeQuery(fn() => Team::select('id', 'photo', 'is_active')
             ->with(['translations' => $translationScope])
-            ->orderBy('id')->limit(50)->get()));
+            ->orderBy('sort')->limit(50)->get()));
 
         $services = $load('services', fn() => $this->safeQuery(fn() => Service::select('id', 'slug', 'icon', 'image', 'sort', 'is_slider', 'slider_image')
             ->with(['translations' => $translationScope])

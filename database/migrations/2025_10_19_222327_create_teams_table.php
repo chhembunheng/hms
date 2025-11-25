@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('photo')->nullable();
             $table->string('slug')->unique()->nullable();
-            $table->unsignedBigInteger('position_id')->nullable();
+            $table->tinyInteger('sort')->default(1);
             $table->string('linkedin_url')->nullable();
             $table->string('twitter_url')->nullable();
             $table->string('facebook_url')->nullable();
