@@ -3,7 +3,7 @@
     "slug": "databases",
     "icon": "fa-solid fa-database",
     "image": "site/assets/img/databases/databases.png",
-    "banners": [
+    "images": [
       "site/assets/img/integrations/databases.png",
       "site/assets/img/integrations/databases-1.png",
       "site/assets/img/integrations/databases-2.png"
@@ -40,13 +40,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "MySQL Integration",
+            "name": "MySQL",
             "description": "Connect MySQL to browse tables, run queries, and power internal tools.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល MySQL",
+            "name": "MySQL",
             "description": "ភ្ជាប់ MySQL ដើម្បីរុករកតារាង រត់សំណើ និងបង្កើតឧបករណ៍ផ្ទៃក្នុង។",
             "content": ""
           }
@@ -196,13 +196,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "MariaDB Integration",
+            "name": "MariaDB",
             "description": "Link MariaDB for fast querying, role-based access, and safe CRUD.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល MariaDB",
+            "name": "MariaDB",
             "description": "ភ្ជាប់ MariaDB សម្រាប់សំណើលឿន សិទ្ធាតាមតួនាទី និង CRUD ដោយសុវត្ថិភាព។",
             "content": ""
           }
@@ -352,13 +352,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "PostgreSQL Integration",
+            "name": "PostgreSQL",
             "description": "Securely connect Postgres to browse schemas and execute queries.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល PostgreSQL",
+            "name": "PostgreSQL",
             "description": "ភ្ជាប់ Postgres ដោយសុវត្ថិភាព ដើម្បីរុករកស្គីម៉ា និងដំណើរការសំណើ។",
             "content": ""
           }
@@ -508,13 +508,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "Firebase Integration",
+            "name": "Firebase",
             "description": "Manage Firestore/RTDB collections, documents, and rules from one place.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល Firebase",
+            "name": "Firebase",
             "description": "គ្រប់គ្រងសម្រាំង និងឯកសារ Firestore/RTDB ពីទីតាំងតែមួយ។",
             "content": ""
           }
@@ -656,7 +656,7 @@
     "slug": "payment-gateway",
     "icon": "fa-solid fa-credit-card",
     "image": "site/assets/img/integrations/payment-gateway.png",
-    "banners": [
+    "images": [
       "site/assets/img/integrations/payment-gateway.png",
       "site/assets/img/integrations/payment-gateway-1.png",
       "site/assets/img/integrations/payment-gateway-2.png"
@@ -693,13 +693,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "Stripe Integration",
+            "name": "Stripe",
             "description": "Sync customers, invoices, subscriptions, disputes, and payouts.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល Stripe",
+            "name": "Stripe",
             "description": "ធ្វើសមកាលកម្មអតិថិជន វិក័យប័ត្រ ការជាវ ជម្លោះ និងការទូទាត់ចេញ។",
             "content": ""
           }
@@ -849,13 +849,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "PayPal Integration",
+            "name": "PayPal",
             "description": "Search transactions, process refunds, and monitor disputes worldwide.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល PayPal",
+            "name": "PayPal",
             "description": "ស្វែងរកប្រតិបត្តិការ ដំណើរការសងប្រាក់វិញ និងតាមដានជម្លោះជុំវិញពិភពលោក។",
             "content": ""
           }
@@ -1005,13 +1005,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "Phillip Bank Integration",
+            "name": "Phillip Bank",
             "description": "Accept transfers, reconcile, and run bulk payouts with approvals.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល Phillip Bank",
+            "name": "Phillip Bank",
             "description": "ទទួលការផ្ទេរ សម្របសម្រួលប្រតិបត្តិការ និងធ្វើការទូទាត់ច្រើនជាបាច់ជាមួយការអនុម័ត។",
             "content": ""
           }
@@ -1161,13 +1161,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "ABA Bank Integration",
+            "name": "ABA Bank",
             "description": "Generate KHQR, ingest webhooks, and automate reconciliation.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល ABA Bank",
+            "name": "ABA Bank",
             "description": "បង្កើត KHQR ទទួល webhook និងស្វ័យប្រវត្តិកម្មការសម្របសម្រួល។",
             "content": ""
           }
@@ -1317,13 +1317,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "ACLEDA Bank Integration",
+            "name": "ACLEDA Bank",
             "description": "Create KHQR, track transfers, and export settlements.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល ACLEDA Bank",
+            "name": "ACLEDA Bank",
             "description": "បង្កើត KHQR តាមដានការផ្ទេរ និងនាំចេញរបាយការណ៍ដោះស្រាយ។",
             "content": ""
           }
@@ -1473,13 +1473,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "Canadia Bank Integration",
+            "name": "Canadia Bank",
             "description": "Request KHQR, process transfers, and export settlements.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល Canadia Bank",
+            "name": "Canadia Bank",
             "description": "ស្នើ KHQR ដំណើរការផ្ទេរ និងនាំចេញការដោះស្រាយ។",
             "content": ""
           }
@@ -1629,13 +1629,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "Wing Bank Integration",
+            "name": "Wing Bank",
             "description": "Enable KHQR, wallet payments, and bulk disbursements.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល Wing Bank",
+            "name": "Wing Bank",
             "description": "បើកប្រើ KHQR ការទូទាត់កាបូប និងការប្រាក់ចំណាយច្រើនជាបាច់។",
             "content": ""
           }
@@ -1785,13 +1785,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "Bakong Integration",
+            "name": "Bakong",
             "description": "Generate KHQR, check instant transfers, and reconcile automatically.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល Bakong",
+            "name": "Bakong",
             "description": "បង្កើត KHQR ពិនិត្យការផ្ទេរបន្ទាន់ និងស្វ័យប្រវត្តិកម្មការសម្របសម្រួល។",
             "content": ""
           }
@@ -1941,13 +1941,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "AMK Bank Integration",
+            "name": "AMK Bank",
             "description": "Accept KHQR, import statements, and approve batch payouts.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល AMK Bank",
+            "name": "AMK Bank",
             "description": "ទទួល KHQR នាំចូលរបាយការណ៍ និងអនុម័តការទូទាត់ជាបាច់។",
             "content": ""
           }
@@ -2089,7 +2089,7 @@
     "slug": "authentication",
     "icon": "fa-solid fa-user-lock",
     "image": "site/assets/img/integrations/authentication/authentication.png",
-    "banners": [
+    "images": [
       "site/assets/img/integrations/authentication.png",
       "site/assets/img/integrations/authentication-1.png",
       "site/assets/img/integrations/authentication-2.png"
@@ -2126,13 +2126,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "Auth0 Integration",
+            "name": "Auth0",
             "description": "Search users, reset passwords, and update roles/permissions.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល Auth0",
+            "name": "Auth0",
             "description": "ស្វែងរកអ្នកប្រើ កំណត់ពាក្យសម្ងាត់ឡើងវិញ និងធ្វើបច្ចុប្បន្នភាពតួនាទី/សិទ្ធិ។",
             "content": ""
           }
@@ -2282,13 +2282,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "Firebase Auth Integration",
+            "name": "Firebase Auth",
             "description": "View users/providers, reset passwords, and manage custom claims.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល Firebase Auth",
+            "name": "Firebase Auth",
             "description": "មើលអ្នកប្រើ/អ្នកផ្ដល់សេវា កំណត់ពាក្យសម្ងាត់ឡើងវិញ និងគ្រប់គ្រង claims ផ្ទាល់ខ្លួន។",
             "content": ""
           }
@@ -2438,13 +2438,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "Okta Integration",
+            "name": "Okta",
             "description": "Manage users/groups, app assignments, and MFA resets.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល Okta",
+            "name": "Okta",
             "description": "គ្រប់គ្រងអ្នកប្រើ/ក្រុម ការបែងចែកកម្មវិធី និងការកំណត់ឡើងវិញ MFA។",
             "content": ""
           }
@@ -2594,13 +2594,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "Keycloak Integration",
+            "name": "Keycloak",
             "description": "Administer realms, users, roles, and required actions.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល Keycloak",
+            "name": "Keycloak",
             "description": "គ្រប់គ្រង realm អ្នកប្រើ តួនាទី និងសកម្មភាពដែលត្រូវការ។",
             "content": ""
           }
@@ -2742,7 +2742,7 @@
     "slug": "messaging-notifications",
     "icon": "fa-solid fa-envelope",
     "image": "site/assets/img/integrations/messaging-notifications.png",
-    "banners": [
+    "images": [
       "site/assets/img/integrations/messaging-notifications.png",
       "site/assets/img/integrations/messaging-notifications-1.png",
       "site/assets/img/integrations/messaging-notifications-2.png"
@@ -2779,13 +2779,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "Twilio Integration",
+            "name": "Twilio",
             "description": "Send SMS/WhatsApp, manage templates, and monitor delivery.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល Twilio",
+            "name": "Twilio",
             "description": "ផ្ញើ SMS/WhatsApp គ្រប់គ្រងគំរូ និងតាមដានការដឹកជញ្ជូន។",
             "content": ""
           }
@@ -2935,13 +2935,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "SendGrid Integration",
+            "name": "SendGrid",
             "description": "Send templated emails with variables, attachments, and tracking.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល SendGrid",
+            "name": "SendGrid",
             "description": "ផ្ញើអ៊ីមែលតាមគំរូជាមួយអថេរ ឯកសារភ្ជាប់ និងការតាមដាន។",
             "content": ""
           }
@@ -3091,13 +3091,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "FCM Integration",
+            "name": "FCM",
             "description": "Send topic/token pushes with platform overrides and retries.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល FCM",
+            "name": "FCM",
             "description": "ផ្ញើ Push តាម Topic/Token ជាមួយការកំណត់ជាក់លាក់សម្រាប់ Platform និងការព្យាយាមឡើងវិញ។",
             "content": ""
           }
@@ -3247,13 +3247,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "Amazon SNS Integration",
+            "name": "Amazon SNS",
             "description": "Publish to topics, manage subscriptions, and view delivery logs.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល Amazon SNS",
+            "name": "Amazon SNS",
             "description": "ផ្សព្វផ្សាយទៅកាន់ Topic គ្រប់គ្រងការជាវ និងមើលកំណត់ហេតុការដឹកជញ្ជូន។",
             "content": ""
           }
@@ -3395,7 +3395,7 @@
     "slug": "storage",
     "icon": "fa-solid fa-folder",
     "image": "site/assets/img/integrations/file-storage/storage.png",
-    "banners": [
+    "images": [
       "site/assets/img/integrations/storage.png",
       "site/assets/img/integrations/storage-2.png"
     ],
@@ -3431,13 +3431,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "AWS S3 Integration",
+            "name": "AWS S3",
             "description": "Browse buckets, manage objects, and generate signed URLs.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល AWS S3",
+            "name": "AWS S3",
             "description": "រុករកធុង គ្រប់គ្រងវត្ថុ និងបង្កើតតំណ URL ដែលបានចុះហត្ថលេខា។",
             "content": ""
           }
@@ -3587,13 +3587,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "Google Cloud Storage Integration",
+            "name": "Google Cloud Storage",
             "description": "Manage buckets/objects and create signed URLs (V2/V4).",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល Google Cloud Storage",
+            "name": "Google Cloud Storage",
             "description": "គ្រប់គ្រងធុង/វត្ថុ និងបង្កើត Signed URL (V2/V4)។",
             "content": ""
           }
@@ -3743,13 +3743,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "Dropbox Integration",
+            "name": "Dropbox",
             "description": "Browse folders, preview files, and create shared links.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល Dropbox",
+            "name": "Dropbox",
             "description": "រុករកថត មើលជាមុន และបង្កើតតំណចែករំលែក។",
             "content": ""
           }
@@ -3899,13 +3899,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "Cloudinary Integration",
+            "name": "Cloudinary",
             "description": "Upload media, apply transformations, and deliver via signed URLs.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល Cloudinary",
+            "name": "Cloudinary",
             "description": "អាប់ឡូដមេឌៀ បំពាក់ការបម្លែង និងផ្តល់ជូនតាម Signed URL។",
             "content": ""
           }
@@ -4047,7 +4047,7 @@
     "slug": "monitoring",
     "icon": "fa-solid fa-chart-pie",
     "image": "site/assets/img/integrations/monitoring/monitoring.png",
-    "banners": [
+    "images": [
       "site/assets/img/integrations/monitoring.png",
       "site/assets/img/integrations/monitoring-1.png",
       "site/assets/img/integrations/monitoring-2.png"
@@ -4084,13 +4084,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "Datadog Integration",
+            "name": "Datadog",
             "description": "Embed dashboards, view monitors/incidents, and explore logs/traces.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល Datadog",
+            "name": "Datadog",
             "description": "បញ្ចូលផ្ទាំងគ្រប់គ្រង មើលម៉ូនីទ័រ/អ៊ីនស៊ីដិន និងស្វែងរកបញ្ជីកំណត់ហេតុ/ត្រេស។",
             "content": ""
           }
@@ -4240,13 +4240,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "New Relic Integration",
+            "name": "New Relic",
             "description": "Track APM services, errors, alerts, and NRQL widgets.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល New Relic",
+            "name": "New Relic",
             "description": "តាមដានសេវា APM កំហុស ការជូនដំណឹង និងវិដជិត NRQL។",
             "content": ""
           }
@@ -4396,13 +4396,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "Sentry Integration",
+            "name": "Sentry",
             "description": "Triage issues, inspect stack traces, and resolve with context.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល Sentry",
+            "name": "Sentry",
             "description": "តម្រៀបបញ្ហា ពិនិត្យ Stack Trace និងដោះស្រាយដោយមានបរិបទ។",
             "content": ""
           }
@@ -4552,13 +4552,13 @@
         "transactions": [
           {
             "locale": "en",
-            "name": "Grafana Integration",
+            "name": "Grafana",
             "description": "Embed panels with variables and synced time ranges.",
             "content": ""
           },
           {
             "locale": "km",
-            "name": "ការរួមបញ្ចូល Grafana",
+            "name": "Grafana",
             "description": "បញ្ចូលផ្ទាំងជាមួយអថេរ និងសមកាលកម្មកាលបរិច្ឆេទ/ម៉ោង។",
             "content": ""
           }

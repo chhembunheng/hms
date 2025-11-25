@@ -54,7 +54,7 @@ class AchievementSeeder extends Seeder
                     foreach ($translations as $t) {
                         $locale = $t['locale'] ?? 'en';
                         $title = $t['title'] ?? 'N/A';
-                        $subtitle = $t['subtitle'] ?? ($entry['suffix'] ?? null); // reuse suffix as subtitle if provided
+                        $suffix = $t['suffix'] ?? '';
 
                         $translation = AchievementTranslation::query()->firstOrNew([
                             'achievement_id' => $achievement->id,
@@ -62,7 +62,7 @@ class AchievementSeeder extends Seeder
                         ]);
                         $translation->fill([
                             'title' => $title,
-                            'subtitle' => $subtitle,
+                            'suffix' => $suffix,
                             'created_by' => $translation->exists ? $translation->created_by : 1,
                             'updated_by' => 1,
                         ]);

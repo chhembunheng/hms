@@ -21,10 +21,10 @@
                             <div class="counter-contents">
                                 <h2 style="display: flex; align-items: center; justify-content: center;">
                                     <i class="{{ $achievement->icon }} fa-fw" style="font-size: 35px;"></i> &nbsp;
-                                    <span class="counter-number" data-target="{{ $achievement->number }}">0</span>
-                                    <span>{{ $achievement->suffix }}</span>
+                                    <span class="counter-number" data-target="{{ $achievement->value }}">0</span>
+                                    <span>{{ $achievement->getSuffix() }}</span>
                                 </h2>
-                                <h3 class="counter-heading">{{ $achievement->title }}</h3>
+                                <h3 class="counter-heading">{{ $achievement->getTitle() }}</h3>
                             </div>
                         </div>
                     </div>

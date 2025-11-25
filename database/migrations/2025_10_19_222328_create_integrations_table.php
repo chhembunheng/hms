@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('integrations', function (Blueprint $table) {
             $table->id();
-            $table->string('logo')->nullable();
-            $table->string('url')->nullable();
+            $table->string('icon')->nullable();
+            $table->string('image')->nullable();
+            $table->unsignedBigInteger('parent_id')->nullable()->index();
+            $table->string('slug')->unique()->nullable();
+            $table->integer('sort')->default(0);
             $table->json('images')->nullable();
             $table->boolean('is_active')->default(true);
             $table->author();

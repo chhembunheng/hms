@@ -37,6 +37,16 @@ class SitePagesController extends Controller
                     $data['services'] = $collection;
                     continue;
                 }
+                if($key === 'integrations' && $routeName === 'integrations') {
+                    $integration = $collection->where('slug', request()->route('slug'))->first();
+                    $area = [
+                        'title' => $integration?->getName() ?? __('global.integrations'),
+                        'subtitle' => $integration?->getDescription() ?? __('global.our_offered_integrations'),
+                    ];
+                    $data['integration'] = $integration;
+                    $data['integrations'] = $collection;
+                    continue;
+                }
                 if($key === 'careers' && $routeName === 'careers') {
                     $career = $collection->where('slug', request()->route('slug'))->first();
                     $area = [

@@ -61,13 +61,16 @@ trait SiteContentAdapter
             ->with(['translations' => $translationScope])
             ->orderBy('sort')->limit(50)->get()));
 
-        $achievements = $load('achievements', fn() => $this->safeQuery(fn() => Achievement::select('id', 'sort')
+        $achievements = $load('achievements', fn() => $this->safeQuery(fn() => Achievement::select('id', 'sort', 'icon', 'value')
             ->with(['translations' => $translationScope])
+            ->where('is_active', true)
             ->orderBy('sort')->limit(50)->get()));
 
-        $integrations = $load('integrations', fn() => $this->safeQuery(fn() => Integration::select('id', 'slug')
-            ->with(['translations' => $translationScope])
-            ->orderByDesc('id')->limit(50)->get()));
+        $integrations = $load('integrations', fn() => $this->safeQuery(fn() => Integration::select('id', 'slug', 'image', 'sort', 'images', 'icon', 'parent_id')
+            ->with(['translations' => $translationScope, 'children'])
+            ->whereNull('parent_id')
+            ->where('is_active', true)
+            ->orderByDesc('id')->get()));
 
         $pricing = $load('pricing', fn() => $this->safeQuery(fn() => Plan::select('id', 'sort')
             ->with([

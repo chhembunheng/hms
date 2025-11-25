@@ -12,10 +12,12 @@ class Integration extends Model
     protected $table = 'integrations';
 
     protected $fillable = [
-        'logo',
         'image',
         'images',
-        'url',
+        'sort',
+        'slug',
+        'icon',
+        'parent_id',
         'is_active',
         'created_by',
         'updated_by',
@@ -26,6 +28,16 @@ class Integration extends Model
         'is_active' => 'boolean',
         'images' => 'collection',
     ];
+
+    public function navigations()
+    {
+        return $this->morphMany(Navigation::class, 'linked');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Integration::class, 'parent_id');
+    }
 
     public function translations()
     {
@@ -40,7 +52,7 @@ class Integration extends Model
 
     public function getName($locale = null)
     {
-        return $this->getTranslation($locale)?->name ?? 'N/A';
+        return $this->getTranslation($locale)?->name ?? '';
     }
 
     public function getDescription($locale = null)

@@ -14,7 +14,7 @@ class AchievementTranslation extends Model
         'achievement_id',
         'locale',
         'title',
-        'subtitle',
+        'suffix',
         'created_by',
         'updated_by',
     ];

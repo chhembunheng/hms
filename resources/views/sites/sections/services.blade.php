@@ -20,12 +20,12 @@
                         <div class="services-icon">
                             <i class="{{ $service->icon }}" aria-hidden="true"></i>
                         </div>
-                        <h3>{{ $service->name }}</h3>
-                        <p>{!! $service->content ?? '' !!}</p>
+                        <h3>{{ $service->getName() }}</h3>
+                        <p class="text-truncate">{!! $service->getDescription() !!}</p>
                         <div class="services-btn-link">
                             <a href="{{ Route::has('services') ? route('services', ['locale' => app()->getLocale(), 'slug' => $service->slug]) : '#' }}" class="services-link">
                                 {{ __('global.read_more') }}
-                                <span class="visually-hidden">{{ $service->name }}</span>
+                                <span class="visually-hidden">{{ $service->getName() }}</span>
                             </a>
                         </div>
                     </article>

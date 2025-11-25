@@ -21,7 +21,7 @@
                             <div class="services-icon">
                                 <i class="{{ $integration->icon }}"></i>
                             </div>
-                            <h3>{{ $integration->name }}</h3>
+                            <h3>{{ $integration->getName() }}</h3>
                             <div class="services-btn-link">
                                 <a href="{{ Route::has('integrations') ? route('integrations', ['slug' => $integration->slug, 'locale' => app()->getLocale()]) : '#' }}"
                                     class="services-link">{{ __('global.read_more') }}</a>

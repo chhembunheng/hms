@@ -41,6 +41,10 @@ class Achievement extends Model
 
     public function getTitle($locale = null)
     {
-        return $this->getTranslation($locale)?->title ?? 'N/A';
+        return $this->getTranslation($locale)?->title ?? '';
+    }
+    public function getSuffix($locale = null)
+    {
+        return $this->getTranslation($locale)?->suffix ?? '';
     }
 }

@@ -43,27 +43,33 @@ class Service extends Model
         return $this->hasMany(ServiceTranslation::class);
     }
 
+     public function getTranslation($locale = null)
+    {
+        $locale = $locale ?? app()->getLocale();
+        return $this->translations()->where('locale', $locale)->first();
+    }
+
     /**
      * Get the name for a specific locale.
      */
-    public function getName($locale = 'en')
+    public function getName($locale = null)
     {
-        return $this->translations->where('locale', $locale)->first()?->name ?? 'N/A';
+        return $this->getTranslation($locale)?->name ?? '';
     }
 
     /**
      * Get the description for a specific locale.
      */
-    public function getDescription($locale = 'en')
+    public function getDescription($locale = null)
     {
-        return $this->translations->where('locale', $locale)->first()?->description ?? '';
+        return $this->getTranslation($locale)?->description ?? '';
     }
     /**
      * Get the content for a specific locale.
      */
-    public function getContent($locale = 'en')
+    public function getContent($locale = null)
     {
-        return $this->translations->where('locale', $locale)->first()?->content ?? '';
+        return $this->getTranslation($locale)?->content ?? '';
     }
     // get route
     public function getRoute()
@@ -71,22 +77,22 @@ class Service extends Model
         return 'services';
     }
     // slider title
-    public function getSliderTitle($locale = 'en')
+    public function getSliderTitle($locale = null)
     {
-        return $this->translations->where('locale', $locale)->first()?->slider_title ?? '';
+        return $this->getTranslation($locale)?->slider_title ?? '';
     }
     /**
      * Get the slider description for a specific locale.
      */
-    public function getSliderDescription($locale = 'en')
+    public function getSliderDescription($locale = null)
     {
-        return $this->translations->where('locale', $locale)->first()?->slider_description ?? '';
+        return $this->getTranslation($locale)?->slider_description ?? '';
     }
 
     /**
      * Get the slug for a specific locale.
      */
-    public function getSlug($locale = 'en')
+    public function getSlug()
     {
         return $this->slug ?? '';
     }

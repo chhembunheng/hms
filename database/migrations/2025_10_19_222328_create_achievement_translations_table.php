@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('achievement_id')->constrained('achievements')->cascadeOnDelete();
             $table->string('locale', 10);
             $table->string('title');
-            $table->string('subtitle')->nullable();
+            $table->string('suffix')->nullable();
             $table->author();
             $table->unique(['achievement_id','locale']);
         });
