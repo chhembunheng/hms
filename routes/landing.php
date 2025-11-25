@@ -3,52 +3,55 @@
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
-Route::domain(config('app.public_domain'))->group(function () {
-    Route::group([
-        'prefix' => '{locale}',
-        'where' => ['locale' => 'en|km'],
-        'middleware' => ['setlocale', 'navigations'],
-    ], function () {
-        $controller = \App\Http\Controllers\Frontend\SitePagesController::class;
+Route::get('/', function () {
+    $defaultLocale = config('app.locale', 'en');
+    return redirect()->route('index', ['locale' => $defaultLocale]);
+});
 
-        Route::get('/', [$controller, 'index'])->name('index');
+Route::group([
+    'prefix' => '{locale}',
+    'where' => ['locale' => 'en|km'],
+    'middleware' => ['setlocale', 'navigations'],
+], function () {
+    $controller = \App\Http\Controllers\Frontend\SitePagesController::class;
 
-        Route::get('/privacy-policy', [$controller, 'privacyPolicy'])->name('privacy-policy');
+    Route::get('/', [$controller, 'index'])->name('index');
 
-        Route::get('/cookie-policy', [$controller, 'cookiePolicy'])->name('cookie-policy');
+    Route::get('/privacy-policy', [$controller, 'privacyPolicy'])->name('privacy-policy');
 
-        Route::get('/terms-condition', [$controller, 'termsCondition'])->name('terms-condition');
+    Route::get('/cookie-policy', [$controller, 'cookiePolicy'])->name('cookie-policy');
 
-        Route::get('/faqs', [$controller, 'faqs'])->name('faqs');
+    Route::get('/terms-condition', [$controller, 'termsCondition'])->name('terms-condition');
 
-        Route::get('/about', [$controller, 'about'])->name('about');
+    Route::get('/faqs', [$controller, 'faqs'])->name('faqs');
 
-        Route::get('/contact', [$controller, 'contact'])->name('contact');
+    Route::get('/about', [$controller, 'about'])->name('about');
 
-        Route::get('/services/{slug?}', [$controller, 'services'])->name('services');
+    Route::get('/contact', [$controller, 'contact'])->name('contact');
 
-        Route::get('/products/{slug?}', [$controller, 'products'])->name('products');
+    Route::get('/services/{slug?}', [$controller, 'services'])->name('services');
 
-        Route::get('/pricing/{slug?}', [$controller, 'pricing'])->name('pricing');
+    Route::get('/products/{slug?}', [$controller, 'products'])->name('products');
 
-        Route::get('/teams/{slug?}', [$controller, 'teams'])->name('teams');
+    Route::get('/pricing/{slug?}', [$controller, 'pricing'])->name('pricing');
 
-        Route::get('/careers/{slug?}', [$controller, 'careers'])->name('careers');
+    Route::get('/teams/{slug?}', [$controller, 'teams'])->name('teams');
 
-        Route::get('/blogs/{slug?}', [$controller, 'blogs'])->name('blogs');
+    Route::get('/careers/{slug?}', [$controller, 'careers'])->name('careers');
 
-        Route::get('/integrations/{slug?}', [$controller, 'integrations'])->name('integrations');
+    Route::get('/blogs/{slug?}', [$controller, 'blogs'])->name('blogs');
 
-        Route::post('/submit-contact', function () {
-            $data = request()->validate([
-                'name' => 'required',
-                'email' => 'required|email',
-                'phone' => 'required',
-                'subject' => 'required',
-                'message' => 'required',
-            ]);
-            Log::info('Contact Form Submitted', $data);
-            return back()->with('success', __('global.message_sent_successfully'));
-        })->name('submit-contact');
-    });
+    Route::get('/integrations/{slug?}', [$controller, 'integrations'])->name('integrations');
+
+    Route::post('/submit-contact', function () {
+        $data = request()->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'subject' => 'required',
+            'message' => 'required',
+        ]);
+        Log::info('Contact Form Submitted', $data);
+        return back()->with('success', __('global.message_sent_successfully'));
+    })->name('submit-contact');
 });

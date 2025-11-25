@@ -48,7 +48,7 @@ class Service extends Model
      */
     public function getName($locale = 'en')
     {
-        return $this->translations->where('locale', $locale)->first()?->title ?? 'N/A';
+        return $this->translations->where('locale', $locale)->first()?->name ?? 'N/A';
     }
 
     /**

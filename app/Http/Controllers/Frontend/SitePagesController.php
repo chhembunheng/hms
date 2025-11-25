@@ -24,6 +24,7 @@ class SitePagesController extends Controller
                         'subtitle' => $product?->getDescription() ?? __('global.our_products'),
                     ];
                     $data['product'] = $product;
+                    $data['products'] = $collection;
                     continue;
                 }
                 if($key === 'services' && $routeName === 'services') {
@@ -34,6 +35,16 @@ class SitePagesController extends Controller
                     ];
                     $data['service'] = $service;
                     $data['services'] = $collection;
+                    continue;
+                }
+                if($key === 'careers' && $routeName === 'careers') {
+                    $career = $collection->where('slug', request()->route('slug'))->first();
+                    $area = [
+                        'title' => $career?->getTitle() ?? __('global.careers'),
+                        'subtitle' => $career?->getDescription() ?? __('global.our_offered_careers'),
+                    ];
+                    $data['career'] = $career;
+                    $data['careers'] = $collection;
                     continue;
                 }
                 $data[$key] = $collection;

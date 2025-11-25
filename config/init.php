@@ -41,10 +41,10 @@ return [
     'available_locales' => ['km', 'en'],
     'sections' => [
         'index' => ['sliders', 'services', 'integrations', 'talk', 'achievements', 'contacts'],
-        'services' => ['services'],
-        'products' => ['products'],
+        'services' => ['services', 'talk'],
+        'products' => ['products', 'talk'],
         'pricing' => ['pricing_plans'],
-        'careers' => ['careers'],
+        'careers' => ['careers', 'talk'],
         'blogs' => ['blogs'],
         'integrations' => ['integrations'],
         'teams' => ['teams', 'talk'],

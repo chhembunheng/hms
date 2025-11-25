@@ -267,6 +267,8 @@ if (! function_exists('formate_date')) {
 if (! function_exists('badge')) {
     function badge(?string $status = '', ?string $text = '')
     {
+        $status = str_replace(['_', '-'], ' ', strtolower(trim((string)($status ?? ''))));
+        $text = ucwords(trim((string)($text ?? '')));
         $statuses = [
             'success' => 'badge bg-success bg-opacity-10 text-success',
             'pending' => 'badge bg-warning bg-opacity-10 text-warning',
@@ -315,6 +317,13 @@ if (! function_exists('badge')) {
             'urgent' => 'badge bg-danger bg-opacity-10 text-danger',
             'regular' => 'badge bg-secondary bg-opacity-10 text-secondary',
             'full time' => 'badge bg-success bg-opacity-10 text-success',
+            'part time' => 'badge bg-info bg-opacity-10 text-info',
+            'internship' => 'badge bg-primary bg-opacity-10 text-primary',
+            'medium' => 'badge bg-warning bg-opacity-10 text-warning',
+            'high' => 'badge bg-danger bg-opacity-10 text-danger',
+            'low' => 'badge bg-success bg-opacity-10 text-success',
+            'closed' => 'badge bg-danger bg-opacity-10 text-danger',
+            'open' => 'badge bg-success bg-opacity-10 text-success',
         ];
 
         $normalizedStatus = strtolower(trim((string)($status ?? '')));

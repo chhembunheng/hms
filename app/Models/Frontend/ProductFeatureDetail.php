@@ -33,4 +33,14 @@ class ProductFeatureDetail extends Model
     {
         return $this->hasMany(ProductFeatureDetailTranslation::class, 'product_feature_detail_id');
     }
+    public function getName($locale = null)
+    {
+        $locale = $locale ?? app()->getLocale();
+        return $this->translations()->where('locale', $locale)->first()?->title ?? null;
+    }
+    public function getDescription($locale = null)
+    {
+        $locale = $locale ?? app()->getLocale();
+        return $this->translations()->where('locale', $locale)->first()?->description ?? null;
+    }
 }

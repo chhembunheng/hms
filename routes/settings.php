@@ -9,10 +9,15 @@ use App\Http\Controllers\Settings\UserController;
 use App\Http\Controllers\Settings\PermissionController;
 
 Route::get('clear-cache', function () {
-    Artisan::call('optimize:clear');
+    Artisan::call('config:clear');
+    Artisan::call('cache:clear');
     return redirect()->back();
 })->name('clear-cache');
+
 Route::domain(config('app.admin_domain'))->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('settings.my-account.index');
+    })->name('settings.home');
     Route::group(['prefix' => 'settings', 'as' => 'settings.', 'middleware' => ['auth', 'verified', 'abilities']], function () {
         Route::prefix('menus')->name('menus.')->group(function () {
             Route::get('/', [MenuController::class, 'index'])->name('index');

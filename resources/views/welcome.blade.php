@@ -55,24 +55,29 @@
             'prev' => $prev,
         ])
     @endisset
-    @isset($products)
+    @if(isset($products) && !isset($product))
         @include('sites.sections.products', [
             'products' => $products,
             'title' => __('global.products'),
             'subtitle' => __('global.what_we_offer'),
         ])
-    @endisset
-    @isset($details)
-        @foreach ($details as $i => $box)
-            @include('sites.sections.box', [
-                'box' => $box,
-                'details' => $box->details ?? [],
+    @endif
+    @if(isset($product))
+        @include('sites.sections.product', [
+            'product' => $product,
+            'title' => $area['title'],
+            'subtitle' => $area['subtitle'],
+        ])
+        @foreach ($product->features ?? [] as $i => $feature)
+            @include('sites.sections.feature', [
+                'feature' => $feature,
+                'details' => $feature->details ?? [],
                 'left' => $i % 2 == 0 ? false : true,
-                'title' => $box->title ?? '',
-                'subtitle' => $box->description ?? '',
+                'title' => $area['title'] ?? '',
+                'subtitle' => $area['subtitle'] ?? '',
             ])
         @endforeach
-    @endisset
+    @endif
     @isset($pricing)
         @include('sites.sections.pricing', [
             'pricing' => $pricing,
@@ -123,13 +128,21 @@
             'subtitle' => $area['subtitle'],
         ])
     @endisset
-    @isset($careers)
+    @if(isset($careers) && isset($career))
         @include('sites.sections.career', [
+            'career' => $career,
             'careers' => $careers,
             'title' => __('global.our_careers'),
             'subtitle' => __('global.join_our_team'),
         ])
-    @endisset
+    @endif
+    @if(!isset($career) && isset($careers))
+        @include('sites.sections.careers', [
+            'careers' => $careers,
+            'title' => __('global.our_careers'),
+            'subtitle' => __('global.join_our_team'),
+        ])
+    @endif
     @isset($categories)
         @include('sites.sections.faqs', ['categories' => $categories])
     @endisset

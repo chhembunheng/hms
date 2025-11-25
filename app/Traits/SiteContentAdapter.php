@@ -44,7 +44,7 @@ trait SiteContentAdapter
             ->with([
                 'translations' => $translationScope,
                 'features' => function ($q) {
-                    $q->select('id', 'product_id');
+                    $q->select('id', 'product_id', 'icon', 'is_highlighted', 'sort');
                 },
             ])
             ->orderBy('sort')->limit(50)->get()));
@@ -57,7 +57,7 @@ trait SiteContentAdapter
             ->with(['translations' => $translationScope])
             ->orderBy('sort')->limit(50)->get()));
 
-        $careers = $load('careers', fn() => $this->safeQuery(fn() => Career::select('id', 'slug', 'location', 'deadline', 'type', 'level', 'sort', 'is_active')
+        $careers = $load('careers', fn() => $this->safeQuery(fn() => Career::select('id', 'slug', 'location', 'deadline', 'type', 'level', 'sort', 'is_active', 'priority', 'created_at')
             ->with(['translations' => $translationScope])
             ->orderBy('sort')->limit(50)->get()));
 
