@@ -4603,3 +4603,7 @@ blockquote::after {
     font-weight: 500 !important;
     text-transform: none !important;
 }
+
+#top-navigation #navbarContent {
+    z-index: 1080 !important;
+}
