@@ -50,7 +50,11 @@ class Team extends Model
 
     public function getPosition($locale = null)
     {
-        return $this->getTranslation($locale)?->position ?? '';
+        $positions = config('init.positions')[$this->position_id] ?? null;
+        if ($positions) {
+            return $positions[$locale ?? app()->getLocale()] ?? $positions['en'];
+        }
+        return '';
     }
 
     public function getBio($locale = null)

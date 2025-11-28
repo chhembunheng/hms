@@ -50,4 +50,66 @@ return [
         'teams' => ['teams', 'talk'],
         'faqs' => ['faqs', 'talk']
     ],
+    'positions' => [
+        1 => [
+            'en' => 'Assistant Director',
+            'km' => 'ជំនួយការនាយក',
+        ],
+        2 => [
+            'en' => 'Accountant',
+            'km' => 'គណនេយ្យករ',
+        ],
+        3 => [
+            'en' => 'Business Analyst',
+            'km' => 'អ្នកវិភាគអាជីវកម្ម',
+        ],
+        4 => [
+            'en' => 'Customer Support Officer',
+            'km' => 'មន្រ្តីគាំទ្រអតិថិជន',
+        ],
+        5 => [
+            'en' => 'Designer',
+            'km' => 'អ្នករចនា',
+        ],
+        6 => [
+            'en' => 'Software Developer',
+            'km' => 'អ្នកអភិវឌ្ឍន៍កម្មវិធី',
+        ],
+        7 => [
+            'en' => 'Director',
+            'km' => 'នាយក',
+        ],
+        8 => [
+            'en' => 'Financial Analyst',
+            'km' => 'អ្នកវិភាគហិរញ្ញវត្ថុ',
+        ],
+        9 => [
+            'en' => 'HR Specialist',
+            'km' => 'អ្នកជំនាញធនធានមនុស្ស',
+        ],
+        10 => [
+            'en' => 'Manager',
+            'km' => 'អ្នកគ្រប់គ្រង',
+        ],
+        11 => [
+            'en' => 'Marketing Specialist',
+            'km' => 'អ្នកជំនាញទីផ្សារ',
+        ],
+        12 => [
+            'en' => 'Product Manager',
+            'km' => 'អ្នកគ្រប់គ្រងផលិតផល',
+        ],
+        13 => [
+            'en' => 'Sales Representative',
+            'km' => 'តំណាងផ្នែកលក់',
+        ],
+        14 => [
+            'en' => 'Senior Software Developer',
+            'km' => 'អ្នកអភិវឌ្ឍន៍កម្មវិធីជាន់ខ្ពស់',
+        ],
+        15 => [
+            'en' => 'UI/UX Designer',
+            'km' => 'អ្នករចនា UI/UX',
+        ],
+    ]
 ];

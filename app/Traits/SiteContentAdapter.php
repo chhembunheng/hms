@@ -31,7 +31,7 @@ trait SiteContentAdapter
             $relation->where('locale', $locale)->orWhere('locale', 'en');
         };
 
-        $teams = $load('teams', fn() => $this->safeQuery(fn() => Team::select('id', 'photo', 'is_active')
+        $teams = $load('teams', fn() => $this->safeQuery(fn() => Team::select('id', 'photo', 'is_active', 'position_id', 'sort')
             ->with(['translations' => $translationScope])
             ->orderBy('sort')->limit(50)->get()));
 

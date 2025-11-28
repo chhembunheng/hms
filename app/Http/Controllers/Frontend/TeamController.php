@@ -18,23 +18,9 @@ class TeamController extends Controller
     public function __construct()
     {
         $this->locales = collect(config('init.languages'));
-        $this->positions = [
-            1 => 'Assistant Director',
-            2 => 'Accountant',
-            3 => 'Business Analyst',
-            4 => 'Customer Support',
-            5 => 'Designer',
-            6 => 'Developer',
-            7 => 'Director',
-            8 => 'Finance Analyst',
-            9 => 'HR Specialist',
-            10 => 'Manager',
-            11 => 'Marketing Specialist',
-            12 => 'Product Manager',
-            13 => 'Sales Representative',
-            14 => 'Senior Developer',
-            15 => 'UI/UX Designer',
-        ];
+        $this->positions = array_map(function ($position) {
+            return $position[app()->getLocale()] ?? $position['en'];
+        }, config('init.positions'));
     }
 
     public function index(TeamDataTable $dataTable)
