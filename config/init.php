@@ -64,8 +64,8 @@ return [
             'km' => 'អ្នកវិភាគអាជីវកម្ម',
         ],
         4 => [
-            'en' => 'Customer Support Officer',
-            'km' => 'មន្រ្តីគាំទ្រអតិថិជន',
+            'en' => 'Mobile App Developer',
+            'km' => 'អ្នកអភិវឌ្ឍន៍កម្មវិធីទូរស័ព្ទ',
         ],
         5 => [
             'en' => 'Designer',
@@ -96,8 +96,8 @@ return [
             'km' => 'អ្នកជំនាញទីផ្សារ',
         ],
         12 => [
-            'en' => 'Product Manager',
-            'km' => 'អ្នកគ្រប់គ្រងផលិតផល',
+            'en' => 'Project Manager',
+            'km' => 'អ្នកគ្រប់គ្រងគម្រោង',
         ],
         13 => [
             'en' => 'Sales Representative',
