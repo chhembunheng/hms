@@ -25,6 +25,15 @@ Route::get('/privacy-policy', function () {
     return view('welcome', compact('content', 'area'));
 })->name('privacy-policy-static');
 
+Route::get('/return-policy', function () {
+    $area = [
+        'title' => 'Return Policy',
+        'subtitle' => 'Our Commitment to Your Return Policy'
+    ];
+    $content = file_get_contents(public_path('site/data/' . app()->getLocale() . '/return-policy.html'));
+    return view('welcome', compact('content', 'area'));
+})->name('return-policy-static');
+
 Route::match(['get', 'post'], '/text-editor/upload', [TextEditorController::class, 'upload'])->name('text-editor.upload');
 Route::match(['get', 'post'], '/generate-meta', [MetaGeneratorController::class, 'generate'])->name('meta-generator.generate');
 Route::domain(config('app.admin_domain'))->group(function () {
