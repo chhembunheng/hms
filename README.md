@@ -742,12 +742,6 @@ For issues, feature requests, or contributions, please refer to [SECURITY.md](SE
 
 ---
 
-## 📄 License
-
-This project is part of WINTECH SOFTWARE DEVELOPMENT (Cambodia) Co., LTD. All rights reserved.
-
----
-
 **Last Updated**: 2025-10-23  
 **Version**: 1.0.0
 
