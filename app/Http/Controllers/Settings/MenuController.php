@@ -11,10 +11,13 @@ use App\Models\Settings\MenuTranslation;
 use Illuminate\Support\Facades\Validator;
 use App\DataTables\Settings\MenuDataTable;
 use App\Models\Settings\PermissionTranslation;
+use App\Traits\Filterable;
 
 class MenuController extends Controller
 {
-    public function index(MenuDataTable $dataTable)
+    use Filterable;
+
+    public function index(Request $request, MenuDataTable $dataTable)
     {
         return $dataTable->render('settings.menus.index');
     }
@@ -26,9 +29,9 @@ class MenuController extends Controller
         return Menu::select([
             'menus.id',
             DB::raw("COALESCE(
-                    (SELECT name FROM menu_translations 
+                    (SELECT name FROM menu_translations
                      WHERE menu_id = menus.id AND locale = '$locale' LIMIT 1),
-                    (SELECT name FROM menu_translations 
+                    (SELECT name FROM menu_translations
                      WHERE menu_id = menus.id AND locale = 'en' LIMIT 1)
                 ) AS name")
         ])
@@ -272,6 +275,18 @@ class MenuController extends Controller
 
     public function destroy($id)
     {
-        return errors("Deletion disabled because mode=B (keep permissions).");
+        try {
+            $menu = Menu::findOrFail($id);
+
+            if (Menu::where('parent_id', $id)->exists()) {
+                return errors("Cannot delete menu with sub-menus. Delete child menus first.");
+            }
+
+            $menu->delete();
+
+            return success(message: "Menu deleted successfully.");
+        } catch (\Exception $e) {
+            return errors("Failed to delete menu: " . $e->getMessage());
+        }
     }
 }

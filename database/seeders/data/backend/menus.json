@@ -4,1213 +4,172 @@
     "sort": 1,
     "route": "dashboard",
     "translations": [
-      {
-        "locale": "en",
-        "name": "Dashboard",
-        "description": "See a summary of what's happening in the system"
-      },
-      {
-        "locale": "km",
-        "name": "ផ្ទាំងគ្រប់គ្រង",
-        "description": "មើលសេចក្តីសង្ខេបអំពីអ្វីដែលកំពុងកើតឡើងនៅក្នុងប្រព័ន្ធ"
-      }
+      { "locale": "en", "name": "Dashboard", "description": "See a summary of what's happening in the system" },
+      { "locale": "km", "name": "ផ្ទាំងគ្រប់គ្រង", "description": "មើលសេចក្តីសង្ខេបអំពីអ្វីដែលកំពុងកើតឡើងនៅក្នុងប្រព័ន្ធ" }
     ],
     "permissions": []
   },
+
   {
-    "icon": "fa-globe",
+    "icon": "fa-right-to-bracket",
     "sort": 2,
+    "route": "checkin.index",
+    "translations": [
+      { "locale": "en", "name": "Check-In", "description": "Walk-in guest check-in" },
+      { "locale": "km", "name": "ចូលស្នាក់", "description": "ចុះឈ្មោះភ្ញៀវ" }
+    ],
+    "permissions": []
+  },
+
+  {
+    "icon": "fa-right-from-bracket",
+    "sort": 3,
+    "route": "checkout.index",
+    "translations": [
+      { "locale": "en", "name": "Check-Out", "description": "Guest checkout & payment" },
+      { "locale": "km", "name": "ចាកចេញ", "description": "ចេញស្នាក់ និងទូទាត់ប្រាក់" }
+    ],
+    "permissions": []
+  },
+
+  {
+    "icon": "fa-bed",
+    "sort": 4,
+    "route": "rooms.index",
+    "translations": [
+      { "locale": "en", "name": "Rooms", "description": "Room status and availability" },
+      { "locale": "km", "name": "បន្ទប់", "description": "ស្ថានភាពបន្ទប់" }
+    ],
+    "permissions": []
+  },
+
+  {
+    "icon": "fa-users",
+    "sort": 5,
+    "route": "guests.index",
+    "translations": [
+      { "locale": "en", "name": "Guests", "description": "Guest records & police info" },
+      { "locale": "km", "name": "ភ្ញៀវ", "description": "ព័ត៌មានភ្ញៀវ" }
+    ],
+    "permissions": []
+  },
+
+  {
+    "icon": "fa-cloud-sun",
+    "sort": 6,
+    "route": "seasons.index",
+    "translations": [
+      { "locale": "en", "name": "Seasons", "description": "Seasonal pricing control" },
+      { "locale": "km", "name": "រដូវកាល", "description": "តម្លៃតាមរដូវ" }
+    ],
+    "permissions": []
+  },
+
+  {
+    "icon": "fa-file-invoice-dollar",
+    "sort": 7,
+    "route": "billing.index",
+    "translations": [
+      { "locale": "en", "name": "Billing", "description": "Invoices, services & damage charges" },
+      { "locale": "km", "name": "វិក័យប័ត្រ", "description": "ការទូទាត់ប្រាក់" }
+    ],
+    "permissions": []
+  },
+
+  {
+    "icon": "fa-money-bill-transfer",
+    "sort": 8,
+    "route": "exchange-rate.index",
+    "translations": [
+      { "locale": "en", "name": "Exchange Rate", "description": "USD / KHR rate" },
+      { "locale": "km", "name": "អត្រាប្តូរប្រាក់", "description": "អត្រារៀល និងដុល្លារ" }
+    ],
+    "permissions": []
+  },
+
+  {
+    "icon": "fa-cash-register",
+    "sort": 9,
+    "route": "cash-closing.index",
+    "translations": [
+      { "locale": "en", "name": "Cash Closing", "description": "Daily cash closing" },
+      { "locale": "km", "name": "បិទប្រាក់", "description": "បិទប្រាក់ប្រចាំថ្ងៃ" }
+    ],
+    "permissions": []
+  },
+
+  {
+    "icon": "fa-concierge-bell",
+    "sort": 10,
+    "route": "services.index",
+    "translations": [
+      { "locale": "en", "name": "Extra Services", "description": "Laundry, tuk-tuk, late checkout" },
+      { "locale": "km", "name": "សេវាបន្ថែម", "description": "សេវាផ្សេងៗ" }
+    ],
+    "permissions": []
+  },
+
+  {
+    "icon": "fa-screwdriver-wrench",
+    "sort": 11,
+    "route": "maintenance.index",
+    "translations": [
+      { "locale": "en", "name": "Maintenance", "description": "Room repair & issues" },
+      { "locale": "km", "name": "ជួសជុល", "description": "ជួសជុលបន្ទប់" }
+    ],
+    "permissions": []
+  },
+
+  {
+    "icon": "fa-chart-line",
+    "sort": 12,
     "route": null,
     "translations": [
-      {
-        "locale": "en",
-        "name": "Frontends",
-        "description": "Manage frontend content and settings"
-      },
-      {
-        "locale": "km",
-        "name": "ផ្នែកមុខ",
-        "description": "គ្រប់គ្រងមាតិកា និងការកំណត់ផ្នែកមុខ"
-      }
+      { "locale": "en", "name": "Reports", "description": "Hotel & police reports" },
+      { "locale": "km", "name": "របាយការណ៍", "description": "របាយការណ៍សណ្ឋាគារ" }
     ],
     "permissions": [],
     "children": [
       {
-        "icon": "fa-briefcase",
+        "icon": "fa-calendar-day",
         "sort": 1,
-        "route": "frontends.services.index",
+        "route": "reports.daily.index",
         "translations": [
-          {
-            "locale": "en",
-            "name": "Services",
-            "description": "Manage services"
-          },
-          {
-            "locale": "km",
-            "name": "សេវាកម្ម",
-            "description": "គ្រប់គ្រងសេវាកម្ម"
-          }
+          { "locale": "en", "name": "Daily Report", "description": "Daily income" },
+          { "locale": "km", "name": "ប្រចាំថ្ងៃ", "description": "របាយការណ៍ប្រចាំថ្ងៃ" }
         ],
-        "permissions": [
-          {
-            "action": "add",
-            "icon": "fa-circle-plus",
-            "target": "navbar",
-            "sort": 2,
-            "route": "frontends.services.add",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Add",
-                "description": "Add a new service"
-              },
-              {
-                "locale": "km",
-                "name": "បន្ថែម",
-                "description": "បន្ថែមសេវាកម្មថ្មី"
-              }
-            ]
-          },
-          {
-            "action": "edit",
-            "icon": "fa-pen-to-square",
-            "target": "self",
-            "sort": 3,
-            "route": "frontends.services.edit",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Edit",
-                "description": "Update a service"
-              },
-              {
-                "locale": "km",
-                "name": "កែប្រែ",
-                "description": "ធ្វើបច្ចុប្បន្នភាពសេវាកម្ម"
-              }
-            ]
-          },
-          {
-            "action": "delete",
-            "icon": "fa-trash",
-            "target": "confirm",
-            "sort": 4,
-            "route": "frontends.services.delete",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Delete",
-                "description": "Remove a service"
-              },
-              {
-                "locale": "km",
-                "name": "លុប",
-                "description": "លុបសេវាកម្ម"
-              }
-            ]
-          }
-        ]
+        "permissions": []
       },
       {
-        "icon": "fa-boxes-stacked",
+        "icon": "fa-calendar-week",
         "sort": 2,
-        "route": "frontends.products.index",
+        "route": "reports.monthly.index",
         "translations": [
-          {
-            "locale": "en",
-            "name": "Products",
-            "description": "Manage products"
-          },
-          {
-            "locale": "km",
-            "name": "ផលិតផល",
-            "description": "គ្រប់គ្រងផលិតផល"
-          }
+          { "locale": "en", "name": "Monthly Report", "description": "Monthly income" },
+          { "locale": "km", "name": "ប្រចាំខែ", "description": "របាយការណ៍ប្រចាំខែ" }
         ],
-        "permissions": [
-          {
-            "action": "add",
-            "icon": "fa-circle-plus",
-            "target": "navbar",
-            "sort": 2,
-            "route": "frontends.products.add",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Add",
-                "description": "Add a new product"
-              },
-              {
-                "locale": "km",
-                "name": "បន្ថែម",
-                "description": "បន្ថែមផលិតផលថ្មី"
-              }
-            ]
-          },
-          {
-            "action": "edit",
-            "icon": "fa-pen-to-square",
-            "target": "self",
-            "sort": 3,
-            "route": "frontends.products.edit",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Edit",
-                "description": "Update a product"
-              },
-              {
-                "locale": "km",
-                "name": "កែប្រែ",
-                "description": "ធ្វើបច្ចុប្បន្នភាពផលិតផល"
-              }
-            ]
-          },
-          {
-            "action": "delete",
-            "icon": "fa-trash",
-            "target": "confirm",
-            "sort": 4,
-            "route": "frontends.products.delete",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Delete",
-                "description": "Remove a product"
-              },
-              {
-                "locale": "km",
-                "name": "លុប",
-                "description": "លុបផលិតផល"
-              }
-            ]
-          },
-          {
-            "action": "feature",
-            "icon": "fa-star",
-            "target": "self",
-            "sort": 4,
-            "route": "frontends.products.feature",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Feature",
-                "description": "Mark a product as featured"
-              },
-              {
-                "locale": "km",
-                "name": "លក្ខណៈពិសេស",
-                "description": "សម្គាល់ផលិតផលមួយជាលក្ខណៈពិសេស"
-              }
-            ]
-          }
-        ]
+        "permissions": []
       },
       {
-        "icon": "fa-people-group",
+        "icon": "fa-id-card",
         "sort": 3,
-        "route": "frontends.teams.index",
+        "route": "reports.police.index",
         "translations": [
-          {
-            "locale": "en",
-            "name": "Teams",
-            "description": "Manage team members"
-          },
-          {
-            "locale": "km",
-            "name": "ក្រុម",
-            "description": "គ្រប់គ្រងសមាជិកក្រុម"
-          }
+          { "locale": "en", "name": "Police Report", "description": "Legal guest report" },
+          { "locale": "km", "name": "ប៉ូលិស", "description": "របាយការណ៍ទៅប៉ូលិស" }
         ],
-        "permissions": [
-          {
-            "action": "add",
-            "icon": "fa-circle-plus",
-            "target": "navbar",
-            "sort": 2,
-            "route": "frontends.teams.add",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Add",
-                "description": "Add a new team member"
-              },
-              {
-                "locale": "km",
-                "name": "បន្ថែម",
-                "description": "បន្ថែមសមាជិកក្រុមថ្មី"
-              }
-            ]
-          },
-          {
-            "action": "edit",
-            "icon": "fa-pen-to-square",
-            "target": "self",
-            "sort": 3,
-            "route": "frontends.teams.edit",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Edit",
-                "description": "Update a team member"
-              },
-              {
-                "locale": "km",
-                "name": "កែប្រែ",
-                "description": "ធ្វើបច្ចុប្បន្នភាពសមាជិកក្រុម"
-              }
-            ]
-          },
-          {
-            "action": "delete",
-            "icon": "fa-trash",
-            "target": "confirm",
-            "sort": 4,
-            "route": "frontends.teams.delete",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Delete",
-                "description": "Remove a team member"
-              },
-              {
-                "locale": "km",
-                "name": "លុប",
-                "description": "លុបសមាជិកក្រុម"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "icon": "fa-newspaper",
-        "sort": 4,
-        "route": "frontends.blogs.index",
-        "translations": [
-          {
-            "locale": "en",
-            "name": "Blogs",
-            "description": "Manage blog posts"
-          },
-          {
-            "locale": "km",
-            "name": "ប្លុក",
-            "description": "គ្រប់គ្រងអត្ថបទប្លុក"
-          }
-        ],
-        "permissions": [
-          {
-            "action": "add",
-            "icon": "fa-circle-plus",
-            "target": "navbar",
-            "sort": 2,
-            "route": "frontends.blogs.add",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Add",
-                "description": "Add a new blog post"
-              },
-              {
-                "locale": "km",
-                "name": "បន្ថែម",
-                "description": "បន្ថែមអត្ថបទប្លុកថ្មី"
-              }
-            ]
-          },
-          {
-            "action": "edit",
-            "icon": "fa-pen-to-square",
-            "target": "self",
-            "sort": 3,
-            "route": "frontends.blogs.edit",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Edit",
-                "description": "Update a blog post"
-              },
-              {
-                "locale": "km",
-                "name": "កែប្រែ",
-                "description": "ធ្វើបច្ចុប្បន្នភាពអត្ថបទប្លុក"
-              }
-            ]
-          },
-          {
-            "action": "delete",
-            "icon": "fa-trash",
-            "target": "confirm",
-            "sort": 4,
-            "route": "frontends.blogs.delete",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Delete",
-                "description": "Remove a blog post"
-              },
-              {
-                "locale": "km",
-                "name": "លុប",
-                "description": "លុបអត្ថបទប្លុក"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "icon": "fa-circle-question",
-        "sort": 5,
-        "route": "frontends.faqs.index",
-        "translations": [
-          {
-            "locale": "en",
-            "name": "FAQs",
-            "description": "Manage frequently asked questions"
-          },
-          {
-            "locale": "km",
-            "name": "សំណួរញឹកញាប់",
-            "description": "គ្រប់គ្រងសំណួរញឹកញាប់"
-          }
-        ],
-        "permissions": [
-          {
-            "action": "add",
-            "icon": "fa-circle-plus",
-            "target": "navbar",
-            "sort": 2,
-            "route": "frontends.faqs.add",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Add",
-                "description": "Add a new FAQ"
-              },
-              {
-                "locale": "km",
-                "name": "បន្ថែម",
-                "description": "បន្ថែមសំណួរញឹកញាប់ថ្មី"
-              }
-            ]
-          },
-          {
-            "action": "edit",
-            "icon": "fa-pen-to-square",
-            "target": "self",
-            "sort": 3,
-            "route": "frontends.faqs.edit",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Edit",
-                "description": "Update a FAQ"
-              },
-              {
-                "locale": "km",
-                "name": "កែប្រែ",
-                "description": "ធ្វើបច្ចុប្បន្នភាពសំណួរញឹកញាប់"
-              }
-            ]
-          },
-          {
-            "action": "delete",
-            "icon": "fa-trash",
-            "target": "confirm",
-            "sort": 4,
-            "route": "frontends.faqs.delete",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Delete",
-                "description": "Remove a FAQ"
-              },
-              {
-                "locale": "km",
-                "name": "លុប",
-                "description": "លុបសំណួរញឹកញាប់"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "icon": "fa-folder",
-        "sort": 6,
-        "route": "frontends.categories.index",
-        "translations": [
-          {
-            "locale": "en",
-            "name": "Categories",
-            "description": "Manage categories"
-          },
-          {
-            "locale": "km",
-            "name": "ប្រភេទ",
-            "description": "គ្រប់គ្រងប្រភេទ"
-          }
-        ],
-        "permissions": [
-          {
-            "action": "add",
-            "icon": "fa-circle-plus",
-            "target": "navbar",
-            "sort": 2,
-            "route": "frontends.categories.add",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Add",
-                "description": "Add a new category"
-              },
-              {
-                "locale": "km",
-                "name": "បន្ថែម",
-                "description": "បន្ថែមប្រភេទថ្មី"
-              }
-            ]
-          },
-          {
-            "action": "edit",
-            "icon": "fa-pen-to-square",
-            "target": "self",
-            "sort": 3,
-            "route": "frontends.categories.edit",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Edit",
-                "description": "Update a category"
-              },
-              {
-                "locale": "km",
-                "name": "កែប្រែ",
-                "description": "ធ្វើបច្ចុប្បន្នភាពប្រភេទ"
-              }
-            ]
-          },
-          {
-            "action": "delete",
-            "icon": "fa-trash",
-            "target": "confirm",
-            "sort": 4,
-            "route": "frontends.categories.delete",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Delete",
-                "description": "Remove a category"
-              },
-              {
-                "locale": "km",
-                "name": "លុប",
-                "description": "លុបប្រភេទ"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "icon": "fa-tags",
-        "sort": 7,
-        "route": "frontends.tags.index",
-        "translations": [
-          {
-            "locale": "en",
-            "name": "Tags",
-            "description": "Manage tags"
-          },
-          {
-            "locale": "km",
-            "name": "ស្លាក",
-            "description": "គ្រប់គ្រងស្លាក"
-          }
-        ],
-        "permissions": [
-          {
-            "action": "add",
-            "icon": "fa-circle-plus",
-            "target": "navbar",
-            "sort": 2,
-            "route": "frontends.tags.add",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Add",
-                "description": "Add a new tag"
-              },
-              {
-                "locale": "km",
-                "name": "បន្ថែម",
-                "description": "បន្ថែមស្លាកថ្មី"
-              }
-            ]
-          },
-          {
-            "action": "edit",
-            "icon": "fa-pen-to-square",
-            "target": "self",
-            "sort": 3,
-            "route": "frontends.tags.edit",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Edit",
-                "description": "Update a tag"
-              },
-              {
-                "locale": "km",
-                "name": "កែប្រែ",
-                "description": "ធ្វើបច្ចុប្បន្នភាពស្លាក"
-              }
-            ]
-          },
-          {
-            "action": "delete",
-            "icon": "fa-trash",
-            "target": "confirm",
-            "sort": 4,
-            "route": "frontends.tags.delete",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Delete",
-                "description": "Remove a tag"
-              },
-              {
-                "locale": "km",
-                "name": "លុប",
-                "description": "លុបស្លាក"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "icon": "fa-puzzle-piece",
-        "sort": 8,
-        "route": "frontends.integrations.index",
-        "translations": [
-          {
-            "locale": "en",
-            "name": "Integrations",
-            "description": "Manage integrations"
-          },
-          {
-            "locale": "km",
-            "name": "ការរួមបញ្ចូល",
-            "description": "គ្រប់គ្រងការរួមបញ្ចូល"
-          }
-        ],
-        "permissions": [
-          {
-            "action": "add",
-            "icon": "fa-circle-plus",
-            "target": "navbar",
-            "sort": 2,
-            "route": "frontends.integrations.add",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Add",
-                "description": "Add a new integration"
-              },
-              {
-                "locale": "km",
-                "name": "បន្ថែម",
-                "description": "បន្ថែមការរួមបញ្ចូលថ្មី"
-              }
-            ]
-          },
-          {
-            "action": "edit",
-            "icon": "fa-pen-to-square",
-            "target": "self",
-            "sort": 3,
-            "route": "frontends.integrations.edit",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Edit",
-                "description": "Update an integration"
-              },
-              {
-                "locale": "km",
-                "name": "កែប្រែ",
-                "description": "ធ្វើបច្ចុប្បន្នភាពការរួមបញ្ចូល"
-              }
-            ]
-          },
-          {
-            "action": "delete",
-            "icon": "fa-trash",
-            "target": "confirm",
-            "sort": 4,
-            "route": "frontends.integrations.delete",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Delete",
-                "description": "Remove an integration"
-              },
-              {
-                "locale": "km",
-                "name": "លុប",
-                "description": "លុបការរួមបញ្ចូល"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "icon": "fa-compass",
-        "sort": 9,
-        "route": "frontends.navigations.index",
-        "translations": [
-          {
-            "locale": "en",
-            "name": "Navigation",
-            "description": "Manage navigation items"
-          },
-          {
-            "locale": "km",
-            "name": "ការរុករក",
-            "description": "គ្រប់គ្រងធាតុរុករក"
-          }
-        ],
-        "permissions": [
-          {
-            "action": "add",
-            "icon": "fa-circle-plus",
-            "target": "navbar",
-            "sort": 2,
-            "route": "frontends.navigations.add",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Add",
-                "description": "Add a new navigation item"
-              },
-              {
-                "locale": "km",
-                "name": "បន្ថែម",
-                "description": "បន្ថែមធាតុរុករកថ្មី"
-              }
-            ]
-          },
-          {
-            "action": "edit",
-            "icon": "fa-pen-to-square",
-            "target": "self",
-            "sort": 3,
-            "route": "frontends.navigations.edit",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Edit",
-                "description": "Update a navigation item"
-              },
-              {
-                "locale": "km",
-                "name": "កែប្រែ",
-                "description": "ធ្វើបច្ចុប្បន្នភាពធាតុរុករក"
-              }
-            ]
-          },
-          {
-            "action": "delete",
-            "icon": "fa-trash",
-            "target": "confirm",
-            "sort": 4,
-            "route": "frontends.navigations.delete",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Delete",
-                "description": "Remove a navigation item"
-              },
-              {
-                "locale": "km",
-                "name": "លុប",
-                "description": "លុបធាតុរុករក"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "icon": "fa-list-check",
-        "sort": 10,
-        "route": "frontends.choosings.index",
-        "translations": [
-          {
-            "locale": "en",
-            "name": "Choosings",
-            "description": "Manage why-choose-us items"
-          },
-          {
-            "locale": "km",
-            "name": "ហេតុជ្រើសយើង",
-            "description": "គ្រប់គ្រងធាតុ \"ហេតុជ្រើសយើង\""
-          }
-        ],
-        "permissions": [
-          {
-            "action": "add",
-            "icon": "fa-circle-plus",
-            "target": "navbar",
-            "sort": 2,
-            "route": "frontends.choosings.add",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Add",
-                "description": "Add a new why-choose-us item"
-              },
-              {
-                "locale": "km",
-                "name": "បន្ថែម",
-                "description": "បន្ថែមធាតុ \"ហេតុជ្រើសយើង\" ថ្មី"
-              }
-            ]
-          },
-          {
-            "action": "edit",
-            "icon": "fa-pen-to-square",
-            "target": "self",
-            "sort": 3,
-            "route": "frontends.choosings.edit",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Edit",
-                "description": "Update a why-choose-us item"
-              },
-              {
-                "locale": "km",
-                "name": "កែប្រែ",
-                "description": "ធ្វើបច្ចុប្បន្នភាពធាតុ \"ហេតុជ្រើសយើង\""
-              }
-            ]
-          },
-          {
-            "action": "delete",
-            "icon": "fa-trash",
-            "target": "confirm",
-            "sort": 4,
-            "route": "frontends.choosings.delete",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Delete",
-                "description": "Remove a why-choose-us item"
-              },
-              {
-                "locale": "km",
-                "name": "លុប",
-                "description": "លុបធាតុ \"ហេតុជ្រើសយើង\""
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "icon": "fa-user-tie",
-        "sort": 11,
-        "route": "frontends.clients.index",
-        "translations": [
-          {
-            "locale": "en",
-            "name": "Clients",
-            "description": "Manage clients"
-          },
-          {
-            "locale": "km",
-            "name": "អតិថិជន",
-            "description": "គ្រប់គ្រងអតិថិជន"
-          }
-        ],
-        "permissions": [
-          {
-            "action": "add",
-            "icon": "fa-circle-plus",
-            "target": "navbar",
-            "sort": 2,
-            "route": "frontends.clients.add",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Add",
-                "description": "Add a new client"
-              },
-              {
-                "locale": "km",
-                "name": "បន្ថែម",
-                "description": "បន្ថែមអតិថិជនថ្មី"
-              }
-            ]
-          },
-          {
-            "action": "edit",
-            "icon": "fa-pen-to-square",
-            "target": "self",
-            "sort": 3,
-            "route": "frontends.clients.edit",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Edit",
-                "description": "Update a client"
-              },
-              {
-                "locale": "km",
-                "name": "កែប្រែ",
-                "description": "ធ្វើបច្ចុប្បន្នភាពអតិថិជន"
-              }
-            ]
-          },
-          {
-            "action": "delete",
-            "icon": "fa-trash",
-            "target": "confirm",
-            "sort": 4,
-            "route": "frontends.clients.delete",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Delete",
-                "description": "Remove a client"
-              },
-              {
-                "locale": "km",
-                "name": "លុប",
-                "description": "លុបអតិថិជន"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "icon": "fa-handshake",
-        "sort": 12,
-        "route": "frontends.partners.index",
-        "translations": [
-          {
-            "locale": "en",
-            "name": "Partners",
-            "description": "Manage partners"
-          },
-          {
-            "locale": "km",
-            "name": "ដៃគូ",
-            "description": "គ្រប់គ្រងដៃគូ"
-          }
-        ],
-        "permissions": [
-          {
-            "action": "add",
-            "icon": "fa-circle-plus",
-            "target": "navbar",
-            "sort": 2,
-            "route": "frontends.partners.add",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Add",
-                "description": "Add a new partner"
-              },
-              {
-                "locale": "km",
-                "name": "បន្ថែម",
-                "description": "បន្ថែមដៃគូថ្មី"
-              }
-            ]
-          },
-          {
-            "action": "edit",
-            "icon": "fa-pen-to-square",
-            "target": "self",
-            "sort": 3,
-            "route": "frontends.partners.edit",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Edit",
-                "description": "Update a partner"
-              },
-              {
-                "locale": "km",
-                "name": "កែប្រែ",
-                "description": "ធ្វើបច្ចុប្បន្នភាពដៃគូ"
-              }
-            ]
-          },
-          {
-            "action": "delete",
-            "icon": "fa-trash",
-            "target": "confirm",
-            "sort": 4,
-            "route": "frontends.partners.delete",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Delete",
-                "description": "Remove a partner"
-              },
-              {
-                "locale": "km",
-                "name": "លុប",
-                "description": "លុបដៃគូ"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "icon": "fa-clipboard-list",
-        "sort": 13,
-        "route": "frontends.plans.index",
-        "translations": [
-          {
-            "locale": "en",
-            "name": "Plans",
-            "description": "Manage plans"
-          },
-          {
-            "locale": "km",
-            "name": "ផែនការ",
-            "description": "គ្រប់គ្រងផែនការ"
-          }
-        ],
-        "permissions": [
-          {
-            "action": "add",
-            "icon": "fa-circle-plus",
-            "target": "navbar",
-            "sort": 2,
-            "route": "frontends.plans.add",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Add",
-                "description": "Add a new plan"
-              },
-              {
-                "locale": "km",
-                "name": "បន្ថែម",
-                "description": "បន្ថែមផែនការថ្មី"
-              }
-            ]
-          },
-          {
-            "action": "edit",
-            "icon": "fa-pen-to-square",
-            "target": "self",
-            "sort": 3,
-            "route": "frontends.plans.edit",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Edit",
-                "description": "Update a plan"
-              },
-              {
-                "locale": "km",
-                "name": "កែប្រែ",
-                "description": "ធ្វើបច្ចុប្បន្នភាពផែនការ"
-              }
-            ]
-          },
-          {
-            "action": "delete",
-            "icon": "fa-trash",
-            "target": "confirm",
-            "sort": 4,
-            "route": "frontends.plans.delete",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Delete",
-                "description": "Remove a plan"
-              },
-              {
-                "locale": "km",
-                "name": "លុប",
-                "description": "លុបផែនការ"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "icon": "fa-trophy",
-        "sort": 14,
-        "route": "frontends.achievements.index",
-        "translations": [
-          {
-            "locale": "en",
-            "name": "Achievements",
-            "description": "Manage achievements"
-          },
-          {
-            "locale": "km",
-            "name": "សមិទ្ធផល",
-            "description": "គ្រប់គ្រងសមិទ្ធផល"
-          }
-        ],
-        "permissions": [
-          {
-            "action": "add",
-            "icon": "fa-circle-plus",
-            "target": "navbar",
-            "sort": 2,
-            "route": "frontends.achievements.add",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Add",
-                "description": "Add a new achievement"
-              },
-              {
-                "locale": "km",
-                "name": "បន្ថែម",
-                "description": "បន្ថែមសមិទ្ធផលថ្មី"
-              }
-            ]
-          },
-          {
-            "action": "edit",
-            "icon": "fa-pen-to-square",
-            "target": "self",
-            "sort": 3,
-            "route": "frontends.achievements.edit",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Edit",
-                "description": "Update an achievement"
-              },
-              {
-                "locale": "km",
-                "name": "កែប្រែ",
-                "description": "ធ្វើបច្ចុប្បន្នភាពសមិទ្ធផល"
-              }
-            ]
-          },
-          {
-            "action": "delete",
-            "icon": "fa-trash",
-            "target": "confirm",
-            "sort": 4,
-            "route": "frontends.achievements.delete",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Delete",
-                "description": "Remove an achievement"
-              },
-              {
-                "locale": "km",
-                "name": "លុប",
-                "description": "លុបសមិទ្ធផល"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "icon": "fa-briefcase",
-        "sort": 15,
-        "route": "frontends.careers.index",
-        "translations": [
-          {
-            "locale": "en",
-            "name": "Careers",
-            "description": "Manage careers and job postings"
-          },
-          {
-            "locale": "km",
-            "name": "អាជីព",
-            "description": "គ្រប់គ្រងការងារ និងការជ្រើសរើសបុគ្គលិក"
-          }
-        ],
-        "permissions": [
-          {
-            "action": "add",
-            "icon": "fa-circle-plus",
-            "target": "navbar",
-            "sort": 2,
-            "route": "frontends.careers.add",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Add",
-                "description": "Add a new job"
-              },
-              {
-                "locale": "km",
-                "name": "បន្ថែម",
-                "description": "បន្ថែមការងារថ្មី"
-              }
-            ]
-          },
-          {
-            "action": "edit",
-            "icon": "fa-pen-to-square",
-            "target": "self",
-            "sort": 3,
-            "route": "frontends.careers.edit",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Edit",
-                "description": "Update a job"
-              },
-              {
-                "locale": "km",
-                "name": "កែប្រែ",
-                "description": "ធ្វើបច្ចុប្បន្នភាពការងារ"
-              }
-            ]
-          },
-          {
-            "action": "delete",
-            "icon": "fa-trash",
-            "target": "confirm",
-            "sort": 4,
-            "route": "frontends.careers.delete",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Delete",
-                "description": "Remove a job"
-              },
-              {
-                "locale": "km",
-                "name": "លុប",
-                "description": "លុបការងារ"
-              }
-            ]
-          }
-        ]
+        "permissions": []
       }
     ]
   },
+
   {
     "icon": "fa-sliders",
-    "sort": 3,
+    "sort": 13,
     "route": null,
     "translations": [
-      {
-        "locale": "en",
-        "name": "Settings",
-        "description": "System configuration and settings"
-      },
-      {
-        "locale": "km",
-        "name": "ការកំណត់",
-        "description": "ការកំណត់រចនាសម្ព័ន្ធប្រព័ន្ធ"
-      }
+      { "locale": "en", "name": "Settings", "description": "System configuration and settings" },
+      { "locale": "km", "name": "ការកំណត់", "description": "ការកំណត់រចនាសម្ព័ន្ធប្រព័ន្ធ" }
     ],
     "permissions": [],
     "children": [
@@ -1219,380 +178,50 @@
         "sort": 1,
         "route": "settings.users.index",
         "translations": [
-          {
-            "locale": "en",
-            "name": "Users",
-            "description": "Manage user accounts"
-          },
-          {
-            "locale": "km",
-            "name": "អ្នកប្រើប្រាស់",
-            "description": "គ្រប់គ្រងគណនីអ្នកប្រើប្រាស់"
-          }
+          { "locale": "en", "name": "Users" },
+          { "locale": "km", "name": "អ្នកប្រើប្រាស់" }
         ],
-        "permissions": [
-          {
-            "action": "add",
-            "icon": "fa-circle-plus",
-            "target": "navbar",
-            "sort": 2,
-            "route": "settings.users.add",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Add",
-                "description": "Add a new user"
-              },
-              {
-                "locale": "km",
-                "name": "បន្ថែម",
-                "description": "បន្ថែមអ្នកប្រើប្រាស់ថ្មី"
-              }
-            ]
-          },
-          {
-            "action": "edit",
-            "icon": "fa-pen-to-square",
-            "target": "self",
-            "sort": 3,
-            "route": "settings.users.edit",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Edit",
-                "description": "Update a user"
-              },
-              {
-                "locale": "km",
-                "name": "កែប្រែ",
-                "description": "ធ្វើបច្ចុប្បន្នភាពអ្នកប្រើប្រាស់"
-              }
-            ]
-          },
-          {
-            "action": "permission",
-            "icon": "fa-universal-access",
-            "target": "self",
-            "sort": 4,
-            "route": "settings.users.index",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Permissions",
-                "description": "Manage user permissions"
-              },
-              {
-                "locale": "km",
-                "name": "សិទ្ធិ",
-                "description": "គ្រប់គ្រងសិទ្ធិរបស់អ្នកប្រើប្រាស់"
-              }
-            ]
-          },
-          {
-            "action": "delete",
-            "icon": "fa-trash",
-            "target": "confirm",
-            "sort": 5,
-            "route": "settings.users.delete",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Delete",
-                "description": "Remove a user"
-              },
-              {
-                "locale": "km",
-                "name": "លុប",
-                "description": "លុបអ្នកប្រើប្រាស់"
-              }
-            ]
-          }
-        ]
+        "permissions": []
       },
       {
         "icon": "fa-universal-access",
         "sort": 2,
         "route": "settings.roles.index",
         "translations": [
-          {
-            "locale": "en",
-            "name": "Roles",
-            "description": "Organize the roles"
-          },
-          {
-            "locale": "km",
-            "name": "តួនាទី",
-            "description": "រៀបចំតួនាទី"
-          }
+          { "locale": "en", "name": "Roles" },
+          { "locale": "km", "name": "តួនាទី" }
         ],
-        "permissions": [
-          {
-            "action": "add",
-            "icon": "fa-circle-plus",
-            "target": "navbar",
-            "sort": 2,
-            "route": "settings.roles.add",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Add",
-                "description": "Create a new role"
-              },
-              {
-                "locale": "km",
-                "name": "បន្ថែម",
-                "description": "បង្កើតតួនាទីថ្មី"
-              }
-            ]
-          },
-          {
-            "action": "edit",
-            "icon": "fa-pen-to-square",
-            "target": "self",
-            "sort": 3,
-            "route": "settings.roles.edit",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Edit",
-                "description": "Change a role"
-              },
-              {
-                "locale": "km",
-                "name": "កែប្រែ",
-                "description": "ផ្លាស់ប្តូរតួនាទី"
-              }
-            ]
-          },
-          {
-            "action": "permission",
-            "icon": "fa-universal-access",
-            "target": "self",
-            "sort": 4,
-            "route": "settings.roles.index",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Permissions",
-                "description": "Manage role permissions"
-              },
-              {
-                "locale": "km",
-                "name": "សិទ្ធិ",
-                "description": "គ្រប់គ្រងសិទ្ធិនៃតួនាទី"
-              }
-            ]
-          },
-          {
-            "action": "delete",
-            "icon": "fa-trash",
-            "target": "confirm",
-            "sort": 5,
-            "route": "settings.roles.delete",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Delete",
-                "description": "Remove a role"
-              },
-              {
-                "locale": "km",
-                "name": "លុប",
-                "description": "លុបតួនាទី"
-              }
-            ]
-          }
-        ]
+        "permissions": []
       },
       {
         "icon": "fa-list",
         "sort": 3,
         "route": "settings.menus.index",
         "translations": [
-          {
-            "locale": "en",
-            "name": "Menu",
-            "description": "Manage main menu items"
-          },
-          {
-            "locale": "km",
-            "name": "ម៉ឺនុយ",
-            "description": "គ្រប់គ្រងធាតុម៉ឺនុយមេ"
-          }
+          { "locale": "en", "name": "Menu" },
+          { "locale": "km", "name": "ម៉ឺនុយ" }
         ],
-        "permissions": [
-          {
-            "action": "add",
-            "icon": "fa-circle-plus",
-            "target": "navbar",
-            "sort": 2,
-            "route": "settings.menus.add",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Add",
-                "description": "Add a new menu"
-              },
-              {
-                "locale": "km",
-                "name": "បន្ថែម",
-                "description": "បន្ថែមម៉ឺនុយថ្មី"
-              }
-            ]
-          },
-          {
-            "action": "edit",
-            "icon": "fa-pen-to-square",
-            "target": "self",
-            "sort": 3,
-            "route": "settings.menus.edit",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Edit",
-                "description": "Edit a menu"
-              },
-              {
-                "locale": "km",
-                "name": "កែប្រែ",
-                "description": "កែប្រែម៉ឺនុយ"
-              }
-            ]
-          },
-          {
-            "action": "delete",
-            "icon": "fa-trash",
-            "target": "confirm",
-            "sort": 4,
-            "route": "settings.menus.delete",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Delete",
-                "description": "Delete a menu"
-              },
-              {
-                "locale": "km",
-                "name": "លុប",
-                "description": "លុបម៉ឺនុយ"
-              }
-            ]
-          }
-        ]
+        "permissions": []
       },
       {
         "icon": "fa-universal-access",
         "sort": 4,
         "route": "settings.permissions.index",
         "translations": [
-          {
-            "locale": "en",
-            "name": "Permissions",
-            "description": "Manage system permissions"
-          },
-          {
-            "locale": "km",
-            "name": "ការអនុញ្ញាត",
-            "description": "គ្រប់គ្រងការអនុញ្ញាតប្រព័ន្ធ"
-          }
+          { "locale": "en", "name": "Permissions" },
+          { "locale": "km", "name": "ការអនុញ្ញាត" }
         ],
-        "permissions": [
-          {
-            "action": "add",
-            "icon": "fa-circle-plus",
-            "target": "navbar",
-            "sort": 2,
-            "route": "settings.permissions.add",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Add",
-                "description": "Create a new permission"
-              },
-              {
-                "locale": "km",
-                "name": "បន្ថែម",
-                "description": "បង្កើតសិទ្ធិថ្មី"
-              }
-            ]
-          },
-          {
-            "action": "edit",
-            "icon": "fa-pen-to-square",
-            "target": "self",
-            "sort": 3,
-            "route": "settings.permissions.edit",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Edit",
-                "description": "Change a permission"
-              },
-              {
-                "locale": "km",
-                "name": "កែប្រែ",
-                "description": "ផ្លាស់ប្តូរសិទ្ធិ"
-              }
-            ]
-          },
-          {
-            "action": "delete",
-            "icon": "fa-trash",
-            "target": "confirm",
-            "sort": 4,
-            "route": "settings.permissions.delete",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Delete",
-                "description": "Remove a permission"
-              },
-              {
-                "locale": "km",
-                "name": "លុប",
-                "description": "លុបសិទ្ធិ"
-              }
-            ]
-          }
-        ]
+        "permissions": []
       },
       {
         "icon": "fa-user-gear",
         "sort": 5,
         "route": "settings.my-account.index",
         "translations": [
-          {
-            "locale": "en",
-            "name": "My Account",
-            "description": "Manage your personal account settings"
-          },
-          {
-            "locale": "km",
-            "name": "គណនីរបស់ខ្ញុំ",
-            "description": "គ្រប់គ្រងការកំណត់គណនីផ្ទាល់ខ្លួន"
-          }
+          { "locale": "en", "name": "My Account" },
+          { "locale": "km", "name": "គណនីរបស់ខ្ញុំ" }
         ],
-        "permissions": [
-          {
-            "action": "edit",
-            "icon": "fa-pen-to-square",
-            "target": "self",
-            "sort": 2,
-            "route": "settings.my-account.index",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Edit Account",
-                "description": "Update your account information"
-              },
-              {
-                "locale": "km",
-                "name": "កែប្រែគណនី",
-                "description": "ធ្វើបច្ចុប្បន្នភាពព័ត៌មានគណនីរបស់អ្នក"
-              }
-            ]
-          }
-        ]
+        "permissions": []
       }
     ]
   }
