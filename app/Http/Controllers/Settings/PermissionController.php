@@ -35,7 +35,7 @@ class PermissionController extends Controller
         $menus = Menu::with('translations')->get();
         $locales = $this->locales;
         $translations = [];
-        
+
         if ($request->isMethod('post')) {
             try {
                 $rules = [
@@ -94,7 +94,7 @@ class PermissionController extends Controller
         $form = Permission::with('translations')->findOrFail($id);
         $menus = Menu::with('translations')->get();
         $locales = $this->locales;
-        
+
         $translations = [];
         foreach ($form->translations as $translation) {
             $translations[$translation->locale] = [

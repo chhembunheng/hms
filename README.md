@@ -1,23 +1,84 @@
-# WinTechWebsite
+# Hotel Management System (HMS)
 
-**WINTECH SOFTWARE DEVELOPMENT (Cambodia) Co., LTD** — A modern Laravel 12 + Vite + Tailwind CMS for managing IT solutions, services, products, and business operations.
+A comprehensive Hotel Management System built with Laravel, designed to streamline hotel operations including reservations, guest management, billing, and administrative tasks.
+
+## 📋 Project Information
+
+**Academic Project**
+- **Institution:** Beltei International University
+- **Major:** Software Engineering (Batch 5)
+- **Academic Year:** Year 4, Semester 2
+- **Subject:** Software Project Management
+- **Lecturer:** CHEN SOVANN
+
+### 👥 Development Team
+
+- **CHHEM BUNHENG** - Team Lead & Backend Developer
+- **LUN SOCHEAT** - Full Stack Developer
+- **OURK ASDA** - Frontend Developer & UI/UX Designer
+
+## 🚀 Features
+
+### Core Modules
+- **Dashboard** - Real-time overview of hotel operations
+- **Check-In/Check-Out** - Guest arrival and departure management
+- **Rooms Management** - Room inventory, status, and assignment
+- **Guest Management** - Guest profiles and history
+- **Billing System** - Invoice generation and payment processing
+- **Seasons Management** - Pricing and availability by season
+- **Exchange Rate** - Multi-currency support
+- **Cash Closing** - Daily financial reconciliation
+- **Extra Services** - Additional hotel services billing
+- **Maintenance** - Facility maintenance tracking
+- **Reports** - Comprehensive business intelligence reports
+
+### Settings & Administration
+- **User Management** - User accounts and authentication
+- **Role & Permissions** - Fine-grained access control (RBAC)
+- **Menu Management** - Dynamic navigation system
+- **Multi-language Support** - English and Khmer (ភាសាខ្មែរ)
+- **Dark/Light Mode** - Theme switching with instant transition
+- **System Configuration** - Customizable system settings
+
+## 📦 Technology Stack
+
+### Backend
+- **Framework:** Laravel 12.42.0
+- **PHP Version:** 8.3.27
+- **Database:** MySQL/MariaDB
+- **Authentication:** JWT (tymon/jwt-auth)
+- **API:** RESTful architecture
+
+### Frontend
+- **CSS Framework:** Tailwind CSS v3 + Bootstrap 5
+- **JavaScript:** Vanilla JS + Alpine.js (Livewire)
+- **Build Tool:** Vite
+- **Icons:** FontAwesome 6
+
+### Additional Libraries
+- **DataTables:** Yajra DataTables for server-side processing
+- **PDF Generation:** DomPDF
+- **Excel Export:** PhpSpreadsheet
+- **Cache:** Redis/Predis
+- **Queue:** Laravel Queue
 
 ---
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- **PHP** ^8.2
-- **Node.js** 18+ (for Vite)
+- **PHP** >= 8.3
 - **Composer** (PHP dependency manager)
-- **npm** or **yarn** (JavaScript package manager)
+- **Node.js** 18+ and npm (JavaScript package manager)
+- **MySQL** >= 8.0 or **MariaDB** >= 10.6
+- **Git**
 
-### Installation
+### Installation Steps
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
-   cd WinTechWebsite
+   git clone https://github.com/chhembunheng/hms.git
+   cd hms
    ```
 
 2. **Install PHP dependencies**
@@ -33,51 +94,126 @@
 4. **Set up environment file**
    ```bash
    cp .env.example .env
+   ```
+   
+   Edit `.env` file with your database credentials:
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=hms_db
+   DB_USERNAME=your_username
+   DB_PASSWORD=your_password
+   ```
+
+5. **Generate application key**
+   ```bash
    php artisan key:generate
    ```
 
-5. **Run migrations**
+6. **Generate JWT secret**
    ```bash
-   php artisan migrate
+   php artisan jwt:secret
    ```
 
-6. **Seed database (optional)**
-   ```bash
-   php artisan db:seed
+7. **Create database**
+   ```sql
+   CREATE DATABASE hms_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
    ```
+
+8. **Run migrations and seeders**
+   ```bash
+   php artisan migrate:fresh --seed
+   ```
+   
+   This will create all tables and seed initial data including:
+   - Admin user account
+   - Default roles and permissions
+   - System menus and navigation
+   - Sample data for testing
+
+9. **Build frontend assets**
+   
+   For development:
+   ```bash
+   npm run dev
+   ```
+   
+   For production:
+   ```bash
+   npm run build
+   ```
+
+10. **Create storage link**
+    ```bash
+    php artisan storage:link
+    ```
+
+11. **Set proper permissions**
+    ```bash
+    chmod -R 775 storage bootstrap/cache
+    chown -R www-data:www-data storage bootstrap/cache
+    ```
+
+12. **Start development server**
+    ```bash
+    php artisan serve
+    ```
+    
+    Access the application at: `http://localhost:8000`
 
 ---
 
-## 🛠️ Development
+## 🔐 Default Credentials
 
-### Start Full Development Environment
-```bash
-composer run dev
+After seeding, login with:
+
+```
+Email: admin@example.com
+Password: password
 ```
 
-This single command runs:
-- Laravel development server (`php artisan serve`)
-- Queue worker listener (`php artisan queue:listen`)
-- Pail log viewer
-- Vite frontend dev server (`npm run dev`)
+**⚠️ Important:** Change these credentials immediately in production!
 
-All processes run concurrently for a seamless development experience.
+---
 
-### Individual Commands
+## 🛠️ Additional Configuration
 
-**Frontend dev (Vite + Tailwind)**
+### Cache Optimization
+
+For better performance in production:
+
 ```bash
-npm run dev
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
 ```
 
-**Backend dev (Laravel)**
+To clear cache during development:
+
 ```bash
-php artisan serve
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear
+php artisan cache:clear
 ```
 
-**Build for production**
+### Queue Configuration
+
+To run background jobs:
+
 ```bash
-npm run build
+php artisan queue:work
+```
+
+For production, use Supervisor to manage queue workers.
+
+### Task Scheduling
+
+Add to your crontab for scheduled tasks:
+
+```bash
+* * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1
 ```
 
 ---
@@ -85,94 +221,158 @@ npm run build
 ## 📋 Project Structure
 
 ```
-WinTechWebsite/
+hms/
 ├── app/
 │   ├── Console/              # Artisan commands
-│   ├── DataTables/           # Server-side DataTable logic
-│   ├── Helpers/              # Global helpers (jwt.php, helpers.php)
+│   ├── DataTables/           # DataTables definitions
+│   │   ├── Frontend/         # Frontend module datatables
+│   │   └── Settings/         # Settings module datatables
+│   ├── Helpers/              # Helper functions (jwt.php, helpers.php)
 │   ├── Http/
-│   │   ├── Controllers/      # Request handlers
-│   │   ├── Middleware/       # Auth, JWT, etc.
-│   │   └── Requests/         # Form validation
+│   │   ├── Controllers/      # Application controllers
+│   │   ├── Middleware/       # Custom middleware
+│   │   └── Requests/         # Form validation requests
 │   ├── Mail/                 # Mailable & queued jobs
 │   ├── Models/               # Eloquent models
+│   │   ├── Frontend/         # Frontend module models
+│   │   └── Settings/         # Settings module models
+│   ├── Traits/               # Reusable traits
 │   └── Providers/            # Service providers
 ├── config/                   # Configuration files
-│   ├── init.php             # App-wide settings (locales, date formats)
-│   ├── services.php         # Third-party service credentials
+│   ├── init.php             # App-wide settings (locales, formats)
 │   ├── jwt.php              # JWT authentication config
+│   ├── datatables.php       # DataTables configuration
 │   └── ...
 ├── database/
-│   ├── migrations/          # Schema changes
+│   ├── migrations/          # Database schema migrations
 │   ├── seeders/             # Database seeders
-│   └── factories/            # Model factories for testing
+│   │   └── data/            # JSON seed data
+│   │       └── backend/
+│   │           └── menus.json
+│   └── factories/           # Model factories for testing
 ├── public/
-│   ├── site/
-│   │   ├── data/            # JSON files (services, products, etc.)
-│   │   │   ├── en/
-│   │   │   └── km/
-│   │   └── assets/          # Images, CSS, JS
-│   └── index.php            # Entry point
+│   ├── assets/              # Compiled assets
+│   │   ├── css/             # Stylesheets (dark-mode.css)
+│   │   └── js/              # JavaScript (theme.js)
+│   ├── site/                # Static files
+│   └── index.php            # Application entry point
 ├── resources/
-│   ├── css/                 # Tailwind + custom CSS
-│   ├── js/                  # Vue/Alpine + app JS
-│   └── views/
-│       ├── auth/            # Authentication views
-│       ├── dashboard/       # Dashboard pages
-│       ├── frontend/        # CMS form views
-│       ├── sites/sections/  # Public-facing sections
-│       └── layouts/         # Layout templates
+│   ├── css/                 # Source CSS (Tailwind + custom)
+│   │   └── app.css
+│   ├── js/                  # Source JavaScript
+│   │   ├── app.js
+│   │   └── theme.js
+│   └── views/               # Blade templates
+│       ├── auth/            # Authentication pages
+│       ├── dashboard/       # Dashboard interface
+│       ├── layouts/         # Layout templates
+│       │   └── partials/    # Reusable components
+│       ├── settings/        # Settings module views
+│       │   ├── menus/
+│       │   ├── permissions/
+│       │   ├── roles/
+│       │   └── users/
+│       └── components/      # Blade components
 ├── routes/
-│   ├── web.php              # Web routes
-│   ├── frontend.php         # Frontend CMS routes
-│   └── landing.php          # Public landing page routes
+│   ├── web.php              # Main web routes
+│   ├── auth.php             # Authentication routes
+│   ├── settings.php         # Settings module routes
+│   └── console.php          # Console commands
+├── storage/                 # File storage & logs
+│   ├── app/                 # Uploaded files
+│   ├── framework/           # Cache & sessions
+│   └── logs/                # Application logs
 ├── tests/                   # Pest test suite
-├── vite.config.js           # Vite configuration
+│   ├── Feature/             # Feature tests
+│   └── Unit/                # Unit tests
+├── vite.config.js           # Vite build configuration
 ├── tailwind.config.js       # Tailwind CSS configuration
-├── phpunit.xml              # PHPUnit config (sqlite in-memory)
+├── phpunit.xml              # PHPUnit configuration
 ├── composer.json            # PHP dependencies
 ├── package.json             # JavaScript dependencies
-└── README.md
+└── README.md                # This file
 ```
 
 ---
 
-## 🏗️ Architecture & Key Features
-
-### MVC Pattern
-- **Routes**: `routes/` map HTTP requests to controllers
-- **Controllers**: `app/Http/Controllers/` handle business logic
-- **Views**: `resources/views/` render Blade templates with Tailwind
+## 🏗️ Key Features & Architecture
 
 ### Authentication & Authorization
-- **JWT Auth**: `tymon/jwt-auth` configured in `config/jwt.php`
-- **Middleware**: Auth checks in `app/Http/Middleware/`
-- **Helpers**: JWT utilities in `app/Helpers/jwt.php`
+- **JWT Authentication**: Secure token-based authentication using `tymon/jwt-auth`
+- **Role-Based Access Control (RBAC)**: Fine-grained permissions system
+- **Multi-level Permissions**: Menu-based permission structure
+- **Password Hashing**: Bcrypt encryption for user passwords
 
-### Frontend (Public Site)
-- **Data-driven**: JSON files in `public/site/data/{locale}/` (services.json, products.json, etc.)
-- **Sections**: Reusable Blade components in `resources/views/sites/sections/`
-- **Localization**: Multi-language support (en, km) via `config/init.php`
+### Multi-Language Support
+- **Locales**: English (en) and Khmer (km)
+- **Database Translations**: Separate translation tables for dynamic content
+- **Language Switcher**: Easy switching between languages
+- **RTL Support**: Right-to-left text support for applicable languages
 
-### Backend (CMS Dashboard)
-- **Forms**: CRUD interfaces for Services, Products, Teams, Clients, etc.
-- **DataTables**: Server-side pagination via `yajra/laravel-datatables`
-- **Translations**: Multi-locale content management (translations table)
-- **Meta SEO**: Automatic meta title/description generation via OpenAI
+### Theme System
+- **Dark/Light Mode**: Toggle between dark and light themes
+- **Instant Switching**: No page reload required
+- **LocalStorage Persistence**: Theme preference saved in browser
+- **FOUC Prevention**: Flash of unstyled content prevented
+- **Custom Styling**: 500+ lines of custom dark mode CSS
 
-### Queue System
-- **Jobs**: Background tasks in `app/Jobs/` and `app/Mail/`
-- **Worker**: Started in `composer run dev` with `php artisan queue:listen`
-- **Driver**: Configured in `.env` (default: sqlite)
+### DataTables Integration
+- **Server-side Processing**: Efficient handling of large datasets
+- **Export Functionality**: PDF and Excel export capabilities
+- **Custom Filters**: Advanced filtering options
+- **Responsive Design**: Mobile-friendly table layouts
 
-### Caching & SEO
-- **Response Cache**: `spatie/laravel-responsecache`
-- **Sitemap**: `spatie/laravel-sitemap` (auto-generated from CMS content)
-- **SEO Tools**: `artesaos/seotools` for meta tags
+### Database Architecture
+- **Migrations**: Version-controlled database schema
+- **Seeders**: Automated data population for testing
+- **Soft Deletes**: Preserve deleted records for auditing
+- **Relationships**: Eloquent ORM for complex data relationships
 
-### Octane (Production)
-- **Runtime**: Supports Swoole/RoadRunner for long-running processes
-- **Statefulness**: Be careful with global mutable state — it persists across requests
+---
+
+## 🚢 Production Deployment
+
+### Using Laravel Sail (Docker)
+
+```bash
+./vendor/bin/sail up -d
+./vendor/bin/sail artisan migrate:fresh --seed
+./vendor/bin/sail npm run build
+```
+
+### Traditional Server Deployment
+
+1. **Configure environment**
+   ```bash
+   APP_ENV=production
+   APP_DEBUG=false
+   ```
+
+2. **Optimize application**
+   ```bash
+   composer install --optimize-autoloader --no-dev
+   php artisan config:cache
+   php artisan route:cache
+   php artisan view:cache
+   npm run build
+   ```
+
+3. **Web server configuration**
+   - Point document root to `public/` directory
+   - Enable mod_rewrite (Apache) or equivalent
+   - Configure SSL certificate for HTTPS
+
+4. **File permissions**
+   ```bash
+   chmod -R 755 storage bootstrap/cache
+   chown -R www-data:www-data storage bootstrap/cache
+   ```
+
+5. **Additional setup**
+   - Configure queue worker (Supervisor recommended)
+   - Set up automated database backups
+   - Configure log rotation
+   - Enable OPcache for PHP
 
 ---
 
@@ -180,70 +380,59 @@ WinTechWebsite/
 
 ### Run All Tests
 ```bash
-composer test
+php artisan test
+```
+
+### Using Pest
+```bash
+./vendor/bin/pest
+```
+
+### Test Coverage
+```bash
+./vendor/bin/pest --coverage
 ```
 
 ### Test Configuration
-- **Framework**: Pest (dev dependency)
-- **Database**: SQLite in-memory (fast, no setup required)
-- **Config**: See `phpunit.xml`
-
-### Example Test (Pest style)
-```php
-test('can fetch services', function () {
-    $services = \App\Models\Frontend\Service::all();
-    expect($services)->toBeIterable();
-});
-```
+- **Framework**: Pest PHP Testing Framework
+- **Database**: SQLite in-memory for fast testing
+- **Configuration**: See `phpunit.xml`
 
 ---
 
-## 🔧 Configuration
+## 🔧 Configuration Tips
 
-### Environment Variables (`.env`)
+### Environment Variables
+
+Key `.env` configurations for HMS:
+
 ```env
-APP_NAME="IT Solutions CMS"
-APP_ENV=local
-APP_DEBUG=true
-APP_URL=http://localhost:8000
+APP_NAME="Hotel Management System"
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://your-domain.com
 
-DB_CONNECTION=sqlite
-DB_DATABASE=database/database.sqlite
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=hms_db
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
 
-JWT_SECRET=your-secret-key
-OPENAI_API_KEY=your-openai-key
+JWT_SECRET=your-jwt-secret-key
+JWT_TTL=60
+
+CACHE_DRIVER=redis
+SESSION_DRIVER=redis
+QUEUE_CONNECTION=redis
 ```
 
-### Key Config Files
-- **`config/init.php`**: Locales, date/time formats, languages
-- **`config/jwt.php`**: JWT expiration, algorithm
-- **`config/services.php`**: Third-party services (Slack, AWS, etc.)
-- **`tailwind.config.js`**: Tailwind theme, colors, plugins
-
----
-
-## 🌍 Multi-Language Support
-
-### Locales
-- **English (en)**: `en-US`
-- **Khmer (km)**: `km-KH`
-
-### Language Files
-```
-lang/
-├── en/
-│   ├── root.php          # Core UI strings
-│   └── global.php        # Public site strings
-└── km/
-    ├── root.php
-    └── global.php
-```
-
-### Usage in Blade
-```blade
-{{ __('global.our_services') }}
-{{ __('form.meta.title') }}
-```
+### Important Config Files
+- **`config/init.php`**: Locales, date/time formats, system settings
+- **`config/jwt.php`**: JWT authentication configuration
+- **`config/datatables.php`**: DataTables engine settings
+- **`tailwind.config.js`**: Tailwind theme customization
+- **`vite.config.js`**: Asset build configuration
 
 ---
 
@@ -251,57 +440,244 @@ lang/
 
 ### Backend (Composer)
 - **laravel/framework** ^12.0 — Core framework
-- **laravel/octane** — High-performance request handler
+- **laravel/livewire** — Dynamic UI components
 - **tymon/jwt-auth** — JWT authentication
 - **yajra/laravel-datatables** — Server-side DataTables
-- **spatie/laravel-responsecache** — HTTP response caching
-- **spatie/laravel-sitemap** — XML sitemap generation
-- **artesaos/seotools** — SEO meta tag management
-- **laravel/pint** — PHP code formatter
+- **spatie/laravel-permission** — Role & permission management
+- **barryvdh/laravel-dompdf** — PDF generation
+- **maatwebsite/excel** — Excel import/export
+- **predis/predis** — Redis client
 
 ### Frontend (npm)
-- **vite** — Module bundler
-- **tailwindcss** — Utility-first CSS framework
-- **postcss** — CSS transformation
-- **autoprefixer** — CSS vendor prefixes
+- **vite** ^5.0 — Fast build tool
+- **tailwindcss** ^3.0 — Utility-first CSS
+- **bootstrap** ^5.3 — UI components
+- **@fortawesome/fontawesome-free** — Icon library
+- **alpinejs** — Lightweight JavaScript framework
 
 ### Development
-- **pest** — Modern PHP testing framework
-- **phpunit** — Unit/feature testing
+- **pestphp/pest** — Modern PHP testing
+- **laravel/pint** — Code style formatter
+- **nunomaduro/collision** — Error handler
 
 ---
 
-## 📁 Common Tasks
+## 📁 Common Development Tasks
 
-### Add a New Page + Controller
-1. Create controller: `app/Http/Controllers/Frontend/MyPageController.php`
-2. Add route: `routes/frontend.php`
-3. Create view: `resources/views/frontend/my-page/index.blade.php`
+### Creating New Modules
 
-### Add API Endpoint
-1. Create controller: `app/Http/Controllers/Api/MyApiController.php`
-2. Add validation: `app/Http/Requests/MyApiRequest.php`
-3. Add route: `routes/api.php`
-
-### Add Database Migration
+**1. Create a new controller**
 ```bash
-php artisan make:migration create_my_table
-php artisan migrate
+php artisan make:controller Settings/MyModuleController
 ```
 
-### Create a Seeder
+**2. Add routes**
+Edit `routes/settings.php` or `routes/web.php`
+
+**3. Create views**
+```bash
+mkdir -p resources/views/settings/mymodule
+```
+
+**4. Add to menu**
+Edit `database/seeders/data/backend/menus.json` and reseed
+
+### Database Operations
+
+**Create migration**
+```bash
+php artisan make:migration create_my_table
+```
+
+**Create model with migration**
+```bash
+php artisan make:model Models/MyModel -m
+```
+
+**Create seeder**
 ```bash
 php artisan make:seeder MySeeder
 ```
 
-### Format PHP Code
+**Refresh database**
+```bash
+php artisan migrate:fresh --seed
+```
+
+### Adding DataTable
+
+**1. Create DataTable class**
+```bash
+php artisan datatables:make MyDataTable
+```
+
+**2. Configure in controller**
+```php
+public function index(MyDataTable $dataTable)
+{
+    return $dataTable->render('mymodule.index');
+}
+```
+
+**3. Use in view**
+```blade
+<x-datatables title="My List" :data="$dataTable" />
+```
+
+### Code Quality
+
+**Format PHP code**
 ```bash
 ./vendor/bin/pint
 ```
 
+**Run tests**
+```bash
+php artisan test
+```
+
+**Check for issues**
+```bash
+./vendor/bin/phpstan analyse
+```
+
 ---
 
-## 🚀 Deployment
+## 🤝 Contributing
+
+This is an academic project for Beltei International University. Contributions are welcome!
+
+### Development Workflow
+
+1. **Fork the repository**
+2. **Create feature branch**
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
+3. **Make your changes**
+4. **Format code**
+   ```bash
+   ./vendor/bin/pint
+   ```
+5. **Test your changes**
+   ```bash
+   php artisan test
+   ```
+6. **Commit changes**
+   ```bash
+   git commit -m 'Add amazing feature'
+   ```
+7. **Push to branch**
+   ```bash
+   git push origin feature/amazing-feature
+   ```
+8. **Open Pull Request**
+
+### Code Style
+- Follow PSR-12 coding standards
+- Use Laravel best practices
+- Write descriptive commit messages
+- Add tests for new features
+
+---
+
+## 📄 License
+
+This project is developed for educational purposes as part of the Software Project Management course at Beltei International University.
+
+**Academic License** - Free to use for educational and learning purposes.
+
+---
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**1. Permission denied errors**
+```bash
+chmod -R 775 storage bootstrap/cache
+chown -R $USER:www-data storage bootstrap/cache
+```
+
+**2. JWT secret not set**
+```bash
+php artisan jwt:secret
+```
+
+**3. Vite not building assets**
+```bash
+rm -rf node_modules package-lock.json
+npm install
+npm run build
+```
+
+**4. Database connection refused**
+- Check MySQL/MariaDB is running
+- Verify database credentials in `.env`
+- Ensure database exists
+
+**5. Class not found errors**
+```bash
+composer dump-autoload
+php artisan clear-compiled
+php artisan optimize:clear
+```
+
+---
+
+## 📞 Support & Contact
+
+For questions, issues, or collaboration:
+
+### Development Team
+
+- **CHHEM BUNHENG**
+  - Role: Team Lead & Backend Developer
+  - GitHub: [@chhembunheng](https://github.com/chhembunheng)
+  
+- **LUN SOCHEAT**
+  - Role: Full Stack Developer
+  
+- **OURK ASDA**
+  - Role: Frontend Developer & UI/UX Designer
+
+### Academic Supervisor
+
+- **Lecturer:** CHEN SOVANN
+- **Course:** Software Project Management
+- **Institution:** Beltei International University
+
+---
+
+## 🙏 Acknowledgments
+
+- Laravel Framework Team
+- Tailwind CSS Team
+- FontAwesome
+- Yajra DataTables
+- All open-source contributors
+
+---
+
+## 📚 Additional Resources
+
+- [Laravel Documentation](https://laravel.com/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [DataTables Documentation](https://datatables.net/)
+- [JWT Auth Documentation](https://jwt-auth.readthedocs.io/)
+- [Pest PHP Documentation](https://pestphp.com/)
+
+---
+
+**Built with ❤️ by Software Engineering Students**
+
+**Beltei International University - Batch 5**
+
+*Year 4, Semester 2 - December 2025*
+
+---
+
+**⭐ If you find this project helpful, please consider giving it a star!**
 
 ### Build Frontend
 ```bash

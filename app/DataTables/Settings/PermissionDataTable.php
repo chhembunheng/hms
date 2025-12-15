@@ -26,11 +26,11 @@ class PermissionDataTable extends DataTable
             ->addIndexColumn()
             ->addColumn('name', function($row) use ($locale) {
                 $name = $row->translations->where('locale', $locale)->first()?->name ?? $row->translations->where('locale', 'en')->first()?->name ?? 'N/A';
-                
+
                 // Add badge based on permission action
                 $badgeClass = 'bg-secondary';
                 $icon = 'fa-shield-halved';
-                
+
                 if (str_contains(strtolower($row->action ?? ''), 'add')) {
                     $badgeClass = 'bg-success';
                     $icon = 'fa-circle-plus';
@@ -44,7 +44,7 @@ class PermissionDataTable extends DataTable
                     $badgeClass = 'bg-primary';
                     $icon = 'fa-eye';
                 }
-                
+
                 return '<i class="fa-solid ' . $icon . ' me-2 text-muted"></i>' . $name;
             })
             ->addColumn('menu', fn($row) => $row->menu?->translations->where('locale', $locale)->first()?->name ?? $row->menu?->translations->where('locale', 'en')->first()?->name ?? 'N/A')
