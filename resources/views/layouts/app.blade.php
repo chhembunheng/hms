@@ -11,11 +11,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <title>{{ config('app.name') }}</title>
+    <script>
+        // Prevent FOUC (Flash of Unstyled Content) by setting theme before page renders
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
     @include('layouts.partials.style')
     @stack('css')
 </head>
 
-<body style="overflow: visible;">
+<body style="overflow: visible;" class="dark:bg-gray-900 dark:text-gray-100">
     @if (config('init.loading.enabled') === true)
         <div class="card-overlay d-none" id="body-overlay"><span class="{{ config('init.loading.icon') }}"></span></div>
     @endif

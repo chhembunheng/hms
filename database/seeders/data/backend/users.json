@@ -23,14 +23,14 @@
         "translations": [
           {
             "locale": "en",
-            "first_name": "SYSTEM",
-            "last_name": "ADMINISTRATOR",
+            "first_name": "ADMINISTRATOR",
+            "last_name": "SYSTEM",
             "address": ""
           },
           {
             "locale": "km",
-            "first_name": "ស៊ីស្ទឹម",
-            "last_name": "អាដមីនស្ត្រាតឺទ័រ",
+            "first_name": "អាដមីនស្ត្រាតឺទ័រ",
+            "last_name": "ស៊ីស្ទឹម",
             "address": ""
           }
         ]

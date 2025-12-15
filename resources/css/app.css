@@ -1,3 +1,176 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    /* Dark mode color transitions */
+    html.dark {
+        color-scheme: dark;
+    }
+
+    /* Instant theme switching - no transition delay */
+    * {
+        transition: none !important;
+    }
+
+    /* Only animate icons smoothly */
+    #theme-toggle i {
+        transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out !important;
+    }
+}
+
+@layer components {
+    /* Dark mode navbar */
+    .dark .navbar {
+        @apply bg-gray-800 border-gray-700;
+    }
+
+    /* Dark mode sidebar */
+    .dark .sidebar {
+        @apply bg-gray-800 border-gray-700;
+    }
+
+    .dark .sidebar-content {
+        @apply bg-gray-800;
+    }
+
+    .dark .nav-sidebar .nav-item .nav-link {
+        @apply text-gray-300 hover:bg-gray-700 hover:text-white;
+    }
+
+    .dark .nav-sidebar .nav-item .nav-link.active {
+        @apply bg-gray-700 text-white;
+    }
+
+    /* Dark mode content */
+    .dark .content-wrapper {
+        @apply bg-gray-900;
+    }
+
+    .dark .page-content {
+        @apply bg-gray-900;
+    }
+
+    .dark .content {
+        @apply text-gray-100;
+    }
+
+    /* Dark mode cards */
+    .dark .card {
+        @apply bg-gray-800 border-gray-700 text-gray-100;
+    }
+
+    .dark .card-header {
+        @apply bg-gray-750 border-gray-700;
+    }
+
+    .dark .card-body {
+        @apply bg-gray-800;
+    }
+
+    /* Dark mode tables */
+    .dark table {
+        @apply text-gray-100;
+    }
+
+    .dark .table thead th {
+        @apply bg-gray-750 text-gray-200 border-gray-700;
+    }
+
+    .dark .table tbody tr {
+        @apply border-gray-700 hover:bg-gray-750;
+    }
+
+    .dark .table tbody td {
+        @apply text-gray-300 border-gray-700;
+    }
+
+    /* Dark mode forms */
+    .dark input,
+    .dark textarea,
+    .dark select {
+        @apply bg-gray-700 border-gray-600 text-gray-100 placeholder-gray-400;
+    }
+
+    .dark input:focus,
+    .dark textarea:focus,
+    .dark select:focus {
+        @apply bg-gray-700 border-gray-500 ring-gray-500;
+    }
+
+    /* Dark mode buttons */
+    .dark .btn {
+        @apply text-gray-100;
+    }
+
+    .dark .btn-light {
+        @apply bg-gray-700 text-gray-100 hover:bg-gray-600;
+    }
+
+    /* Dark mode dropdowns */
+    .dark .dropdown-menu {
+        @apply bg-gray-800 border-gray-700;
+    }
+
+    .dark .dropdown-item {
+        @apply text-gray-300 hover:bg-gray-700 hover:text-white;
+    }
+
+    /* Dark mode modals */
+    .dark .modal-content {
+        @apply bg-gray-800 text-gray-100;
+    }
+
+    .dark .modal-header {
+        @apply border-gray-700;
+    }
+
+    .dark .modal-footer {
+        @apply border-gray-700;
+    }
+
+    /* Dark mode breadcrumb */
+    .dark .breadcrumb {
+        @apply bg-gray-800 text-gray-300;
+    }
+
+    .dark .breadcrumb-item a {
+        @apply text-gray-400 hover:text-gray-200;
+    }
+
+    /* Dark mode alerts */
+    .dark .alert {
+        @apply border-gray-700;
+    }
+
+    /* Dark mode badges */
+    .dark .badge {
+        @apply text-gray-100;
+    }
+
+    /* Dark mode text colors */
+    .dark .text-muted {
+        @apply text-gray-400;
+    }
+
+    .dark .text-dark {
+        @apply text-gray-100;
+    }
+
+    /* Dark mode borders */
+    .dark .border {
+        @apply border-gray-700;
+    }
+
+    /* Custom gray-750 for better dark mode */
+    .bg-gray-750 {
+        background-color: #2d3748;
+    }
+
+    .dark .shadow,
+    .dark .shadow-sm,
+    .dark .shadow-lg {
+        @apply shadow-gray-900/50;
+    }
+}
+

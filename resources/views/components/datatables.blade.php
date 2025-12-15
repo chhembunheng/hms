@@ -1,17 +1,29 @@
 @props([
     'data' => null,
+    'dataTable' => null,
     'title' => null,
     'content' => false,
     'fixed' => false,
 ])
+@php
+    // Support both 'data' and 'dataTable' props for backwards compatibility
+    $tableData = $dataTable ?? $data;
+@endphp
+@if($tableData)
 <div class="card border border-primary shadow-sm">
     <div class="card-header bg-primary text-white border-bottom-0 py-2">
         <h6 class="mb-0">{{ $title }}</h6>
     </div>
     <div class="card-body">
-        {!! $data->table(['class' => 'table table-hover datatables no-footer'], true) !!}
+        {!! $tableData->table(['class' => 'table table-hover datatables no-footer'], true) !!}
     </div>
 </div>
+@else
+<div class="alert alert-warning">
+    <i class="fa-solid fa-exclamation-triangle me-2"></i>
+    No datatable provided. Please pass the datatable object to this component.
+</div>
+@endif
 @push('scripts')
     <script src="{{ asset('assets/js/vendor/tables/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/tables/datatables/extensions/fixed_columns.min.js') }}"></script>

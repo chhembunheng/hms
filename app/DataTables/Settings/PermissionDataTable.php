@@ -24,15 +24,37 @@ class PermissionDataTable extends DataTable
         $locale = app()->getLocale();
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('name', fn($row) => $row->translations->where('locale', $locale)->first()?->name ?? $row->translations->where('locale', 'en')->first()?->name ?? 'N/A')
+            ->addColumn('name', function($row) use ($locale) {
+                $name = $row->translations->where('locale', $locale)->first()?->name ?? $row->translations->where('locale', 'en')->first()?->name ?? 'N/A';
+                
+                // Add badge based on permission action
+                $badgeClass = 'bg-secondary';
+                $icon = 'fa-shield-halved';
+                
+                if (str_contains(strtolower($row->action ?? ''), 'add')) {
+                    $badgeClass = 'bg-success';
+                    $icon = 'fa-circle-plus';
+                } elseif (str_contains(strtolower($row->action ?? ''), 'edit')) {
+                    $badgeClass = 'bg-info';
+                    $icon = 'fa-pen-to-square';
+                } elseif (str_contains(strtolower($row->action ?? ''), 'delete')) {
+                    $badgeClass = 'bg-danger';
+                    $icon = 'fa-trash';
+                } elseif (str_contains(strtolower($row->action ?? ''), 'view')) {
+                    $badgeClass = 'bg-primary';
+                    $icon = 'fa-eye';
+                }
+                
+                return '<i class="fa-solid ' . $icon . ' me-2 text-muted"></i>' . $name;
+            })
             ->addColumn('menu', fn($row) => $row->menu?->translations->where('locale', $locale)->first()?->name ?? $row->menu?->translations->where('locale', 'en')->first()?->name ?? 'N/A')
             ->addColumn('action_route', fn($row) => $row->action_route ?? '-')
-            ->addColumn('sort', fn($row) => $row->order)
+            ->addColumn('sort', fn($row) => '<span class="badge bg-secondary bg-opacity-20 text-secondary">' . ($row->sort ?? 0) . '</span>')
             ->editColumn('created_at', function (Permission $model) {
                 return $model->created_at?->format(config('init.datetime.display_format'));
             })
             ->addColumn('action', fn($row) => view('settings.permissions.action', compact('row')))
-            ->rawColumns(['action']);
+            ->rawColumns(['name', 'sort', 'action']);
     }
 
     /**

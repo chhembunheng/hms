@@ -3,3 +3,4 @@
 <link rel="stylesheet" href="{{ asset('assets/js/vendor/editors/tui/tui-image-editor.css') }}?v={{ config('init.layout_version') }}">
 <link href="{{ asset('assets/css/all.min.css') }}?v={{ config('init.layout_version') }}" id="stylesheet" rel="stylesheet" type="text/css">
 <link href="{{ asset('assets/css/main.css') }}?v={{ config('init.layout_version') }}" id="stylesheet" rel="stylesheet" type="text/css">
+<link href="{{ asset('assets/css/dark-mode.css') }}?v={{ config('init.layout_version') }}" rel="stylesheet" type="text/css">

@@ -26,6 +26,7 @@
  <script src="{{ asset('assets/js/vendor/media/glightbox.min.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/vendor/editors/ckeditor.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/app.js') }}?v={{ config('init.layout_version') }}"></script>
+ <script src="{{ asset('assets/js/theme.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/helpers.js') }}?v={{ config('init.layout_version') }}"></script>
  <script>
      // initialize body overlay

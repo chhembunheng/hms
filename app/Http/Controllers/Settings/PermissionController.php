@@ -31,6 +31,7 @@ class PermissionController extends Controller
      */
     public function add(Request $request)
     {
+        $form = null;
         $menus = Menu::with('translations')->get();
         $locales = $this->locales;
         $translations = [];
@@ -82,7 +83,7 @@ class PermissionController extends Controller
             }
         }
 
-        return view('settings.permissions.form', compact('menus', 'locales', 'translations'));
+        return view('settings.permissions.form', compact('form', 'menus', 'locales', 'translations'));
     }
 
     /**
@@ -90,12 +91,12 @@ class PermissionController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        $permission = Permission::with('translations')->findOrFail($id);
+        $form = Permission::with('translations')->findOrFail($id);
         $menus = Menu::with('translations')->get();
         $locales = $this->locales;
         
         $translations = [];
-        foreach ($permission->translations as $translation) {
+        foreach ($form->translations as $translation) {
             $translations[$translation->locale] = [
                 'name' => $translation->name,
                 'description' => $translation->description,
@@ -121,7 +122,7 @@ class PermissionController extends Controller
                     return errors(message: $validator->errors()->first());
                 }
 
-                $permission->update([
+                $form->update([
                     'menu_id' => $request->input('menu_id'),
                     'icon' => $request->input('icon'),
                     'target' => $request->input('target'),
@@ -135,7 +136,7 @@ class PermissionController extends Controller
 
                 foreach ($this->locales->keys() as $locale) {
                     PermissionTranslation::updateOrCreate(
-                        ['permission_id' => $permission->id, 'locale' => $locale],
+                        ['permission_id' => $form->id, 'locale' => $locale],
                         [
                             'name' => $names[$locale] ?? $names['en'] ?? '',
                             'description' => $descriptions[$locale] ?? null,
@@ -150,7 +151,7 @@ class PermissionController extends Controller
             }
         }
 
-        return view('settings.permissions.form', compact('permission', 'menus', 'locales', 'translations'));
+        return view('settings.permissions.form', compact('form', 'menus', 'locales', 'translations'));
     }
 
     /**

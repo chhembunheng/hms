@@ -1,37 +1,43 @@
-<div class="btn-group btn-group-sm" role="group">
-    <a href="{{ route('settings.permissions.edit', $a->id) }}" class="btn btn-outline-primary" title="Edit">
-        <i class="fas fa-pen-to-square"></i>
-    </a>
-    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" 
-            onclick="deletePermission({{ $a->id }})" title="Delete">
-        <i class="fas fa-trash"></i>
-    </button>
-</div>
+@php
+    $actions = [
+        [
+            'action' => 'edit',
+            'action_route' => 'settings.permissions.edit',
+            'icon' => 'fa-pen-to-square',
+            'target' => 'self',
+            'translations' => collect([
+                (object)['locale' => app()->getLocale(), 'name' => __('Edit')]
+            ])
+        ],
+        [
+            'action' => 'delete',
+            'action_route' => 'settings.permissions.delete',
+            'icon' => 'fa-trash',
+            'target' => 'confirm',
+            'translations' => collect([
+                (object)['locale' => app()->getLocale(), 'name' => __('Delete')]
+            ])
+        ]
+    ];
+@endphp
 
-<script>
-function deletePermission(id) {
-    if (!confirm('Are you sure you want to delete this permission?')) {
-        return;
-    }
-    
-    fetch(`/settings/system/permissions/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            location.reload();
-        } else {
-            alert(data.message || 'Error deleting permission');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Error deleting permission');
-    });
-}
-</script>
+<div class="d-inline-flex dropdown ms-2">
+    <a href="#" class="text-body" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+    </a>
+    <div class="dropdown-menu dropdown-menu-end">
+        @foreach ($actions as $action)
+            @if ($action['action'] === 'delete')
+                <a href="{{ route($action['action_route'], ['id' => $row->id]) }}" class="dropdown-item" onclick="deleteRecord(event)">
+                    <i class="fa-light {{ $action['icon'] }} me-2"></i> {{ $action['translations']->firstWhere('locale', app()->getLocale())->name }}
+                </a>
+                @continue
+            @endif
+            @if ($action['target'] === 'self')
+                <a href="{{ route($action['action_route'], ['id' => $row->id]) }}" class="dropdown-item">
+                    <i class="fa-light {{ $action['icon'] }} me-2"></i> {{ $action['translations']->firstWhere('locale', app()->getLocale())->name }}
+                </a>
+            @endif
+        @endforeach
+    </div>
+</div>
