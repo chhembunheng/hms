@@ -36,12 +36,11 @@ Route::get('/return-policy', function () {
 
 Route::match(['get', 'post'], '/text-editor/upload', [TextEditorController::class, 'upload'])->name('text-editor.upload');
 Route::match(['get', 'post'], '/generate-meta', [MetaGeneratorController::class, 'generate'])->name('meta-generator.generate');
-Route::domain(config('app.admin_domain'))->group(function () {
+
     require __DIR__ . '/auth.php';
     require __DIR__ . '/frontend.php';
     require __DIR__ . '/settings.php';
-});
 
-Route::domain(config('app.public_domain'))->group(function () {
-    require __DIR__ . '/landing.php';
-});
+// Route::domain(config('app.public_domain'))->group(function () {
+//     require __DIR__ . '/landing.php';
+// });

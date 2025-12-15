@@ -14,7 +14,6 @@ Route::get('clear-cache', function () {
     return redirect()->back();
 })->name('clear-cache');
 
-Route::domain(config('app.admin_domain'))->group(function () {
     Route::get('/', function () {
         return redirect()->route('dashboard.index');
     });
@@ -56,4 +55,3 @@ Route::domain(config('app.admin_domain'))->group(function () {
             Route::get('/events', [MyAccountController::class, 'events'])->name('events');
         });
     });
-});
