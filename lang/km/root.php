@@ -159,7 +159,9 @@ return [
         'state' => 'State',
         'user' => 'User',
         'username' => 'Username',
-        'learn_more' => 'ស្វែងយល់បន្ថែម'
+        'learn_more' => 'ស្វែងយល់បន្ថែម',
+        'route' => 'Route',
+        'action' => 'Action'
     ],
 
     'auth' => [

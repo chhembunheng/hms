@@ -201,6 +201,8 @@ return [
         'target' => 'Target',
         'new_tab' => 'New Tab',
         'same_tab' => 'Same Tab',
+        'route' => 'Route',
+        'action' => 'Action',
     ],
 
     'auth' => [

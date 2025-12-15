@@ -18,18 +18,18 @@
       {
         "username": "admin",
         "email": "info@Administrator.com.kh",
-        "phone": "+85510345432",
+        "phone": "+85516467236",
         "gender": "male",
         "translations": [
           {
             "locale": "en",
-            "first_name": "CAMBODIA",
+            "first_name": "SYSTEM",
             "last_name": "ADMINISTRATOR",
             "address": ""
           },
           {
             "locale": "km",
-            "first_name": "ខេមបូឌា",
+            "first_name": "ស៊ីស្ទឹម",
             "last_name": "អាដមីនស្ត្រាតឺទ័រ",
             "address": ""
           }

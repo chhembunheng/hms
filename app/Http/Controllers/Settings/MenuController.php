@@ -15,7 +15,7 @@ use App\Models\Settings\PermissionTranslation;
 class MenuController extends Controller
 {
 
-    public function index(Request $request, MenuDataTable $dataTable)
+    public function index(MenuDataTable $dataTable)
     {
         return $dataTable->render('settings.menus.index');
     }
