@@ -16,22 +16,22 @@
     ],
     "users": [
       {
-        "username": "wintech",
-        "email": "info@wintech.com.kh",
+        "username": "admin",
+        "email": "info@Administrator.com.kh",
         "phone": "+85510345432",
         "gender": "male",
         "translations": [
           {
             "locale": "en",
             "first_name": "CAMBODIA",
-            "last_name": "WINTECH",
-            "address": "House #1363, National Road No. 2, Toul Roka Village, Phnom Penh 120602, Cambodia"
+            "last_name": "ADMINISTRATOR",
+            "address": ""
           },
           {
             "locale": "km",
             "first_name": "ខេមបូឌា",
-            "last_name": "វីនថេក",
-            "address": "ផ្ទះលេខ 1363, ផ្លូវជាតិលេខ 2, ភូមិតោលរ៉ូកា, រាជធានីភ្នំពេញ 120602, កម្ពុជា"
+            "last_name": "អាដមីនស្ត្រាតឺទ័រ",
+            "address": ""
           }
         ]
       }

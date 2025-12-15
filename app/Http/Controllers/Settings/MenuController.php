@@ -11,11 +11,9 @@ use App\Models\Settings\MenuTranslation;
 use Illuminate\Support\Facades\Validator;
 use App\DataTables\Settings\MenuDataTable;
 use App\Models\Settings\PermissionTranslation;
-use App\Traits\Filterable;
 
 class MenuController extends Controller
 {
-    use Filterable;
 
     public function index(Request $request, MenuDataTable $dataTable)
     {
