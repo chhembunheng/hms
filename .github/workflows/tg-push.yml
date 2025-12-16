@@ -9,6 +9,7 @@ jobs:
       - run: |
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TG_BOT_TOKEN }}/sendMessage" \
           -d chat_id=${{ secrets.TG_CHAT_ID }} \
+          -d message_thread_id=$TG_TOPIC_ID \
           -d parse_mode=Markdown \
           -d text=$'🚀 *Code landed*\n\n👤 By: *${{ github.actor }}*\n📦 `${{ github.repository }}`\n🌿 Branch: `${{ github.ref_name }}`\n\n💬 Commit: ${{ github.event.head_commit.message }}\n🔗 `${{ github.sha }}`\n\n🔗 [View commit](${{ github.event.head_commit.url }})\n\n✨ Fresh changes just hit the repo.'
 
