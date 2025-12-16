@@ -15,7 +15,7 @@ jobs:
           -d chat_id=${{ secrets.TG_CHAT_ID }} \
           -d message_thread_id=$TG_TOPIC_ID \
           -d parse_mode=Markdown \
-          -d text=$'🚀 *Code just dropped* 🔥\n╙═════════════════════╜\n\n👤 *Dev:* @${{ github.actor }}\n🌿 *Branch:* `${{ github.ref_name }}`\n⏱️ *Pushed:* '"$TIMESTAMP"$' ICT\n\n💬 *What changed:*\n_'"$COMMIT_MSG"$'_\n\n🔖 *Commit:* `'"$COMMIT_HASH"$'`\n\n👉 [View the diff](${{ github.event.head_commit.url }})\n╚═════════════════════╝\n✨ Ship it, test it, no cap ✅'
+          -d text=$'🚀 *Code just dropped*\n\n👤 @${{ github.actor }}\n🌿 `${{ github.ref_name }}`\n⏱️ '"$TIMESTAMP"$' ICT\n\n💬 _'"$COMMIT_MSG"$'_\n🔖 `'"$COMMIT_HASH"$'`\n\n[View diff](${{ github.event.head_commit.url }})\n\n✨ ship it, no cap'
 
 
 env:

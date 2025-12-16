@@ -16,7 +16,7 @@ jobs:
           -d chat_id=${{ secrets.TG_CHAT_ID }} \
           -d message_thread_id=$TG_TOPIC_ID \
           -d parse_mode=Markdown \
-          -d text=$'✅ *MERGED* 🎉\n╙═════════════════════╜\n\n🏷️ *PR #${{ github.event.pull_request.number }}*\n📌 _${{ github.event.pull_request.title }}_\n\n👑 *Merged by:* @${{ github.actor }}\n🌿 *Into:* `${{ github.base_ref }}`\n⏱️ *Shipped:* '"$TIMESTAMP"$' ICT\n\n💥 *Impact:*\n• ${{ github.event.pull_request.changed_files }} files changed\n• ${{ github.event.pull_request.commits }} commits squashed\n• +${{ github.event.pull_request.additions }} / -${{ github.event.pull_request.deletions }} lines\n• Merge hash: `'"$MERGE_SHA"$'`\n\n🔗 [See the PR](${{ github.event.pull_request.html_url }})\n╚═════════════════════╝\n🚀 Another W in the books. Deploy szn 🔥'
+          -d text=$'✅ *PR #${{ github.event.pull_request.number }} merged*\n\n📌 _${{ github.event.pull_request.title }}_\n\n👑 @${{ github.actor }}\n🌿 into `${{ github.base_ref }}`\n⏱️ '"$TIMESTAMP"$' ICT\n\n💥 ${{ github.event.pull_request.changed_files }} files • ${{ github.event.pull_request.commits }} commits\n📝 +${{ github.event.pull_request.additions }} / -${{ github.event.pull_request.deletions }}\n🔖 `'"$MERGE_SHA"$'`\n\n[View PR](${{ github.event.pull_request.html_url }})\n\n🎉 W in the books, deploy time'
 
 env:
   TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
