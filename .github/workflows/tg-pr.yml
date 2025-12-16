@@ -15,7 +15,7 @@ jobs:
           -d chat_id=${{ secrets.TG_CHAT_ID }} \
           -d message_thread_id=$TG_TOPIC_ID \
           -d parse_mode=Markdown \
-          -d text=$'🔀 *New PR Alert* ‼️\n╙═════════════════════╜\n\n🏷️ *PR #${{ github.event.pull_request.number }}*\n📌 _${{ github.event.pull_request.title }}_\n\n👤 *Author:* @${{ github.actor }}\n🌿 *Branches:* `${{ github.head_ref }}` ➜ `${{ github.base_ref }}`\n⏱️ *Created:* '"$TIMESTAMP"$' ICT\n\n📈 *The damage:*\n• ${{ github.event.pull_request.changed_files }} files touched\n• ${{ github.event.pull_request.commits }} commits locked in\n• +${{ github.event.pull_request.additions }} / -${{ github.event.pull_request.deletions }} lines\n\n👀 [Review this PR](${{ github.event.pull_request.html_url }})\n╚═════════════════════╝\n👍 Review szn - let\'s get this merged 🚀'
+          -d text=$'🔀 *New PR #${{ github.event.pull_request.number }}*\n\n📌 _${{ github.event.pull_request.title }}_\n\n👤 @${{ github.actor }}\n🌿 `${{ github.head_ref }}` ➜ `${{ github.base_ref }}`\n⏱️ '"$TIMESTAMP"$' ICT\n\n📈 ${{ github.event.pull_request.changed_files }} files • ${{ github.event.pull_request.commits }} commits\n📝 +${{ github.event.pull_request.additions }} / -${{ github.event.pull_request.deletions }}\n\n[Review PR](${{ github.event.pull_request.html_url }})\n\n👀 review szn, let\'s merge this'
 
 
 env:
