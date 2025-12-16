@@ -10,12 +10,12 @@ jobs:
     steps:
       - run: |
           PR_BODY=$(echo '${{ github.event.pull_request.body }}' | head -c 150)
-          TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M UTC")
+          TIMESTAMP=$(TZ='Asia/Phnom_Penh' date +"%b %d, %Y at %I:%M %p ICT")
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TG_BOT_TOKEN }}/sendMessage" \
           -d chat_id=${{ secrets.TG_CHAT_ID }} \
           -d message_thread_id=$TG_TOPIC_ID \
           -d parse_mode=Markdown \
-          -d text=$'🔀 *NEW PULL REQUEST*\n━━━━━━━━━━━━━━━━\n\n📌 *Title:*\n*${{ github.event.pull_request.title }}*\n\n👤 *Author:* @${{ github.actor }}\n🆔 *PR #${{ github.event.pull_request.number }}*\n🌿 *Merge:* `${{ github.head_ref }}` → `${{ github.base_ref }}`\n⏰ *Opened:* '"$TIMESTAMP"$'\n\n📊 *Changes:*\n• Files: ${{ github.event.pull_request.changed_files }}\n• Additions: +${{ github.event.pull_request.additions }}\n• Deletions: -${{ github.event.pull_request.deletions }}\n• Commits: ${{ github.event.pull_request.commits }}\n\n📝 *Description:*\n_'"${PR_BODY:-No description}"$'_\n\n🔗 [Review PR Now](${{ github.event.pull_request.html_url }})\n━━━━━━━━━━━━━━━━\n👀 Reviewers needed! Let\'s ship this 🚀'
+          -d text=$'🔀 *Pull Request #${{ github.event.pull_request.number }}*\n────────────────────\n\n*${{ github.event.pull_request.title }}*\n\n*Author:* ${{ github.actor }}\n*Merge:* `${{ github.head_ref }}` → `${{ github.base_ref }}`\n*Opened:* '"$TIMESTAMP"$'\n\n*Changes:*\n• Files: ${{ github.event.pull_request.changed_files }} | Commits: ${{ github.event.pull_request.commits }}\n• +${{ github.event.pull_request.additions }} / -${{ github.event.pull_request.deletions }} lines\n\n[Review Pull Request](${{ github.event.pull_request.html_url }})'
 
 
 env:

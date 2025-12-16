@@ -10,13 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M UTC")
+          TIMESTAMP=$(TZ='Asia/Phnom_Penh' date +"%b %d, %Y at %I:%M %p ICT")
           MERGE_SHA=$(echo '${{ github.event.pull_request.merge_commit_sha }}' | cut -c1-8)
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TG_BOT_TOKEN }}/sendMessage" \
           -d chat_id=${{ secrets.TG_CHAT_ID }} \
           -d message_thread_id=$TG_TOPIC_ID \
           -d parse_mode=Markdown \
-          -d text=$'✅ *PR MERGED SUCCESSFULLY*\n━━━━━━━━━━━━━━━━\n\n📌 *Title:*\n*${{ github.event.pull_request.title }}*\n\n👤 *Merged by:* @${{ github.actor }}\n🆔 *PR #${{ github.event.pull_request.number }}*\n🌿 *Branch:* `${{ github.head_ref }}` → `${{ github.base_ref }}`\n⏰ *Merged at:* '"$TIMESTAMP"$'\n\n📊 *Impact:*\n• Files Changed: ${{ github.event.pull_request.changed_files }}\n• Lines Added: +${{ github.event.pull_request.additions }}\n• Lines Removed: -${{ github.event.pull_request.deletions }}\n• Total Commits: ${{ github.event.pull_request.commits }}\n\n🔖 *Merge Commit:*\n`'"$MERGE_SHA"$'`\n\n🔗 [View Merged PR](${{ github.event.pull_request.html_url }})\n━━━━━━━━━━━━━━━━\n🎉 Clean merge! Ready to deploy 🚀'
+          -d text=$'✅ *PR #${{ github.event.pull_request.number }} Merged*\n────────────────────\n\n*${{ github.event.pull_request.title }}*\n\n*Merged by:* ${{ github.actor }}\n*Branch:* `${{ github.head_ref }}` → `${{ github.base_ref }}`\n*Merged:* '"$TIMESTAMP"$'\n\n*Impact:*\n• Files: ${{ github.event.pull_request.changed_files }} | Commits: ${{ github.event.pull_request.commits }}\n• +${{ github.event.pull_request.additions }} / -${{ github.event.pull_request.deletions }} lines\n• Merge commit: `'"$MERGE_SHA"$'`\n\n[View Pull Request](${{ github.event.pull_request.html_url }})'
 
 env:
   TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
