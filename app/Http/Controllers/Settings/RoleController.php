@@ -62,8 +62,9 @@ class RoleController extends Controller
                 // Create translations
                 $names = $request->input('name', []);
                 $descriptions = $request->input('description', []);
-                
-                foreach ($locales as $locale) {
+
+
+                foreach ($locales as $locale => $lang) {
                     RoleTranslation::create([
                         'role_id' => $role->id,
                         'locale' => $locale,
@@ -123,7 +124,7 @@ class RoleController extends Controller
                 // Update translations
                 $names = $request->input('name', []);
                 $descriptions = $request->input('description', []);
-                
+
                 foreach ($locales as $locale) {
                     RoleTranslation::updateOrCreate(
                         ['role_id' => $form->id, 'locale' => $locale],
