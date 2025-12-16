@@ -41,7 +41,59 @@ class MenuDataTable extends DataTable
      */
     public function query(Menu $model): QueryBuilder
     {
-        return $model->newQuery();
+        $query = $model->newQuery()->with('translations');
+
+        // Get filters from request headers
+        $filtersHeader = request()->header('filters');
+        if ($filtersHeader) {
+            $filters = json_decode(urldecode($filtersHeader), true);
+
+            if (is_array($filters)) {
+                // Filter by name (searches in translations)
+                if (!empty($filters['name'])) {
+                    $query->whereHas('translations', function ($q) use ($filters) {
+                        $q->where('name', 'like', '%' . $filters['name'] . '%');
+                    });
+                }
+
+                // Filter by route
+                if (!empty($filters['route'])) {
+                    $query->where('route', 'like', '%' . $filters['route'] . '%');
+                }
+
+                // Filter by parent menu
+                if (!empty($filters['parent_id'])) {
+                    if ($filters['parent_id'] === 'null') {
+                        $query->whereNull('parent_id');
+                    } else {
+                        $query->where('parent_id', $filters['parent_id']);
+                    }
+                }
+
+                // Filter by multiple menu IDs (multiselect)
+                if (!empty($filters['menu_ids']) && is_array($filters['menu_ids'])) {
+                    $query->whereIn('id', $filters['menu_ids']);
+                }
+
+                // Filter by sort/order range
+                if (!empty($filters['sort_from'])) {
+                    $query->where('sort', '>=', $filters['sort_from']);
+                }
+                if (!empty($filters['sort_to'])) {
+                    $query->where('sort', '<=', $filters['sort_to']);
+                }
+
+                // Filter by date range
+                if (!empty($filters['created_from'])) {
+                    $query->whereDate('created_at', '>=', $filters['created_from']);
+                }
+                if (!empty($filters['created_to'])) {
+                    $query->whereDate('created_at', '<=', $filters['created_to']);
+                }
+            }
+        }
+
+        return $query;
     }
 
     /**
@@ -54,6 +106,13 @@ class MenuDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->orderBy(1);
+            //         ->parameters([
+            //     'processing' => true,
+            //     'serverSide' => true,
+            //     'searchDelay' => 500,
+            //     'deferLoading' => 0,
+            // ]);
+
     }
 
     /**

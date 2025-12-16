@@ -275,4 +275,24 @@ return [
     'cover_letter' => 'លិខិតស្នើសុំការងារ',
     'tell_us_about_yourself' => 'ប្រាប់អំពីខ្លួនអ្នកឱ្យយើង​ដឹង',
 
+    // Filters
+    'filters' => 'តម្រង',
+    'toggle_filters' => 'បើក/បិទតម្រង',
+    'apply' => 'អនុវត្ត',
+    'reset' => 'កំណត់ឡើងវិញ',
+    'applying' => 'កំពុងអនុវត្ត...',
+    'all' => 'ទាំងអស់',
+    'search_by_name' => 'ស្វែងរកតាមឈ្មោះ',
+    'search_by_route' => 'ស្វែងរកតាមផ្លូវ',
+    'range' => 'ចន្លោះ',
+    'from' => 'ពី',
+    'to' => 'ទៅ',
+    'created_date_range' => 'ចន្លោះកាលបរិច្ឆេទបង្កើត',
+    'menus' => 'ម៉ឺនុយ',
+    'multiple' => 'ច្រើន',
+    'selected' => 'បានជ្រើសរើស',
+    'all_selected' => 'បានជ្រើសរើសទាំងអស់',
+    'select_all' => 'ជ្រើសរើសទាំងអស់',
+    'search' => 'ស្វែងរក',
+
 ];

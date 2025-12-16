@@ -27,6 +27,7 @@ Route::get('/lang/{lang}', [\App\Http\Controllers\LanguageController::class, 'se
             Route::match(['get', 'post'], '/add', [MenuController::class, 'add'])->name('add');
             Route::match(['get', 'post'], '/{id}/edit', [MenuController::class, 'edit'])->name('edit');
             Route::delete('/{id}/delete', [MenuController::class, 'destroy'])->name('delete');
+            Route::get('/select2', [MenuController::class, 'select2'])->name('select2');
         });
         Route::prefix('users')->name('users.')->group(function () {
             Route::get('/', [UserController::class, 'index'])->name('index');
