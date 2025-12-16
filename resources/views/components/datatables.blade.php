@@ -60,9 +60,21 @@
                     beforeSend: function(xhr) {
                         let filters = {};
                         $('#filter-container').find('input, select, textarea').each(function() {
-                            let name = ($(this).attr('name') || '').replace('[]', '');
-                            let value = $(this).val();
-                            if (name && value) filters[name] = value;
+                            let $el = $(this);
+                            let name = ($el.attr('name') || '').replace('[]', '');
+                            let value = $el.val();
+
+                            // Handle multiselect arrays
+                            if (name && value) {
+                                if (Array.isArray(value)) {
+                                    // For multiselect, only add if array has values
+                                    if (value.length > 0) {
+                                        filters[name] = value;
+                                    }
+                                } else if (value !== '') {
+                                    filters[name] = value;
+                                }
+                            }
                         });
                         xhr.setRequestHeader('filters', encodeURIComponent(JSON.stringify(filters)));
                     },

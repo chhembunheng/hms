@@ -12,7 +12,6 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <title>{{ config('app.name') }}</title>
     <script>
-        // Prevent FOUC (Flash of Unstyled Content) by setting theme before page renders
         if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else {
@@ -21,6 +20,14 @@
     </script>
     @include('layouts.partials.style')
     @stack('css')
+    <style>
+        .multiple-select {
+            width: 100% !important;
+            max-width: 100% !important;
+            visibility: hidden;
+            height: 0 !important;
+        }
+    </style>
 </head>
 
 <body style="overflow: visible;" class="dark:bg-gray-900 dark:text-gray-100">

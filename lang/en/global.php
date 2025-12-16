@@ -194,7 +194,7 @@ return [
     'error_429_message' => 'You have made too many requests in a short time. Please slow down and try again later.',
     'error_500_message' => 'Whoops, something went wrong on our servers.',
     'error_503_message' => 'Sorry, we are doing some maintenance. Please check back later.',
-    
+
     // Form labels
     'name_en' => 'Name (English)',
     'name_km' => 'Name (Khmer)',
@@ -273,4 +273,24 @@ return [
     'upload_resume' => 'Upload Resume',
     'cover_letter' => 'Cover Letter',
     'tell_us_about_yourself' => 'Tell us about yourself',
+
+    // Filters
+    'filters' => 'Filters',
+    'toggle_filters' => 'Toggle Filters',
+    'apply' => 'Apply',
+    'reset' => 'Reset',
+    'applying' => 'Applying...',
+    'all' => 'All',
+    'search_by_name' => 'Search by name',
+    'search_by_route' => 'Search by route',
+    'range' => 'Range',
+    'from' => 'From',
+    'to' => 'To',
+    'created_date_range' => 'Created Date Range',
+    'menus' => 'Menus',
+    'multiple' => 'Multiple',
+    'selected' => 'selected',
+    'all_selected' => 'All Selected',
+    'select_all' => 'Select All',
+    'search' => 'Search',
 ];

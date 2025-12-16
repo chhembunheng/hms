@@ -588,7 +588,7 @@
                 var isSelectAllOption = $target.val() === this.options.selectAllValue;
 
                 // Apply or unapply the configured selected class.
-                
+
                 if (this.options.selectedClass) {
                     if (checked) {
                         $target.closest('.multiselect-item')
@@ -880,11 +880,11 @@
 
         /**
          * Create a checkbox container with input and label based on given values
-         * @param {JQuery} $item 
-         * @param {String} label 
-         * @param {String} name 
-         * @param {String} value 
-         * @param {String} inputType 
+         * @param {JQuery} $item
+         * @param {String} label
+         * @param {String} name
+         * @param {String} value
+         * @param {String} inputType
          * @returns {JQuery}
          */
         createCheckbox: function ($item, label, name, value, title, inputType) {
@@ -1114,7 +1114,7 @@
                     this.$filter = $(this.options.templates.filter);
                     $('input', this.$filter).attr('placeholder', this.options.filterPlaceholder);
 
-                    // Handles optional filter clear button                        
+                    // Handles optional filter clear button
                     if (!this.options.includeFilterClearBtn) {
                         this.$filter.find(".multiselect-search").attr("type", "text");
 
@@ -1637,7 +1637,7 @@
             this.$select.prop('disabled', false);
             this.$button.prop('disabled', false)
                 .removeClass('disabled');
-            
+
             this.updateButtonText();
         },
 
@@ -1648,7 +1648,7 @@
             this.$select.prop('disabled', true);
             this.$button.prop('disabled', true)
                 .addClass('disabled');
-            
+
             this.updateButtonText();
         },
 

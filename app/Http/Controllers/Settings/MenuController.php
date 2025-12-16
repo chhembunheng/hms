@@ -287,4 +287,46 @@ class MenuController extends Controller
             return errors("Failed to delete menu: " . $e->getMessage());
         }
     }
+
+
+    public function select2(Request $request)
+    {
+        $search = $request->input('q', '');
+        $page = (int) $request->input('page', 1);
+        $perPage = 10;
+
+        $query = Menu::query();
+
+        if ($search !== '') {
+            $locale = app()->getLocale();
+            $query->whereHas('translations', function ($q) use ($search, $locale) {
+                $q->where('locale', $locale)
+                  ->where('name', 'like', '%' . $search . '%');
+            });
+        }
+
+        $total = $query->count();
+        $menus = $query->with('translations')
+                       ->skip(($page - 1) * $perPage)
+                       ->take($perPage)
+                       ->get();
+
+        $results = [];
+        foreach ($menus as $menu) {
+            $name = $menu->translations->where('locale', app()->getLocale())->first()?->name
+                    ?? $menu->translations->where('locale', 'en')->first()?->name
+                    ?? 'N/A';
+            $results[] = [
+                'id' => $menu->id,
+                'text' => $name,
+            ];
+        }
+
+        return response()->json([
+            'results' => $results,
+            'pagination' => [
+                'more' => ($page * $perPage) < $total,
+            ],
+        ]);
+    }
 }
