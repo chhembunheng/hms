@@ -14,6 +14,8 @@ Route::get('clear-cache', function () {
     return redirect()->back();
 })->name('clear-cache');
 
+Route::get('/lang/{lang}', [\App\Http\Controllers\LanguageController::class, 'setLanguage'])->name('admin.lang');
+
     Route::get('/', function () {
         return redirect()->route('dashboard.index');
     });
