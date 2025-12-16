@@ -1,0 +1,18 @@
+name: Push Alert
+
+on: [push]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TG_BOT_TOKEN }}/sendMessage" \
+          -d chat_id=${{ secrets.TG_CHAT_ID }} \
+          -d parse_mode=Markdown \
+          -d text="🚀 *Code landed*\n\n👤 *${{ github.actor }}*\n📦 `${{ github.repository }}`\n🌿 `${{ github.ref_name }}`\n\n✨ Fresh changes just hit the repo."
+
+
+env:
+  TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+  TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
