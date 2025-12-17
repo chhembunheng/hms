@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="Wintech is a leading IT solutions provider, offering innovative software and technology services to empower businesses worldwide.">
-    <meta name="keywords" content="IT solutions, software development, technology services, business solutions, Wintech">
+    <meta name="description" content="HMS is a leading IT solutions provider, offering innovative software and technology services to empower businesses worldwide.">
+    <meta name="keywords" content="IT solutions, software development, technology services, business solutions, HMS">
     <meta name="author" content="{{ config('app.name') }}">
     <meta name="robots" content="index, follow">
     <title>@yield('title', config('app.name'))</title>
@@ -19,7 +19,7 @@
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
-    <meta name="apple-mobile-web-app-title" content="WinTech">
+    <meta name="apple-mobile-web-app-title" content="HMS">
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
     <meta name="theme-color" content="#ffffff">
 
