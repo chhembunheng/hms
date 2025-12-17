@@ -104,6 +104,11 @@ class Abilities
             ]);
         }
 
+
+        if (!isset($this->permissions[$this->route])) {
+            return $next($request);
+        }
+
         if ($this->administrator || isset($this->access[$this->route])) {
             return $next($request);
         }
