@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Settings;
 
-use App\DataTables\Settings\RoleDataTable;
-use App\Http\Controllers\Controller;
-use App\Models\Settings\Role;
-use App\Models\Settings\RoleTranslation;
 use Illuminate\Http\Request;
+use App\Models\Settings\Role;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
+use App\Models\Settings\RoleTranslation;
 use Illuminate\Support\Facades\Validator;
+use App\DataTables\Settings\RoleDataTable;
 
 class RoleController extends Controller
 {
@@ -62,8 +63,8 @@ class RoleController extends Controller
                 // Create translations
                 $names = $request->input('name', []);
                 $descriptions = $request->input('description', []);
-                
-                foreach ($locales as $locale) {
+
+                foreach ($locales as $locale => $lang) {
                     RoleTranslation::create([
                         'role_id' => $role->id,
                         'locale' => $locale,
@@ -72,6 +73,9 @@ class RoleController extends Controller
                         'created_by' => auth()->id(),
                     ]);
                 }
+
+                Cache::flush();
+
 
                 return success(message: 'Role created successfully.');
             } catch (\Exception $e) {
@@ -87,7 +91,7 @@ class RoleController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        $form = Role::findOrFail($id);
+        $form = Role::with('permissions')->findOrFail($id);
         $locales = collect(config('init.languages'));
 
         if ($request->isMethod('post')) {
@@ -123,8 +127,8 @@ class RoleController extends Controller
                 // Update translations
                 $names = $request->input('name', []);
                 $descriptions = $request->input('description', []);
-                
-                foreach ($locales as $locale) {
+
+                foreach ($locales as $locale => $lang) {
                     RoleTranslation::updateOrCreate(
                         ['role_id' => $form->id, 'locale' => $locale],
                         [
@@ -134,6 +138,8 @@ class RoleController extends Controller
                         ]
                     );
                 }
+
+                Cache::flush();
 
                 return success(message: 'Role updated successfully.');
             } catch (\Exception $e) {
@@ -166,6 +172,9 @@ class RoleController extends Controller
 
             // Delete the role
             $role->delete();
+
+            // Invalidate Abilities cache/session for all users
+            session()->forget(['access', 'administrator']);
 
             return success(message: 'Role deleted successfully.');
         } catch (\Exception $e) {
