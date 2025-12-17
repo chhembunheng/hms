@@ -23,13 +23,11 @@ class Role extends Model
 
     public function permissions()
     {
-        // Pivot table created by migration: role_permission
         return $this->belongsToMany(Permission::class, 'role_permission', 'role_id', 'permission_id');
     }
 
     public function users()
     {
-        // Pivot table created by migration: user_role
         return $this->belongsToMany(User::class, 'user_role', 'role_id', 'user_id');
     }
 }

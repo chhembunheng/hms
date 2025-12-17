@@ -26,7 +26,7 @@
                 'title' => $permTitle,
                 'key' => 'perm-' . $perm->id,
                 'folder' => false,
-                'select' => in_array($perm->id, $selected),
+                'selected' => in_array($perm->id, $selected),
             ];
         }
 
@@ -46,7 +46,7 @@
                     'title' => $permTitle,
                     'key' => 'perm-' . $perm->id,
                     'folder' => false,
-                    'select' => in_array($perm->id, $selected),
+                    'selected' => in_array($perm->id, $selected),
                 ];
             }
 
@@ -121,7 +121,7 @@
                 });
                 syncSelectedPermissions();
             });
-            
+
             const expandToggle = document.getElementById('perm-toggle-expand');
             if (expandToggle) {
                 let expanded = false;
@@ -134,7 +134,7 @@
             $('#permissions-tree').on('fancytreeselect', function(event, data) {
                 syncSelectedPermissions();
             });
-            
+
             // Initial sync
             syncSelectedPermissions();
             const form = document.querySelector('form');

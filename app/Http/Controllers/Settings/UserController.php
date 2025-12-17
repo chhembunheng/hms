@@ -29,6 +29,9 @@ class UserController extends Controller
         $form = new User();
         $locales = $this->locales;
         $translations = [];
+        $roles = \App\Models\Settings\Role::with(['translations' => function($q) {
+            $q->where('locale', app()->getLocale());
+        }])->get();
 
         if ($request->isMethod('post')) {
             try {
@@ -74,19 +77,24 @@ class UserController extends Controller
                     ]);
                 }
 
+                // Assign roles
+                $user->roles()->sync($request->input('roles', []));
                 return success(message: 'User created successfully');
             } catch (\Exception $e) {
                 return errors(message: $e->getMessage());
             }
         }
 
-        return view('settings.users.form', compact('form', 'locales', 'translations'));
+        return view('settings.users.form', compact('form', 'locales', 'translations', 'roles'));
     }
 
     public function edit(Request $request, $id)
     {
-        $form = User::with('translations')->findOrFail($id);
+        $form = User::with(['translations', 'roles'])->findOrFail($id);
         $locales = $this->locales;
+        $roles = \App\Models\Settings\Role::with(['translations' => function($q) {
+            $q->where('locale', app()->getLocale());
+        }])->get();
 
         $translations = [];
         foreach ($form->translations as $translation) {
@@ -148,13 +156,15 @@ class UserController extends Controller
                     );
                 }
 
+                // Assign roles
+                $form->roles()->sync($request->input('roles', []));
                 return success(message: 'User updated successfully');
             } catch (\Exception $e) {
                 return errors(message: $e->getMessage());
             }
         }
 
-        return view('settings.users.form', compact('form', 'locales', 'translations'));
+        return view('settings.users.form', compact('form', 'locales', 'translations', 'roles'));
     }
 
     public function destroy($id)

@@ -99,4 +99,8 @@ return [
     'choose_file' => 'Choose File',
     'close' => 'Close',
     'instruction' => 'សូមបំពេញទម្រង់ដោយយកចិត្តទុកដាក់។ វាលដែលមានសញ្ញា <span class="text-danger">*</span> គឺត្រូវការ។',
+    'deselect_all' => 'បោះបង់ជ្រើសរើសទាំងអស់',
+    'select_all' => 'ជ្រើសរើសទាំងអស់',
+    'expand_all' => 'ពង្រីកទាំងអស់',
+    'collapse_all' => 'បង្រួមទាំងអស់',
 ];

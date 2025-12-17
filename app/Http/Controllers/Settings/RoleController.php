@@ -88,7 +88,7 @@ class RoleController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        $form = Role::findOrFail($id);
+        $form = Role::with('permissions')->findOrFail($id);
         $locales = collect(config('init.languages'));
 
         if ($request->isMethod('post')) {
@@ -125,7 +125,7 @@ class RoleController extends Controller
                 $names = $request->input('name', []);
                 $descriptions = $request->input('description', []);
 
-                foreach ($locales as $locale) {
+                foreach ($locales as $locale => $lang) {
                     RoleTranslation::updateOrCreate(
                         ['role_id' => $form->id, 'locale' => $locale],
                         [

@@ -118,4 +118,9 @@ return [
     'select_options' => 'Select Options',
     'option' => 'Option',
     'select_option' => 'Select Option',
+    'deselect_all' => 'Deselect All',
+    'select_all' => 'Select All',
+    'expand_all' => 'Expand All',
+    'collapse_all' => 'Collapse All',
+    'permissions' => 'Permissions',
 ];

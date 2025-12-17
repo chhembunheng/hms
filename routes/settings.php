@@ -41,12 +41,6 @@ Route::get('/lang/{lang}', [\App\Http\Controllers\LanguageController::class, 'se
             Route::match(['get', 'post'], '/{id}/edit', [RoleController::class, 'edit'])->name('edit');
             Route::delete('/{id}/delete', [RoleController::class, 'destroy'])->name('delete');
         });
-        Route::prefix('permissions')->name('permissions.')->group(function () {
-            Route::get('/', [PermissionController::class, 'index'])->name('index');
-            Route::match(['get', 'post'], '/add', [PermissionController::class, 'add'])->name('add');
-            Route::match(['get', 'post'], '/{id}/edit', [PermissionController::class, 'edit'])->name('edit');
-            Route::delete('/{id}/delete', [PermissionController::class, 'destroy'])->name('delete');
-        });
         Route::prefix('security')->name('security.')->group(function () {
 
             Route::match(['get', 'post'], '/authenticator', [MyAccountController::class, 'authenticator'])->name('authenticator');
