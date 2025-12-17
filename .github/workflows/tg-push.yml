@@ -7,18 +7,18 @@ jobs:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, 'Merge pull request')"
     steps:
-      - name: Send Telegram Notification
-        run: |
-          COMMIT_MSG=$(echo "${{ github.event.head_commit.message }}" | head -n1)
+      - run: |
+          COMMIT_MSG=$(echo '${{ github.event.head_commit.message }}' | head -n1)
           TIMESTAMP=$(TZ='Asia/Phnom_Penh' date +"%b %d at %I:%M %p")
-          COMMIT_HASH=$(echo "${{ github.sha }}" | cut -c1-7)
-
+          COMMIT_HASH=$(echo '${{ github.sha }}' | cut -c1-7)
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TG_BOT_TOKEN }}/sendMessage" \
-            -d chat_id="${{ secrets.TG_CHAT_ID }}" \
-            -d message_thread_id="${{ secrets.TG_TOPIC_ID }}" \
-            -d parse_mode="Markdown" \
-            -d text=$'🚀 *Code ចេញពីដៃ Dev កម្រិតទេវតា* \n\n\ 👤 @${{ github.actor }} (សរសេរដោយប្រើជំនឿ 10%)\n\ 🌿 `${{ github.ref_name }}` branch កំពុងសន្លប់\n\ ⏱️ '"$TIMESTAMP"$' ICT\n\n\ 💬 _'"$COMMIT_MSG"$'_\n\ 🔖 `'"$COMMIT_HASH"$'`\n\n\ 👀 [ចុចមើលភាពមហន្តរាយ](${{ github.event.head_commit.url }})\n\n\ 😎 ម៉ាស៊ីនខ្ញុំដើរ ម៉ាស៊ីនគេមិនដឹង\n\'
-        env: 
-          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
-          TG_TOPIC_ID: ${{ secrets.TG_TOPIC_ID }}
+          -d chat_id=${{ secrets.TG_CHAT_ID }} \
+          -d message_thread_id=$TG_TOPIC_ID \
+          -d parse_mode=Markdown \
+          -d text=$'🚀 *Code just dropped*\n\n👤 @${{ github.actor }}\n🌿 `${{ github.ref_name }}`\n⏱️ '"$TIMESTAMP"$' ICT\n\n💬 _'"$COMMIT_MSG"$'_\n🔖 `'"$COMMIT_HASH"$'`\n\n[View diff](${{ github.event.head_commit.url }})\n\n✨ ship it, no cap'
+
+
+env:
+  TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+  TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+  TG_TOPIC_ID: ${{ secrets.TG_TOPIC_ID }}
