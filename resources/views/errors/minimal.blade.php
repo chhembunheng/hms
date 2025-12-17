@@ -36,7 +36,6 @@
     <link rel="stylesheet" href="{{ asset('site/assets/css/meanmenu.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('site/assets/css/style.min.css') . (env('APP_ENV') == 'local' || request()->clear == 'yes' ? '?v=' . time() : '') }}" />
     <link rel="stylesheet" href="{{ asset('site/assets/css/responsive.min.css') . (env('APP_ENV') == 'local' || request()->clear == 'yes' ? '?v=' . time() : '') }}" />
-    @include('frontends.layouts.partials.header')
 </head>
 
 <body class="antialiased">
@@ -44,11 +43,14 @@
         <div class="d-table">
             <div class="d-table-cell">
                 <div class="container">
-                    <div class="error-content">
-                        <img src="@yield('code', webpasset('site/assets/img/404.png'))" alt="error">
-                        <h3>@yield('title', __('global.error_404_title'))</h3>
-                        <p>@yield('message', __('global.error_404_message'))</p>
-                        <a href="{{ route('index', ['locale' => app()->getLocale() ?? 'en']) }}" class="default-btn-one">{{ __('global.back_to_home') }}</a>
+                    <div class="error-content text-center p-4 bg-white rounded shadow-lg" style="max-width: 420px; margin: 0 auto;">
+                        <img src="{{ asset('site/assets/img/404.png') }}" alt="Error" style="max-width: 180px; margin-bottom: 1.5rem;">
+                        <h2 class="mb-2 text-danger">Oops! Something went wrong</h2>
+                        <h5 class="mb-3">@yield('title', __('global.error_404_title'))</h5>
+                        <p class="mb-4 text-muted">@yield('message', __('global.error_404_message'))</p>
+                        <a href="{{ route('dashboard.index') }}" class="btn btn-primary px-4 py-2">
+                            <i class="fa fa-home me-2"></i> {{ __('global.back_to_home') }}
+                        </a>
                     </div>
                 </div>
             </div>

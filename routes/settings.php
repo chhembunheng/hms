@@ -1,16 +1,21 @@
 <?php
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
-use App\Http\Controllers\Settings\MyAccountController;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Settings\MenuController;
 use App\Http\Controllers\Settings\RoleController;
 use App\Http\Controllers\Settings\UserController;
+use App\Http\Controllers\Settings\MyAccountController;
 use App\Http\Controllers\Settings\PermissionController;
 
 Route::get('clear-cache', function () {
     Artisan::call('config:clear');
     Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+    Cache::flush();
     return redirect()->back();
 })->name('clear-cache');
 

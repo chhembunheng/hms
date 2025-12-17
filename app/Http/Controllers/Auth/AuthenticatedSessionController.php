@@ -31,6 +31,22 @@ class AuthenticatedSessionController extends Controller
         }
         $request->session()->regenerate();
 
+        // Set access session for non-admin users
+        $user = auth()->user();
+        if ($user && (!isset($user->administrator) || $user->administrator != 1)) {
+            $access = [];
+            foreach ($user->roles as $role) {
+                foreach ($role->permissions as $permission) {
+                    if ($permission->action_route) {
+                        $access[$permission->action_route] = true;
+                    }
+                }
+            }
+            session(['access' => $access]);
+        } else {
+            session()->forget('access');
+        }
+
         return redirect()->intended(route('dashboard.index', absolute: false));
     }
 
