@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="Wintech is a leading IT solutions provider, offering innovative software and technology services to empower businesses worldwide.">
-    <meta name="keywords" content="IT solutions, software development, technology services, business solutions, Wintech">
+    <meta name="description" content="HMS is a leading IT solutions provider, offering innovative software and technology services to empower businesses worldwide.">
+    <meta name="keywords" content="IT solutions, software development, technology services, business solutions, HMS">
     <meta name="author" content="{{ config('app.name') }}">
     <meta name="robots" content="index, follow">
     <title>@yield('title', config('app.name'))</title>
