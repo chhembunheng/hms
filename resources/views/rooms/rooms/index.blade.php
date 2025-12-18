@@ -1,5 +1,4 @@
 <x-app-layout>
-    <div class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -64,9 +63,4 @@
                 </div>
             </div>
         </div>
-    </div>
 </x-app-layout>
-
-@push('scripts')
-{{ $dataTable->scripts() }}
-@endpush
