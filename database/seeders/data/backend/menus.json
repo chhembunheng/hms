@@ -4,8 +4,16 @@
     "sort": 1,
     "route": "dashboard.index",
     "translations": [
-      { "locale": "en", "name": "Dashboard", "description": "See a summary of what's happening in the system" },
-      { "locale": "km", "name": "ផ្ទាំងគ្រប់គ្រង", "description": "មើលសេចក្តីសង្ខេបអំពីអ្វីដែលកំពុងកើតឡើងនៅក្នុងប្រព័ន្ធ" }
+      {
+        "locale": "en",
+        "name": "Dashboard",
+        "description": "See a summary of what's happening in the system"
+      },
+      {
+        "locale": "km",
+        "name": "ផ្ទាំងគ្រប់គ្រង",
+        "description": "មើលសេចក្តីសង្ខេបអំពីអ្វីដែលកំពុងកើតឡើងនៅក្នុងប្រព័ន្ធ"
+      }
     ],
     "permissions": [
       {
@@ -15,580 +23,2759 @@
         "sort": 0,
         "route": "dashboard.index",
         "translations": [
-          { "locale": "en", "name": "View", "description": "View dashboard" },
-          { "locale": "km", "name": "មើល", "description": "មើលផ្ទាំងគ្រប់គ្រង" }
+          {
+            "locale": "en",
+            "name": "View",
+            "description": "View dashboard"
+          },
+          {
+            "locale": "km",
+            "name": "មើល",
+            "description": "មើលផ្ទាំងគ្រប់គ្រង"
+          }
         ]
       }
     ]
   },
-
   {
     "icon": "fa-right-to-bracket",
     "sort": 2,
-    "route": "checkin.index",
+    "route": null,
     "translations": [
-      { "locale": "en", "name": "Check-In", "description": "Walk-in guest check-in" },
-      { "locale": "km", "name": "ចូលស្នាក់", "description": "ចុះឈ្មោះភ្ញៀវ" }
-    ],
-    "permissions": [
       {
-        "action": "index",
-        "icon": "fa-list",
-        "target": "self",
-        "sort": 0,
-        "route": "checkin.index",
-        "translations": [
-          { "locale": "en", "name": "View", "description": "View check-in" },
-          { "locale": "km", "name": "មើល", "description": "មើលចូលស្នាក់" }
-        ]
+        "locale": "en",
+        "name": "Check-In / Check-Out",
+        "description": "Guest check-in and check-out management"
       },
       {
-        "action": "add",
-        "icon": "fa-circle-plus",
-        "target": "navbar",
-        "sort": 1,
-        "route": "checkin.add",
-        "translations": [
-          { "locale": "en", "name": "Add", "description": "Add new check-in" },
-          { "locale": "km", "name": "បន្ថែម", "description": "បន្ថែមការចុះឈ្មោះ" }
-        ]
-      },
-      {
-        "action": "edit",
-        "icon": "fa-pen-to-square",
-        "target": "self",
-        "sort": 2,
-        "route": "checkin.edit",
-        "translations": [
-          { "locale": "en", "name": "Edit", "description": "Edit check-in" },
-          { "locale": "km", "name": "កែប្រែ", "description": "កែប្រែការចុះឈ្មោះ" }
-        ]
-      },
-      {
-        "action": "delete",
-        "icon": "fa-trash",
-        "target": "confirm",
-        "sort": 3,
-        "route": "checkin.delete",
-        "translations": [
-          { "locale": "en", "name": "Delete", "description": "Delete check-in" },
-          { "locale": "km", "name": "លុប", "description": "លុបការចុះឈ្មោះ" }
-        ]
+        "locale": "km",
+        "name": "ចូលស្នាក់ / ចាកចេញ",
+        "description": "ការគ្រប់គ្រងចូលស្នាក់ និងចាកចេញភ្ញៀវ"
       }
-    ]
-  },
-
-  {
-    "icon": "fa-right-from-bracket",
-    "sort": 3,
-    "route": "checkout.index",
-    "translations": [
-      { "locale": "en", "name": "Check-Out", "description": "Guest checkout & payment" },
-      { "locale": "km", "name": "ចាកចេញ", "description": "ចេញស្នាក់ និងទូទាត់ប្រាក់" }
     ],
-    "permissions": [
+    "permissions": [],
+    "children": [
       {
-        "action": "index",
-        "icon": "fa-list",
-        "target": "self",
-        "sort": 0,
+        "icon": "fa-right-to-bracket",
+        "sort": 1,
+        "route": "checkin.walkin.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Walk-In Check-In",
+            "description": "Walk-in guest check-in"
+          },
+          {
+            "locale": "km",
+            "name": "ចូលស្នាក់ដោយផ្ទាល់",
+            "description": "ចុះឈ្មោះភ្ញៀវដោយផ្ទាល់"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "checkin.walkin.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View walk-in check-in"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលចូលស្នាក់ដោយផ្ទាល់"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "checkin.walkin.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit walk-in check-in"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែចូលស្នាក់ដោយផ្ទាល់"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "checkin.walkin.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete walk-in check-in"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបចូលស្នាក់ដោយផ្ទាល់"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-bed",
+        "sort": 2,
+        "route": "checkin.staying.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Staying Guests (In-House)",
+            "description": "Current staying guests"
+          },
+          {
+            "locale": "km",
+            "name": "ភ្ញៀវកំពុងស្នាក់",
+            "description": "ភ្ញៀវដែលកំពុងស្នាក់"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "checkin.staying.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View staying guests"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលភ្ញៀវកំពុងស្នាក់"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "checkin.staying.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit staying guest"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែភ្ញៀវកំពុងស្នាក់"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "checkin.staying.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete staying guest"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបភ្ញៀវកំពុងស្នាក់"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-calendar-plus",
+        "sort": 3,
+        "route": "checkin.extend.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Extend Stay",
+            "description": "Extend guest stay"
+          },
+          {
+            "locale": "km",
+            "name": "បន្ថែមរយៈពេលស្នាក់",
+            "description": "បន្ថែមរយៈពេលស្នាក់ភ្ញៀវ"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "checkin.extend.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View extend stay"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលបន្ថែមរយៈពេលស្នាក់"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "checkin.extend.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit extend stay"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែបន្ថែមរយៈពេលស្នាក់"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "checkin.extend.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete extend stay"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបបន្ថែមរយៈពេលស្នាក់"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-plus",
+        "sort": 4,
+        "route": "checkin.extra-charges.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Add Extra Charges",
+            "description": "Add extra charges to stay"
+          },
+          {
+            "locale": "km",
+            "name": "បន្ថែមថ្លៃបន្ថែម",
+            "description": "បន្ថែមថ្លៃបន្ថែមទៅការស្នាក់"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "checkin.extra-charges.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View extra charges"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលថ្លៃបន្ថែម"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "checkin.extra-charges.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit extra charges"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែថ្លៃបន្ថែម"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "checkin.extra-charges.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete extra charges"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបថ្លៃបន្ថែម"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-right-from-bracket",
+        "sort": 5,
         "route": "checkout.index",
         "translations": [
-          { "locale": "en", "name": "View", "description": "View check-out" },
-          { "locale": "km", "name": "មើល", "description": "មើលចាកចេញ" }
+          {
+            "locale": "en",
+            "name": "Check-Out & Payment",
+            "description": "Guest checkout & payment"
+          },
+          {
+            "locale": "km",
+            "name": "ចាកចេញ និងទូទាត់ប្រាក់",
+            "description": "ចេញស្នាក់ និងទូទាត់ប្រាក់"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "checkout.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View check-out"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលចាកចេញ"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "checkout.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit check-out"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែចាកចេញ"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "checkout.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete check-out"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបចាកចេញ"
+              }
+            ]
+          }
         ]
       },
       {
-        "action": "add",
-        "icon": "fa-circle-plus",
-        "target": "navbar",
-        "sort": 1,
-        "route": "checkout.add",
+        "icon": "fa-exchange-alt",
+        "sort": 6,
+        "route": "checkin.change-room.index",
         "translations": [
-          { "locale": "en", "name": "Add", "description": "Add checkout" },
-          { "locale": "km", "name": "បន្ថែម", "description": "បន្ថែមការចេញ" }
+          {
+            "locale": "en",
+            "name": "Change Room",
+            "description": "Change guest room"
+          },
+          {
+            "locale": "km",
+            "name": "ផ្លាស់ប្តូរបន្ទប់",
+            "description": "ផ្លាស់ប្តូរបន្ទប់ភ្ញៀវ"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "checkin.change-room.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View change room"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលផ្លាស់ប្តូរបន្ទប់"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "checkin.change-room.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit change room"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែផ្លាស់ប្តូរបន្ទប់"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "checkin.change-room.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete change room"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបផ្លាស់ប្តូរបន្ទប់"
+              }
+            ]
+          }
         ]
       },
       {
-        "action": "edit",
-        "icon": "fa-pen-to-square",
-        "target": "self",
-        "sort": 2,
-        "route": "checkout.edit",
+        "icon": "fa-ban",
+        "sort": 7,
+        "route": "checkin.void.index",
         "translations": [
-          { "locale": "en", "name": "Edit", "description": "Edit checkout" },
-          { "locale": "km", "name": "កែប្រែ", "description": "កែប្រែការចេញ" }
-        ]
-      },
-      {
-        "action": "delete",
-        "icon": "fa-trash",
-        "target": "confirm",
-        "sort": 3,
-        "route": "checkout.delete",
-        "translations": [
-          { "locale": "en", "name": "Delete", "description": "Delete checkout" },
-          { "locale": "km", "name": "លុប", "description": "លុបការចេញ" }
+          {
+            "locale": "en",
+            "name": "Void / Cancel Stay",
+            "description": "Void or cancel stay"
+          },
+          {
+            "locale": "km",
+            "name": "លុប / បោះបង់ការស្នាក់",
+            "description": "លុប ឬបោះបង់ការស្នាក់"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "checkin.void.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View void/cancel stay"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលលុប/បោះបង់ការស្នាក់"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "checkin.void.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit void/cancel stay"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែលុប/បោះបង់ការស្នាក់"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "checkin.void.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete void/cancel stay"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបលុប/បោះបង់ការស្នាក់"
+              }
+            ]
+          }
         ]
       }
     ]
   },
-
+  {
+    "icon": "fa-users",
+    "sort": 3,
+    "route": null,
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Guest Management",
+        "description": "Guest records and management"
+      },
+      {
+        "locale": "km",
+        "name": "ការគ្រប់គ្រងភ្ញៀវ",
+        "description": "ព័ត៌មាន និងការគ្រប់គ្រងភ្ញៀវ"
+      }
+    ],
+    "permissions": [],
+    "children": [
+      {
+        "icon": "fa-user",
+        "sort": 1,
+        "route": "guests.profile.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Guest Profile",
+            "description": "Guest profile management"
+          },
+          {
+            "locale": "km",
+            "name": "ប្រវត្តិភ្ញៀវ",
+            "description": "ការគ្រប់គ្រងប្រវត្តិភ្ញៀវ"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "guests.profile.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View guest profiles"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលប្រវត្តិភ្ញៀវ"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "guests.profile.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit guest profile"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែប្រវត្តិភ្ញៀវ"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "guests.profile.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete guest profile"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបប្រវត្តិភ្ញៀវ"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-flag",
+        "sort": 2,
+        "route": "guests.national.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "National Guest Record",
+            "description": "National guest records"
+          },
+          {
+            "locale": "km",
+            "name": "ព័ត៌មានភ្ញៀវជាតិ",
+            "description": "ព័ត៌មានភ្ញៀវជាតិ"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "guests.national.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View national guest records"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលព័ត៌មានភ្ញៀវជាតិ"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "guests.national.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit national guest record"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែព័ត៌មានភ្ញៀវជាតិ"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "guests.national.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete national guest record"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបព័ត៌មានភ្ញៀវជាតិ"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-globe",
+        "sort": 3,
+        "route": "guests.international.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "International Guest Record",
+            "description": "International guest records"
+          },
+          {
+            "locale": "km",
+            "name": "ព័ត៌មានភ្ញៀវអន្តរជាតិ",
+            "description": "ព័ត៌មានភ្ញៀវអន្តរជាតិ"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "guests.international.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View international guest records"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលព័ត៌មានភ្ញៀវអន្តរជាតិ"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "guests.international.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit international guest record"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែព័ត៌មានភ្ញៀវអន្តរជាតិ"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "guests.international.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete international guest record"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបព័ត៌មានភ្ញៀវអន្តរជាតិ"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-id-card",
+        "sort": 4,
+        "route": "guests.passport.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Passport / ID Capture",
+            "description": "Passport and ID capture"
+          },
+          {
+            "locale": "km",
+            "name": "ថតលិខិតឆ្លងដែន / អត្តសញ្ញាណប័ណ្ណ",
+            "description": "ថតលិខិតឆ្លងដែន និងអត្តសញ្ញាណប័ណ្ណ"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "guests.passport.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View passport/ID captures"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលថតលិខិតឆ្លងដែន/អត្តសញ្ញាណប័ណ្ណ"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "guests.passport.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit passport/ID capture"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែថតលិខិតឆ្លងដែន/អត្តសញ្ញាណប័ណ្ណ"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "guests.passport.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete passport/ID capture"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបថតលិខិតឆ្លងដែន/អត្តសញ្ញាណប័ណ្ណ"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-history",
+        "sort": 5,
+        "route": "guests.history.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Guest Stay History",
+            "description": "Guest stay history"
+          },
+          {
+            "locale": "km",
+            "name": "ប្រវត្តិការស្នាក់ភ្ញៀវ",
+            "description": "ប្រវត្តិការស្នាក់ភ្ញៀវ"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "guests.history.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View guest stay history"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលប្រវត្តិការស្នាក់ភ្ញៀវ"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "guests.history.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit guest stay history"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែប្រវត្តិការស្នាក់ភ្ញៀវ"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "guests.history.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete guest stay history"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបប្រវត្តិការស្នាក់ភ្ញៀវ"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-sticky-note",
+        "sort": 6,
+        "route": "guests.notes.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Guest Notes / Blacklist",
+            "description": "Guest notes and blacklist"
+          },
+          {
+            "locale": "km",
+            "name": "ចំណាំភ្ញៀវ / បញ្ជីហាមឃាត់",
+            "description": "ចំណាំភ្ញៀវ និងបញ្ជីហាមឃាត់"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "guests.notes.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View guest notes/blacklist"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលចំណាំភ្ញៀវ/បញ្ជីហាមឃាត់"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "guests.notes.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit guest notes/blacklist"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែចំណាំភ្ញៀវ/បញ្ជីហាមឃាត់"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "guests.notes.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete guest notes/blacklist"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបចំណាំភ្ញៀវ/បញ្ជីហាមឃាត់"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
   {
     "icon": "fa-bed",
     "sort": 4,
-    "route": "rooms.index",
-    "translations": [
-      { "locale": "en", "name": "Rooms", "description": "Room status and availability" },
-      { "locale": "km", "name": "បន្ទប់", "description": "ស្ថានភាពបន្ទប់" }
-    ],
-    "permissions": [
-      {
-        "action": "index",
-        "icon": "fa-list",
-        "target": "self",
-        "sort": 0,
-        "route": "rooms.index",
-        "translations": [
-          { "locale": "en", "name": "View", "description": "View rooms" },
-          { "locale": "km", "name": "មើល", "description": "មើលបន្ទប់" }
-        ]
-      },
-      {
-        "action": "add",
-        "icon": "fa-circle-plus",
-        "target": "navbar",
-        "sort": 1,
-        "route": "rooms.add",
-        "translations": [
-          { "locale": "en", "name": "Add", "description": "Add new room" },
-          { "locale": "km", "name": "បន្ថែម", "description": "បន្ថែមបន្ទប់ថ្មី" }
-        ]
-      },
-      {
-        "action": "edit",
-        "icon": "fa-pen-to-square",
-        "target": "self",
-        "sort": 2,
-        "route": "rooms.edit",
-        "translations": [
-          { "locale": "en", "name": "Edit", "description": "Edit room" },
-          { "locale": "km", "name": "កែប្រែ", "description": "កែប្រែបន្ទប់" }
-        ]
-      },
-      {
-        "action": "delete",
-        "icon": "fa-trash",
-        "target": "confirm",
-        "sort": 3,
-        "route": "rooms.delete",
-        "translations": [
-          { "locale": "en", "name": "Delete", "description": "Delete room" },
-          { "locale": "km", "name": "លុប", "description": "លុបបន្ទប់" }
-        ]
-      }
-    ]
-  },
-
-  {
-    "icon": "fa-users",
-    "sort": 5,
-    "route": "guests.index",
-    "translations": [
-      { "locale": "en", "name": "Guests", "description": "Guest records & police info" },
-      { "locale": "km", "name": "ភ្ញៀវ", "description": "ព័ត៌មានភ្ញៀវ" }
-    ],
-    "permissions": [
-      {
-        "action": "index",
-        "icon": "fa-list",
-        "target": "self",
-        "sort": 0,
-        "route": "guests.index",
-        "translations": [
-          { "locale": "en", "name": "View", "description": "View guests" },
-          { "locale": "km", "name": "មើល", "description": "មើលភ្ញៀវ" }
-        ]
-      },
-      {
-        "action": "add",
-        "icon": "fa-circle-plus",
-        "target": "navbar",
-        "sort": 1,
-        "route": "guests.add",
-        "translations": [
-          { "locale": "en", "name": "Add", "description": "Add new guest" },
-          { "locale": "km", "name": "បន្ថែម", "description": "បន្ថែមភ្ញៀវថ្មី" }
-        ]
-      },
-      {
-        "action": "edit",
-        "icon": "fa-pen-to-square",
-        "target": "self",
-        "sort": 2,
-        "route": "guests.edit",
-        "translations": [
-          { "locale": "en", "name": "Edit", "description": "Edit guest" },
-          { "locale": "km", "name": "កែប្រែ", "description": "កែប្រែភ្ញៀវ" }
-        ]
-      },
-      {
-        "action": "delete",
-        "icon": "fa-trash",
-        "target": "confirm",
-        "sort": 3,
-        "route": "guests.delete",
-        "translations": [
-          { "locale": "en", "name": "Delete", "description": "Delete guest" },
-          { "locale": "km", "name": "លុប", "description": "លុបភ្ញៀវ" }
-        ]
-      }
-    ]
-  },
-
-  {
-    "icon": "fa-cloud-sun",
-    "sort": 6,
-    "route": "seasons.index",
-    "translations": [
-      { "locale": "en", "name": "Seasons", "description": "Seasonal pricing control" },
-      { "locale": "km", "name": "រដូវកាល", "description": "តម្លៃតាមរដូវ" }
-    ],
-    "permissions": [
-      {
-        "action": "index",
-        "icon": "fa-list",
-        "target": "self",
-        "sort": 0,
-        "route": "seasons.index",
-        "translations": [
-          { "locale": "en", "name": "View", "description": "View seasons" },
-          { "locale": "km", "name": "មើល", "description": "មើលរដូវកាល" }
-        ]
-      },
-      {
-        "action": "add",
-        "icon": "fa-circle-plus",
-        "target": "navbar",
-        "sort": 1,
-        "route": "seasons.add",
-        "translations": [
-          { "locale": "en", "name": "Add", "description": "Add new season" },
-          { "locale": "km", "name": "បន្ថែម", "description": "បន្ថែមរដូវកាលថ្មី" }
-        ]
-      },
-      {
-        "action": "edit",
-        "icon": "fa-pen-to-square",
-        "target": "self",
-        "sort": 2,
-        "route": "seasons.edit",
-        "translations": [
-          { "locale": "en", "name": "Edit", "description": "Edit season" },
-          { "locale": "km", "name": "កែប្រែ", "description": "កែប្រែរដូវកាល" }
-        ]
-      },
-      {
-        "action": "delete",
-        "icon": "fa-trash",
-        "target": "confirm",
-        "sort": 3,
-        "route": "seasons.delete",
-        "translations": [
-          { "locale": "en", "name": "Delete", "description": "Delete season" },
-          { "locale": "km", "name": "លុប", "description": "លុបរដូវកាល" }
-        ]
-      }
-    ]
-  },
-
-  {
-    "icon": "fa-file-invoice-dollar",
-    "sort": 7,
-    "route": "billing.index",
-    "translations": [
-      { "locale": "en", "name": "Billing", "description": "Invoices, services & damage charges" },
-      { "locale": "km", "name": "វិក័យប័ត្រ", "description": "ការទូទាត់ប្រាក់" }
-    ],
-    "permissions": [
-      {
-        "action": "index",
-        "icon": "fa-list",
-        "target": "self",
-        "sort": 0,
-        "route": "billing.index",
-        "translations": [
-          { "locale": "en", "name": "View", "description": "View billing" },
-          { "locale": "km", "name": "មើល", "description": "មើលវិក័យប័ត្រ" }
-        ]
-      },
-      {
-        "action": "add",
-        "icon": "fa-circle-plus",
-        "target": "navbar",
-        "sort": 1,
-        "route": "billing.add",
-        "translations": [
-          { "locale": "en", "name": "Add", "description": "Add new billing" },
-          { "locale": "km", "name": "បន្ថែម", "description": "បន្ថែមវិក័យប័ត្រថ្មី" }
-        ]
-      },
-      {
-        "action": "edit",
-        "icon": "fa-pen-to-square",
-        "target": "self",
-        "sort": 2,
-        "route": "billing.edit",
-        "translations": [
-          { "locale": "en", "name": "Edit", "description": "Edit billing" },
-          { "locale": "km", "name": "កែប្រែ", "description": "កែប្រែវិក័យប័ត្រ" }
-        ]
-      },
-      {
-        "action": "delete",
-        "icon": "fa-trash",
-        "target": "confirm",
-        "sort": 3,
-        "route": "billing.delete",
-        "translations": [
-          { "locale": "en", "name": "Delete", "description": "Delete billing" },
-          { "locale": "km", "name": "លុប", "description": "លុបវិក័យប័ត្រ" }
-        ]
-      }
-    ]
-  },
-
-  {
-    "icon": "fa-money-bill-transfer",
-    "sort": 8,
-    "route": "exchange-rate.index",
-    "translations": [
-      { "locale": "en", "name": "Exchange Rate", "description": "USD / KHR rate" },
-      { "locale": "km", "name": "អត្រាប្តូរប្រាក់", "description": "អត្រារៀល និងដុល្លារ" }
-    ],
-    "permissions": [
-      {
-        "action": "index",
-        "icon": "fa-list",
-        "target": "self",
-        "sort": 0,
-        "route": "exchange-rate.index",
-        "translations": [
-          { "locale": "en", "name": "View", "description": "View exchange rate" },
-          { "locale": "km", "name": "មើល", "description": "មើលអត្រាប្តូរប្រាក់" }
-        ]
-      },
-      {
-        "action": "add",
-        "icon": "fa-circle-plus",
-        "target": "navbar",
-        "sort": 1,
-        "route": "exchange-rate.add",
-        "translations": [
-          { "locale": "en", "name": "Add", "description": "Add exchange rate" },
-          { "locale": "km", "name": "បន្ថែម", "description": "បន្ថែមអត្រាប្តូរប្រាក់" }
-        ]
-      },
-      {
-        "action": "edit",
-        "icon": "fa-pen-to-square",
-        "target": "self",
-        "sort": 2,
-        "route": "exchange-rate.edit",
-        "translations": [
-          { "locale": "en", "name": "Edit", "description": "Edit exchange rate" },
-          { "locale": "km", "name": "កែប្រែ", "description": "កែប្រែអត្រាប្តូរប្រាក់" }
-        ]
-      },
-      {
-        "action": "delete",
-        "icon": "fa-trash",
-        "target": "confirm",
-        "sort": 3,
-        "route": "exchange-rate.delete",
-        "translations": [
-          { "locale": "en", "name": "Delete", "description": "Delete exchange rate" },
-          { "locale": "km", "name": "លុប", "description": "លុបអត្រាប្តូរប្រាក់" }
-        ]
-      }
-    ]
-  },
-
-  {
-    "icon": "fa-cash-register",
-    "sort": 9,
-    "route": "cash-closing.index",
-    "translations": [
-      { "locale": "en", "name": "Cash Closing", "description": "Daily cash closing" },
-      { "locale": "km", "name": "បិទប្រាក់", "description": "បិទប្រាក់ប្រចាំថ្ងៃ" }
-    ],
-    "permissions": [
-      {
-        "action": "index",
-        "icon": "fa-list",
-        "target": "self",
-        "sort": 0,
-        "route": "cash-closing.index",
-        "translations": [
-          { "locale": "en", "name": "View", "description": "View cash closing" },
-          { "locale": "km", "name": "មើល", "description": "មើលបិទប្រាក់" }
-        ]
-      },
-      {
-        "action": "add",
-        "icon": "fa-circle-plus",
-        "target": "navbar",
-        "sort": 1,
-        "route": "cash-closing.add",
-        "translations": [
-          { "locale": "en", "name": "Add", "description": "Add cash closing" },
-          { "locale": "km", "name": "បន្ថែម", "description": "បន្ថែមការបិទប្រាក់" }
-        ]
-      },
-      {
-        "action": "edit",
-        "icon": "fa-pen-to-square",
-        "target": "self",
-        "sort": 2,
-        "route": "cash-closing.edit",
-        "translations": [
-          { "locale": "en", "name": "Edit", "description": "Edit cash closing" },
-          { "locale": "km", "name": "កែប្រែ", "description": "កែប្រែការបិទប្រាក់" }
-        ]
-      },
-      {
-        "action": "delete",
-        "icon": "fa-trash",
-        "target": "confirm",
-        "sort": 3,
-        "route": "cash-closing.delete",
-        "translations": [
-          { "locale": "en", "name": "Delete", "description": "Delete cash closing" },
-          { "locale": "km", "name": "លុប", "description": "លុបការបិទប្រាក់" }
-        ]
-      }
-    ]
-  },
-
-  {
-    "icon": "fa-concierge-bell",
-    "sort": 10,
-    "route": "services.index",
-    "translations": [
-      { "locale": "en", "name": "Extra Services", "description": "Laundry, tuk-tuk, late checkout" },
-      { "locale": "km", "name": "សេវាបន្ថែម", "description": "សេវាផ្សេងៗ" }
-    ],
-    "permissions": [
-      {
-        "action": "index",
-        "icon": "fa-list",
-        "target": "self",
-        "sort": 0,
-        "route": "services.index",
-        "translations": [
-          { "locale": "en", "name": "View", "description": "View services" },
-          { "locale": "km", "name": "មើល", "description": "មើលសេវា" }
-        ]
-      },
-      {
-        "action": "add",
-        "icon": "fa-circle-plus",
-        "target": "navbar",
-        "sort": 1,
-        "route": "services.add",
-        "translations": [
-          { "locale": "en", "name": "Add", "description": "Add new service" },
-          { "locale": "km", "name": "បន្ថែម", "description": "បន្ថែមសេវាថ្មី" }
-        ]
-      },
-      {
-        "action": "edit",
-        "icon": "fa-pen-to-square",
-        "target": "self",
-        "sort": 2,
-        "route": "services.edit",
-        "translations": [
-          { "locale": "en", "name": "Edit", "description": "Edit service" },
-          { "locale": "km", "name": "កែប្រែ", "description": "កែប្រែសេវា" }
-        ]
-      },
-      {
-        "action": "delete",
-        "icon": "fa-trash",
-        "target": "confirm",
-        "sort": 3,
-        "route": "services.delete",
-        "translations": [
-          { "locale": "en", "name": "Delete", "description": "Delete service" },
-          { "locale": "km", "name": "លុប", "description": "លុបសេវា" }
-        ]
-      }
-    ]
-  },
-
-  {
-    "icon": "fa-screwdriver-wrench",
-    "sort": 11,
-    "route": "maintenance.index",
-    "translations": [
-      { "locale": "en", "name": "Maintenance", "description": "Room repair & issues" },
-      { "locale": "km", "name": "ជួសជុល", "description": "ជួសជុលបន្ទប់" }
-    ],
-    "permissions": [
-      {
-        "action": "index",
-        "icon": "fa-list",
-        "target": "self",
-        "sort": 0,
-        "route": "maintenance.index",
-        "translations": [
-          { "locale": "en", "name": "View", "description": "View maintenance" },
-          { "locale": "km", "name": "មើល", "description": "មើលជួសជុល" }
-        ]
-      },
-      {
-        "action": "add",
-        "icon": "fa-circle-plus",
-        "target": "navbar",
-        "sort": 1,
-        "route": "maintenance.add",
-        "translations": [
-          { "locale": "en", "name": "Add", "description": "Add maintenance" },
-          { "locale": "km", "name": "បន្ថែម", "description": "បន្ថែមការជួសជុល" }
-        ]
-      },
-      {
-        "action": "edit",
-        "icon": "fa-pen-to-square",
-        "target": "self",
-        "sort": 2,
-        "route": "maintenance.edit",
-        "translations": [
-          { "locale": "en", "name": "Edit", "description": "Edit maintenance" },
-          { "locale": "km", "name": "កែប្រែ", "description": "កែប្រែការជួសជុល" }
-        ]
-      },
-      {
-        "action": "delete",
-        "icon": "fa-trash",
-        "target": "confirm",
-        "sort": 3,
-        "route": "maintenance.delete",
-        "translations": [
-          { "locale": "en", "name": "Delete", "description": "Delete maintenance" },
-          { "locale": "km", "name": "លុប", "description": "លុបការជួសជុល" }
-        ]
-      }
-    ]
-  },
-
-  {
-    "icon": "fa-chart-line",
-    "sort": 12,
     "route": null,
     "translations": [
-      { "locale": "en", "name": "Reports", "description": "Hotel & police reports" },
-      { "locale": "km", "name": "របាយការណ៍", "description": "របាយការណ៍សណ្ឋាគារ" }
+      {
+        "locale": "en",
+        "name": "Room Management",
+        "description": "Room status and management"
+      },
+      {
+        "locale": "km",
+        "name": "ការគ្រប់គ្រងបន្ទប់",
+        "description": "ស្ថានភាព និងការគ្រប់គ្រងបន្ទប់"
+      }
+    ],
+    "permissions": [],
+    "children": [
+      {
+        "icon": "fa-list",
+        "sort": 1,
+        "route": "rooms.list.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Room List",
+            "description": "List of all rooms"
+          },
+          {
+            "locale": "km",
+            "name": "បញ្ជីបន្ទប់",
+            "description": "បញ្ជីបន្ទប់ទាំងអស់"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "add",
+            "icon": "fa-plus",
+            "target": "navbar",
+            "sort": 0,
+            "route": "rooms.list.add",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Add",
+                "description": "Add room"
+              },
+              {
+                "locale": "km",
+                "name": "បន្ថែម",
+                "description": "បន្ថែមបន្ទប់"
+              }
+            ]
+          },
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 1,
+            "route": "rooms.list.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View room list"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលបញ្ជីបន្ទប់"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 2,
+            "route": "rooms.list.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit room"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែបន្ទប់"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 3,
+            "route": "rooms.list.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete room"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបបន្ទប់"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-tags",
+        "sort": 2,
+        "route": "rooms.type.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Room Type",
+            "description": "Room types management"
+          },
+          {
+            "locale": "km",
+            "name": "ប្រភេទបន្ទប់",
+            "description": "ការគ្រប់គ្រងប្រភេទបន្ទប់"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "add",
+            "icon": "fa-plus",
+            "target": "navbar",
+            "sort": 0,
+            "route": "rooms.type.add",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Add",
+                "description": "Add room type"
+              },
+              {
+                "locale": "km",
+                "name": "បន្ថែម",
+                "description": "បន្ថែមប្រភេទបន្ទប់"
+              }
+            ]
+          },
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 1,
+            "route": "rooms.type.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View room types"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលប្រភេទបន្ទប់"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 2,
+            "route": "rooms.type.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit room type"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែប្រភេទបន្ទប់"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 3,
+            "route": "rooms.type.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete room type"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបប្រភេទបន្ទប់"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-dollar-sign",
+        "sort": 3,
+        "route": "rooms.pricing.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Room Pricing",
+            "description": "Room pricing management"
+          },
+          {
+            "locale": "km",
+            "name": "តម្លៃបន្ទប់",
+            "description": "ការគ្រប់គ្រងតម្លៃបន្ទប់"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "add",
+            "icon": "fa-plus",
+            "target": "navbar",
+            "sort": 0,
+            "route": "rooms.pricing.add",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Add",
+                "description": "Add room pricing"
+              },
+              {
+                "locale": "km",
+                "name": "បន្ថែម",
+                "description": "បន្ថែមតម្លៃបន្ទប់"
+              }
+            ]
+          },
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 1,
+            "route": "rooms.pricing.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View room pricing"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលតម្លៃបន្ទប់"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 2,
+            "route": "rooms.pricing.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit room pricing"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែតម្លៃបន្ទប់"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 3,
+            "route": "rooms.pricing.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete room pricing"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបតម្លៃបន្ទប់"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-info-circle",
+        "sort": 4,
+        "route": "rooms.status.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Room Status",
+            "description": "Room status management"
+          },
+          {
+            "locale": "km",
+            "name": "ស្ថានភាពបន្ទប់",
+            "description": "ការគ្រប់គ្រងស្ថានភាពបន្ទប់"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "add",
+            "icon": "fa-plus",
+            "target": "navbar",
+            "sort": 0,
+            "route": "rooms.status.add",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Add",
+                "description": "Add room status"
+              },
+              {
+                "locale": "km",
+                "name": "បន្ថែម",
+                "description": "បន្ថែមស្ថានភាពបន្ទប់"
+              }
+            ]
+          },
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 1,
+            "route": "rooms.status.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View room status"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលស្ថានភាពបន្ទប់"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 2,
+            "route": "rooms.status.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit room status"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែស្ថានភាពបន្ទប់"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 3,
+            "route": "rooms.status.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete room status"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបស្ថានភាពបន្ទប់"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "icon": "fa-file-invoice-dollar",
+    "sort": 5,
+    "route": null,
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Billing / Invoice",
+        "description": "Invoices and billing management"
+      },
+      {
+        "locale": "km",
+        "name": "វិក័យប័ត្រ / វិក័យប័ត្រ",
+        "description": "ការគ្រប់គ្រងវិក័យប័ត្រ"
+      }
+    ],
+    "permissions": [],
+    "children": [
+      {
+        "icon": "fa-list",
+        "sort": 1,
+        "route": "billing.list.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Payment Invoice",
+            "description": "Payment invoices"
+          },
+          {
+            "locale": "km",
+            "name": "វិក័យប័ត្រទូទាត់",
+            "description": "វិក័យប័ត្រទូទាត់"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "billing.list.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View payment invoices"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលវិក័យប័ត្រទូទាត់"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "billing.list.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit payment invoice"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែវិក័យប័ត្រទូទាត់"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "billing.list.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete payment invoice"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបវិក័យប័ត្រទូទាត់"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-history",
+        "sort": 2,
+        "route": "billing.history.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Invoice History",
+            "description": "Invoice history"
+          },
+          {
+            "locale": "km",
+            "name": "ប្រវត្តិវិក័យប័ត្រ",
+            "description": "ប្រវត្តិវិក័យប័ត្រ"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "billing.history.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View invoice history"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលប្រវត្តិវិក័យប័ត្រ"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-ban",
+        "sort": 3,
+        "route": "billing.void.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Cancel Invoice",
+            "description": "Cancel invoices"
+          },
+          {
+            "locale": "km",
+            "name": "លុបវិក័យប័ត្រ",
+            "description": "លុបវិក័យប័ត្រ"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "billing.void.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View cancel invoices"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលវិក័យប័ត្រដែលលុប"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "billing.void.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit cancel invoice"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែវិក័យប័ត្រដែលលុប"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "billing.void.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete cancel invoice"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបវិក័យប័ត្រដែលលុប"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-clock",
+        "sort": 4,
+        "route": "billing.pending-cancel-invoice.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Pending Cancel Invoice",
+            "description": "Pending cancel invoices"
+          },
+          {
+            "locale": "km",
+            "name": "វិក័យប័ត្ររងចាំលុប",
+            "description": "វិក័យប័ត្ររងចាំលុប"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "billing.pending-cancel-invoice.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View pending cancel invoices"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលវិក័យប័ត្ររងចាំលុប"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "billing.pending-cancel-invoice.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit pending cancel invoice"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែវិក័យប័ត្ររងចាំលុប"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "billing.pending-cancel-invoice.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete pending cancel invoice"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបវិក័យប័ត្ររងចាំលុប"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-history",
+        "sort": 10,
+        "route": "payment.history.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Payment History",
+            "description": "Payment history"
+          },
+          {
+            "locale": "km",
+            "name": "ប្រវត្តិការទូទាត់",
+            "description": "ប្រវត្តិការទូទាត់"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "payment.history.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View payment history"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលប្រវត្តិការទូទាត់"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "icon": "fa-cash-register",
+    "sort": 7,
+    "route": null,
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Cash Closing",
+        "description": "Daily cash closing management"
+      },
+      {
+        "locale": "km",
+        "name": "បិទប្រាក់",
+        "description": "ការគ្រប់គ្រងការបិទប្រាក់ប្រចាំថ្ងៃ"
+      }
+    ],
+    "permissions": [],
+    "children": [
+      {
+        "icon": "fa-chart-bar",
+        "sort": 1,
+        "route": "cash-closing.daily-summary.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Daily Cash Summary",
+            "description": "Daily cash summary"
+          },
+          {
+            "locale": "km",
+            "name": "សង្ខេបប្រាក់ប្រចាំថ្ងៃ",
+            "description": "សង្ខេបប្រាក់ប្រចាំថ្ងៃ"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "cash-closing.daily-summary.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View daily cash summary"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលសង្ខេបប្រាក់ប្រចាំថ្ងៃ"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-qrcode",
+        "sort": 2,
+        "route": "cash-closing.qr-summary.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "QR Summary",
+            "description": "QR payment summary"
+          },
+          {
+            "locale": "km",
+            "name": "សង្ខេប QR",
+            "description": "សង្ខេបការទូទាត់ដោយ QR"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "cash-closing.qr-summary.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View QR summary"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលសង្ខេប QR"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-calculator",
+        "sort": 3,
+        "route": "cash-closing.difference.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Cash Difference",
+            "description": "Cash difference calculation"
+          },
+          {
+            "locale": "km",
+            "name": "ភាពខុសគ្នារបស់ប្រាក់",
+            "description": "ការគណនាភាពខុសគ្នារបស់ប្រាក់"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "cash-closing.difference.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View cash difference"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលភាពខុសគ្នារបស់ប្រាក់"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-lock",
+        "sort": 4,
+        "route": "cash-closing.close-day.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Close Day",
+            "description": "Close the day"
+          },
+          {
+            "locale": "km",
+            "name": "បិទថ្ងៃ",
+            "description": "បិទថ្ងៃ"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "cash-closing.close-day.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View close day"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលបិទថ្ងៃ"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-unlock",
+        "sort": 5,
+        "route": "cash-closing.re-open-day.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Re-open Day",
+            "description": "Re-open the day"
+          },
+          {
+            "locale": "km",
+            "name": "បើកថ្ងៃឡើងវិញ",
+            "description": "បើកថ្ងៃឡើងវិញ"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "cash-closing.re-open-day.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View re-open day"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលបើកថ្ងៃឡើងវិញ"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "icon": "fa-concierge-bell",
+    "sort": 8,
+    "route": null,
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Extra Services",
+        "description": "Extra services management"
+      },
+      {
+        "locale": "km",
+        "name": "សេវាបន្ថែម",
+        "description": "ការគ្រប់គ្រងសេវាបន្ថែម"
+      }
+    ],
+    "permissions": [],
+    "children": [
+      {
+        "icon": "fa-tshirt",
+        "sort": 1,
+        "route": "services.laundry.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Laundry",
+            "description": "Laundry services"
+          },
+          {
+            "locale": "km",
+            "name": "សេវាលាងគីឡូ",
+            "description": "សេវាលាងគីឡូ"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "services.laundry.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View laundry services"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលសេវាលាងគីឡូ"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "services.laundry.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit laundry service"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែសេវាលាងគីឡូ"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "services.laundry.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete laundry service"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបសេវាលាងគីឡូ"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-clock",
+        "sort": 2,
+        "route": "services.late-checkout.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Late Check-Out",
+            "description": "Late check-out services"
+          },
+          {
+            "locale": "km",
+            "name": "ចាកចេញយឺត",
+            "description": "សេវាចាកចេញយឺត"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "services.late-checkout.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View late check-out services"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលសេវាចាកចេញយឺត"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "services.late-checkout.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit late check-out service"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែសេវាចាកចេញយឺត"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "services.late-checkout.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete late check-out service"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបសេវាចាកចេញយឺត"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-taxi",
+        "sort": 3,
+        "route": "services.tuk-tuk.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Tuk-Tuk / Transport",
+            "description": "Tuk-tuk and transport services"
+          },
+          {
+            "locale": "km",
+            "name": "ទុកទុក / ដឹកជញ្ជូន",
+            "description": "សេវាទុកទុក និងដឹកជញ្ជូន"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "services.tuk-tuk.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View tuk-tuk/transport services"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលសេវាទុកទុក/ដឹកជញ្ជូន"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "services.tuk-tuk.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit tuk-tuk/transport service"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែសេវាទុកទុក/ដឹកជញ្ជូន"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "services.tuk-tuk.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete tuk-tuk/transport service"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបសេវាទុកទុក/ដឹកជញ្ជូន"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-exclamation-triangle",
+        "sort": 4,
+        "route": "services.damage-fee.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Damage Fee",
+            "description": "Damage fee services"
+          },
+          {
+            "locale": "km",
+            "name": "ថ្លៃពុករលួយ",
+            "description": "សេវាថ្លៃពុករលួយ"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "services.damage-fee.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View damage fee services"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលសេវាថ្លៃពុករលួយ"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "services.damage-fee.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit damage fee service"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែសេវាថ្លៃពុករលួយ"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "services.damage-fee.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete damage fee service"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបសេវាថ្លៃពុករលួយ"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-plus-circle",
+        "sort": 5,
+        "route": "services.custom.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Custom Service",
+            "description": "Custom services"
+          },
+          {
+            "locale": "km",
+            "name": "សេវាផ្ទាល់ខ្លួន",
+            "description": "សេវាផ្ទាល់ខ្លួន"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "services.custom.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View custom services"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលសេវាផ្ទាល់ខ្លួន"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "services.custom.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit custom service"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែសេវាផ្ទាល់ខ្លួន"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "services.custom.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete custom service"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបសេវាផ្ទាល់ខ្លួន"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "icon": "fa-screwdriver-wrench",
+    "sort": 9,
+    "route": null,
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Housekeeping / Maintenance",
+        "description": "Housekeeping and maintenance management"
+      },
+      {
+        "locale": "km",
+        "name": "ការថែទាំ / ជួសជុល",
+        "description": "ការគ្រប់គ្រងការថែទាំ និងជួសជុល"
+      }
+    ],
+    "permissions": [],
+    "children": [
+      {
+        "icon": "fa-broom",
+        "sort": 1,
+        "route": "maintenance.cleaning-status.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Room Cleaning Status",
+            "description": "Room cleaning status"
+          },
+          {
+            "locale": "km",
+            "name": "ស្ថានភាពសំអាតបន្ទប់",
+            "description": "ស្ថានភាពសំអាតបន្ទប់"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "maintenance.cleaning-status.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View room cleaning status"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលស្ថានភាពសំអាតបន្ទប់"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "maintenance.cleaning-status.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit room cleaning status"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែស្ថានភាពសំអាតបន្ទប់"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "maintenance.cleaning-status.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete room cleaning status"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបស្ថានភាពសំអាតបន្ទប់"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-check-circle",
+        "sort": 2,
+        "route": "maintenance.mark-dirty.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Mark Room Dirty / Clean",
+            "description": "Mark room as dirty or clean"
+          },
+          {
+            "locale": "km",
+            "name": "សម្គាល់បន្ទប់អាក្រក់ / ស្អាត",
+            "description": "សម្គាល់បន្ទប់ថាអាក្រក់ ឬស្អាត"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "maintenance.mark-dirty.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View mark room dirty/clean"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលសម្គាល់បន្ទប់អាក្រក់/ស្អាត"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "maintenance.mark-dirty.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit mark room dirty/clean"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែសម្គាល់បន្ទប់អាក្រក់/ស្អាត"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "maintenance.mark-dirty.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete mark room dirty/clean"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបសម្គាល់បន្ទប់អាក្រក់/ស្អាត"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-tools",
+        "sort": 3,
+        "route": "maintenance.request.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Maintenance Request",
+            "description": "Maintenance requests"
+          },
+          {
+            "locale": "km",
+            "name": "សំណើជួសជុល",
+            "description": "សំណើជួសជុល"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "maintenance.request.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View maintenance requests"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលសំណើជួសជុល"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "maintenance.request.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit maintenance request"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែសំណើជួសជុល"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "maintenance.request.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete maintenance request"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបសំណើជួសជុល"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-history",
+        "sort": 4,
+        "route": "maintenance.history.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Maintenance History",
+            "description": "Maintenance history"
+          },
+          {
+            "locale": "km",
+            "name": "ប្រវត្តិជួសជុល",
+            "description": "ប្រវត្តិជួសជុល"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "maintenance.history.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View maintenance history"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលប្រវត្តិជួសជុល"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-ban",
+        "sort": 5,
+        "route": "maintenance.out-of-service.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Room Out-of-Service",
+            "description": "Rooms out of service"
+          },
+          {
+            "locale": "km",
+            "name": "បន្ទប់ឈប់ប្រើ",
+            "description": "បន្ទប់ដែលឈប់ប្រើ"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "maintenance.out-of-service.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View rooms out of service"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលបន្ទប់ឈប់ប្រើ"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "maintenance.out-of-service.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit room out of service"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែបន្ទប់ឈប់ប្រើ"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 2,
+            "route": "maintenance.out-of-service.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete room out of service"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបបន្ទប់ឈប់ប្រើ"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "icon": "fa-chart-line",
+    "sort": 10,
+    "route": null,
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Reports",
+        "description": "Hotel and police reports"
+      },
+      {
+        "locale": "km",
+        "name": "របាយការណ៍",
+        "description": "របាយការណ៍សណ្ឋាគារ"
+      }
     ],
     "permissions": [],
     "children": [
@@ -597,8 +2784,16 @@
         "sort": 1,
         "route": "reports.daily.index",
         "translations": [
-          { "locale": "en", "name": "Daily Report", "description": "Daily income" },
-          { "locale": "km", "name": "ប្រចាំថ្ងៃ", "description": "របាយការណ៍ប្រចាំថ្ងៃ" }
+          {
+            "locale": "en",
+            "name": "Daily Report",
+            "description": "Daily income"
+          },
+          {
+            "locale": "km",
+            "name": "របាយការណ៍ប្រចាំថ្ងៃ",
+            "description": "ប្រាក់ចំណូលប្រចាំថ្ងៃ"
+          }
         ],
         "permissions": [
           {
@@ -608,8 +2803,16 @@
             "sort": 0,
             "route": "reports.daily.index",
             "translations": [
-              { "locale": "en", "name": "View", "description": "View daily report" },
-              { "locale": "km", "name": "មើល", "description": "មើលរបាយការណ៍ប្រចាំថ្ងៃ" }
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View daily report"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលរបាយការណ៍ប្រចាំថ្ងៃ"
+              }
             ]
           }
         ]
@@ -619,8 +2822,16 @@
         "sort": 2,
         "route": "reports.monthly.index",
         "translations": [
-          { "locale": "en", "name": "Monthly Report", "description": "Monthly income" },
-          { "locale": "km", "name": "ប្រចាំខែ", "description": "របាយការណ៍ប្រចាំខែ" }
+          {
+            "locale": "en",
+            "name": "Monthly Report",
+            "description": "Monthly income"
+          },
+          {
+            "locale": "km",
+            "name": "របាយការណ៍ប្រចាំខែ",
+            "description": "ប្រាក់ចំណូលប្រចាំខែ"
+          }
         ],
         "permissions": [
           {
@@ -630,19 +2841,111 @@
             "sort": 0,
             "route": "reports.monthly.index",
             "translations": [
-              { "locale": "en", "name": "View", "description": "View monthly report" },
-              { "locale": "km", "name": "មើល", "description": "មើលរបាយការណ៍ប្រចាំខែ" }
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View monthly report"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលរបាយការណ៍ប្រចាំខែ"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-chart-bar",
+        "sort": 3,
+        "route": "reports.occupancy.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Occupancy Report",
+            "description": "Room occupancy report"
+          },
+          {
+            "locale": "km",
+            "name": "របាយការណ៍ការប្រើប្រាស់",
+            "description": "របាយការណ៍ការប្រើប្រាស់បន្ទប់"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "reports.occupancy.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View occupancy report"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលរបាយការណ៍ការប្រើប្រាស់"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-users",
+        "sort": 4,
+        "route": "reports.guest.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Guest Report",
+            "description": "Guest report"
+          },
+          {
+            "locale": "km",
+            "name": "របាយការណ៍ភ្ញៀវ",
+            "description": "របាយការណ៍ភ្ញៀវ"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "reports.guest.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View guest report"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលរបាយការណ៍ភ្ញៀវ"
+              }
             ]
           }
         ]
       },
       {
         "icon": "fa-id-card",
-        "sort": 3,
+        "sort": 5,
         "route": "reports.police.index",
         "translations": [
-          { "locale": "en", "name": "Police Report", "description": "Legal guest report" },
-          { "locale": "km", "name": "ប៉ូលិស", "description": "របាយការណ៍ទៅប៉ូលិស" }
+          {
+            "locale": "en",
+            "name": "Police / Immigration Report",
+            "description": "Legal guest report"
+          },
+          {
+            "locale": "km",
+            "name": "របាយការណ៍ប៉ូលិស / ការអន្តោប្រវេសន៍",
+            "description": "របាយការណ៍ភ្ញៀវស្របច្បាប់"
+          }
         ],
         "permissions": [
           {
@@ -652,22 +2955,37 @@
             "sort": 0,
             "route": "reports.police.index",
             "translations": [
-              { "locale": "en", "name": "View", "description": "View police report" },
-              { "locale": "km", "name": "មើល", "description": "មើលរបាយការណ៍ប៉ូលិស" }
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View police/immigration report"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលរបាយការណ៍ប៉ូលិស/ការអន្តោប្រវេសន៍"
+              }
             ]
           }
         ]
       }
     ]
   },
-
   {
     "icon": "fa-sliders",
-    "sort": 13,
+    "sort": 11,
     "route": null,
     "translations": [
-      { "locale": "en", "name": "Settings", "description": "System configuration and settings" },
-      { "locale": "km", "name": "ការកំណត់", "description": "ការកំណត់រចនាសម្ព័ន្ធប្រព័ន្ធ" }
+      {
+        "locale": "en",
+        "name": "Settings",
+        "description": "System configuration and settings"
+      },
+      {
+        "locale": "km",
+        "name": "ការកំណត់",
+        "description": "ការកំណត់រចនាសម្ព័ន្ធប្រព័ន្ធ"
+      }
     ],
     "permissions": [],
     "children": [
@@ -676,30 +2994,54 @@
         "sort": 1,
         "route": "settings.users.index",
         "translations": [
-          { "locale": "en", "name": "Users" },
-          { "locale": "km", "name": "អ្នកប្រើប្រាស់" }
+          {
+            "locale": "en",
+            "name": "Users",
+            "description": "User management"
+          },
+          {
+            "locale": "km",
+            "name": "អ្នកប្រើប្រាស់",
+            "description": "ការគ្រប់គ្រងអ្នកប្រើប្រាស់"
+          }
         ],
         "permissions": [
+          {
+            "action": "add",
+            "icon": "fa-plus",
+            "target": "navbar",
+            "sort": 0,
+            "route": "settings.users.add",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Add",
+                "description": "Add user"
+              },
+              {
+                "locale": "km",
+                "name": "បន្ថែម",
+                "description": "បន្ថែមអ្នកប្រើប្រាស់"
+              }
+            ]
+          },
           {
             "action": "index",
             "icon": "fa-list",
             "target": "self",
-            "sort": 0,
+            "sort": 1,
             "route": "settings.users.index",
             "translations": [
-              { "locale": "en", "name": "View", "description": "View users" },
-              { "locale": "km", "name": "មើល", "description": "មើលអ្នកប្រើប្រាស់" }
-            ]
-          },
-          {
-            "action": "add",
-            "icon": "fa-circle-plus",
-            "target": "navbar",
-            "sort": 1,
-            "route": "settings.users.add",
-            "translations": [
-              { "locale": "en", "name": "Add", "description": "Add new user" },
-              { "locale": "km", "name": "បន្ថែម", "description": "បន្ថែមអ្នកប្រើប្រាស់ថ្មី" }
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View users"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលអ្នកប្រើប្រាស់"
+              }
             ]
           },
           {
@@ -709,8 +3051,16 @@
             "sort": 2,
             "route": "settings.users.edit",
             "translations": [
-              { "locale": "en", "name": "Edit", "description": "Edit user" },
-              { "locale": "km", "name": "កែប្រែ", "description": "កែប្រែអ្នកប្រើប្រាស់" }
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit user"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែអ្នកប្រើប្រាស់"
+              }
             ]
           },
           {
@@ -720,41 +3070,73 @@
             "sort": 3,
             "route": "settings.users.delete",
             "translations": [
-              { "locale": "en", "name": "Delete", "description": "Delete user" },
-              { "locale": "km", "name": "លុប", "description": "លុបអ្នកប្រើប្រាស់" }
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete user"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបអ្នកប្រើប្រាស់"
+              }
             ]
           }
         ]
       },
       {
-        "icon": "fa-universal-access",
+        "icon": "fa-user-shield",
         "sort": 2,
         "route": "settings.roles.index",
         "translations": [
-          { "locale": "en", "name": "Roles" },
-          { "locale": "km", "name": "តួនាទី" }
+          {
+            "locale": "en",
+            "name": "Roles & Permission",
+            "description": "Role and permission management"
+          },
+          {
+            "locale": "km",
+            "name": "តួនាទី និងសិទ្ធិ",
+            "description": "ការគ្រប់គ្រងតួនាទី និងសិទ្ធិ"
+          }
         ],
         "permissions": [
+          {
+            "action": "add",
+            "icon": "fa-plus",
+            "target": "navbar",
+            "sort": 0,
+            "route": "settings.roles.add",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Add",
+                "description": "Add role & permission"
+              },
+              {
+                "locale": "km",
+                "name": "បន្ថែម",
+                "description": "បន្ថែមតួនាទី និងសិទ្ធិ"
+              }
+            ]
+          },
           {
             "action": "index",
             "icon": "fa-list",
             "target": "self",
-            "sort": 0,
+            "sort": 1,
             "route": "settings.roles.index",
             "translations": [
-              { "locale": "en", "name": "View", "description": "View roles" },
-              { "locale": "km", "name": "មើល", "description": "មើលតួនាទី" }
-            ]
-          },
-          {
-            "action": "add",
-            "icon": "fa-circle-plus",
-            "target": "navbar",
-            "sort": 1,
-            "route": "settings.roles.add",
-            "translations": [
-              { "locale": "en", "name": "Add", "description": "Add new role" },
-              { "locale": "km", "name": "បន្ថែម", "description": "បន្ថែមតួនាទីថ្មី" }
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View roles & permissions"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលតួនាទី និងសិទ្ធិ"
+              }
             ]
           },
           {
@@ -764,8 +3146,16 @@
             "sort": 2,
             "route": "settings.roles.edit",
             "translations": [
-              { "locale": "en", "name": "Edit", "description": "Edit role" },
-              { "locale": "km", "name": "កែប្រែ", "description": "កែប្រែតួនាទី" }
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit role & permission"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែតួនាទី និងសិទ្ធិ"
+              }
             ]
           },
           {
@@ -775,8 +3165,16 @@
             "sort": 3,
             "route": "settings.roles.delete",
             "translations": [
-              { "locale": "en", "name": "Delete", "description": "Delete role" },
-              { "locale": "km", "name": "លុប", "description": "លុបតួនាទី" }
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete role & permission"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបតួនាទី និងសិទ្ធិ"
+              }
             ]
           }
         ]
@@ -786,30 +3184,54 @@
         "sort": 3,
         "route": "settings.menus.index",
         "translations": [
-          { "locale": "en", "name": "Menu" },
-          { "locale": "km", "name": "ម៉ឺនុយ" }
+          {
+            "locale": "en",
+            "name": "Menu Management",
+            "description": "Menu management"
+          },
+          {
+            "locale": "km",
+            "name": "ការគ្រប់គ្រងម៉ឺនុយ",
+            "description": "ការគ្រប់គ្រងម៉ឺនុយ"
+          }
         ],
         "permissions": [
+          {
+            "action": "add",
+            "icon": "fa-plus",
+            "target": "navbar",
+            "sort": 0,
+            "route": "settings.menus.add",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Add",
+                "description": "Add menu"
+              },
+              {
+                "locale": "km",
+                "name": "បន្ថែម",
+                "description": "បន្ថែមម៉ឺនុយ"
+              }
+            ]
+          },
           {
             "action": "index",
             "icon": "fa-list",
             "target": "self",
-            "sort": 0,
+            "sort": 1,
             "route": "settings.menus.index",
             "translations": [
-              { "locale": "en", "name": "View", "description": "View menu" },
-              { "locale": "km", "name": "មើល", "description": "មើលម៉ឺនុយ" }
-            ]
-          },
-          {
-            "action": "add",
-            "icon": "fa-circle-plus",
-            "target": "navbar",
-            "sort": 1,
-            "route": "settings.menus.add",
-            "translations": [
-              { "locale": "en", "name": "Add", "description": "Add new menu" },
-              { "locale": "km", "name": "បន្ថែម", "description": "បន្ថែមម៉ឺនុយថ្មី" }
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View menus"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលម៉ឺនុយ"
+              }
             ]
           },
           {
@@ -819,8 +3241,16 @@
             "sort": 2,
             "route": "settings.menus.edit",
             "translations": [
-              { "locale": "en", "name": "Edit", "description": "Edit menu" },
-              { "locale": "km", "name": "កែប្រែ", "description": "កែប្រែម៉ឺនុយ" }
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit menu"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែម៉ឺនុយ"
+              }
             ]
           },
           {
@@ -830,19 +3260,168 @@
             "sort": 3,
             "route": "settings.menus.delete",
             "translations": [
-              { "locale": "en", "name": "Delete", "description": "Delete menu" },
-              { "locale": "km", "name": "លុប", "description": "លុបម៉ឺនុយ" }
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete menu"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបម៉ឺនុយ"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-money-bill-transfer",
+        "sort": 4,
+        "route": "settings.exchange-rate.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Exchange Rate (USD / KHR)",
+            "description": "Exchange rate management"
+          },
+          {
+            "locale": "km",
+            "name": "អត្រាប្តូរប្រាក់ (ដុល្លារ / រៀល)",
+            "description": "ការគ្រប់គ្រងអត្រាប្តូរប្រាក់"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "add",
+            "icon": "fa-plus",
+            "target": "navbar",
+            "sort": 0,
+            "route": "settings.exchange-rate.add",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Add",
+                "description": "Add exchange rate"
+              },
+              {
+                "locale": "km",
+                "name": "បន្ថែម",
+                "description": "បន្ថែមអត្រាប្តូរប្រាក់"
+              }
+            ]
+          },
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 1,
+            "route": "settings.exchange-rate.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View exchange rates"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលអត្រាប្តូរប្រាក់"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 2,
+            "route": "settings.exchange-rate.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit exchange rate"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែអត្រាប្តូរប្រាក់"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 3,
+            "route": "settings.exchange-rate.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete exchange rate"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបអត្រាប្តូរប្រាក់"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-cogs",
+        "sort": 5,
+        "route": "settings.system.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "System Configuration",
+            "description": "System configuration"
+          },
+          {
+            "locale": "km",
+            "name": "ការកំណត់រចនាសម្ព័ន្ធ",
+            "description": "ការកំណត់រចនាសម្ព័ន្ធ"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "settings.system.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View system configuration"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលការកំណត់រចនាសម្ព័ន្ធ"
+              }
             ]
           }
         ]
       },
       {
         "icon": "fa-user",
-        "sort": 5,
+        "sort": 6,
         "route": "settings.my-account.index",
         "translations": [
-          { "locale": "en", "name": "My Account" },
-          { "locale": "km", "name": "គណនីរបស់ខ្ញុំ" }
+          {
+            "locale": "en",
+            "name": "My Account",
+            "description": "My account settings"
+          },
+          {
+            "locale": "km",
+            "name": "គណនីរបស់ខ្ញុំ",
+            "description": "ការកំណត់គណនីរបស់ខ្ញុំ"
+          }
         ],
         "permissions": [
           {
@@ -852,8 +3431,16 @@
             "sort": 0,
             "route": "settings.my-account.index",
             "translations": [
-              { "locale": "en", "name": "View", "description": "View my account" },
-              { "locale": "km", "name": "មើល", "description": "មើលគណនីរបស់ខ្ញុំ" }
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View my account"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលគណនីរបស់ខ្ញុំ"
+              }
             ]
           },
           {
@@ -863,8 +3450,16 @@
             "sort": 1,
             "route": "settings.my-account.edit",
             "translations": [
-              { "locale": "en", "name": "Edit", "description": "Edit my account" },
-              { "locale": "km", "name": "កែប្រែ", "description": "កែប្រែគណនីរបស់ខ្ញុំ" }
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit my account"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែគណនីរបស់ខ្ញុំ"
+              }
             ]
           }
         ]
