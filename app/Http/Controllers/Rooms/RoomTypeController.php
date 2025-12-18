@@ -6,7 +6,6 @@ use App\DataTables\Rooms\RoomTypeDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\RoomType;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class RoomTypeController extends Controller
 {
@@ -23,30 +22,18 @@ class RoomTypeController extends Controller
         $form = new RoomType();
 
         if ($request->isMethod('post')) {
-            $request->validate([
+            $rules = [
                 'name' => 'required|string|max:255|unique:room_types',
                 'description' => 'nullable|string',
-                'is_active' => 'boolean',
-            ]);
+                'is_active' => 'nullable|boolean',
+            ];
 
-            try {
-                DB::beginTransaction();
+            $request->validate($rules);
 
-                RoomType::create([
-                    'name' => $request->name,
-                    'description' => $request->description,
-                    'is_active' => $request->is_active ?? true,
-                ]);
+            RoomType::create($request->all());
 
-                DB::commit();
-
-                return redirect()->route('rooms.type.index')
-                    ->with('success', __('Room type created successfully.'));
-            } catch (\Exception $e) {
-                DB::rollBack();
-                return back()->withInput()
-                    ->with('error', __('Failed to create room type. Please try again.'));
-            }
+            return redirect()->route('rooms.type.index')
+                ->with('success', 'Room type created successfully.');
         }
 
         return view('rooms.room-types.form', compact('form'));
@@ -57,57 +44,29 @@ class RoomTypeController extends Controller
         $form = RoomType::findOrFail($id);
 
         if ($request->isMethod('post')) {
-            $request->validate([
+            $rules = [
                 'name' => 'required|string|max:255|unique:room_types,name,' . $form->id,
                 'description' => 'nullable|string',
-                'is_active' => 'boolean',
-            ]);
+                'is_active' => 'nullable|boolean',
+            ];
 
-            try {
-                DB::beginTransaction();
+            $request->validate($rules);
 
-                $form->update([
-                    'name' => $request->name,
-                    'description' => $request->description,
-                    'is_active' => $request->is_active ?? true,
-                ]);
+            $form->update($request->all());
 
-                DB::commit();
-
-                return redirect()->route('rooms.type.index')
-                    ->with('success', __('Room type updated successfully.'));
-            } catch (\Exception $e) {
-                DB::rollBack();
-                return back()->withInput()
-                    ->with('error', __('Failed to update room type. Please try again.'));
-            }
+            return redirect()->route('rooms.type.index')
+                ->with('success', 'Room type updated successfully.');
         }
 
         return view('rooms.room-types.form', compact('form'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(RoomType $roomType)
+    public function delete($id)
     {
-        try {
-            DB::beginTransaction();
+        $roomType = RoomType::findOrFail($id);
+        $roomType->delete();
 
-            // Check if room type is being used
-            if ($roomType->rooms()->exists() || $roomType->roomPricings()->exists()) {
-                return back()->with('error', __('Cannot delete room type as it is being used by rooms or pricing.'));
-            }
-
-            $roomType->delete();
-
-            DB::commit();
-
-            return redirect()->route('rooms.type.index')
-                ->with('success', __('Room type deleted successfully.'));
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return back()->with('error', __('Failed to delete room type. Please try again.'));
-        }
+        return redirect()->route('rooms.type.index')
+            ->with('success', 'Room type deleted successfully.');
     }
 }
