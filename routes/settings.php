@@ -8,7 +8,7 @@ use App\Http\Controllers\Settings\MenuController;
 use App\Http\Controllers\Settings\RoleController;
 use App\Http\Controllers\Settings\UserController;
 use App\Http\Controllers\Settings\MyAccountController;
-use App\Http\Controllers\Settings\PermissionController;
+use App\Http\Controllers\Settings\ExchangeRateController;
 
 Route::get('clear-cache', function () {
     Artisan::call('config:clear');
@@ -33,6 +33,12 @@ Route::get('/lang/{lang}', [\App\Http\Controllers\LanguageController::class, 'se
             Route::match(['get', 'post'], '/{id}/edit', [MenuController::class, 'edit'])->name('edit');
             Route::delete('/{id}/delete', [MenuController::class, 'destroy'])->name('delete');
             Route::get('/select2', [MenuController::class, 'select2'])->name('select2');
+        });
+        Route::prefix('exchange-rate')->name('exchange-rate.')->group(function () {
+            Route::get('/', [ExchangeRateController::class, 'index'])->name('index');
+            Route::match(['get', 'post'], '/add', [ExchangeRateController::class, 'add'])->name('add');
+            Route::match(['get', 'post'], '/{id}/edit', [ExchangeRateController::class, 'edit'])->name('edit');
+            Route::delete('/{id}/delete', [ExchangeRateController::class, 'delete'])->name('delete');
         });
         Route::prefix('users')->name('users.')->group(function () {
             Route::get('/', [UserController::class, 'index'])->name('index');
