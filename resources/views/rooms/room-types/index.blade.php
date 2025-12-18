@@ -1,21 +1,10 @@
-@extends('layouts.app')
-
-@section('title', __('Room Types'))
-
-@section('content')
+<x-app-layout>
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">{{ __('Room Types') }}</h3>
-                    @can('rooms.type.form')
-                        <div class="card-tools">
-                            <a href="{{ route('rooms.type.add') }}" class="btn btn-primary btn-sm">
-                                <i class="fas fa-plus"></i> {{ __('Add Room Type') }}
-                            </a>
-                        </div>
-                    @endcan
                 </div>
 
                 <div class="card-body">
@@ -33,15 +22,10 @@
 
                     <!-- DataTable -->
                     <div class="table-responsive">
-                        {{ $dataTable->table() }}
+                        <x-datatables title="{{ __('Rooms Types') }}" :data="$dataTable"></x-datatables>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
-
-@push('scripts')
-{{ $dataTable->scripts() }}
-@endpush
+</x-app-layout>

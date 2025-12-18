@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\DataTables\Rooms\RoomPricingDataTable;
 use App\Models\RoomPricing;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class RoomPricingController extends Controller
 {
@@ -23,36 +22,21 @@ class RoomPricingController extends Controller
         $form = new RoomPricing();
 
         if ($request->isMethod('post')) {
-            $request->validate([
+            $rules = [
                 'room_type_id' => 'required|exists:room_types,id',
                 'price' => 'required|numeric|min:0',
                 'currency' => 'required|string|max:3',
                 'effective_from' => 'required|date',
                 'effective_to' => 'nullable|date|after:effective_from',
-                'is_active' => 'boolean',
-            ]);
+                'is_active' => 'nullable|boolean',
+            ];
 
-            try {
-                DB::beginTransaction();
+            $request->validate($rules);
 
-                RoomPricing::create([
-                    'room_type_id' => $request->room_type_id,
-                    'price' => $request->price,
-                    'currency' => $request->currency,
-                    'effective_from' => $request->effective_from,
-                    'effective_to' => $request->effective_to,
-                    'is_active' => $request->is_active ?? true,
-                ]);
+            RoomPricing::create($request->all());
 
-                DB::commit();
-
-                return redirect()->route('rooms.pricing.index')
-                    ->with('success', __('Room pricing created successfully.'));
-            } catch (\Exception $e) {
-                DB::rollBack();
-                return back()->withInput()
-                    ->with('error', __('Failed to create room pricing. Please try again.'));
-            }
+            return redirect()->route('rooms.pricing.index')
+                ->with('success', 'Room pricing created successfully.');
         }
 
         return view('rooms.room-pricing.form', compact('form'));
@@ -63,36 +47,21 @@ class RoomPricingController extends Controller
         $form = RoomPricing::findOrFail($id);
 
         if ($request->isMethod('post')) {
-            $request->validate([
+            $rules = [
                 'room_type_id' => 'required|exists:room_types,id',
                 'price' => 'required|numeric|min:0',
                 'currency' => 'required|string|max:3',
                 'effective_from' => 'required|date',
                 'effective_to' => 'nullable|date|after:effective_from',
-                'is_active' => 'boolean',
-            ]);
+                'is_active' => 'nullable|boolean',
+            ];
 
-            try {
-                DB::beginTransaction();
+            $request->validate($rules);
 
-                $form->update([
-                    'room_type_id' => $request->room_type_id,
-                    'price' => $request->price,
-                    'currency' => $request->currency,
-                    'effective_from' => $request->effective_from,
-                    'effective_to' => $request->effective_to,
-                    'is_active' => $request->is_active ?? true,
-                ]);
+            $form->update($request->all());
 
-                DB::commit();
-
-                return redirect()->route('rooms.pricing.index')
-                    ->with('success', __('Room pricing updated successfully.'));
-            } catch (\Exception $e) {
-                DB::rollBack();
-                return back()->withInput()
-                    ->with('error', __('Failed to update room pricing. Please try again.'));
-            }
+            return redirect()->route('rooms.pricing.index')
+                ->with('success', 'Room pricing updated successfully.');
         }
 
         return view('rooms.room-pricing.form', compact('form'));
@@ -108,23 +77,12 @@ class RoomPricingController extends Controller
 
 
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(RoomPricing $roomPricing)
+    public function delete($id)
     {
-        try {
-            DB::beginTransaction();
+        $roomPricing = RoomPricing::findOrFail($id);
+        $roomPricing->delete();
 
-            $roomPricing->delete();
-
-            DB::commit();
-
-            return redirect()->route('rooms.pricing.index')
-                ->with('success', __('Room pricing deleted successfully.'));
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return back()->with('error', __('Failed to delete room pricing. Please try again.'));
-        }
+        return redirect()->route('rooms.pricing.index')
+            ->with('success', 'Room pricing deleted successfully.');
     }
 }

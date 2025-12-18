@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('title', __('Room Pricing'))
-
-@section('content')
+<x-app-layout>
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
@@ -18,34 +14,51 @@
                     @endcan
                 </div>
 
-                <div class="card-body">
-                    <!-- Filters -->
-                    <x-datatable-filter
-                        :filters="[
-                            ['name' => 'room_type_id', 'label' => __('Room Type'), 'type' => 'select', 'options' => \App\Models\RoomType::where('is_active', true)->get()->map(fn($type) => ['value' => $type->id, 'label' => $type->name])->toArray()],
-                            ['name' => 'price_min', 'label' => __('Min Price'), 'type' => 'number', 'step' => '0.01'],
-                            ['name' => 'price_max', 'label' => __('Max Price'), 'type' => 'number', 'step' => '0.01'],
-                            ['name' => 'currency', 'label' => __('Currency'), 'type' => 'select', 'options' => [['value' => 'USD', 'label' => 'USD'], ['value' => 'EUR', 'label' => 'EUR'], ['value' => 'KHR', 'label' => 'KHR']]],
-                            ['name' => 'effective_from', 'label' => __('Effective From'), 'type' => 'date'],
-                            ['name' => 'effective_to', 'label' => __('Effective To'), 'type' => 'date'],
-                            ['name' => 'is_active', 'label' => __('Status'), 'type' => 'multi-select', 'options' => [['value' => 1, 'label' => __('Active')], ['value' => 0, 'label' => __('Inactive')]]],
-                            ['name' => 'created_from', 'label' => __('Created From'), 'type' => 'date'],
-                            ['name' => 'created_to', 'label' => __('Created To'), 'type' => 'date'],
-                        ]"
-                        route="{{ route('rooms.pricing.index') }}"
-                    />
+                        <div class="card-body">
+                            <!-- Filter Component -->
+                            <x-datatable-filter>
+                                <div class="col-md-3">
+                                    <label class="form-label">{{ __('Room Type') }}</label>
+                                    <select name="room_type_id" class="form-select form-select-sm">
+                                        <option value="">{{ __('All') }}</option>
+                                        <!-- Add room type options -->
+                                    </select>
+                                </div>
 
-                    <!-- DataTable -->
-                    <div class="table-responsive">
-                        {{ $dataTable->table() }}
-                    </div>
-                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">{{ __('Price') }}</label>
+                                    <input type="number" name="price" class="form-control form-control-sm" placeholder="{{ __('Search by price') }}" step="0.01">
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label class="form-label">{{ __('Currency') }}</label>
+                                    <input type="text" name="currency" class="form-control form-control-sm" placeholder="{{ __('Search by currency') }}" maxlength="3">
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label class="form-label">{{ __('Active Status') }}</label>
+                                    <select name="is_active[]" class="form-select form-select-sm multiple-select" multiple>
+                                        <option value="1">{{ __('Active') }}</option>
+                                        <option value="0">{{ __('Inactive') }}</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">{{ __('Effective Date Range') }}</label>
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <input type="date" name="effective_from" class="form-control form-control-sm">
+                                        <span class="text-muted">—</span>
+                                        <input type="date" name="effective_to" class="form-control form-control-sm">
+                                    </div>
+                                </div>
+                            </x-datatable-filter>
+
+                            <!-- DataTable -->
+                            <div class="table-responsive">
+                                <x-datatables title="{{ __('Room Pricing') }}" :data="$dataTable"> </x-datatables>
+                            </div>
+                        </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
-
-@push('scripts')
-{{ $dataTable->scripts() }}
-@endpush
+</x-app-layout>

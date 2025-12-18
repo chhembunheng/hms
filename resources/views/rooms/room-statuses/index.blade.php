@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('title', __('Room Statuses'))
-
-@section('content')
+<x-app-layout>
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
@@ -34,15 +30,10 @@
 
                     <!-- DataTable -->
                     <div class="table-responsive">
-                        {{ $dataTable->table() }}
+                        <x-datatables title="{{ __('Room Statuses') }}" :data="$dataTable"></x-datatables>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
-
-@push('scripts')
-{{ $dataTable->scripts() }}
-@endpush
+</x-app-layout>
