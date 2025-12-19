@@ -338,6 +338,7 @@ return [
     'is_active' => 'Is Active',
     'created_at' => 'Created At',
     'action' => 'Action',
+    'confirm_action' => 'Are you sure you want to proceed with this action?',
     'fullname' => 'Fullname',
     'email' => 'Email',
     'updated_at' => 'Updated At',

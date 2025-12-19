@@ -7,6 +7,9 @@
                     <h3 class="card-title">{{ __('rooms.room_list') }}</h3>
                     @can('rooms.list.form')
                         <div class="card-tools">
+                            <a href="{{ route('rooms.check-in') }}" class="btn btn-success btn-sm me-2">
+                                <i class="fas fa-sign-in-alt"></i> {{ __('rooms.check_in') }}
+                            </a>
                             <a href="{{ route('rooms.list.add') }}" class="btn btn-primary btn-sm">
                                 <i class="fas fa-plus"></i> {{ __('rooms.add_room') }}
                             </a>
