@@ -16,6 +16,10 @@ Route::group(['prefix' => 'rooms', 'as' => 'rooms.', 'middleware' => ['auth', 'v
         Route::delete('/{id}/delete', [RoomController::class, 'delete'])->name('delete');
     });
 
+    // Check-in
+    Route::get('/check-in', [RoomController::class, 'checkIn'])->name('check-in');
+    Route::post('/{id}/check-in', [RoomController::class, 'processCheckIn'])->name('process-check-in');
+
     // Room Types
     Route::prefix('type')->name('type.')->group(function () {
         Route::get('/', [RoomTypeController::class, 'index'])->name('index');

@@ -23,17 +23,25 @@ class RoomTypeController extends Controller
 
         if ($request->isMethod('post')) {
             $rules = [
-                'name' => 'required|string|max:255|unique:room_types',
+                'name_en' => 'required|string|max:255',
+                'name_kh' => 'nullable|string|max:255',
                 'description' => 'nullable|string',
                 'is_active' => 'nullable|boolean',
             ];
 
             $request->validate($rules);
 
-            RoomType::create($request->all());
+            $data = $request->only(['name_en', 'name_kh', 'description']);
+            $data['is_active'] = $request->boolean('is_active', false);
 
-            return redirect()->route('rooms.type.index')
-                ->with('success', 'Room type created successfully.');
+            RoomType::create($data);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Room type created successfully.',
+                'redirect' => route('rooms.type.index'),
+                'delay' => 2000
+            ]);
         }
 
         return view('rooms.room-types.form', compact('form'));
@@ -45,17 +53,25 @@ class RoomTypeController extends Controller
 
         if ($request->isMethod('post')) {
             $rules = [
-                'name' => 'required|string|max:255|unique:room_types,name,' . $form->id,
+                'name_en' => 'required|string|max:255',
+                'name_kh' => 'nullable|string|max:255',
                 'description' => 'nullable|string',
                 'is_active' => 'nullable|boolean',
             ];
 
             $request->validate($rules);
 
-            $form->update($request->all());
+            $data = $request->only(['name_en', 'name_kh', 'description']);
+            $data['is_active'] = $request->boolean('is_active', false);
 
-            return redirect()->route('rooms.type.index')
-                ->with('success', 'Room type updated successfully.');
+            $form->update($data);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Room type updated successfully.',
+                'redirect' => route('rooms.type.index'),
+                'delay' => 2000
+            ]);
         }
 
         return view('rooms.room-types.form', compact('form'));
@@ -67,9 +83,17 @@ class RoomTypeController extends Controller
             $roomType = RoomType::findOrFail($id);
             $roomType->delete();
 
-            return success(message: "Room type deleted successfully.");
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Room type deleted successfully.',
+                'redirect' => route('rooms.type.index'),
+                'delay' => 2000
+            ]);
         } catch (\Exception $e) {
-            return errors("Failed to delete room type: " . $e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to delete room type: ' . $e->getMessage()
+            ]);
         }
     }
 }

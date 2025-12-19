@@ -23,7 +23,7 @@ class RoomPricingDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('room_type', fn($row) => $row->roomType->name ?? '-')
+            ->addColumn('room_type', fn($row) => $row->roomType->localized_name ?? '-')
             ->addColumn('price', fn($row) => number_format($row->price, 2))
             ->addColumn('pricing_type', fn($row) => RoomPricing::getPricingTypes()[$row->pricing_type] ?? $row->pricing_type)
             ->addColumn('currency', fn($row) => $row->currency)
@@ -46,52 +46,49 @@ class RoomPricingDataTable extends DataTable
     {
         $query = $model->newQuery()->with('roomType');
 
-        // Get filters from request headers
         $filtersHeader = request()->header('filters');
         if ($filtersHeader) {
             $filters = json_decode(urldecode($filtersHeader), true);
 
             if (is_array($filters)) {
-                // Filter by room_type_id
+                if (!empty($filters['search'])) {
+                    $query->where(function ($q) use ($filters) {
+                        $q->where('currency', 'like', '%' . $filters['search'] . '%')
+                          ->orWhere('pricing_type', 'like', '%' . $filters['search'] . '%')
+                          ->orWhereHas('roomType', function ($subQuery) use ($filters) {
+                              $subQuery->where('name', 'like', '%' . $filters['search'] . '%');
+                          });
+                    });
+                }
+
                 if (!empty($filters['room_type_id'])) {
                     $query->where('room_type_id', $filters['room_type_id']);
                 }
 
-                // Filter by price range
-                if (!empty($filters['price_min'])) {
-                    $query->where('price', '>=', $filters['price_min']);
-                }
-                if (!empty($filters['price_max'])) {
-                    $query->where('price', '<=', $filters['price_max']);
-                }
-
-                // Filter by currency
-                if (!empty($filters['currency'])) {
-                    $query->where('currency', $filters['currency']);
-                }
-
-                // Filter by pricing_type
                 if (!empty($filters['pricing_type'])) {
                     $query->where('pricing_type', $filters['pricing_type']);
                 }
 
-                // Filter by effective_from range
-                if (!empty($filters['effective_from'])) {
-                    $query->whereDate('effective_from', '>=', $filters['effective_from']);
-                }
-                if (!empty($filters['effective_to'])) {
-                    $query->whereDate('effective_to', '<=', $filters['effective_to']);
+                if (!empty($filters['currency'])) {
+                    $query->where('currency', $filters['currency']);
                 }
 
-                // Filter by is_active
                 if (!empty($filters['is_active']) && is_array($filters['is_active'])) {
                     $query->whereIn('is_active', $filters['is_active']);
                 }
 
-                // Filter by created_at range
+                if (!empty($filters['effective_from'])) {
+                    $query->whereDate('effective_from', '>=', $filters['effective_from']);
+                }
+
+                if (!empty($filters['effective_to'])) {
+                    $query->whereDate('effective_to', '<=', $filters['effective_to']);
+                }
+
                 if (!empty($filters['created_from'])) {
                     $query->whereDate('created_at', '>=', $filters['created_from']);
                 }
+
                 if (!empty($filters['created_to'])) {
                     $query->whereDate('created_at', '<=', $filters['created_to']);
                 }

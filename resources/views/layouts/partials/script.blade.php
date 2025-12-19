@@ -311,7 +311,9 @@
                      if (res.status === 'success') {
                          success(res.message);
                          if (res.redirect) {
-                             window.location.href = res.redirect;
+                             setTimeout(() => {
+                                 window.location.href = res.redirect;
+                             }, res.delay || 2000);
                          }
                      } else {
                          error(res.message);

@@ -23,7 +23,7 @@ class RoomStatusDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('name', fn($row) => $row->name)
+            ->addColumn('name', fn($row) => $row->localized_name)
             ->addColumn('name_en', fn($row) => $row->name_en ?? '-')
             ->addColumn('name_kh', fn($row) => $row->name_kh ?? '-')
             ->addColumn('description', fn($row) => $row->description ?? '-')
@@ -45,46 +45,26 @@ class RoomStatusDataTable extends DataTable
     {
         $query = $model->newQuery();
 
-        // Get filters from request headers
         $filtersHeader = request()->header('filters');
         if ($filtersHeader) {
             $filters = json_decode(urldecode($filtersHeader), true);
 
             if (is_array($filters)) {
-                // Filter by name
-                if (!empty($filters['name'])) {
-                    $query->where('name', 'like', '%' . $filters['name'] . '%');
+                if (!empty($filters['search'])) {
+                    $query->where('name_en', 'like', '%' . $filters['search'] . '%')
+                            ->orWhere('name_kh', 'like', '%' . $filters['search'] . '%')
+                            ->orWhere('description', 'like', '%' . $filters['search'] . '%')
+                            ->orWhere('color', 'like', '%' . $filters['search'] . '%');
                 }
 
-                // Filter by name_en
-                if (!empty($filters['name_en'])) {
-                    $query->where('name_en', 'like', '%' . $filters['name_en'] . '%');
-                }
-
-                // Filter by name_kh
-                if (!empty($filters['name_kh'])) {
-                    $query->where('name_kh', 'like', '%' . $filters['name_kh'] . '%');
-                }
-
-                // Filter by description
-                if (!empty($filters['description'])) {
-                    $query->where('description', 'like', '%' . $filters['description'] . '%');
-                }
-
-                // Filter by color
-                if (!empty($filters['color'])) {
-                    $query->where('color', 'like', '%' . $filters['color'] . '%');
-                }
-
-                // Filter by is_active
                 if (!empty($filters['is_active']) && is_array($filters['is_active'])) {
                     $query->whereIn('is_active', $filters['is_active']);
                 }
 
-                // Filter by created_at range
                 if (!empty($filters['created_from'])) {
                     $query->whereDate('created_at', '>=', $filters['created_from']);
                 }
+
                 if (!empty($filters['created_to'])) {
                     $query->whereDate('created_at', '<=', $filters['created_to']);
                 }

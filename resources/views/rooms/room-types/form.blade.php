@@ -7,7 +7,10 @@
                         <div class="card-body">
                             <div class="row g-4">
                                 <div class="col-md-6">
-                                    <x-form.input :label="__('Name')" name="name" :value="old('name', $form?->name)" required />
+                                    <x-form.input :label="__('global.name_en')" name="name_en" :value="old('name_en', $form?->name_en)" required />
+                                </div>
+                                <div class="col-md-6">
+                                    <x-form.input :label="__('global.name_kh')" name="name_kh" :value="old('name_kh', $form?->name_kh)" required />
                                 </div>
                                 <div class="col-md-6">
                                     <x-form.checkbox :label="__('Is Active')" name="is_active" :checked="old('is_active', $form?->is_active ?? true)" />

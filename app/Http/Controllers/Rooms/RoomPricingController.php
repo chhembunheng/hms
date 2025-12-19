@@ -34,10 +34,17 @@ class RoomPricingController extends Controller
 
             $request->validate($rules);
 
-            RoomPricing::create($request->all());
+            $data = $request->only(['room_type_id', 'price', 'pricing_type', 'currency', 'effective_from', 'effective_to']);
+            $data['is_active'] = $request->boolean('is_active', false);
 
-            return redirect()->route('rooms.pricing.index')
-                ->with('success', __('rooms.room_pricing_created_successfully'));
+            RoomPricing::create($data);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Room pricing created successfully.',
+                'redirect' => route('rooms.pricing.index'),
+                'delay' => 2000
+            ]);
         }
 
         return view('rooms.room-pricing.form', compact('form'));
@@ -60,10 +67,17 @@ class RoomPricingController extends Controller
 
             $request->validate($rules);
 
-            $form->update($request->all());
+            $data = $request->only(['room_type_id', 'price', 'pricing_type', 'currency', 'effective_from', 'effective_to']);
+            $data['is_active'] = $request->boolean('is_active', false);
 
-            return redirect()->route('rooms.pricing.index')
-                ->with('success', __('rooms.room_pricing_updated_successfully'));
+            $form->update($data);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Room pricing updated successfully.',
+                'redirect' => route('rooms.pricing.index'),
+                'delay' => 2000
+            ]);
         }
 
         return view('rooms.room-pricing.form', compact('form'));
@@ -85,9 +99,17 @@ class RoomPricingController extends Controller
             $roomPricing = RoomPricing::findOrFail($id);
             $roomPricing->delete();
 
-            return success(message: __('rooms.room_pricing_deleted_successfully'));
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Room pricing deleted successfully.',
+                'redirect' => route('rooms.pricing.index'),
+                'delay' => 2000
+            ]);
         } catch (\Exception $e) {
-            return errors("Failed to delete room pricing: " . $e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to delete room pricing: ' . $e->getMessage()
+            ]);
         }
     }
 }

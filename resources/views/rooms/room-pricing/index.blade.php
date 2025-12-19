@@ -18,16 +18,16 @@
                             <!-- Filter Component -->
                             <x-datatable-filter>
                                 <div class="col-md-3">
+                                    <label class="form-label">{{ __('global.search') }}</label>
+                                    <input type="text" name="search" class="form-control form-control-sm" placeholder="{{ __('global.search') }}">
+                                </div>
+
+                                <div class="col-md-3">
                                     <label class="form-label">{{ __('rooms.room_type') }}</label>
                                     <select name="room_type_id" class="form-select form-select-sm">
                                         <option value="">{{ __('rooms.all') }}</option>
                                         <!-- Add room type options -->
                                     </select>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <label class="form-label">{{ __('rooms.price') }}</label>
-                                    <input type="number" name="price" class="form-control form-control-sm" placeholder="{{ __('rooms.search_by_price') }}" step="0.01">
                                 </div>
 
                                 <div class="col-md-3">
@@ -56,15 +56,6 @@
                                         <option value="1">{{ __('rooms.active') }}</option>
                                         <option value="0">{{ __('rooms.inactive') }}</option>
                                     </select>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label">{{ __('rooms.effective_date_range') }}</label>
-                                    <div class="d-flex gap-2 align-items-center">
-                                        <input type="date" name="effective_from" class="form-control form-control-sm">
-                                        <span class="text-muted">—</span>
-                                        <input type="date" name="effective_to" class="form-control form-control-sm">
-                                    </div>
                                 </div>
                             </x-datatable-filter>
 

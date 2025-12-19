@@ -44,47 +44,34 @@ class ExchangeRateDataTable extends DataTable
     {
         $query = $model->newQuery();
 
-        // Get filters from request headers
         $filtersHeader = request()->header('filters');
         if ($filtersHeader) {
             $filters = json_decode(urldecode($filtersHeader), true);
 
             if (is_array($filters)) {
-                // Filter by from_currency
-                if (!empty($filters['from_currency'])) {
-                    $query->where('from_currency', 'like', '%' . $filters['from_currency'] . '%');
+                if (!empty($filters['search'])) {
+                    $query->where(function ($q) use ($filters) {
+                        $q->where('from_currency', 'like', '%' . $filters['search'] . '%')
+                          ->orWhere('to_currency', 'like', '%' . $filters['search'] . '%');
+                    });
                 }
 
-                // Filter by to_currency
-                if (!empty($filters['to_currency'])) {
-                    $query->where('to_currency', 'like', '%' . $filters['to_currency'] . '%');
-                }
-
-                // Filter by rate range
-                if (!empty($filters['rate_from'])) {
-                    $query->where('rate', '>=', $filters['rate_from']);
-                }
-                if (!empty($filters['rate_to'])) {
-                    $query->where('rate', '<=', $filters['rate_to']);
-                }
-
-                // Filter by effective_date range
-                if (!empty($filters['effective_from'])) {
-                    $query->whereDate('effective_date', '>=', $filters['effective_from']);
-                }
-                if (!empty($filters['effective_to'])) {
-                    $query->whereDate('effective_date', '<=', $filters['effective_to']);
-                }
-
-                // Filter by is_active
                 if (!empty($filters['is_active']) && is_array($filters['is_active'])) {
                     $query->whereIn('is_active', $filters['is_active']);
                 }
 
-                // Filter by created_at range
+                if (!empty($filters['effective_from'])) {
+                    $query->whereDate('effective_date', '>=', $filters['effective_from']);
+                }
+
+                if (!empty($filters['effective_to'])) {
+                    $query->whereDate('effective_date', '<=', $filters['effective_to']);
+                }
+
                 if (!empty($filters['created_from'])) {
                     $query->whereDate('created_at', '>=', $filters['created_from']);
                 }
+
                 if (!empty($filters['created_to'])) {
                     $query->whereDate('created_at', '<=', $filters['created_to']);
                 }

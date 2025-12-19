@@ -30,10 +30,17 @@ class RoomController extends Controller
 
             $request->validate($rules);
 
-            Room::create($request->all());
+            $data = $request->only(['room_number', 'floor', 'room_type_id', 'status_id']);
+            $data['is_active'] = $request->boolean('is_active', false);
 
-            return redirect()->route('rooms.list.index')
-                ->with('success', 'Room created successfully.');
+            Room::create($data);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Room created successfully.',
+                'redirect' => route('rooms.list.index'),
+                'delay' => 2000
+            ]);
         }
 
         return view('rooms.rooms.form', compact('form'));
@@ -54,10 +61,17 @@ class RoomController extends Controller
 
             $request->validate($rules);
 
-            $form->update($request->all());
+            $data = $request->only(['room_number', 'floor', 'room_type_id', 'status_id']);
+            $data['is_active'] = $request->boolean('is_active', false);
 
-            return redirect()->route('rooms.list.index')
-                ->with('success', 'Room updated successfully.');
+            $form->update($data);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Room updated successfully.',
+                'redirect' => route('rooms.list.index'),
+                'delay' => 2000
+            ]);
         }
 
         return view('rooms.rooms.form', compact('form'));
@@ -69,9 +83,44 @@ class RoomController extends Controller
             $room = Room::findOrFail($id);
             $room->delete();
 
-            return success(message: "Room deleted successfully.");
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Room deleted successfully.',
+                'redirect' => route('rooms.list.index'),
+                'delay' => 2000
+            ]);
         } catch (\Exception $e) {
-            return errors("Failed to delete room: " . $e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to delete room: ' . $e->getMessage()
+            ]);
         }
+    }
+
+    public function checkIn()
+    {
+        $rooms = Room::with(['roomType', 'status'])
+            ->active()
+            ->orderBy('floor')
+            ->orderBy('room_number')
+            ->get()
+            ->groupBy('floor');
+
+        return view('rooms.rooms.check-in', compact('rooms'));
+    }
+
+    public function processCheckIn(Request $request, $id)
+    {
+        $room = Room::findOrFail($id);
+
+        // Add validation and check-in logic here
+        // For now, just return success
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Check-in successful for room ' . $room->room_number,
+            'redirect' => route('rooms.check-in'),
+            'delay' => 2000
+        ]);
     }
 }

@@ -23,7 +23,8 @@ class RoomTypeDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('name', fn($row) => $row->name)
+            ->addColumn('name_en', fn($row) => $row->name_en ?? '-')
+            ->addColumn('name_kh', fn($row) => $row->name_kh ?? '-')
             ->addColumn('description', fn($row) => $row->description ?? '-')
             ->addColumn('is_active', fn($row) => badge($row->is_active ? 'active' : 'inactive'))
             ->editColumn('created_at', function (RoomType $model) {
@@ -42,31 +43,25 @@ class RoomTypeDataTable extends DataTable
     {
         $query = $model->newQuery();
 
-        // Get filters from request headers
         $filtersHeader = request()->header('filters');
         if ($filtersHeader) {
             $filters = json_decode(urldecode($filtersHeader), true);
 
             if (is_array($filters)) {
-                // Filter by name
-                if (!empty($filters['name'])) {
-                    $query->where('name', 'like', '%' . $filters['name'] . '%');
+                if (!empty($filters['search'])) {
+                    $query->where('name_en', 'like', '%' . $filters['search'] . '%')
+                            ->orWhere('name_kh', 'like', '%' . $filters['search'] . '%')
+                            ->orWhere('description', 'like', '%' . $filters['search'] . '%');
                 }
 
-                // Filter by description
-                if (!empty($filters['description'])) {
-                    $query->where('description', 'like', '%' . $filters['description'] . '%');
-                }
-
-                // Filter by is_active
                 if (!empty($filters['is_active']) && is_array($filters['is_active'])) {
                     $query->whereIn('is_active', $filters['is_active']);
                 }
 
-                // Filter by created_at range
                 if (!empty($filters['created_from'])) {
                     $query->whereDate('created_at', '>=', $filters['created_from']);
                 }
+
                 if (!empty($filters['created_to'])) {
                     $query->whereDate('created_at', '<=', $filters['created_to']);
                 }
@@ -104,7 +99,8 @@ class RoomTypeDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('#')->searchable(false)->orderable(false),
-            Column::make('name')->title(__('root.common.name')),
+            Column::make('name_en')->title(__('global.name_en')),
+            Column::make('name_kh')->title(__('global.name_kh')),
             Column::make('description')->title(__('form.description')),
             Column::make('is_active')->title(__('rooms.active_status')),
             Column::make('created_at')->title(__('global.created_at')),

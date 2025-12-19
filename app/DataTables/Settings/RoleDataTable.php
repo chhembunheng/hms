@@ -39,7 +39,22 @@ class RoleDataTable extends DataTable
      */
     public function query(Role $model): QueryBuilder
     {
-        return $model->newQuery();
+        $query = $model->newQuery()->with('translations');
+
+        $filtersHeader = request()->header('filters');
+        if ($filtersHeader) {
+            $filters = json_decode(urldecode($filtersHeader), true);
+
+            if (is_array($filters)) {
+                if (!empty($filters['search'])) {
+                    $query->whereHas('translations', function ($subQuery) use ($filters) {
+                        $subQuery->where('name', 'like', '%' . $filters['search'] . '%');
+                    });
+                }
+            }
+        }
+
+        return $query;
     }
 
     /**

@@ -24,8 +24,20 @@ class PermissionDataTable extends DataTable
         $locale = app()->getLocale();
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('name', function($row) use ($locale) {
-                $name = $row->translations->where('locale', $locale)->first()?->name ?? $row->translations->where('locale', 'en')->first()?->name ?? 'N/A';
+            ->addColumn('name', function ($row) use ($locale) {
+                $translation = $row->translations->where('locale', $locale)->first();
+
+                if (!$translation) {
+                    $translation = $row->translations
+                        ->where('locale', 'en')
+                        ->first();
+                }
+
+                if (!$translation) {
+                    return 'N/A';
+                }
+
+                $name = $translation->name;
 
                 // Add badge based on permission action
                 $badgeClass = 'bg-secondary';
@@ -64,7 +76,29 @@ class PermissionDataTable extends DataTable
      */
     public function query(Permission $model): QueryBuilder
     {
-        return $model->newQuery()->with(['menu', 'translations']);
+        $query = $model->newQuery()->with(['menu', 'translations']);
+
+        $filtersHeader = request()->header('filters');
+        if ($filtersHeader) {
+            $filters = json_decode(urldecode($filtersHeader), true);
+
+            if (is_array($filters)) {
+                if (!empty($filters['search'])) {
+                    $query->where(function ($q) use ($filters) {
+                        $q->where('action', 'like', '%' . $filters['search'] . '%')
+                          ->orWhere('action_route', 'like', '%' . $filters['search'] . '%')
+                          ->orWhereHas('translations', function ($subQuery) use ($filters) {
+                              $subQuery->where('name', 'like', '%' . $filters['search'] . '%');
+                          })
+                          ->orWhereHas('menu.translations', function ($subQuery) use ($filters) {
+                              $subQuery->where('name', 'like', '%' . $filters['search'] . '%');
+                          });
+                    });
+                }
+            }
+        }
+
+        return $query;
     }
 
     /**
@@ -94,17 +128,13 @@ class PermissionDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('DT_RowIndex')->title(__('root.common.no'))->width(60),
-            Column::make('name'),
-            Column::make('menu'),
-            Column::make('action_route'),
-            Column::make('sort'),
-            Column::make('created_at'),
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(100)
-                  ->addClass('text-center'),
+            Column::computed('DT_RowIndex')->title('#')->width(60),
+            Column::computed('name')->title(__('global.name')),
+            Column::make('menu')->title(__('global.menu')),
+            Column::make('action_route')->title(__('global.route')),
+            Column::make('sort')->title(__('global.sort')),
+            Column::make('created_at')->title(__('global.created_at')),
+            Column::computed('action')->exportable(false)->printable(false)->width(60)->addClass('text-center')->title(__('global.action')),
         ];
     }
 
@@ -113,6 +143,6 @@ class PermissionDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Permission_' . date('YmdHis');
+        return __('global.permissions') . '_' . date('YmdHis');
     }
 }
