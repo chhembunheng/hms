@@ -67,7 +67,16 @@ class UserDataTable extends DataTable
         return $this->builder()
                     ->setTableId('user-table')
                     ->columns($this->getColumns())
-                    ->minifiedAjax();
+                    ->minifiedAjax()
+                    ->parameters([
+                        'responsive' => true,
+                        'autoWidth' => false,
+                        'scrollX' => true,
+                        'fixedColumns' => [
+                            'leftColumns' => 1,
+                            'rightColumns' => 1,
+                        ],
+                    ]);
     }
 
     /**

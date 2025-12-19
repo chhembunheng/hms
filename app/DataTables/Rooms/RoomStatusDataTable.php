@@ -103,7 +103,16 @@ class RoomStatusDataTable extends DataTable
                     ->setTableId('room-statuses-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->orderBy(1);
+                    ->orderBy(1)
+                    ->parameters([
+                        'responsive' => true,
+                        'autoWidth' => false,
+                        'scrollX' => true,
+                        'fixedColumns' => [
+                            'leftColumns' => 1,
+                            'rightColumns' => 1,
+                        ],
+                    ]);
     }
 
     /**

@@ -3,7 +3,7 @@
      <div class="container-fluid p-0">
          <div class="d-flex align-items-center">
              <div class="d-flex me-2 align-items-center">
-                 <button type="button" class="navbar-toggler sidebar-mobile-main-toggle rounded-pill">
+                 <button type="button" class="navbar-toggler sidebar-main-toggle sidebar-mobile-main-toggle rounded-pill">
                      <i class="fa-solid fa-bars fa-fw" style="font-size: 1.1rem;"></i>
                  </button>
              </div>

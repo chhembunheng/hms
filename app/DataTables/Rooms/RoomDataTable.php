@@ -97,7 +97,16 @@ class RoomDataTable extends DataTable
                     ->setTableId('rooms-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->orderBy(1);
+                    ->orderBy(1)
+                    ->parameters([
+                        'responsive' => true,
+                        'autoWidth' => false,
+                        'scrollX' => true,
+                        'fixedColumns' => [
+                            'leftColumns' => 1,
+                            'rightColumns' => 1,
+                        ],
+                    ]);
     }
 
     /**
