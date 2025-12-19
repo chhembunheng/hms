@@ -17,31 +17,17 @@
                 <div class="card-body">
                     <!-- Filter Component -->
                     <x-datatable-filter>
-                        <div class="col-md-3">
-                            <label class="form-label">{{ __('root.common.name') }}</label>
-                            <input type="text" name="name" class="form-control form-control-sm" placeholder="{{ __('global.search_by_name') }}">
+                        <div class="col-md-4">
+                            <label class="form-label">{{ __('global.search') }}</label>
+                            <input type="text" name="search" class="form-control form-control-sm" placeholder="{{ __('global.search') }}">
                         </div>
 
-                        <div class="col-md-3">
-                            <label class="form-label">{{ __('form.description') }}</label>
-                            <input type="text" name="description" class="form-control form-control-sm" placeholder="{{ __('global.search_by_description') }}">
-                        </div>
-
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label class="form-label">{{ __('rooms.active_status') }}</label>
                             <select name="is_active[]" class="form-select form-select-sm multiple-select" multiple>
                                 <option value="1">{{ __('rooms.active') }}</option>
                                 <option value="0">{{ __('rooms.inactive') }}</option>
                             </select>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label class="form-label">{{ __('global.created_date_range') }}</label>
-                            <div class="d-flex gap-2 align-items-center">
-                                <input type="date" name="created_from" class="form-control form-control-sm">
-                                <span class="text-muted">—</span>
-                                <input type="date" name="created_to" class="form-control form-control-sm">
-                            </div>
                         </div>
                     </x-datatable-filter>
 

@@ -18,28 +18,8 @@
                     <!-- Filter Component -->
                     <x-datatable-filter>
                         <div class="col-md-3">
-                            <label class="form-label">{{ __('root.common.name') }}</label>
-                            <input type="text" name="name" class="form-control form-control-sm" placeholder="{{ __('global.search_by_name') }}">
-                        </div>
-
-                        <div class="col-md-3">
-                            <label class="form-label">{{ __('rooms.name_en') }}</label>
-                            <input type="text" name="name_en" class="form-control form-control-sm" placeholder="{{ __('Search by English name') }}">
-                        </div>
-
-                        <div class="col-md-3">
-                            <label class="form-label">{{ __('rooms.name_kh') }}</label>
-                            <input type="text" name="name_kh" class="form-control form-control-sm" placeholder="{{ __('Search by Khmer name') }}">
-                        </div>
-
-                        <div class="col-md-3">
-                            <label class="form-label">{{ __('form.description') }}</label>
-                            <input type="text" name="description" class="form-control form-control-sm" placeholder="{{ __('global.search_by_description') }}">
-                        </div>
-
-                        <div class="col-md-3">
-                            <label class="form-label">{{ __('rooms.color') }}</label>
-                            <input type="text" name="color" class="form-control form-control-sm" placeholder="{{ __('Search by color') }}">
+                            <label class="form-label">{{ __('global.search') }}</label>
+                            <input type="text" name="search" class="form-control form-control-sm" placeholder="{{ __('global.search') }}">
                         </div>
 
                         <div class="col-md-3">
@@ -48,15 +28,6 @@
                                 <option value="1">{{ __('rooms.active') }}</option>
                                 <option value="0">{{ __('rooms.inactive') }}</option>
                             </select>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label class="form-label">{{ __('global.created_date_range') }}</label>
-                            <div class="d-flex gap-2 align-items-center">
-                                <input type="date" name="created_from" class="form-control form-control-sm">
-                                <span class="text-muted">—</span>
-                                <input type="date" name="created_to" class="form-control form-control-sm">
-                            </div>
                         </div>
                     </x-datatable-filter>
 

@@ -25,8 +25,8 @@ class RoomDataTable extends DataTable
             ->addIndexColumn()
             ->addColumn('room_number', fn($row) => $row->room_number)
             ->addColumn('floor', fn($row) => $row->floor ?? '-')
-            ->addColumn('room_type', fn($row) => $row->roomType?->name ?? '-')
-            ->addColumn('status', fn($row) => $row->status?->name ?? '-')
+            ->addColumn('room_type', fn($row) => $row->roomType?->localized_name ?? '-')
+            ->addColumn('status', fn($row) => $row->status?->localized_name ?? '-')
             ->addColumn('is_active', fn($row) => badge($row->is_active ? 'active' : 'inactive'))
             ->editColumn('created_at', function (Room $model) {
                 return $model->created_at?->format(config('init.datetime.display_format'));
@@ -44,41 +44,41 @@ class RoomDataTable extends DataTable
     {
         $query = $model->newQuery()->with(['roomType', 'status']);
 
-        // Get filters from request headers
         $filtersHeader = request()->header('filters');
         if ($filtersHeader) {
             $filters = json_decode(urldecode($filtersHeader), true);
 
             if (is_array($filters)) {
-                // Filter by room_number
-                if (!empty($filters['room_number'])) {
-                    $query->where('room_number', 'like', '%' . $filters['room_number'] . '%');
+                if (!empty($filters['search'])) {
+                    $query->where(function ($q) use ($filters) {
+                        $q->where('room_number', 'like', '%' . $filters['search'] . '%')
+                          ->orWhere('floor', 'like', '%' . $filters['search'] . '%')
+                          ->orWhereHas('roomType', function ($subQuery) use ($filters) {
+                              $subQuery->where('name', 'like', '%' . $filters['search'] . '%');
+                          })
+                          ->orWhereHas('status', function ($subQuery) use ($filters) {
+                              $subQuery->where('name_en', 'like', '%' . $filters['search'] . '%')
+                                       ->orWhere('name_kh', 'like', '%' . $filters['search'] . '%');
+                          });
+                    });
                 }
 
-                // Filter by floor
-                if (!empty($filters['floor'])) {
-                    $query->where('floor', $filters['floor']);
-                }
-
-                // Filter by room_type_id
                 if (!empty($filters['room_type_id'])) {
                     $query->where('room_type_id', $filters['room_type_id']);
                 }
 
-                // Filter by status_id
                 if (!empty($filters['status_id'])) {
                     $query->where('status_id', $filters['status_id']);
                 }
 
-                // Filter by is_active
                 if (!empty($filters['is_active']) && is_array($filters['is_active'])) {
                     $query->whereIn('is_active', $filters['is_active']);
                 }
 
-                // Filter by created_at range
                 if (!empty($filters['created_from'])) {
                     $query->whereDate('created_at', '>=', $filters['created_from']);
                 }
+
                 if (!empty($filters['created_to'])) {
                     $query->whereDate('created_at', '<=', $filters['created_to']);
                 }

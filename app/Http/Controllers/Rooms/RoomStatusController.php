@@ -23,7 +23,8 @@ class RoomStatusController extends Controller
 
         if ($request->isMethod('post')) {
             $rules = [
-                'name' => 'required|string|max:255|unique:room_statuses',
+                'name_en' => 'required|string|max:255',
+                'name_kh' => 'required|string|max:255',
                 'color' => 'required|string|max:7',
                 'description' => 'nullable|string',
                 'is_active' => 'nullable|boolean',
@@ -31,10 +32,17 @@ class RoomStatusController extends Controller
 
             $request->validate($rules);
 
-            RoomStatus::create($request->all());
+            $data = $request->only(['name_en', 'name_kh', 'color', 'description']);
+            $data['is_active'] = $request->boolean('is_active', false);
 
-            return redirect()->route('rooms.status.index')
-                ->with('success', 'Room status created successfully.');
+            RoomStatus::create($data);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Room status created successfully.',
+                'redirect' => route('rooms.status.index'),
+                'delay' => 2000
+            ]);
         }
 
         return view('rooms.room-statuses.form', compact('form'));
@@ -46,7 +54,8 @@ class RoomStatusController extends Controller
 
         if ($request->isMethod('post')) {
             $rules = [
-                'name' => 'required|string|max:255|unique:room_statuses,name,' . $form->id,
+                'name_en' => 'required|string|max:255',
+                'name_kh' => 'required|string|max:255',
                 'color' => 'required|string|max:7',
                 'description' => 'nullable|string',
                 'is_active' => 'nullable|boolean',
@@ -54,10 +63,17 @@ class RoomStatusController extends Controller
 
             $request->validate($rules);
 
-            $form->update($request->all());
+            $data = $request->only(['name_en', 'name_kh', 'color', 'description']);
+            $data['is_active'] = $request->boolean('is_active', false);
 
-            return redirect()->route('rooms.status.index')
-                ->with('success', 'Room status updated successfully.');
+            $form->update($data);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Room status updated successfully.',
+                'redirect' => route('rooms.status.index'),
+                'delay' => 2000
+            ]);
         }
 
         return view('rooms.room-statuses.form', compact('form'));
@@ -69,9 +85,17 @@ class RoomStatusController extends Controller
             $roomStatus = RoomStatus::findOrFail($id);
             $roomStatus->delete();
 
-            return success(message: "Room status deleted successfully.");
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Room status deleted successfully.',
+                'redirect' => route('rooms.status.index'),
+                'delay' => 2000
+            ]);
         } catch (\Exception $e) {
-            return errors("Failed to delete room status: " . $e->getMessage());
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to delete room status: ' . $e->getMessage()
+            ]);
         }
     }
 }

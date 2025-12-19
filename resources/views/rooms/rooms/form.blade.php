@@ -17,7 +17,8 @@
                                         :label="__('rooms.room_type')"
                                         name="room_type_id"
                                         :value="old('room_type_id', $form?->room_type_id)"
-                                        :options="\App\Models\RoomType::active()->pluck('name', 'id')->toArray()"
+                                        :options="\App\Models\RoomType::active()->get()->pluck('localized_name', 'id')->toArray()"
+                                        :selected="old('room_type_id', $form?->room_type_id)"
                                     />
                                 </div>
                                 <div class="col-md-6">
@@ -26,6 +27,7 @@
                                         name="status_id"
                                         :value="old('status_id', $form?->status_id)"
                                         :options="\App\Models\RoomStatus::active()->get()->pluck('localized_name', 'id')->toArray()"
+                                        :selected="old('status_id', $form?->status_id)"
                                     />
                                 </div>
                                 <div class="col-md-6">

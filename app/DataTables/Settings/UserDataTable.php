@@ -56,7 +56,32 @@ class UserDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        return $model->newQuery()->with('translations');
+        $query = $model->newQuery()->with('translations');
+
+        $filtersHeader = request()->header('filters');
+        if ($filtersHeader) {
+            $filters = json_decode(urldecode($filtersHeader), true);
+
+            if (is_array($filters)) {
+                if (!empty($filters['search'])) {
+                    $query->where(function ($q) use ($filters) {
+                        $q->where('email', 'like', '%' . $filters['search'] . '%')
+                          ->orWhereHas('translations', function ($subQuery) use ($filters) {
+                              $subQuery->where('first_name', 'like', '%' . $filters['search'] . '%')
+                                       ->orWhere('last_name', 'like', '%' . $filters['search'] . '%');
+                          });
+                    });
+                }
+
+                if (!empty($filters['role_ids']) && is_array($filters['role_ids'])) {
+                    $query->whereHas('roles', function ($q) use ($filters) {
+                        $q->whereIn('roles.id', $filters['role_ids']);
+                    });
+                }
+            }
+        }
+
+        return $query;
     }
 
     /**

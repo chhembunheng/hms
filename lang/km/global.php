@@ -198,6 +198,7 @@ return [
 
     // Form labels
     'name_en' => 'ឈ្មោះ (អង់គ្លេស)',
+    'name_kh' => 'ឈ្មោះ (ខ្មែរ)',
     'name_km' => 'ឈ្មោះ (ខ្មែរ)',
     'description_en' => 'ការពិពណ៌នា (អង់គ្លេស)',
     'description_km' => 'ការពិពណ៌នា (ខ្មែរ)',

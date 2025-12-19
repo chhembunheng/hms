@@ -17,13 +17,8 @@
                         <div class="card-body">
                             <x-datatable-filter>
                                 <div class="col-md-3">
-                                    <label class="form-label">{{ __('rooms.room_number') }}</label>
-                                    <input type="text" name="room_number" class="form-control form-control-sm" placeholder="{{ __('rooms.search_by_room_number') }}">
-                                </div>
-
-                                <div class="col-md-3">
-                                    <label class="form-label">{{ __('rooms.floor') }}</label>
-                                    <input type="number" name="floor" class="form-control form-control-sm" placeholder="{{ __('rooms.search_by_floor') }}">
+                                    <label class="form-label">{{ __('global.search') }}</label>
+                                    <input type="text" name="search" class="form-control form-control-sm" placeholder="{{ __('global.search') }}">
                                 </div>
 
                                 <div class="col-md-3">
@@ -48,15 +43,6 @@
                                         <option value="1">{{ __('rooms.active') }}</option>
                                         <option value="0">{{ __('rooms.inactive') }}</option>
                                     </select>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label">{{ __('global.created_date_range') }}</label>
-                                    <div class="d-flex gap-2 align-items-center">
-                                        <input type="date" name="created_from" class="form-control form-control-sm">
-                                        <span class="text-muted">—</span>
-                                        <input type="date" name="created_to" class="form-control form-control-sm">
-                                    </div>
                                 </div>
                             </x-datatable-filter>
 

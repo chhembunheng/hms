@@ -7,13 +7,10 @@
                         <div class="card-body">
                             <div class="row g-4">
                                 <div class="col-md-6">
-                                    <x-form.input :label="__('root.common.name')" name="name" :value="old('name', $form?->name)" required />
+                                    <x-form.input :label="__('rooms.name_en')" name="name_en" :value="old('name_en', $form?->name_en)" required />
                                 </div>
                                 <div class="col-md-6">
-                                    <x-form.input :label="__('rooms.name_en')" name="name_en" :value="old('name_en', $form?->name_en)" />
-                                </div>
-                                <div class="col-md-6">
-                                    <x-form.input :label="__('rooms.name_kh')" name="name_kh" :value="old('name_kh', $form?->name_kh)" />
+                                    <x-form.input :label="__('rooms.name_kh')" name="name_kh" :value="old('name_kh', $form?->name_kh)" required />
                                 </div>
                                 <div class="col-md-6">
                                     <x-form.input :label="__('rooms.color')" name="color" type="color" :value="old('color', $form?->color ?? '#007bff')" required />

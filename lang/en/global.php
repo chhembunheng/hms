@@ -197,6 +197,7 @@ return [
 
     // Form labels
     'name_en' => 'Name (English)',
+    'name_kh' => 'Name (Khmer)',
     'name_km' => 'Name (Khmer)',
     'description_en' => 'Description (English)',
     'description_km' => 'Description (Khmer)',

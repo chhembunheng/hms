@@ -35744,7 +35744,6 @@ html[data-color-theme=dark] .btn-sidebar-expand {
 }
 
 .nav-sidebar .nav-link.active {
-    border-right: 2px solid #034246 !important;
     background-color: rgba(3, 66, 70, 0.1)
 }
 

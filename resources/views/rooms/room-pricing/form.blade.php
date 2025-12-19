@@ -11,7 +11,7 @@
                                         :label="__('Room Type')"
                                         name="room_type_id"
                                         :selected="old('room_type_id', $form?->room_type_id)"
-                                        :options="\App\Models\RoomType::active()->pluck('name', 'id')->toArray()"
+                                        :options="\App\Models\RoomType::active()->get()->pluck('localized_name', 'id')->toArray()"
                                         required
                                     />
                                 </div>
