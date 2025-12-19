@@ -1,5 +1,5 @@
  <!-- Main navbar -->
- <div class="navbar navbar-static shadow-none" style="min-height: 63px;">
+ <div class="navbar navbar-static shadow-none" style="min-height: 50px;">
      <div class="container-fluid p-0">
          <div class="d-flex align-items-center">
              <div class="d-flex me-2 align-items-center">
@@ -10,6 +10,7 @@
              <div class="navbar-brand flex-1 h-32px">
                  <a href="{{ route('dashboard.index') }}" class="d-inline-flex align-items-center">
                      {{-- <img src="{{ asset('assets/logo/text-blue.png') }}" class="h-32px"> --}}
+                     <span class="fw-bold fs-3 text-white">HMS CAMBODIA</span>
                  </a>
              </div>
          </div>
@@ -69,11 +70,6 @@
                          <a href="#" class="dropdown-item" onclick="clearCache()">
                              <i class="fa-solid fa-broom-wide me-2 fa-fw"></i>
                              {{ __('root.nav.clear_cache') }}
-                         </a>
-                         <a href="#" class="dropdown-item" id="theme-toggle" style="cursor: pointer;">
-                             <i class="fa-solid fa-sun me-2 fa-fw" id="theme-toggle-light-icon" style="color: #1e40af;"></i>
-                             <i class="fa-solid fa-moon me-2 fa-fw d-none" id="theme-toggle-dark-icon" style="color: #ffffff;"></i>
-                             <span id="theme-toggle-text">Dark Mode</span>
                          </a>
                          <a href="#" class="dropdown-item" onclick="logout()">
                              <i class="fa-solid fa-arrow-right-from-bracket me-2"></i>

@@ -5,7 +5,7 @@
     --app-primary-color: #00213e;
     --app-primary-color-hover: #0d2c48;
     --app-primary-color-active: #001a32;
-    --app-primary-color-rgb: 0, 33, 62;
+    --app-primary-color-rgb: 28, 82, 71;
     --app-primary-color-link: #26425b;
     --app-primary-color-link-hover: #40596e;
     --body-font-size-lg: 1rem;
@@ -4920,15 +4920,15 @@ fieldset:disabled .btn {
 .navbar {
     --navbar-padding-x: calc(var(--spacer) * 0.5);
     --navbar-padding-y: var(--spacer-2);
-    --navbar-color: var(--body-color);
-    --navbar-hover-color: var(--body-color);
-    --navbar-disabled-color: rgba(var(--body-color-rgb), 0.3);
-    --navbar-active-color: var(--link-color);
+    --navbar-color: #ffffff;
+    --navbar-hover-color: #ffffff;
+    --navbar-disabled-color: rgba(255, 255, 255, 0.3);
+    --navbar-active-color: #ffffff;
     --navbar-brand-padding-y: var(--spacer-1);
     --navbar-brand-margin-end: 0;
     --navbar-brand-font-size: var(--body-font-size);
-    --navbar-brand-color: var(--link-color);
-    --navbar-brand-hover-color: var(--link-color);
+    --navbar-brand-color: #ffffff;
+    --navbar-brand-hover-color: #ffffff;
     --navbar-nav-link-padding-x: 1rem;
     --navbar-toggler-padding-y: var(--navbar-link-padding-y);
     --navbar-toggler-padding-x: var(--navbar-link-padding-y);
@@ -16606,12 +16606,12 @@ html[data-color-theme=dark] [data-color-theme] .link-yellow {
 
 [data-color-theme=dark] .text-primary,
 html[data-color-theme=dark] [data-color-theme] .text-primary {
-    --primary-rgb: 109, 181, 255
+    --primary-rgb: 28, 82, 71
 }
 
 [data-color-theme=dark] .link-primary,
 html[data-color-theme=dark] [data-color-theme] .link-primary {
-    --primary-rgb: 109, 181, 255
+    --primary-rgb: 28, 82, 71
 }
 
 [data-color-theme=dark] .text-secondary,
@@ -18586,27 +18586,28 @@ html[data-color-theme=dark] .nav-tabs:not(.nav-tabs-underline):not(.nav-tabs-ove
 }
 
 .navbar {
-    --navbar-bg: var(--white);
+    --navbar-bg: #1c5247;
     --navbar-brand-width: calc(18.75rem - var(--navbar-padding-x));
     --navbar-brand-image-size: var(--body-line-height-computed);
     --navbar-search-width: 30rem;
-    --navbar-link-padding-y: 0.625rem;
+    --navbar-link-padding-y: 0.375rem;
     --navbar-link-padding-x: 0.9375rem;
-    --navbar-hover-bg: var(--gray-200);
-    --navbar-hover-active-bg: var(--gray-300);
-    --navbar-hover-active-color: var(--body-color);
-    --navbar-active-bg: rgba(var(--primary-rgb), 0.1);
+    --navbar-hover-bg: rgba(255, 255, 255, 0.1);
+    --navbar-hover-active-bg: rgba(255, 255, 255, 0.15);
+    --navbar-hover-active-color: #ffffff;
+    --navbar-active-bg: rgba(28, 82, 71, 0.2);
     -ms-flex-negative: 0;
     flex-shrink: 0;
     background-color: var(--navbar-bg);
-    color: var(--navbar-color)
+    color: #ffffff
 }
 
 .navbar[data-color-theme=dark],
 [data-color-theme=dark] .navbar:not([data-color-theme]),
 html[data-color-theme=dark] .navbar {
     color-scheme: dark;
-    --navbar-bg: #32333a
+    --navbar-bg: #1c5247;
+    color: #ffffff
 }
 
 .navbar-nav .nav-tabs {
@@ -35743,8 +35744,8 @@ html[data-color-theme=dark] .btn-sidebar-expand {
 }
 
 .nav-sidebar .nav-link.active {
-    border-right: 2px solid #00213e !important;
-    background-color: #eee
+    border-right: 2px solid #1c5247 !important;
+    background-color: rgba(28, 82, 71, 0.1)
 }
 
 .nav-sidebar .nav-link i {
