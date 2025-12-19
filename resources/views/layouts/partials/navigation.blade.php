@@ -9,7 +9,6 @@
              </div>
              <div class="navbar-brand flex-1 h-32px">
                  <a href="{{ route('dashboard.index') }}" class="d-inline-flex align-items-center">
-                     {{-- <img src="{{ asset('assets/logo/text-blue.png') }}" class="h-32px"> --}}
                      <span class="fw-bold fs-3 text-white">HMS CAMBODIA</span>
                  </a>
              </div>
