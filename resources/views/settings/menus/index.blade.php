@@ -5,7 +5,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">{{ __('Menu Management') }}</h3>
+                            <h3 class="card-title">{{ __('global.menu_management') }}</h3>
                         </div>
 
                         <div class="card-body">
@@ -44,7 +44,7 @@
 
                             <!-- DataTable -->
                             <div class="table-responsive">
-                                <x-datatables title="{{ __('Menu List') }}" :data="$dataTable"></x-datatables>
+                                <x-datatables title="{{ __('global.menu_list') }}" :data="$dataTable"></x-datatables>
                             </div>
                         </div>
                     </div>

@@ -6,4 +6,10 @@
             @endforeach
         </ul>
     </div>
+        <div class="sidebar-footer text-center py-2 border-top mt-auto" style="background: #f8f9fa;">
+            <small class="text-muted">
+            &copy; {{ date('Y') }} <a href="https://github.com/chhembunheng" target="_blank" class="text-decoration-none">@hengdev_04</a><br>
+            All rights reserved.
+            </small>
+        </div>
 </div>

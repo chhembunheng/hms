@@ -12,6 +12,7 @@ class RoomPricing extends Model
     protected $fillable = [
         'room_type_id',
         'price',
+        'pricing_type',
         'currency',
         'effective_from',
         'effective_to',
@@ -24,6 +25,17 @@ class RoomPricing extends Model
         'effective_to' => 'date',
         'is_active' => 'boolean',
     ];
+
+    /**
+     * Get available pricing types.
+     */
+    public static function getPricingTypes(): array
+    {
+        return [
+            'night' => __('rooms.per_night'),
+            '3_hours' => __('rooms.per_3_hours'),
+        ];
+    }
 
     /**
      * Get the room type that owns the pricing.

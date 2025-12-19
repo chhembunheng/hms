@@ -25,12 +25,12 @@ class RoomTypeDataTable extends DataTable
             ->addIndexColumn()
             ->addColumn('name', fn($row) => $row->name)
             ->addColumn('description', fn($row) => $row->description ?? '-')
-            ->addColumn('is_active', fn($row) => $row->is_active ? 'Active' : 'Inactive')
+            ->addColumn('is_active', fn($row) => badge($row->is_active ? 'active' : 'inactive'))
             ->editColumn('created_at', function (RoomType $model) {
                 return $model->created_at?->format(config('init.datetime.display_format'));
             })
             ->addColumn('action', fn($row) => view('rooms.room-types.action', compact('row')))
-            ->rawColumns(['action']);
+            ->rawColumns(['action', 'is_active']);
     }
 
     /**
@@ -95,11 +95,12 @@ class RoomTypeDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('#')->searchable(false)->orderable(false),
-            Column::make('name'),
-            Column::make('description'),
-            Column::make('is_active'),
-            Column::make('created_at'),
+            Column::make('name')->title(__('root.common.name')),
+            Column::make('description')->title(__('form.description')),
+            Column::make('is_active')->title(__('rooms.active_status')),
+            Column::make('created_at')->title(__('global.created_at')),
             Column::computed('action')
+                  ->title(__('global.action'))
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)
@@ -112,6 +113,6 @@ class RoomTypeDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'RoomTypes_' . date('YmdHis');
+        return __('rooms.room_types') . '_' . date('YmdHis');
     }
 }

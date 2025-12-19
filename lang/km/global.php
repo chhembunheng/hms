@@ -294,4 +294,55 @@ return [
     'select_all' => 'ជ្រើសរើសទាំងអស់',
     'search' => 'ស្វែងរក',
 
+    // User Management
+    'user_management' => 'ការគ្រប់គ្រងអ្នកប្រើប្រាស់',
+    'add_user' => 'បន្ថែមអ្នកប្រើប្រាស់',
+    'user_list' => 'បញ្ជីអ្នកប្រើប្រាស់',
+    'search_by_email' => 'ស្វែងរកតាមអ៊ីមែល',
+
+    // Role Management
+    'role_management' => 'ការគ្រប់គ្រងតួនាទី',
+    'add_role' => 'បន្ថែមតួនាទី',
+    'role_list' => 'បញ្ជីតួនាទី',
+    'roles' => 'តួនាទី',
+    'search_by_display_name' => 'ស្វែងរកតាមឈ្មោះបង្ហាញ',
+
+    // Permission Management
+    'permissions_management' => 'ការគ្រប់គ្រងសិទ្ធិ',
+    'add_permission' => 'បន្ថែមសិទ្ធិ',
+    'permission_list' => 'បញ្ជីសិទ្ធិ',
+    'permissions' => 'សិទ្ធិ',
+    'search_by_description' => 'ស្វែងរកតាមការពិពណ៌នា',
+
+    // Menu Management
+    'menu_management' => 'ការគ្រប់គ្រងម៉ឺនុយ',
+    'menu_list' => 'បញ្ជីម៉ឺនុយ',
+    'menus' => 'ម៉ឺនុយ',
+    'search_by_route' => 'ស្វែងរកតាមផ្លូវ',
+
+    // Exchange Rate Management
+    'exchange_rate_management' => 'ការគ្រប់គ្រងអត្រាប្តូរប្រាក់',
+    'add_exchange_rate' => 'បន្ថែមអត្រាប្តូរប្រាក់',
+    'exchange_rate_list' => 'បញ្ជីអត្រាប្តូរប្រាក់',
+    'exchange_rates' => 'អត្រាប្តូរប្រាក់',
+    'from_currency' => 'ពីរូបិយប័ណ្ណ',
+    'to_currency' => 'ទៅរូបិយប័ណ្ណ',
+    'rate' => 'អត្រា',
+    'rate_range' => 'ចន្លោះអត្រា',
+    'effective_date_range' => 'ចន្លោះកាលបរិច្ឆេទមានប្រសិទ្ធភាព',
+    'search_by_from_currency' => 'ស្វែងរកតាមរូបិយប័ណ្ណដើម',
+    'search_by_to_currency' => 'ស្វែងរកតាមរូបិយប័ណ្ណគោលដៅ',
+    'min' => 'អប្បបរមា',
+    'max' => 'អតិបរមា',
+    'rate' => 'អត្រា',
+    'is_active' => 'សកម្ម',
+    'created_at' => 'បានបង្កើតនៅ',
+    'action' => 'សកម្មភាព',
+    'fullname' => 'ឈ្មោះពេញ',
+    'email' => 'អ៊ីមែល',
+    'updated_at' => 'បានធ្វើបច្ចុប្បន្នភាពនៅ',
+    'users' => 'អ្នកប្រើប្រាស់',
+
+    // Common
+    'created_date_range' => 'ចន្លោះកាលបរិច្ឆេទបង្កើត',
 ];

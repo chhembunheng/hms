@@ -7,14 +7,14 @@
                         <div class="card-body">
                             <div class="row g-4">
                                 <div class="col-md-6">
-                                    <x-form.input :label="__('Room Number')" name="room_number" :value="old('room_number', $form?->room_number)" required />
+                                    <x-form.input :label="__('rooms.room_number')" name="room_number" :value="old('room_number', $form?->room_number)" required />
                                 </div>
                                 <div class="col-md-6">
-                                    <x-form.input :label="__('Floor')" name="floor" type="number" :value="old('floor', $form?->floor)" />
+                                    <x-form.input :label="__('rooms.floor')" name="floor" type="number" :value="old('floor', $form?->floor)" />
                                 </div>
                                 <div class="col-md-6">
                                     <x-form.select
-                                        :label="__('Room Type')"
+                                        :label="__('rooms.room_type')"
                                         name="room_type_id"
                                         :value="old('room_type_id', $form?->room_type_id)"
                                         :options="\App\Models\RoomType::active()->pluck('name', 'id')->toArray()"
@@ -22,14 +22,14 @@
                                 </div>
                                 <div class="col-md-6">
                                     <x-form.select
-                                        :label="__('Status')"
+                                        :label="__('form.status')"
                                         name="status_id"
                                         :value="old('status_id', $form?->status_id)"
                                         :options="\App\Models\RoomStatus::active()->pluck('name', 'id')->toArray()"
                                     />
                                 </div>
                                 <div class="col-md-6">
-                                    <x-form.checkbox :label="__('Is Active')" name="is_active" :checked="old('is_active', $form?->is_active ?? true)" />
+                                    <x-form.checkbox :label="__('rooms.is_active')" name="is_active" :checked="old('is_active', $form?->is_active ?? true)" />
                                 </div>
                             </div>
                         </div>

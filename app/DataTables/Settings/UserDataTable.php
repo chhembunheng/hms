@@ -76,12 +76,12 @@ class UserDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('DT_RowIndex')->title(__('root.common.no'))->width(60),
-            Column::computed('name')->title('Fullname'),
-            Column::make('email')->title('Email'),
-            Column::make('created_at')->title('Created At'),
-            Column::make('updated_at')->title('Updated At'),
-            Column::computed('action')->exportable(false)->printable(false)->width(60)->addClass('text-center')->title('Action'),
+            Column::computed('DT_RowIndex')->title('#')->width(60),
+            Column::computed('name')->title(__('global.fullname')),
+            Column::make('email')->title(__('global.email')),
+            Column::make('created_at')->title(__('global.created_at')),
+            Column::make('updated_at')->title(__('global.updated_at')),
+            Column::computed('action')->exportable(false)->printable(false)->width(60)->addClass('text-center')->title(__('global.action')),
         ];
     }
 
@@ -90,6 +90,6 @@ class UserDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'User_' . date('YmdHis');
+        return __('global.users') . '_' . date('YmdHis');
     }
 }

@@ -60,12 +60,13 @@ class RoleDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('DT_RowIndex')->title(__('root.common.no'))->width(60),
-            Column::make('name'),
-            Column::make('administrator'),
-            Column::make('sort'),
-            Column::make('created_at'),
+            Column::computed('DT_RowIndex')->title('#')->width(60),
+            Column::make('name')->title(__('root.common.name')),
+            Column::make('administrator')->title(__('form.administrator')),
+            Column::make('sort')->title(__('form.sort')),
+            Column::make('created_at')->title(__('global.created_at')),
             Column::computed('action')
+                  ->title(__('global.action'))
                   ->exportable(false)
                   ->printable(false)
                   ->width(100)
@@ -78,6 +79,6 @@ class RoleDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Role_' . date('YmdHis');
+        return __('global.roles') . '_' . date('YmdHis');
     }
 }

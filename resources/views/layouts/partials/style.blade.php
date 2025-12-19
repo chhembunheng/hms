@@ -5,7 +5,6 @@
 <link href="{{ asset('assets/css/main.css') }}?v={{ config('init.layout_version') }}" id="stylesheet" rel="stylesheet" type="text/css">
 
 <style>
-/* Font system: Ubuntu first, Hanuman fallback for Khmer */
 html:lang(km) {
     font-family: 'Ubuntu', 'Hanuman', system-ui, -apple-system, sans-serif !important;
 }
@@ -15,17 +14,15 @@ html:lang(km) body * {
     font-family: 'Ubuntu', 'Hanuman', system-ui, -apple-system, sans-serif !important;
 }
 
-/* English stays Ubuntu only */
 html:lang(en) {
-    font-family: 'Ubuntu', system-ui, -apple-system, sans-serif !important;
+    font-family: 'Ubuntu', 'Hanuman', system-ui, -apple-system, sans-serif !important;
 }
 
 html:lang(en) body,
 html:lang(en) body * {
-    font-family: 'Ubuntu', system-ui, -apple-system, sans-serif !important;
+    font-family: 'Ubuntu', 'Hanuman', system-ui, -apple-system, sans-serif !important;
 }
 
-/* Fallback using data-locale */
 html[data-locale="km"] {
     font-family: 'Ubuntu', 'Hanuman', system-ui, -apple-system, sans-serif !important;
 }
@@ -36,15 +33,14 @@ html[data-locale="km"] body * {
 }
 
 html[data-locale="en"] {
-    font-family: 'Ubuntu', system-ui, -apple-system, sans-serif !important;
+    font-family: 'Ubuntu', 'Hanuman', system-ui, -apple-system, sans-serif !important;
 }
 
 html[data-locale="en"] body,
 html[data-locale="en"] body * {
-    font-family: 'Ubuntu', system-ui, -apple-system, sans-serif !important;
+    font-family: 'Ubuntu', 'Hanuman', system-ui, -apple-system, sans-serif !important;
 }
 
-/* Force Ubuntu first for all Bootstrap classes in Khmer locale */
 html:lang(km) .navbar-brand,
 html:lang(km) .nav-link,
 html:lang(km) .dropdown-item,
@@ -58,7 +54,6 @@ html:lang(km) p, html:lang(km) span, html:lang(km) div {
     font-family: 'Ubuntu', 'Hanuman', system-ui, -apple-system, sans-serif !important;
 }
 
-/* English classes stay Ubuntu only */
 html:lang(en) .navbar-brand,
 html:lang(en) .nav-link,
 html:lang(en) .dropdown-item,
@@ -69,10 +64,9 @@ html:lang(en) .card-text,
 html:lang(en) h1, html:lang(en) h2, html:lang(en) h3,
 html:lang(en) h4, html:lang(en) h5, html:lang(en) h6,
 html:lang(en) p, html:lang(en) span, html:lang(en) div {
-    font-family: 'Ubuntu', system-ui, -apple-system, sans-serif !important;
+    font-family: 'Ubuntu', 'Hanuman', system-ui, -apple-system, sans-serif !important;
 }
 
-/* ABSOLUTELY PROTECT Font Awesome Icons - Highest Priority */
 .fa, .fas, .far, .fal, .fad, .fab,
 .fa-solid, .fa-regular, .fa-light, .fa-duotone, .fa-brands,
 .fa-thin, .fa-sharp, .fa-classic,
@@ -82,7 +76,6 @@ html:lang(en) p, html:lang(en) span, html:lang(en) div {
     font-style: normal !important;
 }
 
-/* Prevent browser auto-translation */
 html[translate="no"] {
     -webkit-user-translate: none !important;
     -moz-user-translate: none !important;
@@ -90,14 +83,12 @@ html[translate="no"] {
     user-translate: none !important;
 }
 
-/* Hide from translation services */
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
     .notranslate {
         -webkit-user-translate: none !important;
     }
 }
 
-/* Extra protection for icons inside links and other elements */
 html:lang(km) .fa, html:lang(km) .fas, html:lang(km) .far, html:lang(km) .fal,
 html:lang(km) .fad, html:lang(km) .fab, html:lang(km) .fa-solid, html:lang(km) .fa-regular,
 html:lang(km) .fa-light, html:lang(km) .fa-duotone, html:lang(km) .fa-brands,
@@ -112,11 +103,79 @@ html:lang(en) [class*="fa-"] {
     font-family: "Font Awesome 7 Pro", "Font Awesome 7 Brands" !important;
 }
 
-/* Protect icons in navigation specifically */
 .nav-link .fa, .nav-link .fas, .nav-link .far, .nav-link .fal,
 .nav-link .fad, .nav-link .fab, .nav-link .fa-solid, .nav-link .fa-regular,
 .nav-link .fa-light, .nav-link .fa-duotone, .nav-link .fa-brands,
 .nav-link [class*="fa-"] {
     font-family: "Font Awesome 7 Pro", "Font Awesome 7 Brands" !important;
 }
+
+/* Custom Brand Color: #034246 (Dark Teal) */
+:root {
+    --custom-brand-color: #034246;
+    --custom-brand-hover: #025a5f;
+    --custom-brand-light: #e8f4f5;
+}
+
+/* Apply custom color to navbar */
+.navbar-dark {
+    background-color: var(--custom-brand-color) !important;
+}
+
+/* Apply to nav links */
+.nav-link {
+    color: var(--custom-brand-color) !important;
+}
+
+/* Apply to primary buttons */
+.btn-primary {
+    background-color: var(--custom-brand-color) !important;
+    border-color: var(--custom-brand-color) !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--custom-brand-hover) !important;
+    border-color: var(--custom-brand-hover) !important;
+}
+
+/* Apply to active states */
+.nav-link.active,
+.nav-sidebar .nav-link.active {
+    background-color: var(--custom-brand-color) !important;
+    color: white !important;
+}
+
+/* Apply to focus states */
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: var(--custom-brand-hover) !important;
+    border-color: var(--custom-brand-hover) !important;
+    box-shadow: 0 0 0 0.2rem rgba(3, 66, 70, 0.25) !important;
+}
+
+/* Apply to accent elements */
+.text-primary {
+    color: var(--custom-brand-color) !important;
+}
+
+.bg-primary {
+    background-color: var(--custom-brand-color) !important;
+}
+
+.border-primary {
+    border-color: var(--custom-brand-color) !important;
+}
+
+/* Custom gradient backgrounds */
+.custom-gradient {
+    background: linear-gradient(135deg, var(--custom-brand-color) 0%, var(--custom-brand-hover) 100%);
+}
+
+/* Sidebar active states */
+.nav-sidebar .nav-link.active {
+    background: linear-gradient(135deg, var(--custom-brand-color) 0%, var(--custom-brand-hover) 100%) !important;
+    color: white !important;
+}
+
+
 </style>

@@ -24,14 +24,16 @@ class RoomStatusDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addIndexColumn()
             ->addColumn('name', fn($row) => $row->name)
+            ->addColumn('name_en', fn($row) => $row->name_en ?? '-')
+            ->addColumn('name_kh', fn($row) => $row->name_kh ?? '-')
             ->addColumn('description', fn($row) => $row->description ?? '-')
             ->addColumn('color', fn($row) => '<span style="color: ' . $row->color . ';">' . $row->color . '</span>')
-            ->addColumn('is_active', fn($row) => $row->is_active ? 'Active' : 'Inactive')
+            ->addColumn('is_active', fn($row) => badge($row->is_active ? 'active' : 'inactive'))
             ->editColumn('created_at', function (RoomStatus $model) {
                 return $model->created_at?->format(config('init.datetime.display_format'));
             })
             ->addColumn('action', fn($row) => view('rooms.room-statuses.action', compact('row')))
-            ->rawColumns(['action', 'color']);
+            ->rawColumns(['action', 'color', 'is_active']);
     }
 
     /**
@@ -52,6 +54,16 @@ class RoomStatusDataTable extends DataTable
                 // Filter by name
                 if (!empty($filters['name'])) {
                     $query->where('name', 'like', '%' . $filters['name'] . '%');
+                }
+
+                // Filter by name_en
+                if (!empty($filters['name_en'])) {
+                    $query->where('name_en', 'like', '%' . $filters['name_en'] . '%');
+                }
+
+                // Filter by name_kh
+                if (!empty($filters['name_kh'])) {
+                    $query->where('name_kh', 'like', '%' . $filters['name_kh'] . '%');
                 }
 
                 // Filter by description
@@ -101,11 +113,12 @@ class RoomStatusDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('#')->searchable(false)->orderable(false),
-            Column::make('name'),
-            Column::make('description'),
-            Column::make('color'),
-            Column::make('is_active'),
-            Column::make('created_at'),
+            Column::make('name_en')->title(__('rooms.name_en')),
+            Column::make('name_kh')->title(__('rooms.name_kh')),
+            Column::make('description')->title(__('form.description')),
+            Column::make('color')->title(__('rooms.color')),
+            Column::make('is_active')->title(__('rooms.active_status')),
+            Column::make('created_at')->title(__('global.created_at')),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

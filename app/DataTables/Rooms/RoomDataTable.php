@@ -27,12 +27,12 @@ class RoomDataTable extends DataTable
             ->addColumn('floor', fn($row) => $row->floor ?? '-')
             ->addColumn('room_type', fn($row) => $row->roomType?->name ?? '-')
             ->addColumn('status', fn($row) => $row->status?->name ?? '-')
-            ->addColumn('is_active', fn($row) => $row->is_active ? 'Active' : 'Inactive')
+            ->addColumn('is_active', fn($row) => badge($row->is_active ? 'active' : 'inactive'))
             ->editColumn('created_at', function (Room $model) {
                 return $model->created_at?->format(config('init.datetime.display_format'));
             })
             ->addColumn('action', fn($row) => view('rooms.rooms.action', compact('row')))
-            ->rawColumns(['action']);
+            ->rawColumns(['action', 'is_active']);
     }
 
     /**
@@ -107,13 +107,14 @@ class RoomDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('#')->searchable(false)->orderable(false),
-            Column::make('room_number'),
-            Column::make('floor'),
-            Column::make('room_type'),
-            Column::make('status'),
-            Column::make('is_active'),
-            Column::make('created_at'),
+            Column::make('room_number')->title(__('rooms.room_number')),
+            Column::make('floor')->title(__('rooms.floor')),
+            Column::make('room_type')->title(__('rooms.room_type')),
+            Column::make('status')->title(__('form.status')),
+            Column::make('is_active')->title(__('rooms.active_status')),
+            Column::make('created_at')->title(__('global.created_at')),
             Column::computed('action')
+                  ->title(__('global.action'))
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)
@@ -126,6 +127,6 @@ class RoomDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Rooms_' . date('YmdHis');
+        return __('rooms.rooms') . '_' . date('YmdHis');
     }
 }

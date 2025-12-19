@@ -181,4 +181,28 @@ class RoleController extends Controller
             return errors(message: $e->getMessage());
         }
     }
+
+    public function select2(Request $request)
+    {
+        $search = $request->input('q', '');
+        $query = Role::query();
+
+        if (!empty($search)) {
+            $query->whereHas('translations', function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%');
+            });
+        }
+
+        $roles = $query->orderBy('sort', 'asc')->limit(20)->get();
+
+        $results = [];
+        foreach ($roles as $role) {
+            $results[] = [
+                'id' => $role->id,
+                'text' => $role->translations()->where('locale', app()->getLocale())->value('name') ?? $role->translations()->where('locale', 'en')->value('name') ?? 'N/A',
+            ];
+        }
+
+        return response()->json(['results' => $results]);
+    }
 }

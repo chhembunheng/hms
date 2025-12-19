@@ -7,16 +7,22 @@
                         <div class="card-body">
                             <div class="row g-4">
                                 <div class="col-md-6">
-                                    <x-form.input :label="__('Name')" name="name" :value="old('name', $form?->name)" required />
+                                    <x-form.input :label="__('root.common.name')" name="name" :value="old('name', $form?->name)" required />
                                 </div>
                                 <div class="col-md-6">
-                                    <x-form.input :label="__('Color')" name="color" type="color" :value="old('color', $form?->color ?? '#007bff')" required />
+                                    <x-form.input :label="__('rooms.name_en')" name="name_en" :value="old('name_en', $form?->name_en)" />
                                 </div>
                                 <div class="col-md-6">
-                                    <x-form.checkbox :label="__('Is Active')" name="is_active" :checked="old('is_active', $form?->is_active ?? true)" />
+                                    <x-form.input :label="__('rooms.name_kh')" name="name_kh" :value="old('name_kh', $form?->name_kh)" />
+                                </div>
+                                <div class="col-md-6">
+                                    <x-form.input :label="__('rooms.color')" name="color" type="color" :value="old('color', $form?->color ?? '#007bff')" required />
+                                </div>
+                                <div class="col-md-6">
+                                    <x-form.checkbox :label="__('rooms.active_status')" name="is_active" :checked="old('is_active', $form?->is_active ?? true)" />
                                 </div>
                                 <div class="col-12">
-                                    <x-form.textarea :label="__('Description')" name="description" :value="old('description', $form?->description)" rows="3" />
+                                    <x-form.textarea :label="__('form.description')" name="description" :value="old('description', $form?->description)" rows="3" />
                                 </div>
                             </div>
                         </div>

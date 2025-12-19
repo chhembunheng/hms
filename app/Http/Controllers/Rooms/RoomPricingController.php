@@ -25,6 +25,7 @@ class RoomPricingController extends Controller
             $rules = [
                 'room_type_id' => 'required|exists:room_types,id',
                 'price' => 'required|numeric|min:0',
+                'pricing_type' => 'required|in:night,3_hours',
                 'currency' => 'required|string|max:3',
                 'effective_from' => 'required|date',
                 'effective_to' => 'nullable|date|after:effective_from',
@@ -36,7 +37,7 @@ class RoomPricingController extends Controller
             RoomPricing::create($request->all());
 
             return redirect()->route('rooms.pricing.index')
-                ->with('success', 'Room pricing created successfully.');
+                ->with('success', __('rooms.room_pricing_created_successfully'));
         }
 
         return view('rooms.room-pricing.form', compact('form'));
@@ -50,6 +51,7 @@ class RoomPricingController extends Controller
             $rules = [
                 'room_type_id' => 'required|exists:room_types,id',
                 'price' => 'required|numeric|min:0',
+                'pricing_type' => 'required|in:night,3_hours',
                 'currency' => 'required|string|max:3',
                 'effective_from' => 'required|date',
                 'effective_to' => 'nullable|date|after:effective_from',
@@ -61,7 +63,7 @@ class RoomPricingController extends Controller
             $form->update($request->all());
 
             return redirect()->route('rooms.pricing.index')
-                ->with('success', 'Room pricing updated successfully.');
+                ->with('success', __('rooms.room_pricing_updated_successfully'));
         }
 
         return view('rooms.room-pricing.form', compact('form'));
@@ -83,6 +85,6 @@ class RoomPricingController extends Controller
         $roomPricing->delete();
 
         return redirect()->route('rooms.pricing.index')
-            ->with('success', 'Room pricing deleted successfully.');
+            ->with('success', __('rooms.room_pricing_deleted_successfully'));
     }
 }

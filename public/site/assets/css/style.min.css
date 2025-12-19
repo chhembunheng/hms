@@ -101,10 +101,10 @@ button {
 
 :root,
 [data-color-theme=light] {
-    --app-primary-color: #00213e;
-    --app-primary-color-hover: #0d2c48;
-    --app-primary-color-active: #001a32;
-    --app-primary-color-rgb: 28, 82, 71;
+    --app-primary-color: #034246;
+    --app-primary-color-hover: #025a5f;
+    --app-primary-color-active: #022d32;
+    --app-primary-color-rgb: 3, 66, 70;
     --app-primary-color-link: #26425b;
     --app-primary-color-link-hover: #40596e;
     --body-font-size-lg: 1rem;
@@ -4572,16 +4572,16 @@ blockquote::after {
     justify-content: space-between !important;
     align-items: center !important;
     padding: 16px !important;
-    color: #00213e !important;
+    color: #034246 !important;
     background: #ffffff !important;
 }
 
 #top-navigation.is-sticky * {
-    color: #00213e !important;
+    color: #034246 !important;
 }
 
 #top-navigation.is-sticky {
-    color: #00213e !important;
+    color: #034246 !important;
     background: #ffffff !important;
     box-shadow: 0px 15px 50px 0px rgba(27, 32, 50, 0.1);
 }

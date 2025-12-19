@@ -27,12 +27,12 @@ class ExchangeRateDataTable extends DataTable
             ->addColumn('to_currency', fn($row) => $row->to_currency)
             ->addColumn('rate', fn($row) => number_format($row->rate, 2))
             ->addColumn('effective_date', fn($row) => $row->effective_date->format('Y-m-d'))
-            ->addColumn('is_active', fn($row) => $row->is_active ? 'Active' : 'Inactive')
+            ->addColumn('is_active', fn($row) => badge($row->is_active ? 'active' : 'inactive'))
             ->editColumn('created_at', function (ExchangeRate $model) {
                 return $model->created_at?->format(config('init.datetime.display_format'));
             })
             ->addColumn('action', fn($row) => view('settings.exchange-rates.action', compact('row')))
-            ->rawColumns(['action']);
+            ->rawColumns(['action', 'is_active']);
     }
 
     /**
@@ -113,13 +113,14 @@ class ExchangeRateDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('#')->searchable(false)->orderable(false),
-            Column::make('from_currency'),
-            Column::make('to_currency'),
-            Column::make('rate'),
-            Column::make('effective_date'),
-            Column::make('is_active'),
-            Column::make('created_at'),
+            Column::make('from_currency')->title(__('global.from_currency')),
+            Column::make('to_currency')->title(__('global.to_currency')),
+            Column::make('rate')->title(__('global.rate')),
+            Column::make('effective_date')->title(__('global.effective_date_range')),
+            Column::make('is_active')->title(__('rooms.active_status')),
+            Column::make('created_at')->title(__('global.created_at')),
             Column::computed('action')
+                  ->title(__('global.action'))
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)
@@ -132,6 +133,6 @@ class ExchangeRateDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'ExchangeRates_' . date('YmdHis');
+        return __('global.exchange_rates') . '_' . date('YmdHis');
     }
 }

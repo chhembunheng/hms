@@ -18,48 +18,52 @@ class RoomPricingSeeder extends Seeder
 
         $pricingData = [
             [
-                'price' => 50.00,
-                'currency' => 'USD',
-                'effective_from' => now()->format('Y-m-d'),
-                'is_active' => true,
+                'night_price' => 50.00,
+                'three_hour_price' => 25.00,
             ],
             [
-                'price' => 80.00,
-                'currency' => 'USD',
-                'effective_from' => now()->format('Y-m-d'),
-                'is_active' => true,
+                'night_price' => 80.00,
+                'three_hour_price' => 40.00,
             ],
             [
-                'price' => 100.00,
-                'currency' => 'USD',
-                'effective_from' => now()->format('Y-m-d'),
-                'is_active' => true,
+                'night_price' => 100.00,
+                'three_hour_price' => 50.00,
             ],
             [
-                'price' => 150.00,
-                'currency' => 'USD',
-                'effective_from' => now()->format('Y-m-d'),
-                'is_active' => true,
+                'night_price' => 150.00,
+                'three_hour_price' => 75.00,
             ],
             [
-                'price' => 250.00,
-                'currency' => 'USD',
-                'effective_from' => now()->format('Y-m-d'),
-                'is_active' => true,
+                'night_price' => 250.00,
+                'three_hour_price' => 125.00,
             ],
             [
-                'price' => 500.00,
-                'currency' => 'USD',
-                'effective_from' => now()->format('Y-m-d'),
-                'is_active' => true,
+                'night_price' => 500.00,
+                'three_hour_price' => 250.00,
             ],
         ];
 
         foreach ($roomTypes as $index => $roomType) {
             if (isset($pricingData[$index])) {
-                RoomPricing::create(array_merge($pricingData[$index], [
+                // Create per night pricing
+                RoomPricing::create([
                     'room_type_id' => $roomType->id,
-                ]));
+                    'price' => $pricingData[$index]['night_price'],
+                    'pricing_type' => 'night',
+                    'currency' => 'USD',
+                    'effective_from' => now()->format('Y-m-d'),
+                    'is_active' => true,
+                ]);
+
+                // Create 3-hour pricing
+                RoomPricing::create([
+                    'room_type_id' => $roomType->id,
+                    'price' => $pricingData[$index]['three_hour_price'],
+                    'pricing_type' => '3_hours',
+                    'currency' => 'USD',
+                    'effective_from' => now()->format('Y-m-d'),
+                    'is_active' => true,
+                ]);
             }
         }
     }

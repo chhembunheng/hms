@@ -22,10 +22,138 @@
             visibility: hidden;
             height: 0 !important;
         }
+
+        /* Enhanced DataTable Scrolling */
+        .datatable-scroll-wrap {
+            overflow-x: auto !important;
+            overflow-y: auto !important;
+            max-height: 70vh;
+            position: relative;
+        }
+
+        .datatable-scroll-wrap table {
+            margin-bottom: 0;
+            min-width: 100%;
+            white-space: nowrap;
+        }
+
+        .datatable-scroll-wrap thead th {
+            position: sticky;
+            top: 0;
+            background: #f8f9fa;
+            z-index: 10;
+            border-bottom: 2px solid #dee2e6;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .datatable-scroll-wrap tbody td {
+            white-space: nowrap;
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .datatable-scroll-wrap tbody td:hover {
+            white-space: normal;
+            word-wrap: break-word;
+            overflow: visible;
+            background: rgba(0,123,255,0.1);
+            z-index: 5;
+            position: relative;
+        }
+
+        /* Custom scrollbar styling */
+        .datatable-scroll-wrap::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+
+        .datatable-scroll-wrap::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .datatable-scroll-wrap::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+
+        .datatable-scroll-wrap::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .datatable-scroll-wrap {
+                max-height: 60vh;
+            }
+
+            .datatable-scroll-wrap tbody td {
+                max-width: 150px;
+            }
+        }
+
+        /* Fixed column styling for better UX */
+        .DTFC_LeftBodyWrapper table,
+        .DTFC_RightBodyWrapper table {
+            margin-bottom: 0;
+        }
+
+        .DTFC_LeftBodyWrapper,
+        .DTFC_RightBodyWrapper {
+            background: white;
+        }
+
+        /* System Watermark */
+        .system-watermark {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+        }
+
+        .watermark-text {
+            font-size: 72px;
+            font-weight: bold;
+            color: rgba(0, 0, 0, 0.05);
+            transform: rotate(-45deg);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        /* Dark mode watermark */
+        .dark .watermark-text {
+            color: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Responsive watermark adjustments */
+        @media (max-width: 768px) {
+            .watermark-text {
+                font-size: 48px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .watermark-text {
+                font-size: 36px;
+            }
+        }
     </style>
 </head>
 
 <body style="overflow: visible;" class="dark:bg-gray-900 dark:text-gray-100">
+    <!-- System Watermark -->
+    <div class="system-watermark">
+        <div class="watermark-text">HMS CAMBODIA</div>
+    </div>
     @if (config('init.loading.enabled') === true)
         <div class="card-overlay d-none" id="body-overlay"><span class="{{ config('init.loading.icon') }}"></span></div>
     @endif

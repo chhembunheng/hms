@@ -25,15 +25,16 @@ class RoomPricingDataTable extends DataTable
             ->addIndexColumn()
             ->addColumn('room_type', fn($row) => $row->roomType->name ?? '-')
             ->addColumn('price', fn($row) => number_format($row->price, 2))
+            ->addColumn('pricing_type', fn($row) => RoomPricing::getPricingTypes()[$row->pricing_type] ?? $row->pricing_type)
             ->addColumn('currency', fn($row) => $row->currency)
             ->addColumn('effective_from', fn($row) => $row->effective_from?->format(config('init.datetime.display_format')))
             ->addColumn('effective_to', fn($row) => $row->effective_to?->format(config('init.datetime.display_format')) ?? '-')
-            ->addColumn('is_active', fn($row) => $row->is_active ? 'Active' : 'Inactive')
+            ->addColumn('is_active', fn($row) => badge($row->is_active ? 'active' : 'inactive'))
             ->editColumn('created_at', function (RoomPricing $model) {
                 return $model->created_at?->format(config('init.datetime.display_format'));
             })
             ->addColumn('action', fn($row) => view('rooms.room-pricing.action', compact('row')))
-            ->rawColumns(['action']);
+            ->rawColumns(['action', 'is_active']);
     }
 
     /**
@@ -67,6 +68,11 @@ class RoomPricingDataTable extends DataTable
                 // Filter by currency
                 if (!empty($filters['currency'])) {
                     $query->where('currency', $filters['currency']);
+                }
+
+                // Filter by pricing_type
+                if (!empty($filters['pricing_type'])) {
+                    $query->where('pricing_type', $filters['pricing_type']);
                 }
 
                 // Filter by effective_from range
@@ -114,13 +120,14 @@ class RoomPricingDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('#')->searchable(false)->orderable(false),
-            Column::make('room_type'),
-            Column::make('price'),
-            Column::make('currency'),
-            Column::make('effective_from'),
-            Column::make('effective_to'),
-            Column::make('is_active'),
-            Column::make('created_at'),
+            Column::make('room_type')->title(__('rooms.room_type')),
+            Column::make('price')->title(__('rooms.price')),
+            Column::make('pricing_type')->title(__('rooms.pricing_type')),
+            Column::make('currency')->title(__('rooms.currency')),
+            Column::make('effective_from')->title(__('rooms.effective_from')),
+            Column::make('effective_to')->title(__('rooms.effective_to')),
+            Column::make('is_active')->title(__('rooms.is_active')),
+            Column::make('created_at')->title(__('Created At')),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

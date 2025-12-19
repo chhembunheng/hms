@@ -48,7 +48,13 @@
                     }
                 },
                 scrollX: true,
+                scrollY: '50vh',
                 scrollCollapse: true,
+                responsive: true,
+                fixedHeader: {
+                    header: true,
+                    footer: false
+                },
                 searching: false,
                 initComplete: function(settings, json) {
                     $(document).find('.dataTables_paginate .paginate_button a').addClass('rounded-pill');

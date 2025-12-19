@@ -324,6 +324,10 @@ if (! function_exists('badge')) {
             'low' => 'badge bg-success bg-opacity-10 text-success',
             'closed' => 'badge bg-danger bg-opacity-10 text-danger',
             'open' => 'badge bg-success bg-opacity-10 text-success',
+            'available' => 'badge bg-success bg-opacity-10 text-success',
+            'unavailable' => 'badge bg-danger bg-opacity-10 text-danger',
+            'occupied' => 'badge bg-warning bg-opacity-10 text-warning',
+            'reserved' => 'badge bg-info bg-opacity-10 text-info',
         ];
 
         $normalizedStatus = strtolower(trim((string)($status ?? '')));
@@ -670,5 +674,35 @@ if (!function_exists('getFileSize')) {
         }
 
         return 0;
+    }
+}
+
+if (!function_exists('get_currencies')) {
+    function get_currencies(): array
+    {
+        return [
+            'USD' => 'USD - US Dollar',
+            'KHR' => 'KHR - Cambodian Riel',
+        ];
+    }
+}
+
+if (!function_exists('statusBadge')) {
+    function statusBadge($status)
+    {
+        switch (strtolower($status)) {
+            case 'active':
+                return badge('success', 'Active');
+            case 'inactive':
+                return badge('danger', 'Inactive');
+            case 'pending':
+                return badge('warning', 'Pending');
+            case 'completed':
+                return badge('success', 'Completed');
+            case 'canceled':
+                return badge('danger', 'Canceled');
+            default:
+                return badge('secondary', ucfirst($status));
+        }
     }
 }

@@ -8,6 +8,9 @@ class RoomStatus extends Model
 {
     protected $fillable = [
         'name',
+        'name_en',
+        'name_kh',
+        'description',
         'color',
         'is_active',
     ];
@@ -24,5 +27,14 @@ class RoomStatus extends Model
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
+    }
+
+    public function getLocalizedNameAttribute()
+    {
+        $locale = app()->getLocale();
+        if ($locale === 'km' && $this->name_kh) {
+            return $this->name_kh;
+        }
+        return $this->name_en ?: $this->name;
     }
 }

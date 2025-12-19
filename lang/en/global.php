@@ -292,4 +292,56 @@ return [
     'all_selected' => 'All Selected',
     'select_all' => 'Select All',
     'search' => 'Search',
+
+    // User Management
+    'user_management' => 'User Management',
+    'add_user' => 'Add User',
+    'user_list' => 'User List',
+    'search_by_email' => 'Search by email',
+
+    // Role Management
+    'role_management' => 'Role Management',
+    'add_role' => 'Add Role',
+    'role_list' => 'Role List',
+    'roles' => 'Roles',
+    'search_by_display_name' => 'Search by display name',
+
+    // Permission Management
+    'permissions_management' => 'Permissions Management',
+    'add_permission' => 'Add Permission',
+    'permission_list' => 'Permission List',
+    'permissions' => 'Permissions',
+    'search_by_description' => 'Search by description',
+
+    // Menu Management
+    'menu_management' => 'Menu Management',
+    'menu_list' => 'Menu List',
+    'menus' => 'Menus',
+    'search_by_route' => 'Search by route',
+
+    // Exchange Rate Management
+    'exchange_rate_management' => 'Exchange Rate Management',
+    'add_exchange_rate' => 'Add Exchange Rate',
+    'exchange_rate_list' => 'Exchange Rate List',
+    'exchange_rates' => 'Exchange Rates',
+    'from_currency' => 'From Currency',
+    'to_currency' => 'To Currency',
+    'rate' => 'Rate',
+    'rate_range' => 'Rate Range',
+    'effective_date_range' => 'Effective Date Range',
+    'search_by_from_currency' => 'Search by from currency',
+    'search_by_to_currency' => 'Search by to currency',
+    'min' => 'Min',
+    'max' => 'Max',
+    'rate' => 'Rate',
+    'is_active' => 'Is Active',
+    'created_at' => 'Created At',
+    'action' => 'Action',
+    'fullname' => 'Fullname',
+    'email' => 'Email',
+    'updated_at' => 'Updated At',
+    'users' => 'Users',
+
+    // Common
+    'created_date_range' => 'Created Date Range',
 ];

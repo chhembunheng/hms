@@ -51,6 +51,7 @@ Route::get('/lang/{lang}', [\App\Http\Controllers\LanguageController::class, 'se
             Route::match(['get', 'post'], '/add', [RoleController::class, 'add'])->name('add');
             Route::match(['get', 'post'], '/{id}/edit', [RoleController::class, 'edit'])->name('edit');
             Route::delete('/{id}/delete', [RoleController::class, 'destroy'])->name('delete');
+            Route::get('/select2', [RoleController::class, 'select2'])->name('select2');
         });
         Route::prefix('security')->name('security.')->group(function () {
 

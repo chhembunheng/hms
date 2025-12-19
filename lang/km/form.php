@@ -51,7 +51,7 @@ return [
     'github' => 'ហ្គីតហាប់',
 
     // Admin form fields
-    'administrator' => 'ผู้ดูแลระบบ',
+    'administrator' => 'អ្នកគ្រប់គ្រង',
     'parent_menu' => 'ម៉ឺនុយមេ',
     'parent_navigation' => 'ការរុករកមេ',
     'select_menu' => 'ជ្រើសម៉ឺនុយ',

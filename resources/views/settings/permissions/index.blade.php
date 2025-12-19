@@ -1,38 +1,56 @@
 <x-app-layout>
     <div class="content">
-        <!-- Info Banner for Permissions Page -->
-        <div class="alert alert-info border-info shadow-sm mb-3" role="alert">
-            <div class="d-flex align-items-center">
-                <i class="fa-solid fa-shield-halved fa-2x me-3 text-info"></i>
-                <div>
-                    <h6 class="mb-1 fw-bold">{{ __('Permissions Management') }}</h6>
-                    <small class="text-muted">{{ __('Define and manage access control permissions for roles and users') }}</small>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">{{ __('global.permissions_management') }}</h3>
+                            @can('settings.permissions.form')
+                                <div class="card-tools">
+                                    <a href="{{ route('settings.permissions.add') }}" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-plus"></i> {{ __('global.add_permission') }}
+                                    </a>
+                                </div>
+                            @endcan
+                        </div>
+
+                        <div class="card-body">
+                            <!-- Filter Component -->
+                            <x-datatable-filter>
+                                <div class="col-md-4">
+                                    <label class="form-label">{{ __('form.name') }}</label>
+                                    <input type="text" name="name" class="form-control form-control-sm" placeholder="{{ __('global.search_by_name') }}">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label">{{ __('form.display_name') }}</label>
+                                    <input type="text" name="display_name" class="form-control form-control-sm" placeholder="{{ __('global.search_by_display_name') }}">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label">{{ __('form.description') }}</label>
+                                    <input type="text" name="description" class="form-control form-control-sm" placeholder="{{ __('global.search_by_description') }}">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">{{ __('global.created_date_range') }}</label>
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <input type="date" name="created_from" class="form-control form-control-sm">
+                                        <span class="text-muted">—</span>
+                                        <input type="date" name="created_to" class="form-control form-control-sm">
+                                    </div>
+                                </div>
+                            </x-datatable-filter>
+
+                            <!-- DataTable -->
+                            <div class="table-responsive">
+                                <x-datatables title="{{ __('global.permission_list') }}" :data="$dataTable"></x-datatables>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
-        @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show border-success shadow-sm" role="alert">
-                <i class="fa-solid fa-circle-check me-2"></i>
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-        @endif
-
-        @if(session('error'))
-            <div class="alert alert-danger alert-dismissible fade show border-danger shadow-sm" role="alert">
-                <i class="fa-solid fa-circle-exclamation me-2"></i>
-                {{ session('error') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-        @endif
-
-        <!-- DataTable with Permission-specific styling -->
-        <x-datatables title="{{ __('global.list') }}" :data="$dataTable">
-        </x-datatables>
     </div>
 </x-app-layout>
-
-@push('scripts')
-    {!! $dataTable->scripts() !!}
-@endpush

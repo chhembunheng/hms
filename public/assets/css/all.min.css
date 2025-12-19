@@ -2,10 +2,10 @@
 
 :root,
 [data-color-theme=light] {
-    --app-primary-color: #00213e;
-    --app-primary-color-hover: #0d2c48;
-    --app-primary-color-active: #001a32;
-    --app-primary-color-rgb: 28, 82, 71;
+    --app-primary-color: #034246;
+    --app-primary-color-hover: #025a5f;
+    --app-primary-color-active: #022d32;
+    --app-primary-color-rgb: 3, 66, 70;
     --app-primary-color-link: #26425b;
     --app-primary-color-link-hover: #40596e;
     --body-font-size-lg: 1rem;
@@ -16606,12 +16606,12 @@ html[data-color-theme=dark] [data-color-theme] .link-yellow {
 
 [data-color-theme=dark] .text-primary,
 html[data-color-theme=dark] [data-color-theme] .text-primary {
-    --primary-rgb: 28, 82, 71
+    --primary-rgb: 3, 66, 70
 }
 
 [data-color-theme=dark] .link-primary,
 html[data-color-theme=dark] [data-color-theme] .link-primary {
-    --primary-rgb: 28, 82, 71
+    --primary-rgb: 3, 66, 70
 }
 
 [data-color-theme=dark] .text-secondary,
@@ -18586,7 +18586,7 @@ html[data-color-theme=dark] .nav-tabs:not(.nav-tabs-underline):not(.nav-tabs-ove
 }
 
 .navbar {
-    --navbar-bg: #1c5247;
+    --navbar-bg: #034246;
     --navbar-brand-width: calc(18.75rem - var(--navbar-padding-x));
     --navbar-brand-image-size: var(--body-line-height-computed);
     --navbar-search-width: 30rem;
@@ -18595,7 +18595,7 @@ html[data-color-theme=dark] .nav-tabs:not(.nav-tabs-underline):not(.nav-tabs-ove
     --navbar-hover-bg: rgba(255, 255, 255, 0.1);
     --navbar-hover-active-bg: rgba(255, 255, 255, 0.15);
     --navbar-hover-active-color: #ffffff;
-    --navbar-active-bg: rgba(28, 82, 71, 0.2);
+    --navbar-active-bg: rgba(3, 66, 70, 0.2);
     -ms-flex-negative: 0;
     flex-shrink: 0;
     background-color: var(--navbar-bg);
@@ -18606,7 +18606,7 @@ html[data-color-theme=dark] .nav-tabs:not(.nav-tabs-underline):not(.nav-tabs-ove
 [data-color-theme=dark] .navbar:not([data-color-theme]),
 html[data-color-theme=dark] .navbar {
     color-scheme: dark;
-    --navbar-bg: #1c5247;
+    --navbar-bg: #034246;
     color: #ffffff
 }
 
@@ -35744,8 +35744,8 @@ html[data-color-theme=dark] .btn-sidebar-expand {
 }
 
 .nav-sidebar .nav-link.active {
-    border-right: 2px solid #1c5247 !important;
-    background-color: rgba(28, 82, 71, 0.1)
+    border-right: 2px solid #034246 !important;
+    background-color: rgba(3, 66, 70, 0.1)
 }
 
 .nav-sidebar .nav-link i {
