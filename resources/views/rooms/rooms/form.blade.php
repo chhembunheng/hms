@@ -25,7 +25,7 @@
                                         :label="__('form.status')"
                                         name="status_id"
                                         :value="old('status_id', $form?->status_id)"
-                                        :options="\App\Models\RoomStatus::active()->pluck('name', 'id')->toArray()"
+                                        :options="\App\Models\RoomStatus::active()->get()->pluck('localized_name', 'id')->toArray()"
                                     />
                                 </div>
                                 <div class="col-md-6">

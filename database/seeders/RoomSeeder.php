@@ -15,28 +15,8 @@ class RoomSeeder extends Seeder
      */
     public function run(): void
     {
-        // Seed room types
-        $roomTypes = [
-            ['name' => 'Single', 'description' => 'Single room', 'is_active' => true],
-            ['name' => 'Double', 'description' => 'Double room', 'is_active' => true],
-            ['name' => 'Suite', 'description' => 'Suite room', 'is_active' => true],
-        ];
-
-        foreach ($roomTypes as $type) {
-            RoomType::create($type);
-        }
-
-        // Seed room statuses
-        $roomStatuses = [
-            ['name' => 'Available', 'color' => 'green', 'is_active' => true],
-            ['name' => 'Occupied', 'color' => 'red', 'is_active' => true],
-            ['name' => 'Cleaning', 'color' => 'yellow', 'is_active' => true],
-            ['name' => 'Maintenance', 'color' => 'orange', 'is_active' => true],
-        ];
-
-        foreach ($roomStatuses as $status) {
-            RoomStatus::create($status);
-        }
+        // Note: Room types are seeded in RoomTypeSeeder
+        // Note: Room statuses are seeded in RoomStatusSeeder
 
         // Seed sample rooms
         $rooms = [

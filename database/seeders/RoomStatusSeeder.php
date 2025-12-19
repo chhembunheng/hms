@@ -15,7 +15,6 @@ class RoomStatusSeeder extends Seeder
     {
         $roomStatuses = [
             [
-                'name' => 'Available',
                 'name_en' => 'Available',
                 'name_kh' => 'ទំនេរ',
                 'description' => 'Room is available for booking',
@@ -23,7 +22,6 @@ class RoomStatusSeeder extends Seeder
                 'is_active' => true,
             ],
             [
-                'name' => 'Occupied',
                 'name_en' => 'Occupied',
                 'name_kh' => 'មានអ្នកស្នាក់នៅ',
                 'description' => 'Room is currently occupied',
@@ -31,7 +29,6 @@ class RoomStatusSeeder extends Seeder
                 'is_active' => true,
             ],
             [
-                'name' => 'Cleaning',
                 'name_en' => 'Cleaning',
                 'name_kh' => 'កំពុងសម្អាត',
                 'description' => 'Room is being cleaned',
@@ -39,7 +36,6 @@ class RoomStatusSeeder extends Seeder
                 'is_active' => true,
             ],
             [
-                'name' => 'Maintenance',
                 'name_en' => 'Maintenance',
                 'name_kh' => 'កំពុងជួសជុល',
                 'description' => 'Room is under maintenance',
@@ -47,7 +43,6 @@ class RoomStatusSeeder extends Seeder
                 'is_active' => true,
             ],
             [
-                'name' => 'Out of Order',
                 'name_en' => 'Out of Order',
                 'name_kh' => 'មិនអាចប្រើបាន',
                 'description' => 'Room is out of service',
@@ -55,7 +50,6 @@ class RoomStatusSeeder extends Seeder
                 'is_active' => true,
             ],
             [
-                'name' => 'Reserved',
                 'name_en' => 'Reserved',
                 'name_kh' => 'បានបម្រុងទុក',
                 'description' => 'Room is reserved',

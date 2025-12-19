@@ -81,10 +81,13 @@ class RoomPricingController extends Controller
 
     public function delete($id)
     {
-        $roomPricing = RoomPricing::findOrFail($id);
-        $roomPricing->delete();
+        try {
+            $roomPricing = RoomPricing::findOrFail($id);
+            $roomPricing->delete();
 
-        return redirect()->route('rooms.pricing.index')
-            ->with('success', __('rooms.room_pricing_deleted_successfully'));
+            return success(message: __('rooms.room_pricing_deleted_successfully'));
+        } catch (\Exception $e) {
+            return errors("Failed to delete room pricing: " . $e->getMessage());
+        }
     }
 }
