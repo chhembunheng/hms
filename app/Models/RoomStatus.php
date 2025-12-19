@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class RoomStatus extends Model
 {
     protected $fillable = [
-        'name',
         'name_en',
         'name_kh',
         'description',
@@ -35,6 +34,6 @@ class RoomStatus extends Model
         if ($locale === 'km' && $this->name_kh) {
             return $this->name_kh;
         }
-        return $this->name_en ?: $this->name;
+        return $this->name_en ?: $this->name_kh;
     }
 }

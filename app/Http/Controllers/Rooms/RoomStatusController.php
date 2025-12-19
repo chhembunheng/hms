@@ -65,10 +65,13 @@ class RoomStatusController extends Controller
 
     public function delete($id)
     {
-        $roomStatus = RoomStatus::findOrFail($id);
-        $roomStatus->delete();
+        try {
+            $roomStatus = RoomStatus::findOrFail($id);
+            $roomStatus->delete();
 
-        return redirect()->route('rooms.status.index')
-            ->with('success', 'Room status deleted successfully.');
+            return success(message: "Room status deleted successfully.");
+        } catch (\Exception $e) {
+            return errors("Failed to delete room status: " . $e->getMessage());
+        }
     }
 }

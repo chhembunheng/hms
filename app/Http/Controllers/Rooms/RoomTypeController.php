@@ -63,10 +63,13 @@ class RoomTypeController extends Controller
 
     public function delete($id)
     {
-        $roomType = RoomType::findOrFail($id);
-        $roomType->delete();
+        try {
+            $roomType = RoomType::findOrFail($id);
+            $roomType->delete();
 
-        return redirect()->route('rooms.type.index')
-            ->with('success', 'Room type deleted successfully.');
+            return success(message: "Room type deleted successfully.");
+        } catch (\Exception $e) {
+            return errors("Failed to delete room type: " . $e->getMessage());
+        }
     }
 }
