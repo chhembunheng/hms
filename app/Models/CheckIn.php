@@ -22,8 +22,11 @@ class CheckIn extends Model
         'guest_type',
         'guest_country',
         'number_of_guests',
+        'billing_type',
         'check_in_date',
+        'check_in_time',
         'check_out_date',
+        'check_out_time',
         'total_amount',
         'paid_amount',
         'status',
@@ -35,6 +38,8 @@ class CheckIn extends Model
     protected $casts = [
         'check_in_date' => 'date',
         'check_out_date' => 'date',
+        'check_in_time' => 'datetime:H:i',
+        'check_out_time' => 'datetime:H:i',
         'total_amount' => 'decimal:2',
         'paid_amount' => 'decimal:2',
         'actual_check_in_at' => 'datetime',
@@ -57,6 +62,16 @@ class CheckIn extends Model
     public function room()
     {
         return $this->belongsTo(Room::class);
+    }
+
+    public function checkInRooms()
+    {
+        return $this->hasMany(CheckInRoom::class);
+    }
+
+    public function rooms()
+    {
+        return $this->belongsToMany(Room::class, 'check_in_rooms');
     }
 
     public function scopeActive($query)
