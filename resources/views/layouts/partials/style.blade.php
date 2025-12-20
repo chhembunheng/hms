@@ -177,5 +177,39 @@ html:lang(en) [class*="fa-"] {
     color: white !important;
 }
 
+/* Datepicker styling */
+.datepicker {
+    cursor: pointer;
+}
+
+.datepicker:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    border-color: #86b7fe;
+}
+
+/* Datepicker dropdown styling */
+.datepicker-dropdown {
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.datepicker .datepicker-cell {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.datepicker .datepicker-cell:hover {
+    background-color: #f8f9fa;
+}
+
+.datepicker .datepicker-cell.selected {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.datepicker .datepicker-cell.today {
+    background-color: #fff3cd;
+}
 
 </style>

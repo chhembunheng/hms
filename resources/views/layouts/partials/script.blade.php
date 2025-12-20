@@ -61,6 +61,20 @@
                  return m;
              }
          });
+
+         // Initialize datepickers globally
+         $(document).find('.datepicker').each(function() {
+             if (!$(this).data('datepicker')) {
+                 new Datepicker(this, {
+                     format: 'yyyy-mm-dd',
+                     autohide: true,
+                     todayBtn: true,
+                     clearBtn: true,
+                     todayBtnMode: 1,
+                     todayHighlight: true
+                 });
+             }
+         });
      });
 
      function loading(e) {
