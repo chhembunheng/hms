@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -29,7 +30,6 @@ return Application::configure(basePath: dirname(__DIR__))
             'setlocale' => \App\Http\Middleware\SetLocale::class,
             'abilities' => \App\Http\Middleware\Abilities::class,
             'editor' => \App\Http\Middleware\ProcessEditor::class,
-            'navigations' => \App\Http\Middleware\Navigations::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
