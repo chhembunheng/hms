@@ -4,9 +4,11 @@ namespace App\Models\Settings;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use App\Traits\Loggable;
 
 class Permission extends Model
 {
+    use Loggable;
     protected $table = 'permissions';
 
     protected $fillable = [

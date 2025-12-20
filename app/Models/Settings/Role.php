@@ -4,9 +4,11 @@ namespace App\Models\Settings;
 
 use App\Models\Settings\User;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\Loggable;
 
 class Role extends Model
 {
+    use Loggable;
     protected $table = 'roles';
 
     protected $fillable = [
