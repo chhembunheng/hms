@@ -366,4 +366,6 @@ return [
     // Common
     'created_date_range' => 'ចន្លោះកាលបរិច្ឆេទបង្កើត',
     'clear_cache' => 'សម្អាត Cache',
+    'yes' => 'បាទ/ចាស',
+    'no' => 'ទេ',
 ];

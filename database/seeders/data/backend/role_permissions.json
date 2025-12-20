@@ -1,0 +1,89 @@
+{
+  "Administrator": {
+    "description": "Full system access",
+    "permissions": ["*"]
+  },
+  "Manager": {
+    "description": "Management level access to most functions",
+    "permissions": [
+      "dashboard.*",
+      "checkin.*",
+      "checkout.*",
+      "rooms.*",
+      "guests.*",
+      "reports.*",
+      "settings.users.*",
+      "settings.menus.*"
+    ]
+  },
+  "Front Desk": {
+    "description": "Front desk operations and guest services",
+    "permissions": [
+      "dashboard.index",
+      "checkin.*",
+      "checkout.*",
+      "rooms.list.index",
+      "rooms.list.edit",
+      "guests.*",
+      "reports.checkin",
+      "reports.checkout"
+    ]
+  },
+  "Housekeeping": {
+    "description": "Room cleaning and maintenance tasks",
+    "permissions": [
+      "dashboard.index",
+      "rooms.status.*",
+      "maintenance.*",
+      "reports.housekeeping"
+    ]
+  },
+  "Maintenance": {
+    "description": "Technical maintenance and repairs",
+    "permissions": [
+      "dashboard.index",
+      "maintenance.*",
+      "rooms.status.*",
+      "reports.maintenance"
+    ]
+  },
+  "Security": {
+    "description": "Security monitoring and access control",
+    "permissions": [
+      "dashboard.index",
+      "security.*",
+      "checkin.staying.index",
+      "reports.security"
+    ]
+  },
+  "Concierge": {
+    "description": "Guest services and concierge operations",
+    "permissions": [
+      "dashboard.index",
+      "guests.*",
+      "services.*",
+      "reservations.*",
+      "reports.services"
+    ]
+  },
+  "Restaurant Staff": {
+    "description": "Restaurant and food service operations",
+    "permissions": [
+      "dashboard.index",
+      "restaurant.*",
+      "menu.*",
+      "orders.*",
+      "reports.restaurant"
+    ]
+  },
+  "Accounting": {
+    "description": "Financial and accounting operations",
+    "permissions": [
+      "dashboard.index",
+      "billing.*",
+      "payments.*",
+      "reports.financial",
+      "reports.revenue"
+    ]
+  }
+}

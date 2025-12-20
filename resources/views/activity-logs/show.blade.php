@@ -40,6 +40,24 @@
                                 </table>
                             </div>
                             <div class="col-md-6">
+                                @php
+                                    $newValues = $activityLog->new_values;
+                                    if (isset($newValues['created_at'])) {
+                                        $newValues['created_at'] = \Carbon\Carbon::parse($newValues['created_at'])->format('Y-m-d H:i:s');
+                                    }
+                                    if (isset($newValues['updated_at'])) {
+                                        $newValues['updated_at'] = \Carbon\Carbon::parse($newValues['updated_at'])->format('Y-m-d H:i:s');
+                                    }
+                                    $oldValues = $activityLog->old_values;
+                                    if (isset($oldValues['created_at'])) {
+                                        $oldValues['created_at'] = \Carbon\Carbon::parse($oldValues['created_at'])->format('Y-m-d H:i:s');
+                                    }
+                                    if (isset($oldValues['updated_at'])) {
+                                        $oldValues['updated_at'] = \Carbon\Carbon::parse($oldValues['updated_at'])->format('Y-m-d H:i:s');
+                                    }
+                                    $activityLog->new_values = $newValues;
+                                    $activityLog->old_values = $oldValues;
+                                @endphp
                                 <h5>{{ __('global.changes') }}</h5>
                                 @if($activityLog->old_values)
                                 <h6>{{ __('global.old_values') }}</h6>

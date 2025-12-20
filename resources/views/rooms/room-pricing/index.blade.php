@@ -24,16 +24,16 @@
 
                                 <div class="col-md-3">
                                     <label class="form-label">{{ __('rooms.room_type') }}</label>
-                                    <select name="room_type_id" class="form-select form-select-sm">
-                                        <option value="">{{ __('rooms.all') }}</option>
-                                        <!-- Add room type options -->
+                                    <select name="room_type_id[]" class="form-select form-select-sm multiple-select" multiple>
+                                        @foreach($roomTypes as $roomType)
+                                            <option value="{{ $roomType->id }}">{{ $roomType->localized_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
                                 <div class="col-md-3">
                                     <label class="form-label">{{ __('rooms.pricing_type') }}</label>
-                                    <select name="pricing_type" class="form-select form-select-sm">
-                                        <option value="">{{ __('rooms.all') }}</option>
+                                    <select name="pricing_type[]" class="form-select form-select-sm multiple-select" multiple>
                                         @foreach(\App\Models\RoomPricing::getPricingTypes() as $key => $value)
                                             <option value="{{ $key }}">{{ $value }}</option>
                                         @endforeach
@@ -42,8 +42,7 @@
 
                                 <div class="col-md-3">
                                     <label class="form-label">{{ __('rooms.currency') }}</label>
-                                    <select name="currency" class="form-select form-select-sm">
-                                        <option value="">{{ __('rooms.all') }}</option>
+                                    <select name="currency[]" class="form-select form-select-sm multiple-select" multiple>
                                         @foreach(get_currencies() as $code => $name)
                                             <option value="{{ $code }}">{{ $name }}</option>
                                         @endforeach

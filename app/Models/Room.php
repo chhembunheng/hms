@@ -32,6 +32,11 @@ class Room extends Model
         return $this->belongsTo(RoomStatus::class);
     }
 
+    public function checkIns()
+    {
+        return $this->hasMany(CheckIn::class);
+    }
+
     public function scopeActive($query)
     {
         return $query->where('is_active', true);

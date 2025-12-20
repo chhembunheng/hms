@@ -81,6 +81,23 @@ class RoomTypeController extends Controller
     {
         try {
             $roomType = RoomType::findOrFail($id);
+
+            // Check if room type has associated rooms
+            if ($roomType->rooms()->exists()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Cannot delete room type because it has associated rooms.'
+                ]);
+            }
+
+            // Check if room type has associated pricing
+            if ($roomType->roomPricings()->exists()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Cannot delete room type because it has associated pricing.'
+                ]);
+            }
+
             $roomType->delete();
 
             return response()->json([

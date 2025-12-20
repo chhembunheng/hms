@@ -45,6 +45,9 @@ class UserDataTable extends DataTable
             ->editColumn('created_at', function (User $model) {
                 return $model->created_at?->format(config('init.datetime.display_format'));
             })
+            ->editColumn('updated_at', function (User $model) {
+                return $model->updated_at?->format(config('init.datetime.display_format'));
+            })
             ->addColumn('action', fn($row) => view('settings.users.action', compact('row')))
             ->rawColumns(['action']);
     }

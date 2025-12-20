@@ -26,6 +26,11 @@ class RoomType extends Model
         return $this->hasMany(Room::class);
     }
 
+    public function roomPricings()
+    {
+        return $this->hasMany(RoomPricing::class);
+    }
+
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
@@ -40,3 +45,4 @@ class RoomType extends Model
         return $this->name_en ?: $this->name_kh;
     }
 }
+

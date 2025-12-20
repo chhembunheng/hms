@@ -7,12 +7,17 @@ use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\DataTables\Rooms\RoomDataTable;
+use App\Models\RoomType;
+use App\Models\RoomStatus;
 
 class RoomController extends Controller
 {
     public function index(RoomDataTable $dataTable)
     {
-        return $dataTable->render('rooms.rooms.index');
+        $roomTypes = RoomType::active()->get();
+        $roomStatuses = RoomStatus::active()->get();
+
+        return $dataTable->render('rooms.rooms.index', compact('roomTypes', 'roomStatuses'));
     }
 
     public function add(Request $request)
@@ -81,6 +86,15 @@ class RoomController extends Controller
     {
         try {
             $room = Room::findOrFail($id);
+
+            // Check if room has active check-ins
+            if ($room->checkIns()->active()->exists()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Cannot delete room because it has active check-ins.'
+                ]);
+            }
+
             $room->delete();
 
             return response()->json([

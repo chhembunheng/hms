@@ -83,6 +83,15 @@ class RoomStatusController extends Controller
     {
         try {
             $roomStatus = RoomStatus::findOrFail($id);
+
+            // Check if room status has associated rooms
+            if ($roomStatus->rooms()->exists()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Cannot delete room status because it has associated rooms.'
+                ]);
+            }
+
             $roomStatus->delete();
 
             return response()->json([

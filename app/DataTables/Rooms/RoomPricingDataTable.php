@@ -62,15 +62,27 @@ class RoomPricingDataTable extends DataTable
                 }
 
                 if (!empty($filters['room_type_id'])) {
-                    $query->where('room_type_id', $filters['room_type_id']);
+                    if (is_array($filters['room_type_id'])) {
+                        $query->whereIn('room_type_id', $filters['room_type_id']);
+                    } else {
+                        $query->where('room_type_id', $filters['room_type_id']);
+                    }
                 }
 
                 if (!empty($filters['pricing_type'])) {
-                    $query->where('pricing_type', $filters['pricing_type']);
+                    if (is_array($filters['pricing_type'])) {
+                        $query->whereIn('pricing_type', $filters['pricing_type']);
+                    } else {
+                        $query->where('pricing_type', $filters['pricing_type']);
+                    }
                 }
 
                 if (!empty($filters['currency'])) {
-                    $query->where('currency', $filters['currency']);
+                    if (is_array($filters['currency'])) {
+                        $query->whereIn('currency', $filters['currency']);
+                    } else {
+                        $query->where('currency', $filters['currency']);
+                    }
                 }
 
                 if (!empty($filters['is_active']) && is_array($filters['is_active'])) {

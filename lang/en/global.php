@@ -365,4 +365,6 @@ return [
     // Common
     'created_date_range' => 'Created Date Range',
     'clear_cache' => 'Clear Cache',
+    'yes' => 'Yes',
+    'no' => 'No',
 ];

@@ -24,7 +24,7 @@ class RoomStatus extends Model
 
     public function rooms()
     {
-        return $this->hasMany(Room::class);
+        return $this->hasMany(Room::class, 'status_id');
     }
 
     public function scopeActive($query)

@@ -14,7 +14,14 @@ class RoomPricingController extends Controller
      */
     public function index(RoomPricingDataTable $dataTable)
     {
-        return $dataTable->render('rooms.room-pricing.index');
+        $roomTypes = \App\Models\RoomType::active()->get();
+        $pricingTypes = [
+            'night' => 'Night',
+            '3_hours' => '3 Hours',
+        ];
+        $currencies = get_currencies();
+
+        return $dataTable->render('rooms.room-pricing.index', compact('roomTypes', 'pricingTypes', 'currencies'));
     }
 
     public function add(Request $request)
@@ -97,6 +104,16 @@ class RoomPricingController extends Controller
     {
         try {
             $roomPricing = RoomPricing::findOrFail($id);
+
+            // Check if pricing is currently active or will be active in the future
+            $now = now()->toDateString();
+            if (($roomPricing->effective_from <= $now && ($roomPricing->effective_to === null || $roomPricing->effective_to >= $now))) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Cannot delete room pricing that is currently active or will be active in the future.'
+                ]);
+            }
+
             $roomPricing->delete();
 
             return response()->json([

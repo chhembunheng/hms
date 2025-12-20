@@ -26,13 +26,13 @@ class RoomDataTable extends DataTable
             ->addColumn('room_number', fn($row) => $row->room_number)
             ->addColumn('floor', fn($row) => $row->floor ?? '-')
             ->addColumn('room_type', fn($row) => $row->roomType?->localized_name ?? '-')
-            ->addColumn('status', fn($row) => $row->status?->localized_name ?? '-')
+            ->addColumn('status', fn($row) => roomStatusBadgeWithColor($row->status))
             ->addColumn('is_active', fn($row) => badge($row->is_active ? 'active' : 'inactive'))
             ->editColumn('created_at', function (Room $model) {
                 return $model->created_at?->format(config('init.datetime.display_format'));
             })
             ->addColumn('action', fn($row) => view('rooms.rooms.action', compact('row')))
-            ->rawColumns(['action', 'is_active']);
+            ->rawColumns(['action', 'is_active', 'status']);
     }
 
     /**
@@ -64,11 +64,19 @@ class RoomDataTable extends DataTable
                 }
 
                 if (!empty($filters['room_type_id'])) {
-                    $query->where('room_type_id', $filters['room_type_id']);
+                    if (is_array($filters['room_type_id'])) {
+                        $query->whereIn('room_type_id', $filters['room_type_id']);
+                    } else {
+                        $query->where('room_type_id', $filters['room_type_id']);
+                    }
                 }
 
                 if (!empty($filters['status_id'])) {
-                    $query->where('status_id', $filters['status_id']);
+                    if (is_array($filters['status_id'])) {
+                        $query->whereIn('status_id', $filters['status_id']);
+                    } else {
+                        $query->where('status_id', $filters['status_id']);
+                    }
                 }
 
                 if (!empty($filters['is_active']) && is_array($filters['is_active'])) {

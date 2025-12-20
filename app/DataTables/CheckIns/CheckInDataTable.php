@@ -70,11 +70,19 @@ class CheckInDataTable extends DataTable
             }
 
             if (!empty($filters['status'])) {
-                $query->where('status', $filters['status']);
+                if (is_array($filters['status'])) {
+                    $query->whereIn('status', $filters['status']);
+                } else {
+                    $query->where('status', $filters['status']);
+                }
             }
 
             if (!empty($filters['guest_type'])) {
-                $query->where('guest_type', $filters['guest_type']);
+                if (is_array($filters['guest_type'])) {
+                    $query->whereIn('guest_type', $filters['guest_type']);
+                } else {
+                    $query->where('guest_type', $filters['guest_type']);
+                }
             }
 
             if (!empty($filters['check_in_date'])) {

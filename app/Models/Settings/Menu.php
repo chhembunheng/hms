@@ -47,7 +47,7 @@ class Menu extends Model
     {
         // Clear raw menu data
         Cache::forget('menus_raw_data');
-        
+
         // Clear processed menus for all locales
         // Since we can't use wildcards easily, we'll clear entire cache
         // Or you can implement cache tags if using Redis/Memcached

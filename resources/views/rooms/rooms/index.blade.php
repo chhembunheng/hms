@@ -26,17 +26,19 @@
 
                                 <div class="col-md-3">
                                     <label class="form-label">{{ __('rooms.room_type') }}</label>
-                                    <select name="room_type_id" class="form-select form-select-sm">
-                                        <option value="">{{ __('rooms.all') }}</option>
-                                        <!-- Add options for room types -->
+                                    <select name="room_type_id[]" class="form-select form-select-sm multiple-select" multiple>
+                                        @foreach($roomTypes as $roomType)
+                                            <option value="{{ $roomType->id }}">{{ $roomType->localized_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
                                 <div class="col-md-3">
                                     <label class="form-label">{{ __('form.status') }}</label>
-                                    <select name="status_id" class="form-select form-select-sm">
-                                        <option value="">{{ __('rooms.all') }}</option>
-                                        <!-- Add options for statuses -->
+                                    <select name="status_id[]" class="form-select form-select-sm multiple-select" multiple>
+                                        @foreach($roomStatuses as $status)
+                                            <option value="{{ $status->id }}">{{ $status->localized_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 

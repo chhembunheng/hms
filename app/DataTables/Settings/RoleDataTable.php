@@ -28,8 +28,10 @@ class RoleDataTable extends DataTable
             ->editColumn('created_at', function (Role $model) {
                 return $model->created_at?->format(config('init.datetime.display_format'));
             })
+            ->editColumn('administrator', fn($row) => $row->administrator ? badge(__('global.yes')) : badge(__('global.no')))
+            ->addColumn('total_users', fn($row) => $row->users()->count())
             ->addColumn('action', fn($row) => view('settings.roles.action', compact('row')))
-            ->rawColumns(['action']);
+            ->rawColumns(['action', 'administrator']);
     }
 
     /**
@@ -87,6 +89,7 @@ class RoleDataTable extends DataTable
             Column::computed('DT_RowIndex')->title('#')->width(60),
             Column::make('name')->title(__('root.common.name')),
             Column::make('administrator')->title(__('form.administrator')),
+            Column::make('total_users')->title(__('form.total_users')),
             Column::make('sort')->title(__('form.sort')),
             Column::make('created_at')->title(__('global.created_at')),
             Column::computed('action')

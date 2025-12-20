@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\RoomStatus;
 use Carbon\Carbon;
 use Spatie\Image\Image;
 use Illuminate\Support\Str;
@@ -328,6 +329,8 @@ if (! function_exists('badge')) {
             'unavailable' => 'badge bg-danger bg-opacity-10 text-danger',
             'occupied' => 'badge bg-warning bg-opacity-10 text-warning',
             'reserved' => 'badge bg-info bg-opacity-10 text-info',
+            __('global.yes') => 'badge bg-success bg-opacity-10 text-success',
+            __('global.no') => 'badge bg-danger bg-opacity-10 text-danger'
         ];
 
         $normalizedStatus = strtolower(trim((string)($status ?? '')));
@@ -731,5 +734,129 @@ if (!function_exists('modelTypes')) {
         }
 
         return $models;
+    }
+}
+
+
+if (!function_exists('roomStatusBadge')) {
+    function roomStatusBadge($status)
+    {
+        // If status is a RoomStatus model instance, use its localized name and color
+        if ($status instanceof \App\Models\RoomStatus) {
+            $color = $status->color ?? '#6c757d'; // Default to secondary color
+            $bootstrapColor = hexToBootstrapColor($color);
+            return badge($bootstrapColor, $status->localized_name);
+        }
+
+        // If status is a string, try to find the matching RoomStatus
+        if (is_string($status)) {
+            $roomStatus = \App\Models\RoomStatus::where('name_en', $status)
+                ->orWhere('name_kh', $status)
+                ->first();
+
+            if ($roomStatus) {
+                $color = $roomStatus->color ?? '#6c757d';
+                $bootstrapColor = hexToBootstrapColor($color);
+                return badge($bootstrapColor, $roomStatus->localized_name);
+            }
+        }
+
+        // Fallback for unknown status
+        return badge('secondary', ucfirst((string)$status));
+    }
+}
+
+if (!function_exists('roomStatusBadgeWithColor')) {
+    function roomStatusBadgeWithColor($status)
+    {
+        // If status is a RoomStatus model instance, use its localized name and actual color
+        if ($status instanceof \App\Models\RoomStatus) {
+            $color = $status->color ?? '#6c757d';
+            $textColor = getContrastColor($color);
+            return '<span class="badge" style="background-color: ' . $color . '; color: ' . $textColor . '; border-radius: 0.375rem; padding: 0.25rem 0.5rem; font-size: 0.75rem; font-weight: 500;">' . $status->localized_name . '</span>';
+        }
+
+        // If status is a string, try to find the matching RoomStatus
+        if (is_string($status)) {
+            $roomStatus = \App\Models\RoomStatus::where('name_en', $status)
+                ->orWhere('name_kh', $status)
+                ->first();
+
+            if ($roomStatus) {
+                $color = $roomStatus->color ?? '#6c757d';
+                $textColor = getContrastColor($color);
+                return '<span class="badge bg-opacity-10" style="background-color: ' . $color . '; color: ' . $textColor . '; border-radius: 0.375rem; padding: 0.25rem 0.5rem; font-size: 0.75rem; font-weight: 500;">' . $roomStatus->localized_name . '</span>';
+            }
+        }
+
+        // Fallback for unknown status
+        return '<span class="badge bg-secondary text-white" style="border-radius: 0.375rem; padding: 0.25rem 0.5rem; font-size: 0.75rem; font-weight: 500;">' . ucfirst((string)$status) . '</span>';
+    }
+}
+
+if (!function_exists('hexToBootstrapColor')) {
+    function hexToBootstrapColor($hexColor)
+    {
+        // Remove # if present
+        $hexColor = ltrim($hexColor, '#');
+
+        // Convert hex to RGB
+        $r = hexdec(substr($hexColor, 0, 2));
+        $g = hexdec(substr($hexColor, 2, 2));
+        $b = hexdec(substr($hexColor, 4, 2));
+
+        // Common hex color mappings to Bootstrap colors
+        $colorMap = [
+            // Success green
+            '#28a745' => 'success',
+            '#20c997' => 'success',
+            '#17a2b8' => 'info',
+            '#007bff' => 'primary',
+            '#6f42c1' => 'primary',
+            '#e83e8c' => 'danger',
+            '#dc3545' => 'danger',
+            '#fd7e14' => 'warning',
+            '#ffc107' => 'warning',
+            '#6c757d' => 'secondary',
+            '#343a40' => 'dark',
+            '#f8f9fa' => 'light',
+        ];
+
+        // Check for exact match
+        if (isset($colorMap['#' . strtolower($hexColor)])) {
+            return $colorMap['#' . strtolower($hexColor)];
+        }
+
+        // Simple color detection based on RGB values
+        if ($r > 200 && $g > 200 && $b < 100) {
+            return 'warning'; // Yellow
+        } elseif ($r > 200 && $g < 100 && $b < 100) {
+            return 'danger'; // Red
+        } elseif ($r < 100 && $g > 200 && $b < 100) {
+            return 'success'; // Green
+        } elseif ($r < 100 && $g < 100 && $b > 200) {
+            return 'primary'; // Blue
+        }
+
+        return 'secondary'; // Default fallback
+    }
+}
+
+if (!function_exists('getContrastColor')) {
+    function getContrastColor($hexColor)
+    {
+        // Remove # if present
+        $hexColor = ltrim($hexColor, '#');
+
+        // Convert to RGB
+        $r = hexdec(substr($hexColor, 0, 2));
+        $g = hexdec(substr($hexColor, 2, 2));
+        $b = hexdec(substr($hexColor, 4, 2));
+
+        // Calculate luminance
+        $luminance = (0.299 * $r + 0.587 * $g + 0.114 * $b) / 255;
+
+        // Return white text for dark backgrounds, black text for light backgrounds
+        return $luminance > 0.5 ? '#000000' : '#ffffff';
     }
 }

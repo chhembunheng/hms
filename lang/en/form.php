@@ -123,4 +123,5 @@ return [
     'expand_all' => 'Expand All',
     'collapse_all' => 'Collapse All',
     'permissions' => 'Permissions',
+    'total_users' => 'Total Users',
 ];

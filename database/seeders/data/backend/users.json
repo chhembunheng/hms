@@ -14,25 +14,337 @@
         "description": "អ្នកគ្រប់គ្រងដែលមានលទ្ធិសមរម្យពេញលេញ"
       }
     ],
-    
     "users": [
       {
         "username": "admin",
-        "email": "info@Administrator.com.kh",
+        "email": "admin@hotel.com",
         "phone": "+85516467236",
         "gender": "male",
+        "address": "Phnom Penh, Cambodia",
         "translations": [
           {
             "locale": "en",
-            "first_name": "ADMINISTRATOR",
-            "last_name": "SYSTEM",
-            "address": ""
+            "first_name": "Hotel",
+            "last_name": "Administrator",
+            "address": "Phnom Penh, Cambodia"
           },
           {
             "locale": "km",
-            "first_name": "អាដមីនស្ត្រាតឺទ័រ",
-            "last_name": "ស៊ីស្ទឹម",
-            "address": ""
+            "first_name": "អាដមីនីស្ត្រាទ័រ",
+            "last_name": "សណ្ឋាគារ",
+            "address": "ភ្នំពេញ ប្រទេសកម្ពុជា"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "administrator": 0,
+    "sort": 2,
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Manager",
+        "description": "Hotel manager with supervisory access"
+      },
+      {
+        "locale": "km",
+        "name": "អ្នកគ្រប់គ្រង",
+        "description": "អ្នកគ្រប់គ្រងសណ្ឋាគារដែលមានសិទ្ធិឃ្លាំមើល"
+      }
+    ],
+    "users": [
+      {
+        "username": "manager",
+        "email": "manager@hotel.com",
+        "phone": "+85512345678",
+        "gender": "male",
+        "address": "Phnom Penh, Cambodia",
+        "translations": [
+          {
+            "locale": "en",
+            "first_name": "John",
+            "last_name": "Manager",
+            "address": "Phnom Penh, Cambodia"
+          },
+          {
+            "locale": "km",
+            "first_name": "ចន",
+            "last_name": "អ្នកគ្រប់គ្រង",
+            "address": "ភ្នំពេញ ប្រទេសកម្ពុជា"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "administrator": 0,
+    "sort": 3,
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Front Desk",
+        "description": "Front desk staff for check-ins and customer service"
+      },
+      {
+        "locale": "km",
+        "name": "មន្ទីរទទួល",
+        "description": "បុគ្គលិកមន្ទីរទទួលសម្រាប់ការចុះឈ្មោះនិងសេវាកម្មអតិថិជន"
+      }
+    ],
+    "users": [
+      {
+        "username": "frontdesk",
+        "email": "frontdesk@hotel.com",
+        "phone": "+85523456789",
+        "gender": "female",
+        "address": "Phnom Penh, Cambodia",
+        "translations": [
+          {
+            "locale": "en",
+            "first_name": "Sarah",
+            "last_name": "Receptionist",
+            "address": "Phnom Penh, Cambodia"
+          },
+          {
+            "locale": "km",
+            "first_name": "សារ៉ា",
+            "last_name": "អ្នកទទួល",
+            "address": "ភ្នំពេញ ប្រទេសកម្ពុជា"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "administrator": 0,
+    "sort": 4,
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Housekeeping",
+        "description": "Housekeeping and cleaning staff"
+      },
+      {
+        "locale": "km",
+        "name": "អ្នកថែទាំបន្ទប់",
+        "description": "បុគ្គលិកថែទាំបន្ទប់និងអ្នកសម្អាត"
+      }
+    ],
+    "users": [
+      {
+        "username": "housekeeping",
+        "email": "housekeeping@hotel.com",
+        "phone": "+85534567890",
+        "gender": "female",
+        "address": "Phnom Penh, Cambodia",
+        "translations": [
+          {
+            "locale": "en",
+            "first_name": "Maria",
+            "last_name": "Cleaner",
+            "address": "Phnom Penh, Cambodia"
+          },
+          {
+            "locale": "km",
+            "first_name": "ម៉ារីយ៉ា",
+            "last_name": "អ្នកសម្អាត",
+            "address": "ភ្នំពេញ ប្រទេសកម្ពុជា"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "administrator": 0,
+    "sort": 5,
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Maintenance",
+        "description": "Maintenance and technical staff"
+      },
+      {
+        "locale": "km",
+        "name": "អ្នកជួសជុល",
+        "description": "បុគ្គលិកជួសជុលនិងបច្ចេកទេស"
+      }
+    ],
+    "users": [
+      {
+        "username": "maintenance",
+        "email": "maintenance@hotel.com",
+        "phone": "+85545678901",
+        "gender": "male",
+        "address": "Phnom Penh, Cambodia",
+        "translations": [
+          {
+            "locale": "en",
+            "first_name": "David",
+            "last_name": "Technician",
+            "address": "Phnom Penh, Cambodia"
+          },
+          {
+            "locale": "km",
+            "first_name": "ដេវីដ",
+            "last_name": "អ្នកបច្ចេកទេស",
+            "address": "ភ្នំពេញ ប្រទេសកម្ពុជា"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "administrator": 0,
+    "sort": 6,
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Security",
+        "description": "Security personnel"
+      },
+      {
+        "locale": "km",
+        "name": "អ្នកឃ្លាំមើលសុវត្ថិភាព",
+        "description": "បុគ្គលិកសុវត្ថិភាព"
+      }
+    ],
+    "users": [
+      {
+        "username": "security",
+        "email": "security@hotel.com",
+        "phone": "+85556789012",
+        "gender": "male",
+        "address": "Phnom Penh, Cambodia",
+        "translations": [
+          {
+            "locale": "en",
+            "first_name": "Robert",
+            "last_name": "Security",
+            "address": "Phnom Penh, Cambodia"
+          },
+          {
+            "locale": "km",
+            "first_name": "រ៉ូប៊ឺត",
+            "last_name": "សុវត្ថិភាព",
+            "address": "ភ្នំពេញ ប្រទេសកម្ពុជា"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "administrator": 0,
+    "sort": 7,
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Concierge",
+        "description": "Concierge services staff"
+      },
+      {
+        "locale": "km",
+        "name": "អ្នកបម្រើសេវាកម្ម",
+        "description": "បុគ្គលិកសេវាកម្មអ្នកបម្រើ"
+      }
+    ],
+    "users": [
+      {
+        "username": "concierge",
+        "email": "concierge@hotel.com",
+        "phone": "+85567890123",
+        "gender": "female",
+        "address": "Phnom Penh, Cambodia",
+        "translations": [
+          {
+            "locale": "en",
+            "first_name": "Anna",
+            "last_name": "Concierge",
+            "address": "Phnom Penh, Cambodia"
+          },
+          {
+            "locale": "km",
+            "first_name": "អាណា",
+            "last_name": "អ្នកបម្រើ",
+            "address": "ភ្នំពេញ ប្រទេសកម្ពុជា"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "administrator": 0,
+    "sort": 8,
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Restaurant Staff",
+        "description": "Restaurant and food service staff"
+      },
+      {
+        "locale": "km",
+        "name": "បុគ្គលិកភោជនីយដ្ឋាន",
+        "description": "បុគ្គលិកភោជនីយដ្ឋាននិងសេវាកម្មអាហារ"
+      }
+    ],
+    "users": [
+      {
+        "username": "restaurant",
+        "email": "restaurant@hotel.com",
+        "phone": "+85578901234",
+        "gender": "male",
+        "address": "Phnom Penh, Cambodia",
+        "translations": [
+          {
+            "locale": "en",
+            "first_name": "Carlos",
+            "last_name": "Chef",
+            "address": "Phnom Penh, Cambodia"
+          },
+          {
+            "locale": "km",
+            "first_name": "កាលូស",
+            "last_name": "ចុងភៅ",
+            "address": "ភ្នំពេញ ប្រទេសកម្ពុជា"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "administrator": 0,
+    "sort": 9,
+    "translations": [
+      {
+        "locale": "en",
+        "name": "Accounting",
+        "description": "Accounting and finance staff"
+      },
+      {
+        "locale": "km",
+        "name": "គណនេយ្យ",
+        "description": "បុគ្គលិកគណនេយ្យនិងហិរញ្ញវត្ថុ"
+      }
+    ],
+    "users": [
+      {
+        "username": "accounting",
+        "email": "accounting@hotel.com",
+        "phone": "+85589012345",
+        "gender": "female",
+        "address": "Phnom Penh, Cambodia",
+        "translations": [
+          {
+            "locale": "en",
+            "first_name": "Lisa",
+            "last_name": "Accountant",
+            "address": "Phnom Penh, Cambodia"
+          },
+          {
+            "locale": "km",
+            "first_name": "លីសា",
+            "last_name": "គណនេយ្យករ",
+            "address": "ភ្នំពេញ ប្រទេសកម្ពុជា"
           }
         ]
       }

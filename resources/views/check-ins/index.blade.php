@@ -23,8 +23,7 @@
 
                             <div class="col-md-3">
                                 <label class="form-label">{{ __('rooms.guest_type') }}</label>
-                                <select name="guest_type" class="form-select form-select-sm">
-                                    <option value="">{{ __('global.all') }}</option>
+                                <select name="guest_type[]" class="form-select form-select-sm multiple-select" multiple>
                                     <option value="national">{{ __('rooms.national') }}</option>
                                     <option value="international">{{ __('rooms.international') }}</option>
                                 </select>
@@ -32,8 +31,7 @@
 
                             <div class="col-md-3">
                                 <label class="form-label">{{ __('global.status') }}</label>
-                                <select name="status" class="form-select form-select-sm">
-                                    <option value="">{{ __('global.all') }}</option>
+                                <select name="status[]" class="form-select form-select-sm multiple-select" multiple>
                                     <option value="confirmed">{{ __('rooms.confirmed') }}</option>
                                     <option value="checked_in">{{ __('rooms.checked_in') }}</option>
                                     <option value="checked_out">{{ __('rooms.checked_out') }}</option>
