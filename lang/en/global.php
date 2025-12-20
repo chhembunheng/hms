@@ -344,6 +344,25 @@ return [
     'updated_at' => 'Updated At',
     'users' => 'Users',
 
+    // Activity Logs
+    'activity_logs' => 'Activity Logs',
+    'activity_log_list' => 'Activity Log List',
+    'user' => 'User',
+    'model' => 'Model',
+    'ip_address' => 'IP Address',
+    'user_agent' => 'User Agent',
+    'old_values' => 'Old Values',
+    'new_values' => 'New Values',
+    'changes' => 'Changes',
+    'activity_log_details' => 'Activity Log Details',
+    'all_users' => 'All Users',
+    'all_actions' => 'All Actions',
+    'model_type' => 'Model Type',
+    'created' => 'Created',
+    'updated' => 'Updated',
+    'deleted' => 'Deleted',
+
     // Common
     'created_date_range' => 'Created Date Range',
+    'clear_cache' => 'Clear Cache',
 ];

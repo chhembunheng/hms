@@ -3370,6 +3370,63 @@
         ]
       },
       {
+        "icon": "fa-history",
+        "sort": 5,
+        "route": "activity-logs.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Activity Logs",
+            "description": "User activity audit logs"
+          },
+          {
+            "locale": "km",
+            "name": "កំណត់ហេតុសកម្មភាព",
+            "description": "កំណត់ហេតុសកម្មភាពរបស់អ្នកប្រើប្រាស់"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "activity-logs.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View activity logs"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលកំណត់ហេតុសកម្មភាព"
+              }
+            ]
+          },
+          {
+            "action": "show",
+            "icon": "fa-eye",
+            "target": "self",
+            "sort": 1,
+            "route": "activity-logs.show",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View Details",
+                "description": "View activity log details"
+              },
+              {
+                "locale": "km",
+                "name": "មើលព័ត៌មានលម្អិត",
+                "description": "មើលព័ត៌មានលម្អិតកំណត់ហេតុសកម្មភាព"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "icon": "fa-user",
         "sort": 6,
         "route": "settings.my-account.index",

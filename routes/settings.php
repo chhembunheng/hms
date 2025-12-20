@@ -45,6 +45,7 @@ Route::get('/lang/{lang}', [\App\Http\Controllers\LanguageController::class, 'se
             Route::match(['get', 'post'], '/add', [UserController::class, 'add'])->name('add');
             Route::match(['get', 'post'], '/{id}/edit', [UserController::class, 'edit'])->name('edit');
             Route::delete('/{id}/delete', [UserController::class, 'destroy'])->name('delete');
+            Route::get('/select2', [UserController::class, 'select2'])->name('select2');
         });
         Route::prefix('roles')->name('roles.')->group(function () {
             Route::get('/', [RoleController::class, 'index'])->name('index');

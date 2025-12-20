@@ -180,4 +180,32 @@ class UserController extends Controller
             return errors(message: $e->getMessage());
         }
     }
+
+    public function select2(Request $request)
+    {
+        $search = $request->input('search', '');
+        $query = User::query();
+
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('username', 'like', '%' . $search . '%')
+                  ->orWhere('email', 'like', '%' . $search . '%')
+                  ->orWhereHas('translations', function ($subQuery) use ($search) {
+                      $subQuery->where('first_name', 'like', '%' . $search . '%')
+                               ->orWhere('last_name', 'like', '%' . $search . '%');
+                  });
+            });
+        }
+
+        $users = $query->limit(20)->get();
+
+        $results = $users->map(function ($user) {
+            return [
+                'id' => $user->id,
+                'text' => $user->username . ' (' . $user->email . ')',
+            ];
+        });
+
+        return response()->json(['results' => $results]);
+    }
 }

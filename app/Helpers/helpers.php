@@ -706,3 +706,30 @@ if (!function_exists('statusBadge')) {
         }
     }
 }
+
+if (!function_exists('modelTypes')) {
+    function modelTypes(): array
+    {
+        $models = [];
+        $modelPath = app_path('Models');
+        if (!is_dir($modelPath)) {
+            return [];
+        }
+
+        $files = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($modelPath)
+        );
+
+        foreach ($files as $file) {
+            if ($file->isFile() && $file->getExtension() === 'php') {
+                $relativePath = str_replace(app_path() . DIRECTORY_SEPARATOR, '', $file->getPathname());
+                $class = 'App\\' . str_replace(['/', '\\'], '\\', substr($relativePath, 0, -4));
+                if (class_exists($class)) {
+                    $models[] = $class;
+                }
+            }
+        }
+
+        return $models;
+    }
+}

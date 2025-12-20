@@ -3,10 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Traits\Loggable;
 
 class RoomPricing extends Model
 {
+    use SoftDeletes, Loggable;
+
     protected $table = 'room_pricing';
 
     protected $fillable = [

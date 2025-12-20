@@ -345,6 +345,25 @@ return [
     'updated_at' => 'បានធ្វើបច្ចុប្បន្នភាពនៅ',
     'users' => 'អ្នកប្រើប្រាស់',
 
+    // Activity Logs
+    'activity_logs' => 'កំណត់ហេតុសកម្មភាព',
+    'activity_log_list' => 'បញ្ជីកំណត់ហេតុសកម្មភាព',
+    'user' => 'អ្នកប្រើប្រាស់',
+    'model' => 'ម៉ូដែល',
+    'ip_address' => 'អាសយដ្ឋាន IP',
+    'user_agent' => 'ភ្នាក់ងារអ្នកប្រើប្រាស់',
+    'old_values' => 'តម្លៃចាស់',
+    'new_values' => 'តម្លៃថ្មី',
+    'changes' => 'ការផ្លាស់ប្តូរ',
+    'activity_log_details' => 'ព័ត៌មានលម្អិតកំណត់ហេតុសកម្មភាព',
+    'all_users' => 'អ្នកប្រើប្រាស់ទាំងអស់',
+    'all_actions' => 'សកម្មភាពទាំងអស់',
+    'model_type' => 'ប្រភេទម៉ូដែល',
+    'created' => 'បានបង្កើត',
+    'updated' => 'បានធ្វើបច្ចុប្បន្នភាព',
+    'deleted' => 'បានលុប',
+
     // Common
     'created_date_range' => 'ចន្លោះកាលបរិច្ឆេទបង្កើត',
+    'clear_cache' => 'សម្អាត Cache',
 ];

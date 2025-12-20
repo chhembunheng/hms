@@ -3,9 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\Loggable;
 
 class RoomStatus extends Model
 {
+    use SoftDeletes, Loggable;
+
     protected $fillable = [
         'name_en',
         'name_kh',

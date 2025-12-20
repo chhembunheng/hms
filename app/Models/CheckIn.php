@@ -3,10 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
+use App\Traits\Loggable;
 
 class CheckIn extends Model
 {
+    use SoftDeletes, Loggable;
+
     protected $fillable = [
         'booking_number',
         'room_id',

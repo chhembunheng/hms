@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckInController;
+use App\Http\Controllers\ActivityLogController;
 
 Route::middleware(['auth', 'verified', 'abilities'])->group(function () {
     // Check-ins
@@ -13,6 +14,12 @@ Route::middleware(['auth', 'verified', 'abilities'])->group(function () {
         Route::delete('/{id}', [CheckInController::class, 'destroy'])->name('destroy');
         Route::post('/{id}/check-in', [CheckInController::class, 'checkIn'])->name('check-in');
         Route::post('/{id}/check-out', [CheckInController::class, 'checkOut'])->name('check-out');
+    });
+
+    // Activity Logs
+    Route::prefix('activity-logs')->name('activity-logs.')->group(function () {
+        Route::get('/', [ActivityLogController::class, 'index'])->name('index');
+        Route::get('/{activityLog}', [ActivityLogController::class, 'show'])->name('show');
     });
 });
 

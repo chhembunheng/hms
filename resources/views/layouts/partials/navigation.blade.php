@@ -68,7 +68,7 @@
                          @endif
                          <a href="#" class="dropdown-item" onclick="clearCache()">
                              <i class="fa-solid fa-broom-wide me-2 fa-fw"></i>
-                             {{ __('root.nav.clear_cache') }}
+                             {{ __('global.clear_cache') }}
                          </a>
                          <a href="#" class="dropdown-item" onclick="logout()">
                              <i class="fa-solid fa-arrow-right-from-bracket me-2"></i>

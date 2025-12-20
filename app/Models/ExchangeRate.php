@@ -3,9 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\Loggable;
 
 class ExchangeRate extends Model
 {
+    use SoftDeletes, Loggable;
+
     protected $fillable = [
         'from_currency',
         'to_currency',
