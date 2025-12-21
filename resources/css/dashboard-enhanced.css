@@ -281,11 +281,3 @@
     border-radius: 0.5rem !important;
 }
 
-/* Dark Mode Support (Optional) */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --shadow-sm: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.3);
-        --shadow-md: 0 0.25rem 1rem rgba(0, 0, 0, 0.4);
-        --shadow-lg: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.5);
-    }
-}

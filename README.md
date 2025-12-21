@@ -37,7 +37,6 @@ A comprehensive Hotel Management System built with Laravel, designed to streamli
 - **Role & Permissions** - Fine-grained access control (RBAC)
 - **Menu Management** - Dynamic navigation system
 - **Multi-language Support** - English and Khmer (ភាសាខ្មែរ)
-- **Dark/Light Mode** - Theme switching with instant transition
 - **System Configuration** - Customizable system settings
 
 ## 📦 Technology Stack
@@ -252,7 +251,7 @@ hms/
 │   └── factories/           # Model factories for testing
 ├── public/
 │   ├── assets/              # Compiled assets
-│   │   ├── css/             # Stylesheets (dark-mode.css)
+│   │   ├── css/             # Stylesheets
 │   │   └── js/              # JavaScript (theme.js)
 │   ├── site/                # Static files
 │   └── index.php            # Application entry point
@@ -308,13 +307,6 @@ hms/
 - **Database Translations**: Separate translation tables for dynamic content
 - **Language Switcher**: Easy switching between languages
 - **RTL Support**: Right-to-left text support for applicable languages
-
-### Theme System
-- **Dark/Light Mode**: Toggle between dark and light themes
-- **Instant Switching**: No page reload required
-- **LocalStorage Persistence**: Theme preference saved in browser
-- **FOUC Prevention**: Flash of unstyled content prevented
-- **Custom Styling**: 500+ lines of custom dark mode CSS
 
 ### DataTables Integration
 - **Server-side Processing**: Efficient handling of large datasets
