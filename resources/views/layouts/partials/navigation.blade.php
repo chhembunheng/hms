@@ -1,4 +1,7 @@
  <!-- Main navbar -->
+@php
+    $systemConfig = \App\Models\Settings\SystemConfiguration::first();
+@endphp
  <div class="navbar navbar-static shadow-none" style="min-height: 50px;">
      <div class="container-fluid p-0">
          <div class="d-flex align-items-center">
@@ -9,7 +12,10 @@
              </div>
              <div class="navbar-brand flex-1 h-32px">
                  <a href="{{ route('dashboard.index') }}" class="d-inline-flex align-items-center">
-                     <span class="fw-bold fs-3 text-white">HMS CAMBODIA</span>
+                     @if($systemConfig && $systemConfig->logo_path)
+                         <img src="{{ Storage::url($systemConfig->logo_path) }}" alt="Logo" class="me-2" style="height: 28px; width: auto;">
+                     @endif
+                     <span class="fw-bold fs-3 text-white">{{ $systemConfig ? $systemConfig->localized_hotel_name : config('app.name') }}</span>
                  </a>
              </div>
          </div>
@@ -39,14 +45,6 @@
                  </div>
              </li>
              @if (auth()->check())
-                 <li class="nav-item ms-lg-2">
-                     <a href="index.html#" class="navbar-nav-link navbar-nav-link-icon rounded-pill"
-                         data-bs-toggle="offcanvas" data-bs-target="#notifications">
-                         <i class="fa-solid fa-bell fa-fw"></i>
-                         <span
-                             class="badge bg-yellow text-black position-absolute top-0 end-0 translate-middle-top zindex-1 rounded-pill mt-1 me-1">2</span>
-                     </a>
-                 </li>
                  <li class="nav-item nav-item-dropdown-lg dropdown ms-lg-2">
                      <a href="index.html#" class="navbar-nav-link align-items-center rounded-pill p-1"
                          data-bs-toggle="dropdown">

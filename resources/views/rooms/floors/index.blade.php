@@ -1,0 +1,42 @@
+<x-app-layout>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">{{ __('rooms.floors') }}</h3>
+                    @can('rooms.floor.form')
+                        <div class="card-tools">
+                            <a href="{{ route('rooms.floor.add') }}" class="btn btn-primary btn-sm">
+                                <i class="fas fa-plus"></i> {{ __('rooms.add_floor') }}
+                            </a>
+                        </div>
+                    @endcan
+                </div>
+
+                        <div class="card-body">
+                            <x-datatable-filter>
+                                <div class="col-md-3">
+                                    <label class="form-label">{{ __('global.search') }}</label>
+                                    <input type="text" name="search" class="form-control form-control-sm" placeholder="{{ __('global.search') }}">
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label class="form-label">{{ __('rooms.active_status') }}</label>
+                                    <select name="is_active[]" class="form-select form-select-sm multiple-select" multiple>
+                                        <option value="1">{{ __('rooms.active') }}</option>
+                                        <option value="0">{{ __('rooms.inactive') }}</option>
+                                    </select>
+                                </div>
+                            </x-datatable-filter>
+
+                            <!-- DataTable -->
+                            <div class="table-responsive">
+                                <x-datatables title="{{ __('rooms.floors') }}" :data="$dataTable"></x-datatables>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</x-app-layout>

@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('check_in_rooms', function (Blueprint $table) {
-            $table->softDeletes();
+        Schema::table('system_configurations', function (Blueprint $table) {
+            //
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('check_in_rooms', function (Blueprint $table) {
-            $table->dropSoftDeletes();
+        Schema::table('system_configurations', function (Blueprint $table) {
+            //
         });
     }
 };

@@ -12,7 +12,7 @@ class Room extends Model
 
     protected $fillable = [
         'room_number',
-        'floor',
+        'floor_id',
         'room_type_id',
         'status_id',
         'is_active',
@@ -30,6 +30,11 @@ class Room extends Model
     public function status()
     {
         return $this->belongsTo(RoomStatus::class);
+    }
+
+    public function floor()
+    {
+        return $this->belongsTo(Floor::class);
     }
 
     public function checkIns()

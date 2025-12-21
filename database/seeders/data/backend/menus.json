@@ -56,57 +56,38 @@
     "permissions": [],
     "children": [
       {
-        "icon": "fa-right-to-bracket",
+        "icon": "fa-list",
         "sort": 1,
         "route": "checkin.walkin.index",
         "translations": [
           {
             "locale": "en",
-            "name": "Walk-In Check-In",
-            "description": "Walk-in guest check-in"
+            "name": "Check In List",
+            "description": "View all check-ins"
           },
           {
             "locale": "km",
-            "name": "ចូលស្នាក់ដោយផ្ទាល់",
-            "description": "ចុះឈ្មោះភ្ញៀវដោយផ្ទាល់"
+            "name": "បញ្ជីចូលស្នាក់",
+            "description": "មើលបញ្ជីចូលស្នាក់ទាំងអស់"
           }
         ],
         "permissions": [
           {
-            "action": "add",
-            "icon": "fa-plus",
-            "target": "navbar",
-            "sort": 0,
-            "route": "checkin.walkin.add",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Add",
-                "description": "Add walk-in check-in"
-              },
-              {
-                "locale": "km",
-                "name": "បន្ថែម",
-                "description": "បន្ថែមចូលស្នាក់ដោយផ្ទាល់"
-              }
-            ]
-          },
-          {
             "action": "index",
             "icon": "fa-list",
             "target": "self",
-            "sort": 1,
+            "sort": 0,
             "route": "checkin.walkin.index",
             "translations": [
               {
                 "locale": "en",
                 "name": "View",
-                "description": "View walk-in check-in"
+                "description": "View check-in list"
               },
               {
                 "locale": "km",
                 "name": "មើល",
-                "description": "មើលចូលស្នាក់ដោយផ្ទាល់"
+                "description": "មើលបញ្ជីចូលស្នាក់"
               }
             ]
           },
@@ -114,18 +95,18 @@
             "action": "edit",
             "icon": "fa-pen-to-square",
             "target": "self",
-            "sort": 2,
+            "sort": 1,
             "route": "checkin.walkin.edit",
             "translations": [
               {
                 "locale": "en",
                 "name": "Edit",
-                "description": "Edit walk-in check-in"
+                "description": "Edit check-in"
               },
               {
                 "locale": "km",
                 "name": "កែប្រែ",
-                "description": "កែប្រែចូលស្នាក់ដោយផ្ទាល់"
+                "description": "កែប្រែចូលស្នាក់"
               }
             ]
           },
@@ -133,18 +114,56 @@
             "action": "delete",
             "icon": "fa-trash",
             "target": "confirm",
-            "sort": 3,
+            "sort": 2,
             "route": "checkin.walkin.delete",
             "translations": [
               {
                 "locale": "en",
                 "name": "Delete",
-                "description": "Delete walk-in check-in"
+                "description": "Delete check-in"
               },
               {
                 "locale": "km",
                 "name": "លុប",
-                "description": "លុបចូលស្នាក់ដោយផ្ទាល់"
+                "description": "លុបចូលស្នាក់"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-plus",
+        "sort": 2,
+        "route": "checkin.walkin.add",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Check In",
+            "description": "Process guest check-in"
+          },
+          {
+            "locale": "km",
+            "name": "ចូលស្នាក់",
+            "description": "ដំណើរការចូលស្នាក់ភ្ញៀវ"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "add",
+            "icon": "fa-plus",
+            "target": "self",
+            "sort": 0,
+            "route": "checkin.walkin.add",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Process",
+                "description": "Process check-in"
+              },
+              {
+                "locale": "km",
+                "name": "ដំណើរការ",
+                "description": "ដំណើរការចូលស្នាក់"
               }
             ]
           }
@@ -152,7 +171,7 @@
       },
       {
         "icon": "fa-bed",
-        "sort": 2,
+        "sort": 3,
         "route": "checkin.staying.index",
         "translations": [
           {
@@ -1102,6 +1121,101 @@
     ],
     "permissions": [],
     "children": [
+      {
+        "icon": "fa-building",
+        "sort": 0,
+        "route": "rooms.floor.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "Floors",
+            "description": "Floor management"
+          },
+          {
+            "locale": "km",
+            "name": "ជាន់",
+            "description": "ការគ្រប់គ្រងជាន់"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "add",
+            "icon": "fa-plus",
+            "target": "navbar",
+            "sort": 0,
+            "route": "rooms.floor.add",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Add",
+                "description": "Add floor"
+              },
+              {
+                "locale": "km",
+                "name": "បន្ថែម",
+                "description": "បន្ថែមជាន់"
+              }
+            ]
+          },
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 1,
+            "route": "rooms.floor.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View floors"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលជាន់"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 2,
+            "route": "rooms.floor.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit floor"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែជាន់"
+              }
+            ]
+          },
+          {
+            "action": "delete",
+            "icon": "fa-trash",
+            "target": "confirm",
+            "sort": 3,
+            "route": "rooms.floor.delete",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Delete",
+                "description": "Delete floor"
+              },
+              {
+                "locale": "km",
+                "name": "លុប",
+                "description": "លុបជាន់"
+              }
+            ]
+          }
+        ]
+      },
       {
         "icon": "fa-list",
         "sort": 1,
@@ -3389,8 +3503,65 @@
         ]
       },
       {
-        "icon": "fa-history",
+        "icon": "fa-cogs",
         "sort": 5,
+        "route": "settings.system-configuration.index",
+        "translations": [
+          {
+            "locale": "en",
+            "name": "System Configuration",
+            "description": "Configure hotel and system settings"
+          },
+          {
+            "locale": "km",
+            "name": "ការកំណត់ប្រព័ន្ធ",
+            "description": "កំណត់រចនាសម្ព័ន្ធសណ្ឋាគារ និងប្រព័ន្ធ"
+          }
+        ],
+        "permissions": [
+          {
+            "action": "index",
+            "icon": "fa-list",
+            "target": "self",
+            "sort": 0,
+            "route": "settings.system-configuration.index",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "View",
+                "description": "View system configuration"
+              },
+              {
+                "locale": "km",
+                "name": "មើល",
+                "description": "មើលការកំណត់ប្រព័ន្ធ"
+              }
+            ]
+          },
+          {
+            "action": "edit",
+            "icon": "fa-pen-to-square",
+            "target": "self",
+            "sort": 1,
+            "route": "settings.system-configuration.edit",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Edit",
+                "description": "Edit system configuration"
+              },
+              {
+                "locale": "km",
+                "name": "កែប្រែ",
+                "description": "កែប្រែការកំណត់ប្រព័ន្ធ"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "icon": "fa-history",
+        "sort": 6,
         "route": "activity-logs.index",
         "translations": [
           {
@@ -3447,7 +3618,7 @@
       },
       {
         "icon": "fa-user",
-        "sort": 6,
+        "sort": 7,
         "route": "settings.my-account.index",
         "translations": [
           {

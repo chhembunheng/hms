@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CheckIn;
 use App\Models\Room;
+use App\Models\CheckIn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\DataTables\CheckInDataTable;
+use App\DataTables\CheckIns\CheckInDataTable;
 
 class CheckInController extends Controller
 {

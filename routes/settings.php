@@ -9,6 +9,7 @@ use App\Http\Controllers\Settings\RoleController;
 use App\Http\Controllers\Settings\UserController;
 use App\Http\Controllers\Settings\MyAccountController;
 use App\Http\Controllers\Settings\ExchangeRateController;
+use App\Http\Controllers\Settings\SystemConfigurationController;
 
 Route::get('clear-cache', function () {
     Artisan::call('config:clear');
@@ -40,6 +41,10 @@ Route::get('/lang/{lang}', [\App\Http\Controllers\LanguageController::class, 'se
             Route::match(['get', 'post'], '/{id}/edit', [ExchangeRateController::class, 'edit'])->name('edit');
             Route::delete('/{id}/delete', [ExchangeRateController::class, 'delete'])->name('delete');
         });
+        Route::prefix('system-configuration')->name('system-configuration.')->group(function () {
+            Route::get('/', [SystemConfigurationController::class, 'index'])->name('index');
+            Route::match(['get', 'post'], '/edit', [SystemConfigurationController::class, 'edit'])->name('edit');
+        });
         Route::prefix('users')->name('users.')->group(function () {
             Route::get('/', [UserController::class, 'index'])->name('index');
             Route::match(['get', 'post'], '/add', [UserController::class, 'add'])->name('add');
@@ -61,6 +66,7 @@ Route::get('/lang/{lang}', [\App\Http\Controllers\LanguageController::class, 'se
         });
         Route::prefix('my-account')->name('my-account.')->group(function () {
             Route::get('/', [MyAccountController::class, 'index'])->name('index');
+            Route::match(['get', 'post'], '/update-profile', [MyAccountController::class, 'updateProfile'])->name('update-profile');
             Route::get('/enable-2fa', [MyAccountController::class, 'enableTwoFactorAuthentication'])->name('enable-2fa');
             Route::get('/events', [MyAccountController::class, 'events'])->name('events');
         });

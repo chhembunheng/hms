@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Rooms\RoomController;
+use App\Http\Controllers\Rooms\FloorController;
 use App\Http\Controllers\Rooms\RoomTypeController;
 use App\Http\Controllers\Rooms\RoomStatusController;
 use App\Http\Controllers\Rooms\RoomPricingController;
@@ -19,6 +20,14 @@ Route::group(['prefix' => 'rooms', 'as' => 'rooms.', 'middleware' => ['auth', 'v
     // Check-in
     Route::get('/check-in', [RoomController::class, 'checkIn'])->name('check-in');
     Route::post('/{id}/check-in', [RoomController::class, 'processCheckIn'])->name('process-check-in');
+
+    // Floors
+    Route::prefix('floor')->name('floor.')->group(function () {
+        Route::get('/', [FloorController::class, 'index'])->name('index');
+        Route::match(['get', 'post'], '/add', [FloorController::class, 'add'])->name('add');
+        Route::match(['get', 'post'], '/{id}/edit', [FloorController::class, 'edit'])->name('edit');
+        Route::delete('/{id}/delete', [FloorController::class, 'delete'])->name('delete');
+    });
 
     // Room Types
     Route::prefix('type')->name('type.')->group(function () {

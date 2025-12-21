@@ -82,10 +82,15 @@ class User extends Authenticatable implements JWTSubject
     public function getNameAttribute()
     {
         $tran = $this->translations()->where('locale', app()->getLocale())->first();
-        if ($tran && !empty($tran->name)) {
-            return $tran->name;
+        if ($tran && !empty($tran->first_name)) {
+            return trim($tran->last_name . ' ' . $tran->first_name);
         }
-        return $tran->last_name . ' ' . $tran->first_name;
+        // Fallback to English if current locale not found
+        $tranEn = $this->translations()->where('locale', 'en')->first();
+        if ($tranEn && !empty($tranEn->first_name)) {
+            return trim($tranEn->last_name . ' ' . $tranEn->first_name);
+        }
+        return 'User'; // Default fallback
     }
 
      public function translations()
