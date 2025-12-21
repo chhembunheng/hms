@@ -330,7 +330,13 @@ if (! function_exists('badge')) {
             'occupied' => 'badge bg-warning bg-opacity-10 text-warning',
             'reserved' => 'badge bg-info bg-opacity-10 text-info',
             __('global.yes') => 'badge bg-success bg-opacity-10 text-success',
-            __('global.no') => 'badge bg-danger bg-opacity-10 text-danger'
+            __('global.no') => 'badge bg-danger bg-opacity-10 text-danger',
+            'confirmed' => 'badge bg-warning bg-opacity-10 text-warning',
+            'checked in' => 'badge bg-success bg-opacity-10 text-success',
+            'checked out' => 'badge bg-info bg-opacity-10 text-info',
+            'cancelled' => 'badge bg-danger bg-opacity-10 text-danger',
+            'national' => 'badge bg-success bg-opacity-10 text-success',
+            'international' => 'badge bg-info bg-opacity-10 text-info',
         ];
 
         $normalizedStatus = strtolower(trim((string)($status ?? '')));

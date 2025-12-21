@@ -26,18 +26,12 @@ class WalkInDataTable extends DataTable
             ->addColumn('booking_number', fn($row) => $row->booking_number)
             ->addColumn('guest_name', fn($row) => $row->guest_name)
             ->addColumn('room_number', fn($row) => $row->room->room_number ?? '-')
-            ->addColumn('guest_type', fn($row) => badge($row->guest_type === 'national' ? 'National' : 'International'))
+            ->addColumn('guest_type', fn($row) => badge($row->guest_type == 'national' ? 'National' : 'International'))
             ->addColumn('check_in_date', fn($row) => $row->check_in_date?->format('M d, Y'))
             ->addColumn('check_out_date', fn($row) => $row->check_out_date?->format('M d, Y'))
             ->addColumn('total_amount', fn($row) => '$' . number_format($row->total_amount, 2))
             ->addColumn('status', function($row) {
-                $statusColors = [
-                    'confirmed' => 'warning',
-                    'checked_in' => 'success',
-                    'checked_out' => 'info',
-                    'cancelled' => 'danger'
-                ];
-                return badge(ucfirst(str_replace('_', ' ', $row->status)), $statusColors[$row->status] ?? 'secondary');
+                return badge(strtolower($row->status));
             })
             ->editColumn('created_at', function (CheckIn $model) {
                 return $model->created_at?->format(config('init.datetime.display_format'));
@@ -54,9 +48,31 @@ class WalkInDataTable extends DataTable
      */
     public function query(CheckIn $model): QueryBuilder
     {
-        return $model->newQuery()
-            ->with(['room.roomType', 'room.status'])
-            ->where('status', 'checked_in'); // Only walk-in check-ins
+        $query = $model->newQuery()
+            ->with(['room.roomType', 'room.status']);
+
+            $filtersHeader = request()->header('filters');
+            if ($filtersHeader) {
+                $filters = json_decode(urldecode($filtersHeader), true);
+
+                if (is_array($filters)) {
+                    if (!empty($filters['search'])) {
+                        $query->where(function ($q) use ($filters) {
+                            $q->where('booking_number', 'like', '%' . $filters['search'] . '%')
+                              ->orWhere('guest_name', 'like', '%' . $filters['search'] . '%')
+                              ->orWhereHas('room', function ($subQuery) use ($filters) {
+                                  $subQuery->where('room_number', 'like', '%' . $filters['search'] . '%');
+                              });
+                        });
+                    }
+
+                    if (!empty($filters['status']) && is_array($filters['status'])) {
+                        $query->whereIn('status', $filters['status']);
+                    }
+                }
+            }
+            
+        return $query;
     }
 
     /**
@@ -68,7 +84,6 @@ class WalkInDataTable extends DataTable
                     ->setTableId('walkin-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('Bfrtip')
                     ->orderBy(1)
                     ->selectStyleSingle()
                     ->buttons([
