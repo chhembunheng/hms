@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\CheckIn;
 use App\Models\CheckInRoom;
 use App\Models\Room;
+use App\Models\Floor;
 use Illuminate\Http\Request;
 use App\DataTables\CheckIns\WalkInDataTable;
+use Illuminate\Support\Facades\Log;
 
 class WalkInController extends Controller
 {
@@ -20,17 +22,53 @@ class WalkInController extends Controller
     {
         $form = new CheckIn();
         $rooms = Room::with(['roomType', 'status'])
-            ->whereHas('status', function($query) {
-                $query->where('name_en', 'Available');
-            })
+            // ->whereHas('status', function($query) {
+            //     $query->where('name_en', 'Available');
+            // })
             ->active()
             ->get();
+
+        // Load floors with rooms
+        $floors = Floor::with([
+            'rooms.roomType',
+            'rooms.status',
+            'rooms' => function($query) {
+                $query->active()->orderBy('room_number');
+            }
+        ])->active()->orderBy('floor_number')->get();
+
+        // Load room pricings separately
+        $roomTypeIds = $floors->pluck('rooms')->flatten()->pluck('room_type_id')->unique()->filter();
+        $roomPricings = \App\Models\RoomPricing::whereIn('room_type_id', $roomTypeIds)
+            ->where('is_active', true)
+            ->orderBy('effective_from', 'desc')
+            ->get()
+            ->groupBy('room_type_id');
+
+        // Attach pricings to room types
+        foreach ($floors as $floor) {
+            foreach ($floor->rooms as $room) {
+                if ($room->roomType && isset($roomPricings[$room->roomType->id])) {
+                    $room->roomType->roomPricings = $roomPricings[$room->roomType->id];
+                }
+            }
+        }
+
+        // Define guest types
+        $guestTypes = collect([
+            (object)['value' => 'national', 'label' => 'National', 'icon' => 'fa-house'],
+            (object)['value' => 'international', 'label' => 'International', 'icon' => 'fa-plane']
+        ]);
+
+        // Define billing types
+        $billingTypes = collect([
+            (object)['value' => 'night', 'label' => 'Nightly Rate']
+        ]);
 
         if ($request->isMethod('post')) {
             $rules = [
                 'room_ids' => 'required|array',
                 'room_ids.*' => 'required|integer|exists:rooms,id',
-                'room_guests' => 'required|json',
                 'guest_name' => 'required|string|max:255',
                 'guest_email' => 'nullable|email',
                 'guest_phone' => 'nullable|string|max:20',
@@ -38,12 +76,11 @@ class WalkInController extends Controller
                 'guest_national_id' => 'required_if:guest_type,national|string|max:20',
                 'guest_passport' => 'required_if:guest_type,international|string|max:20',
                 'guest_country' => 'required_if:guest_type,international|string|max:100',
-                'billing_type' => 'required|in:night,3_hours',
+                'billing_type' => 'required|in:night',
                 'check_in_date' => 'required|date|after_or_equal:today',
-                'check_in_time' => 'required_if:billing_type,3_hours|date_format:H:i',
                 'check_out_date' => 'required|date|after_or_equal:check_in_date',
-                'check_out_time' => 'required_if:billing_type,3_hours|date_format:H:i',
                 'total_days' => 'required|integer|min:1',
+                'total_guests' => 'required|integer|min:1',
                 'total_amount' => 'required|numeric|min:0',
                 'paid_amount' => 'nullable|numeric|min:0|lte:total_amount',
                 'notes' => 'nullable|string|max:1000',
@@ -51,10 +88,7 @@ class WalkInController extends Controller
 
             $request->validate($rules);
 
-            // Parse room IDs and guest data
-            $roomIds = explode(',', $request->room_ids);
-            $roomIds = array_map('intval', array_filter($roomIds));
-            $roomGuests = json_decode($request->room_guests, true);
+            $roomIds = $request->room_ids;
 
             if (empty($roomIds)) {
                 return response()->json([
@@ -63,17 +97,6 @@ class WalkInController extends Controller
                 ], 422);
             }
 
-            // Validate that we have guest data for all rooms
-            foreach ($roomIds as $roomId) {
-                if (!isset($roomGuests[$roomId]) || $roomGuests[$roomId] < 1) {
-                    return response()->json([
-                        'status' => 'error',
-                        'message' => 'Guest count must be specified for each room.'
-                    ], 422);
-                }
-            }
-
-            // Check if all rooms are available for the selected dates
             $rooms = Room::whereIn('id', $roomIds)->get();
             if ($rooms->count() !== count($roomIds)) {
                 return response()->json([
@@ -104,19 +127,15 @@ class WalkInController extends Controller
                 }
             }
 
-            // Calculate total guests
-            $totalGuests = array_sum($roomGuests);
-
             // Create the check-in record (use first room as primary)
             $data = $request->only([
                 'guest_name', 'guest_email', 'guest_phone',
                 'guest_type', 'guest_national_id', 'guest_passport', 'guest_country',
                 'billing_type', 'check_in_date', 'check_in_time', 'check_out_date', 'check_out_time',
-                'total_amount', 'notes'
+                'total_guests', 'total_amount', 'notes'
             ]);
 
             $data['room_id'] = $roomIds[0]; // Primary room
-            $data['number_of_guests'] = $totalGuests;
             $data['paid_amount'] = $request->paid_amount ?? 0;
             $data['status'] = 'checked_in';
             $data['actual_check_in_at'] = now();
@@ -137,21 +156,12 @@ class WalkInController extends Controller
 
                     if ($pricing) {
                         $roomPrice = $pricing->price;
-                    } elseif ($request->billing_type === '3_hours') {
-                        // Fallback: convert nightly price to 3-hour price (24/3 = 8 periods per day)
-                        $nightlyPricing = $room->roomType->roomPricings()
-                            ->where('is_active', true)
-                            ->where('pricing_type', 'night')
-                            ->orderBy('effective_from', 'desc')
-                            ->first();
-                        $roomPrice = $nightlyPricing ? $nightlyPricing->price / 8 : 0;
                     }
                 }
 
                 CheckInRoom::create([
                     'check_in_id' => $checkIn->id,
                     'room_id' => $roomId,
-                    'number_of_guests' => $roomGuests[$roomId],
                     'room_price' => $roomPrice,
                 ]);
             }
@@ -164,13 +174,50 @@ class WalkInController extends Controller
             ]);
         }
 
-        return view('check-ins.walkin.form', compact('form', 'rooms'));
+        return view('check-ins.walkin.form', compact('form', 'rooms', 'floors', 'guestTypes', 'billingTypes'));
     }
 
     public function edit(Request $request, $id)
     {
         $form = CheckIn::with('checkInRooms.room.roomType')->findOrFail($id);
         $rooms = Room::with(['roomType', 'status'])->active()->get();
+
+        // Load floors with rooms
+        $floors = Floor::with([
+            'rooms.roomType',
+            'rooms.status',
+            'rooms' => function($query) {
+                $query->active()->orderBy('room_number');
+            }
+        ])->active()->orderBy('floor_number')->get();
+
+        // Load room pricings separately
+        $roomTypeIds = $floors->pluck('rooms')->flatten()->pluck('room_type_id')->unique()->filter();
+        $roomPricings = \App\Models\RoomPricing::whereIn('room_type_id', $roomTypeIds)
+            ->where('is_active', true)
+            ->orderBy('effective_from', 'desc')
+            ->get()
+            ->groupBy('room_type_id');
+
+        // Attach pricings to room types
+        foreach ($floors as $floor) {
+            foreach ($floor->rooms as $room) {
+                if ($room->roomType && isset($roomPricings[$room->roomType->id])) {
+                    $room->roomType->roomPricings = $roomPricings[$room->roomType->id];
+                }
+            }
+        }
+
+        // Define guest types
+        $guestTypes = collect([
+            (object)['value' => 'national', 'label' => 'National', 'icon' => 'fa-house'],
+            (object)['value' => 'international', 'label' => 'International', 'icon' => 'fa-plane']
+        ]);
+
+        // Define billing types
+        $billingTypes = collect([
+            (object)['value' => 'night', 'label' => 'Nightly Rate']
+        ]);
 
         if ($request->isMethod('post')) {
             $rules = [
@@ -187,6 +234,7 @@ class WalkInController extends Controller
                 'check_in_date' => 'required|date',
                 'check_out_date' => 'required|date|after:check_in_date',
                 'total_days' => 'required|integer|min:1',
+                'total_guests' => 'required|integer|min:1',
                 'total_amount' => 'required|numeric|min:0',
                 'paid_amount' => 'nullable|numeric|min:0|lte:total_amount',
                 'status' => 'required|in:confirmed,checked_in,checked_out,cancelled',
@@ -198,6 +246,14 @@ class WalkInController extends Controller
             // Parse room IDs and guest data
             $roomIds = $request->room_ids; // Already an array from validation
             $roomGuests = json_decode($request->room_guests, true);
+
+            // Ensure roomGuests is an array
+            if (!is_array($roomGuests)) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Invalid room guest data format.'
+                ], 422);
+            }
 
             if (empty($roomIds)) {
                 return response()->json([
@@ -248,19 +304,15 @@ class WalkInController extends Controller
                 }
             }
 
-            // Calculate total guests
-            $totalGuests = array_sum($roomGuests);
-
             // Update the check-in record
             $data = $request->only([
                 'guest_name', 'guest_email', 'guest_phone',
                 'guest_type', 'guest_national_id', 'guest_passport', 'guest_country',
                 'check_in_date', 'check_out_date',
-                'total_amount', 'paid_amount', 'status', 'notes'
+                'total_guests', 'total_amount', 'paid_amount', 'status', 'notes'
             ]);
 
             $data['room_id'] = $roomIds[0]; // Primary room
-            $data['number_of_guests'] = $totalGuests;
 
             $form->update($data);
 
@@ -283,7 +335,6 @@ class WalkInController extends Controller
                 CheckInRoom::create([
                     'check_in_id' => $form->id,
                     'room_id' => $roomId,
-                    'number_of_guests' => $roomGuests[$roomId],
                     'room_price' => $roomPrice,
                 ]);
             }
@@ -297,7 +348,7 @@ class WalkInController extends Controller
         }
 
 
-        return view('check-ins.walkin.form', compact('form', 'rooms'));
+        return view('check-ins.walkin.form', compact('form', 'rooms', 'floors', 'guestTypes', 'billingTypes'));
     }
 
 
@@ -311,6 +362,79 @@ class WalkInController extends Controller
             'message' => 'Walk-in check-in deleted successfully.',
             'redirect' => route('checkin.walkin.index'),
             'delay' => 2000
+        ]);
+    }
+
+    public function getAvailableRooms(Request $request)
+    {
+        $request->validate([
+            'check_in_date' => 'required|date|after_or_equal:today',
+            'check_out_date' => 'required|date|after_or_equal:check_in_date',
+            'billing_type' => 'required|in:night',
+        ]);
+
+        // Get all active rooms with their types and statuses
+        $rooms = Room::with(['roomType', 'status', 'floor'])
+            ->active()
+            ->get();
+
+        // Filter out rooms that are not available for the selected dates
+        $availableRooms = $rooms->filter(function($room) use ($request) {
+            // Skip if room is not available status
+            if (!$room->status || $room->status->name_en !== 'Available') {
+                return false;
+            }
+
+            // Check for conflicting bookings
+            $conflictingBookings = CheckIn::where('room_id', $room->id)
+                ->whereIn('status', ['confirmed', 'checked_in'])
+                ->where(function($query) use ($request) {
+                    $query->whereBetween('check_in_date', [$request->check_in_date, $request->check_out_date])
+                          ->orWhereBetween('check_out_date', [$request->check_in_date, $request->check_out_date])
+                          ->orWhere(function($q) use ($request) {
+                              $q->where('check_in_date', '<=', $request->check_in_date)
+                                ->where('check_out_date', '>=', $request->check_out_date);
+                          });
+                })
+                ->exists();
+
+            return !$conflictingBookings;
+        });        // Group rooms by floor
+        $floors = $availableRooms->groupBy('floor_id')->map(function($floorRooms, $floorId) use ($request) {
+            $floor = $floorRooms->first()->floor;
+            return [
+                'id' => $floorId,
+                'name' => $floor ? $floor->localized_name : 'Unknown Floor',
+                'rooms' => $floorRooms->map(function($room) use ($request) {
+                    // Get pricing for the room
+                    $nightlyPrice = null;
+                    $hourlyPrice = null;
+
+                    if ($room->roomType) {
+                        $nightlyPrice = $room->roomType->roomPricings()
+                            ->where('is_active', true)
+                            ->where('pricing_type', 'night')
+                            ->orderBy('effective_from', 'desc')
+                            ->first();
+                    }
+
+                    return [
+                        'id' => $room->id,
+                        'number' => $room->room_number,
+                        'type' => $room->roomType ? $room->roomType->name_en : 'Standard Room',
+                        'type_kh' => $room->roomType ? $room->roomType->name_kh : '',
+                        'max_guests' => $room->roomType ? $room->roomType->max_guests : 1,
+                        'price_night' => $nightlyPrice ? $nightlyPrice->price : 0,
+                        'status' => $room->status ? $room->status->name_en : 'Unknown',
+                    ];
+                })->sortBy('number')->values()
+            ];
+        })->values();
+
+        return response()->json([
+            'status' => 'success',
+            'floors' => $floors,
+            'total_rooms' => $availableRooms->count()
         ]);
     }
 }

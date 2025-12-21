@@ -21,6 +21,7 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
         <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     @endif
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <script>
         // Ensure locale is properly set for font loading
         document.documentElement.setAttribute('data-locale', '{{ app()->getLocale() }}');

@@ -67,7 +67,7 @@ class RoomDataTable extends DataTable
                 }
 
                 if (!empty($filters['floor'])) {
-                    $query->where('floor', $filters['floor']);
+                    $query->where('floor_id', $filters['floor']);
                 }
 
                 if (!empty($filters['room_type_id'])) {

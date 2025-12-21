@@ -10,6 +10,7 @@ Route::group(['prefix' => 'checkin', 'as' => 'checkin.', 'middleware' => ['auth'
     // Walk-In Check-In
     Route::prefix('walkin')->name('walkin.')->group(function () {
         Route::get('/', [WalkInController::class, 'index'])->name('index');
+        Route::get('/available-rooms', [WalkInController::class, 'getAvailableRooms'])->name('available-rooms');
         Route::match(['get', 'post'], '/add', [WalkInController::class, 'add'])->name('add');
         Route::match(['get', 'post'], '/{id}/edit', [WalkInController::class, 'edit'])->name('edit');
         Route::delete('/{id}/delete', [WalkInController::class, 'delete'])->name('delete');
