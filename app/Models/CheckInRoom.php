@@ -12,12 +12,10 @@ class CheckInRoom extends Model
     protected $fillable = [
         'check_in_id',
         'room_id',
-        'number_of_guests',
         'room_price',
     ];
 
     protected $casts = [
-        'number_of_guests' => 'integer',
         'room_price' => 'decimal:2',
     ];
 

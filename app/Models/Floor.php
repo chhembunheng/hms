@@ -23,7 +23,7 @@ class Floor extends Model
 
     public function rooms()
     {
-        return $this->hasMany(Room::class, 'floor', 'floor_number');
+        return $this->hasMany(Room::class, 'floor_id', 'id');
     }
 
     public function getLocalizedNameAttribute()

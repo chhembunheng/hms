@@ -15,6 +15,7 @@ class RoomType extends Model
         'name_kh',
         'description',
         'is_active',
+        'max_guests',
     ];
 
     protected $casts = [
@@ -23,12 +24,12 @@ class RoomType extends Model
 
     public function rooms()
     {
-        return $this->hasMany(Room::class);
+        return $this->hasMany(Room::class, 'room_type_id');
     }
 
     public function roomPricings()
     {
-        return $this->hasMany(RoomPricing::class);
+        return $this->hasMany(RoomPricing::class, 'room_type_id');
     }
 
     public function scopeActive($query)

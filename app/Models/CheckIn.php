@@ -21,7 +21,7 @@ class CheckIn extends Model
         'guest_passport',
         'guest_type',
         'guest_country',
-        'number_of_guests',
+        'total_guests',
         'billing_type',
         'check_in_date',
         'check_in_time',
@@ -42,6 +42,7 @@ class CheckIn extends Model
         'check_out_time' => 'datetime:H:i',
         'total_amount' => 'decimal:2',
         'paid_amount' => 'decimal:2',
+        'total_guests' => 'integer',
         'actual_check_in_at' => 'datetime',
         'actual_check_out_at' => 'datetime',
     ];

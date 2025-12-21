@@ -1,62 +1,21 @@
 <?php
 
-skipIfNoDb();
+// Password reset is disabled - admin resets passwords only
+// Skipping password reset tests
 
-use App\Models\Settings\User;
-use Illuminate\Auth\Notifications\ResetPassword;
-use Illuminate\Support\Facades\Notification;
-
-test('reset password link screen can be rendered', function () {
+test('reset password link screen is disabled', function () {
     $response = $this->get('/forgot-password');
-
-    $response->assertStatus(200);
+    $response->assertStatus(404);
 });
 
-test('reset password link can be requested', function () {
-    Notification::fake();
-
-    $user = User::factory()->create();
-
-    $this->post('/forgot-password', ['email' => $user->email]);
-
-    Notification::assertSentTo($user, ResetPassword::class);
+test('reset password link request is disabled', function () {
+    $response = $this->post('/forgot-password', [
+        'email' => 'test@example.com',
+    ]);
+    $response->assertStatus(404);
 });
 
-test('reset password screen can be rendered', function () {
-    Notification::fake();
-
-    $user = User::factory()->create();
-
-    $this->post('/forgot-password', ['email' => $user->email]);
-
-    Notification::assertSentTo($user, ResetPassword::class, function ($notification) {
-        $response = $this->get('/reset-password/'.$notification->token);
-
-        $response->assertStatus(200);
-
-        return true;
-    });
-});
-
-test('password can be reset with valid token', function () {
-    Notification::fake();
-
-    $user = User::factory()->create();
-
-    $this->post('/forgot-password', ['email' => $user->email]);
-
-    Notification::assertSentTo($user, ResetPassword::class, function ($notification) use ($user) {
-        $response = $this->post('/reset-password', [
-            'token' => $notification->token,
-            'email' => $user->email,
-            'password' => 'password',
-            'password_confirmation' => 'password',
-        ]);
-
-        $response
-            ->assertSessionHasNoErrors()
-            ->assertRedirect(route('login'));
-
-        return true;
-    });
+test('reset password screen is disabled', function () {
+    $response = $this->get('/reset-password/token123');
+    $response->assertStatus(404);
 });

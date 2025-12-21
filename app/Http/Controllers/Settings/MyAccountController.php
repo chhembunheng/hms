@@ -15,22 +15,47 @@ class MyAccountController extends Controller
 {
     public function index(Request $request)
     {
-        $user = Auth::user();
+        $user = User::find(Auth::id());
         return view('settings.my-account.index', compact('user'));
     }
     public function authenticator(Request $request)
     {
         $twofa = new Google2FA();
-        $user = Auth::user();
+        $user = User::find(Auth::id());
+
+        if ($request->isMethod('post')) {
+            $request->validate([
+                'code' => 'required|string|size:6'
+            ]);
+
+            $valid = $twofa->verifyKey($user->two_factor_secret, $request->input('code'));
+
+            if ($valid) {
+                $user->two_factor_confirmed_at = now();
+                $user->save();
+
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Two-factor authentication has been enabled successfully.',
+                    'delay' => 2000
+                ]);
+            } else {
+                return errors('Invalid verification code. Please try again.');
+            }
+        }
+
         if (empty($user->two_factor_secret)) {
             $user->two_factor_secret = $twofa->generateSecretKey();
+            $user->save();
         }
+
         $text = $twofa->getQRCodeUrl(
             config('app.name'),
             $user->email,
             $user->two_factor_secret
         );
         $qrcode = createQRCode($text);
+
         return success([
             'body' => view('settings.my-account.security.authenticator', [
                 'title' => 'Link an Authenticator',
@@ -39,6 +64,19 @@ class MyAccountController extends Controller
             ])->render()
         ]);
     }
+
+    public function disableTwoFactorAuthentication(Request $request)
+    {
+        $user = User::find(Auth::id());
+
+        $user->update([
+            'two_factor_secret' => null,
+            'two_factor_confirmed_at' => null,
+        ]);
+
+        return success(['message' => 'Two-factor authentication has been disabled successfully.']);
+    }
+
     public function changePassword(Request $request)
     {
         $user = Auth::user();
@@ -48,61 +86,6 @@ class MyAccountController extends Controller
                 'user' => $user
             ])->render()
         ]);
-    }
-
-    public function enableTwoFactorAuthentication(Request $request)
-    {
-        $twofa = new Google2FA();
-        $user = User::find(Auth::id());
-        if ($user->two_factor_secret) {
-            if ($user->two_factor_confirmed_at) {
-                return redirect()->route('dashboard.index')->with('status', 'Two-factor authentication is already enabled.');
-            }
-            $text = $twofa->getQRCodeUrl(
-                config('app.name'),
-                $user->email,
-                $user->two_factor_secret
-            );
-            return createQRCode($text);
-        }
-        $user->two_factor_secret = $twofa->generateSecretKey();
-        $user->save();
-
-        return redirect()->back()->with('status', 'Two-factor authentication enabled.');
-    }
-    public function events(Request $request)
-    {
-        $from_date = $request->from_date ?? now()->startOfMonth();
-        $to_date = $request->to_date ?? now()->endOfYear();
-        $periods = CarbonPeriod::create($from_date, CarbonInterval::days(3), $to_date);
-
-        $lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'CALSCALE:GREGORIAN', 'PRODID:-//Your App//EN'];
-        foreach ($periods as $period) {
-            $summary = '🛌👩‍⚕️ ' . $period->format('D, d M Y');
-            $location = '';
-            $description = '';
-            $lines = array_merge($lines, [
-                'BEGIN:VEVENT',
-                'DTSTART:' . $period->format('Ymd\THis\Z'),
-                'DTEND:' . $period->format('Ymd\THis\Z'),
-                'DTSTAMP:' . now()->utc()->format('Ymd\THis\Z'),
-                'UID:' . $period->format('Ymd') . '@working.com',
-                'SUMMARY:' . $summary,
-                'LOCATION:' . $location,
-                'DESCRIPTION:' . $description,
-                'STATUS:CONFIRMED',
-                'TRANSP:OPAQUE',
-                'END:VEVENT',
-            ]);
-        }
-        $lines[] = 'END:VCALENDAR';
-        $lines[] = '';
-
-        return response(implode("\r\n", $lines), 200)
-            ->header('Content-Type', 'text/calendar; charset=utf-8')
-            ->header('Content-Disposition', 'attachment; filename="db-schedule.ics"');
-
-        return redirect()->back()->with('status', 'Two-factor authentication enabled.');
     }
 
     public function updateProfile(Request $request)
@@ -121,6 +104,7 @@ class MyAccountController extends Controller
                 'phone' => 'nullable|string|max:255',
                 'address' => 'nullable|string',
                 'gender' => 'nullable|string|in:male,female,other',
+                'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:51200',
             ];
 
             $validator = \Illuminate\Support\Facades\Validator::make($request->all(), $rules);
@@ -129,14 +113,29 @@ class MyAccountController extends Controller
             }
 
             try {
-                $user->update([
+                $updateData = [
                     'username' => $request->input('username'),
                     'email' => $request->input('email'),
                     'phone' => $request->input('phone'),
                     'address' => $request->input('address'),
                     'gender' => $request->input('gender'),
                     'updated_by' => $user->id,
-                ]);
+                ];
+
+                // Handle avatar upload
+                if ($request->hasFile('avatar')) {
+                    $avatar = $request->file('avatar');
+                    $avatarName = time() . '_' . $user->id . '.' . $avatar->getClientOriginalExtension();
+                    $avatar->move(public_path('storage/avatars'), $avatarName);
+                    $updateData['avatar'] = 'storage/avatars/' . $avatarName;
+
+                    // Delete old avatar if exists
+                    if ($user->avatar && file_exists(public_path($user->avatar))) {
+                        unlink(public_path($user->avatar));
+                    }
+                }
+
+                $user->update($updateData);
 
                 // Update or create translations
                 $firstNames = $request->input('first_name', []);

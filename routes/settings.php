@@ -62,12 +62,12 @@ Route::get('/lang/{lang}', [\App\Http\Controllers\LanguageController::class, 'se
         Route::prefix('security')->name('security.')->group(function () {
 
             Route::match(['get', 'post'], '/authenticator', [MyAccountController::class, 'authenticator'])->name('authenticator');
+            Route::post('/disable-2fa', [MyAccountController::class, 'disableTwoFactorAuthentication'])->name('disable-2fa');
             Route::match(['get', 'post'], '/change-password', [MyAccountController::class, 'changePassword'])->name('change-password');
         });
         Route::prefix('my-account')->name('my-account.')->group(function () {
             Route::get('/', [MyAccountController::class, 'index'])->name('index');
             Route::match(['get', 'post'], '/update-profile', [MyAccountController::class, 'updateProfile'])->name('update-profile');
             Route::get('/enable-2fa', [MyAccountController::class, 'enableTwoFactorAuthentication'])->name('enable-2fa');
-            Route::get('/events', [MyAccountController::class, 'events'])->name('events');
         });
     });

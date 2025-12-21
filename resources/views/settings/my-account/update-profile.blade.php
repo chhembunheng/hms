@@ -5,8 +5,60 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body pt-0">
-            <form id="update-profile-form" action="/settings/my-account/update-profile" method="POST" enctype="multipart/form-data" class="ajax-form-modal">
+            <form id="update-profile-form" action="{{ route('settings.my-account.update-profile') }}" method="POST" enctype="multipart/form-data" class="ajax-form-modal">
                 @csrf
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="avatar" class="form-label">Profile Picture</label>
+
+                            <!-- Current Avatar Preview -->
+                            <div class="mb-3 text-center">
+                                <div class="d-inline-block position-relative">
+                                    @if ($user->avatar)
+                                        <img src="{{ asset($user->avatar) }}" class="rounded-pill" style="width: 100px; height: 100px; object-fit: cover;" alt="Current Profile Picture">
+                                    @else
+                                        <img src="{{ asset('assets/images/default/male-avatar.jpg') }}" class="rounded-pill" style="width: 100px; height: 100px; object-fit: cover;" alt="Default Profile Picture">
+                                    @endif
+                                    <div class="position-absolute top-50 start-50 translate-middle">
+                                        <i class="fa-solid fa-camera text-white" style="font-size: 24px; text-shadow: 0 0 3px rgba(0,0,0,0.7);"></i>
+                                    </div>
+                                </div>
+                                <p class="text-muted mt-2 small">Click "Choose Image" to change your profile picture</p>
+                            </div>
+
+                            <input type="file" class="form-control @error('avatar') is-invalid @enderror" id="avatar" name="avatar" accept="image/*" style="display: none;">
+                            <div class="d-flex align-items-center gap-2">
+                                <button type="button" class="btn btn-outline-primary" id="select-image-btn">
+                                    <i class="fa-solid fa-image fa-fw"></i> Choose Image
+                                </button>
+                                <small class="text-muted">Accepted formats: JPG, PNG, GIF. Max size: 50MB</small>
+                            </div>
+                            @error('avatar')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Preview and Crop Area -->
+                <div class="row mb-3" id="image-preview-container" style="display: none;">
+                    <div class="col-md-12">
+                        <div class="text-center">
+                            <div class="mb-3">
+                                <img id="image-preview" src="" alt="Preview" style="max-width: 100%; max-height: 300px;">
+                            </div>
+                            <div class="d-flex justify-content-center gap-2">
+                                <button type="button" class="btn btn-success" id="crop-save-btn">
+                                    <i class="fa-solid fa-crop fa-fw"></i> Save Crop
+                                </button>
+                                <button type="button" class="btn btn-secondary" id="crop-cancel-btn">
+                                    <i class="fa-solid fa-times fa-fw"></i> Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group mb-3">
@@ -110,69 +162,139 @@
 
                 <div class="d-flex justify-content-end gap-2 pt-3 border-top">
                     <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary btn-sm" onclick="submitUpdateProfileForm()">Update Profile</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Update Profile</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
+<!-- Cropper.js CSS -->
+<link rel="stylesheet" href="{{ asset('assets/css/vendor/cropperjs/cropper.min.css') }}?v={{ config('init.layout_version') }}">
+
+<script src="{{ asset('assets/js/vendor/cropperjs/cropper.min.js') }}?v={{ config('init.layout_version') }}"></script>
+
 <script>
-function submitUpdateProfileForm() {
-    const form = document.getElementById('update-profile-form');
-    const formData = new FormData(form);
+$(document).ready(function() {
+    let cropper = null;
+    let croppedBlob = null;
+    let isAvatarEditMode = window.location.hash === '#avatar-edit';
 
-    // Show loading state
-    const submitBtn = form.querySelector('button[type="button"]');
-    const originalText = submitBtn.textContent;
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Updating...';
+    // Check if modal was opened for avatar editing
+    if (isAvatarEditMode) {
+        // Auto-trigger image selection for avatar editing
+        setTimeout(function() {
+            $('#select-image-btn').click();
+        }, 500); // Small delay to ensure modal is fully loaded
+    }
 
-    $.ajax({
-        url: "{{ route('settings.my-account.update-profile') }}",
-        method: "POST",
-        data: formData,
-        processData: false,
-        contentType: false,
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        success: function(response) {
-            console.log('Success response:', response);
-            if (response.status === 'success') {
-                $('#modal-remote').modal('hide');
-                success(response.message);
-                // Reload the page to show updated info
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1000);
-            } else {
-                error(response.message || 'Update failed');
+    // Handle image selection
+    $('#select-image-btn').on('click', function() {
+        $('#avatar').click();
+    });
+
+    // Handle file input change
+    $('#avatar').on('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            // Validate file type
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+            if (!allowedTypes.includes(file.type)) {
+                error('Please select a valid image file (JPG, PNG, or GIF).');
+                return;
             }
-        },
-        error: function(xhr, status, error) {
-            console.error('AJAX Error:', xhr, status, error);
-            let message = 'An error occurred while updating profile';
-            if (xhr.responseJSON && xhr.responseJSON.message) {
-                message = xhr.responseJSON.message;
-            } else if (xhr.responseText) {
-                try {
-                    const jsonResponse = JSON.parse(xhr.responseText);
-                    if (jsonResponse.message) {
-                        message = jsonResponse.message;
-                    }
-                } catch (e) {
-                    message = xhr.responseText;
+
+            // Validate file size (50MB)
+            if (file.size > 50 * 1024 * 1024) {
+                error('File size must be less than 50MB.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                $('#image-preview').attr('src', e.target.result);
+                $('#image-preview-container').show();
+
+                // Hide the form fields when in avatar editing mode
+                if (isAvatarEditMode) {
+                    $('.form-group:not(:has(#image-preview-container))').hide();
+                    $('.modal-footer').hide();
+                    $('.modal-header h5').text('Edit Profile Picture');
                 }
-            }
-            error(message);
-        },
-        complete: function() {
-            // Re-enable button
-            submitBtn.disabled = false;
-            submitBtn.textContent = originalText;
+
+                // Initialize cropper
+                if (cropper) {
+                    cropper.destroy();
+                }
+
+                cropper = new Cropper($('#image-preview')[0], {
+                    aspectRatio: 1, // Square crop for profile pictures
+                    viewMode: 1,
+                    dragMode: 'move',
+                    responsive: true,
+                    restore: false,
+                    checkCrossOrigin: false,
+                    checkOrientation: false,
+                    modal: true,
+                    guides: true,
+                    center: true,
+                    highlight: false,
+                    background: false,
+                    autoCrop: true,
+                    autoCropArea: 0.8,
+                    scalable: true,
+                    zoomable: true,
+                    zoomOnTouch: true,
+                    zoomOnWheel: true,
+                    wheelZoomRatio: 0.1,
+                    cropBoxMovable: true,
+                    cropBoxResizable: true,
+                    toggleDragModeOnDblclick: false,
+                });
+            };
+            reader.readAsDataURL(file);
         }
     });
-}
-</script>
 
+    // Handle crop save
+    $('#crop-save-btn').on('click', function() {
+        if (cropper) {
+            cropper.getCroppedCanvas({
+                width: 300,
+                height: 300,
+                imageSmoothingEnabled: true,
+                imageSmoothingQuality: 'high',
+            }).toBlob(function(blob) {
+                croppedBlob = blob;
+
+                // Create a new file from the blob
+                const croppedFile = new File([blob], 'cropped-avatar.jpg', { type: 'image/jpeg' });
+
+                // Create a DataTransfer to set the file input
+                const dt = new DataTransfer();
+                dt.items.add(croppedFile);
+                $('#avatar')[0].files = dt.files;
+
+                // Submit the form automatically
+                $('#update-profile-form').submit();
+
+            }, 'image/jpeg', 0.9);
+        }
+    });
+
+    // Handle crop cancel
+    $('#crop-cancel-btn').on('click', function() {
+        $('#image-preview-container').hide();
+        $('#avatar').val('');
+        if (cropper) {
+            cropper.destroy();
+            cropper = null;
+        }
+
+        // Close modal if in avatar editing mode
+        if (isAvatarEditMode) {
+            $('.modal').modal('hide');
+        }
+    });
+});
+</script>
