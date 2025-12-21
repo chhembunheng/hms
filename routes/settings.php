@@ -66,6 +66,7 @@ Route::get('/lang/{lang}', [\App\Http\Controllers\LanguageController::class, 'se
         });
         Route::prefix('my-account')->name('my-account.')->group(function () {
             Route::get('/', [MyAccountController::class, 'index'])->name('index');
+            Route::match(['get', 'post'], '/update-profile', [MyAccountController::class, 'updateProfile'])->name('update-profile');
             Route::get('/enable-2fa', [MyAccountController::class, 'enableTwoFactorAuthentication'])->name('enable-2fa');
             Route::get('/events', [MyAccountController::class, 'events'])->name('events');
         });

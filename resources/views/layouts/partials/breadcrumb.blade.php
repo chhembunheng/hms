@@ -1,4 +1,5 @@
 @props(['data' => [], 'menus' => []])
+@if(!isset($hideBreadcrumb) || !$hideBreadcrumb)
 <div class="page-header page-header-light shadow dark:bg-gray-800 dark:border-gray-700">
     <div class="page-header-content d-lg-flex border-top dark:border-gray-700" style="height: 50px !important;">
         <div class="d-flex">
@@ -53,3 +54,4 @@
         </div>
     </div>
 </div>
+@endif
