@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Rooms;
 
-use App\Http\Controllers\Controller;
 use App\Models\Room;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use App\DataTables\Rooms\RoomDataTable;
+use App\Models\Floor;
 use App\Models\RoomType;
 use App\Models\RoomStatus;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\DataTables\Rooms\RoomDataTable;
 
 class RoomController extends Controller
 {
@@ -16,8 +16,9 @@ class RoomController extends Controller
     {
         $roomTypes = RoomType::active()->get();
         $roomStatuses = RoomStatus::active()->get();
+        $floors = Floor::active()->get();
 
-        return $dataTable->render('rooms.rooms.index', compact('roomTypes', 'roomStatuses'));
+        return $dataTable->render('rooms.rooms.index', compact('roomTypes', 'roomStatuses', 'floors'));
     }
 
     public function add(Request $request)
@@ -27,7 +28,7 @@ class RoomController extends Controller
         if ($request->isMethod('post')) {
             $rules = [
                 'room_number' => 'required|string|max:255|unique:rooms',
-                'floor' => 'nullable|integer',
+                'floor_id' => 'nullable|exists:floors,id',
                 'room_type_id' => 'nullable|exists:room_types,id',
                 'status_id' => 'nullable|exists:room_statuses,id',
                 'is_active' => 'nullable|boolean',
@@ -35,7 +36,7 @@ class RoomController extends Controller
 
             $request->validate($rules);
 
-            $data = $request->only(['room_number', 'floor', 'room_type_id', 'status_id']);
+            $data = $request->only(['room_number', 'floor_id', 'room_type_id', 'status_id']);
             $data['is_active'] = $request->boolean('is_active', false);
 
             Room::create($data);
@@ -58,7 +59,7 @@ class RoomController extends Controller
         if ($request->isMethod('post')) {
             $rules = [
                 'room_number' => 'required|string|max:255|unique:rooms,room_number,' . $id,
-                'floor' => 'nullable|integer',
+                'floor_id' => 'nullable|exists:floors,id',
                 'room_type_id' => 'nullable|exists:room_types,id',
                 'status_id' => 'nullable|exists:room_statuses,id',
                 'is_active' => 'nullable|boolean',
@@ -66,7 +67,7 @@ class RoomController extends Controller
 
             $request->validate($rules);
 
-            $data = $request->only(['room_number', 'floor', 'room_type_id', 'status_id']);
+            $data = $request->only(['room_number', 'floor_id', 'room_type_id', 'status_id']);
             $data['is_active'] = $request->boolean('is_active', false);
 
             $form->update($data);
@@ -113,12 +114,14 @@ class RoomController extends Controller
 
     public function checkIn()
     {
-        $rooms = Room::with(['roomType', 'status'])
+        $rooms = Room::with(['roomType', 'status', 'floor'])
             ->active()
-            ->orderBy('floor')
-            ->orderBy('room_number')
+            ->join('floors', 'rooms.floor_id', '=', 'floors.id')
+            ->orderBy('floors.floor_number')
+            ->orderBy('rooms.room_number')
+            ->select('rooms.*')
             ->get()
-            ->groupBy('floor');
+            ->groupBy('floor.floor_number');
 
         return view('rooms.rooms.check-in', compact('rooms'));
     }

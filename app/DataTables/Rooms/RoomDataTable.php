@@ -24,7 +24,7 @@ class RoomDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addIndexColumn()
             ->addColumn('room_number', fn($row) => $row->room_number)
-            ->addColumn('floor', fn($row) => $row->floor ?? '-')
+            ->addColumn('floor', fn($row) => $row->floor?->localized_name ?? '-')
             ->addColumn('room_type', fn($row) => $row->roomType?->localized_name ?? '-')
             ->addColumn('status', fn($row) => roomStatusBadgeWithColor($row->status))
             ->addColumn('is_active', fn($row) => badge($row->is_active ? 'active' : 'inactive'))
@@ -42,7 +42,7 @@ class RoomDataTable extends DataTable
      */
     public function query(Room $model): QueryBuilder
     {
-        $query = $model->newQuery()->with(['roomType', 'status']);
+        $query = $model->newQuery()->with(['roomType', 'status', 'floor']);
 
         $filtersHeader = request()->header('filters');
         if ($filtersHeader) {
@@ -52,7 +52,10 @@ class RoomDataTable extends DataTable
                 if (!empty($filters['search'])) {
                     $query->where(function ($q) use ($filters) {
                         $q->where('room_number', 'like', '%' . $filters['search'] . '%')
-                          ->orWhere('floor', 'like', '%' . $filters['search'] . '%')
+                          ->orWhereHas('floor', function ($subQuery) use ($filters) {
+                              $subQuery->where('name_en', 'like', '%' . $filters['search'] . '%')
+                                       ->orWhere('name_kh', 'like', '%' . $filters['search'] . '%');
+                          })
                           ->orWhereHas('roomType', function ($subQuery) use ($filters) {
                               $subQuery->where('name', 'like', '%' . $filters['search'] . '%');
                           })
@@ -63,11 +66,23 @@ class RoomDataTable extends DataTable
                     });
                 }
 
+                if (!empty($filters['floor'])) {
+                    $query->where('floor', $filters['floor']);
+                }
+
                 if (!empty($filters['room_type_id'])) {
                     if (is_array($filters['room_type_id'])) {
                         $query->whereIn('room_type_id', $filters['room_type_id']);
                     } else {
                         $query->where('room_type_id', $filters['room_type_id']);
+                    }
+                }
+
+                if (!empty($filters['floor_id'])) {
+                    if (is_array($filters['floor_id'])) {
+                        $query->whereIn('floor_id', $filters['floor_id']);
+                    } else {
+                        $query->where('floor_id', $filters['floor_id']);
                     }
                 }
 

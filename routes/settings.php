@@ -9,6 +9,7 @@ use App\Http\Controllers\Settings\RoleController;
 use App\Http\Controllers\Settings\UserController;
 use App\Http\Controllers\Settings\MyAccountController;
 use App\Http\Controllers\Settings\ExchangeRateController;
+use App\Http\Controllers\Settings\SystemConfigurationController;
 
 Route::get('clear-cache', function () {
     Artisan::call('config:clear');
@@ -39,6 +40,10 @@ Route::get('/lang/{lang}', [\App\Http\Controllers\LanguageController::class, 'se
             Route::match(['get', 'post'], '/add', [ExchangeRateController::class, 'add'])->name('add');
             Route::match(['get', 'post'], '/{id}/edit', [ExchangeRateController::class, 'edit'])->name('edit');
             Route::delete('/{id}/delete', [ExchangeRateController::class, 'delete'])->name('delete');
+        });
+        Route::prefix('system-configuration')->name('system-configuration.')->group(function () {
+            Route::get('/', [SystemConfigurationController::class, 'index'])->name('index');
+            Route::match(['get', 'post'], '/edit', [SystemConfigurationController::class, 'edit'])->name('edit');
         });
         Route::prefix('users')->name('users.')->group(function () {
             Route::get('/', [UserController::class, 'index'])->name('index');

@@ -10,7 +10,13 @@
                                     <x-form.input :label="__('rooms.room_number')" name="room_number" :value="old('room_number', $form?->room_number)" required />
                                 </div>
                                 <div class="col-md-6">
-                                    <x-form.input :label="__('rooms.floor')" name="floor" type="number" :value="old('floor', $form?->floor)" />
+                                    <x-form.select
+                                        :label="__('rooms.floor')"
+                                        name="floor_id"
+                                        :value="old('floor_id', $form?->floor_id)"
+                                        :options="\App\Models\Floor::active()->get()->pluck('localized_name', 'id')->toArray()"
+                                        :selected="old('floor_id', $form?->floor_id)"
+                                    />
                                 </div>
                                 <div class="col-md-6">
                                     <x-form.select

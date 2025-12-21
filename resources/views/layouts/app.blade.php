@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+@php
+    $systemConfig = \App\Models\Settings\SystemConfiguration::first();
+@endphp
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-locale="{{ app()->getLocale() }}" dir="ltr" translate="no">
 
 <head>
@@ -8,7 +11,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-translate-customization" content="..."/>
     <meta name="robots" content="noarchive">
-    <title>{{ config('app.name') }}</title>
+    <title>{{ $systemConfig ? $systemConfig->system_title : config('app.name') }}</title>
+
+    <!-- Favicon -->
+    @if($systemConfig && $systemConfig->favicon_path)
+        <link rel="icon" type="image/x-icon" href="{{ Storage::url($systemConfig->favicon_path) }}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{ Storage::url($systemConfig->favicon_path) }}">
+    @else
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    @endif
     <script>
         // Ensure locale is properly set for font loading
         document.documentElement.setAttribute('data-locale', '{{ app()->getLocale() }}');
@@ -152,7 +164,7 @@
 <body style="overflow: visible;" class="dark:bg-gray-900 dark:text-gray-100">
     <!-- System Watermark -->
     <div class="system-watermark">
-        <div class="watermark-text">HMS CAMBODIA</div>
+        <div class="watermark-text">{{ $systemConfig ? $systemConfig->watermark_title : 'HMS CAMBODIA' }}</div>
     </div>
     @if (config('init.loading.enabled') === true)
         <div class="card-overlay d-none" id="body-overlay"><span class="{{ config('init.loading.icon') }}"></span></div>

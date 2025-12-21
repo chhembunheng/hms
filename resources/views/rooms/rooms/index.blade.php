@@ -25,6 +25,15 @@
                                 </div>
 
                                 <div class="col-md-3">
+                                    <label class="form-label">{{ __('rooms.floor') }}</label>
+                                    <select name="floor_id[]" class="form-select form-select-sm multiple-select" multiple>
+                                        @foreach(\App\Models\Floor::active()->get() as $floor)
+                                            <option value="{{ $floor->id }}">{{ $floor->localized_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-md-3">
                                     <label class="form-label">{{ __('rooms.room_type') }}</label>
                                     <select name="room_type_id[]" class="form-select form-select-sm multiple-select" multiple>
                                         @foreach($roomTypes as $roomType)
