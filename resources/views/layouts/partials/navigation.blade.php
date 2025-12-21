@@ -49,8 +49,13 @@
                      <a href="index.html#" class="navbar-nav-link align-items-center rounded-pill p-1"
                          data-bs-toggle="dropdown">
                          <div class="status-indicator-container">
+                                @if (auth()->user()->avatar)
+                                    <img src="{{ asset(auth()->user()->avatar) }}"
+                                        class="w-32px h-32px rounded-pill">
+                                @else
                              <img src="{{ asset('assets/images/default/male-avatar.jpg') }}"
                                  class="w-32px h-32px rounded-pill">
+                                @endif
                              <span class="status-indicator bg-success"></span>
                          </div>
                          <span class="d-none d-lg-inline-block mx-lg-2">{{ auth()->user()->name }}</span>

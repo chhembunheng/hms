@@ -6,9 +6,13 @@
         <div class="card card-body shadow-none pt-5">
             <div class="d-flex justify-content-center">
                 <div class="card-img-actions d-inline-block mb-3">
-                    <img src="{{ asset('assets/images/default/male-avatar.jpg') }}" class="rounded-pill" style="width: 100px; height: 100px;">
+                    @if ($user->avatar)
+                        <img src="{{ asset($user->avatar) }}" class="rounded-pill" style="width: 100px; height: 100px; object-fit: cover;">
+                    @else
+                        <img src="{{ asset('assets/images/default/male-avatar.jpg') }}" class="rounded-pill" style="width: 100px; height: 100px; object-fit: cover;">
+                    @endif
                     <div class="card-img-actions-overlay card-img rounded-circle">
-                        <a href="#" class="btn btn-outline-primary btn-icon rounded-pill">
+                        <a href="{{ route('settings.my-account.update-profile') }}#avatar-edit" class="btn btn-outline-primary btn-icon rounded-pill modal-remote">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
                     </div>
@@ -56,17 +60,16 @@
                     </div>
                     <div class="flex-shrink-0 ms-sm-3 mt-2 mt-sm-0 d-flex justify-content-end align-items-center">
                         @if ($user->two_factor_secret)
-                            <label class="form-check form-switch me-3">
-                                <input type="checkbox" class="form-check-input form-check-input-secondary" checked>
-                                <span class="form-check-label">On</span>
-                            </label>
+                            <span class="badge bg-success me-3">On</span>
+                            <button type="button" class="btn btn-outline-danger btn-sm" id="disable-2fa-btn">
+                                <i class="fa-solid fa-ban fa-fw"></i> Disable 2FA
+                            </button>
                         @else
-                            <label class="form-check form-switch me-3">
-                                <input type="checkbox" class="form-check-input form-check-input-secondary">
-                                <span class="form-check-label">Off</span>
-                            </label>
+                            <span class="badge bg-secondary me-3">Off</span>
+                            <a href="{{ route('settings.security.authenticator') }}" class="btn btn-primary btn-sm modal-remote">
+                                <i class="fa-solid fa-shield fa-fw"></i> Enable 2FA
+                            </a>
                         @endif
-                        <a href="{{ route('settings.security.authenticator') }}" class="btn btn-primary btn-sm modal-remote">Manage</a>
                     </div>
                 </div>
                 <div class="list-group-item d-flex flex-column flex-sm-row align-items-start py-3">
@@ -122,3 +125,47 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+$(document).ready(function() {
+    $('#disable-2fa-btn').on('click', function() {
+        swalInit.fire({
+            title: 'Disable Two-Factor Authentication',
+            text: 'Are you sure you want to disable two-factor authentication? This will make your account less secure.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: '<i class="fa-solid fa-ban fa-fw"></i> &nbsp;Disable 2FA',
+            cancelButtonText: '<i class="fa-solid fa-times fa-fw"></i> &nbsp;Cancel',
+            buttonsStyling: false,
+            customClass: {
+                confirmButton: 'btn btn-flat-danger',
+                cancelButton: 'btn btn-light'
+            }
+        }).then(function(result) {
+            if (result.value) {
+                $.ajax({
+                    url: "{{ route('settings.security.disable-2fa') }}",
+                    method: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            success(response.message);
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 1000);
+                        } else {
+                            error(response.message || 'Failed to disable 2FA');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error:', xhr, status, error);
+                        error('An error occurred while disabling 2FA');
+                    }
+                });
+            }
+        });
+    });
+});
+</script>

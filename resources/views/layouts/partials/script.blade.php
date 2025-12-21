@@ -246,16 +246,37 @@
          if (!form.valid()) {
              return;
          }
+         // Check if form has file inputs
+         const hasFiles = form.find('input[type="file"]').length > 0;
+         let ajaxData;
+
+         if (hasFiles) {
+             ajaxData = new FormData(form[0]);
+         } else {
+             ajaxData = form.serialize();
+         }
+
          $.ajax({
              url: url,
              type: method,
-             data: form.serialize(),
+             data: ajaxData,
              dataType: 'json',
+             processData: hasFiles ? false : true,
+             contentType: hasFiles ? false : 'application/x-www-form-urlencoded',
              success: function(res) {
                  if (res.status === 'success') {
                      success(res.message);
+                     const delay = res.delay || 0;
                      if (redirect) {
-                         window.location.href = redirect;
+                         setTimeout(() => {
+                             window.location.href = redirect;
+                         }, delay);
+                     } else if (delay > 0) {
+                         // No redirect specified, but delay exists - close modal and reload page
+                         setTimeout(() => {
+                             $('.modal').modal('hide');
+                             window.location.reload();
+                         }, delay);
                      }
                  } else {
                      error(res.message);

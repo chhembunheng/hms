@@ -5,7 +5,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body pt-0">
-            <form action="{{ $action ?? '' }}" method="POST" class="ajax-form-modal">
+            <form action="{{ route('settings.security.change-password') }}" method="POST" class="ajax-form-modal">
                 @csrf
                 <p class="m-0 text-muted">Update your account password to ensure you are using a long, random password to stay secure.</p>
                 <div class="mb-3 mt-3">

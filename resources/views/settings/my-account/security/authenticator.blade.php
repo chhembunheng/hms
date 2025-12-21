@@ -5,7 +5,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body pt-0">
-            <form action="{{ $action ?? '' }}" method="POST" class="ajax-form-modal">
+            <form action="{{ route('settings.security.authenticator') }}" method="POST" class="ajax-form-modal">
                 @csrf
                 <p class="m-0 text-muted">Each time you log in, you will need to verify your identity using the authenticator app to generate a verification code.</p>
                 <div class="mb-3 mt-3">
