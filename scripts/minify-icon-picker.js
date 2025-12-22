@@ -3,11 +3,11 @@
 /**
  * Asset Minification Script
  * Minifies JavaScript and CSS files
- * 
+ *
  * Usage:
  *   node scripts/minify-icon-picker.js <path>
  *   npm run minify:assets -- <path>
- * 
+ *
  * Examples:
  *   node scripts/minify-icon-picker.js /path/to/component
  *   node scripts/minify-icon-picker.js public/assets/js/vendor/pickers/icon-picker
@@ -26,12 +26,11 @@ let componentPath = process.argv[2];
 if (!componentPath) {
     // Default to icon-picker if no path provided
     componentPath = 'public/assets/js/vendor/pickers/icon-picker';
-    console.log('⚠️  No path provided. Using default: icon-picker\n');
 }
 
 // Resolve to absolute path
-const BASE_PATH = path.isAbsolute(componentPath) 
-    ? componentPath 
+const BASE_PATH = path.isAbsolute(componentPath)
+    ? componentPath
     : path.join(__dirname, '..', componentPath);
 
 /**
@@ -85,16 +84,16 @@ function minifyFile(inputPath, outputPath, minifyFn) {
         const content = fs.readFileSync(inputPath, 'utf8');
         const minified = minifyFn(content);
         fs.writeFileSync(outputPath, minified, 'utf8');
-        
+
         const originalSize = Buffer.byteLength(content, 'utf8');
         const minifiedSize = Buffer.byteLength(minified, 'utf8');
         const reduction = ((1 - minifiedSize / originalSize) * 100).toFixed(2);
-        
+
         console.log(`✓ Minified: ${path.basename(inputPath)}`);
         console.log(`  Original: ${(originalSize / 1024).toFixed(2)} KB`);
         console.log(`  Minified: ${(minifiedSize / 1024).toFixed(2)} KB`);
         console.log(`  Reduction: ${reduction}%\n`);
-        
+
         return true;
     } catch (error) {
         console.error(`✗ Error minifying ${inputPath}:`, error.message);
@@ -106,15 +105,13 @@ function minifyFile(inputPath, outputPath, minifyFn) {
  * Main function
  */
 function main() {
-    console.log('🔨 Asset Minification\n');
-    console.log(`Component path: ${BASE_PATH}\n`);
-    
+
     // Check if path exists
     if (!fs.existsSync(BASE_PATH)) {
         console.error(`✗ Path not found: ${BASE_PATH}`);
         process.exit(1);
     }
-    
+
     const files = [
         {
             input: path.join(BASE_PATH, 'js', path.basename(BASE_PATH) + '.js'),
@@ -129,25 +126,25 @@ function main() {
             type: 'CSS'
         }
     ];
-    
+
     let successCount = 0;
-    
+
     files.forEach(({ input, output, minifier, type }) => {
         console.log(`📦 Processing ${type}...`);
-        
+
         if (!fs.existsSync(input)) {
             console.warn(`⚠️  Input file not found: ${path.basename(input)}`);
             console.warn(`   Expected at: ${input}\n`);
             return;
         }
-        
+
         if (minifyFile(input, output, minifier)) {
             successCount++;
         }
     });
-    
+
     console.log(`\n✨ Complete! ${successCount}/${files.length} files minified successfully.`);
-    
+
     if (successCount > 0) {
         process.exit(0);
     } else {

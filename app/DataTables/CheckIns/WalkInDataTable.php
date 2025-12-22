@@ -49,7 +49,8 @@ class WalkInDataTable extends DataTable
     public function query(CheckIn $model): QueryBuilder
     {
         $query = $model->newQuery()
-            ->with(['room.roomType', 'room.status']);
+            ->with(['room.roomType', 'room.status'])
+            ->where('status', 'checked_in');
 
             $filtersHeader = request()->header('filters');
             if ($filtersHeader) {
@@ -71,7 +72,7 @@ class WalkInDataTable extends DataTable
                     }
                 }
             }
-            
+
         return $query;
     }
 

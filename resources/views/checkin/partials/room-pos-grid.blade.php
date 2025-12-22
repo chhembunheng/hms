@@ -271,15 +271,11 @@ function renderAvailableRooms(floors) {
         `;
 
         $('#room-grid').append(floorHtml);
-        console.log('Appended floor HTML for floor:', floor.name, 'HTML length:', floorHtml.length);
     });
 
-    console.log('All floors processed, final floor-tabs HTML:', $('#floor-tabs').html());
-    console.log('Final room-grid HTML:', $('#room-grid').html());
 
     $('#floor-navigation').removeClass('d-none');
     $('#room-grid').removeClass('d-none');
-    console.log('Elements should now be visible');
 }
 
 $(document).ready(function() {

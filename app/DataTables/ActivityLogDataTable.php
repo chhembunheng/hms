@@ -79,7 +79,7 @@ class ActivityLogDataTable extends DataTable
             }
         }
 
-        return $query;
+        return $query->orderBy('created_at', 'desc');
     }
 
     /**

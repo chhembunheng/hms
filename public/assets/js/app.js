@@ -134,23 +134,6 @@ const App = function () {
             sidebarCollapsedClass = 'sidebar-collapsed',
             sidebarMobileExpandedClass = 'sidebar-mobile-expanded';
 
-        console.log('sidebarMainToggle called, DOM ready:', document.readyState);
-        console.log('Sidebar elements found:', {
-            sidebarMainElement: !!sidebarMainElement,
-            desktopTogglers: sidebarMainDesktopToggler.length,
-            mobileTogglers: sidebarMainMobileToggler.length
-        });
-
-        if (sidebarMainElement) {
-            console.log('Sidebar classes:', sidebarMainElement.className);
-        }
-
-        // Helper function to check if we're on desktop (lg breakpoint and above)
-        const isDesktop = () => window.innerWidth >= 992; // Bootstrap lg breakpoint
-
-        console.log('Current localStorage sidebar-collapsed:', localStorage.getItem('sidebar-collapsed'));
-        console.log('Is desktop:', isDesktop());
-
         // Safe localStorage functions
         const setSidebarState = (state) => {
             try {
@@ -171,7 +154,6 @@ const App = function () {
 
         // Restore sidebar state from localStorage
         if (getSidebarState() && sidebarMainElement) {
-            console.log('Restoring sidebar collapsed state from localStorage');
             sidebarMainElement.classList.add(sidebarCollapsedClass);
 
             // Trigger DataTable responsive recalculation after sidebar restoration
@@ -188,7 +170,6 @@ const App = function () {
                 e.preventDefault();
                 sidebarMainElement.classList.toggle(sidebarCollapsedClass);
                 const isCollapsed = sidebarMainElement.classList.contains(sidebarCollapsedClass);
-                console.log('Sidebar toggled, collapsed:', isCollapsed);
                 // Save state to localStorage
                 setSidebarState(isCollapsed);
 

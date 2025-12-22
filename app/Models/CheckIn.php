@@ -13,6 +13,7 @@ class CheckIn extends Model
 
     protected $fillable = [
         'booking_number',
+        'guest_id',
         'room_id',
         'guest_name',
         'guest_email',
@@ -63,6 +64,11 @@ class CheckIn extends Model
     public function room()
     {
         return $this->belongsTo(Room::class);
+    }
+
+    public function guest()
+    {
+        return $this->belongsTo(Guest::class);
     }
 
     public function checkInRooms()

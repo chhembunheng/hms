@@ -5,6 +5,7 @@ namespace App\Http\Controllers\CheckIn;
 use App\Http\Controllers\Controller;
 use App\Models\CheckIn;
 use App\Models\CheckInRoom;
+use App\Models\Guest;
 use App\Models\Room;
 use App\Models\Floor;
 use Illuminate\Http\Request;
@@ -127,6 +128,9 @@ class WalkInController extends Controller
                 }
             }
 
+            // Find or create guest profile
+            $guest = $this->findOrCreateGuest($request);
+
             // Create the check-in record (use first room as primary)
             $data = $request->only([
                 'guest_name', 'guest_email', 'guest_phone',
@@ -135,6 +139,7 @@ class WalkInController extends Controller
                 'total_guests', 'total_amount', 'notes'
             ]);
 
+            $data['guest_id'] = $guest->id;
             $data['room_id'] = $roomIds[0]; // Primary room
             $data['paid_amount'] = $request->paid_amount ?? 0;
             $data['status'] = 'checked_in';
@@ -436,5 +441,66 @@ class WalkInController extends Controller
             'floors' => $floors,
             'total_rooms' => $availableRooms->count()
         ]);
+    }
+
+    /**
+     * Find existing guest or create a new one
+     */
+    private function findOrCreateGuest(Request $request)
+    {
+        $guestData = [
+            'email' => $request->guest_email,
+            'phone' => $request->guest_phone,
+            'national_id' => $request->guest_national_id,
+            'passport' => $request->guest_passport,
+        ];
+
+        // Try to find existing guest by unique identifiers
+        $guest = null;
+
+        if (!empty($guestData['email'])) {
+            $guest = Guest::where('email', $guestData['email'])->first();
+        }
+
+        if (!$guest && !empty($guestData['phone'])) {
+            $guest = Guest::where('phone', $guestData['phone'])->first();
+        }
+
+        if (!$guest && !empty($guestData['national_id'])) {
+            $guest = Guest::where('national_id', $guestData['national_id'])->first();
+        }
+
+        if (!$guest && !empty($guestData['passport'])) {
+            $guest = Guest::where('passport', $guestData['passport'])->first();
+        }
+
+        if ($guest) {
+            // Update existing guest's visit information
+            $guest->update([
+                'last_visit_at' => now(),
+                'total_visits' => $guest->total_visits + 1,
+            ]);
+        } else {
+            // Parse guest name into first and last name
+            $nameParts = explode(' ', trim($request->guest_name), 2);
+            $firstName = $nameParts[0] ?? '';
+            $lastName = $nameParts[1] ?? '';
+
+            // Create new guest
+            $guest = Guest::create([
+                'first_name' => $firstName,
+                'last_name' => $lastName,
+                'email' => $request->guest_email,
+                'phone' => $request->guest_phone,
+                'national_id' => $request->guest_national_id,
+                'passport' => $request->guest_passport,
+                'guest_type' => $request->guest_type,
+                'country' => $request->guest_country,
+                'last_visit_at' => now(),
+                'total_visits' => 1,
+            ]);
+        }
+
+        return $guest;
     }
 }
