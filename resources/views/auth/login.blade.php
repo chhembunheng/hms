@@ -15,7 +15,7 @@
                                 </div>
                             </div>
                             <h4 class="text-center mb-1 text-primary">Welcome Back</h4>
-                            <p class="text-center mb-3 text-muted">No card required. You'll get all the advanced functionality for free during the 14 day PRO trial.</p>
+                            <p class="text-center mb-3 text-muted">Sign in to continue to Hotel Management System.</p>
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="mb-3">
@@ -36,19 +36,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="d-flex align-items-center mb-3">
-                                    <label class="form-check">
-                                        <input type="checkbox" name="remember" class="form-check-input">
-                                        <span class="form-check-label">Remember</span>
-                                    </label>
-                                    <a href="/forgot-password" class="ms-auto">Forgot password?</a>
-                                </div>
                                 <div class="form-group mb-4">
                                     <button type="submit" class="btn btn-primary w-100">Log in</button>
                                 </div>
                             </form>
-                            <p class="text-center mb-0 text-muted">By signing in you’re okay with our</p>
-                            <p class="text-center mb-0 text-muted"><a href="/terms-of-service">Terms of Service</a> and <a href="/privacy-policy">Privacy Policy</a></p>
                         </div>
                     </div>
                 </div>
