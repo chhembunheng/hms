@@ -866,3 +866,15 @@ if (!function_exists('getContrastColor')) {
         return $luminance > 0.5 ? '#000000' : '#ffffff';
     }
 }
+
+
+if (!function_exists('paymentMethods')) {
+    function paymentMethods(): array
+    {
+        return [
+            'cash_khr' => 'Cash (KHR)',
+            'cash_usd' => 'Cash (USD)',
+            'ABA POS Machine' => 'ABA POS Machine',
+        ];
+    }
+}

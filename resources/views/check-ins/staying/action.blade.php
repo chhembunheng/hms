@@ -4,7 +4,7 @@
     </a>
     <div class="dropdown-menu dropdown-menu-end">
         @foreach ($actions as $action)
-            @if ($action['action'] === 'check_out')
+            @if ($action['action'] === 'checkout')
                 <a href="#" class="dropdown-item" onclick="showCheckOutModal({{ $row->id }}, '{{ $row->booking_number }}', {{ $row->total_amount }}, {{ $row->paid_amount }})">
                     <i class="fa-light {{ $action['icon'] }} me-2"></i> {{ $action->translations->firstWhere('locale', app()->getLocale())->name }}
                 </a>
@@ -18,6 +18,7 @@
         @endforeach
     </div>
 </div>
+
 
 <script>
 function showCheckOutModal(id, bookingNumber, totalAmount, paidAmount) {
@@ -52,11 +53,11 @@ function showCheckOutModal(id, bookingNumber, totalAmount, paidAmount) {
                             </div>
                             <div class="mb-3">
                                 <label for="paymentMethod" class="form-label">{{ __('checkins.payment_method') }}</label>
-                                <select class="form-select" id="paymentMethod">
-                                    <option value="">{{ __('global.select') }}</option>
-                                    <option value="cash">{{ __('checkins.cash') }}</option>
-                                    <option value="card">{{ __('checkins.card') }}</option>
-                                    <option value="bank_transfer">{{ __('checkins.bank_transfer') }}</option>
+                                <select class="form-select form-select-sm select2" id="paymentMethod">
+                                    <option value="">{{ __('form.select_option') }}</option>
+                                    @foreach (paymentMethods() as $code => $name)
+                                        <option value="{{ $code }}">{{ $name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -86,6 +87,12 @@ function showCheckOutModal(id, bookingNumber, totalAmount, paidAmount) {
     // Show modal
     const modal = new bootstrap.Modal(document.getElementById('checkOutModal'));
     modal.show();
+
+    // Initialize select2 for payment method
+    $('#paymentMethod').select2({
+        dropdownParent: $('#checkOutModal'),
+        width: '100%'
+    });
 }
 
 function processCheckOut(id) {
@@ -114,7 +121,7 @@ function processCheckOut(id) {
     .then(response => response.json())
     .then(data => {
         if (data.status === 'success') {
-            toastr.success(data.message);
+            success(data.message);
             // Close modal
             const modal = bootstrap.Modal.getInstance(document.getElementById('checkOutModal'));
             modal.hide();
@@ -122,39 +129,12 @@ function processCheckOut(id) {
                 window.location.reload();
             }, 2000);
         } else {
-            toastr.error(data.message);
+            error(data.message);
         }
     })
     .catch(error => {
         console.error('Error:', error);
-        toastr.error('An error occurred during check-out');
+        error('An error occurred during check-out');
     });
-}
-
-function deleteRecord(id, name) {
-    if (confirm('Are you sure you want to delete ' + name + '?')) {
-        fetch(`{{ url('checkin/staying') }}/${id}/delete`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                toastr.success(data.message);
-                setTimeout(() => {
-                    window.location.reload();
-                }, 2000);
-            } else {
-                toastr.error(data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            toastr.error('An error occurred');
-        });
-    }
 }
 </script>

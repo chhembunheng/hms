@@ -32,7 +32,7 @@ class MenuSeeder extends Seeder
                     'sort' => $data['sort'],
                 ]
             );
-            
+
             // Handle translations array format
             if (!empty($data['translations'])) {
                 foreach ($data['translations'] as $translation) {
@@ -71,9 +71,10 @@ class MenuSeeder extends Seeder
             }
             if (!empty($data['permissions'])) {
                 foreach ($data['permissions'] as $permissionData) {
+                    $actionRoute = $permissionData['route'] ?? $this->actionRoute($data['route'], $permissionData['action']);
                     $permission = Permission::updateOrCreate(
                         [
-                            'action_route' => $this->actionRoute($data['route'], $permissionData['action']),
+                            'action_route' => $actionRoute,
                             'menu_id' => $menu->id,
                         ],
                         [

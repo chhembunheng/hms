@@ -204,13 +204,32 @@
                 "description": "មើលភ្ញៀវកំពុងស្នាក់"
               }
             ]
+          },
+          {
+            "action": "checkout",
+            "icon": "fa-right-from-bracket",
+            "target": "modal",
+            "sort": 1,
+            "route": "checkin.staying.check-out",
+            "translations": [
+              {
+                "locale": "en",
+                "name": "Check-Out & Payment",
+                "description": "Process guest checkout and payment"
+              },
+              {
+                "locale": "km",
+                "name": "ចាកចេញ និងទូទាត់ប្រាក់",
+                "description": "ដំណើរការចាកចេញភ្ញៀវ និងទូទាត់ប្រាក់"
+              }
+            ]
           }
         ]
       },
       {
         "icon": "fa-right-from-bracket",
         "sort": 5,
-        "route": "checkout.index",
+        "route": "checkout.checkout.index",
         "translations": [
           {
             "locale": "en",
@@ -229,7 +248,7 @@
             "icon": "fa-list",
             "target": "self",
             "sort": 0,
-            "route": "checkout.index",
+            "route": "checkout.checkout.index",
             "translations": [
               {
                 "locale": "en",
@@ -240,44 +259,6 @@
                 "locale": "km",
                 "name": "មើល",
                 "description": "មើលចាកចេញ"
-              }
-            ]
-          },
-          {
-            "action": "edit",
-            "icon": "fa-pen-to-square",
-            "target": "self",
-            "sort": 1,
-            "route": "checkout.edit",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Edit",
-                "description": "Edit check-out"
-              },
-              {
-                "locale": "km",
-                "name": "កែប្រែ",
-                "description": "កែប្រែចាកចេញ"
-              }
-            ]
-          },
-          {
-            "action": "delete",
-            "icon": "fa-trash",
-            "target": "confirm",
-            "sort": 2,
-            "route": "checkout.delete",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Delete",
-                "description": "Delete check-out"
-              },
-              {
-                "locale": "km",
-                "name": "លុប",
-                "description": "លុបចាកចេញ"
               }
             ]
           }
