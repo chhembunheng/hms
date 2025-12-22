@@ -74,7 +74,7 @@ class StayingController extends Controller
         ]);
     }
 
-    public function checkOut($id)
+    public function checkOut(Request $request, $id)
     {
         $checkIn = CheckIn::findOrFail($id);
 
@@ -85,9 +85,20 @@ class StayingController extends Controller
             ], 422);
         }
 
+        // Validate payment data
+        $rules = [
+            'paid_amount' => 'required|numeric|min:0|max:' . $checkIn->total_amount,
+            'payment_method' => 'nullable|string|max:50',
+            'notes' => 'nullable|string|max:1000',
+        ];
+
+        $request->validate($rules);
+
         $checkIn->update([
             'status' => 'checked_out',
-            'actual_check_out_at' => now()
+            'actual_check_out_at' => now(),
+            'paid_amount' => $request->paid_amount,
+            'notes' => $request->notes,
         ]);
 
         // Update room statuses to "Cleaning"
@@ -99,7 +110,7 @@ class StayingController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Guest checked out successfully.',
+            'message' => 'Guest checked out and payment processed successfully.',
             'redirect' => route('checkin.staying.index'),
             'delay' => 2000
         ]);

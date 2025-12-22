@@ -36,30 +36,13 @@ class CheckInSeeder extends Seeder
                 'billing_type' => 'night',
                 'check_in_date' => now()->format('Y-m-d'),
                 'check_out_date' => now()->addDays(3)->format('Y-m-d'),
-                'total_amount' => 450.00,
-                'paid_amount' => 225.00,
-                'status' => 'confirmed',
+                'total_amount' => 44.00,
+                'paid_amount' => 44.00,
+                'status' => 'checked_in',
                 'notes' => 'Business trip guest',
             ],
             [
                 'room_id' => $availableRooms->skip(1)->first()?->id ?? $availableRooms->first()->id,
-                'guest_name' => 'Sokun Doe',
-                'guest_email' => 'sokun.doe@example.com',
-                'guest_phone' => '+855-12-345-678',
-                'guest_type' => 'national',
-                'guest_national_id' => '123456789',
-                'total_guests' => 1,
-                'billing_type' => 'night',
-                'check_in_date' => now()->subDays(1)->format('Y-m-d'),
-                'check_out_date' => now()->addDays(2)->format('Y-m-d'),
-                'total_amount' => 200.00,
-                'paid_amount' => 200.00,
-                'status' => 'checked_in',
-                'notes' => 'Regular guest',
-                'actual_check_in_at' => now()->subDays(1)->setTime(14, 30),
-            ],
-            [
-                'room_id' => $availableRooms->skip(2)->first()?->id ?? $availableRooms->first()->id,
                 'guest_name' => 'Maria Garcia',
                 'guest_email' => 'maria.garcia@example.com',
                 'guest_phone' => '+34-666-123-456',
@@ -70,8 +53,8 @@ class CheckInSeeder extends Seeder
                 'billing_type' => 'night',
                 'check_in_date' => now()->subDays(5)->format('Y-m-d'),
                 'check_out_date' => now()->subDays(2)->format('Y-m-d'),
-                'total_amount' => 600.00,
-                'paid_amount' => 600.00,
+                'total_amount' => 25,
+                'paid_amount' => 75,
                 'status' => 'checked_out',
                 'notes' => 'Family vacation',
                 'actual_check_in_at' => now()->subDays(5)->setTime(15, 0),
@@ -80,7 +63,6 @@ class CheckInSeeder extends Seeder
         ];
 
         foreach ($checkIns as $checkInData) {
-            // Skip if room is not available
             if (!isset($checkInData['room_id'])) {
                 continue;
             }

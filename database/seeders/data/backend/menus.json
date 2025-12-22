@@ -111,21 +111,21 @@
             ]
           },
           {
-            "action": "delete",
-            "icon": "fa-trash",
+            "action": "cancel",
+            "icon": "fa-times",
             "target": "confirm",
-            "sort": 2,
-            "route": "checkin.walkin.delete",
+            "sort": 3,
+            "route": "checkin.walkin.cancel",
             "translations": [
               {
                 "locale": "en",
-                "name": "Delete",
-                "description": "Delete check-in"
+                "name": "Cancel",
+                "description": "Cancel check-in"
               },
               {
                 "locale": "km",
-                "name": "លុប",
-                "description": "លុបចូលស្នាក់"
+                "name": "បោះបង់",
+                "description": "បោះបង់ចូលស្នាក់"
               }
             ]
           }
@@ -202,44 +202,6 @@
                 "locale": "km",
                 "name": "មើល",
                 "description": "មើលភ្ញៀវកំពុងស្នាក់"
-              }
-            ]
-          },
-          {
-            "action": "edit",
-            "icon": "fa-pen-to-square",
-            "target": "self",
-            "sort": 1,
-            "route": "checkin.staying.edit",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Edit",
-                "description": "Edit staying guest"
-              },
-              {
-                "locale": "km",
-                "name": "កែប្រែ",
-                "description": "កែប្រែភ្ញៀវកំពុងស្នាក់"
-              }
-            ]
-          },
-          {
-            "action": "delete",
-            "icon": "fa-trash",
-            "target": "confirm",
-            "sort": 2,
-            "route": "checkin.staying.delete",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Delete",
-                "description": "Delete staying guest"
-              },
-              {
-                "locale": "km",
-                "name": "លុប",
-                "description": "លុបភ្ញៀវកំពុងស្នាក់"
               }
             ]
           }
@@ -324,17 +286,17 @@
       {
         "icon": "fa-ban",
         "sort": 7,
-        "route": "checkin.void.index",
+        "route": "checkin.void-stay.index",
         "translations": [
           {
             "locale": "en",
             "name": "Void / Cancel Stay",
-            "description": "Void or cancel stay"
+            "description": "View cancelled stays"
           },
           {
             "locale": "km",
             "name": "លុប / បោះបង់ការស្នាក់",
-            "description": "លុប ឬបោះបង់ការស្នាក់"
+            "description": "មើលការស្នាក់ដែលបានបោះបង់"
           }
         ],
         "permissions": [
@@ -343,55 +305,17 @@
             "icon": "fa-list",
             "target": "self",
             "sort": 0,
-            "route": "checkin.void.index",
+            "route": "checkin.void-stay.index",
             "translations": [
               {
                 "locale": "en",
                 "name": "View",
-                "description": "View void/cancel stay"
+                "description": "View cancelled stays"
               },
               {
                 "locale": "km",
                 "name": "មើល",
-                "description": "មើលលុប/បោះបង់ការស្នាក់"
-              }
-            ]
-          },
-          {
-            "action": "edit",
-            "icon": "fa-pen-to-square",
-            "target": "self",
-            "sort": 1,
-            "route": "checkin.void.edit",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Edit",
-                "description": "Edit void/cancel stay"
-              },
-              {
-                "locale": "km",
-                "name": "កែប្រែ",
-                "description": "កែប្រែលុប/បោះបង់ការស្នាក់"
-              }
-            ]
-          },
-          {
-            "action": "delete",
-            "icon": "fa-trash",
-            "target": "confirm",
-            "sort": 2,
-            "route": "checkin.void.delete",
-            "translations": [
-              {
-                "locale": "en",
-                "name": "Delete",
-                "description": "Delete void/cancel stay"
-              },
-              {
-                "locale": "km",
-                "name": "លុប",
-                "description": "លុបលុប/បោះបង់ការស្នាក់"
+                "description": "មើលការស្នាក់ដែលបានបោះបង់"
               }
             ]
           }

@@ -513,4 +513,47 @@ class WalkInController extends Controller
 
         return $guest;
     }
+
+    public function cancel($id)
+    {
+        $checkIn = CheckIn::findOrFail($id);
+
+        // Only allow cancellation for confirmed or checked_in status
+        if (!in_array($checkIn->status, ['confirmed', 'checked_in'])) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Cannot cancel this check-in. Invalid status.'
+            ], 422);
+        }
+
+        // Update check-in status to cancelled
+        $checkIn->update([
+            'status' => 'cancelled',
+            'cancelled_at' => now(),
+        ]);
+
+        // Update room statuses back to available
+        $roomIds = $checkIn->checkInRooms->pluck('room_id')->toArray();
+        if (!empty($roomIds)) {
+            \App\Models\Room::whereIn('id', $roomIds)->update([
+                'status_id' => \App\Models\RoomStatus::where('name_en', 'Available')->first()->id ?? 1
+            ]);
+        }
+
+        // Update guest visit count if guest exists
+        if ($checkIn->guest_id) {
+            $guest = Guest::find($checkIn->guest_id);
+            if ($guest) {
+                $guest->decrement('total_visits');
+                $guest->update(['last_visit_at' => null]);
+            }
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Check-in cancelled successfully.',
+            'redirect' => route('checkin.walkin.index'),
+            'delay' => 2000
+        ]);
+    }
 }

@@ -31,19 +31,13 @@ class StayingDataTable extends DataTable
             ->addColumn('check_out_date', fn($row) => $row->check_out_date?->format('M d, Y'))
             ->addColumn('total_amount', fn($row) => '$' . number_format($row->total_amount, 2))
             ->addColumn('status', function($row) {
-                $statusColors = [
-                    'confirmed' => 'warning',
-                    'checked_in' => 'success',
-                    'checked_out' => 'info',
-                    'cancelled' => 'danger'
-                ];
-                return badge(ucfirst(str_replace('_', ' ', $row->status)), $statusColors[$row->status] ?? 'secondary');
+                return badge(ucfirst(str_replace('_', ' ', $row->status)));
             })
             ->editColumn('created_at', function (CheckIn $model) {
                 return $model->created_at?->format(config('init.datetime.display_format'));
             })
             ->addColumn('action', fn($row) => view('check-ins.staying.action', compact('row')))
-            ->rawColumns(['action', 'guest_type', 'status']);
+            ->rawColumns(['guest_type', 'status', 'action']);
     }
 
     /**
@@ -56,7 +50,7 @@ class StayingDataTable extends DataTable
     {
         return $model->newQuery()
             ->with(['room.roomType', 'room.status'])
-            ->where('status', 'checked_in'); // Currently staying guests
+            ->where('status', 'checked_in');
     }
 
     /**
@@ -68,17 +62,7 @@ class StayingDataTable extends DataTable
                     ->setTableId('staying-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+                    ->orderBy(1);
     }
 
     /**
