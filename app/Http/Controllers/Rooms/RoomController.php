@@ -111,33 +111,4 @@ class RoomController extends Controller
             ]);
         }
     }
-
-    public function checkIn()
-    {
-        $rooms = Room::with(['roomType', 'status', 'floor'])
-            ->active()
-            ->join('floors', 'rooms.floor_id', '=', 'floors.id')
-            ->orderBy('floors.floor_number')
-            ->orderBy('rooms.room_number')
-            ->select('rooms.*')
-            ->get()
-            ->groupBy('floor.floor_number');
-
-        return view('rooms.rooms.check-in', compact('rooms'));
-    }
-
-    public function processCheckIn(Request $request, $id)
-    {
-        $room = Room::findOrFail($id);
-
-        // Add validation and check-in logic here
-        // For now, just return success
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Check-in successful for room ' . $room->room_number,
-            'redirect' => route('rooms.check-in'),
-            'delay' => 2000
-        ]);
-    }
 }

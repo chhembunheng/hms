@@ -198,6 +198,13 @@ class CheckInController extends Controller
             'actual_check_out_at' => now()
         ]);
 
+        // Update room statuses back to "Available"
+        $availableStatus = \App\Models\RoomStatus::where('name_en', 'Available')->first();
+        if ($availableStatus) {
+            $roomIds = $checkIn->checkInRooms->pluck('room_id')->toArray();
+            \App\Models\Room::whereIn('id', $roomIds)->update(['status_id' => $availableStatus->id]);
+        }
+
         return response()->json([
             'status' => 'success',
             'message' => 'Guest checked out successfully.',

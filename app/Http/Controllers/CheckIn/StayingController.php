@@ -90,6 +90,13 @@ class StayingController extends Controller
             'actual_check_out_at' => now()
         ]);
 
+        // Update room statuses to "Cleaning"
+        $cleaningStatus = \App\Models\RoomStatus::where('name_en', 'Cleaning')->first();
+        if ($cleaningStatus) {
+            $roomIds = $checkIn->checkInRooms->pluck('room_id')->toArray();
+            \App\Models\Room::whereIn('id', $roomIds)->update(['status_id' => $cleaningStatus->id]);
+        }
+
         return response()->json([
             'status' => 'success',
             'message' => 'Guest checked out successfully.',

@@ -388,15 +388,31 @@ $(document).ready(function() {
                     setTimeout(function() {
                         window.location.href = response.redirect;
                     }, 1500);
-                } else {
+                } else if (response.status === 'error') {
                     error(response.message || 'An error occurred while saving the booking');
+                    return;
+                } else {
+                    error('Unexpected response from server');
                 }
             },
-            error: function(xhr) {
+            error: function(xhr, status, errorThrown) {
                 let message = 'An error occurred while saving the booking';
-                if (xhr.responseJSON && xhr.responseJSON.message) {
+
+                if (xhr.status === 422 && xhr.responseJSON) {
+                    // Handle validation errors
+                    if (xhr.responseJSON.message) {
+                        message = xhr.responseJSON.message;
+                    } else if (xhr.responseJSON.errors) {
+                        // Handle Laravel validation errors
+                        const errors = Object.values(xhr.responseJSON.errors).flat();
+                        message = errors.join(', ');
+                    }
+                } else if (xhr.responseJSON && xhr.responseJSON.message) {
                     message = xhr.responseJSON.message;
+                } else if (xhr.responseJSON && xhr.responseJSON.status === 'error') {
+                    message = xhr.responseJSON.message || 'An error occurred';
                 }
+
                 error(message);
             }
         });

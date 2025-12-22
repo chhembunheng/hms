@@ -124,7 +124,7 @@ class WalkInController extends Controller
                     return response()->json([
                         'status' => 'error',
                         'message' => 'Room ' . ($room ? $room->room_number : $roomId) . ' is not available for the selected dates.'
-                    ], 422);
+                    ]);
                 }
             }
 
@@ -169,6 +169,12 @@ class WalkInController extends Controller
                     'room_id' => $roomId,
                     'room_price' => $roomPrice,
                 ]);
+            }
+
+            // Update room statuses to "Occupied"
+            $occupiedStatus = \App\Models\RoomStatus::where('name_en', 'Occupied')->first();
+            if ($occupiedStatus) {
+                Room::whereIn('id', $roomIds)->update(['status_id' => $occupiedStatus->id]);
             }
 
             return response()->json([
@@ -390,15 +396,18 @@ class WalkInController extends Controller
                 return false;
             }
 
+            $checkInDate = formate_date($request->check_in_date);
+            $checkOutDate = formate_date($request->check_out_date);
+
             // Check for conflicting bookings
             $conflictingBookings = CheckIn::where('room_id', $room->id)
                 ->whereIn('status', ['confirmed', 'checked_in'])
-                ->where(function($query) use ($request) {
-                    $query->whereBetween('check_in_date', [$request->check_in_date, $request->check_out_date])
-                          ->orWhereBetween('check_out_date', [$request->check_in_date, $request->check_out_date])
-                          ->orWhere(function($q) use ($request) {
-                              $q->where('check_in_date', '<=', $request->check_in_date)
-                                ->where('check_out_date', '>=', $request->check_out_date);
+                ->where(function($query) use ($request, $checkInDate, $checkOutDate) {
+                    $query->whereBetween('check_in_date', [$checkInDate, $checkOutDate])
+                          ->orWhereBetween('check_out_date', [$checkInDate, $checkOutDate])
+                          ->orWhere(function($q) use ($checkInDate, $checkOutDate) {
+                              $q->where('check_in_date', '<=', $checkInDate)
+                                ->where('check_out_date', '>=', $checkOutDate);
                           });
                 })
                 ->exists();
@@ -448,6 +457,7 @@ class WalkInController extends Controller
      */
     private function findOrCreateGuest(Request $request)
     {
+
         $guestData = [
             'email' => $request->guest_email,
             'phone' => $request->guest_phone,

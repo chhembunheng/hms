@@ -30,6 +30,10 @@ class Guest extends Model
         'emergency_contact_name',
         'emergency_contact_phone',
         'notes',
+        'is_blacklisted',
+        'blacklist_reason',
+        'blacklisted_at',
+        'internal_notes',
         'last_visit_at',
         'total_visits',
     ];
@@ -37,6 +41,8 @@ class Guest extends Model
     protected $casts = [
         'date_of_birth' => 'date',
         'last_visit_at' => 'datetime',
+        'blacklisted_at' => 'datetime',
+        'is_blacklisted' => 'boolean',
         'total_visits' => 'integer',
     ];
 
@@ -66,5 +72,33 @@ class Guest extends Model
     public function getDisplayNameAttribute()
     {
         return $this->full_name ?: ($this->first_name . ' ' . $this->last_name);
+    }
+
+    public function blacklist($reason = null)
+    {
+        $this->update([
+            'is_blacklisted' => true,
+            'blacklist_reason' => $reason,
+            'blacklisted_at' => now(),
+        ]);
+    }
+
+    public function unblacklist()
+    {
+        $this->update([
+            'is_blacklisted' => false,
+            'blacklist_reason' => null,
+            'blacklisted_at' => null,
+        ]);
+    }
+
+    public function scopeBlacklisted($query)
+    {
+        return $query->where('is_blacklisted', true);
+    }
+
+    public function scopeNotBlacklisted($query)
+    {
+        return $query->where('is_blacklisted', false);
     }
 }
