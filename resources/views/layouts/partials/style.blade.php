@@ -213,3 +213,7 @@ html:lang(en) [class*="fa-"] {
 }
 
 </style>
+
+{{-- Pickadate CSS --}}
+<link rel="stylesheet" href="{{ asset('assets/css/default.css') }}?v={{ config('init.layout_version') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/default.date.css') }}?v={{ config('init.layout_version') }}">

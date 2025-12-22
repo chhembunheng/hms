@@ -23,6 +23,9 @@
  </script>
  <script src="{{ asset('assets/js/vendor/pickers/datepicker.min.js') }}?v={{ config('init.layout_version') }}">
  </script>
+ {{-- Pickadate Scripts --}}
+ <script src="{{ asset('assets/js/picker.js') }}?v={{ config('init.layout_version') }}"></script>
+ <script src="{{ asset('assets/js/picker.date.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/vendor/media/glightbox.min.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/vendor/editors/ckeditor.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/app.js') }}?v={{ config('init.layout_version') }}"></script>

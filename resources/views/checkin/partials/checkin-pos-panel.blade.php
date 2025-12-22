@@ -35,13 +35,13 @@
                 {{-- Check-in Date --}}
                 <div class="col-6">
                     <label class="form-label small fw-bold">Check-in</label>
-                    <input type="date" class="form-control form-control-sm" id="checkin-date" name="checkin_date">
+                    <input type="text" class="form-control form-control-sm" id="checkin-date" name="checkin_date" placeholder="dd-mm-yyyy" autocomplete="off">
                 </div>
 
                 {{-- Check-out Date --}}
                 <div class="col-6">
                     <label class="form-label small fw-bold">Check-out</label>
-                    <input type="date" class="form-control form-control-sm" id="checkout-date" name="checkout_date">
+                    <input type="text" class="form-control form-control-sm" id="checkout-date" name="checkout_date" placeholder="dd-mm-yyyy" autocomplete="off">
                 </div>
 
                 {{-- Total Days --}}
@@ -68,7 +68,7 @@
                         <input type="email" class="form-control form-control-sm" id="guest-email" placeholder="Email (optional)">
                     </div>
                     <div class="col-6">
-                        <input type="tel" class="form-control form-control-sm" id="guest-phone" placeholder="Phone (optional)">
+                        <input type="tel" class="form-control form-control-sm" id="guest-phone" placeholder="Phone (required)">
                     </div>
                 </div>
             </div>
@@ -110,19 +110,25 @@
 
             {{-- Guest Documents --}}
             <div class="mb-3 guest-documents" id="national-docs" style="display: block;">
-                <label class="form-label small fw-bold">National ID</label>
-                <input type="text" class="form-control form-control-sm" id="guest-national-id" placeholder="National ID Number">
+                <label class="form-label small fw-bold">National ID
+                    <span class="text-danger">*</span>
+                </label>
+                <input type="text" class="form-control form-control-sm" id="guest-national-id" placeholder="National ID Number" required>
             </div>
 
             <div class="mb-3 guest-documents" id="international-docs" style="display: none;">
                 <div class="row g-2">
                     <div class="col-6">
-                        <label class="form-label small fw-bold">Passport Number</label>
-                        <input type="text" class="form-control form-control-sm" id="guest-passport" placeholder="Passport Number">
+                        <label class="form-label small fw-bold">Passport Number
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" class="form-control form-control-sm" id="guest-passport" placeholder="Passport Number" required>
                     </div>
                     <div class="col-6">
-                        <label class="form-label small fw-bold">Country</label>
-                        <input type="text" class="form-control form-control-sm" id="guest-country" placeholder="Country of Origin">
+                        <label class="form-label small fw-bold">Country
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" class="form-control form-control-sm" id="guest-country" placeholder="Country of Origin" required>
                     </div>
                 </div>
             </div>
@@ -145,20 +151,8 @@
         {{-- Pricing Summary --}}
         <div class="border-top pt-3">
             <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-bold">Subtotal:</span>
-                <span class="fw-bold" id="subtotal-price">$0.00</span>
-            </div>
-
-            <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="small text-muted">Taxes & Fees:</span>
-                <span class="small text-muted" id="taxes-fees">$0.00</span>
-            </div>
-
-            <hr class="my-2">
-
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <span class="h6 mb-0 fw-bold">Total:</span>
-                <span class="h6 mb-0 fw-bold text-success" id="total-price">$0.00</span>
+                <span class="fw-bold">Total:</span>
+                <span class="fw-bold text-success" id="total-price">$0.00</span>
             </div>
 
             {{-- Action Buttons --}}
@@ -186,19 +180,19 @@
                     <div class="d-flex justify-content-between align-items-center mb-1">
                         <h6 class="mb-0 small fw-bold">
                             <i class="fa-solid fa-bed fa-fw me-1"></i>
-                            Room <span class="room-number"></span>
+                            Room <span class="room-number">%%ROOM_NUMBER%%</span>
                         </h6>
                         <button type="button" class="btn btn-sm btn-outline-danger remove-room-btn" data-room-id="">
                             <i class="fa-solid fa-times fa-fw"></i>
                         </button>
                     </div>
-                    <p class="mb-1 small text-muted room-type"></p>
+                    <p class="mb-1 small text-muted room-type">%%ROOM_TYPE%%</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <small class="text-muted">
                             <i class="fa-solid fa-users fa-fw me-1"></i>
-                            Max: <span class="max-guests"></span> guests
+                            Max: <span class="max-guests">%%MAX_GUESTS%%</span> guests
                         </small>
-                        <span class="badge bg-primary small room-price"></span>
+                        <span class="badge bg-primary small room-price">%%ROOM_PRICE%%</span>
                     </div>
                 </div>
             </div>
@@ -260,12 +254,6 @@ $(document).ready(function() {
         }
     });
 
-    // Date change handlers
-    $('#checkin-date, #checkout-date').on('change', function() {
-        calculateTotalDays();
-        updatePricing();
-    });
-
     // Guest count change
     $('#total-guests').on('change', function() {
         updatePricing();
@@ -325,6 +313,9 @@ $(document).ready(function() {
 
         // Collect form data
         const guestType = $('input[name="guest_type"]:checked').val();
+        const checkinPicker = $('#checkin-date').pickadate('picker');
+        const checkoutPicker = $('#checkout-date').pickadate('picker');
+
         const formData = {
             room_ids: selectedRooms.map(room => room.id), // Send as array
             guest_name: $('#guest-name').val() || 'Walk-in Guest',
@@ -332,8 +323,8 @@ $(document).ready(function() {
             guest_phone: $('#guest-phone').val(),
             guest_type: guestType,
             billing_type: $('#billing-type').val(),
-            check_in_date: $('#checkin-date').val(),
-            check_out_date: $('#checkout-date').val(),
+            check_in_date: checkinPicker ? checkinPicker.get('select', 'yyyy-mm-dd') : '',
+            check_out_date: checkoutPicker ? checkoutPicker.get('select', 'yyyy-mm-dd') : '',
             total_days: $('#total-days').val(),
             total_guests: $('#total-guests').val(),
             total_amount: parseFloat($('#total-price').text().replace('$', '').replace(',', '')),
@@ -445,10 +436,10 @@ $(document).ready(function() {
             selectedRooms.forEach(room => {
                 const roomHtml = roomTemplate
                     .replace(/data-room-id=""/g, `data-room-id="${room.id}"`)
-                    .replace('<span class="room-number"></span>', room.number)
-                    .replace('room-type', `room-type">${room.type}`)
-                    .replace('<span class="max-guests"></span>', room.maxGuests)
-                    .replace('room-price', `room-price">$${room.price}/night`);
+                    .replace('%%ROOM_NUMBER%%', room.number)
+                    .replace('%%ROOM_TYPE%%', room.type)
+                    .replace('%%MAX_GUESTS%%', room.maxGuests)
+                    .replace('%%ROOM_PRICE%%', `$${room.price}/night`);
                 html += roomHtml;
             });
             $('#selected-rooms-list').html(html);
@@ -458,14 +449,25 @@ $(document).ready(function() {
     }
 
     function calculateTotalDays() {
-        const checkinDate = new Date($('#checkin-date').val());
-        const checkoutDate = new Date($('#checkout-date').val());
+        var checkinValue = $('#checkin-date').val();
+        var checkoutValue = $('#checkout-date').val();
 
-        if (checkinDate && checkoutDate && checkoutDate > checkinDate) {
-            const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
-            const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-            $('#total-days').val(daysDiff);
-            return daysDiff;
+        if (checkinValue && checkoutValue) {
+            // Parse d-m-yyyy format
+            var checkinParts = checkinValue.split('-');
+            var checkoutParts = checkoutValue.split('-');
+
+            if (checkinParts.length === 3 && checkoutParts.length === 3) {
+                var checkinDate = new Date(checkinParts[2], checkinParts[1] - 1, checkinParts[0]);
+                var checkoutDate = new Date(checkoutParts[2], checkoutParts[1] - 1, checkoutParts[0]);
+
+                if (checkoutDate > checkinDate) {
+                    var timeDiff = checkoutDate.getTime() - checkinDate.getTime();
+                    var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                    $('#total-days').val(daysDiff);
+                    return daysDiff;
+                }
+            }
         }
 
         $('#total-days').val('0');
@@ -476,7 +478,7 @@ $(document).ready(function() {
         const totalDays = parseInt($('#total-days').val()) || 0;
         const billingType = $('#billing-type').val();
 
-        let subtotal = 0;
+        let total = 0;
         selectedRooms.forEach(room => {
             let roomPrice = parseFloat(room.price);
 
@@ -489,25 +491,67 @@ $(document).ready(function() {
                     roomPrice = roomPrice;
             }
 
-            subtotal += roomPrice * totalDays;
+            total += roomPrice * totalDays;
         });
 
-        const taxes = subtotal * 0.05;
-        const total = subtotal + taxes;
-
-        $('#subtotal-price').text(`$${subtotal.toFixed(2)}`);
-        $('#taxes-fees').text(`$${taxes.toFixed(2)}`);
         $('#total-price').text(`$${total.toFixed(2)}`);
     }
 
+    // Initialize pickadate
+    $('#checkin-date').pickadate({
+        format: 'd-m-yyyy',
+        formatSubmit: 'yyyy-mm-dd',
+        min: new Date(),
+        onSet: function(event) {
+            if (event.select) {
+                // Update checkout minimum date
+                var checkinDate = new Date(event.select);
+                var minCheckout = new Date(checkinDate);
+                minCheckout.setDate(checkinDate.getDate() + 1);
+
+                var checkoutPicker = $('#checkout-date').pickadate('picker');
+                checkoutPicker.set('min', minCheckout);
+
+                // If checkout is before new checkin, update it
+                var currentCheckout = checkoutPicker.get('select');
+                if (currentCheckout && currentCheckout < minCheckout) {
+                    checkoutPicker.set('select', minCheckout);
+                }
+            }
+            calculateTotalDays();
+            updatePricing();
+        }
+    });
+
+    $('#checkout-date').pickadate({
+        format: 'd-m-yyyy',
+        formatSubmit: 'yyyy-mm-dd',
+        min: new Date(Date.now() + 24 * 60 * 60 * 1000), // Tomorrow
+        onSet: function(event) {
+            calculateTotalDays();
+            updatePricing();
+        }
+    });
+
     // Set default dates
-    const today = new Date();
-    const tomorrow = new Date(today);
+    var today = new Date();
+    var tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
 
-    $('#checkin-date').val(today.toISOString().split('T')[0]);
-    $('#checkout-date').val(tomorrow.toISOString().split('T')[0]);
-    calculateTotalDays();
+    var checkinPicker = $('#checkin-date').pickadate('picker');
+    var checkoutPicker = $('#checkout-date').pickadate('picker');
+
+    if (checkinPicker) {
+        checkinPicker.set('select', today);
+    }
+    if (checkoutPicker) {
+        checkoutPicker.set('select', tomorrow);
+    }
+
+    // Calculate total days after setting dates
+    setTimeout(function() {
+        calculateTotalDays();
+    }, 100);
 });
 </script>
 @endpush
