@@ -108,6 +108,7 @@ return [
         'clear_filters' => 'Clear Filters',
         'search_placeholder' => 'Type to search…',
         'no_results' => 'No results found.',
+        'no_data' => 'No data available',
         'enabled' => 'Enabled',
         'disabled' => 'Disabled',
         'active' => 'Active',
@@ -117,6 +118,7 @@ return [
         'yes' => 'Yes',
         'no' => 'No',
         'none' => 'None',
+        'unknown' => 'Unknown',
         'minutes' => 'Minutes',
         'hours' => 'Hours',
         'days' => 'Days',
@@ -203,6 +205,25 @@ return [
         'same_tab' => 'Same Tab',
         'route' => 'Route',
         'action' => 'Action',
+    ],
+
+    'dashboard' => [
+        'welcome_message' => 'Welcome to HMS Dashboard',
+        'welcome_description' => 'Manage your hotel operations efficiently with real-time insights and comprehensive reporting.',
+        'total_rooms' => 'Total Rooms',
+        'occupancy_rate' => 'Occupancy Rate',
+        'occupied' => 'Occupied',
+        'today_check_ins' => 'Today\'s Check-ins',
+        'today_revenue' => 'Today\'s Revenue',
+        'monthly_overview' => 'Monthly Overview',
+        'monthly_check_ins' => 'Monthly Check-ins',
+        'monthly_revenue' => 'Monthly Revenue',
+        'last_month' => 'Last Month',
+        'room_status' => 'Room Status',
+        'revenue_trend' => 'Revenue Trend',
+        'revenue_by_room_type' => 'Revenue by Room Type',
+        'recent_check_ins' => 'Recent Check-ins',
+        'quick_actions' => 'Quick Actions',
     ],
 
     'auth' => [
@@ -354,6 +375,10 @@ return [
         'utilization' => 'Utilization',
         'export_csv' => 'Export CSV',
         'export_pdf' => 'Export PDF',
+        'daily_report' => 'Daily Report',
+        'monthly_report' => 'Monthly Report',
+        'guest_report' => 'Guest Report',
+        'daily_breakdown' => 'Daily Breakdown',
     ],
 
     'settings' => [

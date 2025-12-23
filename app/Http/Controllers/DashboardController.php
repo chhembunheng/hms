@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Frontend\Team;
-use App\Models\Settings\Menu;
-use App\Models\Settings\User;
-use App\Models\Frontend\Client;
-use App\Models\Frontend\Partner;
-use App\Models\Frontend\Product;
-use App\Models\Frontend\Service;
+use App\Models\CheckIn;
+use App\Models\Guest;
+use App\Models\Room;
+use App\Models\RoomType;
+use App\Models\Floor;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use App\Models\Settings\DashboardCache;
 
 class DashboardController extends Controller
 {
@@ -20,7 +18,105 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard.index');
+        // Today's statistics
+        $today = Carbon::today();
+        $thisMonth = Carbon::now()->startOfMonth();
+        $lastMonth = Carbon::now()->subMonth()->startOfMonth();
+
+        // Room statistics
+        $totalRooms = Room::count();
+        $occupiedRooms = Room::whereHas('checkIns', function ($query) {
+            $query->where('status', 'checked_in');
+        })->count();
+        $availableRooms = $totalRooms - $occupiedRooms;
+        $occupancyRate = $totalRooms > 0 ? round(($occupiedRooms / $totalRooms) * 100, 1) : 0;
+
+        // Today's check-ins and check-outs
+        $todayCheckIns = CheckIn::whereDate('check_in_date', $today)->count();
+        $todayCheckOuts = CheckIn::whereDate('actual_check_out_at', $today)->count();
+
+        // Today's revenue
+        $todayRevenue = CheckIn::whereDate('check_in_date', $today)->sum('paid_amount') +
+                       CheckIn::whereDate('actual_check_out_at', $today)->sum('paid_amount');
+
+        // Monthly statistics
+        $monthlyCheckIns = CheckIn::whereBetween('check_in_date', [$thisMonth, Carbon::now()])->count();
+        $monthlyRevenue = CheckIn::whereBetween('check_in_date', [$thisMonth, Carbon::now()])->sum('paid_amount') +
+                         CheckIn::whereBetween('actual_check_out_at', [$thisMonth, Carbon::now()])->sum('paid_amount');
+
+        // Last month comparison
+        $lastMonthCheckIns = CheckIn::whereBetween('check_in_date', [$lastMonth, $lastMonth->copy()->endOfMonth()])->count();
+        $lastMonthRevenue = CheckIn::whereBetween('check_in_date', [$lastMonth, $lastMonth->copy()->endOfMonth()])->sum('paid_amount') +
+                           CheckIn::whereBetween('actual_check_out_at', [$lastMonth, $lastMonth->copy()->endOfMonth()])->sum('paid_amount');
+
+        // Guest statistics
+        $totalGuests = Guest::count();
+        $activeGuests = CheckIn::where('status', 'checked_in')->distinct('guest_id')->count();
+
+        // Recent check-ins (last 5)
+        $recentCheckIns = CheckIn::with(['guest', 'room'])
+            ->orderBy('check_in_date', 'desc')
+            ->orderBy('check_in_time', 'desc')
+            ->take(5)
+            ->get();
+
+        // Room status breakdown
+        $roomStatuses = Room::join('room_statuses', 'rooms.status_id', '=', 'room_statuses.id')
+            ->selectRaw("CASE WHEN ? = 'km' AND room_statuses.name_kh IS NOT NULL THEN room_statuses.name_kh ELSE room_statuses.name_en END as status_name, count(*) as count", [app()->getLocale()])
+            ->groupBy('status_name')
+            ->get()
+            ->pluck('count', 'status_name');
+
+        // Revenue by room type (this month)
+        $revenueByRoomType = CheckIn::whereBetween('check_in_date', [$thisMonth, Carbon::now()])
+            ->join('rooms', 'check_ins.room_id', '=', 'rooms.id')
+            ->join('room_types', 'rooms.room_type_id', '=', 'room_types.id')
+            ->selectRaw("CASE WHEN ? = 'km' AND room_types.name_kh IS NOT NULL THEN room_types.name_kh ELSE room_types.name_en END as name, SUM(check_ins.paid_amount) as revenue", [app()->getLocale()])
+            ->groupBy('name')
+            ->get();
+
+        // Monthly revenue trend (last 6 months)
+        $monthlyRevenueTrend = [];
+        for ($i = 5; $i >= 0; $i--) {
+            $month = Carbon::now()->subMonths($i);
+            $monthStart = $month->copy()->startOfMonth();
+            $monthEnd = $month->copy()->endOfMonth();
+
+            $revenue = CheckIn::whereBetween('check_in_date', [$monthStart, $monthEnd])->sum('paid_amount') +
+                      CheckIn::whereBetween('actual_check_out_at', [$monthStart, $monthEnd])->sum('paid_amount');
+
+            $monthlyRevenueTrend[] = [
+                'month' => $month->format('M Y'),
+                'revenue' => $revenue
+            ];
+        }
+
+        // Create translated labels for room statuses
+        $roomStatusLabels = [];
+        foreach ($roomStatuses as $status => $count) {
+            $roomStatusLabels[$status] = __('rooms.' . strtolower(str_replace(' ', '_', $status)));
+        }
+
+        return view('dashboard.index', compact(
+            'totalRooms',
+            'occupiedRooms',
+            'availableRooms',
+            'occupancyRate',
+            'todayCheckIns',
+            'todayCheckOuts',
+            'todayRevenue',
+            'monthlyCheckIns',
+            'monthlyRevenue',
+            'lastMonthCheckIns',
+            'lastMonthRevenue',
+            'totalGuests',
+            'activeGuests',
+            'recentCheckIns',
+            'roomStatuses',
+            'roomStatusLabels',
+            'revenueByRoomType',
+            'monthlyRevenueTrend'
+        ));
     }
     //     $locale = app()->getLocale();
 
@@ -280,4 +376,28 @@ class DashboardController extends Controller
 
     //     return 1; // Default fallback
     // }
+
+    /**
+     * Get color for room status
+     */
+    public static function getStatusColor($status)
+    {
+        // Map both English and Khmer status names to colors
+        $colors = [
+            // English names
+            'Available' => '#28a745',
+            'Occupied' => '#dc3545',
+            'Cleaning' => '#ffc107',
+            'Maintenance' => '#6c757d',
+            'Out of Order' => '#dc3545',
+            // Khmer names
+            'ទំនេរ' => '#28a745',        // Available
+            'មានអ្នកស្នាក់នៅ' => '#dc3545', // Occupied
+            'កំពុងសម្អាត' => '#ffc107',   // Cleaning
+            'កំពុងជួសជុល' => '#6c757d',   // Maintenance
+            'មិនអាចប្រើបាន' => '#dc3545', // Out of Order
+        ];
+
+        return $colors[$status] ?? '#858796';
+    }
 }

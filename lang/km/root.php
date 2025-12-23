@@ -108,6 +108,7 @@ return [
         'clear_filters' => 'សម្អាតតម្រង',
         'search_placeholder' => 'វាយស្វែងរក…',
         'no_results' => 'រកមិនឃើញទិន្នន័យទេ។',
+        'no_data' => 'មិនមានទិន្នន័យទេ',
         'enabled' => 'បានបើក',
         'disabled' => 'បានបិទ',
         'active' => 'សកម្ម',
@@ -162,6 +163,25 @@ return [
         'learn_more' => 'ស្វែងយល់បន្ថែម',
         'route' => 'Route',
         'action' => 'Action'
+    ],
+
+    'dashboard' => [
+        'welcome_message' => 'សូមស្វាគមន៍មកកាន់ផ្ទាំងគ្រប់គ្រង HMS',
+        'welcome_description' => 'គ្រប់គ្រងប្រតិបត្តិការសណ្ឋាគាររបស់អ្នកដោយមានប្រសិទ្ធភាពជាមួយនឹងការយល់ដឹងតាមពេលវេលាពិតប្រាកដ និងរបាយការណ៍ទូលំទូលាយ។',
+        'total_rooms' => 'ចំនួនបន្ទប់សរុប',
+        'occupancy_rate' => 'អត្រាការប្រើប្រាស់',
+        'occupied' => 'បានប្រើ',
+        'today_check_ins' => 'ការចុះឈ្មោះថ្ងៃនេះ',
+        'today_revenue' => 'ចំណូលថ្ងៃនេះ',
+        'monthly_overview' => 'ទិដ្ឋភាពប្រចាំខែ',
+        'monthly_check_ins' => 'ការចុះឈ្មោះប្រចាំខែ',
+        'monthly_revenue' => 'ចំណូលប្រចាំខែ',
+        'last_month' => 'ខែមុន',
+        'room_status' => 'ស្ថានភាពបន្ទប់',
+        'revenue_trend' => 'ទិសដៅចំណូល',
+        'revenue_by_room_type' => 'ចំណូលតាមប្រភេទបន្ទប់',
+        'recent_check_ins' => 'ការចុះឈ្មោះថ្មីៗ',
+        'quick_actions' => 'សកម្មភាពរហ័ស',
     ],
 
     'auth' => [
@@ -313,6 +333,10 @@ return [
         'utilization' => 'អត្រាប្រើប្រាស់',
         'export_csv' => 'នាំចេញ CSV',
         'export_pdf' => 'នាំចេញ PDF',
+        'daily_report' => 'របាយការណ៍ប្រចាំថ្ងៃ',
+        'monthly_report' => 'របាយការណ៍ប្រចាំខែ',
+        'guest_report' => 'របាយការណ៍ភ្ញៀវ',
+        'daily_breakdown' => 'ការបំបែកប្រចាំថ្ងៃ',
     ],
 
     'settings' => [

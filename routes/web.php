@@ -24,5 +24,5 @@ require __DIR__ . '/settings.php';
 require __DIR__ . '/rooms.php';
 require __DIR__ . '/checkins.php';
 require __DIR__ . '/checkout.php';
+require __DIR__ . '/reports.php';
 require __DIR__ . '/ajax.php';
-
