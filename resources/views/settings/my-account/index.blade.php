@@ -74,38 +74,6 @@
                 </div>
                 <div class="list-group-item d-flex flex-column flex-sm-row align-items-start py-3">
                     <a href="#" class="d-block me-sm-3 mb-3 mb-sm-0">
-                        <i class="fa-solid fa-envelope fa-xl fa-fw"></i>
-                    </a>
-                    <div class="flex-fill">
-                        <h6 class="mb-0">
-                            <a href="#">Email</a>
-                        </h6>
-                        <ul class="list-inline list-inline-bullet text-muted mb-2">
-                            <li class="list-inline-item">Use your email to protect your account and transactions.</li>
-                        </ul>
-                    </div>
-                    <div class="flex-shrink-0 ms-sm-3 mt-2 mt-sm-0">
-                        <a href="#" class="btn btn-primary btn-sm">Manage</a>
-                    </div>
-                </div>
-                <div class="list-group-item d-flex flex-column flex-sm-row align-items-start py-3">
-                    <a href="#" class="d-block me-sm-3 mb-3 mb-sm-0">
-                        <i class="fa-solid fa-phone-volume fa-xl fa-fw"></i>
-                    </a>
-                    <div class="flex-fill">
-                        <h6 class="mb-0">
-                            <a href="#">Phone Number</a>
-                        </h6>
-                        <ul class="list-inline list-inline-bullet text-muted mb-2">
-                            <li class="list-inline-item">Use your phone number to protect your account and transactions.</li>
-                        </ul>
-                    </div>
-                    <div class="flex-shrink-0 ms-sm-3 mt-2 mt-sm-0">
-                        <a href="#" class="btn btn-primary btn-sm">Manage</a>
-                    </div>
-                </div>
-                <div class="list-group-item d-flex flex-column flex-sm-row align-items-start py-3">
-                    <a href="#" class="d-block me-sm-3 mb-3 mb-sm-0">
                         <i class="fa-solid fa-shield-user fa-xl fa-fw"></i>
                     </a>
                     <div class="flex-fill">
