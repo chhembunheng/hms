@@ -8,6 +8,8 @@ return [
     'edit_guest' => 'Edit Guest',
     'view_guest' => 'View Guest',
     'delete_guest' => 'Delete Guest',
+    'blacklist_status' => 'Blacklist Status',
+    'guest_name' => 'Guest Name',
 
     // Personal Information
     'personal_information' => 'Personal Information',
@@ -82,10 +84,19 @@ return [
     // Stay History
     'stay_history' => 'Stay History',
     'stay_history_for' => 'Stay History for',
+    'no_stay_history' => 'No stay history found for this guest.',
     'stay_details' => 'Stay Details',
     'stay_information' => 'Stay Information',
     'stay_summary' => 'Stay Summary',
     'duration' => 'Duration',
     'guest_information' => 'Guest Information',
     'checkin_details' => 'Check-in Details',
+
+    // Check-in History
+    'checkin_history' => 'Check-in History',
+    'no_checkin_history' => 'No check-in history found for this guest.',
+
+    // Guest Types
+    'national' => 'National',
+    'international' => 'International',
 ];

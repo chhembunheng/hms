@@ -78,14 +78,24 @@ return [
     'internal_notes_help' => 'កំណត់ចំណាំទាំងនេះសម្រាប់ប្រើប្រាស់ផ្ទៃក្នុងរបស់បុគ្គលិកតែប៉ុណ្ណោះ',
     'notes_placeholder' => 'កំណត់ចំណាំសាធារណៈអំពីភ្ញៀវ',
     'notes_help' => 'កំណត់ចំណាំទាំងនេះអាចមើលឃើញដោយភ្ញៀវ',
+    'guest_name' => 'ឈ្មោះភ្ញៀវ',
 
     // Stay History
     'stay_history' => 'ប្រវត្តិការស្នាក់នៅ',
     'stay_history_for' => 'ប្រវត្តិការស្នាក់នៅសម្រាប់',
+    'no_stay_history' => 'រកមិនឃើញប្រវត្តិការស្នាក់នៅសម្រាប់ភ្ញៀវនេះទេ។',
     'stay_details' => 'ព័ត៌មានលម្អិតការស្នាក់នៅ',
     'stay_information' => 'ព័ត៌មានការស្នាក់នៅ',
     'stay_summary' => 'សង្ខេបការស្នាក់នៅ',
     'duration' => 'រយៈពេល',
     'guest_information' => 'ព័ត៌មានភ្ញៀវ',
     'checkin_details' => 'ព័ត៌មានលម្អិតការចូល',
+
+    // Check-in History
+    'checkin_history' => 'ប្រវត្តិការចូលស្នាក់នៅ',
+    'no_checkin_history' => 'រកមិនឃើញប្រវត្តិការចូលស្នាក់នៅសម្រាប់ភ្ញៀវនេះទេ។',
+
+    // Guest Types
+    'national' => 'ក្នុងស្រុក',
+    'international' => 'អន្តរជាតិ',
 ];

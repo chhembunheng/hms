@@ -12,9 +12,6 @@
                             @endif
                         </h5>
                         <div>
-                            <a href="{{ route('guests.stay-history.index', $guest->id) }}" class="btn btn-info btn-sm me-2">
-                                <i class="fas fa-history me-1"></i>{{ __('guests.stay_history') }}
-                            </a>
                             <a href="{{ route('guests.list.edit', $guest->id) }}" class="btn btn-light btn-sm me-2">
                                 <i class="fas fa-edit me-1"></i>{{ __('global.edit') }}
                             </a>
@@ -108,7 +105,7 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label fw-bold">{{ __('guests.guest_type') }}</label>
-                                    <p class="mb-0">{{ $guest->guest_type ? badge($guest->guest_type) : '-' }}</p>
+                                    <p class="mb-0">{!! $guest->guest_type ? badge(__('guests.' . $guest->guest_type)) : '-' !!}</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -256,9 +253,9 @@
                                             <tr>
                                                 <td>{{ $checkIn->room->room_number ?? '-' }}</td>
                                                 <td>{{ $checkIn->room->roomType->localized_name ?? '-' }}</td>
-                                                <td>{{ $checkIn->check_in_at ? $checkIn->check_in_at->format('d-m-Y H:i') : '-' }}</td>
-                                                <td>{{ $checkIn->check_out_at ? $checkIn->check_out_at->format('d-m-Y H:i') : '-' }}</td>
-                                                <td>{{ badge($checkIn->status) }}</td>
+                                                <td>{{ $checkIn->actual_check_in_at ? $checkIn->actual_check_in_at->format('d-m-Y H:i') : ($checkIn->check_in_date ? $checkIn->check_in_date->format('d-m-Y') . ' ' . ($checkIn->check_in_time ? $checkIn->check_in_time->format('H:i') : '') : '-') }}</td>
+                                                <td>{{ $checkIn->actual_check_out_at ? $checkIn->actual_check_out_at->format('d-m-Y H:i') : ($checkIn->check_out_date ? $checkIn->check_out_date->format('d-m-Y') . ' ' . ($checkIn->check_out_time ? $checkIn->check_out_time->format('H:i') : '') : '-') }}</td>
+                                                <td>{{ $checkIn->status }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

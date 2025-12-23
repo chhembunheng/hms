@@ -149,7 +149,7 @@ class GuestController extends Controller
         if ($request->isMethod('post')) {
             $rules = [
                 'is_blacklisted' => 'required|boolean',
-                'blacklist_reason' => 'required_if:is_blacklisted,true|string|max:1000',
+                'blacklist_reason' => 'required_if:is_blacklisted,1|string|max:1000',
                 'internal_notes' => 'nullable|string|max:2000',
             ];
 

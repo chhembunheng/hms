@@ -25,6 +25,7 @@ return [
     'is_active' => 'សកម្ម',
     'active' => 'សកម្ម',
     'inactive' => 'អសកម្ម',
+    'room' => 'បន្ទប់',
     'search_by_price' => 'ស្វែងរកតាមតម្លៃ',
     'all' => 'ទាំងអស់',
     'active_status' => 'ស្ថានភាពសកម្ម',

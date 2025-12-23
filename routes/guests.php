@@ -17,4 +17,9 @@ Route::group(['prefix' => 'guests', 'as' => 'guests.', 'middleware' => ['auth', 
         Route::match(['get', 'post'], '/{id}/notes', [GuestController::class, 'updateNotes'])->name('notes');
     });
 
+    // Guest Stay History
+    Route::prefix('stay-history')->name('stay-history.')->group(function () {
+        Route::get('/{guestId}', [GuestStayHistoryController::class, 'index'])->name('index');
+    });
+
 });

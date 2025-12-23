@@ -5,6 +5,7 @@ namespace App\Http\Controllers\CheckIn;
 use App\Http\Controllers\Controller;
 use App\Models\CheckIn;
 use App\Models\Room;
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 use App\DataTables\CheckIns\StayingDataTable;
 
@@ -42,6 +43,29 @@ class StayingController extends Controller
             'notes' => $request->notes,
         ]);
 
+        // Generate invoice
+        $invoice = Invoice::create([
+            'check_in_id' => $checkIn->id,
+            'guest_id' => $checkIn->guest_id,
+            'subtotal' => $checkIn->total_amount,
+            'total_amount' => $checkIn->total_amount,
+            'paid_amount' => $request->paid_amount,
+            'balance_amount' => $checkIn->total_amount - $request->paid_amount,
+            'payment_method' => $request->payment_method,
+            'status' => ($request->paid_amount >= $checkIn->total_amount) ? 'paid' : 'partially_paid',
+            'invoice_date' => now()->toDateString(),
+            'due_date' => now()->addDays(30)->toDateString(),
+            'notes' => 'Auto-generated invoice for check-out',
+            'items' => [
+                [
+                    'description' => 'Room charges for ' . $checkIn->room->room_number,
+                    'quantity' => 1,
+                    'unit_price' => $checkIn->total_amount,
+                    'total' => $checkIn->total_amount,
+                ]
+            ],
+        ]);
+
         // Update room statuses to "Cleaning"
         $cleaningStatus = \App\Models\RoomStatus::where('name_en', 'Cleaning')->first();
         if ($cleaningStatus) {
@@ -51,8 +75,8 @@ class StayingController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Guest checked out and payment processed successfully.',
-            'redirect' => route('checkin.staying.index'),
+            'message' => 'Guest checked out and invoice generated successfully.',
+            'redirect' => route('checkout.invoice.show', $invoice->id),
             'delay' => 2000
         ]);
     }

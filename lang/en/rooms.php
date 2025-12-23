@@ -35,6 +35,7 @@ return [
     'room_updated_successfully' => 'Room updated successfully.',
     'room_deleted_successfully' => 'Room deleted successfully.',
     'color' => 'Color',
+    'room' => 'Room',
     'save' => 'Save',
     'cancel' => 'Cancel',
     'edit' => 'Edit',
