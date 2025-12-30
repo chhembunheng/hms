@@ -94,7 +94,7 @@ A comprehensive Hotel Management System built with Laravel, designed to streamli
    ```bash
    cp .env.example .env
    ```
-   
+
    Edit `.env` file with your database credentials:
    ```env
    DB_CONNECTION=mysql
@@ -124,7 +124,7 @@ A comprehensive Hotel Management System built with Laravel, designed to streamli
    ```bash
    php artisan migrate:fresh --seed
    ```
-   
+
    This will create all tables and seed initial data including:
    - Admin user account
    - Default roles and permissions
@@ -132,12 +132,12 @@ A comprehensive Hotel Management System built with Laravel, designed to streamli
    - Sample data for testing
 
 9. **Build frontend assets**
-   
+
    For development:
    ```bash
    npm run dev
    ```
-   
+
    For production:
    ```bash
    npm run build
@@ -158,7 +158,7 @@ A comprehensive Hotel Management System built with Laravel, designed to streamli
     ```bash
     php artisan serve
     ```
-    
+
     Access the application at: `http://localhost:8000`
 
 ---
@@ -168,7 +168,8 @@ A comprehensive Hotel Management System built with Laravel, designed to streamli
 After seeding, login with:
 
 ```
-Email: admin@example.com
+Username: admin
+Email: admin@hotel.com
 Password: password
 ```
 
@@ -626,10 +627,10 @@ For questions, issues, or collaboration:
 - **CHHEM BUNHENG**
   - Role: Team Lead & Backend Developer
   - GitHub: [@chhembunheng](https://github.com/chhembunheng)
-  
+
 - **LUN SOCHEAT**
   - Role: Full Stack Developer
-  
+
 - **OURK ASDA**
   - Role: Frontend Developer & UI/UX Designer
 
@@ -734,6 +735,5 @@ For issues, feature requests, or contributions, please refer to [SECURITY.md](SE
 
 ---
 
-**Last Updated**: 2025-10-23  
+**Last Updated**: 2025-10-23
 **Version**: 1.0.0
-
