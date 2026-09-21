@@ -25,6 +25,7 @@
     <script>
         // Ensure locale is properly set for font loading
         document.documentElement.setAttribute('data-locale', '{{ app()->getLocale() }}');
+        try { localStorage.removeItem('sidebar-collapsed'); } catch(e) {}
     </script>
     @include('layouts.partials.style')
     @stack('css')
@@ -39,6 +40,34 @@
         .multiselect-container {
             max-height: 300px !important;
             overflow-y: auto !important;
+        }
+
+        /* Page Loading Overlay (matching beltei_ums standard) */
+        .loading-overlay {
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            background: #ffffff;
+            z-index: 99999;
+        }
+        .dark .loading-overlay,
+        [data-theme="dark"] .loading-overlay {
+            background: #1e293b;
+        }
+        .loading-overlay__inner {
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+        .loading-overlay__content {
+            left: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
         }
 
         /* Hide raw select until Bootstrap Multiselect initializes (prevents FOUC scrollbox) */
@@ -177,6 +206,17 @@
 </head>
 
 <body style="overflow: visible;" class="dark:bg-gray-900 dark:text-gray-100">
+    <!-- Page Loading Overlay (prevents layout flash and glitch on refresh, matching beltei_ums) -->
+    <div class="loading-overlay" id="page-loading-overlay">
+        <div class="loading-overlay__inner">
+            <div class="loading-overlay__content">
+                <div class="spinner-border text-primary" role="status" style="width: 2.5rem; height: 2.5rem;">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- System Watermark -->
     <div class="system-watermark">
         <div class="watermark-text">{{ $systemConfig ? $systemConfig->watermark_title : 'HMS CAMBODIA' }}</div>

@@ -449,7 +449,13 @@ return [
     'dashboard' => 'Dashboard',
     'add' => 'Add',
     'save' => 'Save',
-    'cancel' => 'Cancel',
     'search' => 'Search',
+    'saving' => 'Saving',
+    'refresh' => 'Refresh',
+    'add_new' => 'Add New',
+    'editing' => 'Editing',
+    'new_record' => 'New Record',
+    'filters' => 'Filters',
+    'toggle_filters' => 'Toggle Filters',
 ];
 

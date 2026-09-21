@@ -1066,3 +1066,121 @@ if (!function_exists('dateFormat')) {
         return format_date($date, $fallback);
     }
 }
+
+if (!function_exists('get_lucide_icon')) {
+    /**
+     * Map FontAwesome or standard icon name to modern Lucide icon name
+     */
+    function get_lucide_icon(?string $icon): string
+    {
+        if (empty($icon)) return 'circle';
+
+        $name = strtolower(trim($icon));
+        // Remove FA prefixes like "fa-solid ", "fa-light ", "fas ", "fa-", etc.
+        $name = preg_replace('/^(fa-solid|fa-regular|fa-light|fa-thin|fa-duotone|fa|fas|far|fal|fad)\s+/', '', $name);
+        $name = preg_replace('/^fa-/', '', $name);
+
+        $map = [
+            'chart-simple' => 'layout-dashboard',
+            'chart-line' => 'trending-up',
+            'right-to-bracket' => 'log-in',
+            'right-from-bracket' => 'log-out',
+            'arrow-right-from-bracket' => 'log-out',
+            'bed' => 'bed',
+            'bed-double' => 'bed-double',
+            'users' => 'users',
+            'users-line' => 'users-round',
+            'user' => 'user',
+            'user-circle' => 'user-round',
+            'file-invoice-dollar' => 'receipt',
+            'receipt' => 'receipt',
+            'sliders' => 'settings',
+            'gear' => 'settings',
+            'bars' => 'menu',
+            'magnifying-glass' => 'search',
+            'search' => 'search',
+            'chevron-down' => 'chevron-down',
+            'chevron-right' => 'chevron-right',
+            'chevron-left' => 'chevron-left',
+            'chevron-up' => 'chevron-up',
+            'calendar' => 'calendar',
+            'calendar-check' => 'calendar-check',
+            'calendar-days' => 'calendar-days',
+            'clock' => 'clock',
+            'clock-rotate-left' => 'history',
+            'van-shuttle' => 'bus',
+            'plane' => 'plane',
+            'plane-arrival' => 'plane-landing',
+            'plane-departure' => 'plane-takeoff',
+            'car' => 'car',
+            'truck-monster' => 'truck',
+            'motorcycle' => 'bike',
+            'passport' => 'file-badge',
+            'id-card' => 'id-card',
+            'house' => 'home',
+            'hotel' => 'building-2',
+            'circle-dollar-to-slot' => 'circle-dollar-sign',
+            'coins' => 'coins',
+            'earth-americas' => 'globe',
+            'compass' => 'compass',
+            'mountain-sun' => 'mountain',
+            'shirt' => 'shirt',
+            'spa' => 'flower-2',
+            'utensils' => 'utensils',
+            'wine-glass' => 'wine',
+            'layer-group' => 'layers',
+            'list' => 'list',
+            'list-check' => 'list-checks',
+            'pen-to-square' => 'pencil',
+            'pen' => 'pencil',
+            'trash' => 'trash-2',
+            'plus' => 'plus',
+            'plus-circle' => 'plus-circle',
+            'check' => 'check',
+            'check-circle' => 'check-circle',
+            'circle-check' => 'check-circle',
+            'xmark' => 'x',
+            'circle-xmark' => 'x-circle',
+            'filter' => 'filter',
+            'rotate-right' => 'rotate-cw',
+            'arrow-down' => 'arrow-down',
+            'arrow-up' => 'arrow-up',
+            'file-excel' => 'file-spreadsheet',
+            'file-lines' => 'file-text',
+            'file-pdf' => 'file-text',
+            'cogs' => 'settings',
+            'info-circle' => 'info',
+            'calendar-day' => 'calendar',
+            'calendar-week' => 'calendar-range',
+            'money-bill-transfer' => 'arrow-left-right',
+            'universal-access' => 'accessibility',
+            'ban' => 'ban',
+            'times' => 'x',
+            'sign-out-alt' => 'log-out',
+            'sign-in-alt' => 'log-in',
+            'calendar-alt' => 'calendar',
+            'money-bill' => 'banknote',
+            'money-bill-wave' => 'banknote',
+            'bed-pulse' => 'bed',
+            'file-invoice' => 'receipt',
+            'cash-register' => 'receipt',
+            'concierge-bell' => 'bell',
+            'print' => 'printer',
+            'broom-wide' => 'sparkles',
+            'location-dot' => 'map-pin',
+            'circle-dot' => 'disc',
+            'suitcase' => 'briefcase',
+            'door-open' => 'door-open',
+            'phone' => 'phone',
+            'envelope' => 'mail',
+            'eye' => 'eye',
+            'lock' => 'lock',
+            'unlock' => 'unlock',
+            'bolt' => 'zap',
+            'folder' => 'folder',
+            'folder-open' => 'folder-open',
+        ];
+
+        return $map[$name] ?? $name;
+    }
+}

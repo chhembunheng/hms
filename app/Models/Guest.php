@@ -19,6 +19,11 @@ class Guest extends Model
         'phone',
         'national_id',
         'passport',
+        'visa_number',
+        'visa_type',
+        'visa_expiry_date',
+        'entry_date',
+        'entry_port',
         'guest_type',
         'country',
         'date_of_birth',
@@ -40,6 +45,8 @@ class Guest extends Model
 
     protected $casts = [
         'date_of_birth' => 'date',
+        'visa_expiry_date' => 'date',
+        'entry_date' => 'date',
         'last_visit_at' => 'datetime',
         'blacklisted_at' => 'datetime',
         'is_blacklisted' => 'boolean',

@@ -86,6 +86,12 @@ class WalkInController extends Controller
                 'guest_passport' => 'required_if:guest_type,international|string|max:20',
                 'guest_country' => 'required_if:guest_type,international|string|max:100',
                 'billing_type' => 'required|in:night,3_hours',
+                'booking_source' => 'nullable|string|max:50',
+                'visa_number' => 'nullable|string|max:50',
+                'visa_type' => 'nullable|string|max:20',
+                'visa_expiry_date' => 'nullable|date',
+                'entry_date' => 'nullable|date',
+                'entry_port' => 'nullable|string|max:100',
                 'check_in_date' => 'required|date|after_or_equal:today',
                 'check_out_date' => 'required|date|after_or_equal:check_in_date',
                 'total_days' => 'required|integer|min:1',
@@ -148,12 +154,15 @@ class WalkInController extends Controller
             $data = $request->only([
                 'guest_name', 'guest_email', 'guest_phone',
                 'guest_type', 'guest_national_id', 'guest_passport', 'guest_country',
-                'billing_type', 'check_in_date', 'check_in_time', 'check_out_date', 'check_out_time',
+                'billing_type', 'booking_source',
+                'visa_number', 'visa_type', 'visa_expiry_date', 'entry_date', 'entry_port',
+                'check_in_date', 'check_in_time', 'check_out_date', 'check_out_time',
                 'total_guests', 'total_amount', 'notes'
             ]);
 
             $data['guest_id'] = $guest->id;
             $data['room_id'] = $roomIds[0]; // Primary room
+            $data['booking_source'] = $request->input('booking_source', 'walk_in');
             $data['paid_amount'] = $request->paid_amount ?? 0;
             $data['status'] = 'checked_in';
             $data['actual_check_in_at'] = now();
@@ -527,11 +536,17 @@ class WalkInController extends Controller
         }
 
         if ($guest) {
-            // Update existing guest's visit information
-            $guest->update([
+            // Update existing guest's visit information & latest visa
+            $updateData = [
                 'last_visit_at' => now(),
                 'total_visits' => $guest->total_visits + 1,
-            ]);
+            ];
+            if ($request->filled('visa_number')) $updateData['visa_number'] = $request->visa_number;
+            if ($request->filled('visa_type')) $updateData['visa_type'] = $request->visa_type;
+            if ($request->filled('visa_expiry_date')) $updateData['visa_expiry_date'] = $request->visa_expiry_date;
+            if ($request->filled('entry_date')) $updateData['entry_date'] = $request->entry_date;
+            if ($request->filled('entry_port')) $updateData['entry_port'] = $request->entry_port;
+            $guest->update($updateData);
         } else {
             // Parse guest name into first and last name
             $nameParts = explode(' ', trim($request->guest_name), 2);
@@ -548,6 +563,11 @@ class WalkInController extends Controller
                 'passport' => $request->guest_passport,
                 'guest_type' => $request->guest_type,
                 'country' => $request->guest_country,
+                'visa_number' => $request->visa_number,
+                'visa_type' => $request->visa_type,
+                'visa_expiry_date' => $request->visa_expiry_date,
+                'entry_date' => $request->entry_date,
+                'entry_port' => $request->entry_port,
                 'last_visit_at' => now(),
                 'total_visits' => 1,
             ]);

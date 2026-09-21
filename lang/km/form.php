@@ -60,11 +60,11 @@ return [
     'action_route' => 'ផ្លូវសកម្មភាព',
 
     // User form fields
-    'username' => 'ឈ្មោះលោកប្រើប្រាស់',
+    'username' => 'ឈ្មោះអ្នកប្រើប្រាស់',
     'email' => 'អ៊ីមែល',
     'phone' => 'ទូរស័ព្ទ',
-    'address' => 'សម្បាច់ที่នៅ',
-    'first_name' => 'ឈ្មោះមុន',
+    'address' => 'អាសយដ្ឋាន',
+    'first_name' => 'នាមត្រកូល',
     'last_name' => 'នាមខ្លួន',
     'password' => 'ពាក្យសម្ងាត់',
     'password_confirmation' => 'បញ្ជាក់ពាក្យសម្ងាត់',
@@ -74,7 +74,7 @@ return [
     'save' => 'រក្សាទុក',
     'create' => 'បង្កើត',
     'update' => 'ធ្វើបច្ចុប្បន្នភាព',
-    'cancel' => ' administrative',
+    'cancel' => 'បោះបង់',
     'delete' => 'លុប',
     'restore' => 'ស្ដារឡើងវិញ',
 

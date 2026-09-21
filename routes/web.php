@@ -26,5 +26,6 @@ require __DIR__ . '/checkins.php';
 require __DIR__ . '/checkout.php';
 require __DIR__ . '/billing.php';
 require __DIR__ . '/payment.php';
+require __DIR__ . '/services.php';
 require __DIR__ . '/reports.php';
 require __DIR__ . '/ajax.php';

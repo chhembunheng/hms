@@ -1,42 +1,26 @@
-<x-app-layout>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">{{ __('rooms.room_statuses') }}</h3>
-                    @can('rooms.status.form')
-                        <div class="card-tools">
-                            <a href="{{ route('rooms.status.add') }}" class="btn btn-primary btn-sm">
-                                <i class="fas fa-plus"></i> {{ __('rooms.add_room_status') }}
-                            </a>
-                        </div>
-                    @endcan
-                </div>
+<x-page-index 
+    :title="__('rooms.room_statuses')" 
+    icon="tag"
+    :create-route="route('rooms.status.add')"
+    :create-permission="'rooms.status.form'"
+    :create-label="__('rooms.add_room_status')">
 
-                <div class="card-body">
-                    <!-- Filter Component -->
-                    <x-datatable-filter>
-                        <div class="col-md-3">
-                            <label class="form-label">{{ __('global.search') }}</label>
-                            <input type="text" name="search" class="form-control form-control-sm" placeholder="{{ __('global.search') }}">
-                        </div>
-
-                        <div class="col-md-3">
-                            <label class="form-label">{{ __('rooms.active_status') }}</label>
-                            <select name="is_active[]" class="form-select form-select-sm multiple-select" multiple>
-                                <option value="1">{{ __('rooms.active') }}</option>
-                                <option value="0">{{ __('rooms.inactive') }}</option>
-                            </select>
-                        </div>
-                    </x-datatable-filter>
-
-                    <!-- DataTable -->
-                    <div class="table-responsive">
-                        <x-datatables title="{{ __('rooms.room_statuses') }}" :data="$dataTable"></x-datatables>
-                    </div>
-                </div>
+    <x-slot:filters>
+        <x-datatable-filter seamless="true">
+            <div class="col-md-4">
+                <label class="form-label">{{ __('global.search') }}</label>
+                <input type="text" name="search" class="form-control form-control-sm" placeholder="{{ __('global.search') }}">
             </div>
-        </div>
-    </div>
-</x-app-layout>
+
+            <div class="col-md-4">
+                <label class="form-label">{{ __('rooms.active_status') }}</label>
+                <select name="is_active[]" class="form-select form-select-sm multiple-select" multiple>
+                    <option value="1">{{ __('rooms.active') }}</option>
+                    <option value="0">{{ __('rooms.inactive') }}</option>
+                </select>
+            </div>
+        </x-datatable-filter>
+    </x-slot:filters>
+
+    <x-datatables :data="$dataTable" seamless="true" />
+</x-page-index>

@@ -1,190 +1,123 @@
 <x-app-layout>
-<div class="container-fluid py-4">
-    <!-- Page Header -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <h1 class="h3 mb-0 text-gray-800">
-                        <i class="fas fa-edit text-primary me-2"></i>
-                        {{ __('global.edit_system_configuration') }}
-                    </h1>
-                    <p class="text-muted mt-1">{{ __('global.update_your_hotel_and_system_settings') }}</p>
-                </div>
-                <a href="{{ route('settings.system-configuration.index') }}" class="btn btn-outline-secondary">
-                    <i class="fas fa-arrow-left me-2"></i>
-                    {{ __('global.back_to_configuration') }}
-                </a>
-            </div>
-        </div>
-    </div>
+<div class="container-fluid py-3">
+    <div class="row justify-content-center">
+        <div class="col-xl-10">
+            <!-- Enterprise Form Header -->
+            <div class="card enterprise-card border-0 shadow-sm mb-3">
+                <div class="card-header enterprise-card-header d-flex flex-wrap justify-content-between align-items-center py-2 px-3 bg-white">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="enterprise-header-icon rounded-circle d-flex align-items-center justify-content-center">
+                            <i data-lucide="sliders" style="width: 17px; height: 17px;"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-0 fw-bold text-dark fs-6 d-flex align-items-center gap-2">
+                                {{ __('global.edit_system_configuration') }}
+                                <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle fw-semibold rounded-pill px-2" style="font-size: 0.7rem;">
+                                    <i data-lucide="pencil" style="width: 10px; height: 10px;" class="me-1"></i>{{ __('global.editing') }}
+                                </span>
+                            </h5>
+                            <div class="text-muted" style="font-size: 0.78rem;">
+                                {{ __('global.update_your_hotel_and_system_settings') }}
+                            </div>
+                        </div>
+                    </div>
 
-    <x-form.layout :form="$configuration">
-        <div class="row justify-content-center">
-            <div class="col-xl-10">
-                <div class="card shadow-sm border-0">
-                    <!-- Card Header with Tabs -->
-                    <div class="card-header bg-white border-bottom-0">
-                        <ul class="nav nav-tabs card-header-tabs" id="configTabs" role="tablist">
+                    <a href="{{ route('settings.system-configuration.index') }}" class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1 rounded-2">
+                        <i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i>
+                        <span>{{ __('global.back_to_configuration') }}</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Enterprise Form Container -->
+            <form action="{{ route('settings.system-configuration.edit') }}" method="POST" enctype="multipart/form-data" validate>
+                @csrf
+                <div class="card enterprise-card border-0 shadow-sm">
+                    <!-- Clean Enterprise Navigation Tabs -->
+                    <div class="card-header bg-white border-bottom px-3 py-0">
+                        <ul class="nav nav-tabs card-header-tabs border-0 gap-1" id="configTabs" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="hotel-tab" data-bs-toggle="tab" data-bs-target="#hotel" type="button" role="tab">
-                                    <i class="fas fa-building me-2"></i>{{ __('global.hotel_information') }}
+                                <button class="nav-link active py-2.5 px-3 d-inline-flex align-items-center gap-1.5 fw-medium text-secondary border-0 border-bottom border-2 rounded-0" id="hotel-tab" data-bs-toggle="tab" data-bs-target="#hotel" type="button" role="tab">
+                                    <i data-lucide="building-2" style="width: 15px; height: 15px;"></i>
+                                    <span>{{ __('global.hotel_information') }}</span>
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="system-tab" data-bs-toggle="tab" data-bs-target="#system" type="button" role="tab">
-                                    <i class="fas fa-sliders-h me-2"></i>{{ __('global.system_settings') }}
+                                <button class="nav-link py-2.5 px-3 d-inline-flex align-items-center gap-1.5 fw-medium text-secondary border-0 border-bottom border-2 rounded-0" id="system-tab" data-bs-toggle="tab" data-bs-target="#system" type="button" role="tab">
+                                    <i data-lucide="sliders" style="width: 15px; height: 15px;"></i>
+                                    <span>{{ __('global.system_settings') }}</span>
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="branding-tab" data-bs-toggle="tab" data-bs-target="#branding" type="button" role="tab">
-                                    <i class="fas fa-palette me-2"></i>{{ __('global.branding') }}
+                                <button class="nav-link py-2.5 px-3 d-inline-flex align-items-center gap-1.5 fw-medium text-secondary border-0 border-bottom border-2 rounded-0" id="branding-tab" data-bs-toggle="tab" data-bs-target="#branding" type="button" role="tab">
+                                    <i data-lucide="palette" style="width: 15px; height: 15px;"></i>
+                                    <span>{{ __('global.branding') }}</span>
                                 </button>
                             </li>
                         </ul>
                     </div>
 
                     <!-- Card Body with Tab Content -->
-                    <div class="card-body">
+                    <div class="card-body p-4">
                         <div class="tab-content" id="configTabContent">
                             <!-- Hotel Information Tab -->
                             <div class="tab-pane fade show active" id="hotel" role="tabpanel">
-                                <div class="row g-4">
-                                    <div class="col-12">
-                                        <div class="alert alert-info border-0 bg-light">
-                                            <div class="d-flex">
-                                                <div class="flex-shrink-0">
-                                                    <i class="fas fa-info-circle text-info fa-lg"></i>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <h6 class="alert-heading mb-1">{{ __('global.hotel_details') }}</h6>
-                                                    <p class="mb-0 small">{{ __('global.configure_your_hotel_name_location_and_contact_information_in_multiple_languages') }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="alert alert-light border border-info-subtle d-flex align-items-center py-2 px-3 mb-4 rounded-3 text-secondary" style="font-size: 0.8125rem;">
+                                    <i data-lucide="info" style="width: 16px; height: 16px;" class="text-primary me-2 flex-shrink-0"></i>
+                                    <span>{{ __('global.configure_your_hotel_name_location_and_contact_information_in_multiple_languages') }}</span>
+                                </div>
 
+                                <div class="row g-3">
                                     <!-- Hotel Name Section -->
-                                    <div class="col-12">
-                                        <div class="card border-light bg-light">
-                                            <div class="card-header bg-white">
-                                                <h6 class="mb-0">
-                                                    <i class="fas fa-tag text-primary me-2"></i>
-                                                    {{ __('global.hotel_name') }}
-                                                </h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="row g-3">
-                                                    <div class="col-md-6">
-                                                        <x-form.input :label="__('English')" name="hotel_name_en" value="{{ old('hotel_name_en', $configuration->hotel_name_en) }}" required />
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <x-form.input :label="__('Khmer')" name="hotel_name_kh" value="{{ old('hotel_name_kh', $configuration->hotel_name_kh) }}" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="col-md-6">
+                                        <x-form.input :label="__('global.hotel_name') . ' (' . __('English') . ')'" name="hotel_name_en" value="{{ old('hotel_name_en', $configuration->hotel_name_en) }}" required />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <x-form.input :label="__('global.hotel_name') . ' (' . __('Khmer') . ')'" name="hotel_name_kh" value="{{ old('hotel_name_kh', $configuration->hotel_name_kh) }}" />
                                     </div>
 
                                     <!-- Location Section -->
-                                    <div class="col-12">
-                                        <div class="card border-light bg-light">
-                                            <div class="card-header bg-white">
-                                                <h6 class="mb-0">
-                                                    <i class="fas fa-map-marker-alt text-success me-2"></i>
-                                                    {{ __('Location') }}
-                                                </h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="row g-3">
-                                                    <div class="col-md-6">
-                                                        <x-form.textarea :label="__('English')" name="location_en" value="{{ old('location_en', $configuration->location_en) }}" rows="3" />
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <x-form.textarea :label="__('Khmer')" name="location_kh" value="{{ old('location_kh', $configuration->location_kh) }}" rows="3" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="col-md-6">
+                                        <x-form.textarea :label="__('form.location') . ' (' . __('English') . ')'" name="location_en" value="{{ old('location_en', $configuration->location_en) }}" rows="3" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <x-form.textarea :label="__('form.location') . ' (' . __('Khmer') . ')'" name="location_kh" value="{{ old('location_kh', $configuration->location_kh) }}" rows="3" />
                                     </div>
 
-                                    <!-- Contact Information Section -->
-                                    <div class="col-12">
-                                        <div class="card border-light bg-light">
-                                            <div class="card-header bg-white">
-                                                <h6 class="mb-0">
-                                                    <i class="fas fa-address-book text-info me-2"></i>
-                                                    {{ __('global.contact_information') }}
-                                                </h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="row g-3">
-                                                    <div class="col-md-6">
-                                                        <div class="input-group">
-                                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                                                            <x-form.input :label="__('Phone Number')" name="phone_number" value="{{ old('phone_number', $configuration->phone_number) }}" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="input-group">
-                                                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                                                            <x-form.input :label="__('Email')" name="email" type="email" value="{{ old('email', $configuration->email) }}" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <!-- Contact Information -->
+                                    <div class="col-md-6">
+                                        <x-form.input :label="__('global.phone_number')" name="phone_number" value="{{ old('phone_number', $configuration->phone_number) }}" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <x-form.input :label="__('global.email')" name="email" type="email" value="{{ old('email', $configuration->email) }}" />
                                     </div>
                                 </div>
                             </div>
 
                             <!-- System Settings Tab -->
                             <div class="tab-pane fade" id="system" role="tabpanel">
-                                <div class="row g-4">
-                                    <div class="col-12">
-                                        <div class="alert alert-warning border-0 bg-light">
-                                            <div class="d-flex">
-                                                <div class="flex-shrink-0">
-                                                    <i class="fas fa-cog text-warning fa-lg"></i>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <h6 class="alert-heading mb-1">{{ __('global.system_configuration_settings') }}</h6>
-                                                    <p class="mb-0 small">{{ __('global.configure_system_wide_settings_and_display_preferences') }}</p>
-                                                </div>
+                                <div class="alert alert-light border border-info-subtle d-flex align-items-center py-2 px-3 mb-4 rounded-3 text-secondary" style="font-size: 0.8125rem;">
+                                    <i data-lucide="info" style="width: 16px; height: 16px;" class="text-primary me-2 flex-shrink-0"></i>
+                                    <span>{{ __('global.configure_system_wide_settings_and_display_preferences') }}</span>
+                                </div>
+
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="p-3 border rounded-3 bg-light-subtle h-100">
+                                            <x-form.input :label="__('global.system_title')" name="system_title" value="{{ old('system_title', $configuration->system_title) }}" />
+                                            <div class="text-muted mt-2" style="font-size: 0.75rem;">
+                                                <i data-lucide="help-circle" style="width: 12px; height: 12px;" class="me-1"></i>
+                                                {{ __('This title appears in the browser tab and system headers.') }}
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
-                                        <div class="card border-light bg-light h-100">
-                                            <div class="card-header bg-white">
-                                                <h6 class="mb-0">
-                                                    <i class="fas fa-desktop text-danger me-2"></i>
-                                                    {{ __('global.display_settings') }}
-                                                </h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <x-form.input :label="__('System Title')" name="system_title" value="{{ old('system_title', $configuration->system_title) }}" />
-                                                <div class="mt-3">
-                                                    <small class="text-muted">{{ __('This title appears in the browser tab and system headers.') }}</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="card border-light bg-light h-100">
-                                            <div class="card-header bg-white">
-                                                <h6 class="mb-0">
-                                                    <i class="fas fa-water text-purple me-2"></i>
-                                                    {{ __('global.watermark_settings') }}
-                                                </h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <x-form.input :label="__('Watermark Title')" name="watermark_title" value="{{ old('watermark_title', $configuration->watermark_title) }}" />
-                                                <div class="mt-3">
-                                                    <small class="text-muted">{{ __('global.watermark_help_text') }}</small>
-                                                </div>
+                                        <div class="p-3 border rounded-3 bg-light-subtle h-100">
+                                            <x-form.input :label="__('global.watermark_title')" name="watermark_title" value="{{ old('watermark_title', $configuration->watermark_title) }}" />
+                                            <div class="text-muted mt-2" style="font-size: 0.75rem;">
+                                                <i data-lucide="help-circle" style="width: 12px; height: 12px;" class="me-1"></i>
+                                                {{ __('global.watermark_help_text') }}
                                             </div>
                                         </div>
                                     </div>
@@ -193,81 +126,74 @@
 
                             <!-- Branding Tab -->
                             <div class="tab-pane fade" id="branding" role="tabpanel">
+                                <div class="alert alert-light border border-info-subtle d-flex align-items-center py-2 px-3 mb-4 rounded-3 text-secondary" style="font-size: 0.8125rem;">
+                                    <i data-lucide="info" style="width: 16px; height: 16px;" class="text-primary me-2 flex-shrink-0"></i>
+                                    <span>{{ __('global.upload_your_logo_and_favicon_to_customize_the_system_appearance') }}</span>
+                                </div>
+
                                 <div class="row g-4">
-                                    <div class="col-12">
-                                        <div class="alert alert-success border-0 bg-light">
-                                            <div class="d-flex">
-                                                <div class="flex-shrink-0">
-                                                    <i class="fas fa-palette text-success fa-lg"></i>
-                                                </div>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <h6 class="alert-heading mb-1">{{ __('global.branding_assets') }}</h6>
-                                                    <p class="mb-0 small">{{ __('global.upload_your_logo_and_favicon_to_customize_the_system_appearance') }}</p>
-                                                </div>
+                                    <!-- Logo Upload -->
+                                    <div class="col-md-6">
+                                        <div class="p-3 border rounded-3 bg-white h-100">
+                                            <div class="d-flex align-items-center gap-2 mb-3">
+                                                <i data-lucide="image" class="text-primary" style="width: 18px; height: 18px;"></i>
+                                                <h6 class="mb-0 fw-bold text-dark">{{ __('global.logo') }}</h6>
+                                            </div>
+
+                                            <div class="mb-3 text-center p-3 border rounded-2 bg-light-subtle">
+                                                @if($configuration->logo_path && Storage::disk('public')->exists($configuration->logo_path))
+                                                    <img id="currentLogoImg" src="{{ Storage::url($configuration->logo_path) }}" alt="{{ __('global.current_logo') }}" class="img-fluid mb-2" style="max-height: 64px; object-fit: contain;">
+                                                    <div class="text-muted small">{{ __('global.current_logo') }}</div>
+                                                @else
+                                                    <div class="text-muted py-2">
+                                                        <i data-lucide="image" style="width: 32px; height: 32px;" class="opacity-40"></i>
+                                                        <div class="small mt-1">{{ __('No Logo Uploaded') }}</div>
+                                                    </div>
+                                                @endif
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label">{{ __('global.upload_new_logo') }}</label>
+                                                <input type="file" class="form-control form-control-sm" name="logo" accept="image/*" id="logoInput">
+                                                <div class="text-muted mt-1" style="font-size: 0.72rem;">{{ __('global.logo_help_text') }}</div>
+                                            </div>
+
+                                            <div id="logoPreview" class="d-none mt-2 p-2 border rounded-2 bg-light text-center">
+                                                <div class="text-muted small mb-1 fw-medium">{{ __('global.preview') }}</div>
+                                                <img id="logoPreviewImg" src="" alt="{{ __('global.logo_preview') }}" class="img-fluid" style="max-height: 50px;">
                                             </div>
                                         </div>
                                     </div>
 
+                                    <!-- Favicon Upload -->
                                     <div class="col-md-6">
-                                        <div class="card border-light bg-light">
-                                            <div class="card-header bg-white">
-                                                <h6 class="mb-0">
-                                                    <i class="fas fa-image text-primary me-2"></i>
-                                                    {{ __('global.logo') }}
-                                                </h6>
+                                        <div class="p-3 border rounded-3 bg-white h-100">
+                                            <div class="d-flex align-items-center gap-2 mb-3">
+                                                <i data-lucide="globe" class="text-primary" style="width: 18px; height: 18px;"></i>
+                                                <h6 class="mb-0 fw-bold text-dark">{{ __('global.favicon') }}</h6>
                                             </div>
-                                            <div class="card-body">
-                                                @if($configuration->logo_path)
-                                                    <div class="mb-3 text-center">
-                                                        <img src="{{ Storage::url($configuration->logo_path) }}" alt="{{ __('global.current_logo') }}" class="img-thumbnail mb-2" style="max-height: 80px;">
-                                                        <p class="text-muted small">{{ __('global.current_logo') }}</p>
+
+                                            <div class="mb-3 text-center p-3 border rounded-2 bg-light-subtle">
+                                                @if($configuration->favicon_path && Storage::disk('public')->exists($configuration->favicon_path))
+                                                    <img id="currentFaviconImg" src="{{ Storage::url($configuration->favicon_path) }}" alt="{{ __('global.current_favicon') }}" class="mb-2" style="width: 32px; height: 32px; object-fit: contain;">
+                                                    <div class="text-muted small">{{ __('global.current_favicon') }}</div>
+                                                @else
+                                                    <div class="text-muted py-2">
+                                                        <i data-lucide="globe" style="width: 32px; height: 32px;" class="opacity-40"></i>
+                                                        <div class="small mt-1">{{ __('No Favicon Uploaded') }}</div>
                                                     </div>
                                                 @endif
-
-                                                <div class="mb-3">
-                                                    <label class="form-label">{{ __('global.upload_new_logo') }}</label>
-                                                    <input type="file" class="form-control" name="logo" accept="image/*" id="logoInput">
-                                                    <div class="form-text">
-                                                        <small class="text-muted">{{ __('global.logo_help_text') }}</small>
-                                                    </div>
-                                                </div>
-
-                                                <div id="logoPreview" class="d-none">
-                                                    <h6>{{ __('global.preview') }}</h6>
-                                                    <img id="logoPreviewImg" src="" alt="{{ __('global.logo_preview') }}" class="img-thumbnail" style="max-height: 60px;">
-                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
 
-                                    <div class="col-md-6">
-                                        <div class="card border-light bg-light">
-                                            <div class="card-header bg-white">
-                                                <h6 class="mb-0">
-                                                    <i class="fas fa-star text-secondary me-2"></i>
-                                                    {{ __('global.favicon') }}
-                                                </h6>
+                                            <div class="mb-3">
+                                                <label class="form-label">{{ __('Upload New Favicon') }}</label>
+                                                <input type="file" class="form-control form-control-sm" name="favicon" accept="image/*,.ico" id="faviconInput">
+                                                <div class="text-muted mt-1" style="font-size: 0.72rem;">{{ __('global.favicon_help_text') }}</div>
                                             </div>
-                                            <div class="card-body">
-                                                @if($configuration->favicon_path)
-                                                    <div class="mb-3 text-center">
-                                                        <img src="{{ Storage::url($configuration->favicon_path) }}" alt="{{ __('global.current_favicon') }}" class="img-thumbnail mb-2" style="max-height: 32px;">
-                                                        <p class="text-muted small">{{ __('global.current_favicon') }}</p>
-                                                    </div>
-                                                @endif
 
-                                                <div class="mb-3">
-                                                    <label class="form-label">{{ __('Upload New Favicon') }}</label>
-                                                    <input type="file" class="form-control" name="favicon" accept="image/*" id="faviconInput">
-                                                    <div class="form-text">
-                                                        <small class="text-muted">{{ __('global.favicon_help_text') }}</small>
-                                                    </div>
-                                                </div>
-
-                                                <div id="faviconPreview" class="d-none">
-                                                    <h6>{{ __('global.preview') }}</h6>
-                                                    <img id="faviconPreviewImg" src="" alt="{{ __('global.favicon_preview') }}" class="img-thumbnail" style="max-height: 32px;">
-                                                </div>
+                                            <div id="faviconPreview" class="d-none mt-2 p-2 border rounded-2 bg-light text-center">
+                                                <div class="text-muted small mb-1 fw-medium">{{ __('global.preview') }}</div>
+                                                <img id="faviconPreviewImg" src="" alt="{{ __('global.favicon_preview') }}" style="width: 24px; height: 24px;">
                                             </div>
                                         </div>
                                     </div>
@@ -276,100 +202,63 @@
                         </div>
                     </div>
 
-                    <!-- Card Footer with Actions -->
-                    <div class="card-footer bg-light border-top">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="text-muted small">
-                                <i class="fas fa-info-circle me-1"></i>
-                                {{ __('global.changes_will_take_effect_immediately_after_saving') }}
-                            </div>
-                            <div>
-                                <a href="{{ route('settings.system-configuration.index') }}" class="btn btn-outline-secondary me-2">
-                                    <i class="fas fa-times me-2"></i>
-                                    {{ __('global.cancel') }}
-                                </a>
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-save me-2"></i>
-                                    {{ __('global.save_configuration') }}
-                                </button>
-                            </div>
-                        </div>
+                    <!-- Enterprise Card Footer Actions -->
+                    <div class="card-footer bg-light-subtle d-flex justify-content-between align-items-center py-2 px-3 border-top">
+                        <a href="{{ route('settings.system-configuration.index') }}" class="btn btn-light btn-sm border d-inline-flex align-items-center gap-1 rounded-2 px-3 text-secondary">
+                            <i data-lucide="x" style="width: 14px; height: 14px;"></i>
+                            <span>{{ __('global.cancel') }}</span>
+                        </a>
+
+                        <button type="submit" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1 rounded-2 px-4 fw-medium" id="btn-submit-form">
+                            <i data-lucide="save" style="width: 14px; height: 14px;"></i>
+                            <span>{{ __('global.save_configuration') }}</span>
+                        </button>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
-    </x-form.layout>
+    </div>
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Logo preview
-    document.getElementById('logoInput').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('logoPreviewImg').src = e.target.result;
-                document.getElementById('logoPreview').classList.remove('d-none');
-            };
-            reader.readAsDataURL(file);
-        }
-    });
+    if (typeof window.initLucideIcons === 'function') {
+        window.initLucideIcons();
+    }
 
-    // Favicon preview
-    document.getElementById('faviconInput').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('faviconPreviewImg').src = e.target.result;
-                document.getElementById('faviconPreview').classList.remove('d-none');
-            };
-            reader.readAsDataURL(file);
-        }
-    });
+    const logoInput = document.getElementById('logoInput');
+    if (logoInput) {
+        logoInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById('logoPreviewImg');
+                    if (img) img.src = e.target.result;
+                    const preview = document.getElementById('logoPreview');
+                    if (preview) preview.classList.remove('d-none');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    const faviconInput = document.getElementById('faviconInput');
+    if (faviconInput) {
+        faviconInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById('faviconPreviewImg');
+                    if (img) img.src = e.target.result;
+                    const preview = document.getElementById('faviconPreview');
+                    if (preview) preview.classList.remove('d-none');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
 });
 </script>
-
-<style>
-.nav-tabs .nav-link {
-    border: none;
-    border-bottom: 2px solid transparent;
-    color: #6c757d;
-    font-weight: 500;
-}
-
-.nav-tabs .nav-link.active {
-    border-bottom-color: #007bff;
-    color: #007bff;
-    background-color: transparent;
-}
-
-.nav-tabs .nav-link:hover {
-    border-bottom-color: #007bff;
-    color: #007bff;
-}
-
-.card {
-    transition: all 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
-}
-
-.input-group-text {
-    background-color: #f8f9fa;
-    border-color: #dee2e6;
-}
-
-.border-purple {
-    border-color: #6f42c1 !important;
-}
-
-.text-purple {
-    color: #6f42c1 !important;
-}
-</style>
 </x-app-layout>

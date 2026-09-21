@@ -119,18 +119,58 @@
             <div class="mb-3 guest-documents" id="international-docs" style="display: none;">
                 <div class="row g-2">
                     <div class="col-6">
-                        <label class="form-label small fw-bold">Passport Number
-                            <span class="text-danger">*</span>
-                        </label>
+                        <label class="form-label small fw-bold">Passport Number <span class="text-danger">*</span></label>
                         <input type="text" class="form-control form-control-sm" id="guest-passport" placeholder="Passport Number" required>
                     </div>
                     <div class="col-6">
-                        <label class="form-label small fw-bold">Country
-                            <span class="text-danger">*</span>
-                        </label>
-                        <input type="text" class="form-control form-control-sm" id="guest-country" placeholder="Country of Origin" required>
+                        <label class="form-label small fw-bold">Country / Origin <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control form-control-sm" id="guest-country" placeholder="e.g. France, USA, Japan" required>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label small fw-bold">Visa Number</label>
+                        <input type="text" class="form-control form-control-sm" id="guest-visa-number" placeholder="e.g. T12345678">
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label small fw-bold">Visa Type</label>
+                        <select class="form-select form-select-sm" id="guest-visa-type">
+                            <option value="T">Tourist (T)</option>
+                            <option value="E">Ordinary / Business (E)</option>
+                            <option value="K">Special (K)</option>
+                            <option value="A">Diplomatic (A)</option>
+                            <option value="B">Official (B)</option>
+                            <option value="C">Courtesy (C)</option>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label small fw-bold">Visa Expiry Date</label>
+                        <input type="text" class="form-control form-control-sm pickadate" id="guest-visa-expiry" placeholder="dd-mm-yyyy" autocomplete="off">
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label small fw-bold">Entry Port</label>
+                        <select class="form-select form-select-sm" id="guest-entry-port">
+                            <option value="Siem Reap Angkor (SAI)">Siem Reap Angkor (SAI)</option>
+                            <option value="Phnom Penh (PNH)">Phnom Penh (PNH)</option>
+                            <option value="Sihanoukville (KOS)">Sihanoukville (KOS)</option>
+                            <option value="Poipet (Banteay Meanchey)">Poipet Border</option>
+                            <option value="Bavet (Svay Rieng)">Bavet Border</option>
+                            <option value="Cham Yeam (Koh Kong)">Cham Yeam Border</option>
+                            <option value="Other">Other Port</option>
+                        </select>
                     </div>
                 </div>
+            </div>
+
+            {{-- Booking Source --}}
+            <div class="mb-3">
+                <label class="form-label small fw-bold">Booking Source</label>
+                <select class="form-select form-select-sm" id="booking-source" name="booking_source">
+                    <option value="walk_in">Walk-in</option>
+                    <option value="booking_com">Booking.com</option>
+                    <option value="agoda">Agoda</option>
+                    <option value="expedia">Expedia</option>
+                    <option value="airbnb">Airbnb</option>
+                    <option value="direct">Direct / Phone / WhatsApp</option>
+                </select>
             </div>
 
             {{-- Billing Type --}}
@@ -322,6 +362,7 @@ $(document).ready(function() {
             guest_email: $('#guest-email').val(),
             guest_phone: $('#guest-phone').val(),
             guest_type: guestType,
+            booking_source: $('#booking-source').val() || 'walk_in',
             billing_type: $('#billing-type').val(),
             check_in_date: checkinPicker ? checkinPicker.get('select', 'yyyy-mm-dd') : '',
             check_out_date: checkoutPicker ? checkoutPicker.get('select', 'yyyy-mm-dd') : '',
@@ -338,6 +379,11 @@ $(document).ready(function() {
         } else {
             formData.guest_passport = $('#guest-passport').val();
             formData.guest_country = $('#guest-country').val();
+            formData.visa_number = $('#guest-visa-number').val();
+            formData.visa_type = $('#guest-visa-type').val();
+            const visaExpPicker = $('#guest-visa-expiry').pickadate('picker');
+            formData.visa_expiry_date = visaExpPicker ? visaExpPicker.get('select', 'yyyy-mm-dd') : $('#guest-visa-expiry').val();
+            formData.entry_port = $('#guest-entry-port').val();
         }
 
         // Validate required fields

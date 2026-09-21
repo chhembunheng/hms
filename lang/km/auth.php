@@ -13,8 +13,7 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
+    'failed' => 'ព័ត៌មានសម្ងាត់ទាំងនេះមិនត្រូវគ្នានឹងកំណត់ត្រារបស់យើងទេ។',
+    'password' => 'ពាក្យសម្ងាត់ដែលបានផ្ដល់គឺមិនត្រឹមត្រូវទេ។',
+    'throttle' => 'ការប៉ុនប៉ងចូលច្រើនដងពេក។ សូមព្យាយាមម្ដងទៀតក្នុងរយៈពេល :seconds វិនាទី។',
 ];

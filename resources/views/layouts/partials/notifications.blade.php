@@ -53,7 +53,7 @@
                             <span class="status-indicator bg-success"></span>
                         </a>
                         <button type="button" class="btn btn-light btn-icon d-inline-flex align-items-center justify-content-center w-32px h-32px rounded-pill p-0">
-                            <i class="fa-solid fa-plus"></i>
+                            <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
                         </button>
                     </div>
 
@@ -63,8 +63,8 @@
 
             <div class="d-flex align-items-start">
                 <div class="me-3">
-                    <div class="bg-warning bg-opacity-10 text-warning rounded-pill">
-                        <i class="fa-solid fa-bell p-2 w-32px h-32px"></i>
+                    <div class="bg-warning bg-opacity-10 text-warning rounded-pill p-2">
+                        <i data-lucide="bell" style="width: 16px; height: 16px;"></i>
                     </div>
                 </div>
                 <div class="flex-1">
@@ -85,7 +85,7 @@
                     <a href="index.html#" class="fw-semibold">Nick</a> requested your feedback and approval in support request <a href="index.html#">#458</a>
                     <div class="my-2">
                         <a href="index.html#" class="btn btn-success btn-sm me-1">
-                            <i class="fa-solid fa-check-double fa-fw me-1"></i>
+                            <i data-lucide="check-check" class="me-1" style="width: 14px; height: 14px;"></i>
                             Approve
                         </a>
                         <a href="index.html#" class="btn btn-light btn-sm">
@@ -114,7 +114,7 @@
                             </div>
                             <div class="ms-2">
                                 <button type="button" class="btn btn-flat-dark text-body btn-icon btn-sm border-transparent rounded-pill">
-                                    <i class="fa-solid fa-arrow-down-to-line"></i>
+                                    <i data-lucide="download" style="width: 16px; height: 16px;"></i>
                                 </button>
                             </div>
                         </div>
@@ -126,8 +126,8 @@
 
             <div class="d-flex align-items-start mb-3">
                 <div class="me-3">
-                    <div class="bg-success bg-opacity-10 text-success rounded-pill">
-                        <i class="fa-solid fa-calendar-circle-plus w-32px h-32px p-2"></i>
+                    <div class="bg-success bg-opacity-10 text-success rounded-pill p-2">
+                        <i data-lucide="calendar-plus" style="width: 16px; height: 16px;"></i>
                     </div>
                 </div>
                 <div class="flex-fill">
@@ -135,7 +135,7 @@
 
                     <div class="my-2">
                         <a href="index.html#" class="btn btn-primary btn-sm">
-                            <i class="fa-solid fa-calendar-circle-plus me-1 fa-fw"></i>
+                            <i data-lucide="calendar-plus" class="me-1" style="width: 14px; height: 14px;"></i>
                             Add to calendar
                         </a>
                     </div>
@@ -157,13 +157,12 @@
 
             <div class="d-flex align-items-start mb-3">
                 <div class="me-3">
-                    <div class="bg-primary bg-opacity-10 text-primary rounded-pill">
-                        <i class="fa-solid fa-file-lines p-2 w-32px h-32px"></i>
+                    <div class="bg-primary bg-opacity-10 text-primary rounded-pill p-2">
+                        <i data-lucide="file-text" style="width: 16px; height: 16px;"></i>
                     </div>
                 </div>
                 <div class="flex-fill">
                     <span class="fw-semibold">HR department</span> requested you to complete internal survey by Friday
-
                     <div class="fs-sm text-muted mt-1">3 days ago</div>
                 </div>
             </div>

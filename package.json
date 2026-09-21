@@ -21,6 +21,7 @@
         "vite": "^7.0.4"
     },
     "dependencies": {
-        "jquery": "^3.7.1"
+        "jquery": "^3.7.1",
+        "lucide": "^1.47.0"
     }
 }

@@ -118,6 +118,18 @@ class DashboardController extends Controller
             $roomStatusLabels[$status] = __('rooms.' . strtolower(str_replace(' ', '_', $status)));
         }
 
+        $roomTypesList = RoomType::active()->withCount('rooms')->get();
+        $totalFloors = Floor::count();
+        $floorsList = Floor::withCount('rooms')->orderBy('name')->get();
+        $allRooms = Room::with([
+            'roomType',
+            'status',
+            'floor',
+            'checkIns' => function ($q) {
+                $q->where('status', 'checked_in')->latest();
+            }
+        ])->orderBy('room_number')->get();
+
         return view('dashboard.index', compact(
             'totalRooms',
             'occupiedRooms',
@@ -136,7 +148,11 @@ class DashboardController extends Controller
             'roomStatuses',
             'roomStatusLabels',
             'revenueByRoomType',
-            'monthlyRevenueTrend'
+            'monthlyRevenueTrend',
+            'roomTypesList',
+            'totalFloors',
+            'floorsList',
+            'allRooms'
         ));
     }
     //     $locale = app()->getLocale();

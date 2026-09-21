@@ -1,18 +1,18 @@
 <div class="d-inline-flex dropdown ms-2">
     <a href="#" class="text-body" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fa-solid fa-bars"></i>
+        <i data-lucide="more-vertical" style="width: 16px; height: 16px;"></i>
     </a>
     <div class="dropdown-menu dropdown-menu-end">
         @foreach ($actions as $action)
             @if ($action['action'] === 'checkout')
-                <a href="#" class="dropdown-item" onclick="showCheckOutModal({{ $row->id }}, '{{ $row->booking_number }}', {{ $row->total_amount }}, {{ $row->paid_amount }})">
-                    <i class="fa-light {{ $action['icon'] }} me-2"></i> {{ $action->translations->firstWhere('locale', app()->getLocale())->name }}
+                <a href="#" class="dropdown-item d-flex align-items-center" onclick="showCheckOutModal({{ $row->id }}, '{{ $row->booking_number }}', {{ $row->total_amount }}, {{ $row->paid_amount }})">
+                    <i data-lucide="{{ get_lucide_icon($action['icon'] ?? 'receipt') }}" class="me-2" style="width: 16px; height: 16px;"></i> {{ $action->translations->firstWhere('locale', app()->getLocale())->name }}
                 </a>
                 @continue
             @endif
             @if ($action['target'] === 'self')
-                <a href="{{ route($action['action_route'], ['id' => $row->id]) }}" class="dropdown-item">
-                    <i class="fa-light {{ $action['icon'] }} me-2"></i> {{ $action->translations->firstWhere('locale', app()->getLocale())->name }}
+                <a href="{{ route($action['action_route'], ['id' => $row->id]) }}" class="dropdown-item d-flex align-items-center">
+                    <i data-lucide="{{ get_lucide_icon($action['icon'] ?? 'circle') }}" class="me-2" style="width: 16px; height: 16px;"></i> {{ $action->translations->firstWhere('locale', app()->getLocale())->name }}
                 </a>
             @endif
         @endforeach
@@ -34,12 +34,12 @@ function showCheckOutModal(id, bookingNumber, totalAmount, paidAmount) {
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header bg-primary text-white">
-                        <h5 class="modal-title" id="checkOutModalLabel"><i class="fa-solid fa-receipt me-2"></i>{{ __('checkins.check_out') }} & {{ __('checkins.payment_status') }} - ${bookingNumber}</h5>
+                        <h5 class="modal-title d-flex align-items-center" id="checkOutModalLabel"><i data-lucide="receipt" class="me-2"></i>{{ __('checkins.check_out') }} & {{ __('checkins.payment_status') }} - ${bookingNumber}</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="alert alert-light border py-2 mb-3">
-                            <small class="text-muted"><i class="fa-solid fa-coins me-1 text-warning"></i>Exchange Rate: <strong>1 USD = ${new Intl.NumberFormat().format(rate)} KHR (៛)</strong></small>
+                            <small class="text-muted d-flex align-items-center"><i data-lucide="coins" class="me-1 text-warning" style="width: 15px; height: 15px;"></i>Exchange Rate: <strong>&nbsp;1 USD = ${new Intl.NumberFormat().format(rate)} KHR (៛)</strong></small>
                         </div>
                         <form id="checkOutForm">
                             <div class="row g-2 mb-3">
@@ -87,7 +87,7 @@ function showCheckOutModal(id, bookingNumber, totalAmount, paidAmount) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('global.cancel') }}</button>
-                        <button type="button" class="btn btn-primary" onclick="processCheckOut(${id})"><i class="fa-solid fa-check me-1"></i>Confirm {{ __('checkins.check_out') }}</button>
+                        <button type="button" class="btn btn-primary d-flex align-items-center" onclick="processCheckOut(${id})"><i data-lucide="check" class="me-1"></i>Confirm {{ __('checkins.check_out') }}</button>
                     </div>
                 </div>
             </div>
@@ -102,6 +102,11 @@ function showCheckOutModal(id, bookingNumber, totalAmount, paidAmount) {
 
     // Add modal to body
     document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+    // Initialize Lucide icons inside modal
+    if (window.initLucideIcons) {
+        window.initLucideIcons(document.getElementById('checkOutModal'));
+    }
 
     // Show modal
     const modal = new bootstrap.Modal(document.getElementById('checkOutModal'));

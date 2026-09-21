@@ -20,10 +20,16 @@ class CheckIn extends Model
         'guest_phone',
         'guest_national_id',
         'guest_passport',
+        'guest_visa_number',
+        'guest_visa_type',
+        'guest_visa_expiry_date',
+        'guest_entry_date',
+        'guest_entry_port',
         'guest_type',
         'guest_country',
         'total_guests',
         'billing_type',
+        'booking_source',
         'check_in_date',
         'check_in_time',
         'check_out_date',
@@ -39,6 +45,8 @@ class CheckIn extends Model
     protected $casts = [
         'check_in_date' => 'date',
         'check_out_date' => 'date',
+        'guest_visa_expiry_date' => 'date',
+        'guest_entry_date' => 'date',
         'check_in_time' => 'datetime:H:i',
         'check_out_time' => 'datetime:H:i',
         'total_amount' => 'decimal:2',
@@ -79,6 +87,16 @@ class CheckIn extends Model
     public function rooms()
     {
         return $this->belongsToMany(Room::class, 'check_in_rooms');
+    }
+
+    public function services()
+    {
+        return $this->hasMany(CheckInService::class);
+    }
+
+    public function airportTransfers()
+    {
+        return $this->hasMany(AirportTransfer::class);
     }
 
     public function scopeActive($query)

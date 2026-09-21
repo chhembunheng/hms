@@ -6,8 +6,8 @@
      <div class="container-fluid p-0">
          <div class="d-flex align-items-center">
              <div class="d-flex me-2 align-items-center">
-                 <button type="button" class="navbar-toggler sidebar-main-toggle sidebar-mobile-main-toggle rounded-pill">
-                     <i class="fa-solid fa-bars fa-fw" style="font-size: 1.1rem;"></i>
+                 <button type="button" class="navbar-toggler sidebar-toggle-btn rounded-pill" id="sidebar-toggle-btn" aria-label="Toggle Sidebar">
+                     <i data-lucide="menu" style="width: 18px; height: 18px;"></i>
                  </button>
              </div>
              <div class="navbar-brand flex-1 h-32px">
@@ -19,7 +19,8 @@
                  </a>
              </div>
          </div>
-         <ul class="nav flex-row justify-content-end align-items-center">
+
+        <ul class="nav flex-row justify-content-end align-items-center">
              <li class="nav-item nav-item-dropdown-lg dropdown language-switch">
                  @php
                      $languages = collect(config('init.languages'));
@@ -30,7 +31,7 @@
                      data-bs-toggle="dropdown" aria-expanded="false">
                      <img src="{{ asset($currentLanguage['flag']) }}" class="lang-flag">
                      <span class="d-none d-lg-inline-block ms-2 me-1">{{ $currentLanguage['name'] }}</span>
-                     <i class="fa-solid fa-chevron-down fa-fw" style="font-size: 0.75rem;"></i>
+                     <i data-lucide="chevron-down" style="width: 14px; height: 14px;"></i>
                  </a>
                  <div class="dropdown-menu dropdown-menu-end">
                      @foreach ($languages as $locale => $lang)
@@ -59,22 +60,22 @@
                              <span class="status-indicator bg-success"></span>
                          </div>
                          <span class="d-none d-lg-inline-block mx-lg-2">{{ auth()->user()->name }}</span>
-                         <i class="fa-solid fa-chevron-down fa-fw" style="font-size: 0.75rem;"></i>
+                         <i data-lucide="chevron-down" style="width: 14px; height: 14px;"></i>
                      </a>
 
                      <div class="dropdown-menu dropdown-menu-end">
                          @if (Route::has('settings.account'))
                              <a href="{{ route('settings.account') }}" class="dropdown-item">
-                                 <i class="fa-solid fa-user-circle me-2"></i>
+                                 <i data-lucide="user" class="me-2" style="width: 16px; height: 16px;"></i>
                                  {{ __('root.nav.manage_your_account') }}
                              </a>
                          @endif
                          <a href="#" class="dropdown-item" onclick="clearCache()">
-                             <i class="fa-solid fa-broom-wide me-2 fa-fw"></i>
+                             <i data-lucide="sparkles" class="me-2" style="width: 16px; height: 16px;"></i>
                              {{ __('global.clear_cache') }}
                          </a>
                          <a href="#" class="dropdown-item" onclick="logout()">
-                             <i class="fa-solid fa-arrow-right-from-bracket me-2"></i>
+                             <i data-lucide="log-out" class="me-2" style="width: 16px; height: 16px;"></i>
                              {{ __('root.nav.logout') }}
                          </a>
                      </div>

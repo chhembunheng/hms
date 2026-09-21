@@ -24,4 +24,11 @@ Route::group(['prefix' => 'reports', 'as' => 'reports.', 'middleware' => ['auth'
         Route::get('/', [GuestReportController::class, 'index'])->name('index');
         Route::get('/print', [GuestReportController::class, 'print'])->name('print');
     });
+
+    // FPCS Foreigner Registration Report (Cambodia Immigration & Police)
+    Route::prefix('fpcs')->name('fpcs.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Reports\FPCSReportController::class, 'index'])->name('index');
+        Route::get('/export', [\App\Http\Controllers\Reports\FPCSReportController::class, 'export'])->name('export');
+        Route::get('/print', [\App\Http\Controllers\Reports\FPCSReportController::class, 'print'])->name('print');
+    });
 });

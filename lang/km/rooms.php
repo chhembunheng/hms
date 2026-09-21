@@ -93,4 +93,6 @@ return [
     'cleaning' => 'កំពុងសម្អាត',
     'reserved' => 'បានកក់ទុក',
     'out_of_service' => 'មិនដំណើរការ',
+    'edit_room' => 'កែសម្រួលបន្ទប់',
+    'room_details' => 'ព័ត៌មានលម្អិតបន្ទប់',
 ];

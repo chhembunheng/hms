@@ -95,4 +95,6 @@ return [
     'cleaning' => 'Cleaning',
     'reserved' => 'Reserved',
     'out_of_service' => 'Out of Service',
+    'edit_room' => 'Edit Room',
+    'room_details' => 'Room Details',
 ];

@@ -4,23 +4,32 @@
     'title' => null,
     'content' => false,
     'fixed' => false,
+    'card' => true,
+    'seamless' => false,
 ])
 @php
     // Support both 'data' and 'dataTable' props for backwards compatibility
     $tableData = $dataTable ?? $data;
+    $shouldRenderCard = ($card !== false) && !empty($title) && empty($seamless);
 @endphp
 @if($tableData)
-<div class="card border border-primary shadow-sm">
-    <div class="card-header bg-primary text-white border-bottom-0 py-2">
-        <h6 class="mb-0">{{ $title }}</h6>
-    </div>
-    <div class="card-body">
-        {!! $tableData->table(['class' => 'table table-hover datatables no-footer'], true) !!}
-    </div>
-</div>
+    @if($shouldRenderCard)
+        <div class="card border border-primary shadow-sm mb-3">
+            <div class="card-header bg-primary text-white border-bottom-0 py-2">
+                <h6 class="mb-0">{{ $title }}</h6>
+            </div>
+            <div class="card-body">
+                {!! $tableData->table(['class' => 'table table-hover datatables no-footer w-100'], true) !!}
+            </div>
+        </div>
+    @else
+        <div class="datatable-canvas w-100">
+            {!! $tableData->table(['class' => 'table table-hover datatables no-footer w-100'], true) !!}
+        </div>
+    @endif
 @else
 <div class="alert alert-warning">
-    <i class="fa-solid fa-exclamation-triangle me-2"></i>
+    <i data-lucide="alert-triangle" class="me-2" style="width: 16px; height: 16px;"></i>
     No datatable provided. Please pass the datatable object to this component.
 </div>
 @endif
@@ -38,25 +47,52 @@
         var _initDataTables = function() {
             $.extend($.fn.dataTable.defaults, {
                 autoWidth: false,
+                lengthMenu: [
+                    [25, 50, 100, 250, 500],
+                    [25, 50, 100, 250, 500]
+                ],
                 pageLength: 25,
-                dom: '<"datatable-header"><"datatable-scroll-wrap"t><"datatable-footer"ip>',
+                dom: '<"datatable-header"B><"datatable-scroll-wrap"t><"datatable-footer"ip>',
                 language: {
                     paginate: {
                         'first': 'First',
                         'last': 'Last',
-                        'next': document.dir == "rtl" ? '<i class="fa-solid fa-angle-left"></i>' : '<i class="fa-solid fa-angle-right"></i>',
-                        'previous': document.dir == "rtl" ? '<i class="fa-solid fa-angle-right"></i>' : '<i class="fa-solid fa-angle-left"></i>'
+                        'next': document.dir == "rtl" ? '←' : '→',
+                        'previous': document.dir == "rtl" ? '→' : '←',
                     }
                 },
+                buttons: [
+                    {
+                        extend: 'csv',
+                        text: '<i class="fa-regular fa-file-csv"></i>',
+                        className: 'btn btn-sm btn-light',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        text: '<i class="fa-regular fa-file-excel"></i>',
+                        className: 'btn btn-sm btn-light',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        text: '<i class="fa-regular fa-print"></i>',
+                        className: 'btn btn-sm btn-light',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    }
+                ],
                 scrollX: true,
-                scrollY: '50vh',
                 scrollCollapse: true,
-                responsive: true,
-                fixedHeader: {
-                    header: true,
-                    footer: false
+                fixedColumns: {
+                    leftColumns: 0,
+                    rightColumns: 1,
                 },
-                searching: false,
                 initComplete: function(settings, json) {
                     $(document).find('.dataTables_paginate .paginate_button a').addClass('rounded-pill');
                 },
@@ -70,17 +106,13 @@
                             let $el = $(this);
                             let name = ($el.attr('name') || '').replace('[]', '');
                             let value = $el.val();
-
-                            // Handle multiselect arrays
+                            if ($el.is(':checkbox')) {
+                                value = $el.is(':checked') ? 1 : 0;
+                            } else if ($el.is(':radio')) {
+                                if (!$el.is(':checked')) return;
+                            }
                             if (name && value) {
-                                if (Array.isArray(value)) {
-                                    // For multiselect, only add if array has values
-                                    if (value.length > 0) {
-                                        filters[name] = value;
-                                    }
-                                } else if (value !== '') {
-                                    filters[name] = value;
-                                }
+                                filters[name] = value;
                             }
                         });
                         xhr.setRequestHeader('filters', encodeURIComponent(JSON.stringify(filters)));
@@ -98,14 +130,6 @@
                 }
             });
         };
-        @if ($fixed)
-            $.extend($.fn.dataTable.defaults, {
-                fixedColumns: {
-                    leftColumns: 0,
-                    rightColumns: 1
-                }
-            });
-        @endif
 
 
         function format(row) {
@@ -179,9 +203,6 @@
 
         tr.shown td.content {
             background: url('https://datatables.net/examples/resources/details_close.png') no-repeat center center;
-        }
-        .dataTables_scrollBody {
-            min-height: 550px !important;
         }
     </style>
 @endpush

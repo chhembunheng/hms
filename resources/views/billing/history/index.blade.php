@@ -1,128 +1,124 @@
-<x-app-layout>
-    <div class="container-fluid py-3">
-        <div class="row justify-content-center">
-            <div class="col-lg-12">
-                <div class="card shadow-sm border-0 mb-4">
-                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                        <h4 class="card-title mb-0">{{ __('billing.invoice_history') }}</h4>
-                        <a href="{{ route('billing.list.index') }}" class="btn btn-light btn-sm">
-                            <i class="fas fa-arrow-left"></i> {{ __('global.back_to_list') }}
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <!-- Filters -->
-                        <div class="row mb-4">
-                            <div class="col-md-12">
-                                <form method="GET" action="{{ route('billing.history.index') }}" class="row g-3">
-                                    <div class="col-md-3">
-                                        <x-form.input label="{{ __('billing.date_from') }}" name="date_from" type="text" class="datepicker" placeholder="dd-mm-yyyy" :value="request('date_from') ? format_date(request('date_from')) : ''" autocomplete="off" />
-                                    </div>
-                                    <div class="col-md-3">
-                                        <x-form.input label="{{ __('billing.date_to') }}" name="date_to" type="text" class="datepicker" placeholder="dd-mm-yyyy" :value="request('date_to') ? format_date(request('date_to')) : ''" autocomplete="off" />
-                                    </div>
-                                    <div class="col-md-4">
-                                        <x-form.input label="{{ __('billing.search') }}" name="search" type="text" :value="request('search')" placeholder="{{ __('billing.search_by_invoice_or_guest') }}" />
-                                    </div>
-                                    <div class="col-md-2 d-flex align-items-end">
-                                        <button type="submit" class="btn btn-primary me-2">
-                                            <i class="fas fa-search"></i> {{ __('global.search') }}
-                                        </button>
-                                        <a href="{{ route('billing.history.index') }}" class="btn btn-secondary">
-                                            <i class="fas fa-times"></i> {{ __('global.clear') }}
-                                        </a>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+<x-page-index 
+    :title="__('billing.invoice_history')" 
+    icon="history">
 
-                        <!-- Deleted Invoices Table -->
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th>{{ __('billing.invoice_number') }}</th>
-                                        <th>{{ __('billing.guest') }}</th>
-                                        <th class="text-end">{{ __('billing.total_amount') }}</th>
-                                        <th>{{ __('billing.deleted_at') }}</th>
-                                        <th class="text-center">{{ __('global.actions') }}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse($invoices as $invoice)
-                                        <tr>
-                                            <td>{{ $invoice->invoice_number }}</td>
-                                            <td>{{ $invoice->guest->full_name }}</td>
-                                            <td class="text-end">${{ number_format($invoice->total_amount, 2) }}</td>
-                                            <td>{{ $invoice->deleted_at->format('d-m-Y H:i') }}</td>
-                                            <td class="text-center">
-                                                <div class="btn-group" role="group">
-                                                    <button type="button" class="btn btn-sm btn-outline-info" title="{{ __('billing.view_details') }}"
-                                                            onclick="viewInvoiceDetails({{ $invoice->id }})">
-                                                        <i class="fas fa-eye"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="5" class="text-center py-4">
-                                                <div class="text-muted">
-                                                    <i class="fas fa-history fa-2x mb-2"></i>
-                                                    <p>{{ __('billing.no_deleted_invoices') }}</p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
+    <x-slot:actions>
+        <a href="{{ route('billing.list.index') }}" class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1 rounded-2">
+            <i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i>
+            <span>{{ __('global.back_to_list') }}</span>
+        </a>
+    </x-slot:actions>
 
-                        <!-- Pagination -->
-                        @if($invoices->hasPages())
-                            <div class="d-flex justify-content-center mt-4">
-                                {{ $invoices->appends(request()->query())->links() }}
-                            </div>
-                        @endif
-                    </div>
+    <x-slot:filters>
+        <form method="GET" action="{{ route('billing.history.index') }}" class="row g-3 px-1 py-1">
+            <div class="col-md-3">
+                <label class="form-label small fw-semibold text-muted mb-1">{{ __('billing.date_from') }}</label>
+                <div class="input-group input-group-sm">
+                    <input type="text" name="date_from" class="form-control form-control-sm rounded-start-2 pickadate" placeholder="dd-mm-yyyy" value="{{ request('date_from') ? format_date(request('date_from')) : '' }}" autocomplete="off">
+                    <span class="input-group-text rounded-end-2"><i data-lucide="calendar" style="width: 14px; height: 14px;"></i></span>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Invoice Details Modal -->
-    <div class="modal fade" id="invoiceDetailsModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">{{ __('billing.invoice_details') }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body" id="invoiceDetailsContent">
-                    <!-- Content will be loaded here -->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('global.close') }}</button>
+            <div class="col-md-3">
+                <label class="form-label small fw-semibold text-muted mb-1">{{ __('billing.date_to') }}</label>
+                <div class="input-group input-group-sm">
+                    <input type="text" name="date_to" class="form-control form-control-sm rounded-start-2 pickadate" placeholder="dd-mm-yyyy" value="{{ request('date_to') ? format_date(request('date_to')) : '' }}" autocomplete="off">
+                    <span class="input-group-text rounded-end-2"><i data-lucide="calendar" style="width: 14px; height: 14px;"></i></span>
                 </div>
             </div>
-        </div>
+            <div class="col-md-4">
+                <label class="form-label small fw-semibold text-muted mb-1">{{ __('billing.search') }}</label>
+                <input type="text" name="search" class="form-control form-control-sm rounded-2" value="{{ request('search') }}" placeholder="{{ __('billing.search_by_invoice_or_guest') }}">
+            </div>
+            <div class="col-md-2 d-flex align-items-end gap-2">
+                <button type="submit" class="btn btn-sm btn-primary rounded-2 px-3 d-inline-flex align-items-center gap-1">
+                    <i data-lucide="filter" style="width: 13px; height: 13px;"></i>
+                    <span>{{ __('global.filter') }}</span>
+                </button>
+                <a href="{{ route('billing.history.index') }}" class="btn btn-sm btn-outline-secondary rounded-2 px-3 d-inline-flex align-items-center gap-1">
+                    <i data-lucide="rotate-ccw" style="width: 13px; height: 13px;"></i>
+                    <span>{{ __('global.clear') }}</span>
+                </a>
+            </div>
+        </form>
+    </x-slot:filters>
+
+    <!-- Deleted Invoices Table -->
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0 datatables-custom">
+            <thead class="table-light">
+                <tr class="text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px; color: #64748b;">
+                    <th class="ps-3">{{ __('billing.invoice_number') }}</th>
+                    <th>{{ __('billing.guest') }}</th>
+                    <th class="text-end">{{ __('billing.total_amount') }}</th>
+                    <th>{{ __('billing.deleted_at') }}</th>
+                    <th class="text-end pe-3">{{ __('global.actions') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($invoices as $invoice)
+                    <tr>
+                        <td class="ps-3 fw-bold text-dark">{{ $invoice->invoice_number }}</td>
+                        <td class="fw-medium text-dark">{{ $invoice->guest->full_name }}</td>
+                        <td class="text-end fw-semibold">${{ number_format($invoice->total_amount, 2) }}</td>
+                        <td class="text-muted small">{{ $invoice->deleted_at->format('d-m-Y H:i') }}</td>
+                        <td class="text-end pe-3">
+                            <button type="button" class="btn btn-sm btn-light border p-1 rounded-2 text-primary" title="{{ __('billing.view_details') }}"
+                                    onclick="viewInvoiceDetails({{ $invoice->id }})">
+                                <i data-lucide="eye" style="width: 14px; height: 14px;"></i>
+                            </button>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="5" class="text-center py-5 text-muted">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mb-3" style="width: 56px; height: 56px;">
+                                    <i data-lucide="history" style="width: 28px; height: 28px; stroke: #94a3b8;"></i>
+                                </div>
+                                <h6 class="fw-semibold text-secondary mb-1">{{ __('billing.no_deleted_invoices') }}</h6>
+                            </div>
+                        </td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
 
-    @push('scripts')
-    <script>
-    function viewInvoiceDetails(invoiceId) {
-        // For now, just show a placeholder. In a real implementation, you might load details via AJAX
-        const content = `
-            <div class="text-center">
-                <i class="fas fa-file-invoice-dollar fa-3x text-muted mb-3"></i>
+    @if($invoices->hasPages())
+        <div class="d-flex justify-content-between align-items-center pt-3 px-3 border-top">
+            <small class="text-muted">
+                {{ __('global.showing') ?? 'Showing' }} {{ $invoices->firstItem() }} {{ __('global.to') ?? 'to' }} {{ $invoices->lastItem() }} {{ __('global.of') ?? 'of' }} {{ $invoices->total() }} {{ __('global.entries') ?? 'entries' }}
+            </small>
+            <div>{{ $invoices->appends(request()->query())->links() }}</div>
+        </div>
+    @endif
+</x-page-index>
+
+<!-- Invoice Details Modal -->
+<div class="modal fade" id="invoiceDetailsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header border-bottom py-2">
+                <h6 class="modal-title fw-bold">{{ __('billing.invoice_details') }}</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body py-4 text-center" id="invoiceDetailsContent">
+                <i data-lucide="file-text" style="width: 48px; height: 48px; stroke: #94a3b8;" class="mb-3"></i>
                 <h5>{{ __('billing.invoice_details') }}</h5>
                 <p class="text-muted">{{ __('billing.invoice_details_not_available') }}</p>
-                <p class="text-muted">{{ __('billing.invoice_was_deleted_on') }}: <strong id="deletedDate"></strong></p>
+                <p class="text-muted small">{{ __('billing.invoice_was_deleted_on') }}: <strong id="deletedDate"></strong></p>
             </div>
-        `;
+            <div class="modal-footer border-top py-2">
+                <button type="button" class="btn btn-sm btn-secondary rounded-2" data-bs-dismiss="modal">{{ __('global.close') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-        document.getElementById('invoiceDetailsContent').innerHTML = content;
-        new bootstrap.Modal(document.getElementById('invoiceDetailsModal')).show();
-    }
-    </script>
-    @endpush
-</x-app-layout>
+@push('scripts')
+<script>
+function viewInvoiceDetails(invoiceId) {
+    new bootstrap.Modal(document.getElementById('invoiceDetailsModal')).show();
+}
+</script>
+@endpush

@@ -32,7 +32,7 @@ class StayingController extends Controller
 
         // Validate payment data
         $rules = [
-            'paid_amount' => 'required|numeric|min:0|max:' . $checkIn->total_amount,
+            'paid_amount' => 'required|numeric|min:0',
             'payment_method' => 'nullable|string|max:50',
             'notes' => 'nullable|string|max:1000',
         ];
@@ -42,6 +42,56 @@ class StayingController extends Controller
         try {
             DB::beginTransaction();
 
+            // Determine room description
+            $roomNumbers = $checkIn->checkInRooms->map(fn($cr) => $cr->room?->room_number)->filter()->implode(', ');
+            if (empty($roomNumbers) && $checkIn->room) {
+                $roomNumbers = $checkIn->room->room_number;
+            }
+
+            // Unbilled Services (tours, laundry, spa, etc.)
+            $unbilledServices = \App\Models\CheckInService::with('service')
+                ->where('check_in_id', $checkIn->id)
+                ->where('is_billed', false)
+                ->get();
+
+            // Unbilled Room-Charged Airport Transfers
+            $unbilledTransfers = \App\Models\AirportTransfer::where('check_in_id', $checkIn->id)
+                ->where('is_charged_to_room', true)
+                ->where('status', '!=', 'cancelled')
+                ->get();
+
+            $grandTotal = (float) $checkIn->total_amount;
+            $items = [
+                [
+                    'description' => 'Room charges for Room ' . ($roomNumbers ?: 'N/A') . ' (' . ucfirst(str_replace('_', ' ', $checkIn->billing_type ?? 'night')) . ')',
+                    'quantity' => 1,
+                    'unit_price' => (float) $checkIn->total_amount,
+                    'total' => (float) $checkIn->total_amount,
+                ]
+            ];
+
+            foreach ($unbilledServices as $svc) {
+                $svcTotal = (float) $svc->total_price;
+                $grandTotal += $svcTotal;
+                $items[] = [
+                    'description' => ($svc->service ? $svc->service->name_en : 'Service') . ' (' . $svc->quantity . ' ' . ($svc->service ? $svc->service->unit : 'item') . ')',
+                    'quantity' => (float) $svc->quantity,
+                    'unit_price' => (float) $svc->unit_price,
+                    'total' => $svcTotal,
+                ];
+            }
+
+            foreach ($unbilledTransfers as $tr) {
+                $trTotal = (float) $tr->price;
+                $grandTotal += $trTotal;
+                $items[] = [
+                    'description' => 'Airport ' . ucfirst($tr->transfer_type) . ' (' . ucfirst($tr->vehicle_type) . ' - ' . ($tr->flight_number ?: 'SAI') . ')',
+                    'quantity' => 1,
+                    'unit_price' => $trTotal,
+                    'total' => $trTotal,
+                ];
+            }
+
             $checkIn->update([
                 'status' => 'checked_out',
                 'actual_check_out_at' => now(),
@@ -49,36 +99,26 @@ class StayingController extends Controller
                 'notes' => $request->notes,
             ]);
 
-            // Determine room description
-            $roomNumbers = $checkIn->checkInRooms->map(fn($cr) => $cr->room?->room_number)->filter()->implode(', ');
-            if (empty($roomNumbers) && $checkIn->room) {
-                $roomNumbers = $checkIn->room->room_number;
-            }
+            // Mark services as billed
+            $unbilledServices->each->update(['is_billed' => true]);
 
             $rate = active_exchange_rate();
             $paymentMethod = $request->payment_method ?: 'cash_usd';
 
-            // Generate invoice
+            // Generate invoice with all items
             $invoice = Invoice::create([
                 'check_in_id' => $checkIn->id,
                 'guest_id' => $checkIn->guest_id,
-                'subtotal' => $checkIn->total_amount,
-                'total_amount' => $checkIn->total_amount,
+                'subtotal' => $grandTotal,
+                'total_amount' => $grandTotal,
                 'paid_amount' => $request->paid_amount,
-                'balance_amount' => max(0, $checkIn->total_amount - $request->paid_amount),
+                'balance_amount' => max(0, $grandTotal - $request->paid_amount),
                 'payment_method' => $paymentMethod,
-                'status' => ($request->paid_amount >= $checkIn->total_amount) ? 'paid' : 'partially_paid',
+                'status' => ($request->paid_amount >= $grandTotal) ? 'paid' : 'partially_paid',
                 'invoice_date' => now()->toDateString(),
                 'due_date' => now()->addDays(30)->toDateString(),
                 'notes' => 'Auto-generated invoice for check-out. Rate: 1 USD = ' . number_format($rate) . ' KHR',
-                'items' => [
-                    [
-                        'description' => 'Room charges for Room ' . ($roomNumbers ?: 'N/A') . ' (' . ucfirst(str_replace('_', ' ', $checkIn->billing_type ?? 'night')) . ')',
-                        'quantity' => 1,
-                        'unit_price' => (float)$checkIn->total_amount,
-                        'total' => (float)$checkIn->total_amount,
-                    ]
-                ],
+                'items' => $items,
             ]);
 
             // Create Payment record if paid amount > 0

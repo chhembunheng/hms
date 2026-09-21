@@ -5,7 +5,7 @@
         <div class="d-flex">
             <div class="breadcrumb py-2 dark:bg-gray-800">
                 <a href="{{ route('dashboard.index') }}" class="breadcrumb-item dark:text-gray-300 dark:hover:text-white">
-                    <i class="fa-solid fa-chart-simple fa-fw"></i>
+                    <i data-lucide="layout-dashboard" style="width: 16px; height: 16px;"></i>
                 </a>
                 @php
                     $routeName = request()->route()->getName();
@@ -37,7 +37,7 @@
             <div class="d-lg-flex align-items-center justify-content-center h-100">
                 @foreach ($data as $row)
                     <a href="{{ route($row['action_route']) }}" class="btn btn-link dark:text-gray-300 dark:hover:text-white">
-                        <i class="fa-solid {{ $row['icon'] }} fa-xl fa-fw"></i> &nbsp;<b>{{ $row['name_' . app()->getLocale()] }}</b>
+                        <i data-lucide="{{ get_lucide_icon($row['icon']) }}" class="me-1" style="width: 16px; height: 16px;"></i> &nbsp;<b>{{ $row['name_' . app()->getLocale()] }}</b>
                     </a>
                 @endforeach
             </div>
@@ -46,7 +46,7 @@
             @foreach ($navbars as $navbar)
                 @if (Route::currentRouteName() != $navbar['action_route'])
                     <a href="{{ route($navbar['action_route']) }}" class="d-flex align-items-center text-body dark:text-gray-300 dark:hover:text-white py-2">
-                        <i class="fa-solid {{ $navbar['icon'] }} me-1 fa-fw fa-xl"></i>
+                        <i data-lucide="{{ get_lucide_icon($navbar['icon']) }}" class="me-1" style="width: 16px; height: 16px;"></i>
                         {{ $navbar['name_' . app()->getLocale()] }}
                     </a>
                 @endif
