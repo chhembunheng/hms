@@ -3,7 +3,7 @@
     if (isset($menus) && is_iterable($menus)) {
         foreach ($menus as $m) {
             $parentName = $m->name ?? '';
-            $parentIcon = get_lucide_icon($m->icon ?? 'circle');
+            $parentIcon = $m->icon ?: 'fa-circle';
             if ($m->route && Route::has($m->route)) {
                 $searchItems[] = [
                     'name' => $parentName,
@@ -19,7 +19,7 @@
                             'name' => $child->name ?? '',
                             'category' => $parentName,
                             'url' => strpos($child->route, 'frontend.') === 0 ? route($child->route, ['locale' => app()->getLocale()]) : route($child->route),
-                            'icon' => get_lucide_icon($child->icon ?? $parentIcon),
+                            'icon' => $child->icon ?? $parentIcon,
                         ];
                     }
                 }
@@ -40,9 +40,9 @@
                     name="search"
                     placeholder="{{ __('Search pages...') }}"
                     autocomplete="off">
-                <i data-lucide="search" class="search-icon-wrapper"></i>
+                <i class="fa-solid fa-magnifying-glass search-icon-wrapper"></i>
                 <button type="button" id="clear-search-menu" class="btn-clear-search d-none" aria-label="Clear">
-                    <i data-lucide="x" style="width: 14px; height: 14px;"></i>
+                    <i class="fa-solid fa-xmark" style="font-size: 13px;"></i>
                 </button>
                 <ul id="autocomplete-dropdown" class="dropdown-menu"></ul>
             </div>
@@ -135,9 +135,13 @@ $(document).ready(function() {
         if (matches.length > 0) {
             let html = '';
             matches.slice(0, 10).forEach(function(item, idx) {
+                let iconClass = item.icon || 'fa-circle';
+                if (!iconClass.includes('fa-solid') && !iconClass.includes('fa-regular') && !iconClass.includes('fa-brands')) {
+                    iconClass = iconClass.startsWith('fa-') ? 'fa-solid ' + iconClass : 'fa-solid fa-' + iconClass;
+                }
                 html += `
                     <li class="dropdown-item" data-link="${item.url}">
-                        <i data-lucide="${item.icon}" class="me-2" style="width: 16px; height: 16px;"></i>
+                        <i class="${iconClass} me-2" style="width: 16px; text-align: center;"></i>
                         <div class="flex-grow-1 text-truncate">
                             <span class="item-title">${item.name}</span>
                             ${item.category ? `<small class="text-muted d-block" style="font-size: 0.7rem;">${item.category}</small>` : ''}
@@ -146,18 +150,12 @@ $(document).ready(function() {
                 `;
             });
             $dropdown.html(html).show();
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons({ root: $dropdown[0] });
-            }
         } else {
             $dropdown.html(`
                 <li class="dropdown-item disabled text-muted py-2 text-center" style="font-size: 0.8rem;">
-                    <i data-lucide="info" class="me-1" style="width: 14px; height: 14px;"></i> {{ __('No pages found') }}
+                    <i class="fa-solid fa-circle-info me-1"></i> {{ __('No pages found') }}
                 </li>
             `).show();
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons({ root: $dropdown[0] });
-            }
         }
 
         // Real-time smooth tree filtering

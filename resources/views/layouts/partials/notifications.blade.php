@@ -53,7 +53,7 @@
                             <span class="status-indicator bg-success"></span>
                         </a>
                         <button type="button" class="btn btn-light btn-icon d-inline-flex align-items-center justify-content-center w-32px h-32px rounded-pill p-0">
-                            <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
+                            <i class="fa-solid fa-plus" style="font-size: 13px;"></i>
                         </button>
                     </div>
 
@@ -64,7 +64,7 @@
             <div class="d-flex align-items-start">
                 <div class="me-3">
                     <div class="bg-warning bg-opacity-10 text-warning rounded-pill p-2">
-                        <i data-lucide="bell" style="width: 16px; height: 16px;"></i>
+                        <i class="fa-solid fa-bell" style="font-size: 14px;"></i>
                     </div>
                 </div>
                 <div class="flex-1">
@@ -85,7 +85,7 @@
                     <a href="index.html#" class="fw-semibold">Nick</a> requested your feedback and approval in support request <a href="index.html#">#458</a>
                     <div class="my-2">
                         <a href="index.html#" class="btn btn-success btn-sm me-1">
-                            <i data-lucide="check-check" class="me-1" style="width: 14px; height: 14px;"></i>
+                            <i class="fa-solid fa-check-double me-1" style="font-size: 12px;"></i>
                             Approve
                         </a>
                         <a href="index.html#" class="btn btn-light btn-sm">
@@ -114,7 +114,7 @@
                             </div>
                             <div class="ms-2">
                                 <button type="button" class="btn btn-flat-dark text-body btn-icon btn-sm border-transparent rounded-pill">
-                                    <i data-lucide="download" style="width: 16px; height: 16px;"></i>
+                                    <i class="fa-solid fa-download" style="font-size: 13px;"></i>
                                 </button>
                             </div>
                         </div>
@@ -127,7 +127,7 @@
             <div class="d-flex align-items-start mb-3">
                 <div class="me-3">
                     <div class="bg-success bg-opacity-10 text-success rounded-pill p-2">
-                        <i data-lucide="calendar-plus" style="width: 16px; height: 16px;"></i>
+                        <i class="fa-solid fa-calendar-plus" style="font-size: 14px;"></i>
                     </div>
                 </div>
                 <div class="flex-fill">
@@ -135,7 +135,7 @@
 
                     <div class="my-2">
                         <a href="index.html#" class="btn btn-primary btn-sm">
-                            <i data-lucide="calendar-plus" class="me-1" style="width: 14px; height: 14px;"></i>
+                            <i class="fa-solid fa-calendar-plus me-1" style="font-size: 12px;"></i>
                             Add to calendar
                         </a>
                     </div>
@@ -158,7 +158,7 @@
             <div class="d-flex align-items-start mb-3">
                 <div class="me-3">
                     <div class="bg-primary bg-opacity-10 text-primary rounded-pill p-2">
-                        <i data-lucide="file-text" style="width: 16px; height: 16px;"></i>
+                        <i class="fa-solid fa-file-lines" style="font-size: 14px;"></i>
                     </div>
                 </div>
                 <div class="flex-fill">

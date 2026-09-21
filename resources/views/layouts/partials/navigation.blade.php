@@ -7,7 +7,7 @@
          <div class="d-flex align-items-center">
              <div class="d-flex me-2 align-items-center">
                  <button type="button" class="navbar-toggler sidebar-toggle-btn rounded-pill" id="sidebar-toggle-btn" aria-label="Toggle Sidebar">
-                     <i data-lucide="menu" style="width: 18px; height: 18px;"></i>
+                     <i class="fa-solid fa-bars" style="font-size: 16px; color: #ffffff;"></i>
                  </button>
              </div>
              <div class="navbar-brand flex-1 h-32px">
@@ -31,7 +31,7 @@
                      data-bs-toggle="dropdown" aria-expanded="false">
                      <img src="{{ asset($currentLanguage['flag']) }}" class="lang-flag">
                      <span class="d-none d-lg-inline-block ms-2 me-1">{{ $currentLanguage['name'] }}</span>
-                     <i data-lucide="chevron-down" style="width: 14px; height: 14px;"></i>
+                     <i class="fa-solid fa-chevron-down ms-1" style="font-size: 10px;"></i>
                  </a>
                  <div class="dropdown-menu dropdown-menu-end">
                      @foreach ($languages as $locale => $lang)
@@ -60,22 +60,22 @@
                              <span class="status-indicator bg-success"></span>
                          </div>
                          <span class="d-none d-lg-inline-block mx-lg-2">{{ auth()->user()->name }}</span>
-                         <i data-lucide="chevron-down" style="width: 14px; height: 14px;"></i>
+                         <i class="fa-solid fa-chevron-down ms-1" style="font-size: 10px;"></i>
                      </a>
 
                      <div class="dropdown-menu dropdown-menu-end">
                          @if (Route::has('settings.account'))
                              <a href="{{ route('settings.account') }}" class="dropdown-item">
-                                 <i data-lucide="user" class="me-2" style="width: 16px; height: 16px;"></i>
+                                 <i class="fa-solid fa-user me-2" style="font-size: 14px;"></i>
                                  {{ __('root.nav.manage_your_account') }}
                              </a>
                          @endif
                          <a href="#" class="dropdown-item" onclick="clearCache()">
-                             <i data-lucide="sparkles" class="me-2" style="width: 16px; height: 16px;"></i>
+                             <i class="fa-solid fa-arrows-rotate me-2" style="font-size: 14px;"></i>
                              {{ __('global.clear_cache') }}
                          </a>
                          <a href="#" class="dropdown-item" onclick="logout()">
-                             <i data-lucide="log-out" class="me-2" style="width: 16px; height: 16px;"></i>
+                             <i class="fa-solid fa-right-from-bracket me-2" style="font-size: 14px;"></i>
                              {{ __('root.nav.logout') }}
                          </a>
                      </div>

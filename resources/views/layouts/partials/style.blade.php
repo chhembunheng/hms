@@ -1,5 +1,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Hanuman:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('assets/js/vendor/editors/tui/tui-image-editor.css') }}?v={{ config('init.layout_version') }}">
+<link href="{{ asset('assets/fonts/fontawesome/css/all.css') }}?v={{ config('init.layout_version') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('assets/css/all.min.css') }}?v={{ config('init.layout_version') }}" id="stylesheet" rel="stylesheet" type="text/css">
 <link href="{{ asset('assets/css/main.css') }}?v={{ config('init.layout_version') }}" id="stylesheet" rel="stylesheet" type="text/css">
 
@@ -244,26 +245,30 @@ body .sidebar-expand-lg.sidebar-collapsed > :not(.btn-sidebar-expand) {
     border-bottom-left-radius: 8px;
 }
 
-/* Proportional Lucide Icons in Navigation (Not oversized!) */
+/* Font Awesome & Proportional Icons in Navigation */
 .sidebar-main .nav-sidebar .nav-link .nav-link-icon,
+.sidebar-main .nav-sidebar .nav-link i.fa-fw,
+.sidebar-main .nav-sidebar .nav-link i[class*="fa-"],
 .sidebar-main .nav-sidebar .nav-link svg.lucide,
 .sidebar-main .nav-sidebar .nav-link [data-lucide] {
-    width: 15px !important;
-    height: 15px !important;
-    max-width: 15px !important;
-    max-height: 15px !important;
-    margin-right: 0.75rem !important;
-    stroke: #475569;
-    stroke-width: 1.6 !important;
+    font-size: 0.95rem !important;
+    width: 1.25rem !important;
+    text-align: center;
+    margin-right: 0.65rem !important;
+    color: #475569;
     flex-shrink: 0;
     vertical-align: middle;
     display: inline-block;
-    transition: stroke 0.15s ease;
+    transition: color 0.15s ease, stroke 0.15s ease;
 }
 
+.sidebar-main .nav-sidebar .nav-link:hover i[class*="fa-"],
+.sidebar-main .nav-sidebar .nav-link.active i[class*="fa-"],
+.sidebar-main .nav-sidebar .nav-item.nav-item-open > .nav-link i[class*="fa-"],
 .sidebar-main .nav-sidebar .nav-link:hover .nav-link-icon,
 .sidebar-main .nav-sidebar .nav-link.active .nav-link-icon,
 .sidebar-main .nav-sidebar .nav-item.nav-item-open > .nav-link .nav-link-icon {
+    color: #193f8f !important;
     stroke: #193f8f !important;
 }
 

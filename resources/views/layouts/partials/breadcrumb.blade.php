@@ -5,7 +5,7 @@
         <div class="d-flex">
             <div class="breadcrumb py-2 dark:bg-gray-800">
                 <a href="{{ route('dashboard.index') }}" class="breadcrumb-item dark:text-gray-300 dark:hover:text-white">
-                    <i data-lucide="layout-dashboard" style="width: 16px; height: 16px;"></i>
+                    <i class="fa-solid fa-house" style="font-size: 14px;"></i>
                 </a>
                 @php
                     $routeName = request()->route()->getName();
@@ -36,8 +36,14 @@
         <div class="collapse d-lg-block ms-lg-auto" id="bc_icon_button_group">
             <div class="d-lg-flex align-items-center justify-content-center h-100">
                 @foreach ($data as $row)
+                    @php
+                        $rowIcon = $row['icon'] ?? 'circle';
+                        if (!str_contains($rowIcon, 'fa-solid') && !str_contains($rowIcon, 'fa-regular') && !str_contains($rowIcon, 'fa-brands')) {
+                            $rowIcon = str_starts_with($rowIcon, 'fa-') ? 'fa-solid ' . $rowIcon : 'fa-solid fa-' . $rowIcon;
+                        }
+                    @endphp
                     <a href="{{ route($row['action_route']) }}" class="btn btn-link dark:text-gray-300 dark:hover:text-white">
-                        <i data-lucide="{{ get_lucide_icon($row['icon']) }}" class="me-1" style="width: 16px; height: 16px;"></i> &nbsp;<b>{{ $row['name_' . app()->getLocale()] }}</b>
+                        <i class="{{ $rowIcon }} me-1"></i> &nbsp;<b>{{ $row['name_' . app()->getLocale()] }}</b>
                     </a>
                 @endforeach
             </div>
@@ -45,8 +51,14 @@
         <div class="d-lg-flex mb-2 mb-lg-0">
             @foreach ($navbars as $navbar)
                 @if (Route::currentRouteName() != $navbar['action_route'])
+                    @php
+                        $navIcon = $navbar['icon'] ?? 'circle';
+                        if (!str_contains($navIcon, 'fa-solid') && !str_contains($navIcon, 'fa-regular') && !str_contains($navIcon, 'fa-brands')) {
+                            $navIcon = str_starts_with($navIcon, 'fa-') ? 'fa-solid ' . $navIcon : 'fa-solid fa-' . $navIcon;
+                        }
+                    @endphp
                     <a href="{{ route($navbar['action_route']) }}" class="d-flex align-items-center text-body dark:text-gray-300 dark:hover:text-white py-2">
-                        <i data-lucide="{{ get_lucide_icon($navbar['icon']) }}" class="me-1" style="width: 16px; height: 16px;"></i>
+                        <i class="{{ $navIcon }} me-1"></i>
                         {{ $navbar['name_' . app()->getLocale()] }}
                     </a>
                 @endif

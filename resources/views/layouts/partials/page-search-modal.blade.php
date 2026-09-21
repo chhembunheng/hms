@@ -5,7 +5,7 @@
     if (isset($menus) && is_iterable($menus)) {
         foreach ($menus as $m) {
             $parentName = $m->name ?? '';
-            $parentIcon = get_lucide_icon($m->icon ?? 'folder');
+            $parentIcon = $m->icon ?: 'fa-folder';
 
             if ($m->route && Route::has($m->route)) {
                 $searchablePages->push([
@@ -24,7 +24,7 @@
                             'title' => $c->name ?? '',
                             'category' => $parentName,
                             'route' => route($c->route),
-                            'icon' => get_lucide_icon($c->icon ?? $parentIcon),
+                            'icon' => $c->icon ?? $parentIcon,
                             'keywords' => strtolower(($c->name ?? '') . ' ' . $parentName)
                         ]);
                     }
@@ -42,7 +42,7 @@
             <div class="modal-header border-bottom p-3 bg-white d-flex align-items-center">
                 <div class="input-group input-group-lg border-0 shadow-none align-items-center">
                     <span class="input-group-text bg-transparent border-0 pe-2 text-muted" style="font-size: 1.1rem;">
-                        <i data-lucide="search" style="width: 20px; height: 20px;"></i>
+                        <i class="fa-solid fa-magnifying-glass"></i>
                     </span>
                     <input type="text" id="globalPageSearchInput" class="form-control border-0 bg-transparent shadow-none" 
                            placeholder="{{ __('Search pages, reports, features... (e.g. FPCS, Transfer, Room, Invoice)') }}" 
@@ -71,7 +71,7 @@
 
                 <!-- Empty State -->
                 <div id="pageSearchEmptyState" class="text-center py-5 text-muted d-none">
-                    <i data-lucide="search-x" style="width: 48px; height: 48px;" class="mb-3 text-secondary opacity-50"></i>
+                    <i class="fa-solid fa-magnifying-glass-chart mb-3 text-secondary opacity-50" style="font-size: 40px;"></i>
                     <h6 class="fw-semibold text-dark">{{ __('No matching pages found') }}</h6>
                     <p class="small mb-0 text-muted">{{ __('Try searching for "staying", "fpcs", "transfer", "report", or "invoice"') }}</p>
                 </div>
@@ -212,15 +212,19 @@
 
         filteredList.forEach((item, idx) => {
             const activeClass = idx === 0 ? 'active-item' : '';
+            let iconClass = item.icon || 'fa-folder';
+            if (!iconClass.includes('fa-solid') && !iconClass.includes('fa-regular') && !iconClass.includes('fa-brands')) {
+                iconClass = iconClass.startsWith('fa-') ? 'fa-solid ' + iconClass : 'fa-solid fa-' + iconClass;
+            }
             const html = `
                 <a href="${item.route}" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between page-search-item ${activeClass}" data-index="${idx}">
                     <div class="d-flex align-items-center">
                         <div class="page-search-icon bg-primary bg-opacity-10 text-primary me-2">
-                            <i data-lucide="${item.icon}" style="width: 16px; height: 16px;"></i>
+                            <i class="${iconClass}" style="font-size: 14px;"></i>
                         </div>
                         <div>
                             <div class="page-title text-dark fw-medium" style="font-size: 0.88rem;">${item.title}</div>
-                            <small class="text-muted" style="font-size: 0.75rem;"><i data-lucide="folder" class="me-1 opacity-75" style="width: 12px; height: 12px;"></i>${item.category}</small>
+                            <small class="text-muted" style="font-size: 0.75rem;"><i class="fa-solid fa-folder me-1 opacity-75" style="font-size: 11px;"></i>${item.category}</small>
                         </div>
                     </div>
                     <div class="text-muted small d-flex align-items-center">
@@ -230,10 +234,6 @@
             `;
             listContainer.append(html);
         });
-
-        if (window.lucide) {
-            lucide.createIcons({ root: listContainer[0] });
-        }
     }
 })();
 </script>

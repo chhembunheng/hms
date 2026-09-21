@@ -29,120 +29,125 @@
  <script src="{{ asset('assets/js/vendor/editors/ckeditor.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/app.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/helpers.js') }}?v={{ config('init.layout_version') }}"></script>
- <script src="{{ asset('assets/js/vendor/lucide.min.js') }}?v={{ config('init.layout_version') }}"></script>
- <script>
-     // Lucide Icons Engine & FontAwesome Auto-Converter
-     window.initLucideIcons = function(root) {
-         if (typeof lucide === 'undefined') return;
-         const container = root || document;
+    <script>
+        // Backward-compatible Icon Initializer: converts any leftover [data-lucide] into native Font Awesome icons
+        window.initLucideIcons = function(root) {
+            const container = root || document;
+            const lucideToFa = {
+                'layout-dashboard': 'fa-solid fa-chart-simple',
+                'trending-up': 'fa-solid fa-chart-line',
+                'log-in': 'fa-solid fa-right-to-bracket',
+                'log-out': 'fa-solid fa-right-from-bracket',
+                'bed': 'fa-solid fa-bed',
+                'bed-double': 'fa-solid fa-bed',
+                'users': 'fa-solid fa-users',
+                'users-round': 'fa-solid fa-users-line',
+                'user': 'fa-solid fa-user',
+                'user-round': 'fa-solid fa-circle-user',
+                'receipt': 'fa-solid fa-receipt',
+                'settings': 'fa-solid fa-gear',
+                'sliders': 'fa-solid fa-sliders',
+                'menu': 'fa-solid fa-bars',
+                'search': 'fa-solid fa-magnifying-glass',
+                'search-x': 'fa-solid fa-magnifying-glass-chart',
+                'chevron-down': 'fa-solid fa-chevron-down',
+                'chevron-right': 'fa-solid fa-chevron-right',
+                'chevron-left': 'fa-solid fa-chevron-left',
+                'chevron-up': 'fa-solid fa-chevron-up',
+                'calendar': 'fa-solid fa-calendar',
+                'calendar-check': 'fa-solid fa-calendar-check',
+                'calendar-days': 'fa-solid fa-calendar-days',
+                'calendar-plus': 'fa-solid fa-calendar-plus',
+                'clock': 'fa-solid fa-clock',
+                'history': 'fa-solid fa-clock-rotate-left',
+                'bus': 'fa-solid fa-van-shuttle',
+                'plane': 'fa-solid fa-plane',
+                'plane-landing': 'fa-solid fa-plane-arrival',
+                'plane-departure': 'fa-solid fa-plane-departure',
+                'car': 'fa-solid fa-car',
+                'truck': 'fa-solid fa-truck',
+                'bike': 'fa-solid fa-motorcycle',
+                'file-badge': 'fa-solid fa-passport',
+                'id-card': 'fa-solid fa-id-card',
+                'home': 'fa-solid fa-house',
+                'building': 'fa-solid fa-hotel',
+                'building-2': 'fa-solid fa-hotel',
+                'circle-dollar-sign': 'fa-solid fa-circle-dollar-to-slot',
+                'coins': 'fa-solid fa-coins',
+                'globe': 'fa-solid fa-earth-americas',
+                'compass': 'fa-solid fa-compass',
+                'mountain': 'fa-solid fa-mountain-sun',
+                'shirt': 'fa-solid fa-shirt',
+                'flower-2': 'fa-solid fa-spa',
+                'utensils': 'fa-solid fa-utensils',
+                'wine': 'fa-solid fa-wine-glass',
+                'layers': 'fa-solid fa-layer-group',
+                'list': 'fa-solid fa-list',
+                'list-checks': 'fa-solid fa-list-check',
+                'pencil': 'fa-solid fa-pen-to-square',
+                'trash-2': 'fa-solid fa-trash',
+                'trash': 'fa-solid fa-trash',
+                'plus': 'fa-solid fa-plus',
+                'plus-circle': 'fa-solid fa-plus-circle',
+                'check': 'fa-solid fa-check',
+                'check-circle': 'fa-solid fa-circle-check',
+                'check-check': 'fa-solid fa-check-double',
+                'x': 'fa-solid fa-xmark',
+                'x-circle': 'fa-solid fa-circle-xmark',
+                'filter': 'fa-solid fa-filter',
+                'rotate-cw': 'fa-solid fa-rotate-right',
+                'arrow-down': 'fa-solid fa-arrow-down',
+                'arrow-up': 'fa-solid fa-arrow-up',
+                'arrow-left': 'fa-solid fa-arrow-left',
+                'arrow-right': 'fa-solid fa-arrow-right',
+                'file-spreadsheet': 'fa-solid fa-file-excel',
+                'file-text': 'fa-solid fa-file-lines',
+                'file-lines': 'fa-solid fa-file-lines',
+                'printer': 'fa-solid fa-print',
+                'sparkles': 'fa-solid fa-broom-wide',
+                'map-pin': 'fa-solid fa-location-dot',
+                'disc': 'fa-solid fa-circle-dot',
+                'briefcase': 'fa-solid fa-suitcase',
+                'door-open': 'fa-solid fa-door-open',
+                'phone': 'fa-solid fa-phone',
+                'mail': 'fa-solid fa-envelope',
+                'eye': 'fa-solid fa-eye',
+                'lock': 'fa-solid fa-lock',
+                'unlock': 'fa-solid fa-unlock',
+                'zap': 'fa-solid fa-bolt',
+                'folder': 'fa-solid fa-folder',
+                'folder-open': 'fa-solid fa-folder-open',
+                'shopping-cart': 'fa-solid fa-cart-shopping',
+                'sticky-note': 'fa-solid fa-note-sticky',
+                'info': 'fa-solid fa-circle-info',
+                'help-circle': 'fa-solid fa-circle-question',
+                'alert-triangle': 'fa-solid fa-triangle-exclamation',
+                'palette': 'fa-solid fa-palette',
+                'app-window': 'fa-solid fa-window-maximize',
+                'stamp': 'fa-solid fa-stamp',
+                'image': 'fa-solid fa-image',
+                'languages': 'fa-solid fa-language',
+                'external-link': 'fa-solid fa-arrow-up-right-from-square',
+                'save': 'fa-solid fa-floppy-disk',
+                'bell': 'fa-solid fa-bell',
+                'download': 'fa-solid fa-download',
+                'circle': 'fa-solid fa-circle',
+                'minus': 'fa-solid fa-minus'
+            };
 
-         const faMap = {
-             'fa-chart-simple': 'layout-dashboard',
-             'fa-chart-line': 'trending-up',
-             'fa-right-to-bracket': 'log-in',
-             'fa-right-from-bracket': 'log-out',
-             'fa-arrow-right-from-bracket': 'log-out',
-             'fa-bed': 'bed',
-             'fa-bed-double': 'bed-double',
-             'fa-users': 'users',
-             'fa-users-line': 'users-round',
-             'fa-user': 'user',
-             'fa-user-circle': 'user-round',
-             'fa-file-invoice-dollar': 'receipt',
-             'fa-receipt': 'receipt',
-             'fa-sliders': 'settings',
-             'fa-gear': 'settings',
-             'fa-bars': 'menu',
-             'fa-magnifying-glass': 'search',
-             'fa-search': 'search',
-             'fa-chevron-down': 'chevron-down',
-             'fa-chevron-right': 'chevron-right',
-             'fa-chevron-left': 'chevron-left',
-             'fa-chevron-up': 'chevron-up',
-             'fa-calendar': 'calendar',
-             'fa-calendar-check': 'calendar-check',
-             'fa-calendar-days': 'calendar-days',
-             'fa-clock': 'clock',
-             'fa-clock-rotate-left': 'history',
-             'fa-van-shuttle': 'bus',
-             'fa-plane': 'plane',
-             'fa-plane-arrival': 'plane-landing',
-             'fa-plane-departure': 'plane-takeoff',
-             'fa-car': 'car',
-             'fa-truck-monster': 'truck',
-             'fa-motorcycle': 'bike',
-             'fa-passport': 'file-badge',
-             'fa-id-card': 'id-card',
-             'fa-house': 'home',
-             'fa-hotel': 'building-2',
-             'fa-circle-dollar-to-slot': 'circle-dollar-sign',
-             'fa-coins': 'coins',
-             'fa-earth-americas': 'globe',
-             'fa-compass': 'compass',
-             'fa-mountain-sun': 'mountain',
-             'fa-shirt': 'shirt',
-             'fa-spa': 'flower-2',
-             'fa-utensils': 'utensils',
-             'fa-wine-glass': 'wine',
-             'fa-layer-group': 'layers',
-             'fa-list': 'list',
-             'fa-list-check': 'list-checks',
-             'fa-pen-to-square': 'pencil',
-             'fa-pen': 'pencil',
-             'fa-trash': 'trash-2',
-             'fa-trash-can': 'trash-2',
-             'fa-plus': 'plus',
-             'fa-plus-circle': 'plus-circle',
-             'fa-check': 'check',
-             'fa-check-circle': 'check-circle',
-             'fa-circle-check': 'check-circle',
-             'fa-xmark': 'x',
-             'fa-circle-xmark': 'x-circle',
-             'fa-filter': 'filter',
-             'fa-rotate-right': 'rotate-cw',
-             'fa-arrow-down': 'arrow-down',
-             'fa-arrow-up': 'arrow-up',
-             'fa-arrow-left': 'arrow-left',
-             'fa-arrow-right': 'arrow-right',
-             'fa-file-excel': 'file-spreadsheet',
-             'fa-file-lines': 'file-text',
-             'fa-file-pdf': 'file-text',
-             'fa-print': 'printer',
-             'fa-broom-wide': 'sparkles',
-             'fa-location-dot': 'map-pin',
-             'fa-circle-dot': 'disc',
-             'fa-suitcase': 'briefcase',
-             'fa-door-open': 'door-open',
-             'fa-phone': 'phone',
-             'fa-envelope': 'mail',
-             'fa-eye': 'eye',
-             'fa-lock': 'lock',
-             'fa-unlock': 'unlock',
-             'fa-bolt': 'zap',
-             'fa-folder': 'folder',
-             'fa-folder-open': 'folder-open',
-             'fa-shopping-cart': 'shopping-cart',
-             'fa-note-sticky': 'sticky-note',
-             'fa-circle-info': 'info',
-             'fa-triangle-exclamation': 'alert-triangle'
-         };
-
-         try {
-             container.querySelectorAll('i[class*="fa-"]').forEach(el => {
-                 if (el.hasAttribute('data-lucide')) return;
-                 for (const cls of el.classList) {
-                     if (faMap[cls]) {
-                         el.setAttribute('data-lucide', faMap[cls]);
-                         el.classList.remove(cls, 'fa-solid', 'fa-regular', 'fa-light', 'fa-fw');
-                         break;
-                     }
-                 }
-             });
-             lucide.createIcons({ root: container });
-         } catch(e) {
-             console.warn('Lucide icon init:', e);
-         }
-     };
+            try {
+                container.querySelectorAll('[data-lucide]').forEach(el => {
+                    const iconName = el.getAttribute('data-lucide');
+                    el.removeAttribute('data-lucide');
+                    const faClass = lucideToFa[iconName] || ('fa-solid fa-' + iconName);
+                    faClass.split(' ').forEach(c => {
+                        if (c) el.classList.add(c);
+                    });
+                });
+            } catch(e) {
+                console.warn('Icon init:', e);
+            }
+        };
 
      // initialize body overlay
      // please make overlay start and stop when page loaded

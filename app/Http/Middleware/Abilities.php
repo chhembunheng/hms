@@ -83,7 +83,7 @@ class Abilities
                 'menus' => $this->menus,
                 'navbars' => collect($this->navbars),
                 'actions' => collect($this->actions)->filter(function ($item) {
-                    return isset($this->access[$item->action_route]) || $item->action  !== 'index';
+                    return $item->action !== 'index' && $item->action !== 'view';
                 }),
             ]);
         } else {
@@ -100,7 +100,7 @@ class Abilities
                     collect($this->actions),
                     $this->permissions,
                     $this->access
-                )->filter(fn($item) => $item->action !== 'index'),
+                )->filter(fn($item) => $item->action !== 'index' && $item->action !== 'view'),
             ]);
         }
 
@@ -228,7 +228,7 @@ class Abilities
                 if ($permission && !$this->administrator && !isset($this->access[$permission['action_route']])) continue;
                 if ($permission && $isActive) {
                     if ($permission['target'] === 'navbar') $this->navbars[] = $permission;
-                    elseif ($permission['target'] !== 'index') $this->actions[] = $permission;
+                    elseif ($permission['action'] !== 'index' && $permission['action'] !== 'view' && $permission['target'] !== 'index') $this->actions[] = $permission;
                 }
             }
             $dataMenus->put($id, $menuObject);

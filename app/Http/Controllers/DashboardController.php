@@ -118,9 +118,29 @@ class DashboardController extends Controller
             $roomStatusLabels[$status] = __('rooms.' . strtolower(str_replace(' ', '_', $status)));
         }
 
+        // 7-day front desk guest flow (arrivals vs departures)
+        $weeklyFlow = [];
+        for ($i = 6; $i >= 0; $i--) {
+            $day = Carbon::today()->subDays($i);
+            $dayCheckIns = CheckIn::whereDate('check_in_date', $day)->count();
+            $dayCheckOuts = CheckIn::whereDate('actual_check_out_at', $day)->count();
+            $weeklyFlow[] = [
+                'day' => $day->format('d M'),
+                'short_day' => $day->format('D'),
+                'check_ins' => $dayCheckIns,
+                'check_outs' => $dayCheckOuts,
+            ];
+        }
+
+        // Average Daily Rate (ADR)
+        $adr = $occupiedRooms > 0 && $todayRevenue > 0 
+            ? round($todayRevenue / $occupiedRooms, 2) 
+            : ($monthlyCheckIns > 0 ? round($monthlyRevenue / $monthlyCheckIns, 2) : 0);
+
+        // Room Type distribution & revenue metrics
         $roomTypesList = RoomType::active()->withCount('rooms')->get();
         $totalFloors = Floor::count();
-        $floorsList = Floor::withCount('rooms')->orderBy('name')->get();
+        $floorsList = Floor::withCount('rooms')->orderBy('floor_number')->get();
         $allRooms = Room::with([
             'roomType',
             'status',
@@ -149,6 +169,8 @@ class DashboardController extends Controller
             'roomStatusLabels',
             'revenueByRoomType',
             'monthlyRevenueTrend',
+            'weeklyFlow',
+            'adr',
             'roomTypesList',
             'totalFloors',
             'floorsList',
