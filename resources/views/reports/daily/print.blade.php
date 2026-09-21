@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ __('reports.daily_report') }} - {{ $date }}</title>
+    <title>{{ __('reports.daily_report') }} - {{ format_date($date) }}</title>
 
     <!-- Bootstrap CSS for print styling -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -25,8 +25,8 @@
         <!-- Header -->
         <div class="print-header">
             <h2>របាយការណ៍ប្រចាំថ្ងៃ</h2>
-            <h4>{{ \Carbon\Carbon::parse($date)->format('l, F j, Y') }}</h4>
-            <p class="text-muted">បានបង្កើតនៅ: {{ now()->format('Y-m-d H:i:s') }}</p>
+            <h4>{{ \Carbon\Carbon::parse($date)->format('d-m-Y') }}</h4>
+            <p class="text-muted">បានបង្កើតនៅ: {{ now()->format('d-m-Y H:i:s') }}</p>
         </div>
 
         <!-- Summary -->
@@ -143,8 +143,8 @@
                             <tr>
                                 <td>{{ $guest->guest_name }}</td>
                                 <td>{{ $guest->room->room_number ?? 'N/A' }}</td>
-                                <td>{{ $guest->check_in_date ? $guest->check_in_date->format('Y-m-d') : 'N/A' }}</td>
-                                <td>{{ $guest->check_out_date ? $guest->check_out_date->format('Y-m-d') : 'N/A' }}</td>
+                                <td>{{ $guest->check_in_date ? $guest->check_in_date->format('d-m-Y') : 'N/A' }}</td>
+                                <td>{{ $guest->check_out_date ? $guest->check_out_date->format('d-m-Y') : 'N/A' }}</td>
                                 <td>បានចូលស្នាក់</td>
                             </tr>
                             @empty

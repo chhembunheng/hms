@@ -63,10 +63,18 @@ class WalkInController extends Controller
 
         // Define billing types
         $billingTypes = collect([
-            (object)['value' => 'night', 'label' => 'Nightly Rate']
+            (object)['value' => 'night', 'label' => 'Nightly Rate'],
+            (object)['value' => '3_hours', 'label' => 'Short Stay (3 Hours)']
         ]);
 
         if ($request->isMethod('post')) {
+            if ($request->filled('check_in_date')) {
+                $request->merge(['check_in_date' => parse_date_input($request->input('check_in_date'))]);
+            }
+            if ($request->filled('check_out_date')) {
+                $request->merge(['check_out_date' => parse_date_input($request->input('check_out_date'))]);
+            }
+
             $rules = [
                 'room_ids' => 'required|array',
                 'room_ids.*' => 'required|integer|exists:rooms,id',
@@ -77,7 +85,7 @@ class WalkInController extends Controller
                 'guest_national_id' => 'required_if:guest_type,national|string|max:20',
                 'guest_passport' => 'required_if:guest_type,international|string|max:20',
                 'guest_country' => 'required_if:guest_type,international|string|max:100',
-                'billing_type' => 'required|in:night',
+                'billing_type' => 'required|in:night,3_hours',
                 'check_in_date' => 'required|date|after_or_equal:today',
                 'check_out_date' => 'required|date|after_or_equal:check_in_date',
                 'total_days' => 'required|integer|min:1',
@@ -107,7 +115,12 @@ class WalkInController extends Controller
             }
 
             foreach ($roomIds as $roomId) {
-                $conflictingBookings = CheckIn::where('room_id', $roomId)
+                $conflictingBookings = CheckIn::where(function($q) use ($roomId) {
+                        $q->where('room_id', $roomId)
+                          ->orWhereHas('checkInRooms', function($sub) use ($roomId) {
+                              $sub->where('room_id', $roomId);
+                          });
+                    })
                     ->whereIn('status', ['confirmed', 'checked_in'])
                     ->where(function($query) use ($request) {
                         $query->whereBetween('check_in_date', [$request->check_in_date, $request->check_out_date])
@@ -227,10 +240,18 @@ class WalkInController extends Controller
 
         // Define billing types
         $billingTypes = collect([
-            (object)['value' => 'night', 'label' => 'Nightly Rate']
+            (object)['value' => 'night', 'label' => 'Nightly Rate'],
+            (object)['value' => '3_hours', 'label' => 'Short Stay (3 Hours)']
         ]);
 
         if ($request->isMethod('post')) {
+            if ($request->filled('check_in_date')) {
+                $request->merge(['check_in_date' => parse_date_input($request->input('check_in_date'))]);
+            }
+            if ($request->filled('check_out_date')) {
+                $request->merge(['check_out_date' => parse_date_input($request->input('check_out_date'))]);
+            }
+
             $rules = [
                 'room_ids' => 'required|array',
                 'room_ids.*' => 'required|integer|exists:rooms,id',
@@ -378,10 +399,17 @@ class WalkInController extends Controller
 
     public function getAvailableRooms(Request $request)
     {
+        if ($request->filled('check_in_date')) {
+            $request->merge(['check_in_date' => parse_date_input($request->input('check_in_date'))]);
+        }
+        if ($request->filled('check_out_date')) {
+            $request->merge(['check_out_date' => parse_date_input($request->input('check_out_date'))]);
+        }
+
         $request->validate([
             'check_in_date' => 'required|date|after_or_equal:today',
             'check_out_date' => 'required|date|after_or_equal:check_in_date',
-            'billing_type' => 'required|in:night',
+            'billing_type' => 'required|in:night,3_hours',
         ]);
 
         // Get all active rooms with their types and statuses
@@ -399,8 +427,13 @@ class WalkInController extends Controller
             $checkInDate = formate_date($request->check_in_date);
             $checkOutDate = formate_date($request->check_out_date);
 
-            // Check for conflicting bookings
-            $conflictingBookings = CheckIn::where('room_id', $room->id)
+            // Check for conflicting bookings across both primary and secondary rooms
+            $conflictingBookings = CheckIn::where(function($q) use ($room) {
+                    $q->where('room_id', $room->id)
+                      ->orWhereHas('checkInRooms', function($sub) use ($room) {
+                          $sub->where('room_id', $room->id);
+                      });
+                })
                 ->whereIn('status', ['confirmed', 'checked_in'])
                 ->where(function($query) use ($request, $checkInDate, $checkOutDate) {
                     $query->whereBetween('check_in_date', [$checkInDate, $checkOutDate])
@@ -413,7 +446,9 @@ class WalkInController extends Controller
                 ->exists();
 
             return !$conflictingBookings;
-        });        // Group rooms by floor
+        });
+
+        // Group rooms by floor
         $floors = $availableRooms->groupBy('floor_id')->map(function($floorRooms, $floorId) use ($request) {
             $floor = $floorRooms->first()->floor;
             return [
@@ -430,6 +465,12 @@ class WalkInController extends Controller
                             ->where('pricing_type', 'night')
                             ->orderBy('effective_from', 'desc')
                             ->first();
+
+                        $hourlyPrice = $room->roomType->roomPricings()
+                            ->where('is_active', true)
+                            ->where('pricing_type', '3_hours')
+                            ->orderBy('effective_from', 'desc')
+                            ->first();
                     }
 
                     return [
@@ -438,7 +479,8 @@ class WalkInController extends Controller
                         'type' => $room->roomType ? $room->roomType->name_en : 'Standard Room',
                         'type_kh' => $room->roomType ? $room->roomType->name_kh : '',
                         'max_guests' => $room->roomType ? $room->roomType->max_guests : 1,
-                        'price_night' => $nightlyPrice ? $nightlyPrice->price : 0,
+                        'price_night' => $nightlyPrice ? (float)$nightlyPrice->price : 0,
+                        'price_3_hours' => $hourlyPrice ? (float)$hourlyPrice->price : 0,
                         'status' => $room->status ? $room->status->name_en : 'Unknown',
                     ];
                 })->sortBy('number')->values()
@@ -529,15 +571,21 @@ class WalkInController extends Controller
         // Update check-in status to cancelled
         $checkIn->update([
             'status' => 'cancelled',
-            'cancelled_at' => now(),
         ]);
 
         // Update room statuses back to available
-        $roomIds = $checkIn->checkInRooms->pluck('room_id')->toArray();
+        $roomIds = $checkIn->checkInRooms->pluck('room_id')->filter()->toArray();
+        if (empty($roomIds) && $checkIn->room_id) {
+            $roomIds = [$checkIn->room_id];
+        }
+
         if (!empty($roomIds)) {
-            \App\Models\Room::whereIn('id', $roomIds)->update([
-                'status_id' => \App\Models\RoomStatus::where('name_en', 'Available')->first()->id ?? 1
-            ]);
+            $availableStatus = \App\Models\RoomStatus::where('name_en', 'Available')->first();
+            if ($availableStatus) {
+                \App\Models\Room::whereIn('id', $roomIds)->update([
+                    'status_id' => $availableStatus->id
+                ]);
+            }
         }
 
         // Update guest visit count if guest exists

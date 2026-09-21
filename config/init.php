@@ -14,11 +14,11 @@ return [
     ],
     'date' => [
         'format' => 'Y-m-d',
-        'display_format' => 'F j, Y',
+        'display_format' => 'd-m-Y',
     ],
     'datetime' => [
         'format' => 'Y-m-d H:i:s',
-        'display_format' => 'F j, Y g:i A',
+        'display_format' => 'd-m-Y H:i',
     ],
     'languages' => [
         'en' => [

@@ -42,11 +42,27 @@ class Payment extends Model
     }
 
     /**
-     * Get formatted amount.
+     * Get formatted amount in USD.
      */
     public function getFormattedAmountAttribute(): string
     {
-        return '$' . number_format($this->amount, 2);
+        return format_usd($this->amount);
+    }
+
+    /**
+     * Get formatted amount in KHR.
+     */
+    public function getFormattedAmountKhrAttribute(): string
+    {
+        return format_khr(usd_to_khr($this->amount));
+    }
+
+    /**
+     * Get formatted dual amount (USD + KHR).
+     */
+    public function getFormattedDualAmountAttribute(): string
+    {
+        return format_dual_currency($this->amount);
     }
 
     /**
@@ -54,12 +70,17 @@ class Payment extends Model
      */
     public function getPaymentMethodLabelAttribute(): string
     {
+        $methods = paymentMethods();
+        if (isset($methods[$this->payment_method])) {
+            return $methods[$this->payment_method];
+        }
+
         return match($this->payment_method) {
-            'cash' => __('checkout.cash'),
-            'card' => __('checkout.card'),
-            'bank_transfer' => __('checkout.bank_transfer'),
-            'check' => __('checkout.check'),
-            default => __('global.unknown'),
+            'cash' => 'Cash (USD)',
+            'card' => 'Credit / Debit Card',
+            'bank_transfer' => 'Bank Transfer',
+            'check' => 'Check',
+            default => ucfirst(str_replace('_', ' ', $this->payment_method ?: 'unknown')),
         };
     }
 }

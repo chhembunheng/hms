@@ -25,7 +25,7 @@
 
                             <div class="col-md-4">
                                 <label class="form-label">{{ __('checkins.cancelled_date_range') }}</label>
-                                <input type="text" name="cancelled_date" class="form-control form-control-sm daterange" placeholder="Select date range">
+                                <input type="text" name="cancelled_date" class="form-control form-control-sm daterange" placeholder="dd-mm-yyyy - dd-mm-yyyy" autocomplete="off">
                             </div>
                         </x-datatable-filter>
 

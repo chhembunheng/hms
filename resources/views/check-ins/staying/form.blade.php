@@ -78,11 +78,11 @@
                                 </div>
 
                                 <div class="col-md-3">
-                                    <x-form.input label="{{ __('rooms.check_in_date') }}" name="check_in_date" type="date" :value="old('check_in_date', $form?->check_in_date?->format('Y-m-d'))" required />
+                                    <x-form.input label="{{ __('rooms.check_in_date') }}" name="check_in_date" type="text" class="datepicker" placeholder="dd-mm-yyyy" autocomplete="off" :value="old('check_in_date', $form?->check_in_date?->format('d-m-Y'))" required />
                                 </div>
 
                                 <div class="col-md-3">
-                                    <x-form.input label="{{ __('rooms.check_out_date') }}" name="check_out_date" type="date" :value="old('check_out_date', $form?->check_out_date?->format('Y-m-d'))" required />
+                                    <x-form.input label="{{ __('rooms.check_out_date') }}" name="check_out_date" type="text" class="datepicker" placeholder="dd-mm-yyyy" autocomplete="off" :value="old('check_out_date', $form?->check_out_date?->format('d-m-Y'))" required />
                                 </div>
 
                                 <div class="col-md-6">

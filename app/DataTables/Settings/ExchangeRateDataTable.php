@@ -26,7 +26,7 @@ class ExchangeRateDataTable extends DataTable
             ->addColumn('from_currency', fn($row) => $row->from_currency)
             ->addColumn('to_currency', fn($row) => $row->to_currency)
             ->addColumn('rate', fn($row) => number_format($row->rate, 2))
-            ->addColumn('effective_date', fn($row) => $row->effective_date->format('Y-m-d'))
+            ->addColumn('effective_date', fn($row) => $row->effective_date?->format('d-m-Y'))
             ->addColumn('is_active', fn($row) => badge($row->is_active ? 'active' : 'inactive'))
             ->editColumn('created_at', function (ExchangeRate $model) {
                 return $model->created_at?->format(config('init.datetime.display_format'));
@@ -56,24 +56,29 @@ class ExchangeRateDataTable extends DataTable
                     });
                 }
 
-                if (!empty($filters['is_active']) && is_array($filters['is_active'])) {
-                    $query->whereIn('is_active', $filters['is_active']);
+                if (!empty($filters['is_active'])) {
+                    $is_active = $filters['is_active'];
+                    if (is_array($is_active)) {
+                        $query->whereIn('is_active', array_filter($is_active, 'strlen'));
+                    } else {
+                        $query->where('is_active', $is_active);
+                    }
                 }
 
                 if (!empty($filters['effective_from'])) {
-                    $query->whereDate('effective_date', '>=', $filters['effective_from']);
+                    $query->whereDate('effective_date', '>=', parse_date_input($filters['effective_from']));
                 }
 
                 if (!empty($filters['effective_to'])) {
-                    $query->whereDate('effective_date', '<=', $filters['effective_to']);
+                    $query->whereDate('effective_date', '<=', parse_date_input($filters['effective_to']));
                 }
 
                 if (!empty($filters['created_from'])) {
-                    $query->whereDate('created_at', '>=', $filters['created_from']);
+                    $query->whereDate('created_at', '>=', parse_date_input($filters['created_from']));
                 }
 
                 if (!empty($filters['created_to'])) {
-                    $query->whereDate('created_at', '<=', $filters['created_to']);
+                    $query->whereDate('created_at', '<=', parse_date_input($filters['created_to']));
                 }
             }
         }

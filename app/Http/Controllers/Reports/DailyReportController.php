@@ -11,7 +11,7 @@ class DailyReportController extends Controller
 {
     public function index(Request $request)
     {
-        $date = $request->get('date', Carbon::today()->format('Y-m-d'));
+        $date = parse_date_input($request->get('date')) ?: Carbon::today()->format('Y-m-d');
 
         // Get check-ins for the selected date
         $checkIns = CheckIn::whereDate('check_in_date', $date)
@@ -48,7 +48,7 @@ class DailyReportController extends Controller
 
     public function print(Request $request)
     {
-        $date = $request->get('date', Carbon::today()->format('Y-m-d'));
+        $date = parse_date_input($request->get('date')) ?: Carbon::today()->format('Y-m-d');
 
         // Get check-ins for the selected date
         $checkIns = CheckIn::whereDate('check_in_date', $date)

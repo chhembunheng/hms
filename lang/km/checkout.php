@@ -61,6 +61,17 @@ return [
     // Status
     'paid' => 'បានបង់',
     'unpaid' => 'មិនទាន់បង់',
+    'pending' => 'រង់ចាំ',
+    'partial' => 'បង់បានខ្លះ',
     'partially_paid' => 'បង់បានខ្លះ',
     'overdue' => 'ហួសកំណត់',
+    'cancelled' => 'បានលុប',
+    'void' => 'ទុកជាមោឃៈ',
+
+    // Extra Checkout Keys
+    'checkout_list' => 'បញ្ជីចាកចេញ',
+    'check_out' => 'ចាកចេញ',
+    'check_out_and_payment' => 'ចាកចេញ និងទូទាត់ប្រាក់',
+    'payment_processed_successfully' => 'ការបង់ប្រាក់ត្រូវបានដំណើរការដោយជោគជ័យ។',
+    'payment_processing_failed' => 'បរាជ័យក្នុងការដំណើរការការបង់ប្រាក់។',
 ];

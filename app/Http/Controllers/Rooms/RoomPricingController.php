@@ -29,6 +29,13 @@ class RoomPricingController extends Controller
         $form = new RoomPricing();
 
         if ($request->isMethod('post')) {
+            if ($request->filled('effective_from')) {
+                $request->merge(['effective_from' => parse_date_input($request->input('effective_from'))]);
+            }
+            if ($request->filled('effective_to')) {
+                $request->merge(['effective_to' => parse_date_input($request->input('effective_to'))]);
+            }
+
             $rules = [
                 'room_type_id' => 'required|exists:room_types,id',
                 'price' => 'required|numeric|min:0',
@@ -62,6 +69,13 @@ class RoomPricingController extends Controller
         $form = RoomPricing::findOrFail($id);
 
         if ($request->isMethod('post')) {
+            if ($request->filled('effective_from')) {
+                $request->merge(['effective_from' => parse_date_input($request->input('effective_from'))]);
+            }
+            if ($request->filled('effective_to')) {
+                $request->merge(['effective_to' => parse_date_input($request->input('effective_to'))]);
+            }
+
             $rules = [
                 'room_type_id' => 'required|exists:room_types,id',
                 'price' => 'required|numeric|min:0',

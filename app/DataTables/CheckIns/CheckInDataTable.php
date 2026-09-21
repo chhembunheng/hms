@@ -27,8 +27,8 @@ class CheckInDataTable extends DataTable
             ->addColumn('guest_name', fn($row) => $row->guest_name)
             ->addColumn('room_number', fn($row) => $row->room->room_number ?? '-')
             ->addColumn('guest_type', fn($row) => badge($row->guest_type === 'national' ? 'National' : 'International'))
-            ->addColumn('check_in_date', fn($row) => $row->check_in_date?->format('M d, Y'))
-            ->addColumn('check_out_date', fn($row) => $row->check_out_date?->format('M d, Y'))
+            ->addColumn('check_in_date', fn($row) => $row->check_in_date?->format('d-m-Y'))
+            ->addColumn('check_out_date', fn($row) => $row->check_out_date?->format('d-m-Y'))
             ->addColumn('total_amount', fn($row) => '$' . number_format($row->total_amount, 2))
             ->addColumn('status', function($row) {
                 $statusColors = [
@@ -86,11 +86,11 @@ class CheckInDataTable extends DataTable
             }
 
             if (!empty($filters['check_in_date'])) {
-                $query->whereDate('check_in_date', '>=', $filters['check_in_date']);
+                $query->whereDate('check_in_date', '>=', parse_date_input($filters['check_in_date']));
             }
 
             if (!empty($filters['check_out_date'])) {
-                $query->whereDate('check_out_date', '<=', $filters['check_out_date']);
+                $query->whereDate('check_out_date', '<=', parse_date_input($filters['check_out_date']));
             }
         }
 
@@ -128,13 +128,13 @@ class CheckInDataTable extends DataTable
                 ->title('#')
                 ->width(30)
                 ->addClass('text-center'),
-            Column::make('booking_number')->title(__('check-ins.booking_number')),
-            Column::make('guest_name')->title(__('check-ins.guest_name')),
-            Column::make('room_number')->title(__('check-ins.room_number')),
-            Column::make('guest_type')->title(__('check-ins.guest_type')),
-            Column::make('check_in_date')->title(__('check-ins.check_in_date')),
-            Column::make('check_out_date')->title(__('check-ins.check_out_date')),
-            Column::make('total_amount')->title(__('check-ins.total_amount')),
+            Column::make('booking_number')->title(__('checkins.booking_number')),
+            Column::make('guest_name')->title(__('checkins.guest_name')),
+            Column::make('room_number')->title(__('checkins.room_number')),
+            Column::make('guest_type')->title(__('checkins.guest_type')),
+            Column::make('check_in_date')->title(__('checkins.check_in_date')),
+            Column::make('check_out_date')->title(__('checkins.check_out_date')),
+            Column::make('total_amount')->title(__('checkins.total_amount')),
             Column::make('status')->title(__('global.status')),
             Column::make('created_at')->title(__('global.created_at')),
             Column::computed('action')

@@ -25,11 +25,11 @@ class BillingController extends Controller
 
         // Filter by date range
         if ($request->filled('date_from')) {
-            $query->whereDate('invoice_date', '>=', $request->date_from);
+            $query->whereDate('invoice_date', '>=', parse_date_input($request->date_from));
         }
 
         if ($request->filled('date_to')) {
-            $query->whereDate('invoice_date', '<=', $request->date_to);
+            $query->whereDate('invoice_date', '<=', parse_date_input($request->date_to));
         }
 
         // Search by invoice number or guest name
@@ -124,11 +124,11 @@ class BillingController extends Controller
 
         // Filter by date range
         if ($request->filled('date_from')) {
-            $query->whereDate('deleted_at', '>=', $request->date_from);
+            $query->whereDate('deleted_at', '>=', parse_date_input($request->date_from));
         }
 
         if ($request->filled('date_to')) {
-            $query->whereDate('deleted_at', '<=', $request->date_to);
+            $query->whereDate('deleted_at', '<=', parse_date_input($request->date_to));
         }
 
         // Search by invoice number or guest name
@@ -158,11 +158,11 @@ class BillingController extends Controller
 
         // Filter by date range
         if ($request->filled('date_from')) {
-            $query->whereDate('updated_at', '>=', $request->date_from);
+            $query->whereDate('updated_at', '>=', parse_date_input($request->date_from));
         }
 
         if ($request->filled('date_to')) {
-            $query->whereDate('updated_at', '<=', $request->date_to);
+            $query->whereDate('updated_at', '<=', parse_date_input($request->date_to));
         }
 
         // Search by invoice number or guest name
@@ -255,11 +255,11 @@ class BillingController extends Controller
 
         // Filter by date range
         if ($request->filled('date_from')) {
-            $query->whereDate('updated_at', '>=', $request->date_from);
+            $query->whereDate('updated_at', '>=', parse_date_input($request->date_from));
         }
 
         if ($request->filled('date_to')) {
-            $query->whereDate('updated_at', '<=', $request->date_to);
+            $query->whereDate('updated_at', '<=', parse_date_input($request->date_to));
         }
 
         // Search by invoice number or guest name

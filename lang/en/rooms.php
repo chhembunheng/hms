@@ -91,4 +91,8 @@ return [
     'select_rooms' => 'Select rooms',
     'rooms_selected' => 'rooms selected',
     'all_rooms_selected' => 'All rooms selected',
+    'check_in' => 'Check-in',
+    'cleaning' => 'Cleaning',
+    'reserved' => 'Reserved',
+    'out_of_service' => 'Out of Service',
 ];

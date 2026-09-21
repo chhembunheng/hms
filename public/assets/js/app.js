@@ -681,12 +681,14 @@ const App = function () {
             console.warn('Warning - multiselect.min.js is not loaded.');
             return;
         }
-        $('select[multiple="multiple"]').each(function () {
+        $('select[multiple="multiple"], select[multiple]').each(function () {
             const $multiple = $(this);
+            if ($multiple.data('ms-initialized') || $multiple.parent().hasClass('multiselect-native-select') || $multiple.hasClass('multiple-select')) {
+                return;
+            }
             const inModal = $multiple.closest('.modal').length > 0;
             const dropdownParent = inModal ? $multiple.closest('.modal-body') : $('.content-inner');
             const searchable = $multiple.data('searchable') === false ? false : true;
-            $multiple.multiselect('destroy');
             $multiple.multiselect({
                 dropRight: document.dir === 'rtl' ? false : true,
                 dropUp: $multiple.hasClass('drop-up') ? true : false,

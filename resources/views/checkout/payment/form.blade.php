@@ -35,9 +35,9 @@
                             <div class="card bg-light">
                                 <div class="card-body">
                                     <h6 class="card-title">{{ __('checkout.stay_details') }}</h6>
-                                    <p class="mb-1"><strong>{{ __('rooms.room') }}:</strong> {{ $invoice->checkIn->room->room_number }}</p>
-                                    <p class="mb-1"><strong>{{ __('checkins.check_in_date') }}:</strong> {{ $invoice->checkIn->check_in_date->format('d-m-Y') }}</p>
-                                    <p class="mb-1"><strong>{{ __('checkins.check_out_date') }}:</strong> {{ $invoice->checkIn->actual_check_out_at->format('d-m-Y') }}</p>
+                                    <p class="mb-1"><strong>{{ __('rooms.room') }}:</strong> {{ $invoice->checkIn?->room?->room_number ?? 'Room' }}</p>
+                                    <p class="mb-1"><strong>{{ __('checkins.check_in_date') }}:</strong> {{ $invoice->checkIn?->check_in_date?->format('d-m-Y') ?? '-' }}</p>
+                                    <p class="mb-1"><strong>{{ __('checkins.check_out_date') }}:</strong> {{ $invoice->checkIn?->actual_check_out_at?->format('d-m-Y') ?? ($invoice->checkIn?->check_out_date?->format('d-m-Y') ?? '-') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -60,10 +60,9 @@
                                                         <label for="payment_method" class="form-label">{{ __('checkout.payment_method') }} <span class="text-danger">*</span></label>
                                                         <select class="form-select @error('payment_method') is-invalid @enderror" id="payment_method" name="payment_method" required>
                                                             <option value="">{{ __('global.select_option') }}</option>
-                                                            <option value="cash" {{ old('payment_method') === 'cash' ? 'selected' : '' }}>{{ __('checkout.cash') }}</option>
-                                                            <option value="card" {{ old('payment_method') === 'card' ? 'selected' : '' }}>{{ __('checkout.card') }}</option>
-                                                            <option value="bank_transfer" {{ old('payment_method') === 'bank_transfer' ? 'selected' : '' }}>{{ __('checkout.bank_transfer') }}</option>
-                                                            <option value="check" {{ old('payment_method') === 'check' ? 'selected' : '' }}>{{ __('checkout.check') }}</option>
+                                                            @foreach(paymentMethods() as $methodKey => $methodLabel)
+                                                                <option value="{{ $methodKey }}" {{ old('payment_method') === $methodKey ? 'selected' : '' }}>{{ $methodLabel }}</option>
+                                                            @endforeach
                                                         </select>
                                                         @error('payment_method')
                                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -81,7 +80,9 @@
                                                         @error('payment_amount')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
-                                                        <div class="form-text">{{ __('checkout.maximum_amount') }}: ${{ number_format($invoice->balance_amount, 2) }}</div>
+                                                        <div class="form-text mt-1 text-primary fw-bold" id="khrEquivalent">
+                                                            ≈ {{ format_khr(usd_to_khr($invoice->balance_amount)) }} (Rate: 1 USD = {{ number_format(active_exchange_rate()) }} KHR)
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -188,12 +189,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const remainingBalance = document.getElementById('remainingBalance');
     const balanceDue = {{ $invoice->balance_amount }};
 
+    const rate = {{ active_exchange_rate() }};
+    const khrEquivalent = document.getElementById('khrEquivalent');
+
     function updatePaymentSummary() {
         const paymentAmount = parseFloat(paymentAmountInput.value) || 0;
         const remaining = balanceDue - paymentAmount;
 
         displayPaymentAmount.textContent = '$' + paymentAmount.toFixed(2);
         remainingBalance.textContent = '$' + Math.max(0, remaining).toFixed(2);
+
+        if (khrEquivalent) {
+            const khrVal = Math.round((paymentAmount * rate) / 100) * 100;
+            khrEquivalent.innerHTML = `≈ ${new Intl.NumberFormat().format(khrVal)} ៛ <small class="text-muted">(Rate: 1 USD = ${new Intl.NumberFormat().format(rate)} KHR)</small>`;
+        }
 
         if (remaining < 0) {
             remainingBalance.classList.add('text-danger');

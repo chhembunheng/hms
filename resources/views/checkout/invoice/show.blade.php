@@ -58,19 +58,19 @@
                         <h6 class="text-primary mb-3"><i class="fas fa-user me-2"></i>{{ __('checkout.guest_room_details', [], 'en') }} / {{ __('checkout.guest_room_details', [], 'km') }}</h6>
                         <div class="mb-2">
                             <label class="form-label fw-bold">{{ __('guests.guest_name', [], 'en') }} / {{ __('guests.guest_name', [], 'km') }}</label>
-                            <p class="mb-0">{{ $invoice->guest->full_name }}</p>
+                            <p class="mb-0">{{ $invoice->guest?->full_name ?? $invoice->checkIn?->guest_name ?? 'N/A' }}</p>
                         </div>
                         <div class="mb-2">
                             <label class="form-label fw-bold">{{ __('rooms.room', [], 'en') }} / {{ __('rooms.room', [], 'km') }}</label>
-                            <p class="mb-0">{{ $invoice->checkIn->room->room_number }} - {{ $invoice->checkIn->room->roomType->localized_name }}</p>
+                            <p class="mb-0">{{ $invoice->checkIn?->room?->room_number ?? 'Room' }} - {{ $invoice->checkIn?->room?->roomType?->localized_name ?? 'Standard' }}</p>
                         </div>
                         <div class="mb-2">
                             <label class="form-label fw-bold">{{ __('checkins.check_in_date', [], 'en') }} / {{ __('checkins.check_in_date', [], 'km') }}</label>
-                            <p class="mb-0">{{ $invoice->checkIn->check_in_date->format('d-m-Y') }}</p>
+                            <p class="mb-0">{{ $invoice->checkIn?->check_in_date?->format('d-m-Y') ?? '-' }}</p>
                         </div>
                         <div class="mb-2">
                             <label class="form-label fw-bold">{{ __('checkins.check_out_date', [], 'en') }} / {{ __('checkins.check_out_date', [], 'km') }}</label>
-                            <p class="mb-0">{{ $invoice->checkIn->actual_check_out_at->format('d-m-Y') }}</p>
+                            <p class="mb-0">{{ $invoice->checkIn?->actual_check_out_at?->format('d-m-Y') ?? ($invoice->checkIn?->check_out_date?->format('d-m-Y') ?? '-') }}</p>
                         </div>
                     </div>
 
@@ -118,15 +118,29 @@
                                     @endif
                                     <tr>
                                         <th colspan="3" class="text-end">{{ __('checkout.total_amount', [], 'en') }} / {{ __('checkout.total_amount', [], 'km') }}</th>
-                                        <th class="text-end">${{ number_format($invoice->total_amount, 2) }}</th>
+                                        <th class="text-end">
+                                            <div>${{ number_format($invoice->total_amount, 2) }}</div>
+                                            <div class="badge bg-primary text-wrap mt-1 fs-6">{{ $invoice->formatted_total_khr }}</div>
+                                        </th>
                                     </tr>
                                     <tr>
                                         <th colspan="3" class="text-end">{{ __('checkout.paid_amount', [], 'en') }} / {{ __('checkout.paid_amount', [], 'km') }}</th>
-                                        <th class="text-end">${{ number_format($invoice->paid_amount, 2) }}</th>
+                                        <th class="text-end">
+                                            <div>${{ number_format($invoice->paid_amount, 2) }}</div>
+                                            <div class="badge bg-success text-wrap mt-1">{{ $invoice->formatted_paid_khr }}</div>
+                                        </th>
                                     </tr>
                                     <tr class="table-warning">
                                         <th colspan="3" class="text-end">{{ __('checkout.balance_amount', [], 'en') }} / {{ __('checkout.balance_amount', [], 'km') }}</th>
-                                        <th class="text-end">${{ number_format($invoice->balance_amount, 2) }}</th>
+                                        <th class="text-end">
+                                            <div>${{ number_format($invoice->balance_amount, 2) }}</div>
+                                            <div class="badge bg-danger text-wrap mt-1">{{ $invoice->formatted_balance_khr }}</div>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" class="text-end py-1">
+                                            <small class="text-muted"><i class="fas fa-coins me-1"></i>Exchange Rate: 1 USD = {{ number_format(active_exchange_rate()) }} KHR (៛)</small>
+                                        </td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -138,8 +152,9 @@
                         <div class="col-12 mt-4">
                             <h6 class="text-primary mb-3"><i class="fas fa-history me-2"></i>{{ __('checkout.payment_history', [], 'en') }} / {{ __('checkout.payment_history', [], 'km') }}</h6>
                             <div class="alert alert-info">
-                                <strong>{{ __('checkout.payment_method', [], 'en') }} / {{ __('checkout.payment_method', [], 'km') }}:</strong> {{ $invoice->payment_method ?: __('global.unknown') }}<br>
-                                <strong>{{ __('checkout.last_payment', [], 'en') }} / {{ __('checkout.last_payment', [], 'km') }}:</strong> {{ $invoice->updated_at->format('d-m-Y H:i') }}
+                                <strong>{{ __('checkout.payment_method', [], 'en') }} / {{ __('checkout.payment_method', [], 'km') }}:</strong>
+                                <span class="badge bg-primary ms-1">{{ $invoice->payment_method_label }}</span><br>
+                                <strong>{{ __('checkout.last_payment', [], 'en') }} / {{ __('checkout.last_payment', [], 'km') }}:</strong> {{ $invoice->updated_at?->format('d-m-Y H:i') }}
                             </div>
                         </div>
                     @endif

@@ -8,6 +8,8 @@ return [
     'edit_guest' => 'កែសម្រួលភ្ញៀវ',
     'view_guest' => 'មើលភ្ញៀវ',
     'delete_guest' => 'លុបភ្ញៀវ',
+    'blacklist_status' => 'ស្ថានភាពបញ្ជីខ្មៅ',
+    'guest_name' => 'ឈ្មោះភ្ញៀវ',
 
     // Personal Information
     'personal_information' => 'ព័ត៌មានផ្ទាល់ខ្លួន',

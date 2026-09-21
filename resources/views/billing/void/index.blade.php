@@ -15,10 +15,10 @@
                             <div class="col-md-12">
                                 <form method="GET" action="{{ route('billing.void.index') }}" class="row g-3">
                                     <div class="col-md-3">
-                                        <x-form.input label="{{ __('billing.date_from') }}" name="date_from" type="date" :value="request('date_from')" />
+                                        <x-form.input label="{{ __('billing.date_from') }}" name="date_from" type="text" class="datepicker" placeholder="dd-mm-yyyy" :value="request('date_from') ? format_date(request('date_from')) : ''" autocomplete="off" />
                                     </div>
                                     <div class="col-md-3">
-                                        <x-form.input label="{{ __('billing.date_to') }}" name="date_to" type="date" :value="request('date_to')" />
+                                        <x-form.input label="{{ __('billing.date_to') }}" name="date_to" type="text" class="datepicker" placeholder="dd-mm-yyyy" :value="request('date_to') ? format_date(request('date_to')) : ''" autocomplete="off" />
                                     </div>
                                     <div class="col-md-4">
                                         <x-form.input label="{{ __('billing.search') }}" name="search" type="text" :value="request('search')" placeholder="{{ __('billing.search_by_invoice_or_guest') }}" />

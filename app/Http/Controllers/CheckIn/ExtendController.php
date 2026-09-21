@@ -21,6 +21,12 @@ class ExtendController extends Controller
         $rooms = Room::with(['roomType', 'status'])->active()->get();
 
         if ($request->isMethod('post')) {
+            if ($request->filled('check_out_date')) {
+                $request->merge([
+                    'check_out_date' => parse_date_input($request->input('check_out_date'))
+                ]);
+            }
+
             $rules = [
                 'check_out_date' => 'required|date|after:check_in_date',
                 'total_amount' => 'required|numeric|min:0',

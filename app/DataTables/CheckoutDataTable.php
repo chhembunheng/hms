@@ -61,11 +61,11 @@ class CheckoutDataTable extends DataTable
                 }
 
                 if (!empty($filters['check_out_from'])) {
-                    $query->whereDate('actual_check_out_at', '>=', $filters['check_out_from']);
+                    $query->whereDate('actual_check_out_at', '>=', parse_date_input($filters['check_out_from']));
                 }
 
                 if (!empty($filters['check_out_to'])) {
-                    $query->whereDate('actual_check_out_at', '<=', $filters['check_out_to']);
+                    $query->whereDate('actual_check_out_at', '<=', parse_date_input($filters['check_out_to']));
                 }
 
                 if (!empty($filters['paid_status'])) {

@@ -27,8 +27,8 @@ class WalkInDataTable extends DataTable
             ->addColumn('guest_name', fn($row) => $row->guest_name)
             ->addColumn('room_number', fn($row) => $row->room->room_number ?? '-')
             ->addColumn('guest_type', fn($row) => badge($row->guest_type == 'national' ? 'National' : 'International'))
-            ->addColumn('check_in_date', fn($row) => $row->check_in_date?->format('M d, Y'))
-            ->addColumn('check_out_date', fn($row) => $row->check_out_date?->format('M d, Y'))
+            ->addColumn('check_in_date', fn($row) => $row->check_in_date?->format('d-m-Y'))
+            ->addColumn('check_out_date', fn($row) => $row->check_out_date?->format('d-m-Y'))
             ->addColumn('total_amount', fn($row) => '$' . number_format($row->total_amount, 2))
             ->addColumn('status', function($row) {
                 return badge(strtolower($row->status));

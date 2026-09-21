@@ -515,7 +515,7 @@ $(document).ready(function() {
 
     // Initialize pickadate
     $('#checkin-date').pickadate({
-        format: 'd-m-yyyy',
+        format: 'dd-mm-yyyy',
         formatSubmit: 'yyyy-mm-dd',
         min: new Date(),
         onSet: function(event) {
@@ -540,7 +540,7 @@ $(document).ready(function() {
     });
 
     $('#checkout-date').pickadate({
-        format: 'd-m-yyyy',
+        format: 'dd-mm-yyyy',
         formatSubmit: 'yyyy-mm-dd',
         min: new Date(Date.now() + 24 * 60 * 60 * 1000), // Tomorrow
         onSet: function(event) {

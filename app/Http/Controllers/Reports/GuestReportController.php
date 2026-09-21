@@ -12,8 +12,8 @@ class GuestReportController extends Controller
 {
     public function index(Request $request)
     {
-        $startDate = $request->get('start_date', Carbon::now()->startOfMonth()->format('Y-m-d'));
-        $endDate = $request->get('end_date', Carbon::now()->endOfMonth()->format('Y-m-d'));
+        $startDate = parse_date_input($request->get('start_date')) ?? Carbon::now()->startOfMonth()->format('Y-m-d');
+        $endDate = parse_date_input($request->get('end_date')) ?? Carbon::now()->endOfMonth()->format('Y-m-d');
 
         // Get guests who checked in during the period
         $guests = Guest::whereHas('checkIns', function ($query) use ($startDate, $endDate) {
@@ -70,8 +70,8 @@ class GuestReportController extends Controller
 
     public function print(Request $request)
     {
-        $startDate = $request->get('start_date', Carbon::now()->startOfMonth()->format('Y-m-d'));
-        $endDate = $request->get('end_date', Carbon::now()->endOfMonth()->format('Y-m-d'));
+        $startDate = parse_date_input($request->get('start_date')) ?? Carbon::now()->startOfMonth()->format('Y-m-d');
+        $endDate = parse_date_input($request->get('end_date')) ?? Carbon::now()->endOfMonth()->format('Y-m-d');
 
         // Get guests who checked in during the period
         $guests = Guest::whereHas('checkIns', function ($query) use ($startDate, $endDate) {

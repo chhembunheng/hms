@@ -72,7 +72,7 @@
                                                 <tbody>
                                                     @foreach($dailyStats as $day)
                                                     <tr>
-                                                        <td>{{ \Carbon\Carbon::parse($day['date'])->format('M j, Y') }}</td>
+                                                        <td>{{ \Carbon\Carbon::parse($day['date'])->format('d-m-Y') }}</td>
                                                         <td>{{ $day['check_ins'] }}</td>
                                                         <td>{{ $day['check_outs'] }}</td>
                                                         <td>${{ number_format($day['revenue'], 2) }}</td>
@@ -115,7 +115,7 @@
                                                 <tbody>
                                                     @forelse($checkIns->take(10) as $checkIn)
                                                     <tr>
-                                                        <td>{{ $checkIn->check_in_date ? $checkIn->check_in_date->format('M j') : 'N/A' }}</td>
+                                                        <td>{{ $checkIn->check_in_date ? $checkIn->check_in_date->format('d-m-Y') : 'N/A' }}</td>
                                                         <td>{{ $checkIn->guest_name }}</td>
                                                         <td>{{ $checkIn->room->room_number ?? 'N/A' }}</td>
                                                         <td>${{ number_format($checkIn->paid_amount, 2) }}</td>
@@ -152,7 +152,7 @@
                                                 <tbody>
                                                     @forelse($checkOuts->take(10) as $checkOut)
                                                     <tr>
-                                                        <td>{{ $checkOut->actual_check_out_at ? \Carbon\Carbon::parse($checkOut->actual_check_out_at)->format('M j') : 'N/A' }}</td>
+                                                        <td>{{ $checkOut->actual_check_out_at ? \Carbon\Carbon::parse($checkOut->actual_check_out_at)->format('d-m-Y') : 'N/A' }}</td>
                                                         <td>{{ $checkOut->guest_name }}</td>
                                                         <td>{{ $checkOut->room->room_number ?? 'N/A' }}</td>
                                                         <td>${{ number_format($checkOut->paid_amount, 2) }}</td>

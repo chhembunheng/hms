@@ -21,11 +21,10 @@
  </script>
  <script src="{{ asset('assets/js/vendor/forms/validation/validate.min.js') }}?v={{ config('init.layout_version') }}">
  </script>
- <script src="{{ asset('assets/js/vendor/pickers/datepicker.min.js') }}?v={{ config('init.layout_version') }}">
- </script>
- {{-- Pickadate Scripts --}}
- <script src="{{ asset('assets/js/picker.js') }}?v={{ config('init.layout_version') }}"></script>
- <script src="{{ asset('assets/js/picker.date.js') }}?v={{ config('init.layout_version') }}"></script>
+    {{-- Pickadate Scripts from beltei_ums --}}
+    <script src="{{ asset('assets/extend/pickadate/picker.js') }}?v={{ config('init.layout_version') }}"></script>
+    <script src="{{ asset('assets/extend/pickadate/picker.date.js') }}?v={{ config('init.layout_version') }}"></script>
+    <script src="{{ asset('assets/extend/pickadate/legacy.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/vendor/media/glightbox.min.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/vendor/editors/ckeditor.js') }}?v={{ config('init.layout_version') }}"></script>
  <script src="{{ asset('assets/js/app.js') }}?v={{ config('init.layout_version') }}"></script>
@@ -50,6 +49,12 @@
      });
      $(document).ready(function() {
 
+         // DISABLE DATATABLE ERROR ALERT (matching beltei_ums)
+         if (typeof $.fn.dataTable !== 'undefined') {
+             $.fn.dataTable.ext.errMode = 'none';
+         }
+
+
          $(document).find('select.select-icons').select2({
              templateResult: iconFormat,
              minimumResultsForSearch: Infinity,
@@ -65,19 +70,117 @@
              }
          });
 
-         // Initialize datepickers globally
-         $(document).find('.datepicker').each(function() {
-             if (!$(this).data('datepicker')) {
-                 new Datepicker(this, {
-                     format: 'yyyy-mm-dd',
-                     autohide: true,
-                     todayBtn: true,
-                     clearBtn: true,
-                     todayBtnMode: 1,
-                     todayHighlight: true
-                 });
-             }
+         // Auto-format date input on type like beltei_ums (dd-mm-yyyy)
+         $(document).on('input', 'input.pickadate, input.pick-adate, input.datepicker, input.date-picker', function() {
+             let value = this.value.replace(/[^0-9]/g, '');
+             if (value.length > 2) value = value.slice(0, 2) + '-' + value.slice(2);
+             if (value.length > 5) value = value.slice(0, 5) + '-' + value.slice(5, 10);
+             this.value = value;
          });
+
+         // Initialize Pickadate globally for all date inputs (beltei_ums style)
+         function initGlobalPickadate() {
+             if (!$.fn.pickadate) return;
+
+             const isKhmer = $('html').attr('lang') === 'km' || $('html').data('locale') === 'km';
+
+             $('input.datepicker, input.date-picker, input.pickadate, input.pick-adate').each(function() {
+                 const $input = $(this);
+                 // Prevent double initialization or initializing POS panel inputs that have custom handlers
+                 if ($input.data('picker') || $input.hasClass('picker__input')) return;
+
+                 const pickadateOptions = {
+                     format: 'dd-mm-yyyy',
+                     selectMonths: true,
+                     selectYears: 100,
+                     editable: true,
+                     today: isKhmer ? 'ថ្ងៃនេះ' : 'Today',
+                     clear: isKhmer ? 'សម្អាត' : 'Clear',
+                     close: isKhmer ? 'បិទ' : 'Close',
+                     onOpen: function() {
+                        const picker = this;
+                        const $inp = picker.$node;
+                        const $root = picker.$root;
+
+                        function alignPicker() {
+                            if (!picker.get('open') || !$inp.length || !$inp[0].getBoundingClientRect) return;
+                            const rect = $inp[0].getBoundingClientRect();
+                            const pickerHeight = $root.find('.picker__box').outerHeight() || 310;
+                            
+                            let top = rect.bottom + 2;
+                            // If overflowing bottom of screen and room above, flip up
+                            if (top + pickerHeight > window.innerHeight && rect.top > pickerHeight) {
+                                top = rect.top - pickerHeight - 2;
+                            }
+
+                            $root.css({
+                                position: 'fixed',
+                                top: top + 'px',
+                                left: Math.max(10, Math.min(rect.left, window.innerWidth - 320)) + 'px',
+                                width: 'auto',
+                                minWidth: '18rem',
+                                maxWidth: '20rem',
+                                zIndex: 10050
+                            });
+                        }
+
+                        setTimeout(alignPicker, 0);
+                        $(window).on('scroll.picker_' + picker.id + ' resize.picker_' + picker.id, alignPicker);
+                    },
+                    onClose: function() {
+                        const picker = this;
+                        $(window).off('scroll.picker_' + picker.id + ' resize.picker_' + picker.id);
+                    },
+                     onSet: function(context) {
+                         if (context.select !== undefined || context.clear !== undefined) {
+                             $input.trigger('change');
+                             if ($input[0]) {
+                                 $input[0].dispatchEvent(new Event('change', { bubbles: true }));
+                             }
+                         }
+                     }
+                 };
+
+                 if (isKhmer) {
+                     pickadateOptions.monthsFull = ['មករា', 'កុម្ភៈ', 'មីនា', 'មេសា', 'ឧសភា', 'មិថុនា', 'កក្កដា', 'សីហា', 'កញ្ញា', 'តុលា', 'វិច្ឆិកា', 'ធ្នូ'];
+                     pickadateOptions.monthsShort = ['មក.', 'កុ.', 'មី.', 'មេ.', 'ឧស.', 'មិថុ.', 'កក្ក.', 'សី.', 'កញ.', 'តុ.', 'វិច្ឆ.', 'ធ.'];
+                     pickadateOptions.weekdaysFull = ['អាទិត្យ', 'ចន្ទ', 'អង្គារ', 'ពុធ', 'ព្រហស្បតិ៍', 'សុក្រ', 'សៅរ៍'];
+                     pickadateOptions.weekdaysShort = ['អា.', 'ច.', 'អ.', 'ព.', 'ព្រ.', 'សុ.', 'ស.'];
+                 }
+
+                 $input.pickadate(pickadateOptions);
+             });
+         }
+
+         initGlobalPickadate();
+         $(document).ajaxComplete(function() {
+             initGlobalPickadate();
+         });
+         $(document).on('shown.bs.modal', function() {
+             initGlobalPickadate();
+         });
+
+         // Initialize daterangepickers globally with DD-MM-YYYY format
+         if ($.fn.daterangepicker) {
+             $('.daterange, .date-range').each(function() {
+                 const $el = $(this);
+                 $el.daterangepicker({
+                     autoUpdateInput: false,
+                     locale: {
+                         format: 'DD-MM-YYYY',
+                         separator: ' - ',
+                         applyLabel: '{{ __("global.apply") }}',
+                         cancelLabel: '{{ __("global.clear") }}'
+                     }
+                 });
+                 $el.on('apply.daterangepicker', function(ev, picker) {
+                     $(this).val(picker.startDate.format('DD-MM-YYYY') + ' - ' + picker.endDate.format('DD-MM-YYYY')).trigger('change');
+                 });
+                 $el.on('cancel.daterangepicker', function(ev, picker) {
+                     $(this).val('').trigger('change');
+                 });
+             });
+         }
      });
 
      function loading(e) {

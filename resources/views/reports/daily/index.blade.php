@@ -6,7 +6,7 @@
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h3 class="card-title">របាយការណ៍ប្រចាំថ្ងៃ</h3>
                         <div>
-                            <a href="{{ route('reports.daily.print', ['date' => $date]) }}" target="_blank" class="btn btn-primary btn-sm">
+                            <a href="{{ route('reports.daily.print', ['date' => format_date($date)]) }}" target="_blank" class="btn btn-primary btn-sm">
                                 <i class="fas fa-print"></i> បោះពុម្ព
                             </a>
                         </div>
@@ -16,9 +16,12 @@
                         <!-- Date Filter -->
                         <div class="row mb-4">
                             <div class="col-md-4">
-                                <form method="GET" class="d-flex">
-                                    <input type="date" name="date" value="{{ $date }}" class="form-control form-control-sm me-2" onchange="this.form.submit()">
-                                    <button type="submit" class="btn btn-outline-primary btn-sm">{{ __('global.filter') }}</button>
+                                <form method="GET" class="d-flex align-items-center gap-2">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" name="date" value="{{ format_date($date) }}" class="form-control form-control-sm pickadate" placeholder="dd-mm-yyyy" autocomplete="off" onchange="this.form.submit()">
+                                        <span class="input-group-text"><i class="fa-solid fa-calendar-days text-muted"></i></span>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary bg-darkblue btn-sm">{{ __('global.filter') }}</button>
                                 </form>
                             </div>
                         </div>
@@ -159,8 +162,8 @@
                                                     <tr>
                                                         <td>{{ $guest->guest_name }}</td>
                                                         <td>{{ $guest->room->room_number ?? 'N/A' }}</td>
-                                                        <td>{{ $guest->check_in_date ? $guest->check_in_date->format('Y-m-d') : 'N/A' }}</td>
-                                                        <td>{{ $guest->check_out_date ? $guest->check_out_date->format('Y-m-d') : 'N/A' }}</td>
+                                                        <td>{{ $guest->check_in_date ? $guest->check_in_date->format('d-m-Y') : 'N/A' }}</td>
+                                                        <td>{{ $guest->check_out_date ? $guest->check_out_date->format('d-m-Y') : 'N/A' }}</td>
                                                         <td>
                                                             <span class="badge bg-success">បានចូលស្នាក់</span>
                                                         </td>

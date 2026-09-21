@@ -203,7 +203,7 @@
                                     <tr>
                                         <td>{{ $checkIn->guest_name }}</td>
                                         <td>{{ $checkIn->room->room_number ?? 'N/A' }}</td>
-                                        <td>{{ $checkIn->check_in_date ? $checkIn->check_in_date->format('M j') : 'N/A' }}</td>
+                                        <td>{{ $checkIn->check_in_date ? $checkIn->check_in_date->format('d-m-Y') : 'N/A' }}</td>
                                     </tr>
                                     @empty
                                     <tr>

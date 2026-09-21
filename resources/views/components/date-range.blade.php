@@ -5,7 +5,13 @@
 @endif
 
 <div class="d-flex align-items-center gap-2">
-    <input type="date" name="{{ $start }}" id="{{ $start }}" value="{{ old($start, $valueStart) }}" {{ $attributes->merge(['class' => 'form-control']) }}>
+    <div class="input-group input-group-sm">
+        <input type="text" name="{{ $start }}" id="{{ $start }}" value="{{ old($start, format_date($valueStart)) }}" placeholder="dd-mm-yyyy" autocomplete="off" {{ $attributes->merge(['class' => 'form-control form-control-sm pickadate']) }}>
+        <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
+    </div>
     <span class="text-muted">—</span>
-    <input type="date" name="{{ $end }}" id="{{ $end }}" value="{{ old($end, $valueEnd) }}" {{ $attributes->merge(['class' => 'form-control']) }}>
+    <div class="input-group input-group-sm">
+        <input type="text" name="{{ $end }}" id="{{ $end }}" value="{{ old($end, format_date($valueEnd)) }}" placeholder="dd-mm-yyyy" autocomplete="off" {{ $attributes->merge(['class' => 'form-control form-control-sm pickadate']) }}>
+        <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
+    </div>
 </div>

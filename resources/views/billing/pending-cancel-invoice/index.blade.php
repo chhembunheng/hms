@@ -15,20 +15,20 @@
                             <div class="col-md-12">
                                 <form method="GET" action="{{ route('billing.pending-cancel-invoice.index') }}" class="row g-3">
                                     <div class="col-md-3">
-                                        <x-form.input label="{{ __('billing.date_from') }}" name="date_from" type="date" :value="request('date_from')" />
+                                        <x-form.input label="{{ __('billing.date_from') }}" name="date_from" type="text" class="pickadate" placeholder="dd-mm-yyyy" :value="request('date_from') ? format_date(request('date_from')) : ''" autocomplete="off" />
                                     </div>
                                     <div class="col-md-3">
-                                        <x-form.input label="{{ __('billing.date_to') }}" name="date_to" type="date" :value="request('date_to')" />
+                                        <x-form.input label="{{ __('billing.date_to') }}" name="date_to" type="text" class="pickadate" placeholder="dd-mm-yyyy" :value="request('date_to') ? format_date(request('date_to')) : ''" autocomplete="off" />
                                     </div>
                                     <div class="col-md-4">
                                         <x-form.input label="{{ __('billing.search') }}" name="search" type="text" :value="request('search')" placeholder="{{ __('billing.search_by_invoice_or_guest') }}" />
                                     </div>
                                     <div class="col-md-2 d-flex align-items-end">
-                                        <button type="submit" class="btn btn-primary me-2">
-                                            <i class="fas fa-search"></i> {{ __('global.search') }}
+                                        <button type="submit" class="btn btn-primary bg-darkblue me-2">
+                                            <i class="fa-solid fa-filter me-1"></i> {{ __('global.filter') }}
                                         </button>
-                                        <a href="{{ route('billing.pending-cancel-invoice.index') }}" class="btn btn-secondary">
-                                            <i class="fas fa-times"></i> {{ __('global.clear') }}
+                                        <a href="{{ route('billing.pending-cancel-invoice.index') }}" class="btn btn-danger">
+                                            <i class="fa-solid fa-rotate-right me-1"></i> {{ __('global.clear') }}
                                         </a>
                                     </div>
                                 </form>

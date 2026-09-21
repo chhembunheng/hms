@@ -11,7 +11,8 @@
             <i class="fa-solid fa-chevron-up"></i>
         </button>
     </div>
-    <div class="card-body" id="filter-body">
+    {{-- filter-body starts invisible to prevent raw-scrollbox FOUC --}}
+    <div class="card-body" id="filter-body" style="opacity:0; visibility:hidden; transition: opacity 0.15s ease;">
         <div class="row g-3">
             {{ $slot }}
         </div>
@@ -32,104 +33,110 @@
 (function () {
 
     const FILTER_CONTAINER = '#filter-container';
+    const FILTER_BODY      = '#filter-body';
 
+    /* ─── Bootstrap Multiselect init ─────────────────────────── */
     function initBootstrapMultiselect() {
 
-        $(FILTER_CONTAINER).find('select.multiple-select').each(function () {
+        let initCount  = 0;
+        let doneCount  = 0;
 
-            const $select = $(this);
-            const server = $select.data('server');
-            const filters = ($select.data('filters') || '').split(',');
+        const $selects = $(FILTER_CONTAINER).find('select.multiple-select');
+        initCount = $selects.length;
 
-            if ($select.data('ms-initialized')) return;
+        if (initCount === 0) {
+            revealFilter(); // nothing to init – show immediately
+            return;
+        }
+
+        $selects.each(function () {
+
+            const $select  = $(this);
+            const server   = $select.data('server');
+            const filters  = ($select.data('filters') || '').split(',');
+            const isMulti  = $select.prop('multiple');
+            const optCount = $select.find('option').length;
+
+            if ($select.data('ms-initialized')) {
+                doneCount++;
+                if (doneCount === initCount) revealFilter();
+                return;
+            }
+            $select.data('ms-initialized', true);
 
             $select.multiselect({
-                includeSelectAllOption: true,
-                enableFiltering: true,
+                includeSelectAllOption: isMulti && (!!server || optCount > 2),
+                enableFiltering:        !!server || optCount > 5,
                 enableCaseInsensitiveFiltering: true,
-                buttonWidth: '100%',
-                maxHeight: 300,
-
-                nonSelectedText: 'None Selected',
-                selectAllText: '{{ __("global.select_all") }}',
-                allSelectedText: '{{ __("global.all_selected") }}',
-                nSelectedText: '{{ __("global.selected") }}'
+                buttonWidth:  '100%',
+                buttonClass:  'btn btn-light border form-select-sm text-start w-100',
+                maxHeight:    300,
+                numberDisplayed: isMulti ? 1 : 999,
+                nonSelectedText:  '{{ __("global.all") }}',
+                selectAllText:    '{{ __("global.select_all") }}',
+                allSelectedText:  '{{ __("global.all_selected") }}',
+                nSelectedText:    '{{ __("global.selected") }}',
             });
 
-            $select.val([]);
-            $select.multiselect('refresh');
-
-            $select.parent()
-                .find('button.multiselect')
-                .one('click', function () {
-
-                    if (!server) return;
-
-                    const payload = {};
-                    filters.forEach(f => {
-                        payload[f] =
-                            $(`[name="${f}[]"]`).val() ||
-                            $(`[name="${f}"]`).val();
+            // AJAX-loaded selects: fetch options on first open
+            if (server) {
+                $select.parent()
+                    .find('button.multiselect')
+                    .one('click', function () {
+                        const payload = {};
+                        filters.forEach(f => {
+                            payload[f] = $(`[name="${f}[]"]`).val() || $(`[name="${f}"]`).val();
+                        });
+                        $.ajax({
+                            url: server, type: 'GET', data: payload, dataType: 'json',
+                            success: function (res) {
+                                if (!res || !res.results) return;
+                                $select.empty();
+                                res.results.forEach(item => {
+                                    $select.append(`<option value="${item.id}">${item.text}</option>`);
+                                });
+                                $select.multiselect('rebuild');
+                            }
+                        });
                     });
+            }
 
-                    $.ajax({
-                        url: server,
-                        type: 'GET',
-                        data: payload,
-                        dataType: 'json',
-                        success: function (res) {
-
-                            if (!res || !res.results) return;
-
-                            $select.empty();
-
-                            res.results.forEach(item => {
-                                $select.append(
-                                    `<option value="${item.id}">${item.text}</option>`
-                                );
-                            });
-
-                            // Rebuild AFTER data load
-                            $select.multiselect('rebuild');
-                        }
-                    });
-                });
-
-            $select.data('ms-initialized', true);
+            doneCount++;
+            if (doneCount === initCount) revealFilter();
         });
     }
 
+    /* Fade-in the filter body after init – no jarring rebuild flash */
+    function revealFilter() {
+        const $body = $(FILTER_BODY);
+        $body.css({ visibility: 'visible', opacity: 1 });
+    }
 
-    function reloadDatatables(callback = null) {
+    /* ─── DataTables helpers ──────────────────────────────────── */
+    function reloadDatatables(callback) {
         $('.dataTable').each(function () {
-            const table = $(this).DataTable();
-            if (table) table.ajax.reload(callback, false);
+            const tbl = $(this).DataTable();
+            if (tbl) tbl.ajax.reload(callback, false);
         });
     }
 
+    /* ─── Page actions ────────────────────────────────────────── */
+    $(document).ready(function () {
 
         initBootstrapMultiselect();
 
-    /* ===============================
-       PAGE ACTIONS
-    =============================== */
-    $(document).ready(function () {
-
-        // Toggle filter
+        // Toggle filter panel
         $('#toggle-filters').on('click', function () {
-            $('#filter-body').slideToggle(200);
-            $(this).find('i')
-                .toggleClass('fa-chevron-up fa-chevron-down');
+            $(FILTER_BODY).slideToggle(200);
+            $(this).find('i').toggleClass('fa-chevron-up fa-chevron-down');
         });
 
         // Apply
         $('#apply-filters').on('click', function () {
             const $btn = $(this);
             const html = $btn.html();
-
             $btn.prop('disabled', true)
                 .html('<i class="fa fa-spinner fa-spin me-1"></i>{{ __("global.applying") }}');
-
             reloadDatatables(() => {
                 $btn.prop('disabled', false).html(html);
             });
@@ -138,20 +145,19 @@
         // Reset
         $('#reset-filters').on('click', function () {
             const $c = $(FILTER_CONTAINER);
-
-            // Clear inputs
             $c.find('input, textarea').val('');
-
-            // Clear multiselects
             $c.find('select.multiple-select').each(function () {
                 $(this).val([]);
                 $(this).multiselect('rebuild');
             });
-
+            // Also clear plain selects
+            $c.find('select:not(.multiple-select)').each(function () {
+                $(this).prop('selectedIndex', 0);
+            });
             $('#apply-filters').trigger('click');
         });
 
-        // Enter = Apply
+        // Enter key = Apply
         $(FILTER_CONTAINER).on('keydown', 'input, select, textarea', function (e) {
             if (e.key === 'Enter') {
                 e.preventDefault();

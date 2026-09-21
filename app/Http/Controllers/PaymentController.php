@@ -24,11 +24,11 @@ class PaymentController extends Controller
 
         // Filter by date range
         if ($request->filled('date_from')) {
-            $query->whereDate('payment_date', '>=', $request->date_from);
+            $query->whereDate('payment_date', '>=', parse_date_input($request->date_from));
         }
 
         if ($request->filled('date_to')) {
-            $query->whereDate('payment_date', '<=', $request->date_to);
+            $query->whereDate('payment_date', '<=', parse_date_input($request->date_to));
         }
 
         // Filter by amount range

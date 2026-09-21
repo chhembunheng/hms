@@ -215,9 +215,9 @@ if (!function_exists('webpasset')) {
                 $img->save($absoluteWebpPath);
                 unlink($tempPath);
                 return asset(str_replace(public_path(), '', $absoluteWebpPath));
-            } catch (\Exception $e) {
-                Log::error("WebP conversion failed for {$path}: " . $e->getMessage());
-                return '';
+            } catch (\Throwable $e) {
+                Log::warning("WebP conversion failed for {$path}: " . $e->getMessage());
+                return asset($path);
             }
         }
 
@@ -229,25 +229,28 @@ if (!function_exists('webpasset')) {
         }
         if (!file_exists($absoluteWebpPath) && file_exists($absolutePath)) {
             try {
-                $img = Image::load($absolutePath)
-                    ->format('webp')
-                    ->quality(80);
+                $targetDir = dirname($absoluteWebpPath);
+                if (is_writable($targetDir) || (!file_exists($targetDir) && @mkdir($targetDir, 0777, true))) {
+                    $img = Image::load($absolutePath)
+                        ->format('webp')
+                        ->quality(80);
 
-                if ($height) {
-                    $img->height($height);
+                    if ($height) {
+                        $img->height($height);
+                    }
+
+                    $img->save($absoluteWebpPath);
                 }
-
-                $img->save($absoluteWebpPath);
-            } catch (\Exception $e) {
-                Log::error("WebP conversion failed for {$path}: " . $e->getMessage());
-                return '';
+            } catch (\Throwable $e) {
+                Log::warning("WebP conversion failed for {$path}: " . $e->getMessage());
+                return asset($path);
             }
         }
         if (file_exists($absoluteWebpPath)) {
             return asset(str_replace(public_path(), '', $absoluteWebpPath));
         }
 
-        return '';
+        return asset($path);
     }
 }
 
@@ -261,7 +264,7 @@ if (! function_exists('yesNo')) {
 if (! function_exists('formate_date')) {
     function formate_date($date)
     {
-        return Carbon::parse($date)->format('Y-m-d') ?? null;
+        return parse_date_input($date);
     }
 }
 
@@ -872,9 +875,194 @@ if (!function_exists('paymentMethods')) {
     function paymentMethods(): array
     {
         return [
-            'cash_khr' => 'Cash (KHR)',
-            'cash_usd' => 'Cash (USD)',
-            'ABA POS Machine' => 'ABA POS Machine',
+            'cash_usd' => 'Cash (USD - $)',
+            'cash_khr' => 'Cash (KHR - ៛)',
+            'khqr' => 'Bakong KHQR (ABA / ACLEDA / Wing / Canadia)',
+            'card' => 'Credit / Debit Card (Visa, MasterCard)',
+            'bank_transfer' => 'Bank Transfer (ABA / Wing)',
         ];
+    }
+}
+
+if (!function_exists('active_exchange_rate')) {
+    /**
+     * Get the active USD to KHR exchange rate
+     */
+    function active_exchange_rate(): float
+    {
+        try {
+            $rate = \App\Models\ExchangeRate::where('from_currency', 'USD')
+                ->where('to_currency', 'KHR')
+                ->where('is_active', true)
+                ->orderBy('effective_date', 'desc')
+                ->value('rate');
+
+            return $rate ? (float)$rate : 4100.00;
+        } catch (\Throwable $e) {
+            return 4100.00;
+        }
+    }
+}
+
+if (!function_exists('usd_to_khr')) {
+    /**
+     * Convert USD amount to KHR
+     */
+    function usd_to_khr(float|int|string|null $amount, ?float $rate = null): float
+    {
+        $rate = $rate ?: active_exchange_rate();
+        return round(((float) $amount) * $rate, -2); // Round to nearest 100 riels
+    }
+}
+
+if (!function_exists('khr_to_usd')) {
+    /**
+     * Convert KHR amount to USD
+     */
+    function khr_to_usd(float|int|string|null $amount, ?float $rate = null): float
+    {
+        $rate = $rate ?: active_exchange_rate();
+        return $rate > 0 ? round(((float) $amount) / $rate, 2) : 0.00;
+    }
+}
+
+if (!function_exists('format_usd')) {
+    /**
+     * Format amount in USD
+     */
+    function format_usd(float|int|string|null $amount): string
+    {
+        return '$' . number_format((float) $amount, 2);
+    }
+}
+
+if (!function_exists('format_khr')) {
+    /**
+     * Format amount in KHR
+     */
+    function format_khr(float|int|string|null $amount): string
+    {
+        return number_format((float) $amount, 0) . ' ៛';
+    }
+}
+
+if (!function_exists('format_dual_currency')) {
+    /**
+     * Format dual currency representation: $XX.XX (XX,XXX ៛)
+     */
+    function format_dual_currency(float|int|string|null $usdAmount, ?float $rate = null): string
+    {
+        $usd = (float) $usdAmount;
+        $khr = usd_to_khr($usd, $rate);
+        return format_usd($usd) . ' (' . format_khr($khr) . ')';
+    }
+}
+
+if (!function_exists('cambodian_visa_types')) {
+    /**
+     * List of Cambodian visa types for international guests
+     */
+    function cambodian_visa_types(): array
+    {
+        return [
+            'T' => 'Tourist Visa (T) - ទេសចរណ៍',
+            'E' => 'Ordinary / Business Visa (E) - ធម្មតា/ពាណិជ្ជកម្ម',
+            'K' => 'Khmer Special Visa (K) - ពិសេសខ្មែរ',
+            'B' => 'Official Visa (B) - ផ្លូវការ',
+            'A' => 'Diplomatic Visa (A) - ការទូត',
+            'C' => 'Courtesy Visa (C) - គួរសម',
+        ];
+    }
+}
+
+if (!function_exists('format_date')) {
+    /**
+     * Format a date always as dd-mm-yyyy (d-m-Y)
+     */
+    function format_date(\DateTimeInterface|string|null $date, string $fallback = '-'): string
+    {
+        if (empty($date)) {
+            return $fallback;
+        }
+
+        try {
+            if ($date instanceof \DateTimeInterface) {
+                return $date->format('d-m-Y');
+            }
+            return \Carbon\Carbon::parse($date)->format('d-m-Y');
+        } catch (\Throwable $e) {
+            return (string) $date;
+        }
+    }
+}
+
+if (!function_exists('format_datetime')) {
+    /**
+     * Format a datetime always as dd-mm-yyyy H:i (d-m-Y H:i)
+     */
+    function format_datetime(\DateTimeInterface|string|null $datetime, bool $withSeconds = false, string $fallback = '-'): string
+    {
+        if (empty($datetime)) {
+            return $fallback;
+        }
+
+        $pattern = $withSeconds ? 'd-m-Y H:i:s' : 'd-m-Y H:i';
+
+        try {
+            if ($datetime instanceof \DateTimeInterface) {
+                return $datetime->format($pattern);
+            }
+            return \Carbon\Carbon::parse($datetime)->format($pattern);
+        } catch (\Throwable $e) {
+            return (string) $datetime;
+        }
+    }
+}
+
+if (!function_exists('parse_date_input')) {
+    /**
+     * Parse date input (dd-mm-yyyy or yyyy-mm-dd) into Y-m-d for database queries
+     */
+    function parse_date_input(?string $dateString): ?string
+    {
+        if (empty($dateString)) {
+            return null;
+        }
+
+        $dateString = trim($dateString);
+
+        try {
+            // Check for dd-mm-yyyy or dd/mm/yyyy
+            if (preg_match('/^(\d{1,2})[\-\/](\d{1,2})[\-\/](\d{4})$/', $dateString, $matches)) {
+                $day = str_pad($matches[1], 2, '0', STR_PAD_LEFT);
+                $month = str_pad($matches[2], 2, '0', STR_PAD_LEFT);
+                $year = $matches[3];
+                return "{$year}-{$month}-{$day}";
+            }
+
+            return \Carbon\Carbon::parse($dateString)->format('Y-m-d');
+        } catch (\Throwable $e) {
+            return $dateString;
+        }
+    }
+}
+
+if (!function_exists('sql_date')) {
+    /**
+     * Parse date into Y-m-d (MySQL format), identical to beltei_ums sql_date()
+     */
+    function sql_date(?string $date): ?string
+    {
+        return parse_date_input($date);
+    }
+}
+
+if (!function_exists('dateFormat')) {
+    /**
+     * Format a date into dd-mm-yyyy, identical to beltei_ums dateFormat()
+     */
+    function dateFormat(\DateTimeInterface|string|null $date, string $fallback = '-'): string
+    {
+        return format_date($date, $fallback);
     }
 }

@@ -45,15 +45,15 @@
         <table class="table table-sm">
             <tr>
                 <td><strong>{{ __('rooms.room') }}:</strong></td>
-                <td>{{ $invoice->checkIn->room->room_number }} - {{ $invoice->checkIn->room->roomType->localized_name }}</td>
+                <td>{{ $invoice->checkIn?->room?->room_number ?? 'Room' }} - {{ $invoice->checkIn?->room?->roomType?->localized_name ?? 'Standard' }}</td>
             </tr>
             <tr>
                 <td><strong>{{ __('checkins.check_in_date') }}:</strong></td>
-                <td>{{ $invoice->checkIn->check_in_date->format('d-m-Y') }}</td>
+                <td>{{ $invoice->checkIn?->check_in_date?->format('d-m-Y') ?? '-' }}</td>
             </tr>
             <tr>
                 <td><strong>{{ __('checkins.check_out_date') }}:</strong></td>
-                <td>{{ $invoice->checkIn->actual_check_out_at->format('d-m-Y') }}</td>
+                <td>{{ $invoice->checkIn?->actual_check_out_at?->format('d-m-Y') ?? ($invoice->checkIn?->check_out_date?->format('d-m-Y') ?? '-') }}</td>
             </tr>
         </table>
     </div>
@@ -101,15 +101,29 @@
                 @endif
                 <tr class="table-active">
                     <th colspan="3" class="text-end">{{ __('checkout.total_amount') }}</th>
-                    <th class="text-end">${{ number_format($invoice->total_amount, 2) }}</th>
+                    <th class="text-end">
+                        ${{ number_format($invoice->total_amount, 2) }}<br>
+                        <span class="text-muted small">({{ $invoice->formatted_total_khr }})</span>
+                    </th>
                 </tr>
                 <tr>
                     <th colspan="3" class="text-end">{{ __('checkout.paid_amount') }}</th>
-                    <th class="text-end">${{ number_format($invoice->paid_amount, 2) }}</th>
+                    <th class="text-end">
+                        ${{ number_format($invoice->paid_amount, 2) }}<br>
+                        <span class="text-muted small">({{ $invoice->formatted_paid_khr }})</span>
+                    </th>
                 </tr>
                 <tr class="table-warning">
                     <th colspan="3" class="text-end">{{ __('checkout.balance_amount') }}</th>
-                    <th class="text-end">${{ number_format($invoice->balance_amount, 2) }}</th>
+                    <th class="text-end">
+                        ${{ number_format($invoice->balance_amount, 2) }}<br>
+                        <span class="text-muted small">({{ $invoice->formatted_balance_khr }})</span>
+                    </th>
+                </tr>
+                <tr>
+                    <td colspan="4" class="text-end small text-muted py-1">
+                        Exchange Rate applied: 1 USD = {{ number_format(active_exchange_rate()) }} KHR (៛)
+                    </td>
                 </tr>
             </tfoot>
         </table>
@@ -119,8 +133,8 @@
     @if($invoice->paid_amount > 0)
         <div class="mb-4">
             <h6>{{ __('checkout.payment_information') }}</h6>
-            <p><strong>{{ __('checkout.payment_method') }}:</strong> {{ $invoice->payment_method ?: __('global.unknown') }}</p>
-            <p><strong>{{ __('checkout.payment_date') }}:</strong> {{ $invoice->updated_at->format('d-m-Y H:i') }}</p>
+            <p class="mb-1"><strong>{{ __('checkout.payment_method') }}:</strong> {{ $invoice->payment_method_label }}</p>
+            <p class="mb-0"><strong>{{ __('checkout.payment_date') }}:</strong> {{ $invoice->updated_at?->format('d-m-Y H:i') ?? '-' }}</p>
         </div>
     @endif
 

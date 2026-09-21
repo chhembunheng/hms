@@ -61,6 +61,17 @@ return [
     // Status
     'paid' => 'Paid',
     'unpaid' => 'Unpaid',
+    'pending' => 'Pending',
+    'partial' => 'Partially Paid',
     'partially_paid' => 'Partially Paid',
     'overdue' => 'Overdue',
+    'cancelled' => 'Cancelled',
+    'void' => 'Void',
+
+    // Extra Checkout Keys
+    'checkout_list' => 'Checkout List',
+    'check_out' => 'Check-Out',
+    'check_out_and_payment' => 'Check-Out & Payment',
+    'payment_processed_successfully' => 'Payment processed successfully.',
+    'payment_processing_failed' => 'Failed to process payment.',
 ];

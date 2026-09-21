@@ -13,6 +13,7 @@ Route::group(['prefix' => 'checkin', 'as' => 'checkin.', 'middleware' => ['auth'
         Route::get('/', [WalkInController::class, 'index'])->name('index');
         Route::get('/available-rooms', [WalkInController::class, 'getAvailableRooms'])->name('available-rooms');
         Route::match(['get', 'post'], '/add', [WalkInController::class, 'add'])->name('add');
+        Route::match(['get', 'post'], '/{id}/edit', [WalkInController::class, 'edit'])->name('edit');
         Route::post('/{id}/cancel', [WalkInController::class, 'cancel'])->name('cancel');
         Route::delete('/{id}/delete', [WalkInController::class, 'delete'])->name('delete');
     });
@@ -23,6 +24,11 @@ Route::group(['prefix' => 'checkin', 'as' => 'checkin.', 'middleware' => ['auth'
         Route::post('/{id}/check-out', [StayingController::class, 'checkOut'])->name('check-out');
     });
 
+    // Extend Stay
+    Route::prefix('extend')->name('extend.')->group(function () {
+        Route::get('/', \App\Http\Controllers\CheckIn\ExtendController::class . '@index')->name('index');
+        Route::match(['get', 'post'], '/{id}/edit', [\App\Http\Controllers\CheckIn\ExtendController::class, 'edit'])->name('edit');
+    });
 
     // Void/Cancelled Stays
     Route::prefix('void-stay')->name('void-stay.')->group(function () {

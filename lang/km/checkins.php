@@ -65,4 +65,10 @@ return [
     'paid_amount' => 'ចំនួនបានបង់',
     'action' => 'សកម្មភាព',
     'status' => 'ស្ថានភាព',
+    'new_check_in' => 'ចូលស្នាក់ថ្មី',
+    'checked_in' => 'បានចូលស្នាក់',
+    'checked_out' => 'បានចាកចេញ',
+    'cancelled' => 'បានបោះបង់',
+    'pending' => 'រង់ចាំ',
+    'checkouts' => 'ការចាកចេញ',
 ];

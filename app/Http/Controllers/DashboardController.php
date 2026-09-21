@@ -35,19 +35,34 @@ class DashboardController extends Controller
         $todayCheckIns = CheckIn::whereDate('check_in_date', $today)->count();
         $todayCheckOuts = CheckIn::whereDate('actual_check_out_at', $today)->count();
 
-        // Today's revenue
-        $todayRevenue = CheckIn::whereDate('check_in_date', $today)->sum('paid_amount') +
-                       CheckIn::whereDate('actual_check_out_at', $today)->sum('paid_amount');
+        // Revenue calculation (from payments if available, or unique checkins)
+        $hasPayments = \App\Models\Payment::exists();
+        if ($hasPayments) {
+            $todayRevenue = (float)\App\Models\Payment::whereDate('payment_date', $today)->sum('amount');
+            $monthlyRevenue = (float)\App\Models\Payment::whereBetween('payment_date', [$thisMonth, Carbon::now()])->sum('amount');
+            $lastMonthRevenue = (float)\App\Models\Payment::whereBetween('payment_date', [$lastMonth, $lastMonth->copy()->endOfMonth()])->sum('amount');
+        } else {
+            $todayRevenue = (float)CheckIn::where(function($q) use ($today) {
+                $q->whereDate('check_in_date', $today)
+                  ->orWhereDate('actual_check_out_at', $today);
+            })->sum('paid_amount');
+
+            $monthlyRevenue = (float)CheckIn::where(function($q) use ($thisMonth) {
+                $q->whereBetween('check_in_date', [$thisMonth, Carbon::now()])
+                  ->orWhereBetween('actual_check_out_at', [$thisMonth, Carbon::now()]);
+            })->sum('paid_amount');
+
+            $lastMonthRevenue = (float)CheckIn::where(function($q) use ($lastMonth) {
+                $q->whereBetween('check_in_date', [$lastMonth, $lastMonth->copy()->endOfMonth()])
+                  ->orWhereBetween('actual_check_out_at', [$lastMonth, $lastMonth->copy()->endOfMonth()]);
+            })->sum('paid_amount');
+        }
 
         // Monthly statistics
         $monthlyCheckIns = CheckIn::whereBetween('check_in_date', [$thisMonth, Carbon::now()])->count();
-        $monthlyRevenue = CheckIn::whereBetween('check_in_date', [$thisMonth, Carbon::now()])->sum('paid_amount') +
-                         CheckIn::whereBetween('actual_check_out_at', [$thisMonth, Carbon::now()])->sum('paid_amount');
 
         // Last month comparison
         $lastMonthCheckIns = CheckIn::whereBetween('check_in_date', [$lastMonth, $lastMonth->copy()->endOfMonth()])->count();
-        $lastMonthRevenue = CheckIn::whereBetween('check_in_date', [$lastMonth, $lastMonth->copy()->endOfMonth()])->sum('paid_amount') +
-                           CheckIn::whereBetween('actual_check_out_at', [$lastMonth, $lastMonth->copy()->endOfMonth()])->sum('paid_amount');
 
         // Guest statistics
         $totalGuests = Guest::count();
@@ -82,8 +97,14 @@ class DashboardController extends Controller
             $monthStart = $month->copy()->startOfMonth();
             $monthEnd = $month->copy()->endOfMonth();
 
-            $revenue = CheckIn::whereBetween('check_in_date', [$monthStart, $monthEnd])->sum('paid_amount') +
-                      CheckIn::whereBetween('actual_check_out_at', [$monthStart, $monthEnd])->sum('paid_amount');
+            if ($hasPayments) {
+                $revenue = (float)\App\Models\Payment::whereBetween('payment_date', [$monthStart, $monthEnd])->sum('amount');
+            } else {
+                $revenue = (float)CheckIn::where(function($q) use ($monthStart, $monthEnd) {
+                    $q->whereBetween('check_in_date', [$monthStart, $monthEnd])
+                      ->orWhereBetween('actual_check_out_at', [$monthStart, $monthEnd]);
+                })->sum('paid_amount');
+            }
 
             $monthlyRevenueTrend[] = [
                 'month' => $month->format('M Y'),

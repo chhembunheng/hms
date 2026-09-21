@@ -27,9 +27,9 @@
                                     <input type="number" step="0.01" class="form-control" id="rate" name="rate" value="{{ old('rate', $form->rate) }}" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="effective_date" class="form-label">Effective Date</label>
-                                    <input type="date" class="form-control" id="effective_date" name="effective_date" value="{{ old('effective_date', $form->effective_date?->format('Y-m-d') ?? now()->format('Y-m-d')) }}" required>
-                                </div>
+                                     <label for="effective_date" class="form-label">Effective Date</label>
+                                     <input type="text" class="form-control datepicker" id="effective_date" name="effective_date" placeholder="dd-mm-yyyy" autocomplete="off" value="{{ old('effective_date', format_date($form->effective_date ?? now())) }}" required>
+                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="is_active" name="is_active" value="1" {{ old('is_active', $form->is_active ?? true) ? 'checked' : '' }}>

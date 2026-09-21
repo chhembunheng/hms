@@ -57,16 +57,21 @@ class RoomStatusDataTable extends DataTable
                             ->orWhere('color', 'like', '%' . $filters['search'] . '%');
                 }
 
-                if (!empty($filters['is_active']) && is_array($filters['is_active'])) {
-                    $query->whereIn('is_active', $filters['is_active']);
+                if (!empty($filters['is_active'])) {
+                    $is_active = $filters['is_active'];
+                    if (is_array($is_active)) {
+                        $query->whereIn('is_active', array_filter($is_active, 'strlen'));
+                    } else {
+                        $query->where('is_active', $is_active);
+                    }
                 }
 
                 if (!empty($filters['created_from'])) {
-                    $query->whereDate('created_at', '>=', $filters['created_from']);
+                    $query->whereDate('created_at', '>=', parse_date_input($filters['created_from']));
                 }
 
                 if (!empty($filters['created_to'])) {
-                    $query->whereDate('created_at', '<=', $filters['created_to']);
+                    $query->whereDate('created_at', '<=', parse_date_input($filters['created_to']));
                 }
             }
         }

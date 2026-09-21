@@ -20,6 +20,10 @@ class ExchangeRateController extends Controller
         $form = new ExchangeRate();
 
         if ($request->isMethod('post')) {
+            if ($request->filled('effective_date')) {
+                $request->merge(['effective_date' => parse_date_input($request->input('effective_date'))]);
+            }
+
             $validator = Validator::make($request->all(), [
                 'from_currency' => 'required|string|max:3',
                 'to_currency' => 'required|string|max:3',
@@ -48,6 +52,10 @@ class ExchangeRateController extends Controller
         $form = ExchangeRate::findOrFail($id);
 
         if ($request->isMethod('post')) {
+            if ($request->filled('effective_date')) {
+                $request->merge(['effective_date' => parse_date_input($request->input('effective_date'))]);
+            }
+
             $validator = Validator::make($request->all(), [
                 'from_currency' => 'required|string|max:3',
                 'to_currency' => 'required|string|max:3',

@@ -38,4 +38,6 @@ return [
     'no_keep' => 'No, Keep',
     'item_deleted' => 'The item has been deleted successfully.',
     'action_cancelled' => 'The action has been cancelled.',
+    'copied_to_clipboard' => 'Copied to clipboard',
+    'access_denied' => 'Access Denied',
 ];

@@ -38,8 +38,8 @@
                                     />
                                 </div>
                                 <div class="col-md-6">
-                                    <x-form.input :label="__('guests.date_of_birth')" name="date_of_birth" type="date" :value="old('date_of_birth', $form?->date_of_birth?->format('Y-m-d'))" />
-                                </div>
+                                     <x-form.input :label="__('guests.date_of_birth')" name="date_of_birth" type="text" class="datepicker" placeholder="dd-mm-yyyy" autocomplete="off" :value="old('date_of_birth', $form?->date_of_birth?->format('d-m-Y'))" />
+                                 </div>
 
                                 <!-- Identification -->
                                 <div class="col-12 mt-4">

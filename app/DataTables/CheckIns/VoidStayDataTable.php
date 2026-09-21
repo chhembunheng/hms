@@ -48,10 +48,53 @@ class VoidStayDataTable extends DataTable
 
     public function query(CheckIn $model)
     {
-        return $model->newQuery()
+        $query = $model->newQuery()
             ->with(['room.roomType', 'checkInRooms.room'])
             ->where('status', 'cancelled')
             ->orderBy('updated_at', 'desc');
+
+        $filtersHeader = request()->header('filters');
+        if ($filtersHeader) {
+            $filters = json_decode(urldecode($filtersHeader), true);
+            if (is_array($filters)) {
+                if (!empty($filters['search'])) {
+                    $query->where(function ($q) use ($filters) {
+                        $q->where('booking_number', 'like', '%' . $filters['search'] . '%')
+                          ->orWhere('guest_name', 'like', '%' . $filters['search'] . '%')
+                          ->orWhereHas('room', function ($subQuery) use ($filters) {
+                              $subQuery->where('room_number', 'like', '%' . $filters['search'] . '%');
+                          });
+                    });
+                }
+
+                if (!empty($filters['guest_type'])) {
+                    if (is_array($filters['guest_type'])) {
+                        $query->whereIn('guest_type', $filters['guest_type']);
+                    } else {
+                        $query->where('guest_type', $filters['guest_type']);
+                    }
+                }
+
+                if (!empty($filters['cancelled_date'])) {
+                    $dates = explode(' - ', $filters['cancelled_date']);
+                    if (count($dates) === 2) {
+                        $start = parse_date_input(trim($dates[0]));
+                        $end = parse_date_input(trim($dates[1]));
+                        if ($start && $end) {
+                            $query->whereDate('updated_at', '>=', $start)
+                                  ->whereDate('updated_at', '<=', $end);
+                        }
+                    } else {
+                        $singleDate = parse_date_input(trim($filters['cancelled_date']));
+                        if ($singleDate) {
+                            $query->whereDate('updated_at', $singleDate);
+                        }
+                    }
+                }
+            }
+        }
+
+        return $query;
     }
 
     public function html()

@@ -71,16 +71,47 @@ class Invoice extends Model
 
     public function getFormattedTotalAttribute()
     {
-        return '$' . number_format($this->total_amount, 2);
+        return format_usd($this->total_amount);
     }
 
     public function getFormattedPaidAttribute()
     {
-        return '$' . number_format($this->paid_amount, 2);
+        return format_usd($this->paid_amount);
     }
 
     public function getFormattedBalanceAttribute()
     {
-        return '$' . number_format($this->balance_amount, 2);
+        return format_usd($this->balance_amount);
+    }
+
+    public function getFormattedTotalKhrAttribute()
+    {
+        return format_khr(usd_to_khr($this->total_amount));
+    }
+
+    public function getFormattedPaidKhrAttribute()
+    {
+        return format_khr(usd_to_khr($this->paid_amount));
+    }
+
+    public function getFormattedBalanceKhrAttribute()
+    {
+        return format_khr(usd_to_khr($this->balance_amount));
+    }
+
+    public function getFormattedDualTotalAttribute()
+    {
+        return format_dual_currency($this->total_amount);
+    }
+
+    public function getFormattedDualBalanceAttribute()
+    {
+        return format_dual_currency($this->balance_amount);
+    }
+
+    public function getPaymentMethodLabelAttribute()
+    {
+        $methods = paymentMethods();
+        return $methods[$this->payment_method] ?? ucfirst(str_replace('_', ' ', $this->payment_method ?: 'unpaid'));
     }
 }

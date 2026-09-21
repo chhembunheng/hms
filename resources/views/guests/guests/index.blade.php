@@ -23,7 +23,7 @@
 
                                 <div class="col-md-3">
                                     <label class="form-label">{{ __('guests.guest_type') }}</label>
-                                    <select name="guest_type" class="form-select form-select-sm">
+                                    <select name="guest_type[]" class="form-select form-select-sm multiple-select" multiple>
                                         <option value="">{{ __('global.all') }}</option>
                                         <option value="national">{{ __('guests.national') }}</option>
                                         <option value="international">{{ __('guests.international') }}</option>
@@ -38,9 +38,9 @@
                                 <div class="col-md-3">
                                     <label class="form-label">{{ __('global.created_at') }}</label>
                                     <div class="input-group input-group-sm">
-                                        <input type="date" name="created_from" class="form-control form-control-sm">
-                                        <span class="input-group-text">-</span>
-                                        <input type="date" name="created_to" class="form-control form-control-sm">
+                                        <input type="text" name="created_from" class="form-control form-control-sm pickadate" placeholder="dd-mm-yyyy" autocomplete="off">
+                                        <span class="input-group-text"><i class="fa-solid fa-calendar-days text-muted"></i></span>
+                                        <input type="text" name="created_to" class="form-control form-control-sm pickadate" placeholder="dd-mm-yyyy" autocomplete="off">
                                     </div>
                                 </div>
                             </x-datatable-filter>

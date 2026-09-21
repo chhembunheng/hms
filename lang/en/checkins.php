@@ -65,4 +65,10 @@ return [
     'paid_amount' => 'Paid Amount',
     'action' => 'Action',
     'status' => 'Status',
+    'new_check_in' => 'New Check-in',
+    'checked_in' => 'Checked In',
+    'checked_out' => 'Checked Out',
+    'cancelled' => 'Cancelled',
+    'pending' => 'Pending',
+    'checkouts' => 'Check-outs',
 ];

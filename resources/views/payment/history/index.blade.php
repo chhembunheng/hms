@@ -43,19 +43,18 @@
                                         <label for="payment_method" class="form-label">{{ __('billing.filter_by_payment_method') }}</label>
                                         <select class="form-select" id="payment_method" name="payment_method">
                                             <option value="">{{ __('global.all') }}</option>
-                                            <option value="cash" {{ request('payment_method') === 'cash' ? 'selected' : '' }}>{{ __('checkout.cash') }}</option>
-                                            <option value="card" {{ request('payment_method') === 'card' ? 'selected' : '' }}>{{ __('checkout.card') }}</option>
-                                            <option value="bank_transfer" {{ request('payment_method') === 'bank_transfer' ? 'selected' : '' }}>{{ __('checkout.bank_transfer') }}</option>
-                                            <option value="check" {{ request('payment_method') === 'check' ? 'selected' : '' }}>{{ __('checkout.check') }}</option>
+                                            @foreach(paymentMethods() as $pCode => $pName)
+                                                <option value="{{ $pCode }}" {{ request('payment_method') === $pCode ? 'selected' : '' }}>{{ $pName }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="col-md-2">
                                         <label for="date_from" class="form-label">{{ __('billing.date_from') }}</label>
-                                        <input type="date" class="form-control" id="date_from" name="date_from" value="{{ request('date_from') }}">
+                                        <input type="text" class="form-control datepicker" id="date_from" name="date_from" placeholder="dd-mm-yyyy" value="{{ request('date_from') ? format_date(request('date_from')) : '' }}" autocomplete="off">
                                     </div>
                                     <div class="col-md-2">
                                         <label for="date_to" class="form-label">{{ __('billing.date_to') }}</label>
-                                        <input type="date" class="form-control" id="date_to" name="date_to" value="{{ request('date_to') }}">
+                                        <input type="text" class="form-control datepicker" id="date_to" name="date_to" placeholder="dd-mm-yyyy" value="{{ request('date_to') ? format_date(request('date_to')) : '' }}" autocomplete="off">
                                     </div>
                                     <div class="col-md-2">
                                         <label for="amount_from" class="form-label">{{ __('billing.amount_from') }}</label>

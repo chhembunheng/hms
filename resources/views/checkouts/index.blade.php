@@ -16,12 +16,18 @@
 
                                 <div class="col-md-3">
                                     <label class="form-label">{{ __('checkins.check_out_date') }}</label>
-                                    <input type="date" name="check_out_from" class="form-control form-control-sm">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" name="check_out_from" class="form-control form-control-sm pickadate" placeholder="dd-mm-yyyy" autocomplete="off">
+                                        <span class="input-group-text"><i class="fa-solid fa-calendar-days text-muted"></i></span>
+                                    </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <label class="form-label">{{ __('global.to') }}</label>
-                                    <input type="date" name="check_out_to" class="form-control form-control-sm">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" name="check_out_to" class="form-control form-control-sm pickadate" placeholder="dd-mm-yyyy" autocomplete="off">
+                                        <span class="input-group-text"><i class="fa-solid fa-calendar-days text-muted"></i></span>
+                                    </div>
                                 </div>
 
                                 <div class="col-md-3">

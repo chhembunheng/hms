@@ -31,14 +31,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label">Current Check-in Date</label>
-                                        <input type="text" class="form-control" value="{{ $form->check_in_date?->format('M d, Y') }}" readonly>
+                                        <input type="text" class="form-control" value="{{ $form->check_in_date?->format('d-m-Y') }}" readonly>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label">Current Check-out Date</label>
-                                        <input type="text" class="form-control" value="{{ $form->check_out_date?->format('M d, Y') }}" readonly>
+                                        <input type="text" class="form-control" value="{{ $form->check_out_date?->format('d-m-Y') }}" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <x-form.input label="New Check-out Date" name="check_out_date" type="date" :value="old('check_out_date', $form?->check_out_date?->format('Y-m-d'))" required />
+                                    <x-form.input label="New Check-out Date" name="check_out_date" type="text" class="datepicker" placeholder="dd-mm-yyyy" autocomplete="off" :value="old('check_out_date', $form?->check_out_date?->format('d-m-Y'))" required />
                                 </div>
 
                                 <div class="col-md-6">

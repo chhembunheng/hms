@@ -23,22 +23,28 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label for="date_from" class="form-label">{{ __('billing.date_from') }}</label>
-                                        <input type="date" class="form-control" id="date_from" name="date_from" value="{{ request('date_from') }}">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control pickadate" id="date_from" name="date_from" placeholder="dd-mm-yyyy" value="{{ request('date_from') ? format_date(request('date_from')) : '' }}" autocomplete="off">
+                                            <span class="input-group-text"><i class="fa-solid fa-calendar-days text-muted"></i></span>
+                                        </div>
                                     </div>
                                     <div class="col-md-2">
                                         <label for="date_to" class="form-label">{{ __('billing.date_to') }}</label>
-                                        <input type="date" class="form-control" id="date_to" name="date_to" value="{{ request('date_to') }}">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control pickadate" id="date_to" name="date_to" placeholder="dd-mm-yyyy" value="{{ request('date_to') ? format_date(request('date_to')) : '' }}" autocomplete="off">
+                                            <span class="input-group-text"><i class="fa-solid fa-calendar-days text-muted"></i></span>
+                                        </div>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="search" class="form-label">{{ __('billing.search') }}</label>
                                         <input type="text" class="form-control" id="search" name="search" value="{{ request('search') }}" placeholder="{{ __('billing.search') }}...">
                                     </div>
                                     <div class="col-md-3 d-flex align-items-end">
-                                        <button type="submit" class="btn btn-primary me-2">
-                                            <i class="fas fa-search"></i> {{ __('global.search') }}
+                                        <button type="submit" class="btn btn-primary bg-darkblue me-2">
+                                            <i class="fa-solid fa-filter me-1"></i> {{ __('global.filter') }}
                                         </button>
-                                        <a href="{{ route('billing.list.index') }}" class="btn btn-secondary">
-                                            <i class="fas fa-times"></i> {{ __('global.clear') }}
+                                        <a href="{{ route('billing.list.index') }}" class="btn btn-danger">
+                                            <i class="fa-solid fa-rotate-right me-1"></i> {{ __('global.clear') }}
                                         </a>
                                     </div>
                                 </form>

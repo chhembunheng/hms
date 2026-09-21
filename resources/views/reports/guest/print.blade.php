@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ __('reports.guest_report') }} - {{ $startDate }} to {{ $endDate }}</title>
+    <title>{{ __('reports.guest_report') }} - {{ format_date($startDate) }} to {{ format_date($endDate) }}</title>
 
     <!-- Bootstrap CSS for print styling -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -25,8 +25,8 @@
         <!-- Header -->
         <div class="print-header">
             <h2>របាយការណ៍ភ្ញៀវ</h2>
-            <h4>{{ \Carbon\Carbon::parse($startDate)->format('M j, Y') }} - {{ \Carbon\Carbon::parse($endDate)->format('M j, Y') }}</h4>
-            <p class="text-muted">បានបង្កើតនៅ: {{ now()->format('Y-m-d H:i:s') }}</p>
+            <h4>{{ \Carbon\Carbon::parse($startDate)->format('d-m-Y') }} - {{ \Carbon\Carbon::parse($endDate)->format('d-m-Y') }}</h4>
+            <p class="text-muted">បានបង្កើតនៅ: {{ now()->format('d-m-Y H:i:s') }}</p>
         </div>
 
         <!-- Summary -->

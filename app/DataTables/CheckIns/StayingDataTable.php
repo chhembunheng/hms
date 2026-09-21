@@ -27,8 +27,8 @@ class StayingDataTable extends DataTable
             ->addColumn('guest_name', fn($row) => $row->guest_name)
             ->addColumn('room_number', fn($row) => $row->room->room_number ?? '-')
             ->addColumn('guest_type', fn($row) => badge($row->guest_type === 'national' ? 'National' : 'International'))
-            ->addColumn('check_in_date', fn($row) => $row->check_in_date?->format('M d, Y'))
-            ->addColumn('check_out_date', fn($row) => $row->check_out_date?->format('M d, Y'))
+            ->addColumn('check_in_date', fn($row) => $row->check_in_date?->format('d-m-Y'))
+            ->addColumn('check_out_date', fn($row) => $row->check_out_date?->format('d-m-Y'))
             ->addColumn('total_amount', fn($row) => '$' . number_format($row->total_amount, 2))
             ->addColumn('status', function($row) {
                 return badge(ucfirst(str_replace('_', ' ', $row->status)));
@@ -48,9 +48,45 @@ class StayingDataTable extends DataTable
      */
     public function query(CheckIn $model): QueryBuilder
     {
-        return $model->newQuery()
+        $query = $model->newQuery()
             ->with(['room.roomType', 'room.status'])
             ->where('status', 'checked_in');
+
+        $filters = [];
+        $filtersHeader = request()->header('filters');
+        if ($filtersHeader) {
+            $filters = json_decode(urldecode($filtersHeader), true) ?: [];
+        }
+        if (empty($filters)) {
+            $filters = request()->all();
+        }
+
+        $search = $filters['search'] ?? null;
+        if (is_array($search)) {
+            $search = $search['value'] ?? null;
+        }
+
+        if (!empty($search) && is_string($search) && trim($search) !== '') {
+            $searchTerm = trim($search);
+            $query->where(function($q) use ($searchTerm) {
+                $q->where('booking_number', 'like', "%{$searchTerm}%")
+                  ->orWhere('guest_name', 'like', "%{$searchTerm}%")
+                  ->orWhereHas('room', fn($rq) => $rq->where('room_number', 'like', "%{$searchTerm}%"));
+            });
+        }
+
+        if (!empty($filters['guest_type'])) {
+            if (is_array($filters['guest_type'])) {
+                $validTypes = array_filter($filters['guest_type']);
+                if (!empty($validTypes)) {
+                    $query->whereIn('guest_type', $validTypes);
+                }
+            } else {
+                $query->where('guest_type', $filters['guest_type']);
+            }
+        }
+
+        return $query;
     }
 
     /**

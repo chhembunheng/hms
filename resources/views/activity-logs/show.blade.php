@@ -35,7 +35,7 @@
                                     </tr>
                                     <tr>
                                         <th>{{ __('global.created_at') }}</th>
-                                        <td>{{ $activityLog->created_at->format('Y-m-d H:i:s') }}</td>
+                                        <td>{{ $activityLog->created_at->format('d-m-Y H:i:s') }}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -43,17 +43,17 @@
                                 @php
                                     $newValues = $activityLog->new_values;
                                     if (isset($newValues['created_at'])) {
-                                        $newValues['created_at'] = \Carbon\Carbon::parse($newValues['created_at'])->format('Y-m-d H:i:s');
+                                        $newValues['created_at'] = \Carbon\Carbon::parse($newValues['created_at'])->format('d-m-Y H:i:s');
                                     }
                                     if (isset($newValues['updated_at'])) {
-                                        $newValues['updated_at'] = \Carbon\Carbon::parse($newValues['updated_at'])->format('Y-m-d H:i:s');
+                                        $newValues['updated_at'] = \Carbon\Carbon::parse($newValues['updated_at'])->format('d-m-Y H:i:s');
                                     }
                                     $oldValues = $activityLog->old_values;
                                     if (isset($oldValues['created_at'])) {
-                                        $oldValues['created_at'] = \Carbon\Carbon::parse($oldValues['created_at'])->format('Y-m-d H:i:s');
+                                        $oldValues['created_at'] = \Carbon\Carbon::parse($oldValues['created_at'])->format('d-m-Y H:i:s');
                                     }
                                     if (isset($oldValues['updated_at'])) {
-                                        $oldValues['updated_at'] = \Carbon\Carbon::parse($oldValues['updated_at'])->format('Y-m-d H:i:s');
+                                        $oldValues['updated_at'] = \Carbon\Carbon::parse($oldValues['updated_at'])->format('d-m-Y H:i:s');
                                     }
                                     $activityLog->new_values = $newValues;
                                     $activityLog->old_values = $oldValues;

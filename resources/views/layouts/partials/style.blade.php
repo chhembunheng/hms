@@ -177,43 +177,132 @@ html:lang(en) [class*="fa-"] {
     color: white !important;
 }
 
-/* Datepicker styling */
-.datepicker {
+/* Datepicker input styling - prevent theme .datepicker { display: none } from hiding inputs */
+input.datepicker,
+input.date-picker,
+input.pickadate,
+input.pick-adate,
+input.picker__input {
+    display: block !important;
     cursor: pointer;
+    background-color: #ffffff;
 }
 
-.datepicker:focus {
+.input-group > input.datepicker,
+.input-group > input.date-picker,
+.input-group > input.pickadate,
+.input-group > input.pick-adate,
+.input-group > input.picker__input {
+    display: block !important;
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+}
+
+input.datepicker:focus,
+input.date-picker:focus,
+input.pickadate:focus,
+input.pick-adate:focus,
+input.picker__input:focus,
+input.picker__input.picker__input--active {
     box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
     border-color: #86b7fe;
+    background-color: #ffffff;
 }
 
-/* Datepicker dropdown styling */
-.datepicker-dropdown {
-    border: 1px solid #ced4da;
-    border-radius: 0.375rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+/* BELTEI style bg-darkblue utility */
+.bg-darkblue {
+    background-color: #002959 !important;
+    color: #ffffff !important;
+}
+.bg-darkblue:hover {
+    background-color: #001f44 !important;
+    color: #ffffff !important;
 }
 
-.datepicker .datepicker-cell {
-    padding: 8px 12px;
-    cursor: pointer;
+/* Pickadate Dropdown Positioning & Modal Z-Index */
+.picker {
+    z-index: 10050 !important;
 }
 
-.datepicker .datepicker-cell:hover {
-    background-color: #f8f9fa;
+.picker__holder {
+    outline: none;
+    z-index: 10051 !important;
 }
 
-.datepicker .datepicker-cell.selected {
-    background-color: #0d6efd;
-    color: white;
+/* ─── Compact Layout Overrides ─────────────────────────────────── */
+/* Reduce page content area padding */
+.content {
+    padding: 0.75rem 1rem !important;
 }
 
-.datepicker .datepicker-cell.today {
-    background-color: #fff3cd;
+/* Reduce container-fluid horizontal padding */
+.container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* Tighter card header */
+.card-header {
+    padding: 0.5rem 0.875rem !important;
+}
+.card-header h3,
+.card-header h5,
+.card-header h6,
+.card-header .card-title {
+    font-size: 0.875rem !important;
+    margin-bottom: 0 !important;
+}
+
+/* Tighter card body */
+.card-body {
+    padding: 0.75rem 0.875rem !important;
+}
+
+/* Tighter filter card */
+#filter-container .card-body {
+    padding: 0.625rem 0.875rem !important;
+}
+#filter-container .card-header {
+    padding: 0.4rem 0.875rem !important;
+}
+#filter-container .card-header h6 {
+    font-size: 0.8125rem !important;
+}
+#filter-container .row.g-3 {
+    --bs-gutter-x: 0.75rem;
+    --bs-gutter-y: 0.5rem;
+}
+#filter-container .form-label {
+    margin-bottom: 0.2rem !important;
+    font-size: 0.8125rem;
+}
+#filter-container .d-flex.mt-3 {
+    margin-top: 0.5rem !important;
+    padding-top: 0.5rem !important;
+}
+
+/* Smaller form controls in filter */
+#filter-container .form-control-sm,
+#filter-container .form-select-sm {
+    font-size: 0.8125rem;
+}
+
+/* Tighter DataTable card */
+.card .card-body .card > .card-header {
+    padding: 0.4rem 0.875rem !important;
+}
+.card .card-body .card > .card-body {
+    padding: 0.5rem 0.875rem !important;
+}
+
+/* Reduce gap between filter and table */
+.mb-3 {
+    margin-bottom: 0.5rem !important;
 }
 
 </style>
 
-{{-- Pickadate CSS --}}
-<link rel="stylesheet" href="{{ asset('assets/css/default.css') }}?v={{ config('init.layout_version') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/default.date.css') }}?v={{ config('init.layout_version') }}">
+{{-- Pickadate Theme CSS from beltei_ums --}}
+<link rel="stylesheet" href="{{ asset('assets/extend/pickadate/themes/pickadate-limitless.css') }}?v={{ config('init.layout_version') }}">

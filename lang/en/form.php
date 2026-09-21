@@ -125,4 +125,7 @@ return [
     'permissions' => 'Permissions',
     'total_users' => 'Total Users',
     'role' => 'Role',
+    'notes' => 'Notes',
+    'add_permission' => 'Add Permission',
+    'image_editor' => 'Image Editor',
 ];

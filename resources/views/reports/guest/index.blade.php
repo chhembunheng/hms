@@ -6,7 +6,7 @@
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h3 class="card-title">របាយការណ៍ភ្ញៀវ</h3>
                         <div>
-                            <a href="{{ route('reports.guest.print', ['start_date' => $startDate, 'end_date' => $endDate]) }}" target="_blank" class="btn btn-primary btn-sm">
+                            <a href="{{ route('reports.guest.print', ['start_date' => format_date($startDate), 'end_date' => format_date($endDate)]) }}" target="_blank" class="btn btn-primary btn-sm">
                                 <i class="fas fa-print"></i> បោះពុម្ព
                             </a>
                         </div>
@@ -16,17 +16,28 @@
                         <!-- Date Range Filter -->
                         <div class="row mb-4">
                             <div class="col-md-8">
-                                <form method="GET" class="row g-3">
+                                <form method="GET" class="row g-3 align-items-end">
                                     <div class="col-md-4">
                                         <label class="form-label">{{ __('global.start_date') }}</label>
-                                        <input type="date" name="start_date" value="{{ $startDate }}" class="form-control form-control-sm">
+                                        <div class="input-group input-group-sm">
+                                            <input type="text" name="start_date" id="start_date" value="{{ format_date($startDate) }}" class="form-control form-control-sm pickadate" placeholder="dd-mm-yyyy" autocomplete="off">
+                                            <span class="input-group-text"><i class="fa-solid fa-calendar-days text-muted"></i></span>
+                                        </div>
                                     </div>
                                     <div class="col-md-4">
                                         <label class="form-label">{{ __('global.end_date') }}</label>
-                                        <input type="date" name="end_date" value="{{ $endDate }}" class="form-control form-control-sm">
+                                        <div class="input-group input-group-sm">
+                                            <input type="text" name="end_date" id="end_date" value="{{ format_date($endDate) }}" class="form-control form-control-sm pickadate" placeholder="dd-mm-yyyy" autocomplete="off">
+                                            <span class="input-group-text"><i class="fa-solid fa-calendar-days text-muted"></i></span>
+                                        </div>
                                     </div>
-                                    <div class="col-md-4 d-flex align-items-end">
-                                        <button type="submit" class="btn btn-outline-primary btn-sm">{{ __('global.filter') }}</button>
+                                    <div class="col-md-4 d-flex gap-2">
+                                        <button type="submit" class="btn btn-primary bg-darkblue btn-sm">
+                                            <i class="fa-solid fa-filter me-1"></i> {{ __('global.filter') }}
+                                        </button>
+                                        <a href="{{ route('reports.guest') }}" class="btn btn-danger btn-sm">
+                                            <i class="fa-solid fa-rotate-right me-1"></i> {{ __('global.clear') ?? 'សម្អាត' }}
+                                        </a>
                                     </div>
                                 </form>
                             </div>

@@ -72,11 +72,11 @@ class GuestDataTable extends DataTable
                 }
 
                 if (!empty($filters['created_from'])) {
-                    $query->whereDate('created_at', '>=', $filters['created_from']);
+                    $query->whereDate('created_at', '>=', parse_date_input($filters['created_from']));
                 }
 
                 if (!empty($filters['created_to'])) {
-                    $query->whereDate('created_at', '<=', $filters['created_to']);
+                    $query->whereDate('created_at', '<=', parse_date_input($filters['created_to']));
                 }
             }
         }

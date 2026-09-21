@@ -22,39 +22,58 @@
 
 <script>
 function showCheckOutModal(id, bookingNumber, totalAmount, paidAmount) {
-    const remainingAmount = totalAmount - paidAmount;
+    const remainingAmount = Math.max(0, totalAmount - paidAmount);
+    const rate = {{ active_exchange_rate() }};
+    const totalKhr = new Intl.NumberFormat().format(Math.round(totalAmount * rate / 100) * 100);
+    const paidKhr = new Intl.NumberFormat().format(Math.round(paidAmount * rate / 100) * 100);
+    const remainingKhr = new Intl.NumberFormat().format(Math.round(remainingAmount * rate / 100) * 100);
 
     // Create modal HTML
     const modalHtml = `
         <div class="modal fade" id="checkOutModal" tabindex="-1" aria-labelledby="checkOutModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="checkOutModalLabel">{{ __('checkins.check_out') }} & {{ __('checkins.payment_status') }} - ${bookingNumber}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title" id="checkOutModalLabel"><i class="fa-solid fa-receipt me-2"></i>{{ __('checkins.check_out') }} & {{ __('checkins.payment_status') }} - ${bookingNumber}</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                        <div class="alert alert-light border py-2 mb-3">
+                            <small class="text-muted"><i class="fa-solid fa-coins me-1 text-warning"></i>Exchange Rate: <strong>1 USD = ${new Intl.NumberFormat().format(rate)} KHR (៛)</strong></small>
+                        </div>
                         <form id="checkOutForm">
-                            <div class="mb-3">
-                                <label for="totalAmount" class="form-label">{{ __('checkins.total_amount') }}</label>
-                                <input type="text" class="form-control" id="totalAmount" value="$${totalAmount.toFixed(2)}" readonly>
+                            <div class="row g-2 mb-3">
+                                <div class="col-6">
+                                    <label class="form-label text-muted small mb-1">{{ __('checkins.total_amount') }}</label>
+                                    <div class="fw-bold fs-6">$${totalAmount.toFixed(2)}</div>
+                                    <small class="text-primary">${totalKhr} ៛</small>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label text-muted small mb-1">{{ __('checkins.paid_amount') }}</label>
+                                    <div class="fw-bold fs-6 text-success">$${paidAmount.toFixed(2)}</div>
+                                    <small class="text-success">${paidKhr} ៛</small>
+                                </div>
+                            </div>
+                            <div class="p-2 bg-light rounded border mb-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="fw-semibold text-secondary">{{ __('checkins.remaining_amount') }}:</span>
+                                    <div class="text-end">
+                                        <div class="fw-bold text-danger fs-5">$${remainingAmount.toFixed(2)}</div>
+                                        <small class="text-danger fw-bold">${remainingKhr} ៛</small>
+                                    </div>
+                                </div>
                             </div>
                             <div class="mb-3">
-                                <label for="paidAmount" class="form-label">{{ __('checkins.paid_amount') }}</label>
-                                <input type="text" class="form-control" id="paidAmount" value="$${paidAmount.toFixed(2)}" readonly>
+                                <label for="paymentAmount" class="form-label fw-semibold">Payment to Settle Now (USD) <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" id="paymentAmount" step="0.01" min="0" max="${remainingAmount}" value="${remainingAmount.toFixed(2)}" required>
+                                </div>
+                                <div class="form-text text-primary" id="modalKhrCalc">≈ ${remainingKhr} ៛</div>
                             </div>
                             <div class="mb-3">
-                                <label for="remainingAmount" class="form-label">{{ __('checkins.remaining_amount') }}</label>
-                                <input type="text" class="form-control" id="remainingAmount" value="$${remainingAmount.toFixed(2)}" readonly>
-                            </div>
-                            <div class="mb-3">
-                                <label for="paymentAmount" class="form-label">{{ __('checkins.paid_amount') }}</label>
-                                <input type="number" class="form-control" id="paymentAmount" step="0.01" min="0" max="${remainingAmount}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="paymentMethod" class="form-label">{{ __('checkins.payment_method') }}</label>
+                                <label for="paymentMethod" class="form-label fw-semibold">{{ __('checkins.payment_method') }}</label>
                                 <select class="form-select form-select-sm select2" id="paymentMethod">
-                                    <option value="">{{ __('form.select_option') }}</option>
                                     @foreach (paymentMethods() as $code => $name)
                                         <option value="{{ $code }}">{{ $name }}</option>
                                     @endforeach
@@ -62,13 +81,13 @@ function showCheckOutModal(id, bookingNumber, totalAmount, paidAmount) {
                             </div>
                             <div class="mb-3">
                                 <label for="checkOutNotes" class="form-label">{{ __('form.notes') }}</label>
-                                <textarea class="form-control" id="checkOutNotes" rows="3"></textarea>
+                                <textarea class="form-control" id="checkOutNotes" rows="2" placeholder="Minibar, laundry, room condition, etc."></textarea>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('global.cancel') }}</button>
-                        <button type="button" class="btn btn-primary" onclick="processCheckOut(${id})">{{ __('checkins.check_out') }} & {{ __('checkins.payment_status') }}</button>
+                        <button type="button" class="btn btn-primary" onclick="processCheckOut(${id})"><i class="fa-solid fa-check me-1"></i>Confirm {{ __('checkins.check_out') }}</button>
                     </div>
                 </div>
             </div>
@@ -88,6 +107,16 @@ function showCheckOutModal(id, bookingNumber, totalAmount, paidAmount) {
     const modal = new bootstrap.Modal(document.getElementById('checkOutModal'));
     modal.show();
 
+    // Listen to amount changes for KHR calculation
+    const paymentInput = document.getElementById('paymentAmount');
+    if (paymentInput) {
+        paymentInput.addEventListener('input', function() {
+            const val = parseFloat(this.value) || 0;
+            const khr = new Intl.NumberFormat().format(Math.round(val * rate / 100) * 100);
+            document.getElementById('modalKhrCalc').textContent = `≈ ${khr} ៛`;
+        });
+    }
+
     // Initialize select2 for payment method
     $('#paymentMethod').select2({
         dropdownParent: $('#checkOutModal'),
@@ -96,11 +125,12 @@ function showCheckOutModal(id, bookingNumber, totalAmount, paidAmount) {
 }
 
 function processCheckOut(id) {
-    const paymentAmount = parseFloat(document.getElementById('paymentAmount').value);
+    const paymentAmountInput = document.getElementById('paymentAmount').value;
+    const paymentAmount = parseFloat(paymentAmountInput);
     const paymentMethod = document.getElementById('paymentMethod').value;
     const notes = document.getElementById('checkOutNotes').value;
 
-    if (!paymentAmount || paymentAmount < 0) {
+    if (isNaN(paymentAmount) || paymentAmount < 0) {
         toastr.error('Please enter a valid payment amount');
         return;
     }
@@ -121,20 +151,26 @@ function processCheckOut(id) {
     .then(response => response.json())
     .then(data => {
         if (data.status === 'success') {
-            success(data.message);
+            toastr.success(data.message);
             // Close modal
             const modal = bootstrap.Modal.getInstance(document.getElementById('checkOutModal'));
-            modal.hide();
+            if (modal) {
+                modal.hide();
+            }
             setTimeout(() => {
-                window.location.reload();
-            }, 2000);
+                if (data.redirect) {
+                    window.location.href = data.redirect;
+                } else {
+                    window.location.reload();
+                }
+            }, 1000);
         } else {
-            error(data.message);
+            toastr.error(data.message);
         }
     })
     .catch(error => {
         console.error('Error:', error);
-        error('An error occurred during check-out');
+        toastr.error('An error occurred during check-out');
     });
 }
 </script>

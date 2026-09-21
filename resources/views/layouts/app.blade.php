@@ -29,11 +29,25 @@
     @include('layouts.partials.style')
     @stack('css')
     <style>
-        .multiple-select {
+        .btn-group:has(> .multiselect) {
             width: 100% !important;
-            max-width: 100% !important;
-            visibility: hidden;
-            height: 0 !important;
+        }
+        .btn-group > button.multiselect {
+            width: 100% !important;
+            text-align: left;
+        }
+        .multiselect-container {
+            max-height: 300px !important;
+            overflow-y: auto !important;
+        }
+
+        /* Hide raw select until Bootstrap Multiselect initializes (prevents FOUC scrollbox) */
+        select.multiple-select {
+            display: none !important;
+        }
+        /* Once wrapped by multiselect, the wrapper div handles layout */
+        .multiselect-native-select select.multiple-select {
+            display: none !important;
         }
 
         /* Enhanced DataTable Scrolling */

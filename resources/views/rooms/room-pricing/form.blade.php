@@ -37,11 +37,11 @@
                                     />
                                 </div>
                                 <div class="col-md-6">
-                                    <x-form.input :label="__('rooms.effective_from')" name="effective_from" type="date" :value="old('effective_from', $form?->effective_from)" required />
-                                </div>
-                                <div class="col-md-6">
-                                    <x-form.input :label="__('rooms.effective_to')" name="effective_to" type="date" :value="old('effective_to', $form?->effective_to)" />
-                                </div>
+                                     <x-form.input :label="__('rooms.effective_from')" name="effective_from" type="text" class="datepicker" placeholder="dd-mm-yyyy" autocomplete="off" :value="old('effective_from', format_date($form?->effective_from))" required />
+                                 </div>
+                                 <div class="col-md-6">
+                                     <x-form.input :label="__('rooms.effective_to')" name="effective_to" type="text" class="datepicker" placeholder="dd-mm-yyyy" autocomplete="off" :value="old('effective_to', format_date($form?->effective_to))" />
+                                 </div>
                                 <div class="col-md-6">
                                     <x-form.checkbox :label="__('Is Active')" name="is_active" :checked="old('is_active', $form?->is_active ?? true)" />
                                 </div>

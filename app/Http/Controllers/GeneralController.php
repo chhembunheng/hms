@@ -17,8 +17,8 @@ class GeneralController extends Controller
         $search = $request->get('search');
         $page = $request->get('page', 1);
         $perPage = 20;
-        $checkInDate = $request->get('check_in_date');
-        $checkOutDate = $request->get('check_out_date');
+        $checkInDate = parse_date_input($request->get('check_in_date')) ?: $request->get('check_in_date');
+        $checkOutDate = parse_date_input($request->get('check_out_date')) ?: $request->get('check_out_date');
         $billingType = $request->get('billing_type');
 
         $query = Room::with(['roomType', 'status'])

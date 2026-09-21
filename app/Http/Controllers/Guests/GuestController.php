@@ -19,6 +19,10 @@ class GuestController extends Controller
         $form = new Guest();
 
         if ($request->isMethod('post')) {
+            if ($request->filled('date_of_birth')) {
+                $request->merge(['date_of_birth' => parse_date_input($request->input('date_of_birth'))]);
+            }
+
             $rules = [
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
@@ -47,6 +51,8 @@ class GuestController extends Controller
                 'state', 'postal_code', 'emergency_contact_name', 'emergency_contact_phone', 'notes'
             ]);
 
+            $data = array_map(fn($v) => is_string($v) && trim($v) === '' ? null : $v, $data);
+
             Guest::create($data);
 
             return response()->json([
@@ -65,6 +71,10 @@ class GuestController extends Controller
         $form = Guest::findOrFail($id);
 
         if ($request->isMethod('post')) {
+            if ($request->filled('date_of_birth')) {
+                $request->merge(['date_of_birth' => parse_date_input($request->input('date_of_birth'))]);
+            }
+
             $rules = [
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
@@ -92,6 +102,8 @@ class GuestController extends Controller
                 'guest_type', 'country', 'date_of_birth', 'gender', 'address', 'city',
                 'state', 'postal_code', 'emergency_contact_name', 'emergency_contact_phone', 'notes'
             ]);
+
+            $data = array_map(fn($v) => is_string($v) && trim($v) === '' ? null : $v, $data);
 
             $form->update($data);
 
