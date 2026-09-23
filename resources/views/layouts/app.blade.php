@@ -38,8 +38,33 @@
             text-align: left;
         }
         .multiselect-container {
-            max-height: 300px !important;
+            max-height: 320px !important;
             overflow-y: auto !important;
+            z-index: 1060 !important;
+        }
+
+        /* Ensure filter container and dropdowns render above datatables and table headers */
+        #enterprise-filter-panel {
+            position: relative;
+            z-index: 1050;
+            overflow: hidden;
+        }
+        #enterprise-filter-panel.is-open {
+            overflow: visible !important;
+        }
+        #filter-container,
+        #filter-body,
+        .enterprise-filter-canvas {
+            position: relative !important;
+            z-index: 1050 !important;
+            overflow: visible !important;
+        }
+        .multiselect-native-select,
+        .multiselect-native-select .btn-group {
+            position: relative !important;
+        }
+        .enterprise-card {
+            overflow: visible !important;
         }
 
         /* Page Loading Overlay (matching beltei_ums standard) */
@@ -168,7 +193,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 9999;
+            z-index: 0;
             display: flex;
             align-items: center;
             justify-content: center;

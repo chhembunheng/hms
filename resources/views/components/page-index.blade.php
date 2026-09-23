@@ -62,8 +62,10 @@
 
             <!-- Optional Collapsible Filter Section -->
             @if(isset($filters) && $filters instanceof \Illuminate\View\ComponentSlot && $filters->isNotEmpty())
-                <div id="enterprise-filter-panel" class="border-bottom px-3 py-3" style="background-color: #fcfdfe;">
-                    {{ $filters }}
+                <div id="enterprise-filter-panel" class="is-open border-bottom">
+                    <div class="enterprise-filter-inner px-3 py-3">
+                        {{ $filters }}
+                    </div>
                 </div>
             @endif
 

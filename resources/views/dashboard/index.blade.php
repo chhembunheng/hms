@@ -466,7 +466,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Chart.js Global Font Config
-    Chart.defaults.font.family = "'Ubuntu', system-ui, -apple-system, sans-serif";
+    Chart.defaults.font.family = "'Outfit', system-ui, -apple-system, sans-serif";
 
     // 1. Modern Revenue Trend Chart (Spline Area)
     const revenueCanvas = document.getElementById('modernRevenueChart');

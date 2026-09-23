@@ -1,32 +1,23 @@
-<x-app-layout>
-    <x-form.layout :form="$form">
-        <div class="container-fluid py-3">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="card shadow-sm border-0 mb-4">
-                        <div class="card-body">
-                            <div class="row g-4">
-                                <div class="col-md-6">
-                                    <x-form.input :label="__('global.name_en')" name="name_en" :value="old('name_en', $form?->name_en)" required />
-                                </div>
-                                <div class="col-md-6">
-                                    <x-form.input :label="__('global.name_kh')" name="name_kh" :value="old('name_kh', $form?->name_kh)" required />
-                                </div>
-                                <div class="col-md-6">
-                                    <x-form.checkbox :label="__('Is Active')" name="is_active" :checked="old('is_active', $form?->is_active ?? true)" />
-                                </div>
-                                <div class="col-12">
-                                    <x-form.textarea :label="__('Description')" name="description" :value="old('description', $form?->description)" rows="3" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<x-page-form 
+    :title="$form?->exists ? __('rooms.edit_room_type') : __('rooms.add_room_type')"
+    icon="bed-double"
+    :is-edit="$form?->exists ?? false"
+    :id="$form?->id"
+    :back-url="route('rooms.type.index')"
+    max-width="col-lg-8">
 
-            <div class="text-end">
-                        <button type="submit" class="btn btn-primary px-4 py-2">{{ __('form.save') }}</button>
-                    </div>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <x-form.input :label="__('global.name_en')" name="name_en" :value="old('name_en', $form?->name_en)" required />
         </div>
-    </x-form.layout>
-</x-app-layout>
+        <div class="col-md-6">
+            <x-form.input :label="__('global.name_kh')" name="name_kh" :value="old('name_kh', $form?->name_kh)" required />
+        </div>
+        <div class="col-12">
+            <x-form.textarea :label="__('rooms.description')" name="description" :value="old('description', $form?->description)" rows="3" />
+        </div>
+        <div class="col-md-6">
+            <x-form.checkbox :label="__('rooms.is_active')" name="is_active" :checked="old('is_active', $form?->is_active ?? true)" />
+        </div>
+    </div>
+</x-page-form>

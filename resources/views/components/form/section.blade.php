@@ -1,10 +1,11 @@
 @props(['title', 'icon' => null, 'subtitle' => null])
-<div class="col-12 mt-3 mb-1">
+<div class="col-12 mt-2 mb-2">
     <div class="d-flex align-items-center gap-2 pb-2 border-bottom">
+        <span class="d-inline-block rounded-pill bg-primary" style="width: 3.5px; height: 16px;"></span>
         @if($icon)
-            <i data-lucide="{{ get_lucide_icon($icon) }}" class="text-primary" style="width: 15px; height: 15px;"></i>
+            <i data-lucide="{{ get_lucide_icon($icon) }}" class="text-primary flex-shrink-0" style="width: 15px; height: 15px;"></i>
         @endif
-        <h6 class="mb-0 fw-semibold text-primary" style="font-size: 0.875rem; letter-spacing: 0.2px;">
+        <h6 class="mb-0 fw-bold fs-6" style="font-size: 0.875rem !important; color: #0f172a !important;">
             {{ $title }}
         </h6>
         @if($subtitle)

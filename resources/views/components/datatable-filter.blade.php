@@ -8,42 +8,54 @@
         <div class="row g-3">
             {{ $slot }}
         </div>
-        <div class="d-flex justify-content-end gap-2 mt-3 pt-2 border-top">
-            <button type="button" class="btn btn-secondary btn-sm d-inline-flex align-items-center gap-1 rounded-2" id="reset-filters">
-                <i data-lucide="rotate-cw" style="width: 13px; height: 13px;"></i>
-                <span>{{ __('global.reset') }}</span>
-            </button>
-            <button type="button" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1 rounded-2 px-3" id="apply-filters">
-                <i data-lucide="check" style="width: 13px; height: 13px;"></i>
-                <span>{{ __('global.apply') }}</span>
-            </button>
+        <div class="filter-actions-bar d-flex justify-content-between align-items-center mt-3 pt-3">
+            <div class="d-none d-sm-flex align-items-center gap-1 text-muted" style="font-size: 0.75rem;">
+                <i data-lucide="sliders-horizontal" style="width: 13px; height: 13px;"></i>
+                <span class="text-uppercase fw-semibold" style="letter-spacing: 0.04em;">{{ __('global.filters') }}</span>
+            </div>
+            <div class="d-flex align-items-center gap-2 ms-auto">
+                <button type="button" class="btn btn-filter-reset d-inline-flex align-items-center gap-1" id="reset-filters">
+                    <i data-lucide="rotate-cw" style="width: 13px; height: 13px;"></i>
+                    <span>{{ __('global.reset') }}</span>
+                </button>
+                <button type="button" class="btn btn-filter-apply d-inline-flex align-items-center gap-1" id="apply-filters">
+                    <i data-lucide="check" style="width: 14px; height: 14px;"></i>
+                    <span>{{ __('global.apply') }}</span>
+                </button>
+            </div>
         </div>
     </div>
 </div>
 @else
-<div id="filter-container" class="card border border-primary shadow-sm mb-3">
-    <div class="card-header bg-primary text-white border-bottom-0 py-2 d-flex justify-content-between align-items-center">
-        <h6 class="mb-0 d-flex align-items-center gap-2">
-            <i data-lucide="filter" style="width: 15px; height: 15px;"></i>
+<div id="filter-container" class="card enterprise-card border-0 shadow-sm mb-3">
+    <div class="card-header enterprise-card-header py-2 px-3 d-flex justify-content-between align-items-center">
+        <h6 class="mb-0 fw-bold text-dark fs-6 d-flex align-items-center gap-2">
+            <i data-lucide="filter" style="width: 15px; height: 15px; color: #193f8f;"></i>
             <span>{{ $title }}</span>
         </h6>
-        <button type="button" class="btn btn-sm btn-light" id="toggle-filters" title="{{ __('global.toggle_filters') }}">
+        <button type="button" class="btn-enterprise-action btn-enterprise-icon-btn" id="toggle-filters" title="{{ __('global.toggle_filters') }}">
             <i data-lucide="chevron-up" style="width: 14px; height: 14px;"></i>
         </button>
     </div>
-    <div class="card-body" id="filter-body">
+    <div class="card-body p-3" id="filter-body">
         <div class="row g-3">
             {{ $slot }}
         </div>
-        <div class="d-flex gap-2 mt-3 pt-3 border-top">
-            <button type="button" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1 rounded-2" id="apply-filters">
-                <i data-lucide="check" style="width: 13px; height: 13px;"></i>
-                <span>{{ __('global.apply') }}</span>
-            </button>
-            <button type="button" class="btn btn-secondary btn-sm d-inline-flex align-items-center gap-1 rounded-2" id="reset-filters">
-                <i data-lucide="rotate-cw" style="width: 13px; height: 13px;"></i>
-                <span>{{ __('global.reset') }}</span>
-            </button>
+        <div class="filter-actions-bar d-flex justify-content-between align-items-center mt-3 pt-3">
+            <div class="d-none d-sm-flex align-items-center gap-1 text-muted" style="font-size: 0.75rem;">
+                <i data-lucide="sliders-horizontal" style="width: 13px; height: 13px;"></i>
+                <span class="text-uppercase fw-semibold" style="letter-spacing: 0.04em;">{{ __('global.filters') }}</span>
+            </div>
+            <div class="d-flex align-items-center gap-2 ms-auto">
+                <button type="button" class="btn btn-filter-reset d-inline-flex align-items-center gap-1" id="reset-filters">
+                    <i data-lucide="rotate-cw" style="width: 13px; height: 13px;"></i>
+                    <span>{{ __('global.reset') }}</span>
+                </button>
+                <button type="button" class="btn btn-filter-apply d-inline-flex align-items-center gap-1" id="apply-filters">
+                    <i data-lucide="check" style="width: 14px; height: 14px;"></i>
+                    <span>{{ __('global.apply') }}</span>
+                </button>
+            </div>
         </div>
     </div>
 </div>

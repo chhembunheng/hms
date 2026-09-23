@@ -216,12 +216,30 @@
              $.fn.dataTable.ext.errMode = 'none';
          }
 
-         // Enterprise Filter Panel Toggle
-         $(document).on('click', '#toggle-filter-panel', function(e) {
-             e.preventDefault();
-             $(this).toggleClass('active');
-             $('#enterprise-filter-panel').slideToggle(180);
-         });
+           // Enterprise Filter Panel Toggle
+           $(document).on('click', '#toggle-filter-panel', function(e) {
+               e.preventDefault();
+               var $btn = $(this);
+               var $panel = $('#enterprise-filter-panel');
+
+               $btn.toggleClass('active');
+
+               if ($panel.is(':visible')) {
+                   $panel.removeClass('is-open');
+                   $panel.slideUp(200, function() {
+                       if (typeof $.fn.dataTable !== 'undefined') {
+                           $.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
+                       }
+                   });
+               } else {
+                   $panel.slideDown(200, function() {
+                       $panel.addClass('is-open');
+                       if (typeof $.fn.dataTable !== 'undefined') {
+                           $.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
+                       }
+                   });
+               }
+           });
 
          // Enterprise Form Submit Loading Spinner
          $(document).on('submit', '#enterprise-form', function() {
@@ -234,20 +252,122 @@
          });
 
 
-         $(document).find('select.select-icons').select2({
-             templateResult: iconFormat,
-             minimumResultsForSearch: Infinity,
-             templateSelection: iconFormat,
-             escapeMarkup: function(m) {
-                 return m;
-             }
-         });
-         $(document).find('select.select2').select2({
-             minimumResultsForSearch: Infinity,
-             escapeMarkup: function(m) {
-                 return m;
-             }
-         });
+          // Global Bootstrap Multiselect for all multiple selects
+          window.initBootstrapMultiselect = function(container) {
+              var $ctx = container ? $(container) : $(document);
+              $ctx.find('select.multiple-select, select[multiple]:not(.select2-multiple, .icon-select2)').each(function() {
+                  var $select = $(this);
+                  if ($select.data('ms-initialized') || $select.parent().hasClass('multiselect-native-select')) {
+                      return;
+                  }
+                  $select.data('ms-initialized', true);
+                  var isMulti = $select.prop('multiple');
+                  var optCount = $select.find('option').length;
+                  var server = $select.data('server');
+
+                  $select.multiselect({
+                      includeSelectAllOption: isMulti && (!!server || optCount > 2),
+                      enableFiltering: !!server || optCount > 5,
+                      enableCaseInsensitiveFiltering: true,
+                      buttonWidth: '100%',
+                      buttonClass: 'btn btn-light border form-select-sm text-start w-100',
+                      maxHeight: 300,
+                      numberDisplayed: isMulti ? 1 : 999,
+                      nonSelectedText: '{{ __("global.all") }}',
+                      selectAllText: '{{ __("global.select_all") }}',
+                      allSelectedText: '{{ __("global.all_selected") }}',
+                      nSelectedText: '{{ __("global.selected") }}',
+                  });
+              });
+          };
+
+          // Global Select2 for all other single selects
+          window.initAppSelect2 = function(container) {
+              var $ctx = container ? $(container) : $(document);
+
+              // 1. Icon format selects
+              $ctx.find('select.select-icons, select.icon-select2').each(function() {
+                  var $el = $(this);
+                  if (!$el.hasClass('select2-hidden-accessible')) {
+                      var $modal = $el.closest('.modal');
+                      var hasEmptyOpt = $el.find('option[value=""]').length > 0;
+                      var placeholderText = $el.data('placeholder') || $el.attr('placeholder') || (hasEmptyOpt ? $el.find('option[value=""]').first().text() : '{{ __('form.select_option') }}');
+                      if (!hasEmptyOpt) {
+                          $el.prepend('<option value=""></option>');
+                      }
+                      $el.select2({
+                          placeholder: placeholderText,
+                          allowClear: true,
+                          templateResult: typeof iconFormat === 'function' ? iconFormat : undefined,
+                          templateSelection: typeof iconFormat === 'function' ? iconFormat : undefined,
+                          dropdownParent: $modal.length ? $modal : undefined,
+                          escapeMarkup: function(m) { return m; }
+                      });
+                  }
+              });
+
+              // 2. All standard single selects across the application
+              $ctx.find('select.form-select, select.form-control, select.select2')
+                  .not('[multiple]')
+                  .not('.multiple-select')
+                  .not('.select-icons')
+                  .not('.icon-select2')
+                  .not('.no-select2')
+                  .not('.swal2-select')
+                  .not('.multiselect-native-select')
+                  .not('[name$="_length"]')
+                  .not('.dt-input')
+                  .each(function() {
+                      var $el = $(this);
+                      if (!$el.hasClass('select2-hidden-accessible')) {
+                          var $modal = $el.closest('.modal');
+                          var optCount = $el.find('option').length;
+                          var hasEmptyOpt = $el.find('option[value=""]').length > 0;
+                          var placeholderText = $el.data('placeholder') || $el.attr('placeholder') || (hasEmptyOpt ? $el.find('option[value=""]').first().text() : '{{ __('form.select_option') }}');
+
+                          if (!hasEmptyOpt) {
+                              $el.prepend('<option value=""></option>');
+                          }
+
+                          var allowClear = $el.data('allow-clear') !== false && $el.data('allow-clear') !== 'false';
+
+                          $el.select2({
+                              placeholder: placeholderText,
+                              allowClear: allowClear,
+                              minimumResultsForSearch: optCount > 8 ? 0 : Infinity,
+                              dropdownParent: $modal.length ? $modal : undefined,
+                              width: '100%',
+                              escapeMarkup: function(m) { return m; }
+                          }).on('select2:select select2:unselect select2:clear', function() {
+                              if (typeof $(this).valid === 'function') {
+                                  $(this).valid();
+                              }
+                          });
+                      }
+                  });
+          };
+
+          // Initialize on page ready
+          window.initBootstrapMultiselect();
+          window.initAppSelect2();
+
+          // Auto-init inside modals and offcanvas drawers
+          $(document).on('shown.bs.modal', function(e) {
+              window.initBootstrapMultiselect(e.target);
+              window.initAppSelect2(e.target);
+          });
+          $(document).on('shown.bs.offcanvas', function(e) {
+              window.initBootstrapMultiselect(e.target);
+              window.initAppSelect2(e.target);
+          });
+
+          // Auto-init on dynamic AJAX completion
+          $(document).ajaxComplete(function(event, xhr, settings) {
+              if (!settings.url || (!settings.url.includes('select2') && !settings.url.includes('multiselect'))) {
+                  window.initBootstrapMultiselect();
+                  window.initAppSelect2();
+              }
+          });
 
          // Auto-format date input on type like beltei_ums (dd-mm-yyyy)
          $(document).on('input', 'input.pickadate, input.pick-adate, input.datepicker, input.date-picker', function() {
@@ -495,27 +615,20 @@
                      keyboard: false
                  });
                  modalInstance.show();
-                 modal.find('form').validate({
+                 modal.find('form').validate(typeof getFormValidateConfig === 'function' ? getFormValidateConfig() : {
                      errorPlacement: function(error, element) {
                          var elem = $(element);
-                         if (elem.hasClass('select2-hidden-accessible')) {
-                             error.insertAfter(elem.siblings('span.select2'));
+                         var s2 = elem.next('.select2-container');
+                         if (s2.length) {
+                             error.insertAfter(s2);
                          } else {
                              error.insertAfter(element);
                          }
                      }
                  });
-                 modal.find('select.select2').each(function() {
-                     $(this).select2({
-                         minimumResultsForSearch: Infinity,
-                         dropdownParent: $(this).parents('.modal'),
-                         escapeMarkup: function(m) {
-                             return m;
-                         }
-                     }).on('select2:select select2:unselect', function() {
-                         $(this).valid();
-                     });
-                 });
+                 if (typeof window.initAppSelect2 === 'function') {
+                     window.initAppSelect2(modal);
+                 }
              },
              error: function(e) {
                  error('Something went wrong');
@@ -576,28 +689,34 @@
              }
          });
      });
-     const buildSelect2 = () => {
-         $(document).find('select.select2').select2({
-             minimumResultsForSearch: Infinity,
-             dropdownParent: $(this).parents('.modal'),
-             escapeMarkup: function(m) {
-                 return m;
-             }
-         });
+      function getFormValidateConfig() {
+          return {
+              ignore: ':hidden:not(.select2-hidden-accessible)',
+              errorPlacement: function(error, element) {
+                  var elem = $(element);
+                  var s2 = elem.next('.select2-container');
+                  if (s2.length) {
+                      error.insertAfter(s2);
+                  } else if (elem.parent().hasClass('input-group')) {
+                      error.insertAfter(elem.parent());
+                  } else {
+                      error.insertAfter(element);
+                  }
+              }
+          };
+      }
+     const buildSelect2 = (context) => {
+         if (typeof window.initAppSelect2 === 'function') {
+             window.initAppSelect2(context);
+         }
      };
      const formValidation = document.querySelectorAll('form[validate]');
      formValidation.forEach((form) => {
-         $(form).validate({
-             errorPlacement: function(error, element) {
-                 var elem = $(element);
-                 if (elem.hasClass('select2-hidden-accessible')) {
-                     error.insertAfter(elem.siblings('span.select2'));
-                 } else {
-                     error.insertAfter(element);
-                 }
-             }
-         });
+         $(form).validate(getFormValidateConfig());
          $(form).on('submit', function(e) {
+             if ($(form).hasClass('ajax-form-modal')) {
+                 return; // Avoid duplicate submission handled by .ajax-form-modal
+             }
              e.preventDefault();
              if (!$(form).valid()) {
                  e.preventDefault();

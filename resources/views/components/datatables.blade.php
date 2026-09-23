@@ -64,7 +64,7 @@
                 buttons: [
                     {
                         extend: 'csv',
-                        text: '<i class="fa-regular fa-file-csv"></i>',
+                        text: '<i class="fa-regular fa-file-csv me-1"></i> CSV',
                         className: 'btn btn-sm btn-light',
                         exportOptions: {
                             columns: ':visible'
@@ -72,7 +72,7 @@
                     },
                     {
                         extend: 'excel',
-                        text: '<i class="fa-regular fa-file-excel"></i>',
+                        text: '<i class="fa-regular fa-file-excel me-1"></i> Excel',
                         className: 'btn btn-sm btn-light',
                         exportOptions: {
                             columns: ':visible'
@@ -80,7 +80,7 @@
                     },
                     {
                         extend: 'print',
-                        text: '<i class="fa-regular fa-print"></i>',
+                        text: '<i class="fa-regular fa-print me-1"></i> Print',
                         className: 'btn btn-sm btn-light',
                         exportOptions: {
                             columns: ':visible'
@@ -94,10 +94,18 @@
                     rightColumns: 1,
                 },
                 initComplete: function(settings, json) {
-                    $(document).find('.dataTables_paginate .paginate_button a').addClass('rounded-pill');
+                    var api = this.api();
+                    $(document).find('.dataTables_paginate .paginate_button a').addClass('rounded-2');
+                    setTimeout(function() {
+                        api.columns.adjust();
+                    }, 50);
                 },
                 drawCallback: function(settings) {
-                    $(document).find('.dataTables_paginate .paginate_button a').addClass('rounded-pill');
+                    var api = this.api();
+                    $(document).find('.dataTables_paginate .paginate_button a').addClass('rounded-2');
+                    setTimeout(function() {
+                        api.columns.adjust();
+                    }, 50);
                 },
                 ajax: {
                     beforeSend: function(xhr) {
@@ -171,11 +179,16 @@
                 tr.addClass('shown');
             }
         });
-        $(document).on('shown.bs.dropdown', '.datatables .dropdown-toggle', function(e) {
-            $(this).parents('.datatables').find('td.dtfc-fixed-right').not($(this).parents('td')).css('z-index', 'auto');
+        $(document).on('shown.bs.dropdown', '.datatables [data-bs-toggle="dropdown"], .datatables .dropdown-toggle', function(e) {
+            var $cell = $(this).closest('td');
+            $cell.css('z-index', '1060');
+            $cell.closest('tr').css('z-index', '1059');
+            $(this).parents('.datatables').find('td.dtfc-fixed-right').not($cell).css('z-index', 'auto');
         });
-        $(document).on('hidden.bs.dropdown', '.datatables .dropdown-toggle', function(e) {
-            $(this).parents('.datatables').find('td.dtfc-fixed-right').css('z-index', '1');
+        $(document).on('hidden.bs.dropdown', '.datatables [data-bs-toggle="dropdown"], .datatables .dropdown-toggle', function(e) {
+            $(this).closest('td').css('z-index', '2');
+            $(this).closest('tr').css('z-index', 'auto');
+            $(this).parents('.datatables').find('td.dtfc-fixed-right').css('z-index', '2');
         });
 
         // Re-initialize GLightbox after DataTable redraws

@@ -23,6 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->group('web', [
             \App\Http\Middleware\PrefixRequestParameters::class,
             \Illuminate\Session\Middleware\StartSession::class,
+            \App\Http\Middleware\SetSessionLocale::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         ]);
